@@ -5,7 +5,7 @@
 // @include     http://mush.twinoid.com/*
 // @include     http://mush.twinoid.es/*
 // @require		http://ctrl-w.badconker.com/js/sprintf.min.js
-// @version     0.31
+// @version     0.31.1
 // ==/UserScript==
 
 // Fix chrome1
@@ -41,6 +41,7 @@ Main.k.langpack.fr.menuNews = "News";
 Main.k.langpack.fr.menuHelpMush = "Aide Mush";
 Main.k.langpack.fr.menuPatchlog = "Patchlog";
 Main.k.langpack.fr.menuTutoChar = "Tuto %s";
+Main.k.langpack.fr.connected = "connecté(e)";
 
 Main.k.langpack.fr.menuForumDiscussion = "Discussion";
 Main.k.langpack.fr.menuForumDiscussionId = 67061;
@@ -89,6 +90,7 @@ Main.k.langpack.en.menuNews = "News";
 Main.k.langpack.en.menuHelpMush = "Help Mush";
 Main.k.langpack.en.menuPatchlog = "Patchlog";
 Main.k.langpack.en.menuTutoChar = "Tuto %s";
+Main.k.langpack.en.connected = "connected";
 
 Main.k.langpack.en.menuForumDiscussion = "Discussion";
 Main.k.langpack.en.menuForumDiscussionId = 104909;
@@ -115,6 +117,7 @@ Main.k.langpack.es.menuNews = "Noticias ";
 Main.k.langpack.es.menuHelpMush = "Ayuda Mush";
 Main.k.langpack.es.menuPatchlog = "Patchlog";
 Main.k.langpack.es.menuTutoChar = "Tuto %s";
+Main.k.langpack.es.connected = "connecté(e)";
 /********* /SPANISH ************/
 
 /************************* /TRANSLATIONS **********************/
@@ -4967,8 +4970,8 @@ Main.k.tabs.playing = function() {
 				for (var j=0; j<heroes.length; j++) {
 					var mouseover = $(heroes[j]).attr("onmouseover");
 					var name = /<h1>([^<]+)<\/h1>/.exec(mouseover)[1];
-					var co = /connexion\s:\s([^<]+)/.exec(mouseover)[1].toLowerCase();
-					tip += "<strong>" + name + "</strong> - connecté(e) " + co + "<br/>";
+					var co = /[a-zA-Z]+\s?:\s([^<]+)/.exec(mouseover)[1].toLowerCase();
+					tip += "<strong>" + name + "</strong> - "+Main.k.getTranslation('connected')+" " + co + "<br/>";
 				}
 
 				tab.find("img").off("mouseover").off("mouseout")
