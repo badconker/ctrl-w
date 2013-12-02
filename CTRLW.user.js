@@ -5,7 +5,7 @@
 // @include     http://mush.twinoid.com/*
 // @include     http://mush.twinoid.es/*
 // @require		http://ctrl-w.badconker.com/js/sprintf.min.js
-// @version     0.31.1
+// @version     0.31.2
 // ==/UserScript==
 
 // Fix chrome1
@@ -4896,21 +4896,21 @@ Main.k.tabs.playing = function() {
 
 				switch (_alarm) {
 					case alarm_equip:
-						alarm_nb = parseInt(/([0-9]+)\s+.quipement/.exec(omo)[1]);
+						alarm_nb = parseInt(/>([0-9]+)/.exec(omo)[1]);
 						break;
 					case alarm_door:
-						alarm_nb = parseInt(/([0-9]+)\s+porte/i.exec(omo)[1]);
+						alarm_nb = parseInt(/>([0-9]+)/i.exec(omo)[1]);
 						break;
 					case alarm_hunter:
 						if (/([0-9]+|un)\s+appareil/i.test(omo)) {
 							alarm_nb = /([0-9]+|un)\s+appareil/i.exec(omo)[1];
-						} else if (/([0-9]+|un)\s+hunter/i.test(omo)) {
-							alarm_nb = /([0-9]+|un)\s+hunter/i.exec(omo)[1];
+						} else if (/>([0-9]+|un)/i.test(omo)) {
+							alarm_nb = />([0-9]+|un)/i.exec(omo)[1];
 						}
 						if (alarm_nb) alarm_nb = alarm_nb.toLowerCase() == "un" ? 1 : parseInt(alarm_nb);
 						break;
 					case alarm_fire:
-						alarm_nb = parseInt(/([0-9]+)\s+incendie/i.exec(omo)[1]);
+						alarm_nb = parseInt(/>([0-9]+)/i.exec(omo)[1]);
 						break;
 				}
 
