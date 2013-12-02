@@ -98,6 +98,8 @@ Main.k.langpack.en.menuForumAdvice = "Advice";
 Main.k.langpack.en.menuForumAdviceId = 112222;
 Main.k.langpack.en.menuForumLounge = "Lounge";
 Main.k.langpack.en.menuForumLoungeId = 112216;
+Main.k.langpack.en.menuForumOfficers = "Officiers";
+Main.k.langpack.en.menuForumOfficersId = 104918;
 
 /********* /ENGLISH ************/
 
