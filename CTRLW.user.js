@@ -208,6 +208,7 @@ Main.k.initData = function() {
 	Main.k.cssToHeroes["-1499px"] = "jin_su";
 	Main.k.cssToHeroes["-1604px"] = "jin_su";
 	Main.k.cssToHeroes["-1391px"] = "raluca";
+	Main.k.cssToHeroes["-1681px"] = "stephen";
 
 	Main.k.getShortDesc = function(hero) {
 		for (var i=0; i<Main.k.HEROES.length; i++) {
