@@ -439,7 +439,7 @@ Main.k.getTranslation = function(key) {
 }
 Main.k.hasTranslation = function(key) {
 	// Compact version for performances
-	return typeof(Main.k.text[key]) != 'undefined';
+	return typeof(Main.k.langpack[Main.k.lang][key]) != 'undefined';
 }
 Main.k.ArrayContains = function(arr, o) {
 	for (a in arr) {
