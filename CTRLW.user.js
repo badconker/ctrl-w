@@ -4,7 +4,8 @@
 // @include     http://mush.vg/*
 // @include     http://mush.twinoid.com/*
 // @include     http://mush.twinoid.es/*
-// @require		http://ctrl-w.badconker.com/js/sprintf.min.js
+// @downloadURL https://raw.github.com/badconker/ctrl-w/master/CTRLW.user.js
+// @require     http://ctrl-w.badconker.com/js/sprintf.min.js
 // @version     0.31.2
 // ==/UserScript==
 
