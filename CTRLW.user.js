@@ -367,54 +367,54 @@ Main.k.displayMainMenu = function() {
 	Main.k.silver = true; //TODO
 	Main.k.fds = ($("a.butmini[href='/fds']").length > 0);
 	var menu = $("<ul>").addClass("kmenu").insertBefore("#maincontainer, .boxcontainer");
-	var play = $("<li class='kmenuel active first'><a href='"+Main.k.mushurl+"/chooseHero'>"+Main.k.getTranslation('menuPlay')+"</a></li>").appendTo(menu);
-	var account = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/me'>"+Main.k.getTranslation('menuAccount')+"</a></li>").appendTo(menu);
+	var play = $("<li class='kmenuel active first'><a href='"+Main.k.mushurl+"/chooseHero'>"+Main.k.text.menuPlay+"</a></li>").appendTo(menu);
+	var account = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/me'>"+Main.k.text.menuAccount+"</a></li>").appendTo(menu);
 
-	if(Main.k.hasTranslation('menuCastings')){
-		var casting = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/group/list'>"+Main.k.getTranslation('menuCastings')+"</a></li>").appendTo(menu);
+	if(typeof(Main.k.langpack[Main.k.lang]['menuCastings']) != 'undefined'){
+		var casting = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/group/list'>"+Main.k.text.menuCastings+"</a></li>").appendTo(menu);
 	}
-	var rankings = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/ranking'>"+Main.k.getTranslation('menuRanking')+"</a></li>").appendTo(menu);
-	var forum = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/tid/forum'>"+Main.k.getTranslation('menuForum')+"</a></li>").appendTo(menu);
-	var help = $("<li class='kmenuel last'><a href='"+Main.k.mushurl+"/help'>"+Main.k.getTranslation('menuHelp')+"</a></li>").appendTo(menu);
+	var rankings = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/ranking'>"+Main.k.text.menuRanking+"</a></li>").appendTo(menu);
+	var forum = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/tid/forum'>"+Main.k.text.menuForum+"</a></li>").appendTo(menu);
+	var help = $("<li class='kmenuel last'><a href='"+Main.k.mushurl+"/help'>"+Main.k.text.menuHelp+"</a></li>").appendTo(menu);
 
 	var play_ss = $("<ul>").appendTo(play);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/vending'><li><img src='/img/icons/skills/rebel.png' />"+Main.k.getTranslation('menuVending')+"</li></a>")
+	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/vending'><li><img src='/img/icons/skills/rebel.png' />"+Main.k.text.menuVending+"</li></a>")
 	.css("display", "none").attr("id", "vendingmenu").appendTo(play_ss);
 
 	var account_ss = $("<ul>").attr("id", "accountmenu").appendTo(account);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me'><li><img src='/img/icons/skills/persistent.png' />"+Main.k.getTranslation('menuXP')+"</li></a>").appendTo(account_ss);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me?profile'><li><img src='/img/icons/skills/opportunist.png' />"+Main.k.getTranslation('menuMyFile')+"</li></a>").appendTo(account_ss);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me?config'><li><img src='/img/icons/skills/engineer.png' />"+Main.k.getTranslation('menuMySettings')+"</li></a>").appendTo(account_ss);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me?news'><li><img src='/img/icons/skills/radio_expert.png' />"+Main.k.getTranslation('menuNews')+"</li></a>").appendTo(account_ss);
+	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me'><li><img src='/img/icons/skills/persistent.png' />"+Main.k.text.menuXP+"</li></a>").appendTo(account_ss);
+	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me?profile'><li><img src='/img/icons/skills/opportunist.png' />"+Main.k.text.menuMyFile+"</li></a>").appendTo(account_ss);
+	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me?config'><li><img src='/img/icons/skills/engineer.png' />"+Main.k.text.menuMySettings+"</li></a>").appendTo(account_ss);
+	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me?news'><li><img src='/img/icons/skills/radio_expert.png' />"+Main.k.text.menuNews+"</li></a>").appendTo(account_ss);
 
 	var rankings_ss = $("<ul>").appendTo(rankings);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/ranking'><li><img src='/img/icons/skills/persistent.png' />"+Main.k.getTranslation('menuRanking')+"</li></a>").appendTo(rankings_ss);
+	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/ranking'><li><img src='/img/icons/skills/persistent.png' />"+Main.k.text.menuRanking+"</li></a>").appendTo(rankings_ss);
 	$("<a class='kssmenuel ext' href='http://twinorank.kubegb.fr/'><li><img src='/img/icons/skills/persistent.png' />Twin-O-Rank</li></a>").appendTo(rankings_ss);
 
 	var forum_ss = $("<ul>").appendTo(forum);
-	if(Main.k.hasTranslation('menuForumDiscussionId')){
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.getTranslation('menuForumDiscussionId')+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.getTranslation('menuForumDiscussion')+"</li></a>").appendTo(forum_ss);
+	if(typeof(Main.k.langpack[Main.k.lang]['menuForumDiscussionId']) != 'undefined'){
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.menuForumDiscussionId+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.menuForumDiscussion+"</li></a>").appendTo(forum_ss);
 	}
-	if(Main.k.hasTranslation('menuForumAdviceId')){
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.getTranslation('menuForumAdviceId')+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.getTranslation('menuForumAdvice')+"</li></a>").appendTo(forum_ss);
+	if(typeof(Main.k.langpack[Main.k.lang]['menuForumAdviceId']) != 'undefined'){
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.menuForumAdviceId+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.menuForumAdvice+"</li></a>").appendTo(forum_ss);
 	}
-	if(Main.k.hasTranslation('menuForumLoungeId')){
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.getTranslation('menuForumLoungeId')+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.getTranslation('menuForumLounge')+"</li></a>").appendTo(forum_ss);
+	if(typeof(Main.k.langpack[Main.k.lang]['menuForumLoungeId']) != 'undefined'){
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.menuForumLoungeId+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.menuForumLounge+"</li></a>").appendTo(forum_ss);
 	}
-	if(Main.k.hasTranslation('menuForumCastingsId')){
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.getTranslation('menuForumCastingsId')+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.getTranslation('menuForumCastings')+"</li></a>").appendTo(forum_ss);
+	if(typeof(Main.k.langpack[Main.k.lang]['menuForumCastingsId']) != 'undefined'){
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.menuForumCastingsId+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.menuForumCastings+"</li></a>").appendTo(forum_ss);
 	}
-	if (Main.k.silver && Main.k.hasTranslation('menuForumOfficersId')) {
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.getTranslation('menuForumOfficersId')+"'><li><img src='/img/icons/skills/rebel.png' />"+Main.k.getTranslation('menuForumOfficers')+"</li></a>").appendTo(forum_ss);
+	if (Main.k.silver && typeof(Main.k.langpack[Main.k.lang]['menuForumOfficersId']) != 'undefined') {
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.menuForumOfficersId+"'><li><img src='/img/icons/skills/rebel.png' />"+Main.k.text.menuForumOfficers+"</li></a>").appendTo(forum_ss);
 	}
 
 	var help_ss = $("<ul>").appendTo(help);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/help'><li><img src='/img/icons/skills/genius.png' />"+Main.k.getTranslation('menuHelpMush')+"</li></a>").appendTo(help_ss);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/patchlog'><li><img src='/img/icons/skills/persistent.png' />"+Main.k.getTranslation('menuPatchlog')+"</li></a>").appendTo(help_ss);
+	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/help'><li><img src='/img/icons/skills/genius.png' />"+Main.k.text.menuHelpMush+"</li></a>").appendTo(help_ss);
+	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/patchlog'><li><img src='/img/icons/skills/persistent.png' />"+Main.k.text.menuPatchlog+"</li></a>").appendTo(help_ss);
 
 	if (Main.k.ownHero && Main.k.text.tutorials[Main.k.ownHero]) {
 		var charname = Main.k.ownHero.replace("_", "");
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/67561|thread/" + Main.k.text.tutorials[Main.k.ownHero] + "'><li><img src='/img/icons/ui/" + charname + ".png' />" + Main.k.getTranslation('menuTutoChar', Main.k.ownHero.capitalize()) + "</li></a>").appendTo(help_ss);
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/67561|thread/" + Main.k.text.tutorials[Main.k.ownHero] + "'><li><img src='/img/icons/ui/" + charname + ".png' />" + sprintf(Main.k.text.menuTutoChar, Main.k.ownHero.capitalize()) + "</li></a>").appendTo(help_ss);
 	}
 	$("<a class='kssmenuel ext' href='http://www.twinpedia.com/mush'><li><img src='http://www.twinpedia.com/_media//favicon.ico' />Twinpedia</li></a>").appendTo(help_ss);
 	$("<a class='kssmenuel ext' href='http://apps-scipion.com/pictoid/mush'><li><img src='/img/icons/ui/win_triumph.png' />Pictoid</li></a>").appendTo(help_ss);
@@ -425,23 +425,7 @@ Main.k.displayMainMenu = function() {
 		$("<a class='kssmenuel' href='"+Main.k.mushurl+"/fds'><li><img src='/img/icons/skills/cold_blood.png' />FDS</li></a>").appendTo(play_ss);
 	}
 }
-Main.k.getTranslation = function(key) {
-	if (typeof(Main.k.text[key]) != 'undefined') {
-		if (typeof(arguments[1]) != 'undefined' && jQuery.type(Main.k.text[key]) == 'string') {
-			var a = $.makeArray(arguments);
-			a.shift();
-			return vsprintf(Main.k.text[key],a);
-		} else {
-			return Main.k.text[key];
-		}
 
-	}
-	return '['+key+']';
-}
-Main.k.hasTranslation = function(key) {
-	// Compact version for performances
-	return typeof(Main.k.langpack[Main.k.lang][key]) != 'undefined';
-}
 Main.k.ArrayContains = function(arr, o) {
 	for (a in arr) {
 		if (a == o) return true;
@@ -5025,7 +5009,7 @@ Main.k.tabs.playing = function() {
 					var mouseover = $(heroes[j]).attr("onmouseover");
 					var name = /<h1>([^<]+)<\/h1>/.exec(mouseover)[1];
 					var co = /[a-zA-Z]+\s?:\s([^<]+)/.exec(mouseover)[1].toLowerCase();
-					tip += "<strong>" + name + "</strong> - "+Main.k.getTranslation('connected')+" " + co + "<br/>";
+					tip += "<strong>" + name + "</strong> - "+Main.k.text.connected+" " + co + "<br/>";
 				}
 
 				tab.find("img").off("mouseover").off("mouseout")
