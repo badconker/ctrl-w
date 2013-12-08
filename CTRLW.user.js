@@ -44,7 +44,10 @@ Main.k.setuptranslations = function() {
 	text.menuHelpMush = "Aide Mush";
 	text.menuPatchlog = "Patchlog";
 	text.menuTutoChar = "Tuto %s";
+
 	text.connected = "connecté(e)";
+	text.lastVersionInstalled = "Dernière version de CTRL+W installée (%s) :";
+	text.AutoUpdateOk = 'Très bien, merci !';
 
 	text.menuForumDiscussion = "Discussion";
 	text.menuForumDiscussionId = 67061;
@@ -150,7 +153,10 @@ Main.k.setuptranslations = function() {
 	text.menuHelpMush = "Mush help";
 	text.menuPatchlog = "Patchlog";
 	text.menuTutoChar = "Tuto %s";
+
 	text.connected = "connected";
+	text.lastVersionInstalled = "Last version of CTRL+W was installed (%s):";
+	text.AutoUpdateOk = 'Ok';
 
 	text.menuForumDiscussion = "Discussion";
 	text.menuForumDiscussionId = 104909;
@@ -2247,24 +2253,29 @@ Main.k.tabs.playing = function() {
 	// ============================================================
 	Main.k.UpdateData = {currversion: 0, changelog: []};
 	Main.k.UpdateCheck = function() {
+		var lastVersion = js.Cookie.get('ctrlwVersion');
 		$.ajax({
-			url :Main.k.servurl + "/versions/update/"+Main.k.version,
+			url :Main.k.servurl + "/versions/update/"+ (typeof(lastVersion) == 'undefined' ? Main.k.version : lastVersion),
 			dataType : 'jsonp',
 			success: function(json) {
+				Main.k.UpdateData.currversion = json.numero;
+				if(typeof(json['changelog_long_'+Main.k.lang]) != 'undefined'){
+					Main.k.UpdateData.changelog = json['changelog_long_'+Main.k.lang];
+				}else{
+					Main.k.UpdateData.changelog = json.changelog_long;
+				}
 				if (Main.k.version < json.numero) {
-					Main.k.UpdateData.currversion = json.numero;
-					if(typeof(json['changelog_long_'+Main.k.lang]) != 'undefined'){
-						Main.k.UpdateData.changelog = json['changelog_long_'+Main.k.lang];
-					}else{
-						Main.k.UpdateData.changelog = json.changelog_long;
-					}
 					$("#updatebtn").css("display", "block");
 				} else {
+					if(typeof(lastVersion) != 'undefined' && lastVersion < GM_info.script.version){
+						Main.k.AutoUpdateDialog();
+					}
+					js.Cookie.set('ctrlwVersion',GM_info.script.version,420000000);
 					$("#updatebtn").css("display", "none");
 				}
 			},
 			error: function(xhr,statut,http){
-			console.warn(xhr,statut,http);
+				console.warn(xhr,statut,http);
 			}
 		});
 	}
@@ -2299,6 +2310,33 @@ Main.k.tabs.playing = function() {
 		var cancel = "<div id=\"cancel\" class=\"but updatesbtn\" onclick=" + cancelAc + "><div class=\"butright\"><div class=\"butbg\"><a href=\"#\">" + Main.getText("cancel") + "</a></div></div></div></div>";
 		var finalisation = '<div id="final" class="updatesactions" style="display:none"><div><strong>Pour finaliser la mise à jour, après avoir installé le script, veuillez cliquer sur le bouton ci-dessous.</strong></div><div class="but updatesbtn" onclick="Main.k.ClosePopup();window.location.reload();"><div class="butright"><div class="butbg"><a href="#">Finaliser la mise à jour</a></div></div></div></div></div>'
 		$("<div>").html(content + ok + cancel + finalisation).appendTo(popup.content);
+
+		// Display popup
+		Main.k.OpenPopup(popup.dom);
+	}
+	Main.k.AutoUpdateDialog = function() {
+		// Create popup
+		var popup = Main.k.CreatePopup();
+		popup.content.css({
+			"height": "auto",
+			"max-height": "90%",
+			"width": "600px",
+			"color": "#FFF"
+		});
+
+		//conf.title = "Mise à jour du script CTRL+W";
+		var maj_content = sprintf(Main.k.text.lastVersionInstalled,Main.k.UpdateData.currversion);
+		maj_content += " <br/> <ul class='updateslist'>";
+		for (var i=0; i<Main.k.UpdateData.changelog.length; i++) {
+			var log = Main.k.UpdateData.changelog[i];
+			maj_content += "<li>"+log+"</li>";
+		}
+		maj_content += "</ul>";
+
+		// Fill popup content
+		var content = "<div class='updatescontent'>" + maj_content + "</div>";
+		var ok = "<div class='updatesactions'><div id=\"ok\" class=\"but updatesbtn\" ><div class=\"butright\"><div class=\"butbg\"><a onclick=\"Main.k.ClosePopup();\" href=\"#\">"+Main.k.text.AutoUpdateOk+"</a></div></div></div>";
+		$("<div>").html(content + ok).appendTo(popup.content);
 
 		// Display popup
 		Main.k.OpenPopup(popup.dom);
