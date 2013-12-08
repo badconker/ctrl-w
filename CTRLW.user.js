@@ -47,7 +47,7 @@ Main.k.setuptranslations = function() {
 
 	text.connected = "connecté(e)";
 	text.lastVersionInstalled = "Dernière version de CTRL+W installée (%s) :";
-	text.AutoUpdateOk = 'Très bien, merci !';
+	text.autoUpdateOk = 'Très bien, merci !';
 
 	text.menuForumDiscussion = "Discussion";
 	text.menuForumDiscussionId = 67061;
@@ -156,7 +156,7 @@ Main.k.setuptranslations = function() {
 
 	text.connected = "connected";
 	text.lastVersionInstalled = "Last version of CTRL+W was installed (%s):";
-	text.AutoUpdateOk = 'Ok';
+	text.autoUpdateOk = 'Ok';
 
 	text.menuForumDiscussion = "Discussion";
 	text.menuForumDiscussionId = 104909;
@@ -2335,7 +2335,7 @@ Main.k.tabs.playing = function() {
 
 		// Fill popup content
 		var content = "<div class='updatescontent'>" + maj_content + "</div>";
-		var ok = "<div class='updatesactions'><div id=\"ok\" class=\"but updatesbtn\" ><div class=\"butright\"><div class=\"butbg\"><a onclick=\"Main.k.ClosePopup();\" href=\"#\">"+Main.k.text.AutoUpdateOk+"</a></div></div></div>";
+		var ok = "<div class='updatesactions'><div id=\"ok\" class=\"but updatesbtn\" ><div class=\"butright\"><div class=\"butbg\"><a onclick=\"Main.k.ClosePopup();\" href=\"#\">"+Main.k.text.autoUpdateOk+"</a></div></div></div>";
 		$("<div>").html(content + ok).appendTo(popup.content);
 
 		// Display popup
