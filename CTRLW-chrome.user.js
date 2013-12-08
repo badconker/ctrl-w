@@ -4,8 +4,9 @@
 // @include     http://mush.vg/*
 // @include     http://mush.twinoid.com/*
 // @include     http://mush.twinoid.es/*
-// @require		http://ctrl-w.badconker.com/js/sprintf.min.js
-// @version     0.31.2
+// @downloadURL https://raw.github.com/badconker/ctrl-w/master/CTRLW-chrome.user.js
+// @require     http://ctrl-w.badconker.com/js/sprintf.min.js
+// @version     0.32
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -17,111 +18,254 @@ Main.k.servurl_badconker = 'http://ctrlw.badconker.com';
 Main.k.topicurl = "http://twd.io/e/KKyl0g";
 Main.k.window = window;
 Main.k.domain = document.domain;
-Main.k.mushurl = 'http://'+document.domain;
+Main.k.mushurl = 'http://' + document.domain;
 
-Main.k.currentLangpack = {};
-
+Main.k.text = {};
 Main.k.langpack = {};
+Main.k.langpack.fr = {};
+Main.k.langpack.en = {};
+Main.k.langpack.es = {};
 
 /************************* TRANSLATIONS **********************/
+Main.k.setuptranslations = function() {
+	/********* FRENCH ************/
+	var text = {};
+	text.menuPlay = "Jouer";
+	text.menuAccount = "Mon compte";
+	text.menuRanking = "Classements";
+	text.menuForum = "Forum";
+	text.menuHelp = "Aide";
+	text.menuCastings = "Castings";
+	text.menuVending = "Distributeur";
+	text.menuXP = "Expérience";
+	text.menuMyFile = "Ma fiche";
+	text.menuMySettings = "Mes réglages";
+	text.menuNews = "News";
+	text.menuHelpMush = "Aide Mush";
+	text.menuPatchlog = "Patchlog";
+	text.menuTutoChar = "Tuto %s";
 
-/********* FRENCH ************/
-Main.k.langpack.fr = {};
-Main.k.langpack.fr.menuPlay = "Jouer";
-Main.k.langpack.fr.menuAccount = "Mon compte";
-Main.k.langpack.fr.menuRanking = "Classements";
-Main.k.langpack.fr.menuForum = "Forum";
-Main.k.langpack.fr.menuHelp = "Aide";
-Main.k.langpack.fr.menuCastings = "Castings";
-Main.k.langpack.fr.menuVending = "Distributeur";
-Main.k.langpack.fr.menuXP = "Expérience";
-Main.k.langpack.fr.menuMyFile = "Ma fiche";
-Main.k.langpack.fr.menuMySettings = "Mes réglages";
-Main.k.langpack.fr.menuNews = "News";
-Main.k.langpack.fr.menuHelpMush = "Aide Mush";
-Main.k.langpack.fr.menuPatchlog = "Patchlog";
-Main.k.langpack.fr.menuTutoChar = "Tuto %s";
-Main.k.langpack.fr.connected = "connecté(e)";
+	text.connected = "connecté(e)";
+	text.lastVersionInstalled = "Dernière version de CTRL+W installée (%s) :";
+	text.autoUpdateOk = 'Très bien, merci !';
 
-Main.k.langpack.fr.menuForumDiscussion = "Discussion";
-Main.k.langpack.fr.menuForumDiscussionId = 67061;
-Main.k.langpack.fr.menuForumAdvice = "Entraide";
-Main.k.langpack.fr.menuForumAdviceId = 67561;
-Main.k.langpack.fr.menuForumLounge = "Détente";
-Main.k.langpack.fr.menuForumLoungeId = 74323;
-Main.k.langpack.fr.menuForumCastings = "Castings";
-Main.k.langpack.fr.menuForumCastingsId = 93847;
-Main.k.langpack.fr.menuForumOfficers = "Officiers";
-Main.k.langpack.fr.menuForumOfficersId = 78267;
+	text.menuForumDiscussion = "Discussion";
+	text.menuForumDiscussionId = 67061;
+	text.menuForumAdvice = "Entraide";
+	text.menuForumAdviceId = 67561;
+	text.menuForumLounge = "Détente";
+	text.menuForumLoungeId = 74323;
+	text.menuForumCastings = "Castings";
+	text.menuForumCastingsId = 93847;
+	text.menuForumOfficers = "Officiers";
+	text.menuForumOfficersId = 78267;
 
-Main.k.langpack.fr.tutorials = {};
-Main.k.langpack.fr.tutorials["eleesha"] = 20507142;
-Main.k.langpack.fr.tutorials["janice"] = 19645493;
-Main.k.langpack.fr.tutorials["chao"] = 21006818;
-Main.k.langpack.fr.tutorials["terrence"] = 20598308;
-Main.k.langpack.fr.tutorials["paola"] = 20451046;
-Main.k.langpack.fr.tutorials["raluca"] = 20458805;
-Main.k.langpack.fr.tutorials["roland"] = 20340650;
-Main.k.langpack.fr.tutorials["ian"] = 20442357;
-Main.k.langpack.fr.tutorials["frieda"] = 19689575;
-Main.k.langpack.fr.tutorials["finola"] = 20507704;
-Main.k.langpack.fr.tutorials["jin su"] = 19614210;
-Main.k.langpack.fr.tutorials["gioele"] = 20629766;
-Main.k.langpack.fr.tutorials["kuan ti"] = 20719766;
-Main.k.langpack.fr.tutorials["chun"] = 20552058;
-Main.k.langpack.fr.tutorials["hua"] = 20261535;
-Main.k.langpack.fr.tutorials["stephen"] = 19654941;
+	// Tutorial topics' url
+	text.tutorials = {};
+	text.tutorials["eleesha"] = 20507142;
+	text.tutorials["janice"] = 19645493;
+	text.tutorials["chao"] = 21006818;
+	text.tutorials["terrence"] = 20598308;
+	text.tutorials["paola"] = 20451046;
+	text.tutorials["raluca"] = 20458805;
+	text.tutorials["roland"] = 20340650;
+	text.tutorials["ian"] = 20442357;
+	text.tutorials["frieda"] = 19689575;
+	text.tutorials["finola"] = 20507704;
+	text.tutorials["jin su"] = 19614210;
+	text.tutorials["gioele"] = 20629766;
+	text.tutorials["kuan ti"] = 20719766;
+	text.tutorials["chun"] = 20552058;
+	text.tutorials["hua"] = 20261535;
+	text.tutorials["stephen"] = 19654941;
+
+	// Titles
+	text.TITLES = {
+		commander: ["Commandant", "Le Commandant décide des planètes que le Daedalus explorera."],
+		comms: ["Responsable de Communications", "Le Responsable de Communications est la seule personne habilitée à décider quels seront les téléchargements prioritaires du Centre de Communication."],
+		admin: ["Administrateur NERON", "Le responsable NERON semble avoir une certaine influence auprès de l'ordinateur de bord. Il est notamment le seul à avoir la possibilité de transmettre des messages à tout l'équipage."]
+	};
+
+	// Ctrl+W options
+	text.optionsWarning = "Plus d'options disponibles prochainement.";
+	text.options = [
+		"Activer la mise en forme personnalisée des messages (bordure + couleur nom + image de fond).",
+		"Simplifier la mise en forme personnalisée des messages (suppression de l'image de fond).",
+		"Afficher le logo Mush au dessus des onglets.",
+		"Séparer les projets / recherches / pilgred sous la zone de jeu."
+	];
+
+	// Misc text
+	text.needPageReload = " Nécessite un rechargement de la page.";
+	text.about = "à propos";
+	text.tools = "outils";
+	text.titles = "titres";
+	text.crew = "équipage";
+	text.shelf = "inventaire";
+	text.aboutTip = "Cliquez ici pour plus d'informations sur le script.";
+
+	text.loads = "charges";
+	text.empty = "vide";
+	text.mageBook = "apprentron";
+	text.camera = "caméra";
+	text.drone = "drone";
+	text.plants = "plantes";
+	text.diseased = "malade";
+	text.thirsty = "soif";
+	text.dry = "desséché";
+	text.nothingToReport = "RAS";
+
+	text.HEROES_SHORTDESC = [
+		"Commandant suprême du Daedalus.",
+		"Scientifique millénaire.",
+		"Grand architecte du Daedalus.",
+		"Psychologue Digitale aux atouts certains.",
+		"Humoriste pilote de chasse à ses heures.",
+		"Exploratrice de l'extrême.",
+		"Officier principal des Communications du Daedalus.",
+		"Chef de la sécurité du Daedalus.",
+		"Biologiste de renommée internationale, pionnière dans l'étude du Mush.",
+		"Cuisinier le plus dangereux de la galaxie.",
+		"Chercheur frugivore flexible.",
+		"Dernier espoir de l'Humanité.",
+		"Génie de la physique quantique félinophile.",
+		"Armateur philantrophobe.",
+		"Investigatrice déchue de premier plan.",
+		"Technophile motorisé."
+	];
+	Main.k.langpack.fr = text;
+	/********* /FRENCH ************/
 
 
-/********* /FRENCH ************/
 
-/********* ENGLISH ************/
-Main.k.langpack.en = {};
-Main.k.langpack.en.menuPlay = "Play";
-Main.k.langpack.en.menuAccount = "My account";
-Main.k.langpack.en.menuRanking = "Ranking";
-Main.k.langpack.en.menuForum = "Forum";
-Main.k.langpack.en.menuHelp = "Help";
-Main.k.langpack.en.menuVending = "Distributeur"; //not translated (TODO)
-Main.k.langpack.en.menuXP = "Experience";
-Main.k.langpack.en.menuMyFile = "My File";
-Main.k.langpack.en.menuMySettings = "My settings";
-Main.k.langpack.en.menuNews = "News";
-Main.k.langpack.en.menuHelpMush = "Help Mush";
-Main.k.langpack.en.menuPatchlog = "Patchlog";
-Main.k.langpack.en.menuTutoChar = "Tuto %s";
-Main.k.langpack.en.connected = "connected";
+	/********* ENGLISH ************/
+	var text = {};
+	text.menuPlay = "Play";
+	text.menuAccount = "My account";
+	text.menuRanking = "Ranking";
+	text.menuForum = "Forum";
+	text.menuHelp = "Help";
+	text.menuVending = "Vending Machine";
+	text.menuXP = "Experience";
+	text.menuMyFile = "My File";
+	text.menuMySettings = "My settings";
+	text.menuNews = "News";
+	text.menuHelpMush = "Mush help";
+	text.menuPatchlog = "Patchlog";
+	text.menuTutoChar = "Tuto %s";
 
-Main.k.langpack.en.menuForumDiscussion = "Discussion";
-Main.k.langpack.en.menuForumDiscussionId = 104909;
-Main.k.langpack.en.menuForumAdvice = "Advice";
-Main.k.langpack.en.menuForumAdviceId = 112222;
-Main.k.langpack.en.menuForumLounge = "Lounge";
-Main.k.langpack.en.menuForumLoungeId = 112216;
-Main.k.langpack.en.menuForumOfficers = "Officiers";
-Main.k.langpack.en.menuForumOfficersId = 104918;
+	text.connected = "connected";
+	text.lastVersionInstalled = "Last version of CTRL+W was installed (%s):";
+	text.autoUpdateOk = 'Ok';
 
-/********* /ENGLISH ************/
+	text.menuForumDiscussion = "Discussion";
+	text.menuForumDiscussionId = 104909;
+	text.menuForumAdvice = "Advice";
+	text.menuForumAdviceId = 112222;
+	text.menuForumLounge = "Lounge";
+	text.menuForumLoungeId = 112216;
+	text.menuForumOfficers = "Officiers";
+	text.menuForumOfficersId = 104918;
 
-/********* SPANISH ************/
-Main.k.langpack.es = {};
-Main.k.langpack.es.menuPlay = "Jugar";
-Main.k.langpack.es.menuAccount = "Mi cuenta";
-Main.k.langpack.es.menuRanking = "Clasificación";
-Main.k.langpack.es.menuForum = "Foro";
-Main.k.langpack.es.menuHelp = "Ayuda";
-Main.k.langpack.es.menuCastings = "Reality Mush";
-Main.k.langpack.es.menuVending = "Distributeur";
-Main.k.langpack.es.menuXP = "Experiencia";
-Main.k.langpack.es.menuMyFile = "Mi ficha ";
-Main.k.langpack.es.menuMySettings = "Mis opciones";
-Main.k.langpack.es.menuNews = "Noticias ";
-Main.k.langpack.es.menuHelpMush = "Ayuda Mush";
-Main.k.langpack.es.menuPatchlog = "Patchlog";
-Main.k.langpack.es.menuTutoChar = "Tuto %s";
-Main.k.langpack.es.connected = "connecté(e)";
-/********* /SPANISH ************/
 
+	// Tutorial topics' url
+	text.tutorials = {};
+	text.tutorials["mush"] = 32534875;
+	text.tutorials["eleesha"] = 32790916; //unofficial
+	text.tutorials["janice"] = 32488283; //neron admin, unofficial
+	text.tutorials["chao"] = 32300186;
+	text.tutorials["terrence"] = 32323021; //unofficial
+	text.tutorials["paola"] = 32423154; //comms manager
+	text.tutorials["raluca"] = 32609208;
+	text.tutorials["roland"] = 32255633;
+	text.tutorials["ian"] = 30242550; //gardening
+	text.tutorials["frieda"] = 32621356;
+	text.tutorials["finola"] = 20507704; //french tuto
+	text.tutorials["jin su"] = 32270135;
+	text.tutorials["gioele"] = 20629766; //french tuto
+	text.tutorials["kuan ti"] = 32777661;
+	text.tutorials["chun"] = 32587937; //unofficial
+	text.tutorials["hua"] = 32641831; //unofficial
+	text.tutorials["stephen"] = 19654941; //french tuto
+
+	// Titles
+	text.TITLES = {
+		commander: ["Commander", "TODO"],
+		comms: ["Comms Manager", "The Communications manager can start to contact others once contact with Sol is re-established."],
+		admin: ["NERON Admin", "TODO"]
+	};
+
+	// Ctrl+W options'
+	text.optionsWarning = "More options will be available later.";
+	text.options = [
+		"Use custom styling for messages (colored border and name + background image.",
+		"Simplify custom styling (don't display background images).",
+		"Display Mush logo (above tabs).",
+		"Add line breaks between NERON projects, research projects and Pilgred."
+	];
+
+	// Misc text
+	text.needPageReload = " Page reload needed.";
+	text.about = "about";
+	text.tools = "tools";
+	text.titles = "titles";
+	text.crew = "crew members";
+	text.shelf = "shelf content";
+	text.aboutTip = "Click here for more informations on Ctrl+W.";
+
+	text.loads = "loads";
+	text.empty = "empty";
+	text.mageBook = "mage book";
+	text.camera = "camera";
+	text.plants = "plants";
+	text.diseased = "diseased";
+	text.thirsty = "thirsty";
+	text.dry = "dry";
+	text.nothingToReport = "nothing to report";
+
+	text.HEROES_SHORTDESC = [
+		"[TODO: JINSU]",
+		"[TODO: FRIEDA]",
+		"[TODO: KUANTI]",
+		"A Digital Psychologist and one-woman enigma machine.",
+		"Amateur comedian and elite fighter pilot. Born to destroy Hunters.",
+		"An extreme explorer with an irrational fear of balloon animals.",
+		"Chief Communications Officer and former political activist.",
+		"[TODO: CHAO]",
+		"[TODO: FINOLA]",
+		"[TODO: STEPHEN]",
+		"Flexible fructivorous researcher. Better living through botany!",
+		"[TODO: CHUN]",
+		"[TODO: RALUCA]",
+		"[TODO: GIOELE]",
+		"Deposed first-rate investigator on the run from the Federation.",
+		"Disillusioned motorized technophile with an unhealthy drone fixation.",
+	];
+
+	Main.k.langpack.en = text;
+	/********* /ENGLISH ************/
+
+
+
+	/********* SPANISH ************/
+	Main.k.langpack.es.menuPlay = "Jugar";
+	Main.k.langpack.es.menuAccount = "Mi cuenta";
+	Main.k.langpack.es.menuRanking = "Clasificación";
+	Main.k.langpack.es.menuForum = "Foro";
+	Main.k.langpack.es.menuHelp = "Ayuda";
+	Main.k.langpack.es.menuCastings = "Reality Mush";
+	Main.k.langpack.es.menuVending = "Distributeur";
+	Main.k.langpack.es.menuXP = "Experiencia";
+	Main.k.langpack.es.menuMyFile = "Mi ficha ";
+	Main.k.langpack.es.menuMySettings = "Mis opciones";
+	Main.k.langpack.es.menuNews = "Noticias ";
+	Main.k.langpack.es.menuHelpMush = "Ayuda Mush";
+	Main.k.langpack.es.menuPatchlog = "Patchlog";
+	Main.k.langpack.es.menuTutoChar = "Tuto %s";
+	Main.k.langpack.es.connected = "connecté(e)";
+	/********* /SPANISH ************/
+}
+Main.k.setuptranslations();
 /************************* /TRANSLATIONS **********************/
 
 
@@ -153,77 +297,48 @@ var Closet = unsafeWindow.Closet;
 				
 				
 
-String.prototype.capitalize = function() { 
+String.prototype.capitalize = function() {
 	return this.replace(/(?:^|\s)\S/g, function(a) {
 		return a.toUpperCase();
 	});
 };
 
-Main.k.initData = function() {
-	
-	//Language detection
-	switch(Main.k.domain){
+Main.k.initLang = function() {
+	// Language detection
+	switch(Main.k.domain) {
 		case "mush.twinoid.com":
 			Main.k.lang = "en";
-		break;
+			break;
 		case "mush.twinoid.es":
 			Main.k.lang = "es";
-		break;
+			break;
 		default:
 			Main.k.lang = "fr";
 	}
-	Main.k.tutorials = {};
-	if(typeof(Main.k.langpack[Main.k.lang]) != 'undefined'){
-		Main.k.currentLangpack = Main.k.langpack[Main.k.lang];
-		if(typeof(Main.k.currentLangpack.tutorials) != 'undefined'){
-			Main.k.tutorials = Main.k.currentLangpack.tutorials;
-		}
-		
-	}
-	Main.k.playing = Main.heroes.iterator().hasNext();
 
-	// Tutorials
-	/*Main.k.tutorials = [];
-	Main.k.tutorials["eleesha"] = 20507142;
-	Main.k.tutorials["janice"] = 19645493;
-	Main.k.tutorials["chao"] = 21006818;
-	Main.k.tutorials["terrence"] = 20598308;
-	Main.k.tutorials["paola"] = 20451046;
-	Main.k.tutorials["raluca"] = 20458805;
-	Main.k.tutorials["roland"] = 20340650;
-	Main.k.tutorials["ian"] = 20442357;
-	Main.k.tutorials["frieda"] = 19689575;
-	Main.k.tutorials["finola"] = 20507704;
-	Main.k.tutorials["jin su"] = 19614210;
-	Main.k.tutorials["gioele"] = 20629766;
-	Main.k.tutorials["kuan ti"] = 20719766;
-	Main.k.tutorials["chun"] = 20552058;
-	Main.k.tutorials["hua"] = 20261535;
-	Main.k.tutorials["stephen"] = 19654941;*/
+	// Default language pack = french (most translated)
+	// Switch to english when fully translated
+	Main.k.currentLangpack = Main.k.langpack.fr;
+
+	// Use available translations instead of default one
+	if (Main.k.lang != "fr" && typeof(Main.k.langpack[Main.k.lang]) != 'undefined') {
+		for (a in Main.k.langpack[Main.k.lang]) {
+			Main.k.currentLangpack[a] = Main.k.langpack[Main.k.lang][a];
+		}
+	}
+
+	// Create smaller proxy
+	Main.k.text = Main.k.currentLangpack;
+}
+Main.k.initData = function() {
+	// Define if we are ingame
+	Main.k.playing = Main.heroes.iterator().hasNext();
 
 	Main.k.BMAXWIDTH = 1160;
 	Main.k.HEROES =   ["jin_su", "frieda", "kuan_ti", "janice", "roland", "hua", "paola", "chao", "finola", "stephen", "ian", "chun", "raluca", "gioele", "eleesha", "terrence"];
-	Main.k.CAPTAINS = ["jin_su", "chao", "gioele", "stephen", "frieda", "kuan_ti", "hua", "roland", "raluca", "finola", "paola", "terrence", "eleesha", "ian", "janice", "chun"];
-	Main.k.RESPCOMM = ["paola", "eleesha", "stephen", "janice", "roland", "hua", "jin_su", "kuan_ti", "gioele", "chun", "ian", "finola", "terrence", "frieda", "chao", "raluca"];
+	Main.k.COMMANDERS = ["jin_su", "chao", "gioele", "stephen", "frieda", "kuan_ti", "hua", "roland", "raluca", "finola", "paola", "terrence", "eleesha", "ian", "janice", "chun"];
+	Main.k.COMMS = ["paola", "eleesha", "stephen", "janice", "roland", "hua", "jin_su", "kuan_ti", "gioele", "chun", "ian", "finola", "terrence", "frieda", "chao", "raluca"];
 	Main.k.ADMINS =   ["janice", "terrence", "eleesha", "raluca", "finola", "frieda", "ian", "stephen", "paola", "jin_su", "hua", "kuan_ti", "gioele", "chun", "roland", "chao"];
-	Main.k.HEROES_SHORTDESC = [
-		"Commandant suprême du Daedalus.",
-		"Scientifique millénaire.",
-		"Grand architecte du Daedalus.",
-		"Psychologue Digitale aux atouts certains.",
-		"Humoriste pilote de chasse à ses heures.",
-		"Exploratrice de l'extrême.",
-		"Officier principal des Communications du Daedalus.",
-		"Chef de la sécurité du Daedalus.",
-		"Biologiste de renommée internationale, pionnière dans l'étude du Mush.",
-		"Cuisinier le plus dangereux de la galaxie.",
-		"Chercheur frugivore flexible.",
-		"Dernier espoir de l'Humanité.",
-		"Génie de la physique quantique félinophile.",
-		"Armateur philantrophobe.",
-		"Investigatrice déchue de premier plan.",
-		"Technophile motorisé."
-	];
 
 	Main.k.cssToHeroes = [];
 	Main.k.cssToHeroes["-1185px"] = "janice";
@@ -235,15 +350,10 @@ Main.k.initData = function() {
 	Main.k.cssToHeroes["-1499px"] = "jin_su";
 	Main.k.cssToHeroes["-1604px"] = "jin_su";
 	Main.k.cssToHeroes["-1391px"] = "raluca";
-
-	Main.k.getShortDesc = function(hero) {
-		for (var i=0; i<Main.k.HEROES.length; i++) {
-			if (Main.k.HEROES[i] == hero) return Main.k.HEROES_SHORTDESC[i];
-		}
-	}
+	Main.k.cssToHeroes["-1681px"] = "stephen";
 
 	Main.k.compActiveMush = [];
-	
+
 	Main.k.compInactiveMush = [];
 	Main.k.compInactiveMush["cold_blood"] = true;
 	Main.k.compInactiveMush["wrestler"] = true;
@@ -254,7 +364,7 @@ Main.k.initData = function() {
 	Main.k.compInactiveMush["panic"] = true;
 	Main.k.compInactiveMush["caffeinomaniac"] = true;
 	Main.k.compInactiveMush["frugivore"] = true;
-	
+
 	Main.k.researchGlory = [];
 	Main.k.researchGlory["drug_dispenser"] = 0;//
 	Main.k.researchGlory["healing_ointmant"] = 0;//
@@ -290,54 +400,54 @@ Main.k.displayMainMenu = function() {
 	Main.k.silver = true; //TODO
 	Main.k.fds = ($("a.butmini[href='/fds']").length > 0);
 	var menu = $("<ul>").addClass("kmenu").insertBefore("#maincontainer, .boxcontainer");
-	var play = $("<li class='kmenuel active first'><a href='"+Main.k.mushurl+"/chooseHero'>"+Main.k.getTranslation('menuPlay')+"</a></li>").appendTo(menu);
-	var account = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/me'>"+Main.k.getTranslation('menuAccount')+"</a></li>").appendTo(menu);
-	
-	if(Main.k.hasTranslation('menuCastings')){
-		var casting = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/group/list'>"+Main.k.getTranslation('menuCastings')+"</a></li>").appendTo(menu);
+	var play = $("<li class='kmenuel active first'><a href='"+Main.k.mushurl+"/chooseHero'>"+Main.k.text.menuPlay+"</a></li>").appendTo(menu);
+	var account = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/me'>"+Main.k.text.menuAccount+"</a></li>").appendTo(menu);
+
+	if(typeof(Main.k.langpack[Main.k.lang]['menuCastings']) != 'undefined'){
+		var casting = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/group/list'>"+Main.k.text.menuCastings+"</a></li>").appendTo(menu);
 	}
-	var rankings = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/ranking'>"+Main.k.getTranslation('menuRanking')+"</a></li>").appendTo(menu);
-	var forum = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/tid/forum'>"+Main.k.getTranslation('menuForum')+"</a></li>").appendTo(menu);
-	var help = $("<li class='kmenuel last'><a href='"+Main.k.mushurl+"/help'>"+Main.k.getTranslation('menuHelp')+"</a></li>").appendTo(menu);
+	var rankings = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/ranking'>"+Main.k.text.menuRanking+"</a></li>").appendTo(menu);
+	var forum = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/tid/forum'>"+Main.k.text.menuForum+"</a></li>").appendTo(menu);
+	var help = $("<li class='kmenuel last'><a href='"+Main.k.mushurl+"/help'>"+Main.k.text.menuHelp+"</a></li>").appendTo(menu);
 
 	var play_ss = $("<ul>").appendTo(play);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/vending'><li><img src='/img/icons/skills/rebel.png' />"+Main.k.getTranslation('menuVending')+"</li></a>")
+	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/vending'><li><img src='/img/icons/skills/rebel.png' />"+Main.k.text.menuVending+"</li></a>")
 	.css("display", "none").attr("id", "vendingmenu").appendTo(play_ss);
 
 	var account_ss = $("<ul>").attr("id", "accountmenu").appendTo(account);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me'><li><img src='/img/icons/skills/persistent.png' />"+Main.k.getTranslation('menuXP')+"</li></a>").appendTo(account_ss);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me?profile'><li><img src='/img/icons/skills/opportunist.png' />"+Main.k.getTranslation('menuMyFile')+"</li></a>").appendTo(account_ss);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me?config'><li><img src='/img/icons/skills/engineer.png' />"+Main.k.getTranslation('menuMySettings')+"</li></a>").appendTo(account_ss);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me?news'><li><img src='/img/icons/skills/radio_expert.png' />"+Main.k.getTranslation('menuNews')+"</li></a>").appendTo(account_ss);
+	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me'><li><img src='/img/icons/skills/persistent.png' />"+Main.k.text.menuXP+"</li></a>").appendTo(account_ss);
+	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me?profile'><li><img src='/img/icons/skills/opportunist.png' />"+Main.k.text.menuMyFile+"</li></a>").appendTo(account_ss);
+	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me?config'><li><img src='/img/icons/skills/engineer.png' />"+Main.k.text.menuMySettings+"</li></a>").appendTo(account_ss);
+	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me?news'><li><img src='/img/icons/skills/radio_expert.png' />"+Main.k.text.menuNews+"</li></a>").appendTo(account_ss);
 
 	var rankings_ss = $("<ul>").appendTo(rankings);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/ranking'><li><img src='/img/icons/skills/persistent.png' />"+Main.k.getTranslation('menuRanking')+"</li></a>").appendTo(rankings_ss);
+	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/ranking'><li><img src='/img/icons/skills/persistent.png' />"+Main.k.text.menuRanking+"</li></a>").appendTo(rankings_ss);
 	$("<a class='kssmenuel ext' href='http://twinorank.kubegb.fr/'><li><img src='/img/icons/skills/persistent.png' />Twin-O-Rank</li></a>").appendTo(rankings_ss);
 
 	var forum_ss = $("<ul>").appendTo(forum);
-	if(Main.k.hasTranslation('menuForumDiscussionId')){
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.getTranslation('menuForumDiscussionId')+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.getTranslation('menuForumDiscussion')+"</li></a>").appendTo(forum_ss);
+	if(typeof(Main.k.langpack[Main.k.lang]['menuForumDiscussionId']) != 'undefined'){
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.menuForumDiscussionId+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.menuForumDiscussion+"</li></a>").appendTo(forum_ss);
 	}
-	if(Main.k.hasTranslation('menuForumAdviceId')){
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.getTranslation('menuForumAdviceId')+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.getTranslation('menuForumAdvice')+"</li></a>").appendTo(forum_ss);
+	if(typeof(Main.k.langpack[Main.k.lang]['menuForumAdviceId']) != 'undefined'){
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.menuForumAdviceId+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.menuForumAdvice+"</li></a>").appendTo(forum_ss);
 	}
-	if(Main.k.hasTranslation('menuForumLoungeId')){
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.getTranslation('menuForumLoungeId')+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.getTranslation('menuForumLounge')+"</li></a>").appendTo(forum_ss);
+	if(typeof(Main.k.langpack[Main.k.lang]['menuForumLoungeId']) != 'undefined'){
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.menuForumLoungeId+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.menuForumLounge+"</li></a>").appendTo(forum_ss);
 	}
-	if(Main.k.hasTranslation('menuForumCastingsId')){
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.getTranslation('menuForumCastingsId')+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.getTranslation('menuForumCastings')+"</li></a>").appendTo(forum_ss);
+	if(typeof(Main.k.langpack[Main.k.lang]['menuForumCastingsId']) != 'undefined'){
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.menuForumCastingsId+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.menuForumCastings+"</li></a>").appendTo(forum_ss);
 	}
-	if (Main.k.silver && Main.k.hasTranslation('menuForumOfficersId')) {
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.getTranslation('menuForumOfficersId')+"'><li><img src='/img/icons/skills/rebel.png' />"+Main.k.getTranslation('menuForumOfficers')+"</li></a>").appendTo(forum_ss);
+	if (Main.k.silver && typeof(Main.k.langpack[Main.k.lang]['menuForumOfficersId']) != 'undefined') {
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.menuForumOfficersId+"'><li><img src='/img/icons/skills/rebel.png' />"+Main.k.text.menuForumOfficers+"</li></a>").appendTo(forum_ss);
 	}
-	
-	var help_ss = $("<ul>").appendTo(help);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/help'><li><img src='/img/icons/skills/genius.png' />"+Main.k.getTranslation('menuHelpMush')+"</li></a>").appendTo(help_ss);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/patchlog'><li><img src='/img/icons/skills/persistent.png' />"+Main.k.getTranslation('menuPatchlog')+"</li></a>").appendTo(help_ss);
 
-	if (Main.k.ownHero && Main.k.tutorials[Main.k.ownHero]) {
+	var help_ss = $("<ul>").appendTo(help);
+	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/help'><li><img src='/img/icons/skills/genius.png' />"+Main.k.text.menuHelpMush+"</li></a>").appendTo(help_ss);
+	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/patchlog'><li><img src='/img/icons/skills/persistent.png' />"+Main.k.text.menuPatchlog+"</li></a>").appendTo(help_ss);
+
+	if (Main.k.ownHero && Main.k.text.tutorials[Main.k.ownHero]) {
 		var charname = Main.k.ownHero.replace("_", "");
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/67561|thread/" + Main.k.tutorials[Main.k.ownHero] + "'><li><img src='/img/icons/ui/" + charname + ".png' />" + Main.k.getTranslation('menuTutoChar', Main.k.ownHero.capitalize()) + "</li></a>").appendTo(help_ss);
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/67561|thread/" + Main.k.text.tutorials[Main.k.ownHero] + "'><li><img src='/img/icons/ui/" + charname + ".png' />" + sprintf(Main.k.text.menuTutoChar, Main.k.ownHero.capitalize()) + "</li></a>").appendTo(help_ss);
 	}
 	$("<a class='kssmenuel ext' href='http://www.twinpedia.com/mush'><li><img src='http://www.twinpedia.com/_media//favicon.ico' />Twinpedia</li></a>").appendTo(help_ss);
 	$("<a class='kssmenuel ext' href='http://apps-scipion.com/pictoid/mush'><li><img src='/img/icons/ui/win_triumph.png' />Pictoid</li></a>").appendTo(help_ss);
@@ -348,25 +458,7 @@ Main.k.displayMainMenu = function() {
 		$("<a class='kssmenuel' href='"+Main.k.mushurl+"/fds'><li><img src='/img/icons/skills/cold_blood.png' />FDS</li></a>").appendTo(play_ss);
 	}
 }
-Main.k.getTranslation = function(key){
-	if(typeof(Main.k.currentLangpack[key]) != 'undefined'){
-		if(typeof(arguments[1]) != 'undefined' && jQuery.type(Main.k.currentLangpack[key]) == 'string'){
-			var a = $.makeArray(arguments);
-			a.shift();
-			return vsprintf(Main.k.currentLangpack[key],a);
-		}else{
-			return Main.k.currentLangpack[key];
-		}
-		
-	}
-	return '['+key+']';	
-}
-Main.k.hasTranslation = function(key){
-	if(typeof(Main.k.currentLangpack[key]) != 'undefined'){
-		return true
-	}
-	return false;
-}
+
 Main.k.ArrayContains = function(arr, o) {
 	for (a in arr) {
 		if (a == o) return true;
@@ -444,26 +536,32 @@ Main.k.MakeButton = function(content, href, onclick, tiptitle, tipdesc) {
 
 	return but;
 }
-Main.k.GetHeroNameFromTopic = function(topic){
+Main.k.GetHeroNameFromTopic = function(topic) {
 	var hero = '';
-	var div = null
-	if(topic.find(".char,.tid_char").length >0){
+	var div = null;
+
+	// First tries to get the character-specific css class name
+	if (topic.find(".char,.tid_char").length >0) {
 		div = topic.find(".char,.tid_char");
 		hero = div.attr('class').replace("char ", "").replace("tid_char tid_", "");
 	}
-	if(div != null && hero == ''){
 
+	// If it failed, compare the image position with custom outfits
+	if (div != null && hero == '') {
 		var sp = div.css('backgroundPosition').split(" ");
 		var pos_y = sp[1];
-		if (typeof Main.k.cssToHeroes[pos_y] != 'undefined') {
-				hero = Main.k.cssToHeroes[pos_y];
-		}
+
+		// Don't need to check if undefined thanks to the shield in the return
+		hero = Main.k.cssToHeroes[pos_y];
 	}
-	
-	if(hero == ''){
-		hero = 'jin_su';
+
+	// If no hero found (hero = "" or hero = undefined), use jin su
+	return hero ? hero : "jin_su";
+}
+Main.k.getShortDesc = function(hero) {
+	for (var i=0; i<Main.k.HEROES.length; i++) {
+		if (Main.k.HEROES[i] == hero) return Main.k.text.HEROES_SHORTDESC[i];
 	}
-	return hero;
 }
 
 
@@ -475,15 +573,8 @@ Main.k.Options.cbubblesNB = false;
 Main.k.Options.dlogo = false;
 Main.k.Options.splitpjt = true;
 Main.k.Options.altpa = false;
+Main.k.Options.options = [];
 
-Main.k.Options.options = [
-//  Option Name,	Option Object,				Need refresh,	After(),				Desc
-	["cbubbles",	Main.k.Options.cbubbles,	false,			Main.k.customBubbles,	"Activer la mise en forme personnalisée des messages (bordure + couleur nom + image de fond)."],
-	["cbubblesNB",	Main.k.Options.cbubblesNB,	false,			Main.k.customBubbles,	"Simplifier la mise en forme personnalisée des messages (suppression de l'image de fond)."],
-	["dlogo",		Main.k.Options.dlogo,		true,			null,					"Afficher le logo Mush au dessus des onglets."],
-	["splitpjt",	Main.k.Options.splitpjt,	false,			Main.k.updateBottom,	"Séparer les projets / recherches / pilgred sous la zone de jeu."],
-	//["altpa",		Main.k.Options.altpa,		true,			null,					"Utiliser des images alternatives pour les pa / pm."]
-];
 Main.k.Options.open = function() {
 	if (Main.k.folding.displayed == "options") {
 		Main.k.folding.displayGame();
@@ -499,29 +590,28 @@ Main.k.Options.open = function() {
 			transform: "scale(0,1)",
 			color: "rgb(9,10,97)"
 		}).attr("id", "options_col").appendTo($("table.inter tr").first());
-		
-		$("<p>").addClass("warning").html("Gestion des options en cours de développement. Les options affichées ci-dessous sont cependant configurables.").appendTo(td);
-		
+
+		$("<p>").addClass("warning").html(Main.k.text.optionsWarning).appendTo(td);
+
 
 		for (var i=0; i<Main.k.Options.options.length; i++) {
 			var opt = Main.k.Options.options[i];
 			var html = opt[4];
-			if (opt[2]) html += " Nécessite un rechargement de la page.";
+			if (opt[2]) html += Main.k.text.needPageReload;
 
 			var p = $("<p>").css({
 				color: "#EEE",
 				padding: "5px",
 				border: "1px dashed #EEE",
 				background: "rgba(255,255,255,0.1)",
-				margin: "10px 20px"
+				margin: "10px 20px",
+				clear: "both"
 			})
-			.html(html)
+			.html('<div style="margin-left: 30px;">' + html + '</div>')
 			.appendTo(td);
 
 			var chk = $("<input>").css({
-				"float": "left",
-				"margin-bottom": "40px",
-				"margin-right": "5px"
+				"float": "left"
 			})
 			.attr("type", "checkbox")
 			.attr("optname", opt[0])
@@ -531,11 +621,11 @@ Main.k.Options.open = function() {
 			if (opt[1]) chk.attr("checked", "checked");
 		}
 	}
-	
+
 	Main.k.folding.display([null,null, "#options_col"], "options");
 }
 Main.k.Options.update = function(e) {
-	var tgt = $(e.target);		
+	var tgt = $(e.target);
 	var key = $(tgt).attr("optname");
 	var val = $(tgt).attr("checked") ? "y" : "n";
 	var i = $(tgt).attr("opti");
@@ -582,6 +672,15 @@ Main.k.Options.updateCookie = function() {
 	js.Cookie.set("ctrlwoptions",cook,420000000);
 }
 Main.k.Options.init = function() {
+	Main.k.Options.options = [
+	//  Option Name,	Option Object,				Need refresh,	After(),				Desc
+		["cbubbles",	Main.k.Options.cbubbles,	false,			Main.k.customBubbles,	Main.k.text.options[0]],
+		["cbubblesNB",	Main.k.Options.cbubblesNB,	false,			Main.k.customBubbles,	Main.k.text.options[1]],
+		["dlogo",		Main.k.Options.dlogo,		true,			null,					Main.k.text.options[2]],
+		["splitpjt",	Main.k.Options.splitpjt,	false,			Main.k.updateBottom,	Main.k.text.options[3]],
+		//["altpa",		Main.k.Options.altpa,		true,			null,					"Utiliser des images alternatives pour les pa / pm."]
+	];
+
 	var cook = js.Cookie.get("ctrlwoptions");
 	if (!cook) return;
 
@@ -729,9 +828,11 @@ Main.k.css.ingame = function() {
 		margin: 0 -2px;\
 	}\
 	.exploring {\
-		top: 0px! important;\
+		top: -30px! important;\
+		right: 15px! important;\
 		width: 200px! important;\
 		height: 24px! important;\
+		z-index: 20;\
 		overflow: hidden! important;\
 	}\
 	.exploring .exploring2 {\
@@ -1277,7 +1378,7 @@ Main.k.css.ingame = function() {
 Main.k.css.bubbles = function() {
 	var d = "3px";
 	var custombubbles_glow = "text-shadow: 0 0 " + d + " #FFF, 0 0 " + d + " #FFF, 0 0 " + d + " #FFF, 0 0 " + d + " #FFF, 0 0 " + d + " #FFF, 0 0 " + d + " #FFF, 0 0 " + d + " #FFF;";
-	
+
 	$("<style>").attr("type", "text/css").html("\
 	.bubble_stephen {\
 		background: url(" + Main.k.servurl + "/img/tile_stephen.png) center repeat #FFF! important;\
@@ -1407,7 +1508,7 @@ Main.k.tabs.playing = function() {
 	// Open links in a new tab
 	$("ul.kmenu a.ext").on("click", function() { Main.k.window.open(this.href); return false; });
 	Main.k.hasTalkie = $("#walltab").length > 0;
-	
+
 	$('#swf_ISO_MODULE').click(function(){
 		if($('.fakeitem.on').length == 1){
 			Main.k.fakeSelectItem($('.fakeitem.on'));
@@ -1596,13 +1697,14 @@ Main.k.tabs.playing = function() {
 				pr.submit();
 				Tools.send2Store("mush_chatContent_" + jq.attr("id"),"");
 				jq.data("default",true);
-				} else {
-				tgt.val(tgt.val() + "\r\n");
+			} else {
+				// Insert line break at caret, not at the end...
+				tgt.insertAtCaret("\n");
 				Tools.send2Store("mush_chatContent_" + jq.attr("id"),tgt.val());
 			}
 		} else Tools.send2Store("mush_chatContent_" + jq.attr("id"),tgt.val());
-	} 
-	Main.onWallFocus = function(jq) {
+	}
+	Main.onWallFocus = function(jq) {//TODO: MULTILANG
 		if(jq.data("default")) {
 			jq.val(Main.getText("edit_me"));
 			jq.data("default",false);
@@ -1823,11 +1925,13 @@ Main.k.tabs.playing = function() {
 			}
 		}
 	}
-/*	Main.onWallInput = function(event) {
+	// Still need correction to insert line break at caret
+	// But nice try blackmagic, anyway~
+	Main.onWallInput = function(event) {
 		var tgt = new js.JQuery(event.target);
 		var val = tgt.val();
-		if(event.keyCode == 13) {
-			if(!event.ctrlKey && !event.shiftKey && val.length > 1) {
+		if (event.keyCode == 13) {
+			if (!event.ctrlKey && val.length > 1) {
 				var updtArr = ["cdTabsChat","chatBlock","char_col"];
 				var scr = new js.JQuery(".cdWallChannel").scrollTop();
 				var sendChatProc = function() {
@@ -1850,54 +1954,13 @@ Main.k.tabs.playing = function() {
 				tgt.val(Main.getText("edit_me"));
 				tgt.data("default",true);
 			} else {
-				tgt.val(tgt.val() + "\r\n");
+				// Insert line break at caret, not at the end...
+				tgt.insertAtCaret("\n");
 				Tools.send2Store("mush_wallReply_" + tgt.attr("id"),tgt.val());
 			}
 		} else Tools.send2Store("mush_wallReply_" + tgt.attr("id"),tgt.val());
-	}*/
-	/*Main.sendChat = function(frm) {
-		var area = $("#" + frm.getAttribute("id") + " textarea[name='" + frm.getAttribute("src") + "']");
-		var msg = area.val();
-		if (msg.length == 0) return;
-		area.val("");
+	}
 
-		// Save msg
-		var stVal = StringTools.urlEncode(msg);
-		js.Cookie.set("lastsentmsg", stVal);
-
-		var sendChatProc = function() {
-			Main.maxLastChatPack(true);
-			Main.resetJs();
-
-			// Message sent
-			Main.k.displayLastSent(false);
-		};
-
-		var updtArr = ["cdTabsChat","chatBlock","char_col"];
-		var url = "/newWallThread?message=" + stVal;
-		Main.updateContent(url,updtArr,null,sendChatProc);
-	}*/
-	/*Main.loadMoreWall = function(jq) {
-		if(Main.lmwProcessing) return;
-		Main.lmwProcessing = true;
-		var w = $(".cdLast");
-		var wp = w.closest(".wall");
-		if(w.length > 0) {
-			JqEx.postLoading(wp);
-			Tools.ping("/retrWallAfter/" + w.parent().data("k"),function(content) {
-				var jq1 = $(content);
-				JqEx.remLoading(wp);
-				w.removeClass("cdLast");
-				wp.append(jq1.find(".wall").html());
-				Main.lmwProcessing = false;
-
-				if (Main.k.Options.cbubbles) Main.k.customBubbles();
-
-				// Never hide unread msg
-				$("table.treereply tr.not_read.cdRepl").css("display", "table-row");
-			});
-		}
-	}*/
 	Main.loadMoreWall = function(jq) {
 		if(Main.lmwProcessing) return;
 		Main.lmwProcessing = true;
@@ -1906,23 +1969,19 @@ Main.k.tabs.playing = function() {
 		if(w.length > 0) {
 			JqEx.postLoading(wp);
 			Tools.ping("/retrWallAfter/" + w.data("k"),function(content) {
-				var jq1 = new js.JQuery(content);
+				var jq1 = $(content);
 				JqEx.remLoading(wp);
-				var subWall = jq1.find(".wall");
-				if(subWall.length == 0) {
-					if(Main.userDebug) console.log("post does not contain wall infos");
-				}
-				wp.append(subWall.html());
+				w.removeClass("cdLast"); // TODO: remove?
+				wp.append(jq1.find(".wall").html());
 				Main.lmwProcessing = false;
+
+				if (Main.k.Options.cbubbles) Main.k.customBubbles();
+
+				// Never hide unread msg
+				$("table.treereply tr.not_read.cdRepl").css("display", "table-row");
 			});
 		} else {
 			Main.lmwProcessing = false;
-			if(Main.userDebug) console.log("cannot find the last wall");
-			
-			/******** CTRL+W *******/
-			// Never hide unread msg
-			$("table.treereply tr.not_read.cdRepl").css("display", "table-row");
-			/******** CTRL+W *******/
 		}
 	}
 	Main.resetJs = function(doActions, skipK) {
@@ -1987,8 +2046,9 @@ Main.k.tabs.playing = function() {
 			Main.sel.selectBySerial(frm.attr("serial"));
 		}
 	}
-	/*Main.sel.selectBySerial = function(serial) {
 
+	// Seems to work again; if not use next method instead
+	Main.sel.selectBySerial = function(serial) {
 		var jMe = $("[serial='" + serial + "']");
 		//if (jMe.length == 0) return; // << from flash
 		js.Cookie.set(CrossConsts.COOK_SEL,StringTools.urlEncode(serial),3600);
@@ -2012,7 +2072,7 @@ Main.k.tabs.playing = function() {
 					$("#cdActionList div").not(".move").remove();
 					Main.cancelSelection(realJMe);
 					this.currentInvSelection = null;
-					
+
 					var tgt = $(".cdActionList");
 					var src = $(".cdActionRepository .heroRoomActions").children().clone();
 					tgt.html(src);
@@ -2117,13 +2177,13 @@ Main.k.tabs.playing = function() {
 			$("#cdItemActions").addClass("selectplayer");
 			$("#cdInventory").removeClass("placard_on");
 		}
-	}*/
-	Main.sel.selectBySerial = function(serial) {
+	}
+	/*Main.sel.selectBySerial = function(serial) {
 		js.Cookie.set(CrossConsts.COOK_SEL,StringTools.urlEncode(serial),3600);
 		var jMe = Selection.j("[serial=" + serial + "]:not(.fakeitem)");
 		var domMe = jMe.toArray()[0];
 		if(jMe.parent().attr("id") == "myInventory") {
-			/******** CTRL+W *******/
+			// ******** CTRL+W ******* /
 			if(jMe.parents('#research_module').length > 0){ //is lab
 				var allItems = $("#myInventory .item").not(".cdEmptySlot").add("[serverselected=true]");
 				$(".cdCharColSel").remove();
@@ -2146,10 +2206,10 @@ Main.k.tabs.playing = function() {
 					$(this).clone().appendTo("#cdActionList");
 				})
 				jMe.addClass("on").prepend(new Tag("div").attr("class","selected").toString());
-				$("<div class='action stSel'> " + realJMe.attr("data-name").split("\\'").join("'") + " :</div>").prependTo("#cdActionList");	
-			
+				$("<div class='action stSel'> " + realJMe.attr("data-name").split("\\'").join("'") + " :</div>").prependTo("#cdActionList");
+
 			}else{
-			/******** /CTRL+W *******/
+			// ******** /CTRL+W ******* /
 				var allItems = JqEx.j("#myInventory .item").not(".cdEmptySlot").add("[serverselected=true]");
 				Selection.j(".cdCharColSel").remove();
 				Selection.j("#myInventory .selected").parent().removeClass("on");
@@ -2161,7 +2221,7 @@ Main.k.tabs.playing = function() {
 					$r = s.split("\\'").join("'");
 					return $r;
 				}(this)) + " :</div>");
-				
+
 				Selection.j(".cdHeroOne").prepend(pre);
 				Lambda.iter(allItems.toArray(),function(h) {
 					h.onclick = function(e) {
@@ -2174,7 +2234,7 @@ Main.k.tabs.playing = function() {
 				this.currentInvSelection = serial;
 				Main.acListMaintainer.refreshHeroInv();
 			}
-			
+
 		} else if(jMe.parent().attr("id") == "room") {
 			var allItems = JqEx.j("#room .item").not(".cdEmptySlot");
 			Selection.j("#room .selected").parent().removeClass("on");
@@ -2209,7 +2269,7 @@ Main.k.tabs.playing = function() {
 			Selection.j(".inv").css("visibility","visible");
 			Selection.j(".cdDistrib").addClass("placard_on");
 		}
-	}
+	}*/
 	// == /Extend Main ============================================
 
 
@@ -2220,24 +2280,29 @@ Main.k.tabs.playing = function() {
 	// ============================================================
 	Main.k.UpdateData = {currversion: 0, changelog: []};
 	Main.k.UpdateCheck = function() {
+		var lastVersion = js.Cookie.get('ctrlwVersion');
 		$.ajax({
-			url :Main.k.servurl + "/versions/update/"+Main.k.version, 
+			url :Main.k.servurl + "/versions/update/"+ (typeof(lastVersion) == 'undefined' ? Main.k.version : lastVersion),
 			dataType : 'jsonp',
 			success: function(json) {
+				Main.k.UpdateData.currversion = json.numero;
+				if(typeof(json['changelog_long_'+Main.k.lang]) != 'undefined'){
+					Main.k.UpdateData.changelog = json['changelog_long_'+Main.k.lang];
+				}else{
+					Main.k.UpdateData.changelog = json.changelog_long;
+				}
 				if (Main.k.version < json.numero) {
-					Main.k.UpdateData.currversion = json.numero;
-					if(typeof(json['changelog_long_'+Main.k.lang]) != 'undefined'){
-						Main.k.UpdateData.changelog = json['changelog_long_'+Main.k.lang];
-					}else{
-						Main.k.UpdateData.changelog = json.changelog_long;
-					}
 					$("#updatebtn").css("display", "block");
 				} else {
+					if(typeof(lastVersion) != 'undefined' && lastVersion < GM_info.script.version){
+						Main.k.AutoUpdateDialog();
+					}
+					js.Cookie.set('ctrlwVersion',GM_info.script.version,420000000);
 					$("#updatebtn").css("display", "none");
 				}
 			},
 			error: function(xhr,statut,http){
-			console.warn(xhr,statut,http);
+				console.warn(xhr,statut,http);
 			}
 		});
 	}
@@ -2272,6 +2337,33 @@ Main.k.tabs.playing = function() {
 		var cancel = "<div id=\"cancel\" class=\"but updatesbtn\" onclick=" + cancelAc + "><div class=\"butright\"><div class=\"butbg\"><a href=\"#\">" + Main.getText("cancel") + "</a></div></div></div></div>";
 		var finalisation = '<div id="final" class="updatesactions" style="display:none"><div><strong>Pour finaliser la mise à jour, après avoir installé le script, veuillez cliquer sur le bouton ci-dessous.</strong></div><div class="but updatesbtn" onclick="Main.k.ClosePopup();window.location.reload();"><div class="butright"><div class="butbg"><a href="#">Finaliser la mise à jour</a></div></div></div></div></div>'
 		$("<div>").html(content + ok + cancel + finalisation).appendTo(popup.content);
+
+		// Display popup
+		Main.k.OpenPopup(popup.dom);
+	}
+	Main.k.AutoUpdateDialog = function() {
+		// Create popup
+		var popup = Main.k.CreatePopup();
+		popup.content.css({
+			"height": "auto",
+			"max-height": "90%",
+			"width": "600px",
+			"color": "#FFF"
+		});
+
+		//conf.title = "Mise à jour du script CTRL+W";
+		var maj_content = sprintf(Main.k.text.lastVersionInstalled,Main.k.UpdateData.currversion);
+		maj_content += " <br/> <ul class='updateslist'>";
+		for (var i=0; i<Main.k.UpdateData.changelog.length; i++) {
+			var log = Main.k.UpdateData.changelog[i];
+			maj_content += "<li>"+log+"</li>";
+		}
+		maj_content += "</ul>";
+
+		// Fill popup content
+		var content = "<div class='updatescontent'>" + maj_content + "</div>";
+		var ok = "<div class='updatesactions'><div id=\"ok\" class=\"but updatesbtn\" ><div class=\"butright\"><div class=\"butbg\"><a onclick=\"Main.k.ClosePopup();\" href=\"#\">"+Main.k.text.autoUpdateOk+"</a></div></div></div>";
+		$("<div>").html(content + ok).appendTo(popup.content);
 
 		// Display popup
 		Main.k.OpenPopup(popup.dom);
@@ -2347,7 +2439,8 @@ Main.k.tabs.playing = function() {
 			var name = $(this).attr("data-name");
 
 			// Ignore personal objects
-			if (name.toLowerCase().indexOf("itrakie") != -1 || name.toLowerCase().indexOf("talkie") != -1 || name.toLowerCase().indexOf("traqueur") != -1) return;
+			var perso = ["itrackie", "talkie", "walkie", "traqueur", "tracker"]; // TODO: add other translations
+			for (a in perso) if (name.toLowerCase().indexOf(perso[a].toLowerCase()) != -1) return;
 
 			// Handle broken objects
 			var broken = (name.indexOf("/img/icons/ui/broken.png") > -1);
@@ -2355,8 +2448,8 @@ Main.k.tabs.playing = function() {
 			// Remove img from desc
 			name = name.replace(/(<img.+\/>)/ig, "").trim();
 
-			// Handle apprentrons
-			if (name.toLowerCase() == "apprentron") {
+			// Handle mage books
+			if (name.toLowerCase() == Main.k.text.mageBook.toLowerCase()) {
 				name = decodeURIComponent(/namey[0-9]+:(.+)g$/.exec($(this).attr("data-tip"))[1]).replace(/(\s\s)/, " ");
 			}
 
@@ -2368,14 +2461,14 @@ Main.k.tabs.playing = function() {
 
 			// Handle loads
 			var reg = /x([0-9]+)$/;
-			if (reg.test(name)) name += " charges";
+			if (reg.test(name)) name += " " + Main.k.text.loads;
 
 			if (!first) inv += ", ";
 			inv += "//" + name + "//" + qty;
 			if (broken) inv += " :alert:";
 			first = false;
 		});
-		if (first) inv += "//vide//";
+		if (first) inv += "//" + Main.k.text.empty + "//";
 
 		// Camera / Drone
 		var ncamera = 0;
@@ -2387,15 +2480,15 @@ Main.k.tabs.playing = function() {
 			else if (item.iid == "HELP_DRONE") ndrones++;
 		}
 		if (ncamera || ndrones) inv += " [";
-		if (ncamera) inv += ncamera + " caméra" + (ncamera != 1 ? "s" : "");
+		if (ncamera) inv += ncamera + " " + Main.k.text.camera + (ncamera != 1 ? "s" : "");
 		if (ncamera && ndrones) inv += " - ";
-		if (ndrones) inv += ndrones + " drone" + (ndrones != 1 ? "s" : "");
+		if (ndrones) inv += ndrones + " " + Main.k.text.drone + (ndrones != 1 ? "s" : "");
 		if (ncamera || ndrones) inv += "]";
 
 		return inv;
 	}
 	Main.k.FormatPlants = function() {
-		var ret = "**//Plantes : //**";
+		var ret = "**//" + Main.k.text.plants.capitalize() + " : //**";
 
 		$("#room").find("[data-id='TREE_POT']").each(function(i) {
 			var name = /^([^<]+)/.exec($(this).attr("data-name"))[1].trim();
@@ -2407,12 +2500,12 @@ Main.k.tabs.playing = function() {
 			ret += "\n- ////**" + name + "** ";
 			//ret += adult ? "(mature)" : "(X cycles)";
 			ret += " - ";
-			
+
 			var problems = [];
-			if (diseased) problems.push("//Malade//");
-			if (thirsty) problems.push("//Soif//");
-			if (dry) problems.push("//Desséché//");
-			if(problems.length == 0) problems.push("//RAS//");
+			if (diseased) problems.push("//" + Main.k.text.diseased.capitalize() + "//");
+			if (thirsty) problems.push("//" + Main.k.text.thirsty.capitalize() + "//");
+			if (dry) problems.push("//" + Main.k.text.dry.capitalize() + "//");
+			if(problems.length == 0) problems.push("//" + Main.k.text.nothingToReport.capitalize() + "//");
 
 			ret += problems.join();
 
@@ -2420,7 +2513,7 @@ Main.k.tabs.playing = function() {
 
 		return ret;
 	}
-	Main.k.FormatProjects = function() {
+	Main.k.FormatProjects = function() {//TODO: MULTILANG
 		var ret = "**//Projets : //**";
 
 		var parse = function(t) {
@@ -2438,7 +2531,7 @@ Main.k.tabs.playing = function() {
 			var desc = parse($(this).find("div.desc").html().trim());
 			var bonus1 = /<h1>([^<]+)<\/h1>/.exec($(this).find("div.suggestprogress ul li img").first().attr("onmouseover"))[1].trim();
 			var bonus2 = /<h1>([^<]+)<\/h1>/.exec($(this).find("div.suggestprogress ul li img").last().attr("onmouseover"))[1].trim();
-			
+
 			ret += "\r\n**" + name + "** - " + pct + "\n";
 			ret += "" + desc + "\n";
 			ret += "Bonus : //" + bonus1 + "//, //" + bonus2 + "//";
@@ -2446,7 +2539,7 @@ Main.k.tabs.playing = function() {
 
 		return ret;
 	}
-	Main.k.FormatResearch = function() {
+	Main.k.FormatResearch = function() {//TODO: MULTILANG
 		var ret = "**//Recherches : //**";
 
 		var parse = function(t) {
@@ -2473,7 +2566,7 @@ Main.k.tabs.playing = function() {
 
 		return ret;
 	}
-	Main.k.FormatPlanets = function() {
+	Main.k.FormatPlanets = function() {//TODO: MULTILANG
 		var ret = "**//Planètes : //**";
 
 		var parse = function(t) {
@@ -2514,7 +2607,7 @@ Main.k.tabs.playing = function() {
 
 		return ret;
 	}
-	Main.k.FormatBIOS = function() {
+	Main.k.FormatBIOS = function() {//TODO: MULTILANG
 		var ret = "**//Paramètres BIOS : //**";
 
 		$('#biosModule ul.dev li').each(function() {
@@ -2525,7 +2618,7 @@ Main.k.tabs.playing = function() {
 
 		return ret;
 	}
-	Main.k.FormatPharma = function() {
+	Main.k.FormatPharma = function() {//TODO: MULTILANG
 		var ret = "**//Consommables : //**";
 
 		$("#room").find("li").not(".cdEmptySlot").each(function() {
@@ -2547,7 +2640,7 @@ Main.k.tabs.playing = function() {
 
 		return ret;
 	}
-	Main.k.FormatLife = function() {
+	Main.k.FormatLife = function() {//TODO: MULTILANG
 		var pv = $("table.pvsm td").not(".barmoral").find("span").html().trim();
 		var moral = $("table.pvsm td.barmoral span").html().trim();
 		return pv + " :mush_hp: / " + moral + " :mush_moral:";
@@ -2589,7 +2682,7 @@ Main.k.tabs.playing = function() {
 		}
 		Main.k.Resize;
 	}
-	Main.k.ExtendPilgred = function() {
+	Main.k.ExtendPilgred = function() {//TODO: MULTILANG
 		$("#pilgredbonus").remove();
 		var pilgred = $("#cdBottomBlock div.pilgred").parent().css({
 			position: "relative",
@@ -2622,7 +2715,7 @@ Main.k.tabs.playing = function() {
 			"font-size": "11px"
 		}).html(res).appendTo(pilgred);
 	}
-	Main.k.maxAgo = function(a,b) {
+	Main.k.maxAgo = function(a,b) {//TODO: MULTILANG
 		// TODO: factorize code
 
 		// undefined
@@ -2690,7 +2783,7 @@ Main.k.tabs.playing = function() {
 		// ?
 		return a;
 	}
-	Main.k.minAgo = function(a,b) {
+	Main.k.minAgo = function(a,b) {//TODO: MULTILANG
 		// TODO: factorize code
 
 		// undefined
@@ -2758,7 +2851,7 @@ Main.k.tabs.playing = function() {
 		// ?
 		return a;
 	}
-	Main.k.extendAgo = function(ago) {
+	Main.k.extendAgo = function(ago) {//TODO: MULTILANG
 		var one = (parseInt(/([0-9]+)/.exec(ago)[1]) == 1);
 
 		ago = ago.replace("min", " minute" + (one ? "" : "s"));
@@ -2810,7 +2903,7 @@ Main.k.tabs.playing = function() {
 			if ($("#cdBottomBlock div.research").length > 0) $("<div>").addClass("split").insertAfter($("#cdBottomBlock div.research").last().parent());
 		}
 	}
-	
+
 	// Game zone fold/unfold
 	Main.k.folding = {};
 	Main.k.folding.displayed = "game";
@@ -2949,7 +3042,7 @@ Main.k.tabs.playing = function() {
 
 	Main.k.About = {};
 	Main.k.About.initialized = false;
-	Main.k.About.open = function() {
+	Main.k.About.open = function() {//TODO: MULTILANG
 		if (Main.k.folding.displayed == "about") {
 			Main.k.folding.displayGame();
 			return;
@@ -3029,7 +3122,7 @@ Main.k.tabs.playing = function() {
 			}).appendTo(td);
 			Main.k.MakeButton("<img src='/img/icons/ui/pageleft.png' /> Retour au jeu", null, Main.k.About.open).css("display", "inline-block").appendTo(close);
 		}
-		
+
 		Main.k.folding.display([null,null, "#about_col"], "about");
 	}
 
@@ -3038,7 +3131,7 @@ Main.k.tabs.playing = function() {
 	Main.k.Profiles = {};
 	Main.k.Profiles.initialized = false;
 	Main.k.Profiles.current = 0;
-	Main.k.Profiles.open = function() {
+	Main.k.Profiles.open = function() {//TODO: MULTILANG
 		if (Main.k.folding.displayed == "profiles") {
 			Main.k.folding.displayGame();
 			return;
@@ -3054,9 +3147,9 @@ Main.k.tabs.playing = function() {
 				color: "rgb(9,10,97)"
 			}).attr("id", "profile_col").appendTo($("table.inter tr").first());
 
-			$("<p>").addClass("warning").html("Les profils de joueurs seront disponibles prochainement.").appendTo(td);	
+			$("<p>").addClass("warning").html("Les profils de joueurs seront disponibles prochainement.").appendTo(td);
 		}
-		
+
 		Main.k.folding.display([null,null, "#profile_col"], "profiles");
 	}
 	Main.k.Profiles.display = function(i) {
@@ -3108,13 +3201,13 @@ Main.k.tabs.playing = function() {
 			$("<img>").attr("src", "http://twinoid.com/img/icons/search.png").appendTo($("<li>").addClass("tab taboff").attr("id", "tabsearch").appendTo(tabs));
 			$("<img>").attr("src", "/img/icons/ui/wall.png").appendTo($("<li>").addClass("tab taboff").attr("id", "tabwall").appendTo(tabs));
 			$("<img>").attr("src", "/img/icons/ui/fav.png").appendTo($("<li>").addClass("tab tabon").attr("id", "tabfav").appendTo(tabs));
-			
+
 			// Tab content
 			var r = $("<div>").addClass("right").css("margin-top", 0).appendTo(td_topics);
 			var rbg = $("<div>").addClass("rightbg chattext").css({
 				"resize": "none"
 			}).appendTo(r);
-			
+
 			$("<div>").addClass("tabcontent").attr("id", "tabstats_content").appendTo(rbg);
 			$("<div>").addClass("tabcontent wall").attr("id", "tabnew_content").appendTo(rbg);
 			$("<div>").addClass("tabcontent wall").attr("id", "tabsearch_content").appendTo(rbg);
@@ -3261,7 +3354,7 @@ Main.k.tabs.playing = function() {
 		if (_target == "newtopic") {
 			Main.k.Manager.open();
 		} else if (_target == "reply") {
-			Main.k.Manager.displayedTopic = k;			
+			Main.k.Manager.displayedTopic = k;
 			var after = function() {
 				var k = Main.k.Manager.displayedTopic;
 				Main.k.Manager.selectTopic(k);
@@ -3455,7 +3548,7 @@ Main.k.tabs.playing = function() {
 			Main.k.Manager.lastago = Main.k.maxAgo(topic_ago, Main.k.Manager.lastago);
 		});
 	}
-	Main.k.Manager.parseTopic = function(topic, highlight) {			
+	Main.k.Manager.parseTopic = function(topic, highlight) {
 		var topicDOM = $("<div>").addClass("reply bubble unit");
 		if (Main.k.Options.cbubbles) topicDOM.addClass("bubble_" + topic.author);
 		if (Main.k.Options.cbubblesNB) topicDOM.addClass("custombubbles_nobackground");
@@ -3590,9 +3683,9 @@ Main.k.tabs.playing = function() {
 			id: 'sessionframe',
 			scrolling: 'no'
 		}).css({
-			width: 0, 
-			height: 0, 
-			display: "none", 
+			width: 0,
+			height: 0,
+			display: "none",
 			position: "absolute"
 		}).appendTo('body').load(function() {
 			// Get new flash
@@ -3722,7 +3815,7 @@ Main.k.tabs.playing = function() {
 		var topic_nb = Main.k.Manager.topics.length;
 		var answer_nb = Main.k.Manager.replies.length;
 		var total_msg = topic_nb + answer_nb;
-		var recap_p = $("<p>").html("Total : <b>" + total_msg + "</b> message" + (total_msg != 1 ? "s" : "") + 
+		var recap_p = $("<p>").html("Total : <b>" + total_msg + "</b> message" + (total_msg != 1 ? "s" : "") +
 			" chargés en <b>" + topic_nb + "</b> topic" + (topic_nb != 1 ? "s" : "") + ". <br/> (depuis " + Main.k.extendAgo(Main.k.Manager.lastago) + ")").appendTo(recap);
 
 		// Hero count
@@ -3917,7 +4010,7 @@ Main.k.tabs.playing = function() {
 			var words = "(" + lwords.join("|") + ")";
 			var nwords = lwords.length;
 			var matched_topics = 0;
-			
+
 			for (var i=0; i<Main.k.Manager.topics.length && matched_topics < max_results; i++) {
 				var topic = Main.k.Manager.topics[i];
 				var matched = false;
@@ -3965,7 +4058,7 @@ Main.k.tabs.playing = function() {
 						for (var l=0; l<authors.length; l++) {
 							if (m.author == authors[l]) {
 								autmatched = true;
-							
+
 								if (nwords == 0) matched = true;
 							}
 						}
@@ -4259,7 +4352,7 @@ Main.k.tabs.playing = function() {
 		// Add left bar
 		// ----------------------------------- //
 		var leftbar = $("<div>").addClass("usLeftbar").insertBefore($("#content"));
-		Main.k.MakeButton("<img src='" + Main.k.servurl + "/img/ctrlw_sml.png' height='16' /> " +  Main.k.version, null, Main.k.About.open, "A propos", "Cliquez ici pour plus d'informations sur le script.").css({
+		Main.k.MakeButton("<img src='" + Main.k.servurl + "/img/ctrlw_sml.png' height='16' /> " +  Main.k.version, null, Main.k.About.open, Main.k.text.about.capitalize(), Main.k.text.aboutTip).css({
 			display: "inline-block",
 			margin: "0 auto 10px"
 		}).appendTo($("<div>").css("text-align", "center").appendTo(leftbar));
@@ -4268,15 +4361,15 @@ Main.k.tabs.playing = function() {
 
 		// Misc tools
 		// ----------------------------------- //
-		$("<h3>").addClass("first").html("Outils").appendTo(leftbar);
+		$("<h3>").addClass("first").html(Main.k.text.tools.capitalize()).appendTo(leftbar);
 
 		// Update Manager
-		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/new.png' /> Mise à jour", null, null, "Mise à jour du script", 
+		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/new.png' /> Mise à jour", null, null, "Mise à jour du script",
 			"Une nouvelle version du script CTRL+W est disponible.")
 		.appendTo(leftbar).attr("id", "updatebtn").css("display", "none").find("a").on("mousedown", Main.k.UpdateDialog);
 
 		// Message Manager
-		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/archive.png' style='vertical-align: -20%' /> Msg Manager", null, null, "Message Manager", 
+		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/archive.png' style='vertical-align: -20%' /> Msg Manager", null, null, "Message Manager",
 			"Ne manquez plus de messages ! Tous les topics avec des messages non lus seront mis en évidence, et vous pourrez effectuer des recherches par auteur ou contenu.")
 		.appendTo(leftbar).find("a").on("mousedown", Main.k.Manager.open);
 
@@ -4285,7 +4378,7 @@ Main.k.tabs.playing = function() {
 		.appendTo(leftbar).find("a").on("mousedown", Main.k.Options.open);
 
 		// Page reloader
-		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/refresh.png' style='vertical-align: -20%' /> Actualiser", null, null, "Actualiser", 
+		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/refresh.png' style='vertical-align: -20%' /> Actualiser", null, null, "Actualiser",
 			"Actualiser la page sans tout recharger. <strong>Fonctionnalité en cours d'optimisation.</strong>")
 		.appendTo(leftbar).find("a").on("mousedown", function() {
 			// TODO: loading screen -- Optimize
@@ -4297,23 +4390,6 @@ Main.k.tabs.playing = function() {
 			Main.topChat();
 			Main.onChanDone(ChatType.Local[1],true)
 		});
-
-		// Last sent message
-		Main.k.MakeButton("<img src='/img/icons/ui/reply.png' class='alerted' /><img src='/img/icons/ui/alert.png' class='alert' /> Dernier msg", null, null, "Récupérer le dernier message", 
-			"Il semblerait que le dernier message que vous avez envoyé a été perdu en route. Cliquez ici pour insérer son contenu dans la zone de texte active.</p><p><strong>Attention, le message est supprimé après utilisation</strong>")
-		.attr("id", "lastsentmsg")
-		.css("display", "none")
-		.appendTo(leftbar).find("a").on("mousedown", function() {
-			var msg = js.Cookie.get("lastsentmsg");
-			var txt = StringTools.urlDecode(msg);
-
-			$('textarea:focus').each(function(e) {
-				$(this).insertAtCaret(txt);
-			});
-
-			js.Cookie.set("lastsentmsg", "");
-			return false;
-		});
 		// ----------------------------------- //
 
 		// Exploration
@@ -4323,7 +4399,7 @@ Main.k.tabs.playing = function() {
 
 		// Heroes' titles
 		// ----------------------------------- //
-		var t = $("<h3>").html("Titres").appendTo(leftbar);
+		var t = $("<h3>").html(Main.k.text.titles.capitalize()).appendTo(leftbar);
 		$("<span>").addClass("displaymore").attr("_target", "#titles_list").appendTo(t).on("click", Main.k.ToggleDisplay);
 		$("<div>").addClass("titles_list").attr("id", "titles_list").css("display", "none").appendTo(leftbar);
 		// ----------------------------------- //
@@ -4331,7 +4407,7 @@ Main.k.tabs.playing = function() {
 
 		// Heroes
 		// ----------------------------------- //
-		var t = $("<h3>").html("Équipage").appendTo(leftbar);
+		var t = $("<h3>").html(Main.k.text.crew.capitalize()).appendTo(leftbar);
 		$("<span>").addClass("displaymore").attr("_target", "#heroes_list").appendTo(t).on("click", Main.k.ToggleDisplay);
 		$("<div>").attr("id", "heroes_list").css("display", "none").appendTo(leftbar);
 		// ----------------------------------- //
@@ -4339,13 +4415,13 @@ Main.k.tabs.playing = function() {
 
 		// Inventory
 		// ----------------------------------- //
-		var t = $("<h3>").html("Inventaire").appendTo(leftbar);
+		var t = $("<h3>").html(Main.k.text.shelf.capitalize()).appendTo(leftbar);
 		$("<span>").addClass("displaymore").attr("_target", ".kobject_list").appendTo(t).on("click", Main.k.ToggleDisplay);
 		$("<div>").addClass("inventory kobject_list").css("display", "none").appendTo(leftbar);
 		$("<div>").css({"clear": "both", "height": "5px"}).appendTo(leftbar);
 
 		// Inventory actions
-		Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Partager", null, null, "Partager l'inventaire", 
+		Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Partager", null, null, "Partager l'inventaire",
 			"Insère l'inventaire de la pièce dans la zone de texte active, de la forme&nbsp;:</p><p><strong>Couloir central :</strong> <i>Combinaison</i>, <i>Couteau</i>, <i>Médikit</i>, <i>Extincteur</i>")
 		.appendTo(leftbar)
 		.find("a").on("mousedown", function(e) {
@@ -4355,7 +4431,7 @@ Main.k.tabs.playing = function() {
 			});
 			return false;
 		});
-		Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Consommables", null, null, "Partager les effets des consommables", 
+		Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Consommables", null, null, "Partager les effets des consommables",
 			"Insère la liste des consommables avec leurs effets dans la zone de texte active, de la forme&nbsp;:</p><p>" +
 			"TODO: aperçu")
 		.attr("id", "pharmashare").css("display", "none").appendTo(leftbar)
@@ -4366,7 +4442,7 @@ Main.k.tabs.playing = function() {
 			});
 			return false;
 		});
-		//Main.k.MakeButton("<img src='/img/icons/ui/notes.gif' /> Daedalus", null, null, "Inventaire complet", 
+		//Main.k.MakeButton("<img src='/img/icons/ui/notes.gif' /> Daedalus", null, null, "Inventaire complet",
 		//	"Affiche l'inventaire complet du Daedalus, pièce par pièce.</p><p><strong>/!\\ Fonctionnalité non codée</strong>").appendTo(leftbar);
 		// ----------------------------------- //
 
@@ -4383,28 +4459,28 @@ Main.k.tabs.playing = function() {
 		var maxshown = 4;
 		var titles_list = $("#titles_list");
 
-		// Captains
-		var captains = $("<div>").appendTo(titles_list);
+		// Commanders
+		var commanders = $("<div>").appendTo(titles_list);
 		$("<img>").addClass("icon").attr("src", "/img/icons/ui/title_01.png")
-		.attr("_title", "Commandant")
-		.attr("_desc", "Le Commandant décide des planètes que le Daedalus explorera.")
+		.attr("_title", Main.k.text.TITLES.commander[0])
+		.attr("_desc", Main.k.text.TITLES.commander[1])
 		.on("mouseover", Main.k.CustomTip)
 		.on("mouseout", Main.hideTip)
-		.appendTo(captains);
-		var captain_nb = 0;
-		for (var i=0; captain_nb<maxshown && i<Main.k.HEROES.length; i++) {
-			var hero = Main.k.CAPTAINS[i];
+		.appendTo(commanders);
+		var commander_nb = 0;
+		for (var i=0; commander_nb<maxshown && i<Main.k.HEROES.length; i++) {
+			var hero = Main.k.COMMANDERS[i];
 			if (Main.k.ArrayContains(Main.k.AliveHeroes, hero)) {
-				captain_nb++;
-				$("<img>").addClass("body " + hero).attr("src", "/img/design/pixel.gif").css("cursor", "pointer").appendTo(captains);
+				commander_nb++;
+				$("<img>").addClass("body " + hero).attr("src", "/img/design/pixel.gif").css("cursor", "pointer").appendTo(commanders);
 			}
 		}
 
 		// Admins
 		var admins = $("<div>").appendTo(titles_list);
 		$("<img>").addClass("icon").attr("src", "/img/icons/ui/title_02.png")
-		.attr("_title", "Administrateur NERON")
-		.attr("_desc", "Le responsable NERON semble avoir une certaine influence auprès de l'ordinateur de bord. Il est notamment le seul à avoir la possibilité de transmettre des messages à tout l'équipage.")
+		.attr("_title", Main.k.text.TITLES.admin[0])
+		.attr("_desc", Main.k.text.TITLES.admin[1])
 		.on("mouseover", Main.k.CustomTip)
 		.on("mouseout", Main.hideTip)
 		.appendTo(admins);
@@ -4417,20 +4493,20 @@ Main.k.tabs.playing = function() {
 			}
 		}
 
-		// Resp. Comm.
-		var respcomm = $("<div>").appendTo(titles_list);
+		// Comms manager
+		var comms = $("<div>").appendTo(titles_list);
 		$("<img>").addClass("icon").attr("src", "/img/icons/ui/title_03.png")
-		.attr("_title", "Responsable de Communications")
-		.attr("_desc", "Le Responsable de Communications est la seule personne habilitée à décider quels seront les téléchargements prioritaires du Centre de Communication")
+		.attr("_title", Main.k.text.TITLES.comms[0])
+		.attr("_desc", Main.k.text.TITLES.comms[1])
 		.on("mouseover", Main.k.CustomTip)
 		.on("mouseout", Main.hideTip)
-		.appendTo(respcomm);
-		var respcomm_nb = 0;
-		for (var i=0; respcomm_nb<maxshown && i<Main.k.HEROES.length; i++) {
-			var hero = Main.k.RESPCOMM[i];
+		.appendTo(comms);
+		var comms_nb = 0;
+		for (var i=0; comms_nb<maxshown && i<Main.k.HEROES.length; i++) {
+			var hero = Main.k.COMMS[i];
 			if (Main.k.ArrayContains(Main.k.AliveHeroes, hero)) {
-				respcomm_nb++;
-				$("<img>").addClass("body " + hero).attr("src", "/img/design/pixel.gif").css("cursor", "pointer").appendTo(respcomm);
+				comms_nb++;
+				$("<img>").addClass("body " + hero).attr("src", "/img/design/pixel.gif").css("cursor", "pointer").appendTo(comms);
 			}
 		}
 		// ----------------------------------- //
@@ -4563,7 +4639,7 @@ Main.k.tabs.playing = function() {
 				.attr("_title", hero.name)
 				.attr("_desc", hero.short_desc + "</p><p><strong>Cliquez pour plus d'informations <br/>/!\\ Fonctionnalité non codée</strong>")
 				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip)				
+				.on("mouseout", Main.hideTip)
 				.on("click", function() {
 					Main.k.Profiles.display($(this).attr("_hid"));
 				})
@@ -4586,7 +4662,7 @@ Main.k.tabs.playing = function() {
 					.attr("_title", hero)
 					.attr("_desc", Main.k.HEROES_SHORTDESC[i] + "</p><p><strong>Cliquez pour plus d'informations <br/>/!\\ Fonctionnalité non codée</strong>")
 					.on("mouseover", Main.k.CustomTip)
-					.on("mouseout", Main.hideTip)				
+					.on("mouseout", Main.hideTip)
 					.on("click", function() {
 						Main.k.Profiles.display($(this).attr("_hid"), hero);
 					})
@@ -4602,8 +4678,6 @@ Main.k.tabs.playing = function() {
 		var exploring = $(".exploring .exploring2");
 		$("#expblock").empty();
 		if (exploring.length > 0) {
-			exploring.parent().css("display", "none");
-			
 			var t = $("<h3>").html("Exploration").appendTo("#expblock");
 			$("<span>").addClass("displayless").attr("_target", "#expblockdiv").appendTo(t).on("click", Main.k.ToggleDisplay);
 			expblock = $("<div>").attr("id", "expblockdiv").appendTo("#expblock");
@@ -4742,7 +4816,7 @@ Main.k.tabs.playing = function() {
 				h3.find("em").remove();
 
 				projectdiv.attr("_title", h3.html().trim())
-				.attr("_desc", 
+				.attr("_desc",
 					$(this).find("div.desc").html().trim() + "</p><p>" +
 					$(this).find("p.efficacity").html().trim()
 				)
@@ -4751,7 +4825,7 @@ Main.k.tabs.playing = function() {
 			});
 
 			// Research actions
-			Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Partager", null, null, "Partager les recherches", 
+			Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Partager", null, null, "Partager les recherches",
 				"Insère la liste de recherches dans la zone de texte active, de la forme&nbsp;:</p><p>" +
 				"<li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li>" +
 				"<li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li>" +
@@ -4790,7 +4864,7 @@ Main.k.tabs.playing = function() {
 
 				// Tooltip
 				projectdiv.attr("_title", $(this).find("h3").html().trim())
-				.attr("_desc", 
+				.attr("_desc",
 					$(this).find("div.desc").html().trim() + "</p><p>" +
 					$(this).find("p.efficacity").html().trim()
 				)
@@ -4799,7 +4873,7 @@ Main.k.tabs.playing = function() {
 			});
 
 			// Projects actions
-			Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Partager", null, null, "Partager les projets", 
+			Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Partager", null, null, "Partager les projets",
 				"Insère la liste de projets dans la zone de texte active, de la forme&nbsp;:</p><p>" +
 				"<li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li>" +
 				"<li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li>" +
@@ -4812,7 +4886,7 @@ Main.k.tabs.playing = function() {
 				});
 				return false;
 			});
-		
+
 		// Astro
 		} else if ($("#navModule").length > 0) {
 			var nav = $("#navModule");
@@ -4832,7 +4906,7 @@ Main.k.tabs.playing = function() {
 				});
 
 				// Planets actions
-				Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Partager", null, null, "Partager les planètes", 
+				Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Partager", null, null, "Partager les planètes",
 					"Insère la liste de planètes dans la zone de texte active, de la forme&nbsp;:</p><p>" +
 					"TODO: aperçu"
 				).appendTo(project_list)
@@ -4844,14 +4918,14 @@ Main.k.tabs.playing = function() {
 					return false;
 				});
 			}
-		
+
 		// BIOS
 		} else if ($("#biosModule").length > 0) {
 			$("<h3>").html("BIOS NERON").appendTo(project_list);
 
 
 			// Share params
-			Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Partager", null, null, "Partager les paramètres", 
+			Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Partager", null, null, "Partager les paramètres",
 				"Insère la liste de paramètres BIOS Neron dans la zone de texte active, de la forme&nbsp;:</p><p>" +
 				"TODO: aperçu"
 			).appendTo(project_list)
@@ -4957,8 +5031,8 @@ Main.k.tabs.playing = function() {
 
 					$("<div>").addClass("alertnb").html(alarm_nb).appendTo(wrap);
 				}
-				
-				
+
+
 
 			});
 			$("#topinfo_bar .alarm_on").css("background-image", "url(" + Main.k.servurl + "/img/alertpleft.gif)");
@@ -4977,14 +5051,14 @@ Main.k.tabs.playing = function() {
 						case 'shield':
 							if(/: *[0-9]+<br\/>.+: *([0-9]+)<br\/>/.test($(this).parent().attr('onmouseover'))){
 								var wrap = $('<div class="spaceshipstatus-info" style="font-size:10px;text-align:center;">'+RegExp.$1+'&nbsp;<img src="http://'+Main.k.domain+'/img/icons/ui/plasma.png" width="11"></div>').appendTo($(this).parent());
-								
+
 							}
 						break;
 					}
 				}
 			});
 		}
-		
+
 		// ----------------------------------- //
 
 
@@ -5000,7 +5074,7 @@ Main.k.tabs.playing = function() {
 					var mouseover = $(heroes[j]).attr("onmouseover");
 					var name = /<h1>([^<]+)<\/h1>/.exec(mouseover)[1];
 					var co = /[a-zA-Z]+\s?:\s([^<]+)/.exec(mouseover)[1].toLowerCase();
-					tip += "<strong>" + name + "</strong> - "+Main.k.getTranslation('connected')+" " + co + "<br/>";
+					tip += "<strong>" + name + "</strong> - "+Main.k.text.connected+" " + co + "<br/>";
 				}
 
 				tab.find("img").off("mouseover").off("mouseout")
@@ -5027,7 +5101,7 @@ Main.k.tabs.playing = function() {
 
 		// Fix PAbis
 		$("#cdPaBloc img[src='/img/design/pa1bis.png']").attr("src", Main.k.servurl + "/img/pa1bis.png");
-		
+
 		// Fix dimensions
 		Main.k.Resize();
 
@@ -5163,7 +5237,7 @@ Main.k.tabs.ranking = function() {
 		display: "block"
 	});
 
-	$("th").each(function() { 
+	$("th").each(function() {
 		var txt = $(this).html().trim();
 		if (txt == "Héros Favori") $(this).html("");
 	})
@@ -5307,13 +5381,14 @@ Main.k.tabs.gameover = function() {
 		.on("mouseout", Main.hideTip)
 		.prependTo("#logtri");
 	}
-	
+
 	//Loading on like click
 	$(document).on('click','a.like',function(){
 		$(this).replaceWith('<img class="cdLoading" src="/img/icons/ui/loading1.gif" alt="loading..." />');
-	});	
-
+	});
 }
+
+
 // == Redéfinition de fonctions/variables  =======================================
 var $hxClasses = {},$estr = function() { return js.Boot.__string_rec(this,''); };
 function $extend(from, fields) {
@@ -5377,8 +5452,8 @@ js.Cookie.get = function(name) {
 js.Lib = function() { }
 $hxClasses["js.Lib"] = js.Lib;
 js.Lib.__name__ = ["js","Lib"];
-if(typeof document != "undefined") js.Lib.document = document;
-if(typeof window != "undefined") {
+if (typeof document != "undefined") js.Lib.document = document;
+if (typeof window != "undefined") {
 	js.Lib.window = window;
 	js.Lib.window.onerror = function(msg,url,line) {
 		var f = js.Lib.onerror;
@@ -5395,7 +5470,7 @@ js.Browser.getLocalStorage = function() {
 		var s = window.localStorage;
 		s.getItem("");
 		return s;
-	} catch( e ) {
+	} catch(e) {
 		return null;
 	}
 }
@@ -5404,13 +5479,13 @@ js.Browser.getSessionStorage = function() {
 		var s = window.sessionStorage;
 		s.getItem("");
 		return s;
-	} catch( e ) {
+	} catch(e) {
 		return null;
 	}
 }
 js.Browser.createXMLHttpRequest = function() {
-	if(typeof XMLHttpRequest != "undefined") return new XMLHttpRequest();
-	if(typeof ActiveXObject != "undefined") return new ActiveXObject("Microsoft.XMLHTTP");
+	if (typeof XMLHttpRequest != "undefined") return new XMLHttpRequest();
+	if (typeof ActiveXObject != "undefined") return new ActiveXObject("Microsoft.XMLHTTP");
 	throw "Unable to create XMLHttpRequest object.";
 }
 
@@ -5420,7 +5495,7 @@ IMap.__name__ = ["IMap"];
 var haxe = {}
 haxe.ds = {}
 haxe.ds.StringMap = function() {
-	this.h = { };
+	this.h = {};
 };
 $hxClasses["haxe.ds.StringMap"] = haxe.ds.StringMap;
 haxe.ds.StringMap.__name__ = ["haxe","ds","StringMap"];
@@ -6298,21 +6373,21 @@ Lambda.empty = function(it) {
 }
 function $iterator(o) { if( $.isArray(o) ) return function() { return HxOverrides.iter(o); }; return typeof(o.iterator) == 'function' ? $bind(o,o.iterator) : o.iterator; };
 var $_, $fid = 0;
-function $bind(o,m) { 
-	if( m == null ) return null; 
-	if( m.__id__ == null ) m.__id__ = $fid++; 
-	var f; 
-	if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; 
-	if( f == null ) { 
-		f = function(){ 
-			return f.method.apply(f.scope, arguments); 
-		}; 
-		f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; 
-	} return f; 
+function $bind(o,m) {
+	if( m == null ) return null;
+	if( m.__id__ == null ) m.__id__ = $fid++;
+	var f;
+	if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__];
+	if( f == null ) {
+		f = function(){
+			return f.method.apply(f.scope, arguments);
+		};
+		f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f;
+	} return f;
 };
 $.fn.iterator = function() {
-	return { 
-	pos : 0, j : this, 
+	return {
+	pos : 0, j : this,
 	hasNext : function() {
 		return this.pos < this.j.length;
 	}, next : function() {
@@ -7046,7 +7121,12 @@ function $hxExpose(src, path) {
 }
 // == /Redéfinition de fonctions  =======================================
 
+
+
+
+
 // Script initialization
+Main.k.initLang();
 Main.k.Options.init();
 Main.k.initData();
 Main.k.displayMainMenu();
