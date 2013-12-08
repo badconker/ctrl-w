@@ -1708,6 +1708,9 @@ Main.k.tabs.playing = function() {
 			.on("click", function() {
 				var txt = Main.k.FormatInventory();
 				$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
+				if($('#astro_maj_inventaire').length > 0){
+					$('#astro_maj_inventaire').trigger('click');
+				}
 				return false;
 			})
 			.attr("_title", "Partager l'inventaire")
@@ -4401,6 +4404,9 @@ Main.k.tabs.playing = function() {
 			$('textarea:focus').each(function(e) {
 				var txt = Main.k.FormatInventory();
 				$(this).insertAtCaret(txt);
+				if($('#astro_maj_inventaire').length > 0){
+					$('#astro_maj_inventaire').trigger('click');
+				}
 			});
 			return false;
 		});
