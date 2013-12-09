@@ -6,7 +6,7 @@
 // @include     http://mush.twinoid.es/*
 // @downloadURL https://raw.github.com/badconker/ctrl-w/master/CTRLW-chrome.user.js
 // @require     http://ctrl-w.badconker.com/js/sprintf.min.js
-// @version     0.32
+// @version     0.32.1
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -44,10 +44,6 @@ Main.k.setuptranslations = function() {
 	text.menuHelpMush = "Aide Mush";
 	text.menuPatchlog = "Patchlog";
 	text.menuTutoChar = "Tuto %s";
-
-	text.connected = "connecté(e)";
-	text.lastVersionInstalled = "Dernière version de CTRL+W installée (%s) :";
-	text.autoUpdateOk = 'Très bien, merci !';
 
 	text.menuForumDiscussion = "Discussion";
 	text.menuForumDiscussionId = 67061;
@@ -103,7 +99,12 @@ Main.k.setuptranslations = function() {
 	text.crew = "équipage";
 	text.shelf = "inventaire";
 	text.aboutTip = "Cliquez ici pour plus d'informations sur le script.";
-
+	text.connected = "connecté(e)";
+	text.shareInventory = "Insère l'inventaire de la pièce dans la zone de texte active, de la forme&nbsp;:</p><p><strong>Couloir central :</strong> <i>Combinaison</i>, <i>Couteau</i>, <i>Médikit</i>, <i>Extincteur</i></p><p><strong>Partage aussi sur Astropad si celui-ci est installé.</strong></p>"
+	
+	text.lastVersionInstalled = "Dernière version de CTRL+W installée (%s) :";
+	text.autoUpdateOk = 'Très bien, merci !';
+	
 	text.loads = "charges";
 	text.empty = "vide";
 	text.mageBook = "apprentron";
@@ -1735,10 +1736,13 @@ Main.k.tabs.playing = function() {
 			.on("click", function() {
 				var txt = Main.k.FormatInventory();
 				$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
+				if($('#astro_maj_inventaire').length > 0){
+					$('#astro_maj_inventaire').trigger('click');
+				}
 				return false;
 			})
 			.attr("_title", "Partager l'inventaire")
-			.attr("_desc", "Insère l'inventaire de la pièce dans la zone de texte active, de la forme&nbsp;:</p><p><strong>Couloir central :</strong> <i>Combinaison</i>, <i>Couteau</i>, <i>Médikit</i>, <i>Extincteur</i>")
+			.attr("_desc", Main.k.text.shareInventory)
 			.on("mouseover", Main.k.CustomTip)
 			.on("mouseout", Main.hideTip);
 
@@ -2439,8 +2443,8 @@ Main.k.tabs.playing = function() {
 			var name = $(this).attr("data-name");
 
 			// Ignore personal objects
-			var perso = ["itrackie", "talkie", "walkie", "traqueur", "tracker"]; // TODO: add other translations
-			for (a in perso) if (name.toLowerCase().indexOf(perso[a].toLowerCase()) != -1) return;
+			var perso = ["itrakie","itrackie", "talkie", "walkie", "traqueur", "tracker"]; // TODO: add other translations (itrackie exists or it's a mistake ?)
+			for (var a = 0 ; a < perso.length ; a++) if (name.toLowerCase().indexOf(perso[a].toLowerCase()) != -1) return;
 
 			// Handle broken objects
 			var broken = (name.indexOf("/img/icons/ui/broken.png") > -1);
@@ -4422,12 +4426,15 @@ Main.k.tabs.playing = function() {
 
 		// Inventory actions
 		Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Partager", null, null, "Partager l'inventaire",
-			"Insère l'inventaire de la pièce dans la zone de texte active, de la forme&nbsp;:</p><p><strong>Couloir central :</strong> <i>Combinaison</i>, <i>Couteau</i>, <i>Médikit</i>, <i>Extincteur</i>")
-		.appendTo(leftbar)
+			Main.k.text.shareInventory
+		).appendTo(leftbar)
 		.find("a").on("mousedown", function(e) {
 			$('textarea:focus').each(function(e) {
 				var txt = Main.k.FormatInventory();
 				$(this).insertAtCaret(txt);
+				if($('#astro_maj_inventaire').length > 0){
+					$('#astro_maj_inventaire').trigger('click');
+				}
 			});
 			return false;
 		});
