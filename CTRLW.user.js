@@ -6,7 +6,7 @@
 // @include     http://mush.twinoid.es/*
 // @downloadURL https://raw.github.com/badconker/ctrl-w/master/CTRLW.user.js
 // @require     http://ctrl-w.badconker.com/js/sprintf.min.js
-// @version     0.32
+// @version     0.32.1
 // ==/UserScript==
 
 // Fix chrome1
@@ -2416,8 +2416,8 @@ Main.k.tabs.playing = function() {
 			var name = $(this).attr("data-name");
 
 			// Ignore personal objects
-			var perso = ["itrackie", "talkie", "walkie", "traqueur", "tracker"]; // TODO: add other translations
-			for (a in perso) if (name.toLowerCase().indexOf(perso[a].toLowerCase()) != -1) return;
+			var perso = ["itrakie","itrackie", "talkie", "walkie", "traqueur", "tracker"]; // TODO: add other translations (itrackie exists or it's a mistake ?)
+			for (var a = 0 ; a < perso.length ; a++) if (name.toLowerCase().indexOf(perso[a].toLowerCase()) != -1) return;
 
 			// Handle broken objects
 			var broken = (name.indexOf("/img/icons/ui/broken.png") > -1);
