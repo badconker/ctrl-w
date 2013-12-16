@@ -4640,7 +4640,7 @@ Main.k.tabs.playing = function() {
 					.css("cursor", "pointer")
 					.attr("_hid", -1)
 					.attr("_title", hero)
-					.attr("_desc", Main.k.HEROES_SHORTDESC[i] + "</p><p><strong>Cliquez pour plus d'informations <br/>/!\\ Fonctionnalité non codée</strong>")
+					.attr("_desc", Main.k.getShortDesc(bubble) + "</p><p><strong>Cliquez pour plus d'informations <br/>/!\\ Fonctionnalité non codée</strong>")
 					.on("mouseover", Main.k.CustomTip)
 					.on("mouseout", Main.hideTip)
 					.on("click", function() {
