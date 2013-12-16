@@ -6,7 +6,7 @@
 // @include     http://mush.twinoid.es/*
 // @downloadURL https://raw.github.com/badconker/ctrl-w/master/CTRLW.user.js
 // @require     http://ctrl-w.badconker.com/js/sprintf.min.js
-// @version     0.32.1
+// @version     0.32.2
 // ==/UserScript==
 
 // Fix chrome1

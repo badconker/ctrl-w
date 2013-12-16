@@ -6,7 +6,7 @@
 // @include     http://mush.twinoid.es/*
 // @downloadURL https://raw.github.com/badconker/ctrl-w/master/CTRLW-chrome.user.js
 // @require     http://ctrl-w.badconker.com/js/sprintf.min.js
-// @version     0.32.1
+// @version     0.32.2
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -4667,7 +4667,7 @@ Main.k.tabs.playing = function() {
 					.css("cursor", "pointer")
 					.attr("_hid", -1)
 					.attr("_title", hero)
-					.attr("_desc", Main.k.HEROES_SHORTDESC[i] + "</p><p><strong>Cliquez pour plus d'informations <br/>/!\\ Fonctionnalité non codée</strong>")
+					.attr("_desc", Main.k.getShortDesc(bubble) + "</p><p><strong>Cliquez pour plus d'informations <br/>/!\\ Fonctionnalité non codée</strong>")
 					.on("mouseover", Main.k.CustomTip)
 					.on("mouseout", Main.hideTip)
 					.on("click", function() {
