@@ -6,7 +6,7 @@
 // @include     http://mush.twinoid.es/*
 // @downloadURL https://raw.github.com/badconker/ctrl-w/master/CTRLW-chrome.user.js
 // @require     http://ctrl-w.badconker.com/js/sprintf.min.js
-// @version     0.32.2
+// @version     0.32.3
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -90,7 +90,10 @@ Main.k.setuptranslations = function() {
 		"Afficher le logo Mush au dessus des onglets.",
 		"Séparer les projets / recherches / pilgred sous la zone de jeu."
 	];
-
+	
+	//Astropad
+	text.astroUpdated = 'Astropad synchronisé.';
+	
 	// Misc text
 	text.needPageReload = " Nécessite un rechargement de la page.";
 	text.about = "à propos";
@@ -204,7 +207,10 @@ Main.k.setuptranslations = function() {
 		"Display Mush logo (above tabs).",
 		"Add line breaks between NERON projects, research projects and Pilgred."
 	];
-
+	
+	//Astropad
+	text.astroUpdated = 'Astropad synchronised.';
+	
 	// Misc text
 	text.needPageReload = " Page reload needed.";
 	text.about = "about";
@@ -564,7 +570,16 @@ Main.k.getShortDesc = function(hero) {
 		if (Main.k.HEROES[i] == hero) return Main.k.text.HEROES_SHORTDESC[i];
 	}
 }
-
+Main.k.SyncAstropad = function(tgt){
+	if($('#astro_maj_inventaire').length > 0){
+		$('#astro_maj_inventaire').trigger('click');
+		Main.showTip(tgt,
+			"<div class='tiptop' ><div class='tipbottom'><div class='tipbg'><div class='tipcontent'>" +
+			Main.k.text.astroUpdated + 
+			"</div></div></div></div>"
+		);
+	}
+}
 
 // == Options Manager  ========================================
 Main.k.Options = {};
@@ -1733,12 +1748,10 @@ Main.k.tabs.playing = function() {
 
 			// Inventory
 			$("<a>").addClass("butmini formatbtn").html("<img src='http://data.hordes.fr/gfx/icons/item_bag.gif' />").attr("href", "#").appendTo(sharediv)
-			.on("click", function() {
+			.on("click", function(e) {
 				var txt = Main.k.FormatInventory();
 				$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
-				if($('#astro_maj_inventaire').length > 0){
-					$('#astro_maj_inventaire').trigger('click');
-				}
+				Main.k.SyncAstropad(e);
 				return false;
 			})
 			.attr("_title", "Partager l'inventaire")
@@ -4429,12 +4442,10 @@ Main.k.tabs.playing = function() {
 			Main.k.text.shareInventory
 		).appendTo(leftbar)
 		.find("a").on("mousedown", function(e) {
+			Main.k.SyncAstropad(e);
 			$('textarea:focus').each(function(e) {
 				var txt = Main.k.FormatInventory();
 				$(this).insertAtCaret(txt);
-				if($('#astro_maj_inventaire').length > 0){
-					$('#astro_maj_inventaire').trigger('click');
-				}
 			});
 			return false;
 		});
