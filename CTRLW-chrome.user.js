@@ -88,11 +88,15 @@ Main.k.setuptranslations = function() {
 		"Activer la mise en forme personnalisée des messages (bordure + couleur nom + image de fond).",
 		"Simplifier la mise en forme personnalisée des messages (suppression de l'image de fond).",
 		"Afficher le logo Mush au dessus des onglets.",
-		"Séparer les projets / recherches / pilgred sous la zone de jeu."
+		"Séparer les projets / recherches / pilgred sous la zone de jeu.",
+		"Désactiver les confirmations d'actions bénéfiques pour l'équipages en tant que Mush."
 	];
 	
 	//Astropad
 	text.astroUpdated = 'Astropad synchronisé.';
+	
+	//Confirm
+	text.confirmBeneficialAction = '\r\n		<h4>Vous êtes du Mush !</h4>\r\n		<p>Cette action est bénéfique pour l\'équipage du Deaedalus et votre rôle est de les convertir ou de détruire le Daedalus. Êtes-vous vraiment sûr de vouloir faire cela ?</p>\r\n	';
 	
 	// Misc text
 	text.needPageReload = " Nécessite un rechargement de la page.";
@@ -591,6 +595,7 @@ Main.k.Options.cbubblesNB = false;
 Main.k.Options.dlogo = false;
 Main.k.Options.splitpjt = true;
 Main.k.Options.altpa = false;
+Main.k.Options.mushNoConf = false;
 Main.k.Options.options = [];
 
 Main.k.Options.open = function() {
@@ -673,6 +678,10 @@ Main.k.Options.updateOpt = function(key, val) {
 			Main.k.Options.splitpjt = (val == "y");
 			Main.k.Options.options[3][1] = (val == "y");
 			break;
+		case "mushNoConf":
+			Main.k.Options.mushNoConf = (val == "y");
+			Main.k.Options.options[4][1] = (val == "y");
+			break;
 		//case "altpa":
 		//	Main.k.Options.altpa = (val == "y");
 		//	Main.k.Options.options[4][1] = (val == "y");
@@ -696,6 +705,7 @@ Main.k.Options.init = function() {
 		["cbubblesNB",	Main.k.Options.cbubblesNB,	false,			Main.k.customBubbles,	Main.k.text.options[1]],
 		["dlogo",		Main.k.Options.dlogo,		true,			null,					Main.k.text.options[2]],
 		["splitpjt",	Main.k.Options.splitpjt,	false,			Main.k.updateBottom,	Main.k.text.options[3]],
+		["mushNoConf",	Main.k.Options.mushNoConf,	false,			null,					Main.k.text.options[4]],
 		//["altpa",		Main.k.Options.altpa,		true,			null,					"Utiliser des images alternatives pour les pa / pm."]
 	];
 
@@ -2197,6 +2207,17 @@ Main.k.tabs.playing = function() {
 			$("#cdInventory").removeClass("placard_on");
 		}
 	}
+	Main.confirmAjaxAction = function(frm,text) {
+		if(Main.k.Options.mushNoConf && text == Main.k.text.confirmBeneficialAction){
+			Main.ajaxAction(frm);
+		}else{
+			Main.jsChoiceBox("",text,Main.getText("ok"),Main.getText("cancel"),function(c) {
+				Main.ajaxAction(frm);
+			},function(_) {
+				return;
+			},"ok");
+		}
+	};
 	/*Main.sel.selectBySerial = function(serial) {
 		js.Cookie.set(CrossConsts.COOK_SEL,StringTools.urlEncode(serial),3600);
 		var jMe = Selection.j("[serial=" + serial + "]:not(.fakeitem)");
