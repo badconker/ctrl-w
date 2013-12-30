@@ -2600,7 +2600,7 @@ Main.k.tabs.playing = function() {
 			var dir, dist;
 			var pllist = $(this).find("ul.pllist li");
 			if (pllist.length > 0) {
-				dir = /(Nord|Est|Ouest|Sud)/.exec(pllist.first().html())[1];
+				dir = /(Nord|Est|Ouest|Sud)/.exec(pllist.eq(-2).html())[1];
 				dist = /([0-9]+)/.exec(pllist.last().html())[1];
 			}
 
