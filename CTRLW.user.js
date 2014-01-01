@@ -9,7 +9,11 @@
 // @version     0.32.4
 // ==/UserScript==
 
-// Fix chrome1
+var isChrome = false;
+if(typeof Main == 'undefined') {
+	var Main = unsafeWindow.Main;
+	isChrome = true;
+}
 Main.k = function() {};
 Main.k.version = GM_info.script.version;
 Main.k.website = "http://ks26782.kimsufi.com/ctrlw";
@@ -19,6 +23,33 @@ Main.k.topicurl = "http://twd.io/e/KKyl0g";
 Main.k.window = window;
 Main.k.domain = document.domain;
 Main.k.mushurl = 'http://' + document.domain;
+
+if(isChrome) {
+	Main.k.window = unsafeWindow;
+	var $ = unsafeWindow.jQuery;
+	var $hxClasses = unsafeWindow.$hxClasses;
+	var _tid = unsafeWindow._tid;
+	var ArrayEx = unsafeWindow.ArrayEx;
+	var ChatType = unsafeWindow.ChatType;
+	var Clients = unsafeWindow.Clients;
+	var CrossConsts = unsafeWindow.CrossConsts;
+	var haxe = unsafeWindow.haxe;
+	var HxOverrides = unsafeWindow.HxOverrides;
+	var JqEx = unsafeWindow.JqEx;
+	var js = unsafeWindow.js;
+	var Lambda = unsafeWindow.Lambda;
+	var prx = unsafeWindow.prx;
+	var Reflect = unsafeWindow.Reflect;
+	var Selection = unsafeWindow.Selection;
+	var Std = unsafeWindow.Std;
+	var StringBuf = unsafeWindow.StringBuf;
+	var StringTools = unsafeWindow.StringTools;
+	var Tag = unsafeWindow.Tag;
+	var Tools = unsafeWindow.Tools;
+	var Utils = unsafeWindow.Utils;
+	var Closet = unsafeWindow.Closet;
+}
+delete isChrome; // This isn't needed past here.
 
 Main.k.text = {};
 Main.k.langpack = {};
@@ -91,13 +122,13 @@ Main.k.setuptranslations = function() {
 		"Séparer les projets / recherches / pilgred sous la zone de jeu.",
 		"Désactiver les confirmations d'actions bénéfiques pour l'équipages en tant que Mush."
 	];
-	
+
 	//Astropad
 	text.astroUpdated = 'Astropad synchronisé.';
-	
+
 	//Confirm
 	text.confirmBeneficialAction = '\r\n		<h4>Vous êtes du Mush !</h4>\r\n		<p>Cette action est bénéfique pour l\'équipage du Deaedalus et votre rôle est de les convertir ou de détruire le Daedalus. Êtes-vous vraiment sûr de vouloir faire cela ?</p>\r\n	';
-	
+
 	// Misc text
 	text.needPageReload = " Nécessite un rechargement de la page.";
 	text.about = "à propos";
@@ -108,10 +139,10 @@ Main.k.setuptranslations = function() {
 	text.aboutTip = "Cliquez ici pour plus d'informations sur le script.";
 	text.connected = "connecté(e)";
 	text.shareInventory = "Insère l'inventaire de la pièce dans la zone de texte active, de la forme&nbsp;:</p><p><strong>Couloir central :</strong> <i>Combinaison</i>, <i>Couteau</i>, <i>Médikit</i>, <i>Extincteur</i></p><p><strong>Partage aussi sur Astropad si celui-ci est installé.</strong></p>"
-	
+
 	text.lastVersionInstalled = "Dernière version de CTRL+W installée (%s) :";
 	text.autoUpdateOk = 'Très bien, merci !';
-	
+
 	text.loads = "charges";
 	text.empty = "vide";
 	text.mageBook = "apprentron";
@@ -160,7 +191,7 @@ Main.k.setuptranslations = function() {
 	text.menuNews = "News";
 	text.menuHelpMush = "Mush help";
 	text.menuPatchlog = "Patchlog";
-	text.menuTutoChar = "Tuto %s";
+	text.menuTutoChar = "Tips for %s";
 
 	text.connected = "connected";
 	text.lastVersionInstalled = "Last version of CTRL+W was installed (%s):";
@@ -172,7 +203,7 @@ Main.k.setuptranslations = function() {
 	text.menuForumAdviceId = 112222;
 	text.menuForumLounge = "Lounge";
 	text.menuForumLoungeId = 112216;
-	text.menuForumOfficers = "Officiers";
+	text.menuForumOfficers = "Officers";
 	text.menuForumOfficersId = 104918;
 
 
@@ -198,25 +229,26 @@ Main.k.setuptranslations = function() {
 
 	// Titles
 	text.TITLES = {
-		commander: ["Commander", "TODO"],
-		comms: ["Comms Manager", "The Communications manager can start to contact others once contact with Sol is re-established."],
-		admin: ["NERON Admin", "TODO"]
+		commander: ["Commander", "The Commander decides where the Daedalus will go."],
+		comms: ["Comms Manager", "The Communications Manager can start to contact others once contact with Sol is re-established. They can also send broadcasts to the entire crew."],
+		admin: ["NERON Admin", "The NERON Admin has some influence with NERON, the onboard computer. They can also send messages to the entire crew via NERON."]
 	};
 
 	// Ctrl+W options'
 	text.optionsWarning = "More options will be available later.";
 	text.options = [
-		"Use custom styling for messages (colored border and name + background image.",
-		"Simplify custom styling (don't display background images).",
-		"Display Mush logo (above tabs).",
-		"Add line breaks between NERON projects, research projects and Pilgred."
+		"Use custom styling for messages (colored border and name + background image).",
+		"Simplify custom styling (don't display background images.)",
+		"Display Mush logo above tabs",
+		"Add line breaks between NERON projects, research projects and Pilgred.",
+		"Disable confirmations for actions beneficial to the crew as Mush."
 	];
-	
+
 	//Astropad
 	text.astroUpdated = 'Astropad synchronised.';
-	
+
 	// Misc text
-	text.needPageReload = " Page reload needed.";
+	text.needPageReload = "Page reload needed.";
 	text.about = "about";
 	text.tools = "tools";
 	text.titles = "titles";
@@ -235,15 +267,15 @@ Main.k.setuptranslations = function() {
 	text.nothingToReport = "nothing to report";
 
 	text.HEROES_SHORTDESC = [
-		"[TODO: JINSU]",
+		"Supreme Commander of the Daedalus.",
 		"[TODO: FRIEDA]",
-		"[TODO: KUANTI]",
+		"Grand Architect of the Daedalus. His knowledge of the ship is unmatched.",
 		"A Digital Psychologist and one-woman enigma machine.",
-		"Amateur comedian and elite fighter pilot. Born to destroy Hunters.",
-		"An extreme explorer with an irrational fear of balloon animals.",
+		"Amateur comedian and elite fighter pilot. Born to destroy Hunters",
+		"An extreme explorer with an irrational fear of balloon animals",
 		"Chief Communications Officer and former political activist.",
 		"[TODO: CHAO]",
-		"[TODO: FINOLA]",
+		"Internationally renowned biologist and pioneer abducted from Earth.",
 		"[TODO: STEPHEN]",
 		"Flexible fructivorous researcher. Better living through botany!",
 		"[TODO: CHUN]",
@@ -278,8 +310,6 @@ Main.k.setuptranslations = function() {
 }
 Main.k.setuptranslations();
 /************************* /TRANSLATIONS **********************/
-
-// Fix chrome2
 
 String.prototype.capitalize = function() {
 	return this.replace(/(?:^|\s)\S/g, function(a) {
@@ -554,7 +584,7 @@ Main.k.SyncAstropad = function(tgt){
 		$('#astro_maj_inventaire').trigger('click');
 		Main.showTip(tgt,
 			"<div class='tiptop' ><div class='tipbottom'><div class='tipbg'><div class='tipcontent'>" +
-			Main.k.text.astroUpdated + 
+			Main.k.text.astroUpdated +
 			"</div></div></div></div>"
 		);
 	}
@@ -2322,10 +2352,6 @@ Main.k.tabs.playing = function() {
 	Main.k.UpdateDialog = function() {
 		if (Main.k.version >= Main.k.UpdateData.currversion) return false;
 		var okHref = Main.k.servurl + "/CTRLW.user.js";
-		var okHref2 = Main.k.servurl + "/CTRLW-chrome.user.js";
-		if(Main.k.ischrome){
-			okHref = okHref2;
-		}
 		// Create popup
 		var popup = Main.k.CreatePopup();
 		popup.content.css({
