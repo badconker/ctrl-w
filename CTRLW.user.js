@@ -4830,12 +4830,12 @@ Main.k.tabs.playing = function() {
 						alarm_nb = parseInt(/>([0-9]+)/i.exec(omo)[1]);
 						break;
 					case alarm_hunter:
-						if (/([0-9]+|un)\s+appareil/i.test(omo)) {
-							alarm_nb = /([0-9]+|un)\s+appareil/i.exec(omo)[1];
-						} else if (/>([0-9]+|un)/i.test(omo)) {
-							alarm_nb = />([0-9]+|un)/i.exec(omo)[1];
+						if (/([0-9]+|un|a)\s+appareil/i.test(omo)) {
+							alarm_nb = /([0-9]+|un|a)\s+appareil/i.exec(omo)[1];
+						} else if (/>([0-9]+|un|a)/i.test(omo)) {
+							alarm_nb = />([0-9]+|un|a)/i.exec(omo)[1];
 						}
-						if (alarm_nb) alarm_nb = alarm_nb.toLowerCase() == "un" ? 1 : parseInt(alarm_nb);
+						if (alarm_nb) alarm_nb = (alarm_nb.toLowerCase() == "un" || alarm_nb.toLowerCase() == "a") ? 1 : parseInt(alarm_nb);
 						break;
 					case alarm_fire:
 						alarm_nb = parseInt(/>([0-9]+)/i.exec(omo)[1]);
