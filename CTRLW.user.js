@@ -73,17 +73,6 @@ Main.k.initLang = function() {
 			Main.k.lang = "fr";
 	}
 
-	// Default language pack = french (most translated)
-	// Switch to english when fully translated
-	// Main.k.currentLangpack = Main.k.langpack.fr;
-
-	// Use available translations instead of default one
-	/*if (Main.k.lang != "fr" && typeof(Main.k.langpack[Main.k.lang]) != 'undefined') {
-		for (a in Main.k.langpack[Main.k.lang]) {
-			Main.k.currentLangpack[a] = Main.k.langpack[Main.k.lang][a];
-		}
-	}*/
-
 	Main.k.text = new Gettext({
 		domain: "ctrl-w"
 	});
