@@ -2180,17 +2180,34 @@ Main.k.tabs.playing = function() {
 			$("#cdInventory").removeClass("placard_on");
 		}
 	}
-	Main.confirmAjaxAction = function(frm,text) {
+	Main.confirmAction = function(frm,text,fct){
 		if(Main.k.Options.mushNoConf && text == Main.k.text.confirmBeneficialAction){
-			Main.ajaxAction(frm);
+			fct(frm);
 		}else{
-			Main.jsChoiceBox("",text,Main.getText("ok"),Main.getText("cancel"),function(c) {
-				Main.ajaxAction(frm);
+			Main.jsChoiceBox("",text,Main.getText("ok"),Main.getText("cancel"),function(_) {
+				fct(frm);
 			},function(_) {
 				return;
-			},"ok");
+			},fct == Main.ajaxAction ? "ok" : "");
 		}
+	}
+	
+	Main.confirmCustomProjAction = function(frm,text) {
+		Main.confirmAction(frm,text,Main.customProjAction);
 	};
+
+	Main.confirmCustomLabAction = function(frm,text) {
+		Main.confirmAction(frm,text,Main.customLabAction);
+	};
+	
+	Main.confirmCustomPilgredAction = function(frm,text) {
+		Main.confirmAction(frm,text,Main.customPilgredAction);
+	};
+
+	Main.confirmAjaxAction = function(frm,text) {
+		Main.confirmAction(frm,text,Main.ajaxAction);
+	};
+
 	/*Main.sel.selectBySerial = function(serial) {
 		js.Cookie.set(CrossConsts.COOK_SEL,StringTools.urlEncode(serial),3600);
 		var jMe = Selection.j("[serial=" + serial + "]:not(.fakeitem)");
