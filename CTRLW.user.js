@@ -406,7 +406,7 @@ Main.k.Options.open = function() {
 		for (var i=0; i<Main.k.Options.options.length; i++) {
 			var opt = Main.k.Options.options[i];
 			var html = opt[4];
-			if (opt[2]) html += Main.k.text.gettext("Nécessite un rechargement de la page.");
+			if (opt[2]) html += " "+Main.k.text.gettext("Nécessite un rechargement de la page.");
 
 			var p = $("<p>").css({
 				color: "#EEE",
