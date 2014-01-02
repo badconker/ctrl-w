@@ -1,0 +1,403 @@
+# Translations template for CTRL+W.
+# This file is distributed under the same license as the CTRL+W project.
+#
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2014-01-01 17:57-0500\n"
+"PO-Revision-Date: 2014-01-01 19:16-0500\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 0.9.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: CTRLW.user.js:341
+msgid "Commandant suprême du Daedalus."
+msgstr "Supreme Commander of the Daedalus."
+
+#: CTRLW.user.js:342
+#, fuzzy
+msgid "Scientifique millénaire."
+msgstr "[TODO: FRIEDA]"
+
+#: CTRLW.user.js:343
+msgid "Grand architecte du Daedalus."
+msgstr "Grand Architect of the Daedalus. His knowledge of the ship is unmatched."
+
+#: CTRLW.user.js:344
+msgid "Psychologue Digitale aux atouts certains."
+msgstr "A Digital Psychologist and one-woman enigma machine."
+
+#: CTRLW.user.js:345
+msgid "Humoriste pilote de chasse à ses heures."
+msgstr "Amateur comedian and elite fighter pilot. Born to destroy Hunters."
+
+#: CTRLW.user.js:346
+msgid "Exploratrice de l'extrême."
+msgstr "An extreme explorer with an irrational fear of balloon animals."
+
+#: CTRLW.user.js:347
+msgid "Officier principal des Communications du Daedalus."
+msgstr "Chief Communications Officer and former political activist."
+
+#: CTRLW.user.js:348
+#, fuzzy
+msgid "Chef de la sécurité du Daedalus."
+msgstr "[TODO: CHAO]"
+
+#: CTRLW.user.js:349
+msgid "Biologiste de renommée internationale, pionnière dans l'étude du Mush."
+msgstr "Internationally renowned biologist and pioneer abducted from Earth."
+
+#: CTRLW.user.js:350
+#, fuzzy
+msgid "Cuisinier le plus dangereux de la galaxie."
+msgstr "[TODO: STEPHEN]"
+
+#: CTRLW.user.js:351
+msgid "Chercheur frugivore flexible."
+msgstr "Flexible fructivorous researcher. Better living through botany!"
+
+#: CTRLW.user.js:352
+#, fuzzy
+msgid "Dernier espoir de l'Humanité."
+msgstr "[TODO: CHUN]"
+
+#: CTRLW.user.js:353
+#, fuzzy
+msgid "Génie de la physique quantique félinophile."
+msgstr "[TODO: RALUCA]"
+
+#: CTRLW.user.js:354
+#, fuzzy
+msgid "Armateur philantrophobe."
+msgstr "[TODO: GIOELE]"
+
+#: CTRLW.user.js:355
+msgid "Investigatrice déchue de premier plan."
+msgstr "Deposed first-rate investigator on the run from the Federation."
+
+#: CTRLW.user.js:356
+msgid "Technophile motorisé."
+msgstr "Disillusioned motorized technophile with an unhealthy drone fixation."
+
+#: CTRLW.user.js:360
+msgid "tutorial_id:mush"
+msgstr "32534875"
+
+#: CTRLW.user.js:361
+#, fuzzy
+msgid "tutorial_id:eleesha"
+msgstr "32790916"
+
+#: CTRLW.user.js:362
+#, fuzzy
+msgid "tutorial_id:janice"
+msgstr "32488283"
+
+#: CTRLW.user.js:363
+msgid "tutorial_id:chao"
+msgstr "32300186"
+
+#: CTRLW.user.js:364
+#, fuzzy
+msgid "tutorial_id:terrence"
+msgstr "32323021"
+
+#: CTRLW.user.js:365
+#, fuzzy
+msgid "tutorial_id:paola"
+msgstr "32423154"
+
+#: CTRLW.user.js:366
+msgid "tutorial_id:raluca"
+msgstr "32609208"
+
+#: CTRLW.user.js:367
+msgid "tutorial_id:roland"
+msgstr "32255633"
+
+#: CTRLW.user.js:368
+#, fuzzy
+msgid "tutorial_id:ian"
+msgstr "30242550"
+
+#: CTRLW.user.js:369
+msgid "tutorial_id:frieda"
+msgstr "32621356"
+
+#: CTRLW.user.js:370
+#, fuzzy
+msgid "tutorial_id:finola"
+msgstr "20507704"
+
+#: CTRLW.user.js:371
+msgid "tutorial_id:jin su"
+msgstr "32270135"
+
+#: CTRLW.user.js:372
+#, fuzzy
+msgid "tutorial_id:gioele"
+msgstr "20629766"
+
+#: CTRLW.user.js:373
+#, fuzzy
+msgid "tutorial_id:kuan ti"
+msgstr "32777661"
+
+#: CTRLW.user.js:374
+#, fuzzy
+msgid "tutorial_id:chun"
+msgstr "32587937"
+
+#: CTRLW.user.js:375
+#, fuzzy
+msgid "tutorial_id:hua"
+msgstr "32641831"
+
+#: CTRLW.user.js:376
+#, fuzzy
+msgid "tutorial_id:stephen"
+msgstr "19654941"
+
+#: CTRLW.user.js:451
+msgid "Jouer"
+msgstr "Play"
+
+#: CTRLW.user.js:452
+msgid "Mon compte"
+msgstr "My account"
+
+#: CTRLW.user.js:454
+#: CTRLW.user.js:477
+msgid "Castings"
+msgstr ""
+
+#: CTRLW.user.js:455
+#: CTRLW.user.js:470
+msgid "Classements"
+msgstr "Ranking"
+
+#: CTRLW.user.js:456
+msgid "Forum"
+msgstr "Forum"
+
+#: CTRLW.user.js:457
+msgid "Aide"
+msgstr "Help"
+
+#: CTRLW.user.js:460
+msgid "Distributeur"
+msgstr "Vending Machine"
+
+#: CTRLW.user.js:464
+msgid "Expérience"
+msgstr "Experience"
+
+#: CTRLW.user.js:465
+msgid "Ma fiche"
+msgstr "My file"
+
+#: CTRLW.user.js:466
+msgid "Mes réglages"
+msgstr "My settings"
+
+#: CTRLW.user.js:467
+msgid "News"
+msgstr "News"
+
+#: CTRLW.user.js:474
+msgid "ForumDiscussionId"
+msgstr "104909"
+
+#: CTRLW.user.js:474
+msgid "Discussion"
+msgstr "Discussion"
+
+#: CTRLW.user.js:475
+msgid "ForumAdviceId"
+msgstr "112222"
+
+#: CTRLW.user.js:475
+msgid "Entraide"
+msgstr "Advice"
+
+#: CTRLW.user.js:476
+msgid "ForumLoungeId"
+msgstr "112216"
+
+#: CTRLW.user.js:476
+msgid "Détente"
+msgstr "Lounge"
+
+#: CTRLW.user.js:477
+msgid "ForumCastingsId"
+msgstr ""
+
+#: CTRLW.user.js:478
+msgid "ForumOfficersId"
+msgstr "104918"
+
+#: CTRLW.user.js:478
+msgid "Officiers"
+msgstr "Officers"
+
+#: CTRLW.user.js:481
+msgid "Aide Mush"
+msgstr "Mush help"
+
+#: CTRLW.user.js:482
+msgid "Patchlog"
+msgstr "Patch log"
+
+#: CTRLW.user.js:486
+msgid "Tuto %1"
+msgstr "Tips for %1"
+
+#: CTRLW.user.js:607
+msgid "Astropad synchronisé."
+msgstr "Astropad synchronised."
+
+#: CTRLW.user.js:640
+msgid "Plus d'options disponibles prochainement."
+msgstr "More options will be available later."
+
+#: CTRLW.user.js:646
+msgid "Nécessite un rechargement de la page."
+msgstr "Page reload needed."
+
+#: CTRLW.user.js:727
+msgid "Activer la mise en forme personnalisée des messages (bordure + couleur nom + image de fond)."
+msgstr "Use custom styling for messages (colored border and name + background image)"
+
+#: CTRLW.user.js:728
+msgid "Simplifier la mise en forme personnalisée des messages (suppression de l'image de fond)."
+msgstr "Simplify custom styling (don't display background images)"
+
+#: CTRLW.user.js:729
+msgid "Afficher le logo Mush au dessus des onglets."
+msgstr "Display Mush logo above the tabs"
+
+#: CTRLW.user.js:730
+msgid "Séparer les projets / recherches / pilgred sous la zone de jeu."
+msgstr "Add line breaks between NERON projects, research projects and Pilgred"
+
+#: CTRLW.user.js:731
+msgid "Désactiver les confirmations d'actions bénéfiques pour l'équipages en tant que Mush."
+msgstr "Disable confirmations for actions beneficial to the crew as Mush"
+
+#: CTRLW.user.js:1793
+#: CTRLW.user.js:4488
+msgid "Insère l'inventaire de la pièce dans la zone de texte active, de la forme&nbsp;:</p><p><strong>Couloir central :</strong> <i>Combinaison</i>, <i>Couteau</i>, <i>Médikit</i>, <i>Extincteur</i></p><p><strong>Partage aussi sur Astropad si celui-ci est installé.</strong></p>"
+msgstr ""
+
+#: CTRLW.user.js:2234
+msgid ""
+"\n"
+"\t\t<h4>Vous êtes du Mush !</h4>\n"
+"\t\t<p>Cette action est bénéfique pour l'équipage du Deaedalus et votre rôle est de les convertir ou de détruire le Daedalus. Êtes-vous vraiment sûr de vouloir faire cela ?</p>\n"
+"\t"
+msgstr ""
+
+#: CTRLW.user.js:2418
+msgid "Dernière version de CTRL+W installée (%1) :"
+msgstr "Last version of CTRL+W was installed (%1):"
+
+#: CTRLW.user.js:2428
+msgid "Très bien, merci !"
+msgstr "Ok"
+
+#: CTRLW.user.js:2515
+msgid "apprentron"
+msgstr "mage book"
+
+#: CTRLW.user.js:2527
+msgid "charges"
+msgstr "loads"
+
+#: CTRLW.user.js:2534
+msgid "vide"
+msgstr "empty"
+
+#: CTRLW.user.js:2546
+msgid "caméra"
+msgstr "camera"
+
+#: CTRLW.user.js:2548
+msgid "drone"
+msgstr "drone"
+
+#: CTRLW.user.js:2554
+msgid "plantes"
+msgstr "plants"
+
+#: CTRLW.user.js:2568
+msgid "malade"
+msgstr "diseased"
+
+#: CTRLW.user.js:2569
+msgid "soif"
+msgstr "thirty"
+
+#: CTRLW.user.js:2570
+msgid "desséché"
+msgstr "dry"
+
+#: CTRLW.user.js:2571
+msgid "RAS"
+msgstr "nothing to report"
+
+#: CTRLW.user.js:4418
+msgid "à propos"
+msgstr "about"
+
+#: CTRLW.user.js:4418
+msgid "Cliquez ici pour plus d'informations sur le script."
+msgstr "Click here for more information about Ctrl+W."
+
+#: CTRLW.user.js:4427
+msgid "outils"
+msgstr "tools"
+
+#: CTRLW.user.js:4465
+msgid "titres"
+msgstr "titles"
+
+#: CTRLW.user.js:4473
+msgid "équipage"
+msgstr "crew members"
+
+#: CTRLW.user.js:4481
+msgid "inventaire"
+msgstr "shelf content"
+
+#: CTRLW.user.js:4529
+msgid "Commandant"
+msgstr "Commander"
+
+#: CTRLW.user.js:4530
+msgid "Le Commandant décide des planètes que le Daedalus explorera."
+msgstr "The Commander decides where the Daedalus will go."
+
+#: CTRLW.user.js:4546
+msgid "Administrateur NERON"
+msgstr "NERON Admin"
+
+#: CTRLW.user.js:4547
+msgid "Le responsable NERON semble avoir une certaine influence auprès de l'ordinateur de bord. Il est notamment le seul à avoir la possibilité de transmettre des messages à tout l'équipage."
+msgstr "The NERON Admin has some influence with NERON, the onboard computer. They can also send messages to the entire crew via NERON."
+
+#: CTRLW.user.js:4563
+msgid "Responsable de Communications"
+msgstr "Comms Manager"
+
+#: CTRLW.user.js:4564
+msgid "Le Responsable de Communications est la seule personne habilitée à décider quels seront les téléchargements prioritaires du Centre de Communication."
+msgstr "The Communications Manager can start to contact others once contact with Sol is re-established. They can also send broadcasts to the entire crew."
+
+#: CTRLW.user.js:5141
+msgid "connecté(e)"
+msgstr "connected"
+

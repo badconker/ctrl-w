@@ -1,0 +1,402 @@
+# Translations template for CTRL+W.
+# This file is distributed under the same license as the CTRL+W project.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2014-01-01 17:57-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 0.9.6\n"
+
+#: CTRLW.user.js:341
+msgid "Commandant suprême du Daedalus."
+msgstr ""
+
+#: CTRLW.user.js:342
+msgid "Scientifique millénaire."
+msgstr ""
+
+#: CTRLW.user.js:343
+msgid "Grand architecte du Daedalus."
+msgstr ""
+
+#: CTRLW.user.js:344
+msgid "Psychologue Digitale aux atouts certains."
+msgstr ""
+
+#: CTRLW.user.js:345
+msgid "Humoriste pilote de chasse à ses heures."
+msgstr ""
+
+#: CTRLW.user.js:346
+msgid "Exploratrice de l'extrême."
+msgstr ""
+
+#: CTRLW.user.js:347
+msgid "Officier principal des Communications du Daedalus."
+msgstr ""
+
+#: CTRLW.user.js:348
+msgid "Chef de la sécurité du Daedalus."
+msgstr ""
+
+#: CTRLW.user.js:349
+msgid "Biologiste de renommée internationale, pionnière dans l'étude du Mush."
+msgstr ""
+
+#: CTRLW.user.js:350
+msgid "Cuisinier le plus dangereux de la galaxie."
+msgstr ""
+
+#: CTRLW.user.js:351
+msgid "Chercheur frugivore flexible."
+msgstr ""
+
+#: CTRLW.user.js:352
+msgid "Dernier espoir de l'Humanité."
+msgstr ""
+
+#: CTRLW.user.js:353
+msgid "Génie de la physique quantique félinophile."
+msgstr ""
+
+#: CTRLW.user.js:354
+msgid "Armateur philantrophobe."
+msgstr ""
+
+#: CTRLW.user.js:355
+msgid "Investigatrice déchue de premier plan."
+msgstr ""
+
+#: CTRLW.user.js:356
+msgid "Technophile motorisé."
+msgstr ""
+
+#: CTRLW.user.js:360
+msgid "tutorial_id:mush"
+msgstr ""
+
+#: CTRLW.user.js:361
+msgid "tutorial_id:eleesha"
+msgstr ""
+
+#: CTRLW.user.js:362
+msgid "tutorial_id:janice"
+msgstr ""
+
+#: CTRLW.user.js:363
+msgid "tutorial_id:chao"
+msgstr ""
+
+#: CTRLW.user.js:364
+msgid "tutorial_id:terrence"
+msgstr ""
+
+#: CTRLW.user.js:365
+msgid "tutorial_id:paola"
+msgstr ""
+
+#: CTRLW.user.js:366
+msgid "tutorial_id:raluca"
+msgstr ""
+
+#: CTRLW.user.js:367
+msgid "tutorial_id:roland"
+msgstr ""
+
+#: CTRLW.user.js:368
+msgid "tutorial_id:ian"
+msgstr ""
+
+#: CTRLW.user.js:369
+msgid "tutorial_id:frieda"
+msgstr ""
+
+#: CTRLW.user.js:370
+msgid "tutorial_id:finola"
+msgstr ""
+
+#: CTRLW.user.js:371
+msgid "tutorial_id:jin su"
+msgstr ""
+
+#: CTRLW.user.js:372
+msgid "tutorial_id:gioele"
+msgstr ""
+
+#: CTRLW.user.js:373
+msgid "tutorial_id:kuan ti"
+msgstr ""
+
+#: CTRLW.user.js:374
+msgid "tutorial_id:chun"
+msgstr ""
+
+#: CTRLW.user.js:375
+msgid "tutorial_id:hua"
+msgstr ""
+
+#: CTRLW.user.js:376
+msgid "tutorial_id:stephen"
+msgstr ""
+
+#: CTRLW.user.js:451
+msgid "Jouer"
+msgstr ""
+
+#: CTRLW.user.js:452
+msgid "Mon compte"
+msgstr ""
+
+#: CTRLW.user.js:454 CTRLW.user.js:477
+msgid "Castings"
+msgstr ""
+
+#: CTRLW.user.js:455 CTRLW.user.js:470
+msgid "Classements"
+msgstr ""
+
+#: CTRLW.user.js:456
+msgid "Forum"
+msgstr ""
+
+#: CTRLW.user.js:457
+msgid "Aide"
+msgstr ""
+
+#: CTRLW.user.js:460
+msgid "Distributeur"
+msgstr ""
+
+#: CTRLW.user.js:464
+msgid "Expérience"
+msgstr ""
+
+#: CTRLW.user.js:465
+msgid "Ma fiche"
+msgstr ""
+
+#: CTRLW.user.js:466
+msgid "Mes réglages"
+msgstr ""
+
+#: CTRLW.user.js:467
+msgid "News"
+msgstr ""
+
+#: CTRLW.user.js:474
+msgid "ForumDiscussionId"
+msgstr ""
+
+#: CTRLW.user.js:474
+msgid "Discussion"
+msgstr ""
+
+#: CTRLW.user.js:475
+msgid "ForumAdviceId"
+msgstr ""
+
+#: CTRLW.user.js:475
+msgid "Entraide"
+msgstr ""
+
+#: CTRLW.user.js:476
+msgid "ForumLoungeId"
+msgstr ""
+
+#: CTRLW.user.js:476
+msgid "Détente"
+msgstr ""
+
+#: CTRLW.user.js:477
+msgid "ForumCastingsId"
+msgstr ""
+
+#: CTRLW.user.js:478
+msgid "ForumOfficersId"
+msgstr ""
+
+#: CTRLW.user.js:478
+msgid "Officiers"
+msgstr ""
+
+#: CTRLW.user.js:481
+msgid "Aide Mush"
+msgstr ""
+
+#: CTRLW.user.js:482
+msgid "Patchlog"
+msgstr ""
+
+#: CTRLW.user.js:486
+msgid "Tuto %1"
+msgstr ""
+
+#: CTRLW.user.js:607
+msgid "Astropad synchronisé."
+msgstr ""
+
+#: CTRLW.user.js:640
+msgid "Plus d'options disponibles prochainement."
+msgstr ""
+
+#: CTRLW.user.js:646
+msgid "Nécessite un rechargement de la page."
+msgstr ""
+
+#: CTRLW.user.js:727
+msgid ""
+"Activer la mise en forme personnalisée des messages (bordure + couleur "
+"nom + image de fond)."
+msgstr ""
+
+#: CTRLW.user.js:728
+msgid ""
+"Simplifier la mise en forme personnalisée des messages (suppression de "
+"l'image de fond)."
+msgstr ""
+
+#: CTRLW.user.js:729
+msgid "Afficher le logo Mush au dessus des onglets."
+msgstr ""
+
+#: CTRLW.user.js:730
+msgid "Séparer les projets / recherches / pilgred sous la zone de jeu."
+msgstr ""
+
+#: CTRLW.user.js:731
+msgid ""
+"Désactiver les confirmations d'actions bénéfiques pour l'équipages en "
+"tant que Mush."
+msgstr ""
+
+#: CTRLW.user.js:1793 CTRLW.user.js:4488
+msgid ""
+"Insère l'inventaire de la pièce dans la zone de texte active, de la "
+"forme&nbsp;:</p><p><strong>Couloir central :</strong> <i>Combinaison</i>,"
+" <i>Couteau</i>, <i>Médikit</i>, <i>Extincteur</i></p><p><strong>Partage "
+"aussi sur Astropad si celui-ci est installé.</strong></p>"
+msgstr ""
+
+#: CTRLW.user.js:2234
+msgid ""
+"\r\n"
+"\t\t<h4>Vous êtes du Mush !</h4>\r\n"
+"\t\t<p>Cette action est bénéfique pour l'équipage du Deaedalus et votre "
+"rôle est de les convertir ou de détruire le Daedalus. Êtes-vous vraiment "
+"sûr de vouloir faire cela ?</p>\r\n"
+"\t"
+msgstr ""
+
+#: CTRLW.user.js:2418
+msgid "Dernière version de CTRL+W installée (%1) :"
+msgstr ""
+
+#: CTRLW.user.js:2428
+msgid "Très bien, merci !"
+msgstr ""
+
+#: CTRLW.user.js:2515
+msgid "apprentron"
+msgstr ""
+
+#: CTRLW.user.js:2527
+msgid "charges"
+msgstr ""
+
+#: CTRLW.user.js:2534
+msgid "vide"
+msgstr ""
+
+#: CTRLW.user.js:2546
+msgid "caméra"
+msgstr ""
+
+#: CTRLW.user.js:2548
+msgid "drone"
+msgstr ""
+
+#: CTRLW.user.js:2554
+msgid "plantes"
+msgstr ""
+
+#: CTRLW.user.js:2568
+msgid "malade"
+msgstr ""
+
+#: CTRLW.user.js:2569
+msgid "soif"
+msgstr ""
+
+#: CTRLW.user.js:2570
+msgid "desséché"
+msgstr ""
+
+#: CTRLW.user.js:2571
+msgid "RAS"
+msgstr ""
+
+#: CTRLW.user.js:4418
+msgid "à propos"
+msgstr ""
+
+#: CTRLW.user.js:4418
+msgid "Cliquez ici pour plus d'informations sur le script."
+msgstr ""
+
+#: CTRLW.user.js:4427
+msgid "outils"
+msgstr ""
+
+#: CTRLW.user.js:4465
+msgid "titres"
+msgstr ""
+
+#: CTRLW.user.js:4473
+msgid "équipage"
+msgstr ""
+
+#: CTRLW.user.js:4481
+msgid "inventaire"
+msgstr ""
+
+#: CTRLW.user.js:4529
+msgid "Commandant"
+msgstr ""
+
+#: CTRLW.user.js:4530
+msgid "Le Commandant décide des planètes que le Daedalus explorera."
+msgstr ""
+
+#: CTRLW.user.js:4546
+msgid "Administrateur NERON"
+msgstr ""
+
+#: CTRLW.user.js:4547
+msgid ""
+"Le responsable NERON semble avoir une certaine influence auprès de "
+"l'ordinateur de bord. Il est notamment le seul à avoir la possibilité de "
+"transmettre des messages à tout l'équipage."
+msgstr ""
+
+#: CTRLW.user.js:4563
+msgid "Responsable de Communications"
+msgstr ""
+
+#: CTRLW.user.js:4564
+msgid ""
+"Le Responsable de Communications est la seule personne habilitée à "
+"décider quels seront les téléchargements prioritaires du Centre de "
+"Communication."
+msgstr ""
+
+#: CTRLW.user.js:5141
+msgid "connecté(e)"
+msgstr ""
+
