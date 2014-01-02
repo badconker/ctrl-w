@@ -5,7 +5,10 @@
 // @include     http://mush.twinoid.com/*
 // @include     http://mush.twinoid.es/*
 // @downloadURL https://raw.github.com/badconker/ctrl-w/master/CTRLW.user.js
-// @require     http://ctrl-w.badconker.com/js/sprintf.min.js
+// @require     http://jsgettext.berlios.de/lib/Gettext.js
+// @resource    translation:fr https://raw.github.com/badconker/ctrl-w/master/translations/fr/LC_MESSAGES/ctrl-w.po
+// @resource    translation:en https://raw.github.com/badconker/ctrl-w/master/translations/en/LC_MESSAGES/ctrl-w.po
+// @resource    translation:es https://raw.github.com/badconker/ctrl-w/master/translations/es/LC_MESSAGES/ctrl-w.po
 // @version     0.32.4
 // ==/UserScript==
 
@@ -19,265 +22,6 @@ Main.k.topicurl = "http://twd.io/e/KKyl0g";
 Main.k.window = window;
 Main.k.domain = document.domain;
 Main.k.mushurl = 'http://' + document.domain;
-
-Main.k.text = {};
-Main.k.langpack = {};
-Main.k.langpack.fr = {};
-Main.k.langpack.en = {};
-Main.k.langpack.es = {};
-
-/************************* TRANSLATIONS **********************/
-Main.k.setuptranslations = function() {
-	/********* FRENCH ************/
-	var text = {};
-	text.menuPlay = "Jouer";
-	text.menuAccount = "Mon compte";
-	text.menuRanking = "Classements";
-	text.menuForum = "Forum";
-	text.menuHelp = "Aide";
-	text.menuCastings = "Castings";
-	text.menuVending = "Distributeur";
-	text.menuXP = "Expérience";
-	text.menuMyFile = "Ma fiche";
-	text.menuMySettings = "Mes réglages";
-	text.menuNews = "News";
-	text.menuHelpMush = "Aide Mush";
-	text.menuPatchlog = "Patchlog";
-	text.menuTutoChar = "Tuto %s";
-
-	text.menuForumDiscussion = "Discussion";
-	text.menuForumDiscussionId = 67061;
-	text.menuForumAdvice = "Entraide";
-	text.menuForumAdviceId = 67561;
-	text.menuForumLounge = "Détente";
-	text.menuForumLoungeId = 74323;
-	text.menuForumCastings = "Castings";
-	text.menuForumCastingsId = 93847;
-	text.menuForumOfficers = "Officiers";
-	text.menuForumOfficersId = 78267;
-
-	// Tutorial topics' url
-	text.tutorials = {};
-	text.tutorials["eleesha"] = 20507142;
-	text.tutorials["janice"] = 19645493;
-	text.tutorials["chao"] = 21006818;
-	text.tutorials["terrence"] = 20598308;
-	text.tutorials["paola"] = 20451046;
-	text.tutorials["raluca"] = 20458805;
-	text.tutorials["roland"] = 20340650;
-	text.tutorials["ian"] = 20442357;
-	text.tutorials["frieda"] = 19689575;
-	text.tutorials["finola"] = 20507704;
-	text.tutorials["jin su"] = 19614210;
-	text.tutorials["gioele"] = 20629766;
-	text.tutorials["kuan ti"] = 20719766;
-	text.tutorials["chun"] = 20552058;
-	text.tutorials["hua"] = 20261535;
-	text.tutorials["stephen"] = 19654941;
-
-	// Titles
-	text.TITLES = {
-		commander: ["Commandant", "Le Commandant décide des planètes que le Daedalus explorera."],
-		comms: ["Responsable de Communications", "Le Responsable de Communications est la seule personne habilitée à décider quels seront les téléchargements prioritaires du Centre de Communication."],
-		admin: ["Administrateur NERON", "Le responsable NERON semble avoir une certaine influence auprès de l'ordinateur de bord. Il est notamment le seul à avoir la possibilité de transmettre des messages à tout l'équipage."]
-	};
-
-	// Ctrl+W options
-	text.optionsWarning = "Plus d'options disponibles prochainement.";
-	text.options = [
-		"Activer la mise en forme personnalisée des messages (bordure + couleur nom + image de fond).",
-		"Simplifier la mise en forme personnalisée des messages (suppression de l'image de fond).",
-		"Afficher le logo Mush au dessus des onglets.",
-		"Séparer les projets / recherches / pilgred sous la zone de jeu.",
-		"Désactiver les confirmations d'actions bénéfiques pour l'équipages en tant que Mush."
-	];
-	
-	//Astropad
-	text.astroUpdated = 'Astropad synchronisé.';
-	
-	//Confirm
-	text.confirmBeneficialAction = '\r\n		<h4>Vous êtes du Mush !</h4>\r\n		<p>Cette action est bénéfique pour l\'équipage du Deaedalus et votre rôle est de les convertir ou de détruire le Daedalus. Êtes-vous vraiment sûr de vouloir faire cela ?</p>\r\n	';
-	
-	// Misc text
-	text.needPageReload = " Nécessite un rechargement de la page.";
-	text.about = "à propos";
-	text.tools = "outils";
-	text.titles = "titres";
-	text.crew = "équipage";
-	text.shelf = "inventaire";
-	text.aboutTip = "Cliquez ici pour plus d'informations sur le script.";
-	text.connected = "connecté(e)";
-	text.shareInventory = "Insère l'inventaire de la pièce dans la zone de texte active, de la forme&nbsp;:</p><p><strong>Couloir central :</strong> <i>Combinaison</i>, <i>Couteau</i>, <i>Médikit</i>, <i>Extincteur</i></p><p><strong>Partage aussi sur Astropad si celui-ci est installé.</strong></p>"
-	
-	text.lastVersionInstalled = "Dernière version de CTRL+W installée (%s) :";
-	text.autoUpdateOk = 'Très bien, merci !';
-	
-	text.loads = "charges";
-	text.empty = "vide";
-	text.mageBook = "apprentron";
-	text.camera = "caméra";
-	text.drone = "drone";
-	text.plants = "plantes";
-	text.diseased = "malade";
-	text.thirsty = "soif";
-	text.dry = "desséché";
-	text.nothingToReport = "RAS";
-
-	text.HEROES_SHORTDESC = [
-		"Commandant suprême du Daedalus.",
-		"Scientifique millénaire.",
-		"Grand architecte du Daedalus.",
-		"Psychologue Digitale aux atouts certains.",
-		"Humoriste pilote de chasse à ses heures.",
-		"Exploratrice de l'extrême.",
-		"Officier principal des Communications du Daedalus.",
-		"Chef de la sécurité du Daedalus.",
-		"Biologiste de renommée internationale, pionnière dans l'étude du Mush.",
-		"Cuisinier le plus dangereux de la galaxie.",
-		"Chercheur frugivore flexible.",
-		"Dernier espoir de l'Humanité.",
-		"Génie de la physique quantique félinophile.",
-		"Armateur philantrophobe.",
-		"Investigatrice déchue de premier plan.",
-		"Technophile motorisé."
-	];
-	Main.k.langpack.fr = text;
-	/********* /FRENCH ************/
-
-
-
-	/********* ENGLISH ************/
-	var text = {};
-	text.menuPlay = "Play";
-	text.menuAccount = "My account";
-	text.menuRanking = "Ranking";
-	text.menuForum = "Forum";
-	text.menuHelp = "Help";
-	text.menuVending = "Vending Machine";
-	text.menuXP = "Experience";
-	text.menuMyFile = "My File";
-	text.menuMySettings = "My settings";
-	text.menuNews = "News";
-	text.menuHelpMush = "Mush help";
-	text.menuPatchlog = "Patchlog";
-	text.menuTutoChar = "Tuto %s";
-
-	text.connected = "connected";
-	text.lastVersionInstalled = "Last version of CTRL+W was installed (%s):";
-	text.autoUpdateOk = 'Ok';
-
-	text.menuForumDiscussion = "Discussion";
-	text.menuForumDiscussionId = 104909;
-	text.menuForumAdvice = "Advice";
-	text.menuForumAdviceId = 112222;
-	text.menuForumLounge = "Lounge";
-	text.menuForumLoungeId = 112216;
-	text.menuForumOfficers = "Officiers";
-	text.menuForumOfficersId = 104918;
-
-
-	// Tutorial topics' url
-	text.tutorials = {};
-	text.tutorials["mush"] = 32534875;
-	text.tutorials["eleesha"] = 32790916; //unofficial
-	text.tutorials["janice"] = 32488283; //neron admin, unofficial
-	text.tutorials["chao"] = 32300186;
-	text.tutorials["terrence"] = 32323021; //unofficial
-	text.tutorials["paola"] = 32423154; //comms manager
-	text.tutorials["raluca"] = 32609208;
-	text.tutorials["roland"] = 32255633;
-	text.tutorials["ian"] = 30242550; //gardening
-	text.tutorials["frieda"] = 32621356;
-	text.tutorials["finola"] = 20507704; //french tuto
-	text.tutorials["jin su"] = 32270135;
-	text.tutorials["gioele"] = 20629766; //french tuto
-	text.tutorials["kuan ti"] = 32777661;
-	text.tutorials["chun"] = 32587937; //unofficial
-	text.tutorials["hua"] = 32641831; //unofficial
-	text.tutorials["stephen"] = 19654941; //french tuto
-
-	// Titles
-	text.TITLES = {
-		commander: ["Commander", "TODO"],
-		comms: ["Comms Manager", "The Communications manager can start to contact others once contact with Sol is re-established."],
-		admin: ["NERON Admin", "TODO"]
-	};
-
-	// Ctrl+W options'
-	text.optionsWarning = "More options will be available later.";
-	text.options = [
-		"Use custom styling for messages (colored border and name + background image.",
-		"Simplify custom styling (don't display background images).",
-		"Display Mush logo (above tabs).",
-		"Add line breaks between NERON projects, research projects and Pilgred."
-	];
-	
-	//Astropad
-	text.astroUpdated = 'Astropad synchronised.';
-	
-	// Misc text
-	text.needPageReload = " Page reload needed.";
-	text.about = "about";
-	text.tools = "tools";
-	text.titles = "titles";
-	text.crew = "crew members";
-	text.shelf = "shelf content";
-	text.aboutTip = "Click here for more informations on Ctrl+W.";
-
-	text.loads = "loads";
-	text.empty = "empty";
-	text.mageBook = "mage book";
-	text.camera = "camera";
-	text.plants = "plants";
-	text.diseased = "diseased";
-	text.thirsty = "thirsty";
-	text.dry = "dry";
-	text.nothingToReport = "nothing to report";
-
-	text.HEROES_SHORTDESC = [
-		"[TODO: JINSU]",
-		"[TODO: FRIEDA]",
-		"[TODO: KUANTI]",
-		"A Digital Psychologist and one-woman enigma machine.",
-		"Amateur comedian and elite fighter pilot. Born to destroy Hunters.",
-		"An extreme explorer with an irrational fear of balloon animals.",
-		"Chief Communications Officer and former political activist.",
-		"[TODO: CHAO]",
-		"[TODO: FINOLA]",
-		"[TODO: STEPHEN]",
-		"Flexible fructivorous researcher. Better living through botany!",
-		"[TODO: CHUN]",
-		"[TODO: RALUCA]",
-		"[TODO: GIOELE]",
-		"Deposed first-rate investigator on the run from the Federation.",
-		"Disillusioned motorized technophile with an unhealthy drone fixation.",
-	];
-
-	Main.k.langpack.en = text;
-	/********* /ENGLISH ************/
-
-
-
-	/********* SPANISH ************/
-	Main.k.langpack.es.menuPlay = "Jugar";
-	Main.k.langpack.es.menuAccount = "Mi cuenta";
-	Main.k.langpack.es.menuRanking = "Clasificación";
-	Main.k.langpack.es.menuForum = "Foro";
-	Main.k.langpack.es.menuHelp = "Ayuda";
-	Main.k.langpack.es.menuCastings = "Reality Mush";
-	Main.k.langpack.es.menuVending = "Distributeur";
-	Main.k.langpack.es.menuXP = "Experiencia";
-	Main.k.langpack.es.menuMyFile = "Mi ficha ";
-	Main.k.langpack.es.menuMySettings = "Mis opciones";
-	Main.k.langpack.es.menuNews = "Noticias ";
-	Main.k.langpack.es.menuHelpMush = "Ayuda Mush";
-	Main.k.langpack.es.menuPatchlog = "Patchlog";
-	Main.k.langpack.es.menuTutoChar = "Tuto %s";
-	Main.k.langpack.es.connected = "connecté(e)";
-	/********* /SPANISH ************/
-}
-Main.k.setuptranslations();
-/************************* /TRANSLATIONS **********************/
 
 // Fix chrome2
 
@@ -300,19 +44,20 @@ Main.k.initLang = function() {
 			Main.k.lang = "fr";
 	}
 
-	// Default language pack = french (most translated)
-	// Switch to english when fully translated
-	Main.k.currentLangpack = Main.k.langpack.fr;
-
-	// Use available translations instead of default one
-	if (Main.k.lang != "fr" && typeof(Main.k.langpack[Main.k.lang]) != 'undefined') {
-		for (a in Main.k.langpack[Main.k.lang]) {
-			Main.k.currentLangpack[a] = Main.k.langpack[Main.k.lang][a];
+	Main.k.text = new Gettext({
+		domain: "ctrl-w"
+	});
+	try {
+		var translationDataText = GM_getResourceText("translation:"+Main.k.lang);
+		if(typeof translationDataText == 'undefined') {
+			console.warn("No translations for '"+Main.k.lang+"'");
+			return;
 		}
+		var translationData = Main.k.text.parse_po(translationDataText);
+		Main.k.text.parse_locale_data({"ctrl-w": translationData}); // ctrl-w is the domain.
+	} catch(err) { // GM_getResourceText throws errors if things don't exist
+		console.error("Error getting translation data:", err);
 	}
-
-	// Create smaller proxy
-	Main.k.text = Main.k.currentLangpack;
 }
 Main.k.initData = function() {
 	// Define if we are ingame
@@ -323,6 +68,45 @@ Main.k.initData = function() {
 	Main.k.COMMANDERS = ["jin_su", "chao", "gioele", "stephen", "frieda", "kuan_ti", "hua", "roland", "raluca", "finola", "paola", "terrence", "eleesha", "ian", "janice", "chun"];
 	Main.k.COMMS = ["paola", "eleesha", "stephen", "janice", "roland", "hua", "jin_su", "kuan_ti", "gioele", "chun", "ian", "finola", "terrence", "frieda", "chao", "raluca"];
 	Main.k.ADMINS =   ["janice", "terrence", "eleesha", "raluca", "finola", "frieda", "ian", "stephen", "paola", "jin_su", "hua", "kuan_ti", "gioele", "chun", "roland", "chao"];
+
+	Main.k.HEROES.short_desc = [
+		Main.k.text.gettext("Commandant suprême du Daedalus."),
+		Main.k.text.gettext("Scientifique millénaire."),
+		Main.k.text.gettext("Grand architecte du Daedalus."),
+		Main.k.text.gettext("Psychologue Digitale aux atouts certains."),
+		Main.k.text.gettext("Humoriste pilote de chasse à ses heures."),
+		Main.k.text.gettext("Exploratrice de l'extrême."),
+		Main.k.text.gettext("Officier principal des Communications du Daedalus."),
+		Main.k.text.gettext("Chef de la sécurité du Daedalus."),
+		Main.k.text.gettext("Biologiste de renommée internationale, pionnière dans l'étude du Mush."),
+		Main.k.text.gettext("Cuisinier le plus dangereux de la galaxie."),
+		Main.k.text.gettext("Chercheur frugivore flexible."),
+		Main.k.text.gettext("Dernier espoir de l'Humanité."),
+		Main.k.text.gettext("Génie de la physique quantique félinophile."),
+		Main.k.text.gettext("Armateur philantrophobe."),
+		Main.k.text.gettext("Investigatrice déchue de premier plan."),
+		Main.k.text.gettext("Technophile motorisé.")
+	];
+
+	Main.k.HEROES.tutorials = {
+		mush: Main.k.text.gettext("tutorial_id:mush"),
+		eleesha: Main.k.text.gettext("tutorial_id:eleesha"),
+		janice: Main.k.text.gettext("tutorial_id:janice"),
+		chao: Main.k.text.gettext("tutorial_id:chao"),
+		terrence: Main.k.text.gettext("tutorial_id:terrence"),
+		paola: Main.k.text.gettext("tutorial_id:paola"),
+		raluca: Main.k.text.gettext("tutorial_id:raluca"),
+		roland: Main.k.text.gettext("tutorial_id:roland"),
+		ian: Main.k.text.gettext("tutorial_id:ian"),
+		frieda: Main.k.text.gettext("tutorial_id:frieda"),
+		finola: Main.k.text.gettext("tutorial_id:finola"),
+		"jin su": Main.k.text.gettext("tutorial_id:jin su"),
+		gioele: Main.k.text.gettext("tutorial_id:gioele"),
+		"kuan ti": Main.k.text.gettext("tutorial_id:kuan ti"),
+		chun: Main.k.text.gettext("tutorial_id:chun"),
+		hua: Main.k.text.gettext("tutorial_id:hua"),
+		stephen: Main.k.text.gettext("tutorial_id:stephen")
+	};
 
 	Main.k.cssToHeroes = [];
 	Main.k.cssToHeroes["-1185px"] = "janice";
@@ -386,54 +170,54 @@ Main.k.displayMainMenu = function() {
 	Main.k.silver = true; //TODO
 	Main.k.fds = ($("a.butmini[href='/fds']").length > 0);
 	var menu = $("<ul>").addClass("kmenu").insertBefore("#maincontainer, .boxcontainer");
-	var play = $("<li class='kmenuel active first'><a href='"+Main.k.mushurl+"/chooseHero'>"+Main.k.text.menuPlay+"</a></li>").appendTo(menu);
-	var account = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/me'>"+Main.k.text.menuAccount+"</a></li>").appendTo(menu);
+	var play = $("<li class='kmenuel active first'><a href='"+Main.k.mushurl+"/chooseHero'>"+Main.k.text.gettext("Jouer")+"</a></li>").appendTo(menu);
+	var account = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/me'>"+Main.k.text.gettext("Mon compte")+"</a></li>").appendTo(menu);
 
-	if(typeof(Main.k.langpack[Main.k.lang]['menuCastings']) != 'undefined'){
-		var casting = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/group/list'>"+Main.k.text.menuCastings+"</a></li>").appendTo(menu);
+	if(Main.k.text.gettext("ForumCastingsId") != "ForumCastingsId") {
+		var casting = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/group/list'>"+Main.k.text.gettext("Castings")+"</a></li>").appendTo(menu);
 	}
-	var rankings = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/ranking'>"+Main.k.text.menuRanking+"</a></li>").appendTo(menu);
-	var forum = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/tid/forum'>"+Main.k.text.menuForum+"</a></li>").appendTo(menu);
-	var help = $("<li class='kmenuel last'><a href='"+Main.k.mushurl+"/help'>"+Main.k.text.menuHelp+"</a></li>").appendTo(menu);
+	var rankings = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/ranking'>"+Main.k.text.gettext("Classements")+"</a></li>").appendTo(menu);
+	var forum = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/tid/forum'>"+Main.k.text.gettext("Forum")+"</a></li>").appendTo(menu);
+	var help = $("<li class='kmenuel last'><a href='"+Main.k.mushurl+"/help'>"+Main.k.text.gettext("Aide")+"</a></li>").appendTo(menu);
 
 	var play_ss = $("<ul>").appendTo(play);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/vending'><li><img src='/img/icons/skills/rebel.png' />"+Main.k.text.menuVending+"</li></a>")
+	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/vending'><li><img src='/img/icons/skills/rebel.png' />"+Main.k.text.gettext("Distributeur")+"</li></a>")
 	.css("display", "none").attr("id", "vendingmenu").appendTo(play_ss);
 
 	var account_ss = $("<ul>").attr("id", "accountmenu").appendTo(account);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me'><li><img src='/img/icons/skills/persistent.png' />"+Main.k.text.menuXP+"</li></a>").appendTo(account_ss);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me?profile'><li><img src='/img/icons/skills/opportunist.png' />"+Main.k.text.menuMyFile+"</li></a>").appendTo(account_ss);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me?config'><li><img src='/img/icons/skills/engineer.png' />"+Main.k.text.menuMySettings+"</li></a>").appendTo(account_ss);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me?news'><li><img src='/img/icons/skills/radio_expert.png' />"+Main.k.text.menuNews+"</li></a>").appendTo(account_ss);
+	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me'><li><img src='/img/icons/skills/persistent.png' />"+Main.k.text.gettext("Expérience")+"</li></a>").appendTo(account_ss);
+	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me?profile'><li><img src='/img/icons/skills/opportunist.png' />"+Main.k.text.gettext("Ma fiche")+"</li></a>").appendTo(account_ss);
+	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me?config'><li><img src='/img/icons/skills/engineer.png' />"+Main.k.text.gettext("Mes réglages")+"</li></a>").appendTo(account_ss);
+	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me?news'><li><img src='/img/icons/skills/radio_expert.png' />"+Main.k.text.gettext("News")+"</li></a>").appendTo(account_ss);
 
 	var rankings_ss = $("<ul>").appendTo(rankings);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/ranking'><li><img src='/img/icons/skills/persistent.png' />"+Main.k.text.menuRanking+"</li></a>").appendTo(rankings_ss);
+	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/ranking'><li><img src='/img/icons/skills/persistent.png' />"+Main.k.text.gettext("Classements")+"</li></a>").appendTo(rankings_ss);
 	$("<a class='kssmenuel ext' href='http://twinorank.kubegb.fr/'><li><img src='/img/icons/skills/persistent.png' />Twin-O-Rank</li></a>").appendTo(rankings_ss);
 
 	var forum_ss = $("<ul>").appendTo(forum);
-	if(typeof(Main.k.langpack[Main.k.lang]['menuForumDiscussionId']) != 'undefined'){
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.menuForumDiscussionId+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.menuForumDiscussion+"</li></a>").appendTo(forum_ss);
+	if(Main.k.text.gettext("ForumDiscussionId") != "ForumDiscussionId") {
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumDiscussionId")+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.gettext("Discussion")+"</li></a>").appendTo(forum_ss);
 	}
-	if(typeof(Main.k.langpack[Main.k.lang]['menuForumAdviceId']) != 'undefined'){
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.menuForumAdviceId+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.menuForumAdvice+"</li></a>").appendTo(forum_ss);
+	if(Main.k.text.gettext("ForumAdviceId") != "ForumAdviceId") {
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumAdviceId")+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.gettext("Entraide")+"</li></a>").appendTo(forum_ss);
 	}
-	if(typeof(Main.k.langpack[Main.k.lang]['menuForumLoungeId']) != 'undefined'){
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.menuForumLoungeId+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.menuForumLounge+"</li></a>").appendTo(forum_ss);
+	if(Main.k.text.gettext("ForumLoungeId") != "ForumLoungeId") {
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumLoungeId")+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.gettext("Détente")+"</li></a>").appendTo(forum_ss);
 	}
-	if(typeof(Main.k.langpack[Main.k.lang]['menuForumCastingsId']) != 'undefined'){
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.menuForumCastingsId+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.menuForumCastings+"</li></a>").appendTo(forum_ss);
+	if(Main.k.text.gettext("ForumCastingsId") != "ForumCastingsId") {
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumCastingsId")+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.gettext("Castings")+"</li></a>").appendTo(forum_ss);
 	}
-	if (Main.k.silver && typeof(Main.k.langpack[Main.k.lang]['menuForumOfficersId']) != 'undefined') {
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.menuForumOfficersId+"'><li><img src='/img/icons/skills/rebel.png' />"+Main.k.text.menuForumOfficers+"</li></a>").appendTo(forum_ss);
+	if(Main.k.text.gettext("ForumOfficersId") != "ForumOfficersId") {
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumOfficersId")+"'><li><img src='/img/icons/skills/rebel.png' />"+Main.k.text.gettext("Officiers")+"</li></a>").appendTo(forum_ss);
 	}
 
 	var help_ss = $("<ul>").appendTo(help);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/help'><li><img src='/img/icons/skills/genius.png' />"+Main.k.text.menuHelpMush+"</li></a>").appendTo(help_ss);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/patchlog'><li><img src='/img/icons/skills/persistent.png' />"+Main.k.text.menuPatchlog+"</li></a>").appendTo(help_ss);
+	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/help'><li><img src='/img/icons/skills/genius.png' />"+Main.k.text.gettext("Aide Mush")+"</li></a>").appendTo(help_ss);
+	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/patchlog'><li><img src='/img/icons/skills/persistent.png' />"+Main.k.text.gettext("Patchlog")+"</li></a>").appendTo(help_ss);
 
-	if (Main.k.ownHero && Main.k.text.tutorials[Main.k.ownHero]) {
+	if (Main.k.ownHero && Main.k.HEROES.tutorials[Main.k.ownHero] != "tutorial_id:"+Main.k.ownHero) {
 		var charname = Main.k.ownHero.replace("_", "");
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/67561|thread/" + Main.k.text.tutorials[Main.k.ownHero] + "'><li><img src='/img/icons/ui/" + charname + ".png' />" + sprintf(Main.k.text.menuTutoChar, Main.k.ownHero.capitalize()) + "</li></a>").appendTo(help_ss);
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/67561|thread/" + Main.k.HEROES.tutorials[Main.k.ownHero] + "'><li><img src='/img/icons/ui/" + charname + ".png' />" + Main.k.text.strargs(Main.k.text.gettext("Tuto %1"), [Main.k.ownHero.capitalize()]) + "</li></a>").appendTo(help_ss);
 	}
 	$("<a class='kssmenuel ext' href='http://www.twinpedia.com/mush'><li><img src='http://www.twinpedia.com/_media//favicon.ico' />Twinpedia</li></a>").appendTo(help_ss);
 	$("<a class='kssmenuel ext' href='http://apps-scipion.com/pictoid/mush'><li><img src='/img/icons/ui/win_triumph.png' />Pictoid</li></a>").appendTo(help_ss);
@@ -501,7 +285,7 @@ Main.k.CustomTip = function(e) {
 	Main.showTip(tgt,
 		"<div class='tiptop' ><div class='tipbottom'><div class='tipbg'><div class='tipcontent'>" +
 		(title ? "<h1>" + title + "</h1>" : "") +
-		(desc ? "<p>" + desc.replace("\r\n", "") + "</p>" : "") +
+		(desc ? "<p>" + desc.replace("\n", "") + "</p>" : "") +
 		"</div></div></div></div>"
 	);
 }
@@ -546,7 +330,7 @@ Main.k.GetHeroNameFromTopic = function(topic) {
 }
 Main.k.getShortDesc = function(hero) {
 	for (var i=0; i<Main.k.HEROES.length; i++) {
-		if (Main.k.HEROES[i] == hero) return Main.k.text.HEROES_SHORTDESC[i];
+		if (Main.k.HEROES[i] == hero) return Main.k.HEREOES.short_desc[i];
 	}
 }
 Main.k.SyncAstropad = function(tgt){
@@ -554,7 +338,7 @@ Main.k.SyncAstropad = function(tgt){
 		$('#astro_maj_inventaire').trigger('click');
 		Main.showTip(tgt,
 			"<div class='tiptop' ><div class='tipbottom'><div class='tipbg'><div class='tipcontent'>" +
-			Main.k.text.astroUpdated + 
+			Main.k.text.gettext("Astropad synchronisé.") + 
 			"</div></div></div></div>"
 		);
 	}
@@ -587,13 +371,13 @@ Main.k.Options.open = function() {
 			color: "rgb(9,10,97)"
 		}).attr("id", "options_col").appendTo($("table.inter tr").first());
 
-		$("<p>").addClass("warning").html(Main.k.text.optionsWarning).appendTo(td);
+		$("<p>").addClass("warning").text(Main.k.text.gettext("Plus d'options disponibles prochainement.")).appendTo(td);
 
 
 		for (var i=0; i<Main.k.Options.options.length; i++) {
 			var opt = Main.k.Options.options[i];
 			var html = opt[4];
-			if (opt[2]) html += Main.k.text.needPageReload;
+			if (opt[2]) html += " "+Main.k.text.gettext("Nécessite un rechargement de la page.");
 
 			var p = $("<p>").css({
 				color: "#EEE",
@@ -674,11 +458,11 @@ Main.k.Options.updateCookie = function() {
 Main.k.Options.init = function() {
 	Main.k.Options.options = [
 	//  Option Name,	Option Object,				Need refresh,	After(),				Desc
-		["cbubbles",	Main.k.Options.cbubbles,	false,			Main.k.customBubbles,	Main.k.text.options[0]],
-		["cbubblesNB",	Main.k.Options.cbubblesNB,	false,			Main.k.customBubbles,	Main.k.text.options[1]],
-		["dlogo",		Main.k.Options.dlogo,		true,			null,					Main.k.text.options[2]],
-		["splitpjt",	Main.k.Options.splitpjt,	false,			Main.k.updateBottom,	Main.k.text.options[3]],
-		["mushNoConf",	Main.k.Options.mushNoConf,	false,			null,					Main.k.text.options[4]],
+		["cbubbles",	Main.k.Options.cbubbles,	false,			Main.k.customBubbles,	Main.k.text.gettext("Activer la mise en forme personnalisée des messages (bordure + couleur nom + image de fond).")],
+		["cbubblesNB",	Main.k.Options.cbubblesNB,	false,			Main.k.customBubbles,	Main.k.text.gettext("Simplifier la mise en forme personnalisée des messages (suppression de l'image de fond).")],
+		["dlogo",		Main.k.Options.dlogo,		true,			null,					Main.k.text.gettext("Afficher le logo Mush au dessus des onglets.")],
+		["splitpjt",	Main.k.Options.splitpjt,	false,			Main.k.updateBottom,	Main.k.text.gettext("Séparer les projets / recherches / pilgred sous la zone de jeu.")],
+		["mushNoConf",	Main.k.Options.mushNoConf,	false,			null,					Main.k.text.gettext("Désactiver les confirmations d'actions bénéfiques pour l'équipages en tant que Mush.")],
 		//["altpa",		Main.k.Options.altpa,		true,			null,					"Utiliser des images alternatives pour les pa / pm."]
 	];
 
@@ -1740,7 +1524,7 @@ Main.k.tabs.playing = function() {
 				return false;
 			})
 			.attr("_title", "Partager l'inventaire")
-			.attr("_desc", Main.k.text.shareInventory)
+			.attr("_desc", Main.k.text.gettext("Insère l'inventaire de la pièce dans la zone de texte active, de la forme&nbsp;:</p><p><strong>Couloir central :</strong> <i>Combinaison</i>, <i>Couteau</i>, <i>Médikit</i>, <i>Extincteur</i></p><p><strong>Partage aussi sur Astropad si celui-ci est installé.</strong></p>"))
 			.on("mouseover", Main.k.CustomTip)
 			.on("mouseout", Main.hideTip);
 
@@ -2181,7 +1965,7 @@ Main.k.tabs.playing = function() {
 		}
 	}
 	Main.confirmAjaxAction = function(frm,text) {
-		if(Main.k.Options.mushNoConf && text == Main.k.text.confirmBeneficialAction){
+		if(Main.k.Options.mushNoConf && text == Main.k.text.gettext("\n\t\t<h4>Vous êtes du Mush !</h4>\n\t\t<p>Cette action est bénéfique pour l\'équipage du Deaedalus et votre rôle est de les convertir ou de détruire le Daedalus. Êtes-vous vraiment sûr de vouloir faire cela ?</p>\n\t")){
 			Main.ajaxAction(frm);
 		}else{
 			Main.jsChoiceBox("",text,Main.getText("ok"),Main.getText("cancel"),function(c) {
@@ -2365,7 +2149,7 @@ Main.k.tabs.playing = function() {
 		});
 
 		//conf.title = "Mise à jour du script CTRL+W";
-		var maj_content = sprintf(Main.k.text.lastVersionInstalled,Main.k.UpdateData.currversion);
+		var maj_content = Main.k.text.strargs(Main.k.text.gettext("Dernière version de CTRL+W installée (%1) :"), [Main.k.UpdateData.currversion]);
 		maj_content += " <br/> <ul class='updateslist'>";
 		for (var i=0; i<Main.k.UpdateData.changelog.length; i++) {
 			var log = Main.k.UpdateData.changelog[i];
@@ -2375,7 +2159,7 @@ Main.k.tabs.playing = function() {
 
 		// Fill popup content
 		var content = "<div class='updatescontent'>" + maj_content + "</div>";
-		var ok = "<div class='updatesactions'><div id=\"ok\" class=\"but updatesbtn\" ><div class=\"butright\"><div class=\"butbg\"><a onclick=\"Main.k.ClosePopup();\" href=\"#\">"+Main.k.text.autoUpdateOk+"</a></div></div></div>";
+		var ok = "<div class='updatesactions'><div id=\"ok\" class=\"but updatesbtn\" ><div class=\"butright\"><div class=\"butbg\"><a onclick=\"Main.k.ClosePopup();\" href=\"#\">"+Main.k.text.gettext("Très bien, merci !")+"</a></div></div></div>";
 		$("<div>").html(content + ok).appendTo(popup.content);
 
 		// Display popup
@@ -2462,7 +2246,7 @@ Main.k.tabs.playing = function() {
 			name = name.replace(/(<img.+\/>)/ig, "").trim();
 
 			// Handle mage books
-			if (name.toLowerCase() == Main.k.text.mageBook.toLowerCase()) {
+			if (name.toLowerCase() == Main.k.text.gettext("apprentron")) {
 				name = decodeURIComponent(/namey[0-9]+:(.+)g$/.exec($(this).attr("data-tip"))[1]).replace(/(\s\s)/, " ");
 			}
 
@@ -2474,14 +2258,14 @@ Main.k.tabs.playing = function() {
 
 			// Handle loads
 			var reg = /x([0-9]+)$/;
-			if (reg.test(name)) name += " " + Main.k.text.loads;
+			if (reg.test(name)) name += " " + Main.k.text.gettext("charges");
 
 			if (!first) inv += ", ";
 			inv += "//" + name + "//" + qty;
 			if (broken) inv += " :alert:";
 			first = false;
 		});
-		if (first) inv += "//" + Main.k.text.empty + "//";
+		if (first) inv += "//" + Main.k.text.gettext("vide") + "//";
 
 		// Camera / Drone
 		var ncamera = 0;
@@ -2493,15 +2277,15 @@ Main.k.tabs.playing = function() {
 			else if (item.iid == "HELP_DRONE") ndrones++;
 		}
 		if (ncamera || ndrones) inv += " [";
-		if (ncamera) inv += ncamera + " " + Main.k.text.camera + (ncamera != 1 ? "s" : "");
+		if (ncamera) inv += ncamera + " " + Main.k.text.gettext("caméra") + (ncamera != 1 ? "s" : "");
 		if (ncamera && ndrones) inv += " - ";
-		if (ndrones) inv += ndrones + " " + Main.k.text.drone + (ndrones != 1 ? "s" : "");
+		if (ndrones) inv += ndrones + " " + Main.k.text.gettext("drone") + (ndrones != 1 ? "s" : "");
 		if (ncamera || ndrones) inv += "]";
 
 		return inv;
 	}
 	Main.k.FormatPlants = function() {
-		var ret = "**//" + Main.k.text.plants.capitalize() + " : //**";
+		var ret = "**//" + Main.k.text.gettext("plantes").capitalize() + " : //**";
 
 		$("#room").find("[data-id='TREE_POT']").each(function(i) {
 			var name = /^([^<]+)/.exec($(this).attr("data-name"))[1].trim();
@@ -2515,10 +2299,10 @@ Main.k.tabs.playing = function() {
 			ret += " - ";
 
 			var problems = [];
-			if (diseased) problems.push("//" + Main.k.text.diseased.capitalize() + "//");
-			if (thirsty) problems.push("//" + Main.k.text.thirsty.capitalize() + "//");
-			if (dry) problems.push("//" + Main.k.text.dry.capitalize() + "//");
-			if(problems.length == 0) problems.push("//" + Main.k.text.nothingToReport.capitalize() + "//");
+			if (diseased) problems.push("//" + Main.k.text.gettext("malade").capitalize() + "//");
+			if (thirsty) problems.push("//" + Main.k.text.gettext("soif").capitalize() + "//");
+			if (dry) problems.push("//" + Main.k.text.gettext("desséché").capitalize() + "//");
+			if(problems.length == 0) problems.push("//" + Main.k.text.gettext("RAS").capitalize() + "//");
 
 			ret += problems.join();
 
@@ -2545,7 +2329,7 @@ Main.k.tabs.playing = function() {
 			var bonus1 = /<h1>([^<]+)<\/h1>/.exec($(this).find("div.suggestprogress ul li img").first().attr("onmouseover"))[1].trim();
 			var bonus2 = /<h1>([^<]+)<\/h1>/.exec($(this).find("div.suggestprogress ul li img").last().attr("onmouseover"))[1].trim();
 
-			ret += "\r\n**" + name + "** - " + pct + "\n";
+			ret += "\n**" + name + "** - " + pct + "\n";
 			ret += "" + desc + "\n";
 			ret += "Bonus : //" + bonus1 + "//, //" + bonus2 + "//";
 		});
@@ -2572,7 +2356,7 @@ Main.k.tabs.playing = function() {
 			var desc = parse($(this).find("div.desc").html().trim());
 			var bonus1 = /<strong>([^<]+)<\/strong>/.exec($(this).find("div.suggestprogress ul li img").first().attr("onmouseover"))[1].trim().replace("Médeçin", "Médecin");
 			var bonus2 = /<strong>([^<]+)<\/strong>/.exec($(this).find("div.suggestprogress ul li img").last().attr("onmouseover"))[1].trim().replace("Médeçin", "Médecin");
-			ret += "\r\n**" + name + "** - " + pct + "\n";
+			ret += "\n**" + name + "** - " + pct + "\n";
 			ret += "" + desc + "\n";
 			ret += "Bonus : //" + bonus1 + "//, //" + bonus2 + "//";
 		});
@@ -4365,7 +4149,7 @@ Main.k.tabs.playing = function() {
 		// Add left bar
 		// ----------------------------------- //
 		var leftbar = $("<div>").addClass("usLeftbar").insertBefore($("#content"));
-		Main.k.MakeButton("<img src='" + Main.k.servurl + "/img/ctrlw_sml.png' height='16' /> " +  Main.k.version, null, Main.k.About.open, Main.k.text.about.capitalize(), Main.k.text.aboutTip).css({
+		Main.k.MakeButton("<img src='" + Main.k.servurl + "/img/ctrlw_sml.png' height='16' /> " +  Main.k.version, null, Main.k.About.open, Main.k.text.gettext("à propos").capitalize(), Main.k.text.gettext("Cliquez ici pour plus d'informations sur le script.")).css({
 			display: "inline-block",
 			margin: "0 auto 10px"
 		}).appendTo($("<div>").css("text-align", "center").appendTo(leftbar));
@@ -4374,7 +4158,7 @@ Main.k.tabs.playing = function() {
 
 		// Misc tools
 		// ----------------------------------- //
-		$("<h3>").addClass("first").html(Main.k.text.tools.capitalize()).appendTo(leftbar);
+		$("<h3>").addClass("first").html(Main.k.text.gettext("outils").capitalize()).appendTo(leftbar);
 
 		// Update Manager
 		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/new.png' /> Mise à jour", null, null, "Mise à jour du script",
@@ -4412,7 +4196,7 @@ Main.k.tabs.playing = function() {
 
 		// Heroes' titles
 		// ----------------------------------- //
-		var t = $("<h3>").html(Main.k.text.titles.capitalize()).appendTo(leftbar);
+		var t = $("<h3>").html(Main.k.text.gettext("titres").capitalize()).appendTo(leftbar);
 		$("<span>").addClass("displaymore").attr("_target", "#titles_list").appendTo(t).on("click", Main.k.ToggleDisplay);
 		$("<div>").addClass("titles_list").attr("id", "titles_list").css("display", "none").appendTo(leftbar);
 		// ----------------------------------- //
@@ -4420,7 +4204,7 @@ Main.k.tabs.playing = function() {
 
 		// Heroes
 		// ----------------------------------- //
-		var t = $("<h3>").html(Main.k.text.crew.capitalize()).appendTo(leftbar);
+		var t = $("<h3>").html(Main.k.text.gettext("équipage").capitalize()).appendTo(leftbar);
 		$("<span>").addClass("displaymore").attr("_target", "#heroes_list").appendTo(t).on("click", Main.k.ToggleDisplay);
 		$("<div>").attr("id", "heroes_list").css("display", "none").appendTo(leftbar);
 		// ----------------------------------- //
@@ -4428,14 +4212,14 @@ Main.k.tabs.playing = function() {
 
 		// Inventory
 		// ----------------------------------- //
-		var t = $("<h3>").html(Main.k.text.shelf.capitalize()).appendTo(leftbar);
+		var t = $("<h3>").html(Main.k.text.gettext("inventaire").capitalize()).appendTo(leftbar);
 		$("<span>").addClass("displaymore").attr("_target", ".kobject_list").appendTo(t).on("click", Main.k.ToggleDisplay);
 		$("<div>").addClass("inventory kobject_list").css("display", "none").appendTo(leftbar);
 		$("<div>").css({"clear": "both", "height": "5px"}).appendTo(leftbar);
 
 		// Inventory actions
 		Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Partager", null, null, "Partager l'inventaire",
-			Main.k.text.shareInventory
+			Main.k.text.gettext("Insère l'inventaire de la pièce dans la zone de texte active, de la forme&nbsp;:</p><p><strong>Couloir central :</strong> <i>Combinaison</i>, <i>Couteau</i>, <i>Médikit</i>, <i>Extincteur</i></p><p><strong>Partage aussi sur Astropad si celui-ci est installé.</strong></p>")
 		).appendTo(leftbar)
 		.find("a").on("mousedown", function(e) {
 			Main.k.SyncAstropad(e);
@@ -4476,8 +4260,8 @@ Main.k.tabs.playing = function() {
 		// Commanders
 		var commanders = $("<div>").appendTo(titles_list);
 		$("<img>").addClass("icon").attr("src", "/img/icons/ui/title_01.png")
-		.attr("_title", Main.k.text.TITLES.commander[0])
-		.attr("_desc", Main.k.text.TITLES.commander[1])
+		.attr("_title", Main.k.text.gettext("Commandant"))
+		.attr("_desc", Main.k.text.gettext("Le Commandant décide des planètes que le Daedalus explorera."))
 		.on("mouseover", Main.k.CustomTip)
 		.on("mouseout", Main.hideTip)
 		.appendTo(commanders);
@@ -4493,8 +4277,8 @@ Main.k.tabs.playing = function() {
 		// Admins
 		var admins = $("<div>").appendTo(titles_list);
 		$("<img>").addClass("icon").attr("src", "/img/icons/ui/title_02.png")
-		.attr("_title", Main.k.text.TITLES.admin[0])
-		.attr("_desc", Main.k.text.TITLES.admin[1])
+		.attr("_title", Main.k.text.gettext("Administrateur NERON"))
+		.attr("_desc", Main.k.text.gettext("Le responsable NERON semble avoir une certaine influence auprès de l'ordinateur de bord. Il est notamment le seul à avoir la possibilité de transmettre des messages à tout l'équipage."))
 		.on("mouseover", Main.k.CustomTip)
 		.on("mouseout", Main.hideTip)
 		.appendTo(admins);
@@ -4510,8 +4294,8 @@ Main.k.tabs.playing = function() {
 		// Comms manager
 		var comms = $("<div>").appendTo(titles_list);
 		$("<img>").addClass("icon").attr("src", "/img/icons/ui/title_03.png")
-		.attr("_title", Main.k.text.TITLES.comms[0])
-		.attr("_desc", Main.k.text.TITLES.comms[1])
+		.attr("_title", Main.k.text.gettext("Responsable de Communications"))
+		.attr("_desc", Main.k.text.gettext("Le Responsable de Communications est la seule personne habilitée à décider quels seront les téléchargements prioritaires du Centre de Communication."))
 		.on("mouseover", Main.k.CustomTip)
 		.on("mouseout", Main.hideTip)
 		.appendTo(comms);
@@ -5017,12 +4801,12 @@ Main.k.tabs.playing = function() {
 						alarm_nb = parseInt(/>([0-9]+)/i.exec(omo)[1]);
 						break;
 					case alarm_hunter:
-						if (/([0-9]+|un)\s+appareil/i.test(omo)) {
-							alarm_nb = /([0-9]+|un)\s+appareil/i.exec(omo)[1];
-						} else if (/>([0-9]+|un)/i.test(omo)) {
-							alarm_nb = />([0-9]+|un)/i.exec(omo)[1];
+						if (/([0-9]+|un|a)\s+appareil/i.test(omo)) {
+							alarm_nb = /([0-9]+|un|a)\s+appareil/i.exec(omo)[1];
+						} else if (/>([0-9]+|un|a)/i.test(omo)) {
+							alarm_nb = />([0-9]+|un|a)/i.exec(omo)[1];
 						}
-						if (alarm_nb) alarm_nb = alarm_nb.toLowerCase() == "un" ? 1 : parseInt(alarm_nb);
+						if (alarm_nb) alarm_nb = (alarm_nb.toLowerCase() == "un" || alarm_nb.toLowerCase() == "a") ? 1 : parseInt(alarm_nb);
 						break;
 					case alarm_fire:
 						alarm_nb = parseInt(/>([0-9]+)/i.exec(omo)[1]);
@@ -5088,7 +4872,7 @@ Main.k.tabs.playing = function() {
 					var mouseover = $(heroes[j]).attr("onmouseover");
 					var name = /<h1>([^<]+)<\/h1>/.exec(mouseover)[1];
 					var co = /[a-zA-Z]+\s?:\s([^<]+)/.exec(mouseover)[1].toLowerCase();
-					tip += "<strong>" + name + "</strong> - "+Main.k.text.connected+" " + co + "<br/>";
+					tip += "<strong>" + name + "</strong> - "+Main.k.text.gettext("connecté(e)")+" " + co + "<br/>";
 				}
 
 				tab.find("img").off("mouseover").off("mouseout")
