@@ -4,11 +4,11 @@
 // @include     http://mush.vg/*
 // @include     http://mush.twinoid.com/*
 // @include     http://mush.twinoid.es/*
-// @downloadURL https://raw.github.com/badconker/ctrl-w/master/CTRLW.user.js
+// @downloadURL https://github.com/nightexcessive/ctrl-w/raw/feature/gettext/CTRLW.user.js
 // @require     http://jsgettext.berlios.de/lib/Gettext.js
-// @resource    translation:fr https://raw.github.com/badconker/ctrl-w/master/translations/fr/LC_MESSAGES/ctrl-w.po
-// @resource    translation:en https://raw.github.com/badconker/ctrl-w/master/translations/en/LC_MESSAGES/ctrl-w.po
-// @resource    translation:es https://raw.github.com/badconker/ctrl-w/master/translations/es/LC_MESSAGES/ctrl-w.po
+// @resource    translation:fr https://github.com/nightexcessive/ctrl-w/raw/feature/gettext/translations/fr/LC_MESSAGES/ctrl-w.po
+// @resource    translation:en https://github.com/nightexcessive/ctrl-w/raw/feature/gettext/translations/en/LC_MESSAGES/ctrl-w.po
+// @resource    translation:es https://github.com/nightexcessive/ctrl-w/raw/feature/gettext/translations/es/LC_MESSAGES/ctrl-w.po
 // @version     0.32.4
 // ==/UserScript==
 
