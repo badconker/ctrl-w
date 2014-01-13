@@ -2898,24 +2898,9 @@ Main.k.tabs.playing = function() {
 		var bubbles = $(".bubble");
 		if (Main.k.Options.cbubbles) {
 			bubbles.each(function() {
-				// Mainsaid
-				var _char = $(this).siblings(".char");
-				if (_char.get(0)) {
-					var charname = _char.attr("class").replace("char", "").trim();
-					$(this).addClass("bubble_" + charname);
-					if (Main.k.Options.cbubblesNB) $(this).addClass("custombubbles_nobackground");
-				}
-
-				// Reply
-				else {
-					var _char = $(this).find(".char");
-
-					if (_char.get(0)) {
-						var charname = _char.attr("class").replace("char", "").trim();
-						$(this).addClass("bubble_" + charname);
-						if (Main.k.Options.cbubblesNB) $(this).addClass("custombubbles_nobackground");
-					}
-				}
+				charname = Main.k.GetHeroNameFromTopic($(this).parent());
+				$(this).addClass("bubble_" + charname);
+				if (Main.k.Options.cbubblesNB) $(this).addClass("custombubbles_nobackground");
 			});
 		} else {
 			bubbles.removeClass("custombubbles_nobackground");
