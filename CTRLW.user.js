@@ -9,8 +9,34 @@
 // @version     0.32.5
 // ==/UserScript==
 
-// Fix chrome1
+var Main = unsafeWindow.Main;
+var $ = unsafeWindow.jQuery;
+var $hxClasses = unsafeWindow.$hxClasses;
+var _tid = unsafeWindow._tid;
+var ArrayEx = unsafeWindow.ArrayEx;
+var ChatType = unsafeWindow.ChatType;
+var Clients = unsafeWindow.Clients;
+var CrossConsts = unsafeWindow.CrossConsts;
+var haxe = unsafeWindow.haxe;
+var HxOverrides = unsafeWindow.HxOverrides;
+var JqEx = unsafeWindow.JqEx;
+var js = unsafeWindow.js;
+var Lambda = unsafeWindow.Lambda;
+var prx = unsafeWindow.prx;
+var Reflect = unsafeWindow.Reflect;
+var Selection = unsafeWindow.Selection;
+var Std = unsafeWindow.Std;
+var StringBuf = unsafeWindow.StringBuf;
+var StringTools = unsafeWindow.StringTools;
+var Tag = unsafeWindow.Tag;
+var Tools = unsafeWindow.Tools;
+var Utils = unsafeWindow.Utils;
+var Closet = unsafeWindow.Closet;
+var mt = unsafeWindow.mt;
+var jQuery = unsafeWindow.jQuery;
+
 Main.k = function() {};
+Main.k.window = unsafeWindow;
 Main.k.version = GM_info.script.version;
 Main.k.website = "http://ks26782.kimsufi.com/ctrlw";
 Main.k.servurl = "http://ctrl-w.badconker.com";
@@ -279,7 +305,9 @@ Main.k.setuptranslations = function() {
 Main.k.setuptranslations();
 /************************* /TRANSLATIONS **********************/
 
-// Fix chrome2
+
+				
+				
 
 String.prototype.capitalize = function() {
 	return this.replace(/(?:^|\s)\S/g, function(a) {
