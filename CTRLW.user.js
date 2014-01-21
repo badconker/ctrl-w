@@ -5,7 +5,7 @@
 // @include     http://mush.twinoid.com/*
 // @include     http://mush.twinoid.es/*
 // @downloadURL https://raw.github.com/badconker/ctrl-w/master/CTRLW.user.js
-// @require     http://jsgettext.berlios.de/lib/Gettext.js
+// @require     https://raw.github.com/badconker/ctrl-w/master/lib/Gettext.js
 // @resource    translation:fr https://raw.github.com/badconker/ctrl-w/master/translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en https://raw.github.com/badconker/ctrl-w/master/translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es https://raw.github.com/badconker/ctrl-w/master/translations/es/LC_MESSAGES/ctrl-w.po
