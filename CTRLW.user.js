@@ -246,7 +246,7 @@ Main.k.displayMainMenu = function() {
 
 	if (Main.k.ownHero && Main.k.HEROES.tutorials[Main.k.ownHero] != "tutorial_id:"+Main.k.ownHero) {
 		var charname = Main.k.ownHero.replace("_", "");
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/67561|thread/" + Main.k.HEROES.tutorials[Main.k.ownHero] + "'><li><img src='/img/icons/ui/" + charname + ".png' />" + Main.k.text.strargs(Main.k.text.gettext("Tuto %1"), [Main.k.ownHero.capitalize()]) + "</li></a>").appendTo(help_ss);
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/+"+Main.k.text.gettext("ForumAdviceId")+"+|thread/" + Main.k.HEROES.tutorials[Main.k.ownHero] + "'><li><img src='/img/icons/ui/" + charname + ".png' />" + Main.k.text.strargs(Main.k.text.gettext("Tuto %1"), [Main.k.ownHero.capitalize()]) + "</li></a>").appendTo(help_ss);
 	}
 	$("<a class='kssmenuel ext' href='http://www.twinpedia.com/mush'><li><img src='http://www.twinpedia.com/_media//favicon.ico' />Twinpedia</li></a>").appendTo(help_ss);
 	$("<a class='kssmenuel ext' href='http://apps-scipion.com/pictoid/mush'><li><img src='/img/icons/ui/win_triumph.png' />Pictoid</li></a>").appendTo(help_ss);

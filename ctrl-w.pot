@@ -3,144 +3,186 @@
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2014-01-01 19:29-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Project-Id-Version: ctrl-w\n"
+"POT-Creation-Date: 2014-01-22 18:16+0100\n"
+"PO-Revision-Date: 2014-01-22 18:24+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.6.3\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: gettext\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:102
 msgid "Commandant suprême du Daedalus."
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:103
 msgid "Scientifique millénaire."
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:104
 msgid "Grand architecte du Daedalus."
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:105
 msgid "Psychologue Digitale aux atouts certains."
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:106
 msgid "Humoriste pilote de chasse à ses heures."
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:107
 msgid "Exploratrice de l'extrême."
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:108
 msgid "Officier principal des Communications du Daedalus."
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:109
 msgid "Chef de la sécurité du Daedalus."
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:110
 msgid "Biologiste de renommée internationale, pionnière dans l'étude du Mush."
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:111
 msgid "Cuisinier le plus dangereux de la galaxie."
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:112
 msgid "Chercheur frugivore flexible."
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:113
 msgid "Dernier espoir de l'Humanité."
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:114
 msgid "Génie de la physique quantique félinophile."
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:115
 msgid "Armateur philantrophobe."
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:116
 msgid "Investigatrice déchue de premier plan."
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:117
 msgid "Technophile motorisé."
 msgstr ""
 
+#. Thread id for this character's tutorial.
 #: CTRLW.user.js:121
 msgid "tutorial_id:mush"
 msgstr ""
 
+#. Thread id for this character's tutorial.
 #: CTRLW.user.js:122
 msgid "tutorial_id:eleesha"
 msgstr ""
 
+#. Thread id for this character's tutorial.
 #: CTRLW.user.js:123
 msgid "tutorial_id:janice"
 msgstr ""
 
+#. Thread id for this character's tutorial.
 #: CTRLW.user.js:124
 msgid "tutorial_id:chao"
 msgstr ""
 
+#. Thread id for this character's tutorial.
 #: CTRLW.user.js:125
 msgid "tutorial_id:terrence"
 msgstr ""
 
+#. Thread id for this character's tutorial.
 #: CTRLW.user.js:126
 msgid "tutorial_id:paola"
 msgstr ""
 
+#. Thread id for this character's tutorial.
 #: CTRLW.user.js:127
 msgid "tutorial_id:raluca"
 msgstr ""
 
+#. Thread id for this character's tutorial.
 #: CTRLW.user.js:128
 msgid "tutorial_id:roland"
 msgstr ""
 
+#. Thread id for this character's tutorial.
 #: CTRLW.user.js:129
 msgid "tutorial_id:ian"
 msgstr ""
 
+#. Thread id for this character's tutorial.
 #: CTRLW.user.js:130
 msgid "tutorial_id:frieda"
 msgstr ""
 
+#. Thread id for this character's tutorial.
 #: CTRLW.user.js:131
 msgid "tutorial_id:finola"
 msgstr ""
 
+#. Thread id for this character's tutorial.
 #: CTRLW.user.js:132
 msgid "tutorial_id:jin su"
 msgstr ""
 
+#. Thread id for this character's tutorial.
 #: CTRLW.user.js:133
 msgid "tutorial_id:gioele"
 msgstr ""
 
+#. Thread id for this character's tutorial.
 #: CTRLW.user.js:134
 msgid "tutorial_id:kuan ti"
 msgstr ""
 
+#. Thread id for this character's tutorial.
 #: CTRLW.user.js:135
 msgid "tutorial_id:chun"
 msgstr ""
 
+#. Thread id for this character's tutorial.
 #: CTRLW.user.js:136
 msgid "tutorial_id:hua"
 msgstr ""
 
+#. Thread id for this character's tutorial.
 #: CTRLW.user.js:137
 msgid "tutorial_id:stephen"
 msgstr ""
@@ -153,10 +195,12 @@ msgstr ""
 msgid "Mon compte"
 msgstr ""
 
+#. Forum casting id
 #: CTRLW.user.js:205 CTRLW.user.js:236 CTRLW.user.js:237
 msgid "ForumCastingsId"
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:206 CTRLW.user.js:237
 msgid "Castings"
 msgstr ""
@@ -173,54 +217,67 @@ msgstr ""
 msgid "Aide"
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:213
 msgid "Distributeur"
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:217
 msgid "Expérience"
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:218
 msgid "Ma fiche"
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:219
 msgid "Mes réglages"
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:220
 msgid "News"
 msgstr ""
 
+#. Forum discussion id
 #: CTRLW.user.js:227 CTRLW.user.js:228
 msgid "ForumDiscussionId"
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:228
 msgid "Discussion"
 msgstr ""
 
+#. Forum advice id
 #: CTRLW.user.js:230 CTRLW.user.js:231
 msgid "ForumAdviceId"
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:231
 msgid "Entraide"
 msgstr ""
 
+#. Forum Lounge id
 #: CTRLW.user.js:233 CTRLW.user.js:234
 msgid "ForumLoungeId"
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:234
 msgid "Détente"
 msgstr ""
 
+#. Forum Officers id
 #: CTRLW.user.js:239 CTRLW.user.js:240
 msgid "ForumOfficersId"
 msgstr ""
 
+#. This translation must be copied from the game.
 #: CTRLW.user.js:240
 msgid "Officiers"
 msgstr ""
@@ -251,8 +308,8 @@ msgstr ""
 
 #: CTRLW.user.js:490
 msgid ""
-"Activer la mise en forme personnalisée des messages (bordure + couleur "
-"nom + image de fond)."
+"Activer la mise en forme personnalisée des messages (bordure + couleur nom + "
+"image de fond)."
 msgstr ""
 
 #: CTRLW.user.js:491
@@ -271,131 +328,144 @@ msgstr ""
 
 #: CTRLW.user.js:494
 msgid ""
-"Désactiver les confirmations d'actions bénéfiques pour l'équipages en "
-"tant que Mush."
+"Désactiver les confirmations d'actions bénéfiques pour l'équipages en tant "
+"que Mush."
 msgstr ""
 
-#: CTRLW.user.js:1556 CTRLW.user.js:4251
+#: CTRLW.user.js:1556 CTRLW.user.js:4253
 msgid ""
 "Insère l'inventaire de la pièce dans la zone de texte active, de la "
-"forme&nbsp;:</p><p><strong>Couloir central :</strong> <i>Combinaison</i>,"
-" <i>Couteau</i>, <i>Médikit</i>, <i>Extincteur</i></p><p><strong>Partage "
+"forme&nbsp;:</p><p><strong>Couloir central :</strong> <i>Combinaison</i>, "
+"<i>Couteau</i>, <i>Médikit</i>, <i>Extincteur</i></p><p><strong>Partage "
 "aussi sur Astropad si celui-ci est installé.</strong></p>"
 msgstr ""
 
+#. Source code of message confirmation when you are Mush and you are doing a beneficial action.
 #: CTRLW.user.js:1997
 msgid ""
 "\n"
 "\t\t<h4>Vous êtes du Mush !</h4>\n"
-"\t\t<p>Cette action est bénéfique pour l'équipage du Deaedalus et votre "
-"rôle est de les convertir ou de détruire le Daedalus. Êtes-vous vraiment "
-"sûr de vouloir faire cela ?</p>\n"
+"\t\t<p>Cette action est bénéfique pour l'équipage du Deaedalus et votre rôle "
+"est de les convertir ou de détruire le Daedalus. Êtes-vous vraiment sûr de "
+"vouloir faire cela ?</p>\n"
 "\t"
 msgstr ""
 
-#: CTRLW.user.js:2181
+#: CTRLW.user.js:2198
 msgid "Dernière version de CTRL+W installée (%1) :"
 msgstr ""
 
-#: CTRLW.user.js:2191
+#: CTRLW.user.js:2208
 msgid "Très bien, merci !"
 msgstr ""
 
-#: CTRLW.user.js:2278
+#. This translation must be copied from the game.
+#: CTRLW.user.js:2295
 msgid "apprentron"
 msgstr ""
 
-#: CTRLW.user.js:2290
+#. This translation must be copied from the game.
+#: CTRLW.user.js:2307
 msgid "charges"
 msgstr ""
 
-#: CTRLW.user.js:2297
+#. This translation must be copied from the game.
+#: CTRLW.user.js:2314
 msgid "vide"
 msgstr ""
 
-#: CTRLW.user.js:2309
+#. This translation must be copied from the game.
+#: CTRLW.user.js:2326
 msgid "caméra"
 msgstr ""
 
-#: CTRLW.user.js:2311
+#. This translation must be copied from the game.
+#: CTRLW.user.js:2328
 msgid "drone"
 msgstr ""
 
-#: CTRLW.user.js:2317
+#. This translation must be copied from the game.
+#: CTRLW.user.js:2334
 msgid "plantes"
 msgstr ""
 
-#: CTRLW.user.js:2331
+#. This translation must be copied from the game.
+#: CTRLW.user.js:2348
 msgid "malade"
 msgstr ""
 
-#: CTRLW.user.js:2332
+#. This translation must be copied from the game.
+#: CTRLW.user.js:2349
 msgid "soif"
 msgstr ""
 
-#: CTRLW.user.js:2333
+#. This translation must be copied from the game.
+#: CTRLW.user.js:2350
 msgid "desséché"
 msgstr ""
 
-#: CTRLW.user.js:2334
+#: CTRLW.user.js:2351
 msgid "RAS"
 msgstr ""
 
-#: CTRLW.user.js:4181
+#: CTRLW.user.js:4183
 msgid "à propos"
 msgstr ""
 
-#: CTRLW.user.js:4181
+#: CTRLW.user.js:4183
 msgid "Cliquez ici pour plus d'informations sur le script."
 msgstr ""
 
-#: CTRLW.user.js:4190
+#: CTRLW.user.js:4192
 msgid "outils"
 msgstr ""
 
-#: CTRLW.user.js:4228
+#: CTRLW.user.js:4230
 msgid "titres"
 msgstr ""
 
-#: CTRLW.user.js:4236
+#: CTRLW.user.js:4238
 msgid "équipage"
 msgstr ""
 
-#: CTRLW.user.js:4244
+#: CTRLW.user.js:4246
 msgid "inventaire"
 msgstr ""
 
-#: CTRLW.user.js:4292
+#: CTRLW.user.js:4294
 msgid "Commandant"
 msgstr ""
 
-#: CTRLW.user.js:4293
+#. This translation must be copied from the game.
+#: CTRLW.user.js:4295
 msgid "Le Commandant décide des planètes que le Daedalus explorera."
 msgstr ""
 
-#: CTRLW.user.js:4309
+#. This translation must be copied from the game.
+#: CTRLW.user.js:4311
 msgid "Administrateur NERON"
 msgstr ""
 
-#: CTRLW.user.js:4310
+#. This translation must be copied from the game.
+#: CTRLW.user.js:4312
 msgid ""
 "Le responsable NERON semble avoir une certaine influence auprès de "
 "l'ordinateur de bord. Il est notamment le seul à avoir la possibilité de "
 "transmettre des messages à tout l'équipage."
 msgstr ""
 
-#: CTRLW.user.js:4326
+#. This translation must be copied from the game.
+#: CTRLW.user.js:4328
 msgid "Responsable de Communications"
 msgstr ""
 
-#: CTRLW.user.js:4327
+#. This translation must be copied from the game.
+#: CTRLW.user.js:4329
 msgid ""
-"Le Responsable de Communications est la seule personne habilitée à "
-"décider quels seront les téléchargements prioritaires du Centre de "
-"Communication."
+"Le Responsable de Communications est la seule personne habilitée à décider "
+"quels seront les téléchargements prioritaires du Centre de Communication."
 msgstr ""
 
-#: CTRLW.user.js:4904
+#: CTRLW.user.js:4906
 msgid "connecté(e)"
 msgstr ""
-
