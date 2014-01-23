@@ -408,7 +408,7 @@ Main.k.GetHeroNameFromTopic = function(topic) {
 }
 Main.k.getShortDesc = function(hero) {
 	for (var i=0; i<Main.k.HEROES.length; i++) {
-		if (Main.k.HEROES[i] == hero) return Main.k.HEREOES.short_desc[i];
+		if (Main.k.HEROES[i] == hero) return Main.k.HEROES.short_desc[i];
 	}
 }
 Main.k.SyncAstropad = function(tgt){
