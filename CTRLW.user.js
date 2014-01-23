@@ -5,10 +5,10 @@
 // @include     http://mush.twinoid.com/*
 // @include     http://mush.twinoid.es/*
 // @downloadURL https://raw.github.com/badconker/ctrl-w/master/CTRLW.user.js
-// @require     https://raw.github.com/badconker/ctrl-w/master/lib/Gettext.js
-// @resource    translation:fr https://raw.github.com/badconker/ctrl-w/master/translations/fr/LC_MESSAGES/ctrl-w.po
-// @resource    translation:en https://raw.github.com/badconker/ctrl-w/master/translations/en/LC_MESSAGES/ctrl-w.po
-// @resource    translation:es https://raw.github.com/badconker/ctrl-w/master/translations/es/LC_MESSAGES/ctrl-w.po
+// @require     lib/Gettext.js
+// @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
+// @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
+// @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
 // @version     0.32.5
 // ==/UserScript==
 
