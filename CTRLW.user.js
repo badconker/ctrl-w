@@ -99,41 +99,74 @@ Main.k.initData = function() {
 	Main.k.ADMINS =   ["janice", "terrence", "eleesha", "raluca", "finola", "frieda", "ian", "stephen", "paola", "jin_su", "hua", "kuan_ti", "gioele", "chun", "roland", "chao"];
 
 	Main.k.HEROES.short_desc = [
-		Main.k.text.gettext("Commandant suprême du Daedalus."),
+		/* Translators: This translation must be copied from the game. */
+		Main.k.text.gettext("Commandant suprême du Daedalus."), 
+		/* Translators: This translation must be copied from the game. */
 		Main.k.text.gettext("Scientifique millénaire."),
+		/* Translators: This translation must be copied from the game. */
 		Main.k.text.gettext("Grand architecte du Daedalus."),
+		/* Translators: This translation must be copied from the game. */
 		Main.k.text.gettext("Psychologue Digitale aux atouts certains."),
+		/* Translators: This translation must be copied from the game. */
 		Main.k.text.gettext("Humoriste pilote de chasse à ses heures."),
+		/* Translators: This translation must be copied from the game. */
 		Main.k.text.gettext("Exploratrice de l'extrême."),
+		/* Translators: This translation must be copied from the game. */
 		Main.k.text.gettext("Officier principal des Communications du Daedalus."),
+		/* Translators: This translation must be copied from the game. */
 		Main.k.text.gettext("Chef de la sécurité du Daedalus."),
+		/* Translators: This translation must be copied from the game. */
 		Main.k.text.gettext("Biologiste de renommée internationale, pionnière dans l'étude du Mush."),
-		Main.k.text.gettext("Cuisinier le plus dangereux de la galaxie."),
+		/* Translators: This translation must be copied from the game. */
+		Main.k.text.gettext("Cuisinier le plus dangereux de la galaxie.")
+		/* Translators: This translation must be copied from the game. */,
 		Main.k.text.gettext("Chercheur frugivore flexible."),
+		/* Translators: This translation must be copied from the game. */
 		Main.k.text.gettext("Dernier espoir de l'Humanité."),
+		/* Translators: This translation must be copied from the game. */
 		Main.k.text.gettext("Génie de la physique quantique félinophile."),
+		/* Translators: This translation must be copied from the game. */
 		Main.k.text.gettext("Armateur philantrophobe."),
+		/* Translators: This translation must be copied from the game. */
 		Main.k.text.gettext("Investigatrice déchue de premier plan."),
+		/* Translators: This translation must be copied from the game. */
 		Main.k.text.gettext("Technophile motorisé.")
 	];
 
 	Main.k.HEROES.tutorials = {
+		/* Translators: Thread id for this character's tutorial. */
 		mush: Main.k.text.gettext("tutorial_id:mush"),
+		/* Translators: Thread id for this character's tutorial. */
 		eleesha: Main.k.text.gettext("tutorial_id:eleesha"),
+		/* Translators: Thread id for this character's tutorial. */
 		janice: Main.k.text.gettext("tutorial_id:janice"),
+		/* Translators: Thread id for this character's tutorial. */
 		chao: Main.k.text.gettext("tutorial_id:chao"),
+		/* Translators: Thread id for this character's tutorial. */
 		terrence: Main.k.text.gettext("tutorial_id:terrence"),
+		/* Translators: Thread id for this character's tutorial. */
 		paola: Main.k.text.gettext("tutorial_id:paola"),
+		/* Translators: Thread id for this character's tutorial. */
 		raluca: Main.k.text.gettext("tutorial_id:raluca"),
+		/* Translators: Thread id for this character's tutorial. */
 		roland: Main.k.text.gettext("tutorial_id:roland"),
+		/* Translators: Thread id for this character's tutorial. */
 		ian: Main.k.text.gettext("tutorial_id:ian"),
+		/* Translators: Thread id for this character's tutorial. */
 		frieda: Main.k.text.gettext("tutorial_id:frieda"),
+		/* Translators: Thread id for this character's tutorial. */
 		finola: Main.k.text.gettext("tutorial_id:finola"),
+		/* Translators: Thread id for this character's tutorial. */
 		"jin su": Main.k.text.gettext("tutorial_id:jin su"),
+		/* Translators: Thread id for this character's tutorial. */
 		gioele: Main.k.text.gettext("tutorial_id:gioele"),
+		/* Translators: Thread id for this character's tutorial. */
 		"kuan ti": Main.k.text.gettext("tutorial_id:kuan ti"),
+		/* Translators: Thread id for this character's tutorial. */
 		chun: Main.k.text.gettext("tutorial_id:chun"),
+		/* Translators: Thread id for this character's tutorial. */
 		hua: Main.k.text.gettext("tutorial_id:hua"),
+		/* Translators: Thread id for this character's tutorial. */
 		stephen: Main.k.text.gettext("tutorial_id:stephen")
 	};
 
@@ -225,18 +258,31 @@ Main.k.displayMainMenu = function() {
 
 	var forum_ss = $("<ul>").appendTo(forum);
 	if(Main.k.text.gettext("ForumDiscussionId") != "ForumDiscussionId") {
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumDiscussionId")+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.gettext("Discussion")+"</li></a>").appendTo(forum_ss);
+		/* Translators: Forum Discussion id */
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumDiscussionId")+
+		/* Translators: Forum Discussion label */
+		"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.gettext("Discussion")+"</li></a>").appendTo(forum_ss);
 	}
 	if(Main.k.text.gettext("ForumAdviceId") != "ForumAdviceId") {
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumAdviceId")+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.gettext("Entraide")+"</li></a>").appendTo(forum_ss);
+		/* Translators: Forum Advice id */
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumAdviceId")+
+		/* Translators: Forum Advice label */
+		"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.gettext("Entraide")+"</li></a>").appendTo(forum_ss);
 	}
 	if(Main.k.text.gettext("ForumLoungeId") != "ForumLoungeId") {
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumLoungeId")+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.gettext("Détente")+"</li></a>").appendTo(forum_ss);
+		/* Translators: Forum Lounge id */
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumLoungeId")+
+		/* Translators: Forum Lounge label */
+		"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.gettext("Détente")+"</li></a>").appendTo(forum_ss);
 	}
 	if(Main.k.text.gettext("ForumCastingsId") != "ForumCastingsId") {
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumCastingsId")+"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.gettext("Castings")+"</li></a>").appendTo(forum_ss);
+		/* Translators: Forum Castings id */
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumCastingsId")+
+		/* Translators: Forum Castings label */
+		"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.gettext("Castings")+"</li></a>").appendTo(forum_ss);
 	}
 	if(Main.k.text.gettext("ForumOfficersId") != "ForumOfficersId") {
+		/* Translators: Forum Officers id */
 		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumOfficersId")+"'><li><img src='/img/icons/skills/rebel.png' />"+Main.k.text.gettext("Officiers")+"</li></a>").appendTo(forum_ss);
 	}
 
@@ -248,7 +294,10 @@ Main.k.displayMainMenu = function() {
 		var charname = Main.k.ownHero.replace("_", "");
 		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/+"+Main.k.text.gettext("ForumAdviceId")+"+|thread/" + Main.k.HEROES.tutorials[Main.k.ownHero] + "'><li><img src='/img/icons/ui/" + charname + ".png' />" + Main.k.text.strargs(Main.k.text.gettext("Tuto %1"), [Main.k.ownHero.capitalize()]) + "</li></a>").appendTo(help_ss);
 	}
-	$("<a class='kssmenuel ext' href='http://www.twinpedia.com/mush'><li><img src='http://www.twinpedia.com/_media//favicon.ico' />Twinpedia</li></a>").appendTo(help_ss);
+	/* Translators: Wiki url */
+	$("<a class='kssmenuel ext' href='"+Main.k.text.gettext("http://www.twinpedia.com/mush")+
+	/* Translators: Wiki favicon url */
+	"'><li><img src='"+Main.k.text.gettext("http://www.twinpedia.com/_media/favicon.ico")+"' />Twinpedia</li></a>").appendTo(help_ss);
 	$("<a class='kssmenuel ext' href='http://apps-scipion.com/pictoid/mush'><li><img src='/img/icons/ui/win_triumph.png' />Pictoid</li></a>").appendTo(help_ss);
 
 	if (Main.k.fds) {
@@ -1994,6 +2043,7 @@ Main.k.tabs.playing = function() {
 		}
 	}
 	Main.confirmAction = function(frm,text,fct){
+		/* Translators: Source code of message confirmation when you are Mush and you are doing a beneficial action. */
 		if(Main.k.Options.mushNoConf && text == Main.k.text.gettext("\n\t\t<h4>Vous êtes du Mush !</h4>\n\t\t<p>Cette action est bénéfique pour l\'équipage du Deaedalus et votre rôle est de les convertir ou de détruire le Daedalus. Êtes-vous vraiment sûr de vouloir faire cela ?</p>\n\t")){
 			fct(frm);
 		}else{
@@ -4291,7 +4341,9 @@ Main.k.tabs.playing = function() {
 		// Commanders
 		var commanders = $("<div>").appendTo(titles_list);
 		$("<img>").addClass("icon").attr("src", "/img/icons/ui/title_01.png")
+		/* Translators: This translation must be copied from the game. */
 		.attr("_title", Main.k.text.gettext("Commandant"))
+		/* Translators: This translation must be copied from the game. */
 		.attr("_desc", Main.k.text.gettext("Le Commandant décide des planètes que le Daedalus explorera."))
 		.on("mouseover", Main.k.CustomTip)
 		.on("mouseout", Main.hideTip)
@@ -4308,7 +4360,9 @@ Main.k.tabs.playing = function() {
 		// Admins
 		var admins = $("<div>").appendTo(titles_list);
 		$("<img>").addClass("icon").attr("src", "/img/icons/ui/title_02.png")
+		/* Translators: This translation must be copied from the game. */
 		.attr("_title", Main.k.text.gettext("Administrateur NERON"))
+		/* Translators: This translation must be copied from the game. */
 		.attr("_desc", Main.k.text.gettext("Le responsable NERON semble avoir une certaine influence auprès de l'ordinateur de bord. Il est notamment le seul à avoir la possibilité de transmettre des messages à tout l'équipage."))
 		.on("mouseover", Main.k.CustomTip)
 		.on("mouseout", Main.hideTip)
@@ -4325,7 +4379,9 @@ Main.k.tabs.playing = function() {
 		// Comms manager
 		var comms = $("<div>").appendTo(titles_list);
 		$("<img>").addClass("icon").attr("src", "/img/icons/ui/title_03.png")
+		/* Translators: This translation must be copied from the game. */
 		.attr("_title", Main.k.text.gettext("Responsable de Communications"))
+		/* Translators: This translation must be copied from the game. */
 		.attr("_desc", Main.k.text.gettext("Le Responsable de Communications est la seule personne habilitée à décider quels seront les téléchargements prioritaires du Centre de Communication."))
 		.on("mouseover", Main.k.CustomTip)
 		.on("mouseout", Main.hideTip)
