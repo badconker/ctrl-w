@@ -59,6 +59,9 @@ String.prototype.capitalize = function() {
 		return a.toUpperCase();
 	});
 };
+RegExp.escape = function(s) {
+    return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+};
 
 Main.k.initLang = function() {
 	// Language detection
@@ -2043,8 +2046,9 @@ Main.k.tabs.playing = function() {
 		}
 	}
 	Main.confirmAction = function(frm,text,fct){
-		/* Translators: Source code of message confirmation when you are Mush and you are doing a beneficial action. */
-		if(Main.k.Options.mushNoConf && text == Main.k.text.gettext("\n\t\t<h4>Vous êtes du Mush !</h4>\n\t\t<p>Cette action est bénéfique pour l\'équipage du Deaedalus et votre rôle est de les convertir ou de détruire le Daedalus. Êtes-vous vraiment sûr de vouloir faire cela ?</p>\n\t")){
+		/* Translators: message confirmation when you are Mush and you are doing a beneficial action. Only the paragraph, not the title. Copy it from the game. */
+		var regex = new RegExp('.*'+RegExp.escape(Main.k.text.gettext("Cette action est bénéfique pour l'équipage du Deaedalus et votre rôle est de les convertir ou de détruire le Daedalus. Êtes-vous vraiment sûr de vouloir faire cela ?"))+'.*');
+		if(Main.k.Options.mushNoConf && regex.test(text)){
 			fct(frm);
 		}else{
 			Main.jsChoiceBox("",text,Main.getText("ok"),Main.getText("cancel"),function(_) {
