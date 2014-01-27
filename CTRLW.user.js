@@ -2976,9 +2976,10 @@ Main.k.tabs.playing = function() {
 				margin: "20px",
 				color: "#CCC",
 				"text-align": "center"
-			}).html("Script développé par <a href='http://twinoid.com/user/8297'>kill0u</a>, maintenu par <a href='http://twinoid.com/user/1244143'>badconker</a><br/>\
+			}).html(Main.k.text.gettext("Script développé par <a href='http://twinoid.com/user/8297'>kill0u</a>, maintenu par <a href='http://twinoid.com/user/1244143'>badconker</a><br/>\
 			Le logo, les images (mise en forme personnalisée des messages) et le design du site web ont été faits par \
-			<a href='http://twinoid.com/user/2992052'>Gnux</a>.").appendTo(td);
+			<a href='http://twinoid.com/user/2992052'>Gnux</a>.<br>\
+			Contributeurs : <a href='http://twinoid.com/user/8011565'>NightExcessive</a>")).appendTo(td);
 
 			// Coming soon
 			$("<h2>").css({

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ctrl+w\n"
 "Report-Msgid-Bugs-To: http://twd.io/e/KKyl0g\n"
-"POT-Creation-Date: 2014-01-25 10:42+0100\n"
+"POT-Creation-Date: 2014-01-27 19:07+0100\n"
 "PO-Revision-Date: 2014-01-25 10:42+0100\n"
 "Last-Translator: \n"
 "Language-Team: English\n"
@@ -344,7 +344,7 @@ msgid ""
 "que Mush."
 msgstr "Disable confirmations for actions beneficial to the crew as Mush"
 
-#: ..\CTRLW.user.js:1608 ..\CTRLW.user.js:4307
+#: ..\CTRLW.user.js:1611 ..\CTRLW.user.js:4311
 msgid ""
 "Insère l'inventaire de la pièce dans la zone de texte active, de la "
 "forme&nbsp;:</p><p><strong>Couloir central :</strong> <i>Combinaison</i>, "
@@ -353,7 +353,7 @@ msgid ""
 msgstr ""
 
 #. Translators: message confirmation when you are Mush and you are doing a beneficial action. Only the paragraph, not the title. Copy it from the game. */
-#: ..\CTRLW.user.js:2050
+#: ..\CTRLW.user.js:2053
 msgid ""
 "Cette action est bénéfique pour l'équipage du Deaedalus et votre rôle est de "
 "les convertir ou de détruire le Daedalus. Êtes-vous vraiment sûr de vouloir "
@@ -362,95 +362,105 @@ msgstr ""
 "This action is beneficial for the crew of the Daedalus and your role is to "
 "convert them or destroy the Daedalus. Are you sure you wish to do this?"
 
-#: ..\CTRLW.user.js:2252
+#: ..\CTRLW.user.js:2255
 msgid "Dernière version de CTRL+W installée (%1) :"
 msgstr "Last version of CTRL+W was installed (%1):"
 
-#: ..\CTRLW.user.js:2262
+#: ..\CTRLW.user.js:2265
 msgid "Très bien, merci !"
 msgstr "Ok"
 
-#: ..\CTRLW.user.js:2349
+#: ..\CTRLW.user.js:2352
 msgid "apprentron"
 msgstr "mage book"
 
-#: ..\CTRLW.user.js:2361
+#: ..\CTRLW.user.js:2364
 msgid "charges"
 msgstr "loads"
 
-#: ..\CTRLW.user.js:2368
+#: ..\CTRLW.user.js:2371
 msgid "vide"
 msgstr "empty"
 
-#: ..\CTRLW.user.js:2380
+#: ..\CTRLW.user.js:2383
 msgid "caméra"
 msgstr "camera"
 
-#: ..\CTRLW.user.js:2382
+#: ..\CTRLW.user.js:2385
 msgid "drone"
 msgstr "drone"
 
-#: ..\CTRLW.user.js:2388
+#: ..\CTRLW.user.js:2391
 msgid "plantes"
 msgstr "plants"
 
-#: ..\CTRLW.user.js:2402
+#: ..\CTRLW.user.js:2405
 msgid "malade"
 msgstr "diseased"
 
-#: ..\CTRLW.user.js:2403
+#: ..\CTRLW.user.js:2406
 msgid "soif"
 msgstr "thirty"
 
-#: ..\CTRLW.user.js:2404
+#: ..\CTRLW.user.js:2407
 msgid "desséché"
 msgstr "dry"
 
-#: ..\CTRLW.user.js:2405
+#: ..\CTRLW.user.js:2408
 msgid "RAS"
 msgstr "nothing to report"
 
-#: ..\CTRLW.user.js:4237
+#: ..\CTRLW.user.js:2979
+msgid ""
+"Script développé par <a href='http://twinoid.com/user/8297'>kill0u</a>, "
+"maintenu par <a href='http://twinoid.com/user/1244143'>badconker</a><br/>\t\t"
+"\tLe logo, les images (mise en forme personnalisée des messages) et le "
+"design du site web ont été faits par \t\t\t<a href='http://twinoid.com/"
+"user/2992052'>Gnux</a>.<br>\t\t\tContributeurs : <a href='http://twinoid.com/"
+"user/8011565'>NightExcessive</a>"
+msgstr ""
+
+#: ..\CTRLW.user.js:4241
 msgid "à propos"
 msgstr "about"
 
-#: ..\CTRLW.user.js:4237
+#: ..\CTRLW.user.js:4241
 msgid "Cliquez ici pour plus d'informations sur le script."
 msgstr "Click here for more information about Ctrl+W."
 
-#: ..\CTRLW.user.js:4246
+#: ..\CTRLW.user.js:4250
 msgid "outils"
 msgstr "tools"
 
-#: ..\CTRLW.user.js:4284
+#: ..\CTRLW.user.js:4288
 msgid "titres"
 msgstr "titles"
 
-#: ..\CTRLW.user.js:4292
+#: ..\CTRLW.user.js:4296
 msgid "équipage"
 msgstr "crew members"
 
-#: ..\CTRLW.user.js:4300
+#: ..\CTRLW.user.js:4304
 msgid "inventaire"
 msgstr "shelf content"
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:4349
+#: ..\CTRLW.user.js:4353
 msgid "Commandant"
 msgstr "Commander"
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:4351
+#: ..\CTRLW.user.js:4355
 msgid "Le Commandant décide des planètes que le Daedalus explorera."
 msgstr "The Commander decides where the Daedalus will go."
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:4368
+#: ..\CTRLW.user.js:4372
 msgid "Administrateur NERON"
 msgstr "NERON Admin"
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:4370
+#: ..\CTRLW.user.js:4374
 msgid ""
 "Le responsable NERON semble avoir une certaine influence auprès de "
 "l'ordinateur de bord. Il est notamment le seul à avoir la possibilité de "
@@ -460,12 +470,12 @@ msgstr ""
 "can also send messages to the entire crew via NERON."
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:4387
+#: ..\CTRLW.user.js:4391
 msgid "Responsable de Communications"
 msgstr "Comms Manager"
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:4389
+#: ..\CTRLW.user.js:4393
 msgid ""
 "Le Responsable de Communications est la seule personne habilitée à décider "
 "quels seront les téléchargements prioritaires du Centre de Communication."
@@ -473,6 +483,6 @@ msgstr ""
 "The Communications Manager can start to contact others once contact with Sol "
 "is re-established. They can also send broadcasts to the entire crew."
 
-#: ..\CTRLW.user.js:4966
+#: ..\CTRLW.user.js:4970
 msgid "connecté(e)"
 msgstr "connected"
