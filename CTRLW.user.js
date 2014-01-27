@@ -958,6 +958,9 @@ Main.k.css.ingame = function() {
 		line-height: 12px;\
 		z-index: 2;\
 	}\
+	.usLeftbar .titles_title { \
+		display:none;\
+	}\
 	.usLeftbar .titles_list .icon { \
 		margin: 0px 5px 3px 4px;\
 		opacity: 1;\
@@ -4281,7 +4284,7 @@ Main.k.tabs.playing = function() {
 
 		// Heroes' titles
 		// ----------------------------------- //
-		var t = $("<h3>").html(Main.k.text.gettext("titres").capitalize()).appendTo(leftbar);
+		var t = $('<h3 class="titles_title"></h3>').html(Main.k.text.gettext("titres").capitalize()).appendTo(leftbar);
 		$("<span>").addClass("displaymore").attr("_target", "#titles_list").appendTo(t).on("click", Main.k.ToggleDisplay);
 		$("<div>").addClass("titles_list").attr("id", "titles_list").css("display", "none").appendTo(leftbar);
 		// ----------------------------------- //
