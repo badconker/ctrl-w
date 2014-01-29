@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ctrl+w\n"
 "Report-Msgid-Bugs-To: http://twd.io/e/KKyl0g\n"
-"POT-Creation-Date: 2014-01-29 19:05+0100\n"
+"POT-Creation-Date: 2014-01-29 19:19+0100\n"
 "PO-Revision-Date: 2014-01-25 10:24+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -341,7 +341,7 @@ msgid ""
 "active, de la forme&nbsp;:</p><p>TODO: example</p>"
 msgstr ""
 
-#: ..\CTRLW.user.js:1611 ..\CTRLW.user.js:4316
+#: ..\CTRLW.user.js:1611 ..\CTRLW.user.js:4320
 msgid ""
 "Insère l'inventaire de la pièce dans la zone de texte active, de la "
 "forme&nbsp;:</p><p><strong>Couloir central :</strong> <i>Combinaison</i>, "
@@ -673,47 +673,47 @@ msgid_plural "Total : %1 messages"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ..\CTRLW.user.js:4246
+#: ..\CTRLW.user.js:4250
 msgid "à propos"
 msgstr ""
 
-#: ..\CTRLW.user.js:4246
+#: ..\CTRLW.user.js:4250
 msgid "Cliquez ici pour plus d'informations sur le script."
 msgstr ""
 
-#: ..\CTRLW.user.js:4255
+#: ..\CTRLW.user.js:4259
 msgid "outils"
 msgstr ""
 
-#: ..\CTRLW.user.js:4293
+#: ..\CTRLW.user.js:4297
 msgid "titres"
 msgstr ""
 
-#: ..\CTRLW.user.js:4301
+#: ..\CTRLW.user.js:4305
 msgid "équipage"
 msgstr ""
 
-#: ..\CTRLW.user.js:4309
+#: ..\CTRLW.user.js:4313
 msgid "inventaire"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:4358
+#: ..\CTRLW.user.js:4362
 msgid "Commandant"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:4360
+#: ..\CTRLW.user.js:4364
 msgid "Le Commandant décide des planètes que le Daedalus explorera."
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:4377
+#: ..\CTRLW.user.js:4381
 msgid "Administrateur NERON"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:4379
+#: ..\CTRLW.user.js:4383
 msgid ""
 "Le responsable NERON semble avoir une certaine influence auprès de "
 "l'ordinateur de bord. Il est notamment le seul à avoir la possibilité de "
@@ -721,17 +721,17 @@ msgid ""
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:4396
+#: ..\CTRLW.user.js:4400
 msgid "Responsable de Communications"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:4398
+#: ..\CTRLW.user.js:4402
 msgid ""
 "Le Responsable de Communications est la seule personne habilitée à décider "
 "quels seront les téléchargements prioritaires du Centre de Communication."
 msgstr ""
 
-#: ..\CTRLW.user.js:4975
+#: ..\CTRLW.user.js:4979
 msgid "connecté(e)"
 msgstr ""

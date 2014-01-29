@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ctrl+w\n"
 "Report-Msgid-Bugs-To: http://twd.io/e/KKyl0g\n"
-"POT-Creation-Date: 2014-01-29 19:05+0100\n"
+"POT-Creation-Date: 2014-01-29 19:19+0100\n"
 "PO-Revision-Date: 2014-01-25 10:42+0100\n"
 "Last-Translator: \n"
 "Language-Team: English\n"
@@ -354,7 +354,7 @@ msgid ""
 "active, de la forme&nbsp;:</p><p>TODO: example</p>"
 msgstr ""
 
-#: ..\CTRLW.user.js:1611 ..\CTRLW.user.js:4316
+#: ..\CTRLW.user.js:1611 ..\CTRLW.user.js:4320
 msgid ""
 "Insère l'inventaire de la pièce dans la zone de texte active, de la "
 "forme&nbsp;:</p><p><strong>Couloir central :</strong> <i>Combinaison</i>, "
@@ -692,47 +692,47 @@ msgid_plural "Total : %1 messages"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ..\CTRLW.user.js:4246
+#: ..\CTRLW.user.js:4250
 msgid "à propos"
 msgstr "about"
 
-#: ..\CTRLW.user.js:4246
+#: ..\CTRLW.user.js:4250
 msgid "Cliquez ici pour plus d'informations sur le script."
 msgstr "Click here for more information about Ctrl+W."
 
-#: ..\CTRLW.user.js:4255
+#: ..\CTRLW.user.js:4259
 msgid "outils"
 msgstr "tools"
 
-#: ..\CTRLW.user.js:4293
+#: ..\CTRLW.user.js:4297
 msgid "titres"
 msgstr "titles"
 
-#: ..\CTRLW.user.js:4301
+#: ..\CTRLW.user.js:4305
 msgid "équipage"
 msgstr "crew members"
 
-#: ..\CTRLW.user.js:4309
+#: ..\CTRLW.user.js:4313
 msgid "inventaire"
 msgstr "shelf content"
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:4358
+#: ..\CTRLW.user.js:4362
 msgid "Commandant"
 msgstr "Commander"
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:4360
+#: ..\CTRLW.user.js:4364
 msgid "Le Commandant décide des planètes que le Daedalus explorera."
 msgstr "The Commander decides where the Daedalus will go."
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:4377
+#: ..\CTRLW.user.js:4381
 msgid "Administrateur NERON"
 msgstr "NERON Admin"
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:4379
+#: ..\CTRLW.user.js:4383
 msgid ""
 "Le responsable NERON semble avoir une certaine influence auprès de "
 "l'ordinateur de bord. Il est notamment le seul à avoir la possibilité de "
@@ -742,12 +742,12 @@ msgstr ""
 "can also send messages to the entire crew via NERON."
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:4396
+#: ..\CTRLW.user.js:4400
 msgid "Responsable de Communications"
 msgstr "Comms Manager"
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:4398
+#: ..\CTRLW.user.js:4402
 msgid ""
 "Le Responsable de Communications est la seule personne habilitée à décider "
 "quels seront les téléchargements prioritaires du Centre de Communication."
@@ -755,6 +755,6 @@ msgstr ""
 "The Communications Manager can start to contact others once contact with Sol "
 "is re-established. They can also send broadcasts to the entire crew."
 
-#: ..\CTRLW.user.js:4975
+#: ..\CTRLW.user.js:4979
 msgid "connecté(e)"
 msgstr "connected"

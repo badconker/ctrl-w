@@ -4080,6 +4080,10 @@ Main.k.tabs.playing = function() {
 				.on("mouseover", Main.k.CustomTip)
 				.on("mouseout", Main.hideTip);
 
+				
+				if(typeof(js.Lib.window["editor_tid_wallPost"]) == 'undefined'){
+					js.Lib.window["editor_tid_wallPost"] = {};
+				}
 				// Modify preview
 				js.Lib.window["editor_tid_wallPost"].preview = $("#tid_wallPost_preview");
 
