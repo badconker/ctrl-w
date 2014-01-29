@@ -1594,8 +1594,8 @@ Main.k.tabs.playing = function() {
 				$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
 				return false;
 			})
-			.attr("_title", "Partager son état de santé")
-			.attr("_desc", "Insère votre nombre de points de vie et de moral dans la zone de texte active, de la forme&nbsp;:</p><p>TODO: example")
+			.attr("_title", Main.k.text.gettext("Partager son état de santé"))
+			.attr("_desc", Main.k.text.gettext("<p>Insère votre nombre de points de vie et de moral dans la zone de texte active, de la forme&nbsp;:</p><p>TODO: example</p>"))
 			.on("mouseover", Main.k.CustomTip)
 			.on("mouseout", Main.hideTip);
 
@@ -1630,8 +1630,8 @@ Main.k.tabs.playing = function() {
 					$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
 					return false;
 				})
-				.attr("_title", "Partager l'état des plantes")
-				.attr("_desc", "TODO: Texte")
+				.attr("_title", Main.k.text.gettext("Partager l'état des plantes"))
+				.attr("_desc", Main.k.text.gettext("<p>Insère l'état des plantes dans la zone de texte active.</p><p>TODO: Exemple</p>"))
 				.on("mouseover", Main.k.CustomTip)
 				.on("mouseout", Main.hideTip);
 			}
@@ -1645,10 +1645,10 @@ Main.k.tabs.playing = function() {
 					return false;
 				})
 				.attr("_title", "Partager les projets")
-				.attr("_desc", "Insère la liste de projets dans la zone de texte active, de la forme&nbsp;:</p><p>" +
+				.attr("_desc", Main.k.text.gettext("Insère la liste de projets dans la zone de texte active, de la forme&nbsp;:</p><p>" +
 				"<li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li>" +
 				"<li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li>" +
-				"<li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li>")
+				"<li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li>"))
 				.on("mouseover", Main.k.CustomTip)
 				.on("mouseout", Main.hideTip);
 			}
@@ -1661,11 +1661,11 @@ Main.k.tabs.playing = function() {
 					$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
 					return false;
 				})
-				.attr("_title", "Partager les recherches")
-				.attr("_desc", "Insère la liste de recherches dans la zone de texte active, de la forme&nbsp;:</p><p>" +
+				.attr("_title", Main.k.text.gettext("Partager les recherches"))
+				.attr("_desc", Main.k.text.gettext("Insère la liste de recherches dans la zone de texte active, de la forme&nbsp;:</p><p>" +
 				"<li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li>" +
 				"<li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li>" +
-				"<li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li>")
+				"<li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li>"))
 				.on("mouseover", Main.k.CustomTip)
 				.on("mouseout", Main.hideTip);
 			}
@@ -1678,8 +1678,8 @@ Main.k.tabs.playing = function() {
 					$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
 					return false;
 				})
-				.attr("_title", "Partager les paramètres BIOS")
-				.attr("_desc", "Insère la liste de paramètres BIOS Neron dans la zone de texte active, de la forme&nbsp;:</p><p>TODO: aperçu")
+				.attr("_title", Main.k.text.gettext("Partager les paramètres BIOS"))
+				.attr("_desc", Main.k.text.gettext("Insère la liste de paramètres BIOS Neron dans la zone de texte active, de la forme&nbsp;:</p><p>TODO: aperçu"))
 				.on("mouseover", Main.k.CustomTip)
 				.on("mouseout", Main.hideTip);
 			}
@@ -1692,8 +1692,8 @@ Main.k.tabs.playing = function() {
 					$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
 					return false;
 				})
-				.attr("_title", "Partager les planètes")
-				.attr("_desc", "TODO: Texte | Séparer les planètes en deux boutons")
+				.attr("_title", Main.k.text.gettext("Partager les planètes"))
+				.attr("_desc", Main.k.text.gettext("<p>Insère les détails des planètes dans la zone de texte active.</p><p>TODO: Exemple</p>"))
 				.on("mouseover", Main.k.CustomTip)
 				.on("mouseout", Main.hideTip);
 			}
@@ -1721,8 +1721,8 @@ Main.k.tabs.playing = function() {
 			.on("click", function() {
 				// TODO
 			})
-			.attr("_title", "Insérer un smiley")
-			.attr("_desc", "Bientôt disponible.")
+			.attr("_title", Main.k.text.gettext("Insérer un smiley"))
+			.attr("_desc", Main.k.text.gettext("Bientôt disponible."))
 			.on("mouseover", Main.k.CustomTip)
 			.on("mouseout", Main.hideTip);
 
@@ -1734,7 +1734,7 @@ Main.k.tabs.playing = function() {
 				t.focus();
 				return false;
 			})
-			.attr("_desc", "Vider la zone de texte.")
+			.attr("_desc", Main.k.text.gettext("Vider la zone de texte."))
 			.on("mouseover", Main.k.CustomTip)
 			.on("mouseout", Main.hideTip);
 
@@ -1748,7 +1748,7 @@ Main.k.tabs.playing = function() {
 				jqp.find("textarea").val("");
 				return false;
 			})
-			.attr("_desc", "Fermer la zone de texte.")
+			.attr("_desc", Main.k.text.gettext("Fermer la zone de texte."))
 			.on("mouseover", Main.k.CustomTip)
 			.on("mouseout", Main.hideTip);
 
@@ -1762,7 +1762,7 @@ Main.k.tabs.playing = function() {
 				Main.k.Manager.openOn("reply", tgt.val(), tgt.closest(".unit").attr("data-k"));
 				return false;
 			})
-			.attr("_desc", "Ouvrir le manager.")
+			.attr("_desc", Main.k.text.gettext("Ouvrir le manager."))
 			.on("mouseover", Main.k.CustomTip)
 			.on("mouseout", Main.hideTip);
 		}
@@ -2223,7 +2223,7 @@ Main.k.tabs.playing = function() {
 		});
 
 		//conf.title = "Mise à jour du script CTRL+W";
-		var maj_content = "Version " + Main.k.UpdateData.currversion + " disponible : <br/> <ul class='updateslist'>";
+		var maj_content = Main.k.text.gettext("Version " + Main.k.UpdateData.currversion + " disponible :")+" <br/> <ul class='updateslist'>";
 		for (var i=0; i<Main.k.UpdateData.changelog.length; i++) {
 			var log = Main.k.UpdateData.changelog[i];
 			maj_content += "<li>"+log+"</li>";
@@ -2232,10 +2232,10 @@ Main.k.tabs.playing = function() {
 
 		// Fill popup content
 		var content = "<div class='updatescontent'>" + maj_content + "</div>";
-		var ok = "<div class='updatesactions'><div id=\"ok\" class=\"but updatesbtn\" ><div class=\"butright\"><div class=\"butbg\"><a onclick=\"$('#final').show();\" href=\""+okHref+"\">Mettre à jour</a></div></div></div>";
+		var ok = "<div class='updatesactions'><div id=\"ok\" class=\"but updatesbtn\" ><div class=\"butright\"><div class=\"butbg\"><a onclick=\"$('#final').show();\" href=\""+okHref+"\">"+Main.k.text.gettext("Mettre à jour")+"</a></div></div></div>";
 		var cancelAc = "'Main.k.ClosePopup();'";
 		var cancel = "<div id=\"cancel\" class=\"but updatesbtn\" onclick=" + cancelAc + "><div class=\"butright\"><div class=\"butbg\"><a href=\"#\">" + Main.getText("cancel") + "</a></div></div></div></div>";
-		var finalisation = '<div id="final" class="updatesactions" style="display:none"><div><strong>Pour finaliser la mise à jour, après avoir installé le script, veuillez cliquer sur le bouton ci-dessous.</strong></div><div class="but updatesbtn" onclick="Main.k.ClosePopup();window.location.reload();"><div class="butright"><div class="butbg"><a href="#">Finaliser la mise à jour</a></div></div></div></div></div>'
+		var finalisation = '<div id="final" class="updatesactions" style="display:none"><div><strong>'+Main.k.text.gettext("Pour finaliser la mise à jour, après avoir installé le script, veuillez cliquer sur le bouton ci-dessous.")+'</strong></div><div class="but updatesbtn" onclick="Main.k.ClosePopup();window.location.reload();"><div class="butright"><div class="butbg"><a href="#">'+Main.k.text.gettext("Finaliser la mise à jour")+'</a></div></div></div></div></div>'
 		$("<div>").html(content + ok + cancel + finalisation).appendTo(popup.content);
 
 		// Display popup
@@ -2962,11 +2962,11 @@ Main.k.tabs.playing = function() {
 				margin: "0 2px",
 				display: "inline-block"
 			}).appendTo(links)
-			.find("a").attr("_title", "Chan IRC")
-			.attr("_desc", "Venez discuter sur IRC avec les autres utilisateurs du script. \
-			Vous pourrez également y trouver de l'aide ou faire des suggestions.</p><p><strong>Chan #ctrlw sur Quakenet</strong>")
+			.find("a").attr("_title", Main.k.text.gettext("Chan IRC"))
+			.attr("_desc", Main.k.text.gettext("Venez discuter sur IRC avec les autres utilisateurs du script. \
+			Vous pourrez également y trouver de l'aide ou faire des suggestions.</p><p><strong>Chan #ctrlw sur Quakenet</strong>"))
 			.on("mouseover", Main.k.CustomTip).on("mouseout", Main.hideTip);
-			Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Topic (Forum Mush)", Main.k.topicurl).css({
+			Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> "+Main.k.text.gettext("Topic (Forum Mush)"), Main.k.topicurl).css({
 				margin: "0 2px",
 				display: "inline-block"
 			}).appendTo(links);
@@ -2982,7 +2982,7 @@ Main.k.tabs.playing = function() {
 			Contributeurs : <a href='http://twinoid.com/user/8011565'>NightExcessive</a>")).appendTo(td);
 
 			// Coming soon
-			$("<h2>").css({
+			/*$("<h2>").css({
 				color: "#EEE",
 				margin: "10px 15px 0"
 			}).html("Fonctionnalités à venir&nbsp;:").appendTo(td);
@@ -2999,14 +2999,14 @@ Main.k.tabs.playing = function() {
 			$("<li>").html("Informations sur le démontage d'objets").appendTo(ul);
 			$("<li>").html("Assistant Admin. Neron + messages pré-enregistrés").appendTo(ul);
 			$("<li>").html("Whiteboard (surprise)").appendTo(ul);
-			$("<li>").css("list-style-type", "none").html("<a href='" + Main.k.website + "'>Liste des mises à jour</a>").appendTo(ul);
+			$("<li>").css("list-style-type", "none").html("<a href='" + Main.k.website + "'>Liste des mises à jour</a>").appendTo(ul);*/
 
 			// Close
 			var close = $("<div>").css({
 				"text-align": "center",
 				margin: "30px 0 0"
 			}).appendTo(td);
-			Main.k.MakeButton("<img src='/img/icons/ui/pageleft.png' /> Retour au jeu", null, Main.k.About.open).css("display", "inline-block").appendTo(close);
+			Main.k.MakeButton("<img src='/img/icons/ui/pageleft.png' /> "+Main.k.text.gettext("Retour au jeu"), null, Main.k.About.open).css("display", "inline-block").appendTo(close);
 		}
 
 		Main.k.folding.display([null,null, "#about_col"], "about");
@@ -3033,7 +3033,7 @@ Main.k.tabs.playing = function() {
 				color: "rgb(9,10,97)"
 			}).attr("id", "profile_col").appendTo($("table.inter tr").first());
 
-			$("<p>").addClass("warning").html("Les profils de joueurs seront disponibles prochainement.").appendTo(td);
+			$("<p>").addClass("warning").html(Main.k.text.gettext("Les profils de joueurs seront disponibles prochainement.")).appendTo(td);
 		}
 
 		Main.k.folding.display([null,null, "#profile_col"], "profiles");
@@ -3106,11 +3106,13 @@ Main.k.tabs.playing = function() {
 			rbg.find(".tabcontent").css("display", "none");
 
 			// Tooltips
-			$("#tabstats").attr("_title", "Statistiques").attr("_desc", "Affiche les statistiques, et permet de gérer le nombre de messages chargés dans la page.");
-			$("#tabnew").attr("_title", "Nouveaux Messages").attr("_desc", "Beaucoup de messages à lire ? Le manager permet de rattraper son retard plus facilement. En chargeant tous les messages dans l'onglet Statistiques, vous pouvez aussi voir les messages non lus manqués à cause du bug (Mush) des messages.");
-			$("#tabsearch").attr("_title", "Recherche de Messages").attr("_desc", "Une discussion à retrouver ? Envie de savoir combien d'incendies se sont déclarés ? (@neron incendie daedalus)");
-			$("#tabwall").attr("_title", "Discussion").attr("_desc", "Le canal de discussion est indispensable pour s'organiser avec l'équipage.</p><p>Pour participer vous devez posséder un <strong>talkie-walkie</strong>.");
-			$("#tabfav").attr("_title", "Favoris").attr("_desc", "Votre sélection de sujets favoris.");
+			$("#tabstats").attr("_title", "Statistiques").attr("_desc", Main.k.text.gettext("Affiche les statistiques, et permet de gérer le nombre de messages chargés dans la page."));
+			$("#tabnew").attr("_title", "Nouveaux Messages").attr("_desc", Main.k.text.gettext("Beaucoup de messages à lire ? Le manager permet de rattraper son retard plus facilement. En chargeant tous les messages dans l'onglet Statistiques, vous pouvez aussi voir les messages non lus manqués à cause du bug (Mush) des messages."));
+			$("#tabsearch").attr("_title", "Recherche de Messages").attr("_desc", Main.k.text.gettext("Une discussion à retrouver ? Envie de savoir combien d'incendies se sont déclarés ? (@neron incendie daedalus)"));
+			/* Translators: This translation must be copied from the game. */
+			$("#tabwall").attr("_title", "Discussion").attr("_desc", Main.k.text.gettext("Le canal de discussion est indispensable pour s'organiser avec l'équipage.</p><p>Pour participer vous devez posséder un <strong>talkie-walkie</strong>."));
+			/* Translators: This translation must be copied from the game. */
+			$("#tabfav").attr("_title", "Favoris").attr("_desc", Main.k.text.gettext("Votre sélection de sujets favoris."));
 			tabs.find(".tab").on("mouseover", Main.k.CustomTip);
 			tabs.find(".tab").on("mouseout", Main.hideTip);
 			tabs.find(".tab").on("click", function() { Main.k.Manager.selectTab(this); });
@@ -3128,7 +3130,7 @@ Main.k.tabs.playing = function() {
 			// Tabs
 			var tabs = $("<ul>").addClass("tabschat customtabs").css({margin: 0, position: "relative"}).appendTo(td_topic);
 			$("<img>").attr("src", "/img/icons/ui/wall.png").appendTo(
-				$("<li>").addClass("tab tabon").attr("id", "tabtopic").attr("_title", "Discussion").attr("_desc", "Le canal de discussion est indispensable pour s'organiser avec l'équipage.").appendTo(tabs)
+				$("<li>").addClass("tab tabon").attr("id", "tabtopic").attr("_title", "Discussion").attr("_desc", Main.k.text.gettext("Le canal de discussion est indispensable pour s'organiser avec l'équipage.</p><p>Pour participer vous devez posséder un <strong>talkie-walkie</strong>.")).appendTo(tabs)
 			);
 
 
@@ -3145,25 +3147,26 @@ Main.k.tabs.playing = function() {
 			$("<p>").addClass("warning").html("Aucun topic sélectionné.").appendTo(topic);
 
 			if (hasmushchat) {
-				var mushtab = $("<li>").addClass("tab taboff").attr("id", "tabmush").attr("_title", "Canal Mush").attr("_desc", "Ssshh, personne nous entend ici... Le Canal Mush est le <em>canal privé</em> pour les adhérents aux <strong>Mush</strong> <img src='/img/icons/ui/mush.png' />.</p><p><strong>/!\\ Fonctionnalité non codée</strong>").appendTo(tabs);
+				/* Translators: The beginning must be copied from the game. */
+				var mushtab = $("<li>").addClass("tab taboff").attr("id", "tabmush").attr("_title", "Canal Mush").attr("_desc", Main.k.text.gettext("Ssshh, personne nous entend ici... Le Canal Mush est le <em>canal privé</em> pour les adhérents aux <strong>Mush</strong> <img src='/img/icons/ui/mush.png' />.</p><p><strong>/!\\ Fonctionnalité non codée</strong>")).appendTo(tabs);
 				$("<img>").attr("src", "/img/icons/ui/mush.png").appendTo(mushtab);
 				var mushchat = $("<div>").attr("id", "tabmush_content").css("display", "none").addClass("tabcontent wall").appendTo(rbg);
-				$("<p>").addClass("warning").html("Disponible prochainement.").appendTo(mushchat);
+				$("<p>").addClass("warning").html(Main.k.text.gettext("Disponible prochainement.")).appendTo(mushchat);
 			}
 			if (haschat1) {
-				var chat1tab = $("<li>").addClass("tab taboff").attr("id", "tabchat1").attr("_title", "Chat privé #1").attr("_desc", "Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!\\ Fonctionnalité non codée</strong>").appendTo(tabs);
+				var chat1tab = $("<li>").addClass("tab taboff").attr("id", "tabchat1").attr("_title", "Chat privé #1").attr("_desc", Main.k.text.gettext("Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!\\ Fonctionnalité non codée</strong>")).appendTo(tabs);
 				$("<img>").attr("src", "/img/icons/ui/private.png").appendTo(chat1tab);
 				var chat1 = $("<div>").attr("id", "tabchat1_content").css("display", "none").addClass("tabcontent wall").appendTo(rbg);
 				$("<p>").addClass("warning").html("Disponible prochainement.").appendTo(chat1);
 			}
 			if (haschat2) {
-				var chat2tab = $("<li>").addClass("tab taboff").attr("id", "tabchat2").attr("_title", "Chat privé #2").attr("_desc", "Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!\\ Fonctionnalité non codée</strong>").appendTo(tabs);
+				var chat2tab = $("<li>").addClass("tab taboff").attr("id", "tabchat2").attr("_title", "Chat privé #2").attr("_desc", Main.k.text.gettext("Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!\\ Fonctionnalité non codée</strong>")).appendTo(tabs);
 				$("<img>").attr("src", "/img/icons/ui/private.png").appendTo(chat2tab);
 				var chat2 = $("<div>").attr("id", "tabchat2_content").css("display", "none").addClass("tabcontent wall").appendTo(rbg);
 				$("<p>").addClass("warning").html("Disponible prochainement.").appendTo(chat2);
 			}
 			if (haschat3) {
-				var chat3tab = $("<li>").addClass("tab taboff").attr("id", "tabchat3").attr("_title", "Chat privé #3").attr("_desc", "Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!\\ Fonctionnalité non codée</strong>").appendTo(tabs);
+				var chat3tab = $("<li>").addClass("tab taboff").attr("id", "tabchat3").attr("_title", "Chat privé #3").attr("_desc", Main.k.text.gettext("Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!\\ Fonctionnalité non codée</strong>")).appendTo(tabs);
 				$("<img>").attr("src", "/img/icons/ui/private.png").appendTo(chat3tab);
 				var chat3 = $("<div>").attr("id", "tabchat3_content").css("display", "none").addClass("tabcontent wall").appendTo(rbg);
 				$("<p>").addClass("warning").html("Disponible prochainement.").appendTo(chat3);
@@ -3187,9 +3190,9 @@ Main.k.tabs.playing = function() {
 				"text-align": "left",
 				position: "relative"
 			}).appendTo(td_reply);
-			var tabreply = $("<li>").addClass("tab tabon").attr("id", "tabreply").attr("_title", "Nouveau message").attr("_desc", "Répondez à un topic / une discussion ou créez un nouveau topic.").appendTo(tabs);
-			var tabneron = $("<li>").addClass("tab taboff").attr("id", "tabneron").attr("_title", "Annonces vocodées").attr("_desc", "Assistant pour les Admin. Néron pour faciliter la création d'annonces vocodées.</p><p><strong>/!\\ Fonctionnalité non codée</strong>").appendTo(tabs);
-			var tabcustom = $("<li>").addClass("tab taboff").attr("id", "tabcustom").attr("_title", "Messages pré-enregistrés").attr("_desc", "Messages récurrents & autres (à définir).</p><p><strong>/!\\ Fonctionnalité non codée</strong>").appendTo(tabs);
+			var tabreply = $("<li>").addClass("tab tabon").attr("id", "tabreply").attr("_title", Main.k.text.gettext("Nouveau message")).attr("_desc", Main.k.text.gettext("Répondez à un topic / une discussion ou créez un nouveau topic.")).appendTo(tabs);
+			var tabneron = $("<li>").addClass("tab taboff").attr("id", "tabneron").attr("_title", Main.k.text.gettext("Annonces vocodées")).attr("_desc", Main.k.text.gettext("Assistant pour les Admin. Néron pour faciliter la création d'annonces vocodées.</p><p><strong>/!\\ Fonctionnalité non codée</strong>")).appendTo(tabs);
+			var tabcustom = $("<li>").addClass("tab taboff").attr("id", "tabcustom").attr("_title", Main.k.text.gettext("Messages pré-enregistrés")).attr("_desc", Main.k.text.gettext("Messages récurrents & autres (à définir).</p><p><strong>/!\\ Fonctionnalité non codée</strong>")).appendTo(tabs);
 			$("<img>").attr("src", "http://twinoid.com/img/icons/edit.png").appendTo(tabreply);
 			$("<img>").attr("src", "/img/icons/ui/neron.png").appendTo(tabneron);
 			$("<img>").attr("src", "/img/icons/ui/book.png").appendTo(tabcustom);
@@ -3206,8 +3209,8 @@ Main.k.tabs.playing = function() {
 			var reply = $("<div>").attr("id", "tabreply_content").addClass("tabcontent wall").appendTo(rbg);
 			var vocod = $("<div>").attr("id", "tabneron_content").css("display", "none").addClass("tabcontent wall").appendTo(rbg);
 			var custom = $("<div>").attr("id", "tabcustom_content").css("display", "none").addClass("tabcontent wall").appendTo(rbg);
-			$("<p>").addClass("warning").html("Disponible prochainement.").appendTo(vocod);
-			$("<p>").addClass("warning").html("Disponible prochainement.").appendTo(custom);
+			$("<p>").addClass("warning").html(Main.k.text.gettext("Disponible prochainement.")).appendTo(vocod);
+			$("<p>").addClass("warning").html(Main.k.text.gettext("Disponible prochainement.")).appendTo(custom);
 
 			// Actions
 			var mini = Main.k.MakeButton("<img src='/img/icons/ui/less.png' /> Réduire le Manager",null,function() {
@@ -3217,7 +3220,7 @@ Main.k.tabs.playing = function() {
 				"margin": "3px 4px 0 auto",
 				"display": "inline-block"
 			});
-			var close = Main.k.MakeButton("<img src='/img/icons/ui/pageleft.png' /> Fermer le Manager",null,function() {
+			var close = Main.k.MakeButton("<img src='/img/icons/ui/pageleft.png' /> "+Main.k.text.gettext("Fermer le Manager"),null,function() {
 				Main.k.Manager.open();
 			}).appendTo(td_reply);
 			close.css({
@@ -3230,7 +3233,7 @@ Main.k.tabs.playing = function() {
 		Main.k.Manager.update();
 		Main.k.Manager.selectTab($("#tabstats"));
 
-		$("#manager_togglemini a").html("<img src='/img/icons/ui/less.png' /> Réduire le Manager");
+		$("#manager_togglemini a").html("<img src='/img/icons/ui/less.png' /> "+Main.k.text.gettext("Réduire le Manager"));
 		Main.k.folding.display(["#topics_col", "#topic_col", "#reply_col"], "manager", after);
 	}
 	Main.k.Manager.replywaiting = "";
@@ -3253,7 +3256,7 @@ Main.k.tabs.playing = function() {
 			$("#manager_togglemini a").html("<img src='/img/icons/ui/more.png' /> Agrandir le Manager");
 			Main.k.folding.display([Main.k.folding.gamecols[0], Main.k.folding.gamecols[1], "#reply_col"], "manager_mini");
 		} else {
-			$("#manager_togglemini a").html("<img src='/img/icons/ui/less.png' /> Réduire le Manager");
+			$("#manager_togglemini a").html("<img src='/img/icons/ui/less.png' /> "+Main.k.text.gettext("Réduire le Manager"));
 			Main.k.folding.display(["#topics_col", "#topic_col", "#reply_col"], "manager");
 		}
 	}
@@ -3645,7 +3648,7 @@ Main.k.tabs.playing = function() {
 	}
 	Main.k.Manager.loadingMessages = function() {
 		$("#recap_div").empty();
-		$("<p>").addClass("warning").html("Chargement en cours...").appendTo($("#recap_div"));
+		$("<p>").addClass("warning").html(Main.k.text.gettext("Chargement en cours...")).appendTo($("#recap_div"));
 	}
 	Main.k.Manager.fillStats = function() {
 		var tab = $("#tabstats_content").empty();
@@ -3653,9 +3656,9 @@ Main.k.tabs.playing = function() {
 			color: "rgb(9, 10, 97)"
 		});
 
-		var warn = $("<div>").addClass("warning").html("Gérez le nombre de messages chargés.\
+		var warn = $("<div>").addClass("warning").html(Main.k.text.gettext("Gérez le nombre de messages chargés.\
 		Le manager est plus complet lorsque tous les messages sont chargés, \
-		mais le jeu devient beaucoup plus lent à cause du chargement de ces messages à chaque action (particularité de mush...).")
+		mais le jeu devient beaucoup plus lent à cause du chargement de ces messages à chaque action (particularité de mush...)."))
 		.css("background-position", "7px 15px")
 		.appendTo(tab);
 
@@ -3666,24 +3669,24 @@ Main.k.tabs.playing = function() {
 		}).appendTo(warn);
 
 		// Action : load all
-		Main.k.MakeButton("<img src='/img/icons/ui/wall.png' class='alerted' /><img src='/img/icons/ui/onceplus.png' class='alert' /> Tout charger",null,function() {
+		Main.k.MakeButton("<img src='/img/icons/ui/wall.png' class='alerted' /><img src='/img/icons/ui/onceplus.png' class='alert' /> "+Main.k.text.gettext("Tout charger"),null,function() {
 			Main.k.Manager.loadingMessages();
 			Main.k.Manager.loadWholeWall();
 		})
 		.appendTo(actions)
 		.find("a")
-		.attr("_title", "Charger tous les messages").attr("_desc", "Chargez tous les messages pour profiter pleinement du manager : recherches dans tous les messages depuis le début de la partie, nouveaux messages manqués à cause du bug de mush, statistiques complètes, etc.</p><p><strong>Cette action peut prendre un certain temps, suivant le nombre de messages postés sur votre vaisseau.</strong>")
+		.attr("_title", "Charger tous les messages").attr("_desc", Main.k.text.gettext("Chargez tous les messages pour profiter pleinement du manager : recherches dans tous les messages depuis le début de la partie, nouveaux messages manqués à cause du bug de mush, statistiques complètes, etc.</p><p><strong>Cette action peut prendre un certain temps, suivant le nombre de messages postés sur votre vaisseau.</strong>"))
 		.on("mouseover", Main.k.CustomTip)
 		.on("mouseout", Main.hideTip);
 
 		// Action : unload
-		Main.k.MakeButton("<img src='/img/icons/ui/wall.png' class='alerted' /><img src='/img/icons/ui/bin.png' class='alert' /> Décharger",null,function() {
+		Main.k.MakeButton("<img src='/img/icons/ui/wall.png' class='alerted' /><img src='/img/icons/ui/bin.png' class='alert' /> "+Main.k.text.gettext("Décharger"),null,function() {
 			Main.k.Manager.loadingMessages();
 			Main.k.Manager.clearSess();
 		})
 		.appendTo(actions)
 		.find("a")
-		.attr("_title", "Décharger les messages").attr("_desc", "Déchargez la liste de messages pour alléger le jeu. Lorsque vous chargez des messages (en scrollant sur le chat, par exemple), ceux-ci restent chargés. Mush chargeant toute la page (dont les messages) à chaque action, votre jeu est grandement ralenti lorsque le nombre de messages chargés est conséquent.</p><p><strong>Cette action bloque le jeu pendant quelques secondes.</strong>")
+		.attr("_title", "Décharger les messages").attr("_desc", Main.k.text.gettext("Déchargez la liste de messages pour alléger le jeu. Lorsque vous chargez des messages (en scrollant sur le chat, par exemple), ceux-ci restent chargés. Mush chargeant toute la page (dont les messages) à chaque action, votre jeu est grandement ralenti lorsque le nombre de messages chargés est conséquent.</p><p><strong>Cette action bloque le jeu pendant quelques secondes.</strong>"))
 		.on("mouseover", Main.k.CustomTip)
 		.on("mouseout", Main.hideTip);
 
@@ -3701,12 +3704,14 @@ Main.k.tabs.playing = function() {
 		var topic_nb = Main.k.Manager.topics.length;
 		var answer_nb = Main.k.Manager.replies.length;
 		var total_msg = topic_nb + answer_nb;
-		var recap_p = $("<p>").html("Total : <b>" + total_msg + "</b> message" + (total_msg != 1 ? "s" : "") +
-			" chargés en <b>" + topic_nb + "</b> topic" + (topic_nb != 1 ? "s" : "") + ". <br/> (depuis " + Main.k.extendAgo(Main.k.Manager.lastago) + ")").appendTo(recap);
+		//A continuer ici
+		var recap_p = $("<p>").html(Main.k.text.strargs(Main.k.text.ngettext("Total : <b>%1</b> message chargé","Total : <b>%1</b> messages chargés",total_msg),[total_msg])
+		
+		+ " "+ Main.k.text.strargs(Main.k.text.ngettext("en <b>%1</b> topic. <br/> (depuis %2)","en <b>%1</b> topics. <br/> (depuis %2)",topic_nb),[topic_nb,Main.k.extendAgo(Main.k.Manager.lastago)])).appendTo(recap);
 
 		// Hero count
 		var popup_recap_char = $("<div>").addClass("chars").appendTo(recap);
-		var popup_msg = "//Total : " + total_msg + " messages//";
+		var popup_msg = "//" + Main.k.text.strargs(Main.k.text.ngettext("Total : %1 message","Total : %1 messages",total_msg),[total_msg])+"//";
 		var max_highlighted = 6;
 		for (var i=0; i<Main.k.Manager.sortedheroes.length; i++) {
 			var hero = Main.k.Manager.heroes[Main.k.Manager.sortedheroes[i]];
