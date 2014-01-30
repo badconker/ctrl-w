@@ -3721,9 +3721,11 @@ Main.k.tabs.playing = function() {
 			var heroDiv = $("<div>").addClass("hero _" + hero.name).attr("_title", Main.k.COMPLETE_SURNAME(hero.name)).css("cursor", "help").appendTo(popup_recap_char);
 			if (i < max_highlighted) heroDiv.addClass("highlight");
 			if (hero.name == "neron") {
-				heroDiv.attr("_desc", "<b>" + hero.mess + "</b> messages"); // dont <b>" + hero.a + "</b> annonces officielles et <b>" + hero.av + "</b> annonces vocodées.");
+				heroDiv.attr("_desc", Main.k.text.strargs(Main.k.text.ngettext("<b>%1</b> message","<b>%1</b> messages",hero.mess),[hero.mess])); // dont <b>" + hero.a + "</b> annonces officielles et <b>" + hero.av + "</b> annonces vocodées.");
 			} else {
-				heroDiv.attr("_desc", "<b>" + hero.mess + "</b> messages dont <b>" + hero.topic + "</b> topics.");
+				heroDiv.attr("_desc", Main.k.text.strargs(Main.k.text.ngettext("<b>%1</b> message","<b>%1</b> messages",hero.mess),[hero.mess]) 
+				
+				+ " "+Main.k.text.strargs(Main.k.text.ngettext("dont <b>%1</b> topic.","dont <b>%1</b> topics.",hero.topic),[hero.topic]));
 			}
 			heroDiv.on("mouseover", Main.k.CustomTip);
 			heroDiv.on("mouseout", Main.hideTip);
@@ -3732,8 +3734,9 @@ Main.k.tabs.playing = function() {
 			$("<img>").attr("src", "/img/icons/ui/" + hero.name.replace("_", "") + ".png").appendTo(heroDiv);
 			var msg = (i < max_highlighted) ? hero.mess + "&nbsp;messages" : hero.mess;
 			$("<span>").html(msg).appendTo(heroDiv);
-
-			popup_msg += "\n**" + Main.k.COMPLETE_SURNAME(hero.name) + " : ** //" + hero.mess + "// messages";
+			
+			/* Translators: %1 = character name, %2 = message count */
+			popup_msg += "\n"+Main.k.text.strargs(Main.k.text.ngettext("**%1 : ** //%2// message","**%1 : ** //%2// messages",hero.mess),[Main.k.COMPLETE_SURNAME(hero.name),hero.mess]);;
 		}
 
 		// Code for sharing msg count
@@ -3770,13 +3773,13 @@ Main.k.tabs.playing = function() {
 				// Actions
 				var actions = $("<a>").addClass("topicact").attr("href", "#topic" + i)
 				.on("click", function() { Main.k.Manager.displayTopic(parseInt(/([0-9]+)/.exec(this.href)[1])); return false; })
-				.html(topic.replies.length + " réponse" + (topic.replies.length == 1 ? "" : "s") + " - " + unread + " message" + (unread == 1 ? "" : "s") + " non lu" + (unread == 1 ? "" : "s"))
+				.html(Main.k.text.strargs(Main.k.text.ngettext("%1 réponse","%1 réponses",topic.replies.length),[topic.replies.length])+ " - " + Main.k.text.strargs(Main.k.text.ngettext("%1 message non lu","%1 messages non lus",unread),[unread]))
 				.appendTo(active_topics);
 			}
 		}
-		if (allread) $("<p>").addClass("warning").html("Aucun message non lu.").appendTo(active_topics);
+		if (allread) $("<p>").addClass("warning").html(Main.k.text.gettext("Aucun message non lu.")).appendTo(active_topics);
 
-		if (favorites.length == 0) $("<p>").addClass("warning").html("Vous n'avez pas de favoris.").appendTo(active_topics);
+		if (favorites.length == 0) $("<p>").addClass("warning").html(Main.k.text.gettext("Vous n'avez pas de favoris.")).appendTo(active_topics);
 		for (var i=0; i<favorites.length; i++) {
 			var topic = favorites[i];
 
@@ -3790,7 +3793,7 @@ Main.k.tabs.playing = function() {
 			// Actions
 			var actions = $("<a>").addClass("topicact").attr("href", "#topic" + topic.id)
 			.on("click", function() { Main.k.Manager.displayTopic(parseInt(/([0-9]+)/.exec(this.href)[1])); return false; })
-			.html(topic.replies.length + " réponse" + (topic.replies.length == 1 ? "" : "s"))
+			.html(Main.k.text.strargs(Main.k.text.ngettext("%1 réponse","%1 réponses",topic.replies.length),[topic.replies.length]))
 			.appendTo(favtopics);
 		}
 	}
@@ -3817,7 +3820,7 @@ Main.k.tabs.playing = function() {
 			// Actions
 			var actions = $("<a>").addClass("topicact").attr("href", "#topic" + i)
 			.on("click", function() { Main.k.Manager.displayTopic(parseInt(/([0-9]+)/.exec(this.href)[1])); return false; })
-			.html(topic.replies.length + " réponse" + (topic.replies.length == 1 ? "" : "s"))
+			.html(Main.k.text.strargs(Main.k.text.ngettext("%1 réponse","%1 réponses",topic.replies.length),[topic.replies.length]))
 			.appendTo(wall);
 		}
 	}
@@ -3846,10 +3849,10 @@ Main.k.tabs.playing = function() {
 		.on("click", Main.k.Manager.search);
 
 		var results = $("<div>").attr("id", "searchresults").appendTo(search);
-		$("<h4>").html("Fonction de recherche").appendTo(results);
-		$("<p>").addClass("help").html("- Vous pouvez rechercher plusieurs mots, dans le désordre, complets ou non, qu'importe le contenu entre eux dans le message.").appendTo(results);
-		$("<p>").addClass("help").html("- Pour rechercher les messages d'un joueur en particulier, utilisez <i>@personnage</i> (le prénom en minuscule, avec un _ pour kuan_ti et jin_su).").appendTo(results);
-		$("<p>").addClass("help").html("- Pour rechercher uniquement dans le premier message des topics, utilisez <i>@topic</i>.").appendTo(results);
+		$("<h4>").html(Main.k.text.gettext("Fonction de recherche")).appendTo(results);
+		$("<p>").addClass("help").html(Main.k.text.gettext("- Vous pouvez rechercher plusieurs mots, dans le désordre, complets ou non, qu'importe le contenu entre eux dans le message.")).appendTo(results);
+		$("<p>").addClass("help").html(Main.k.text.gettext("- Pour rechercher les messages d'un joueur en particulier, utilisez <i>@personnage</i> (le prénom en minuscule, avec un _ pour kuan_ti et jin_su).")).appendTo(results);
+		$("<p>").addClass("help").html(Main.k.text.gettext("- Pour rechercher uniquement dans le premier message des topics, utilisez <i>@topic</i>.")).appendTo(results);
 	}
 	Main.k.Manager.search = function() {
 		var val = $("#searchfield").val().trim();
@@ -3985,7 +3988,7 @@ Main.k.tabs.playing = function() {
 		// Display results
 		if (results.length > 0) {
 			// Récap'
-			$("<p>").addClass("warning").html(results.length + " résultat" + (results.length == 1 ? "" : "s") + " (maximum : " + max_results + ").")
+			$("<p>").addClass("warning").html(Main.k.text.strargs(Main.k.text.ngettext("%1 résultat (maximum : %2).","%1 résultats (maximum : %2).",results.length),[results.length,max_results]))
 			.appendTo($("#searchresults"));
 
 			// Display topics
@@ -3998,13 +4001,13 @@ Main.k.tabs.playing = function() {
 				// Actions
 				$("<a>").addClass("topicact").attr("href", "#topic" + topic.id)
 				.on("click", function() { Main.k.Manager.displayTopic(parseInt(/([0-9]+)/.exec(this.href)[1]), lwords); return false; })
-				.html(topic.replies.length + " réponse" + (topic.replies.length == 1 ? "" : "s")).appendTo($("#searchresults"));
+				.html(Main.k.text.strargs(Main.k.text.ngettext("%1 réponse","%1 réponses",topic.replies.length),[topic.replies.length])).appendTo($("#searchresults"));
 			}
 
 		} else if (authors.length >= 1 || lwords.length >= 1 || iwords.length >= 1) {
-			$("<p>").addClass("warning").html("Aucun résultat.").appendTo($("#searchresults"));
+			$("<p>").addClass("warning").html(Main.k.text.gettext("Aucun résultat.")).appendTo($("#searchresults"));
 		} else {
-			$("<p>").addClass("warning").html("Le texte recherché est trop court.").appendTo($("#searchresults"));
+			$("<p>").addClass("warning").html(Main.k.text.gettext("Le texte recherché est trop court.")).appendTo($("#searchresults"));
 		}
 	}
 	Main.k.Manager.searchHero = function(event) {
@@ -4026,7 +4029,7 @@ Main.k.tabs.playing = function() {
 			}
 		} else {
 			var newpost = $("#tabreply_content").empty();
-			newpost.html("<div class='loading'><img src='http://twinoid.com/img/loading.gif' alt='Chargement' /> Chargement…</div>");
+			newpost.html("<div class='loading'><img src='http://twinoid.com/img/loading.gif' alt='Chargement' /> "+Main.k.text.gettext("Chargement…")+"</div>");
 			Main.k.LoadJS('/mod/wall/post', {_id: "tabreply_content"}, function() {
 				Main.k.Manager.replyloaded = true;
 
@@ -4050,7 +4053,7 @@ Main.k.tabs.playing = function() {
 
 				// Actions
 				var buttons = $("<div>").addClass("tid_buttons").appendTo($("#tabreply_content"));
-				var answer = Main.k.MakeButton("<img src='http://twinoid.com/img/icons/reply.png' /> Répondre au topic",null,function() {
+				var answer = Main.k.MakeButton("<img src='http://twinoid.com/img/icons/reply.png' /> "+ Main.k.text.gettext("Répondre au topic"),null,function() {
 					var val = $("#tid_wallPost").val();
 					var k = Main.k.Manager.displayedTopic;
 					Main.k.postMessage(k, val, Main.k.Manager.update);
@@ -4064,11 +4067,11 @@ Main.k.tabs.playing = function() {
 				.css({display: "inline-block", margin: "4px 4px 8px"})
 				.appendTo(buttons)
 				.find("a")
-				.attr("_title", "Répondre").attr("_desc", "Envoyer ce message en tant que réponse au topic affiché ci-contre.")
+				.attr("_title", "Répondre").attr("_desc", Main.k.text.gettext("Envoyer ce message en tant que réponse au topic affiché ci-contre."))
 				.on("mouseover", Main.k.CustomTip)
 				.on("mouseout", Main.hideTip);
 
-				var newtopic = Main.k.MakeButton("<img src='http://twinoid.com/img/icons/reply.png' /> Nouveau topic",null,function() {
+				var newtopic = Main.k.MakeButton("<img src='http://twinoid.com/img/icons/reply.png' /> " + Main.k.text.gettext("Nouveau topic"),null,function() {
 					var val = $("#tid_wallPost").val();
 					Main.k.newTopic(val, Main.k.Manager.update);
 					$("#tid_wallPost").val("");
@@ -4076,7 +4079,7 @@ Main.k.tabs.playing = function() {
 				.css({display: "inline-block", margin: "4px 4px 8px"})
 				.appendTo(buttons)
 				.find("a")
-				.attr("_title", "Nouveau topic").attr("_desc", "Poster ce message en tant que nouveau topic.")
+				.attr("_title", "Nouveau topic").attr("_desc", Main.k.text.gettext("Poster ce message en tant que nouveau topic."))
 				.on("mouseover", Main.k.CustomTip)
 				.on("mouseout", Main.hideTip);
 
@@ -4259,22 +4262,22 @@ Main.k.tabs.playing = function() {
 		$("<h3>").addClass("first").html(Main.k.text.gettext("outils").capitalize()).appendTo(leftbar);
 
 		// Update Manager
-		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/new.png' /> Mise à jour", null, null, "Mise à jour du script",
+		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/new.png' /> "+ Main.k.text.gettext("Mise à jour"), null, null, Main.k.text.gettext("Mise à jour du script"),
 			"Une nouvelle version du script CTRL+W est disponible.")
 		.appendTo(leftbar).attr("id", "updatebtn").css("display", "none").find("a").on("mousedown", Main.k.UpdateDialog);
 
 		// Message Manager
-		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/archive.png' style='vertical-align: -20%' /> Msg Manager", null, null, "Message Manager",
-			"Ne manquez plus de messages ! Tous les topics avec des messages non lus seront mis en évidence, et vous pourrez effectuer des recherches par auteur ou contenu.")
+		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/archive.png' style='vertical-align: -20%' /> "+ Main.k.text.gettext("Msg Manager"), null, null, Main.k.text.gettext("Message Manager"),
+			Main.k.text.gettext("Ne manquez plus de messages ! Tous les topics avec des messages non lus seront mis en évidence, et vous pourrez effectuer des recherches par auteur ou contenu."))
 		.appendTo(leftbar).find("a").on("mousedown", Main.k.Manager.open);
 
 		// Options Manager
-		Main.k.MakeButton("<img src='/img/icons/ui/pa_eng.png' style='vertical-align: -20%' /> Options", null, null, "Gérer les options", "Certaines fonctionnalitées de Ctrl+W sont configurables. Cliquez ici pour spécifier vos préférences.")
+		Main.k.MakeButton("<img src='/img/icons/ui/pa_eng.png' style='vertical-align: -20%' /> "+ Main.k.text.gettext("Options"), null, null, Main.k.text.gettext("Gérer les options"), Main.k.text.gettext("Certaines fonctionnalitées de Ctrl+W sont configurables. Cliquez ici pour spécifier vos préférences."))
 		.appendTo(leftbar).find("a").on("mousedown", Main.k.Options.open);
 
 		// Page reloader
-		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/refresh.png' style='vertical-align: -20%' /> Actualiser", null, null, "Actualiser",
-			"Actualiser la page sans tout recharger. <strong>Fonctionnalité en cours d'optimisation.</strong>")
+		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/refresh.png' style='vertical-align: -20%' /> "+ Main.k.text.gettext("Actualiser"), null, null, Main.k.text.gettext("Actualiser"),
+			Main.k.text.gettext("Actualiser la page sans tout recharger. <strong>Fonctionnalité en cours d'optimisation.</strong>"))
 		.appendTo(leftbar).find("a").on("mousedown", function() {
 			// TODO: loading screen -- Optimize
 
@@ -4316,8 +4319,8 @@ Main.k.tabs.playing = function() {
 		$("<div>").css({"clear": "both", "height": "5px"}).appendTo(leftbar);
 
 		// Inventory actions
-		Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Partager", null, null, "Partager l'inventaire",
-			Main.k.text.gettext("Insère l'inventaire de la pièce dans la zone de texte active, de la forme&nbsp;:</p><p><strong>Couloir central :</strong> <i>Combinaison</i>, <i>Couteau</i>, <i>Médikit</i>, <i>Extincteur</i></p><p><strong>Partage aussi sur Astropad si celui-ci est installé.</strong></p>")
+		Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> " + Main.k.text.gettext("Partager"), null, null, Main.k.text.gettext("Partager l'inventaire"),
+			Main.k.text.gettext("<p>Insère l'inventaire de la pièce dans la zone de texte active, de la forme&nbsp;:</p><p><strong>Couloir central :</strong> <i>Combinaison</i>, <i>Couteau</i>, <i>Médikit</i>, <i>Extincteur</i></p><p><strong>Partage aussi sur Astropad si celui-ci est installé.</strong></p>")
 		).appendTo(leftbar)
 		.find("a").on("mousedown", function(e) {
 			Main.k.SyncAstropad(e);
@@ -4327,9 +4330,8 @@ Main.k.tabs.playing = function() {
 			});
 			return false;
 		});
-		Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Consommables", null, null, "Partager les effets des consommables",
-			"Insère la liste des consommables avec leurs effets dans la zone de texte active, de la forme&nbsp;:</p><p>" +
-			"TODO: aperçu")
+		Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> "+ Main.k.text.gettext("Consommables"), null, null, Main.k.text.gettext("Partager les effets des consommables"),
+			Main.k.text.gettext("Insère la liste des consommables avec leurs effets dans la zone de texte active, de la forme&nbsp;:</p><p>TODO: aperçu</p>"))
 		.attr("id", "pharmashare").css("display", "none").appendTo(leftbar)
 		.find("a").on("mousedown", function(e) {
 			$('textarea:focus').each(function(e) {
@@ -4338,7 +4340,7 @@ Main.k.tabs.playing = function() {
 			});
 			return false;
 		});
-		//Main.k.MakeButton("<img src='/img/icons/ui/notes.gif' /> Daedalus", null, null, "Inventaire complet",
+		//Main.k.MakeButton("<img src='/img/icons/ui/notes.gif' /> Daedalus", null, null, Main.k.text.gettext("Inventaire complet"),
 		//	"Affiche l'inventaire complet du Daedalus, pièce par pièce.</p><p><strong>/!\\ Fonctionnalité non codée</strong>").appendTo(leftbar);
 		// ----------------------------------- //
 
@@ -4467,7 +4469,7 @@ Main.k.tabs.playing = function() {
 					$("<img>").attr("src", "/img/icons/skills/" + skill.img + ".png")
 					.attr("height", "18").attr("alt", skill.img)
 					.attr("_title", skill.name)
-					.attr("_desc", skill.desc + (Main.k.compInactiveMush[skill.img] ? "<p><strong>Compétence inactive mush</strong></p>" : ""))
+					.attr("_desc", skill.desc + (Main.k.compInactiveMush[skill.img] ? "<p><strong>"+Main.k.text.gettext("Compétence inactive mush")+"</strong></p>" : ""))
 					.on("mouseover", Main.k.CustomTip)
 					.on("mouseout", Main.hideTip)
 					.appendTo(skilldom);
@@ -4475,8 +4477,8 @@ Main.k.tabs.playing = function() {
 					if (Main.k.compInactiveMush[skill.img]) {
 						$("<img>").attr("src", Main.k.servurl_badconker + "/img/non-mush.png").addClass("actmush")
 						.attr("width", "10").attr("height", "10")
-						.attr("_title", "Compétence inactive mush")
-						.attr("_desc", "Cette compétence est inactive quand on est mush (source : Twinpedia).")
+						.attr("_title", Main.k.text.gettext("Compétence inactive mush"))
+						.attr("_desc", Main.k.text.gettext("Cette compétence est inactive quand on est mush (source : Twinpedia)."))
 						.on("mouseover", Main.k.CustomTip)
 						.on("mouseout", Main.hideTip)
 						.appendTo(skilldom);
@@ -4508,7 +4510,7 @@ Main.k.tabs.playing = function() {
 				.css("cursor", "pointer")
 				.attr("_hid", hero.id)
 				.attr("_title", hero.name)
-				.attr("_desc", hero.short_desc + "</p><p><strong>Cliquez pour plus d'informations <br/>/!\\ Fonctionnalité non codée</strong>")
+				.attr("_desc", hero.short_desc + "</p><p><strong>"+Main.k.text.gettext("Cliquez pour plus d'informations <br/>/!\\ Fonctionnalité non codée")+"</strong>")
 				.on("mouseover", Main.k.CustomTip)
 				.on("mouseout", Main.hideTip)
 				.on("click", function() {
@@ -4539,7 +4541,7 @@ Main.k.tabs.playing = function() {
 				.css("cursor", "pointer")
 				.attr("_hid", hero.id)
 				.attr("_title", hero.name)
-				.attr("_desc", hero.short_desc + "</p><p><strong>Cliquez pour plus d'informations <br/>/!\\ Fonctionnalité non codée</strong>")
+				.attr("_desc", hero.short_desc + "</p><p><strong>"+Main.k.text.gettext("Cliquez pour plus d'informations <br/>/!\\ Fonctionnalité non codée")+"</strong>")
 				.on("mouseover", Main.k.CustomTip)
 				.on("mouseout", Main.hideTip)
 				.on("click", function() {
@@ -4562,7 +4564,7 @@ Main.k.tabs.playing = function() {
 					.css("cursor", "pointer")
 					.attr("_hid", -1)
 					.attr("_title", hero)
-					.attr("_desc", Main.k.getShortDesc(bubble) + "</p><p><strong>Cliquez pour plus d'informations <br/>/!\\ Fonctionnalité non codée</strong>")
+					.attr("_desc", Main.k.getShortDesc(bubble) + "</p><p><strong>"+Main.k.text.gettext("Cliquez pour plus d'informations <br/>/!\\ Fonctionnalité non codée")+"</strong>")
 					.on("mouseover", Main.k.CustomTip)
 					.on("mouseout", Main.hideTip)
 					.on("click", function() {
@@ -4728,10 +4730,10 @@ Main.k.tabs.playing = function() {
 
 			// Research actions
 			Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Partager", null, null, "Partager les recherches",
-				"Insère la liste de recherches dans la zone de texte active, de la forme&nbsp;:</p><p>" +
+				Main.k.text.gettext("<p>Insère la liste de recherches dans la zone de texte active, de la forme&nbsp;:</p><p>" +
 				"<li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li>" +
 				"<li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li>" +
-				"<li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li>"
+				"<li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li></p>")
 			).appendTo(project_list)
 			.find("a").addClass("shareresearchbtn").on("mousedown", function(e) {
 				$('textarea:focus').each(function(e) {
@@ -4776,10 +4778,10 @@ Main.k.tabs.playing = function() {
 
 			// Projects actions
 			Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Partager", null, null, "Partager les projets",
-				"Insère la liste de projets dans la zone de texte active, de la forme&nbsp;:</p><p>" +
+				Main.k.text.gettext("<p>Insère la liste de projets dans la zone de texte active, de la forme&nbsp;:</p><p>" +
 				"<li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li>" +
 				"<li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li>" +
-				"<li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li>"
+				"<li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li></p>")
 			).appendTo(project_list)
 			.find("a").addClass("shareprojectbtn").on("mousedown", function(e) {
 				$('textarea:focus').each(function(e) {
@@ -4809,8 +4811,8 @@ Main.k.tabs.playing = function() {
 
 				// Planets actions
 				Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Partager", null, null, "Partager les planètes",
-					"Insère la liste de planètes dans la zone de texte active, de la forme&nbsp;:</p><p>" +
-					"TODO: aperçu"
+					Main.k.text.gettext("Insère la liste de planètes dans la zone de texte active, de la forme&nbsp;:</p><p>" +
+					"TODO: aperçu")
 				).appendTo(project_list)
 				.find("a").on("mousedown", function(e) {
 					$('textarea:focus').each(function(e) {
@@ -4828,8 +4830,8 @@ Main.k.tabs.playing = function() {
 
 			// Share params
 			Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Partager", null, null, "Partager les paramètres",
-				"Insère la liste de paramètres BIOS Neron dans la zone de texte active, de la forme&nbsp;:</p><p>" +
-				"TODO: aperçu"
+				Main.k.text.gettext("Insère la liste de paramètres BIOS Neron dans la zone de texte active, de la forme&nbsp;:</p><p>" +
+				"TODO: aperçu")
 			).appendTo(project_list)
 			.find("a").on("mousedown", function(e) {
 				$('textarea:focus').each(function(e) {
@@ -5205,27 +5207,33 @@ Main.k.tabs.gameover = function() {
 		var counted = false;
 		var data = reg.exec($(this).html());
 		switch (data[2].trim()) {
-			case "Cycle Humain":
+			/* Translators: This translation must be copied from the game. */
+			case Main.k.text.gettext("Cycle Humain"):
 				counted = true;
 				logcount.humanC += parseInt(data[1]);
 				break;
-			case "Recherche Mineur":
+			/* Translators: This translation must be copied from the game. */
+			case Main.k.text.gettext("Recherche Mineur"):
 				counted = true;
 				logcount.researchMin += parseInt(data[1]);
 				break;
-			case "Recherche":
+			/* Translators: This translation must be copied from the game. */
+			case Main.k.text.gettext("Recherche"):
 				counted = true;
 				logcount.research += parseInt(data[1]);
 				break;
-			case "Défenseur Du Daedalus":
+			/* Translators: This translation must be copied from the game. */
+			case Main.k.text.gettext("Défenseur Du Daedalus"):
 				counted = true;
 				logcount.hunter += parseInt(data[1]);
 				break;
-			case "Expédition":
+			/* Translators: This translation must be copied from the game. */
+			case Main.k.text.gettext("Expédition"):
 				counted = true;
 				logcount.expe += parseInt(data[1]);
 				break;
-			case "Nouvel Planète":
+			/* Translators: This translation must be copied from the game. */
+			case Main.k.text.gettext("Nouvel Planète"):
 				counted = true;
 				logcount.planet += parseInt(data[1]);
 				break;
@@ -5237,49 +5245,55 @@ Main.k.tabs.gameover = function() {
 		}
 	});
 	if (logcount.planet) {
-		$("<li>").html(logcount.planet + " x Nouvelle Planète ( + " + logcount.planet * 5 + " )")
-		.attr("_title", "Nouvelle Planète")
-		.attr("_desc", "Gagné à chaque planète (arrivée en orbite).")
+		/* Translators: This translation must be copied from the game. */
+		$("<li>").html(logcount.planet + " x "+Main.k.text.gettext("Nouvelle Planète") + " ( + " + logcount.planet * 5 + " )")
+		.attr("_title", Main.k.text.gettext("Nouvelle Planète"))
+		.attr("_desc", Main.k.text.gettext("Gagné à chaque planète (arrivée en orbite)."))
 		.on("mouseover", Main.k.CustomTip)
 		.on("mouseout", Main.hideTip)
 		.prependTo("#logtri");
 	}
 	if (logcount.expe) {
-		$("<li>").html(logcount.expe + " x Expédition ( + " + logcount.expe * 3 + " )")
-		.attr("_title", "Expédition")
-		.attr("_desc", "Gagné à chaque exploration.")
+		/* Translators: This translation must be copied from the game. */
+		$("<li>").html(logcount.expe + " x "+ Main.k.text.gettext("Expédition") +" ( + " + logcount.expe * 3 + " )")
+		.attr("_title", Main.k.text.gettext("Expédition"))
+		.attr("_desc", Main.k.text.gettext("Gagné à chaque exploration."))
 		.on("mouseover", Main.k.CustomTip)
 		.on("mouseout", Main.hideTip)
 		.prependTo("#logtri");
 	}
 	if (logcount.researchMin) {
-		$("<li>").html(logcount.researchMin + " x Recherche Mineure ( + " + logcount.researchMin * 3 + " )")
-		.attr("_title", "Recherche Mineure")
-		.attr("_desc", "Gagné lorsque la recherche est terminée ainsi qu'une seconde fois lors du retour sur SOL.")
+		/* Translators: This translation must be copied from the game. */
+		$("<li>").html(logcount.researchMin + " x "+ Main.k.text.gettext("Recherche Mineure") +" ( + " + logcount.researchMin * 3 + " )")
+		.attr("_title", Main.k.text.gettext("Recherche Mineure"))
+		.attr("_desc", Main.k.text.gettext("Gagné lorsque la recherche est terminée ainsi qu'une seconde fois lors du retour sur SOL."))
 		.on("mouseover", Main.k.CustomTip)
 		.on("mouseout", Main.hideTip)
 		.prependTo("#logtri");
 	}
 	if (logcount.research) {
-		$("<li>").html(logcount.research + " x Recherche ( + " + logcount.research * 6 + " )")
-		.attr("_title", "Recherche")
-		.attr("_desc", "Gagné lorsque la recherche est terminée ainsi qu'une seconde fois lors du retour sur SOL.")
+		/* Translators: This translation must be copied from the game. */
+		$("<li>").html(logcount.research + " x "+ Main.k.text.gettext("Recherche") + " ( + " + logcount.research * 6 + " )")
+		.attr("_title", Main.k.text.gettext("Recherche"))
+		.attr("_desc", Main.k.text.gettext("Gagné lorsque la recherche est terminée ainsi qu'une seconde fois lors du retour sur SOL."))
 		.on("mouseover", Main.k.CustomTip)
 		.on("mouseout", Main.hideTip)
 		.prependTo("#logtri");
 	}
 	if (logcount.hunter) {
-		$("<li>").html(logcount.hunter + " x Défenseur du Daedalus ( + " + logcount.hunter * 1 + " )")
-		.attr("_title", "Défenseur du Daedalus")
-		.attr("_desc", "Gagné pour chaque Hunter abattu.")
+		/* Translators: This translation must be copied from the game. */
+		$("<li>").html(logcount.hunter + " x "+ Main.k.text.gettext("Défenseur du Daedalus") + " ( + " + logcount.hunter * 1 + " )")
+		.attr("_title", Main.k.text.gettext("Défenseur du Daedalus"))
+		.attr("_desc", Main.k.text.gettext("Gagné pour chaque Hunter abattu."))
 		.on("mouseover", Main.k.CustomTip)
 		.on("mouseout", Main.hideTip)
 		.prependTo("#logtri");
 	}
 	if (logcount.humanC) {
-		$("<li>").html(logcount.humanC + " x Cycle Humain ( + " + logcount.humanC * 1 + " )")
-		.attr("_title", "Cycle Humain")
-		.attr("_desc", "Gagné à chaque cycle.")
+		/* Translators: This translation must be copied from the game. */
+		$("<li>").html(logcount.humanC + " x "+ Main.k.text.gettext("Cycle Humain") + " ( + " + logcount.humanC * 1 + " )")
+		.attr("_title", Main.k.text.gettext("Cycle Humain"))
+		.attr("_desc", Main.k.text.gettext("Gagné à chaque cycle."))
 		.on("mouseover", Main.k.CustomTip)
 		.on("mouseout", Main.hideTip)
 		.prependTo("#logtri");
