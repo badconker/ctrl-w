@@ -295,7 +295,7 @@ Main.k.displayMainMenu = function() {
 
 	if (Main.k.ownHero && Main.k.HEROES.tutorials[Main.k.ownHero] != "tutorial_id:"+Main.k.ownHero) {
 		var charname = Main.k.ownHero.replace("_", "");
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/+"+Main.k.text.gettext("ForumAdviceId")+"+|thread/" + Main.k.HEROES.tutorials[Main.k.ownHero] + "'><li><img src='/img/icons/ui/" + charname + ".png' />" + Main.k.text.strargs(Main.k.text.gettext("Tuto %1"), [Main.k.ownHero.capitalize()]) + "</li></a>").appendTo(help_ss);
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumAdviceId")+"|thread/" + Main.k.HEROES.tutorials[Main.k.ownHero] + "'><li><img src='/img/icons/ui/" + charname + ".png' />" + Main.k.text.strargs(Main.k.text.gettext("Tuto %1"), [Main.k.ownHero.capitalize()]) + "</li></a>").appendTo(help_ss);
 	}
 	/* Translators: Wiki url */
 	$("<a class='kssmenuel ext' href='"+Main.k.text.gettext("http://www.twinpedia.com/mush")+
@@ -1607,7 +1607,7 @@ Main.k.tabs.playing = function() {
 				Main.k.SyncAstropad(e);
 				return false;
 			})
-			.attr("_title", "Partager l'inventaire")
+			.attr("_title", Main.k.text.gettext("Partager l'inventaire"))
 			.attr("_desc", Main.k.text.gettext("Insère l'inventaire de la pièce dans la zone de texte active, de la forme&nbsp;:</p><p><strong>Couloir central :</strong> <i>Combinaison</i>, <i>Couteau</i>, <i>Médikit</i>, <i>Extincteur</i></p><p><strong>Partage aussi sur Astropad si celui-ci est installé.</strong></p>"))
 			.on("mouseover", Main.k.CustomTip)
 			.on("mouseout", Main.hideTip);
@@ -1644,7 +1644,7 @@ Main.k.tabs.playing = function() {
 					$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
 					return false;
 				})
-				.attr("_title", "Partager les projets")
+				.attr("_title", Main.k.text.gettext("Partager les projets"))
 				.attr("_desc", Main.k.text.gettext("Insère la liste de projets dans la zone de texte active, de la forme&nbsp;:</p><p>" +
 				"<li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li>" +
 				"<li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li>" +
@@ -4515,7 +4515,7 @@ Main.k.tabs.playing = function() {
 				.css("cursor", "pointer")
 				.attr("_hid", hero.id)
 				.attr("_title", hero.name)
-				.attr("_desc", hero.short_desc + "</p><p><strong>"+Main.k.text.gettext("Cliquez pour plus d'informations <br/>/!\\ Fonctionnalité non codée")+"</strong>")
+				.attr("_desc", hero.short_desc + "</p><p><strong>"+Main.k.text.gettext("Cliquez pour plus d'informations <br/>/!&#92; Fonctionnalité non codée")+"</strong>")
 				.on("mouseover", Main.k.CustomTip)
 				.on("mouseout", Main.hideTip)
 				.on("click", function() {
@@ -4546,7 +4546,7 @@ Main.k.tabs.playing = function() {
 				.css("cursor", "pointer")
 				.attr("_hid", hero.id)
 				.attr("_title", hero.name)
-				.attr("_desc", hero.short_desc + "</p><p><strong>"+Main.k.text.gettext("Cliquez pour plus d'informations <br/>/!\\ Fonctionnalité non codée")+"</strong>")
+				.attr("_desc", hero.short_desc + "</p><p><strong>"+Main.k.text.gettext("Cliquez pour plus d'informations <br/>/!&#92; Fonctionnalité non codée")+"</strong>")
 				.on("mouseover", Main.k.CustomTip)
 				.on("mouseout", Main.hideTip)
 				.on("click", function() {
@@ -4569,7 +4569,7 @@ Main.k.tabs.playing = function() {
 					.css("cursor", "pointer")
 					.attr("_hid", -1)
 					.attr("_title", hero)
-					.attr("_desc", Main.k.getShortDesc(bubble) + "</p><p><strong>"+Main.k.text.gettext("Cliquez pour plus d'informations <br/>/!\\ Fonctionnalité non codée")+"</strong>")
+					.attr("_desc", Main.k.getShortDesc(bubble) + "</p><p><strong>"+Main.k.text.gettext("Cliquez pour plus d'informations <br/>/!&#92; Fonctionnalité non codée")+"</strong>")
 					.on("mouseover", Main.k.CustomTip)
 					.on("mouseout", Main.hideTip)
 					.on("click", function() {
@@ -4734,7 +4734,7 @@ Main.k.tabs.playing = function() {
 			});
 
 			// Research actions
-			Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Partager", null, null, "Partager les recherches",
+			Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> "+Main.k.text.gettext("Partager"), null, null, Main.k.text.gettext("Partager les recherches"),
 				Main.k.text.gettext("<p>Insère la liste de recherches dans la zone de texte active, de la forme&nbsp;:</p><p>" +
 				"<li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li>" +
 				"<li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li>" +
@@ -4815,7 +4815,7 @@ Main.k.tabs.playing = function() {
 				});
 
 				// Planets actions
-				Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Partager", null, null, "Partager les planètes",
+				Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> "+Main.k.text.gettext("Partager"), null, null, Main.k.text.gettext("Partager les planètes"),
 					Main.k.text.gettext("Insère la liste de planètes dans la zone de texte active, de la forme&nbsp;:</p><p>" +
 					"TODO: aperçu")
 				).appendTo(project_list)
@@ -4834,7 +4834,7 @@ Main.k.tabs.playing = function() {
 
 
 			// Share params
-			Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Partager", null, null, "Partager les paramètres",
+			Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> "+Main.k.text.gettext("Partager"), null, null, Main.k.text.gettext("Partager les paramètres"),
 				Main.k.text.gettext("Insère la liste de paramètres BIOS Neron dans la zone de texte active, de la forme&nbsp;:</p><p>" +
 				"TODO: aperçu")
 			).appendTo(project_list)
@@ -4852,7 +4852,7 @@ Main.k.tabs.playing = function() {
 		if (hasPlants) {
 			// Create div
 			var plantsDIV = $("<div>").attr("id", "plantmanager").appendTo(leftbar);
-			var t = $("<h3>").html("Plantes").appendTo(plantsDIV);
+			var t = $("<h3>").html(Main.k.text.gettext("Plantes")).appendTo(plantsDIV);
 			$("<span>").addClass("displayless").attr("_target", ".kplantlist").appendTo(t).on("click", Main.k.ToggleDisplay);
 
 			// List plants
@@ -4876,7 +4876,7 @@ Main.k.tabs.playing = function() {
 
 			// Plants actions
 			$("<div>").css("clear", "both").css("height", "5px").appendTo(plantsDIV);
-			Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Partager", null, null, "TODO: Texte", "TODO: Texte")
+			Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> "+Main.k.text.gettext("Partager"), null, null, Main.k.text.gettext("Plantes"), Main.k.text.gettext("Partager l'état des plantes."))
 			.appendTo(plantsDIV)
 			.find("a").on("mousedown", function(e) {
 				$('textarea:focus').each(function(e) {
