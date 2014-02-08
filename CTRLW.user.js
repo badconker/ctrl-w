@@ -2181,8 +2181,13 @@ Main.k.tabs.playing = function() {
 	Main.k.UpdateData = {currversion: 0, changelog: []};
 	Main.k.UpdateCheck = function() {
 		var lastVersion = js.Cookie.get('ctrlwVersion');
+		if(typeof(lastVersion) != 'undefined' && lastVersion < Main.k.version){
+			var version_update = lastVersion;
+		}else{
+			var version_update = Main.k.version
+		}
 		$.ajax({
-			url :Main.k.servurl + "/versions/update/"+ (typeof(lastVersion) == 'undefined' ? Main.k.version : lastVersion),
+			url :Main.k.servurl + "/versions/update/"+ version_update,
 			dataType : 'jsonp',
 			success: function(json) {
 				Main.k.UpdateData.currversion = json.numero;
@@ -2191,10 +2196,11 @@ Main.k.tabs.playing = function() {
 				}else{
 					Main.k.UpdateData.changelog = json.changelog_long;
 				}
-				if (Main.k.version < json.numero) {
+				var version = Main.k.version.replace(/([^a-z]*)[a-z]{1}[0-9]*/,'$1');
+				if (version < json.numero || (version == json.numero && /[a-z]+/.test(Main.k.version))) {
 					$("#updatebtn").css("display", "block");
 				} else {
-					if(typeof(lastVersion) != 'undefined' && lastVersion < GM_info.script.version){
+					if(typeof(lastVersion) != 'undefined' && lastVersion != GM_info.script.version){
 						Main.k.AutoUpdateDialog();
 					}
 					js.Cookie.set('ctrlwVersion',GM_info.script.version,420000000);
@@ -2207,7 +2213,6 @@ Main.k.tabs.playing = function() {
 		});
 	}
 	Main.k.UpdateDialog = function() {
-		if (Main.k.version >= Main.k.UpdateData.currversion) return false;
 		var okHref = Main.k.servurl + "/CTRLW.user.js";
 		var okHref2 = Main.k.servurl + "/CTRLW-chrome.user.js";
 		if(Main.k.ischrome){
@@ -2252,7 +2257,7 @@ Main.k.tabs.playing = function() {
 		});
 
 		//conf.title = "Mise à jour du script CTRL+W";
-		var maj_content = Main.k.text.strargs(Main.k.text.gettext("Dernière version de CTRL+W installée (%1) :"), [Main.k.UpdateData.currversion]);
+		var maj_content = Main.k.text.strargs(Main.k.text.gettext("Dernière version de CTRL+W installée (%1) :"), [GM_info.script.version]);
 		maj_content += " <br/> <ul class='updateslist'>";
 		for (var i=0; i<Main.k.UpdateData.changelog.length; i++) {
 			var log = Main.k.UpdateData.changelog[i];
