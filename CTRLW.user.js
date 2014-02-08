@@ -3678,7 +3678,7 @@ Main.k.tabs.playing = function() {
 		})
 		.appendTo(actions)
 		.find("a")
-		.attr("_title", "Charger tous les messages").attr("_desc", Main.k.text.gettext("Chargez tous les messages pour profiter pleinement du manager : recherches dans tous les messages depuis le début de la partie, nouveaux messages manqués à cause du bug de mush, statistiques complètes, etc.</p><p><strong>Cette action peut prendre un certain temps, suivant le nombre de messages postés sur votre vaisseau.</strong>"))
+		.attr("_title", Main.k.text.gettext("Charger tous les messages")).attr("_desc", Main.k.text.gettext("Chargez tous les messages pour profiter pleinement du manager : recherches dans tous les messages depuis le début de la partie, nouveaux messages manqués à cause du bug de mush, statistiques complètes, etc.</p><p><strong>Cette action peut prendre un certain temps, suivant le nombre de messages postés sur votre vaisseau.</strong>"))
 		.on("mouseover", Main.k.CustomTip)
 		.on("mouseout", Main.hideTip);
 
@@ -3689,7 +3689,7 @@ Main.k.tabs.playing = function() {
 		})
 		.appendTo(actions)
 		.find("a")
-		.attr("_title", "Décharger les messages").attr("_desc", Main.k.text.gettext("Déchargez la liste de messages pour alléger le jeu. Lorsque vous chargez des messages (en scrollant sur le chat, par exemple), ceux-ci restent chargés. Mush chargeant toute la page (dont les messages) à chaque action, votre jeu est grandement ralenti lorsque le nombre de messages chargés est conséquent.</p><p><strong>Cette action bloque le jeu pendant quelques secondes.</strong>"))
+		.attr("_title", Main.k.text.gettext("Décharger les messages")).attr("_desc", Main.k.text.gettext("Déchargez la liste de messages pour alléger le jeu. Lorsque vous chargez des messages (en scrollant sur le chat, par exemple), ceux-ci restent chargés. Mush chargeant toute la page (dont les messages) à chaque action, votre jeu est grandement ralenti lorsque le nombre de messages chargés est conséquent.</p><p><strong>Cette action bloque le jeu pendant quelques secondes.</strong>"))
 		.on("mouseover", Main.k.CustomTip)
 		.on("mouseout", Main.hideTip);
 
