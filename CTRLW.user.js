@@ -9,7 +9,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.33
+// @version     0.33.1
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -2196,6 +2196,7 @@ Main.k.tabs.playing = function() {
 				}else{
 					Main.k.UpdateData.changelog = json.changelog_long;
 				}
+				Main.k.UpdateData.url = json.url;
 				var version = Main.k.version.replace(/([^a-z]*)[a-z]{1}[0-9]*/,'$1');
 				if (version < json.numero || (version == json.numero && /[a-z]+/.test(Main.k.version))) {
 					$("#updatebtn").css("display", "block");
@@ -2213,11 +2214,7 @@ Main.k.tabs.playing = function() {
 		});
 	}
 	Main.k.UpdateDialog = function() {
-		var okHref = Main.k.servurl + "/CTRLW.user.js";
-		var okHref2 = Main.k.servurl + "/CTRLW-chrome.user.js";
-		if(Main.k.ischrome){
-			okHref = okHref2;
-		}
+		var okHref = Main.k.UpdateData.url;
 		// Create popup
 		var popup = Main.k.CreatePopup();
 		popup.content.css({
