@@ -4,12 +4,12 @@
 // @include     http://mush.vg/*
 // @include     http://mush.twinoid.com/*
 // @include     http://mush.twinoid.es/*
-// @downloadURL https://raw.github.com/badconker/ctrl-w/master/CTRLW.user.js
+// @downloadURL https://raw.github.com/badconker/ctrl-w/release/CTRLW.user.js
 // @require     lib/Gettext.js
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.32.5
+// @version     0.33
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
