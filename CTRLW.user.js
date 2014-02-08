@@ -2978,11 +2978,12 @@ Main.k.tabs.playing = function() {
 				margin: "20px",
 				color: "#CCC",
 				"text-align": "center"
-			}).html(Main.k.text.gettext("Script développé par <a href='http://twinoid.com/user/8297'>kill0u</a>, maintenu par <a href='http://twinoid.com/user/1244143'>badconker</a><br/>\
-			Le logo, les images (mise en forme personnalisée des messages) et le design du site web ont été faits par \
-			<a href='http://twinoid.com/user/2992052'>Gnux</a>.<br>\
-			Contributeurs : <a href='http://twinoid.com/user/8011565'>NightExcessive</a>")).appendTo(td);
-
+			}).html(Main.k.text.gettext("Script développé par <a href='http://twinoid.com/user/8297'>kill0u</a>, maintenu par <a href='http://twinoid.com/user/1244143'>badconker</a><br/>"+
+			"Le logo, les images (mise en forme personnalisée des messages) et le design du site web ont été faits par "+
+			"<a href='http://twinoid.com/user/2992052'>Gnux</a>.<br/>"+
+			"Contributeurs : <a href='http://twinoid.com/user/8011565'>NightExcessive</a><br/>"+
+			"Traducteurs : <a href='http://twinoid.com/user/7845671'>Avistew</a>")).appendTo(td);
+			
 			// Coming soon
 			/*$("<h2>").css({
 				color: "#EEE",
@@ -3146,29 +3147,29 @@ Main.k.tabs.playing = function() {
 				resize: "none",
 				"min-height": "427px"
 			}).appendTo(rbg);
-			$("<p>").addClass("warning").html("Aucun topic sélectionné.").appendTo(topic);
+			$("<p>").addClass("warning").html(Main.k.text.gettext("Aucun topic sélectionné.")).appendTo(topic);
 
 			if (hasmushchat) {
 				/* Translators: The beginning must be copied from the game. */
-				var mushtab = $("<li>").addClass("tab taboff").attr("id", "tabmush").attr("_title", "Canal Mush").attr("_desc", Main.k.text.gettext("Ssshh, personne nous entend ici... Le Canal Mush est le <em>canal privé</em> pour les adhérents aux <strong>Mush</strong> <img src='/img/icons/ui/mush.png' />.</p><p><strong>/!\\ Fonctionnalité non codée</strong>")).appendTo(tabs);
+				var mushtab = $("<li>").addClass("tab taboff").attr("id", "tabmush").attr("_title", "Canal Mush").attr("_desc", Main.k.text.gettext("Ssshh, personne nous entend ici... Le Canal Mush est le <em>canal privé</em> pour les adhérents aux <strong>Mush</strong> <img src='/img/icons/ui/mush.png' />.</p><p><strong>/!&#92; Fonctionnalité non codée</strong>")).appendTo(tabs);
 				$("<img>").attr("src", "/img/icons/ui/mush.png").appendTo(mushtab);
 				var mushchat = $("<div>").attr("id", "tabmush_content").css("display", "none").addClass("tabcontent wall").appendTo(rbg);
 				$("<p>").addClass("warning").html(Main.k.text.gettext("Disponible prochainement.")).appendTo(mushchat);
 			}
 			if (haschat1) {
-				var chat1tab = $("<li>").addClass("tab taboff").attr("id", "tabchat1").attr("_title", "Chat privé #1").attr("_desc", Main.k.text.gettext("Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!\\ Fonctionnalité non codée</strong>")).appendTo(tabs);
+				var chat1tab = $("<li>").addClass("tab taboff").attr("id", "tabchat1").attr("_title", "Chat privé #1").attr("_desc", Main.k.text.gettext("Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!&#92; Fonctionnalité non codée</strong>")).appendTo(tabs);
 				$("<img>").attr("src", "/img/icons/ui/private.png").appendTo(chat1tab);
 				var chat1 = $("<div>").attr("id", "tabchat1_content").css("display", "none").addClass("tabcontent wall").appendTo(rbg);
 				$("<p>").addClass("warning").html("Disponible prochainement.").appendTo(chat1);
 			}
 			if (haschat2) {
-				var chat2tab = $("<li>").addClass("tab taboff").attr("id", "tabchat2").attr("_title", "Chat privé #2").attr("_desc", Main.k.text.gettext("Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!\\ Fonctionnalité non codée</strong>")).appendTo(tabs);
+				var chat2tab = $("<li>").addClass("tab taboff").attr("id", "tabchat2").attr("_title", "Chat privé #2").attr("_desc", Main.k.text.gettext("Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!&#92; Fonctionnalité non codée</strong>")).appendTo(tabs);
 				$("<img>").attr("src", "/img/icons/ui/private.png").appendTo(chat2tab);
 				var chat2 = $("<div>").attr("id", "tabchat2_content").css("display", "none").addClass("tabcontent wall").appendTo(rbg);
 				$("<p>").addClass("warning").html("Disponible prochainement.").appendTo(chat2);
 			}
 			if (haschat3) {
-				var chat3tab = $("<li>").addClass("tab taboff").attr("id", "tabchat3").attr("_title", "Chat privé #3").attr("_desc", Main.k.text.gettext("Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!\\ Fonctionnalité non codée</strong>")).appendTo(tabs);
+				var chat3tab = $("<li>").addClass("tab taboff").attr("id", "tabchat3").attr("_title", "Chat privé #3").attr("_desc", Main.k.text.gettext("Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!&#92; Fonctionnalité non codée</strong>")).appendTo(tabs);
 				$("<img>").attr("src", "/img/icons/ui/private.png").appendTo(chat3tab);
 				var chat3 = $("<div>").attr("id", "tabchat3_content").css("display", "none").addClass("tabcontent wall").appendTo(rbg);
 				$("<p>").addClass("warning").html("Disponible prochainement.").appendTo(chat3);
@@ -3193,8 +3194,8 @@ Main.k.tabs.playing = function() {
 				position: "relative"
 			}).appendTo(td_reply);
 			var tabreply = $("<li>").addClass("tab tabon").attr("id", "tabreply").attr("_title", Main.k.text.gettext("Nouveau message")).attr("_desc", Main.k.text.gettext("Répondez à un topic / une discussion ou créez un nouveau topic.")).appendTo(tabs);
-			var tabneron = $("<li>").addClass("tab taboff").attr("id", "tabneron").attr("_title", Main.k.text.gettext("Annonces vocodées")).attr("_desc", Main.k.text.gettext("Assistant pour les Admin. Néron pour faciliter la création d'annonces vocodées.</p><p><strong>/!\\ Fonctionnalité non codée</strong>")).appendTo(tabs);
-			var tabcustom = $("<li>").addClass("tab taboff").attr("id", "tabcustom").attr("_title", Main.k.text.gettext("Messages pré-enregistrés")).attr("_desc", Main.k.text.gettext("Messages récurrents & autres (à définir).</p><p><strong>/!\\ Fonctionnalité non codée</strong>")).appendTo(tabs);
+			var tabneron = $("<li>").addClass("tab taboff").attr("id", "tabneron").attr("_title", Main.k.text.gettext("Annonces vocodées")).attr("_desc", Main.k.text.gettext("Assistant pour les Admin. Néron pour faciliter la création d'annonces vocodées.</p><p><strong>/!&#92; Fonctionnalité non codée</strong>")).appendTo(tabs);
+			var tabcustom = $("<li>").addClass("tab taboff").attr("id", "tabcustom").attr("_title", Main.k.text.gettext("Messages pré-enregistrés")).attr("_desc", Main.k.text.gettext("Messages récurrents & autres (à définir).</p><p><strong>/!&#92; Fonctionnalité non codée</strong>")).appendTo(tabs);
 			$("<img>").attr("src", "http://twinoid.com/img/icons/edit.png").appendTo(tabreply);
 			$("<img>").attr("src", "/img/icons/ui/neron.png").appendTo(tabneron);
 			$("<img>").attr("src", "/img/icons/ui/book.png").appendTo(tabcustom);
@@ -3658,9 +3659,9 @@ Main.k.tabs.playing = function() {
 			color: "rgb(9, 10, 97)"
 		});
 
-		var warn = $("<div>").addClass("warning").html(Main.k.text.gettext("Gérez le nombre de messages chargés.\
-		Le manager est plus complet lorsque tous les messages sont chargés, \
-		mais le jeu devient beaucoup plus lent à cause du chargement de ces messages à chaque action (particularité de mush...)."))
+		var warn = $("<div>").addClass("warning").html(Main.k.text.gettext("Gérez le nombre de messages chargés."+
+		"Le manager est plus complet lorsque tous les messages sont chargés, "+
+		"mais le jeu devient beaucoup plus lent à cause du chargement de ces messages à chaque action (particularité de mush...)."))
 		.css("background-position", "7px 15px")
 		.appendTo(tab);
 
@@ -4343,7 +4344,7 @@ Main.k.tabs.playing = function() {
 			return false;
 		});
 		//Main.k.MakeButton("<img src='/img/icons/ui/notes.gif' /> Daedalus", null, null, Main.k.text.gettext("Inventaire complet"),
-		//	"Affiche l'inventaire complet du Daedalus, pièce par pièce.</p><p><strong>/!\\ Fonctionnalité non codée</strong>").appendTo(leftbar);
+		//	"Affiche l'inventaire complet du Daedalus, pièce par pièce.</p><p><strong>/!&#92; Fonctionnalité non codée</strong>").appendTo(leftbar);
 		// ----------------------------------- //
 
 		// Fix "o²"
