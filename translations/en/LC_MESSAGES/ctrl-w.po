@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ctrl+w\n"
 "Report-Msgid-Bugs-To: http://twd.io/e/KKyl0g\n"
-"POT-Creation-Date: 2014-02-09 12:04+0100\n"
-"PO-Revision-Date: 2014-02-09 12:05+0100\n"
+"POT-Creation-Date: 2014-02-09 12:11+0100\n"
+"PO-Revision-Date: 2014-02-09 12:11+0100\n"
 "Last-Translator: \n"
 "Language-Team: English\n"
 "Language: en\n"
@@ -1079,6 +1079,10 @@ msgstr "Share state of plants"
 #: ..\CTRLW.user.js:4984
 msgid "connecté(e)"
 msgstr "connected"
+
+#: ..\CTRLW.user.js:4988
+msgid "Canal privé"
+msgstr "Private channel"
 
 #. Translators: This translation must be copied from the game. */
 #: ..\CTRLW.user.js:5214 ..\CTRLW.user.js:5297 ..\CTRLW.user.js:5298
