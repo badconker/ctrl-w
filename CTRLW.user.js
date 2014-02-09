@@ -2441,8 +2441,8 @@ Main.k.tabs.playing = function() {
 
 		return ret;
 	}
-	Main.k.FormatResearch = function() {//TODO: MULTILANG
-		var ret = "**//Recherches : //**";
+	Main.k.FormatResearch = function() {
+		var ret = "**//"+Main.k.text.gettext("Recherches")+" : //**";
 
 		var parse = function(t) {
 			t = t.replace(/<img\s+src=\"\/img\/icons\/ui\/triumph.png\"\s+alt=\"triomphe\"[\/\s]*>/ig, ":mush_triumph:");
@@ -4696,7 +4696,7 @@ Main.k.tabs.playing = function() {
 
 		// Research
 		if ($("#research_module").length > 0 && projects.length > 0) {
-			var t = $("<h3>").html("Laboratoire").appendTo(project_list);
+			var t = $("<h3>").html(Main.k.text.gettext("Laboratoire")).appendTo(project_list);
 			$("<span>").addClass("displayless").attr("_target", "#projectspreview")
 			.on("click", Main.k.ToggleDisplay).appendTo(t);
 
