@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ctrl+w\n"
 "Report-Msgid-Bugs-To: http://twd.io/e/KKyl0g\n"
-"POT-Creation-Date: 2014-02-08 20:13+0100\n"
-"PO-Revision-Date: 2014-02-08 20:14+0100\n"
+"POT-Creation-Date: 2014-02-09 12:04+0100\n"
+"PO-Revision-Date: 2014-02-09 12:05+0100\n"
 "Last-Translator: \n"
 "Language-Team: English\n"
 "Language: en\n"
@@ -531,6 +531,10 @@ msgstr "dry"
 msgid "RAS"
 msgstr "nothing to report"
 
+#: ..\CTRLW.user.js:2445
+msgid "Recherches"
+msgstr "Researchs"
+
 #: ..\CTRLW.user.js:2967
 msgid "Chan IRC"
 msgstr "IRC Chan"
@@ -1015,6 +1019,10 @@ msgstr "This skill is inactive when you are mush (source: Twinpedia)."
 msgid "Cliquez pour plus d'informations <br/>/!&#92; Fonctionnalité non codée"
 msgstr ""
 "Click here for more information <br/>/!&#92; Functionality not yet developed"
+
+#: ..\CTRLW.user.js:4699
+msgid "Laboratoire"
+msgstr "Research Lab"
 
 #: ..\CTRLW.user.js:4736
 msgid ""
