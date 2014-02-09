@@ -4985,7 +4985,7 @@ Main.k.tabs.playing = function() {
 				}
 
 				tab.find("img").off("mouseover").off("mouseout")
-				.attr("_title", "Canal privé #" + (i+1))
+				.attr("_title", Main.k.text.gettext("Canal privé")+ " #" + (i+1))
 				.attr("_desc", tip)
 				.on("mouseover", Main.k.CustomTip)
 				.on("mouseout", Main.hideTip);

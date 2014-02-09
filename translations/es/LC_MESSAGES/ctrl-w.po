@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: http://twd.io/e/KKyl0g\n"
-"POT-Creation-Date: 2014-02-09 12:04+0100\n"
+"POT-Creation-Date: 2014-02-09 12:11+0100\n"
 "PO-Revision-Date: 2014-01-01 19:39-0500\n"
 "Last-Translator: Michael Johnson <michael@nightexcessive.us>\n"
 "Language-Team: Spanish\n"
@@ -985,6 +985,10 @@ msgstr ""
 
 #: ..\CTRLW.user.js:4984
 msgid "connecté(e)"
+msgstr ""
+
+#: ..\CTRLW.user.js:4988
+msgid "Canal privé"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
