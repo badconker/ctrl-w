@@ -2584,7 +2584,7 @@ Main.k.tabs.playing = function() {
 		}
 		Main.k.Resize;
 	}
-	Main.k.ExtendPilgred = function() {//TODO: MULTILANG
+	Main.k.ExtendPilgred = function() {
 		$("#pilgredbonus").remove();
 		var pilgred = $("#cdBottomBlock div.pilgred").parent().css({
 			position: "relative",
@@ -2604,18 +2604,26 @@ Main.k.tabs.playing = function() {
 		var mushtriumph = -10 * nmush;
 
 		// Print result
-		var res = "<h4>Triomphe retour sur sol</h4>" +
-		"- Retour sur Sol : 20 <br/>" +
-		"- Bonus recherches : " + researchtriumph + "<br/>" +
-		"- Malus mush en vie : " + mushtriumph + "<br/>" +
-		"Total : " + (20 + researchtriumph + mushtriumph);
-		$("<div>").attr("id", "pilgredbonus").css({
-			position: "absolute",
-			top: "3px",
-			left: "54px",
-			width: "140px",
-			"font-size": "11px"
-		}).html(res).appendTo(pilgred);
+		var res = "<h4>"+ Main.k.text.gettext("Triomphe retour sur sol") + "</h4>" +
+		"- " + Main.k.text.gettext("Retour sur Sol :") + " 20 <br/>" +
+		"- " + Main.k.text.gettext("Bonus recherches : ") + researchtriumph + "<br/>" +
+		"- " + Main.k.text.gettext("Malus mush en vie : ") + mushtriumph + "<br/>" +
+		Main.k.text.gettext("Total :") + " " + (20 + researchtriumph + mushtriumph);
+		$("<div>")
+			.attr("id", "pilgredbonus")
+			.attr('_title',Main.k.text.gettext("Triomphe retour sur sol"))
+			.attr('_desc',Main.k.text.gettext("Ne tient pas compte des mushs anonymes."))
+			.css({
+				position: "absolute",
+				top: "3px",
+				left: "54px",
+				width: "140px",
+				"font-size": "11px"
+			})
+			.html(res)
+			.appendTo(pilgred)
+			.on("mouseover", Main.k.CustomTip)
+			.on("mouseout", Main.hideTip);;
 	}
 	Main.k.maxAgo = function(a,b) {//TODO: MULTILANG
 		// TODO: factorize code
