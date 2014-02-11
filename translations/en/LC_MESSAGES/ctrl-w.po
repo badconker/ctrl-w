@@ -532,7 +532,7 @@ msgstr "nothing to report"
 
 #: ..\CTRLW.user.js:2445
 msgid "Recherches"
-msgstr "Researchs"
+msgstr "Researches"
 
 #: ..\CTRLW.user.js:2524
 msgid "Consommables :"
