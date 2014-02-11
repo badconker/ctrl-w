@@ -2520,14 +2520,14 @@ Main.k.tabs.playing = function() {
 
 		return ret;
 	}
-	Main.k.FormatPharma = function() {//TODO: MULTILANG
-		var ret = "**//Consommables : //**";
+	Main.k.FormatPharma = function() {
+		var ret = "**//" + Main.k.text.gettext("Consommables :") + " //**";
 
 		$("#room").find("li").not(".cdEmptySlot").each(function() {
 			var name = $(this).attr("data-name").capitalize();
 			var desc = $(this).attr("data-desc");
 
-			if (desc.indexOf("Effets") != -1) {
+			if (desc.indexOf("Effets") != -1 || $(this).data('id') == "CONSUMABLE") {
 				ret += "\n**" + name + "** : ";
 				ret += desc.substring(desc.indexOf("</em>")+5, desc.length);
 			}
@@ -4687,9 +4687,8 @@ Main.k.tabs.playing = function() {
 			if (name.indexOf(broken) > -1) {
 				$("<img>").attr("src", broken).addClass("broken").appendTo(li.find("tr"));
 			}
-
 			// Pharma?
-			if ($(this).attr("data-desc").indexOf("Effets") != -1) hasPharma = true;
+			if ($(this).attr("data-desc").indexOf("Effets") != -1 || $(this).data('id') == 'CONSUMABLE') hasPharma = true;
 		});
 		$(".usLeftbar .inventory").css("max-width", mwidth + "px").css("margin-left", "0px");
 		// Pharma

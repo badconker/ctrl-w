@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ctrl+w\n"
 "Report-Msgid-Bugs-To: http://twd.io/e/KKyl0g\n"
-"POT-Creation-Date: 2014-02-10 20:38+0100\n"
+"POT-Creation-Date: 2014-02-11 18:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -378,7 +378,7 @@ msgid ""
 ">Bonus : <i>Tireur</i>, <i>Pilote</i></li>"
 msgstr ""
 
-#: ..\CTRLW.user.js:1664 ..\CTRLW.user.js:4743
+#: ..\CTRLW.user.js:1664 ..\CTRLW.user.js:4742
 msgid "Partager les recherches"
 msgstr ""
 
@@ -397,13 +397,13 @@ msgstr ""
 msgid "Partager les paramètres BIOS"
 msgstr ""
 
-#: ..\CTRLW.user.js:1682 ..\CTRLW.user.js:4844
+#: ..\CTRLW.user.js:1682 ..\CTRLW.user.js:4843
 msgid ""
 "Insère la liste de paramètres BIOS Neron dans la zone de texte active, de la "
 "forme&nbsp;:</p><p>TODO: aperçu"
 msgstr ""
 
-#: ..\CTRLW.user.js:1695 ..\CTRLW.user.js:4824
+#: ..\CTRLW.user.js:1695 ..\CTRLW.user.js:4823
 msgid "Partager les planètes"
 msgstr ""
 
@@ -509,6 +509,10 @@ msgstr ""
 
 #: ..\CTRLW.user.js:2445
 msgid "Recherches"
+msgstr ""
+
+#: ..\CTRLW.user.js:2524
+msgid "Consommables :"
 msgstr ""
 
 #: ..\CTRLW.user.js:2607 ..\CTRLW.user.js:2614
@@ -890,8 +894,8 @@ msgstr ""
 msgid "inventaire"
 msgstr ""
 
-#: ..\CTRLW.user.js:4333 ..\CTRLW.user.js:4743 ..\CTRLW.user.js:4824
-#: ..\CTRLW.user.js:4843 ..\CTRLW.user.js:4885
+#: ..\CTRLW.user.js:4333 ..\CTRLW.user.js:4742 ..\CTRLW.user.js:4823
+#: ..\CTRLW.user.js:4842 ..\CTRLW.user.js:4884
 msgid "Partager"
 msgstr ""
 
@@ -964,11 +968,11 @@ msgstr ""
 msgid "Cliquez pour plus d'informations <br/>/!&#92; Fonctionnalité non codée"
 msgstr ""
 
-#: ..\CTRLW.user.js:4707
+#: ..\CTRLW.user.js:4706
 msgid "Laboratoire"
 msgstr ""
 
-#: ..\CTRLW.user.js:4744
+#: ..\CTRLW.user.js:4743
 msgid ""
 "<p>Insère la liste de recherches dans la zone de texte active, de la "
 "forme&nbsp;:</p><p><li><strong>Nom de la recherche</strong> - 0%<br/"
@@ -979,7 +983,7 @@ msgid ""
 "<i>Biologiste</i>, <i>Médecin</i></li></p>"
 msgstr ""
 
-#: ..\CTRLW.user.js:4792
+#: ..\CTRLW.user.js:4791
 msgid ""
 "<p>Insère la liste de projets dans la zone de texte active, de la "
 "forme&nbsp;:</p><p><li><strong>Nom du projet</strong> - 0%<br/>Description "
@@ -989,95 +993,95 @@ msgid ""
 "projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li></p>"
 msgstr ""
 
-#: ..\CTRLW.user.js:4825
+#: ..\CTRLW.user.js:4824
 msgid ""
 "Insère la liste de planètes dans la zone de texte active, de la forme&nbsp;:"
 "</p><p>TODO: aperçu"
 msgstr ""
 
-#: ..\CTRLW.user.js:4843
+#: ..\CTRLW.user.js:4842
 msgid "Partager les paramètres"
 msgstr ""
 
-#: ..\CTRLW.user.js:4861 ..\CTRLW.user.js:4885
+#: ..\CTRLW.user.js:4860 ..\CTRLW.user.js:4884
 msgid "Plantes"
 msgstr ""
 
-#: ..\CTRLW.user.js:4885
+#: ..\CTRLW.user.js:4884
 msgid "Partager l'état des plantes."
 msgstr ""
 
-#: ..\CTRLW.user.js:4992
+#: ..\CTRLW.user.js:4991
 msgid "connecté(e)"
 msgstr ""
 
-#: ..\CTRLW.user.js:4996
+#: ..\CTRLW.user.js:4995
 msgid "Canal privé"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:5222 ..\CTRLW.user.js:5305 ..\CTRLW.user.js:5306
+#: ..\CTRLW.user.js:5221 ..\CTRLW.user.js:5304 ..\CTRLW.user.js:5305
 msgid "Cycle Humain"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:5227
+#: ..\CTRLW.user.js:5226
 msgid "Recherche Mineur"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:5232 ..\CTRLW.user.js:5287 ..\CTRLW.user.js:5288
+#: ..\CTRLW.user.js:5231 ..\CTRLW.user.js:5286 ..\CTRLW.user.js:5287
 msgid "Recherche"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:5237
+#: ..\CTRLW.user.js:5236
 msgid "Défenseur Du Daedalus"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:5242 ..\CTRLW.user.js:5269 ..\CTRLW.user.js:5270
+#: ..\CTRLW.user.js:5241 ..\CTRLW.user.js:5268 ..\CTRLW.user.js:5269
 msgid "Expédition"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:5247
+#: ..\CTRLW.user.js:5246
 msgid "Nouvel Planète"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:5260 ..\CTRLW.user.js:5261
+#: ..\CTRLW.user.js:5259 ..\CTRLW.user.js:5260
 msgid "Nouvelle Planète"
 msgstr ""
 
-#: ..\CTRLW.user.js:5262
+#: ..\CTRLW.user.js:5261
 msgid "Gagné à chaque planète (arrivée en orbite)."
 msgstr ""
 
-#: ..\CTRLW.user.js:5271
+#: ..\CTRLW.user.js:5270
 msgid "Gagné à chaque exploration."
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:5278 ..\CTRLW.user.js:5279
+#: ..\CTRLW.user.js:5277 ..\CTRLW.user.js:5278
 msgid "Recherche Mineure"
 msgstr ""
 
-#: ..\CTRLW.user.js:5280 ..\CTRLW.user.js:5289
+#: ..\CTRLW.user.js:5279 ..\CTRLW.user.js:5288
 msgid ""
 "Gagné lorsque la recherche est terminée ainsi qu'une seconde fois lors du "
 "retour sur SOL."
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:5296 ..\CTRLW.user.js:5297
+#: ..\CTRLW.user.js:5295 ..\CTRLW.user.js:5296
 msgid "Défenseur du Daedalus"
 msgstr ""
 
-#: ..\CTRLW.user.js:5298
+#: ..\CTRLW.user.js:5297
 msgid "Gagné pour chaque Hunter abattu."
 msgstr ""
 
-#: ..\CTRLW.user.js:5307
+#: ..\CTRLW.user.js:5306
 msgid "Gagné à chaque cycle."
 msgstr ""
