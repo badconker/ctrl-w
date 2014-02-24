@@ -9,7 +9,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.33.2
+// @version     0.33.3b1
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -96,7 +96,7 @@ Main.k.initData = function() {
 	Main.k.playing = Main.heroes.iterator().hasNext();
 
 	Main.k.BMAXWIDTH = 1160;
-	Main.k.HEROES =   ["jin_su", "frieda", "kuan_ti", "janice", "roland", "hua", "paola", "chao", "finola", "stephen", "ian", "chun", "raluca", "gioele", "eleesha", "terrence"];
+	Main.k.HEROES =   ["jin_su", "frieda", "kuan_ti", "janice", "roland", "hua", "paola", "chao", "finola", "stephen", "ian", "chun", "raluca", "gioele", "eleesha", "terrence", "andie", "derek"];
 	Main.k.COMMANDERS = ["jin_su", "chao", "gioele", "stephen", "frieda", "kuan_ti", "hua", "roland", "raluca", "finola", "paola", "terrence", "eleesha", "ian", "janice", "chun"];
 	Main.k.COMMS = ["paola", "eleesha", "stephen", "janice", "roland", "hua", "jin_su", "kuan_ti", "gioele", "chun", "ian", "finola", "terrence", "frieda", "chao", "raluca"];
 	Main.k.ADMINS =   ["janice", "terrence", "eleesha", "raluca", "finola", "frieda", "ian", "stephen", "paola", "jin_su", "hua", "kuan_ti", "gioele", "chun", "roland", "chao"];
