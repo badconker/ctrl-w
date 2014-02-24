@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: http://twd.io/e/KKyl0g\n"
-"POT-Creation-Date: 2014-02-11 18:36+0100\n"
+"POT-Creation-Date: 2014-02-24 18:36+0100\n"
 "PO-Revision-Date: 2014-01-01 19:39-0500\n"
 "Last-Translator: Michael Johnson <michael@nightexcessive.us>\n"
 "Language-Team: Spanish\n"
@@ -292,6 +292,10 @@ msgstr ""
 #. Translators: Wiki favicon url */
 #: ..\CTRLW.user.js:303
 msgid "http://www.twinpedia.com/_media/favicon.ico"
+msgstr ""
+
+#: ..\CTRLW.user.js:303
+msgid "Twinpedia"
 msgstr ""
 
 #: ..\CTRLW.user.js:422

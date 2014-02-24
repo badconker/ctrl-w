@@ -300,7 +300,7 @@ Main.k.displayMainMenu = function() {
 	/* Translators: Wiki url */
 	$("<a class='kssmenuel ext' href='"+Main.k.text.gettext("http://www.twinpedia.com/mush")+
 	/* Translators: Wiki favicon url */
-	"'><li><img src='"+Main.k.text.gettext("http://www.twinpedia.com/_media/favicon.ico")+"' />Twinpedia</li></a>").appendTo(help_ss);
+	"'><li><img src='"+Main.k.text.gettext("http://www.twinpedia.com/_media/favicon.ico")+"' />"+Main.k.text.gettext("Twinpedia")+"</li></a>").appendTo(help_ss);
 	$("<a class='kssmenuel ext' href='http://pictoid.bsimo.fr/g/mush'><li><img src='/img/icons/ui/win_triumph.png' />Pictoid</li></a>").appendTo(help_ss);
 
 	if (Main.k.fds) {

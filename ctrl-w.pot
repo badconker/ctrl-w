@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ctrl+w\n"
 "Report-Msgid-Bugs-To: http://twd.io/e/KKyl0g\n"
-"POT-Creation-Date: 2014-02-11 18:40+0100\n"
+"POT-Creation-Date: 2014-02-24 18:36+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -292,6 +292,10 @@ msgstr ""
 #. Translators: Wiki favicon url */
 #: ..\CTRLW.user.js:303
 msgid "http://www.twinpedia.com/_media/favicon.ico"
+msgstr ""
+
+#: ..\CTRLW.user.js:303
+msgid "Twinpedia"
 msgstr ""
 
 #: ..\CTRLW.user.js:422
