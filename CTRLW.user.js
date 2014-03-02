@@ -2250,7 +2250,7 @@ Main.k.tabs.playing = function() {
 				}
 				Main.k.UpdateData.url = json.url;
 				var version = Main.k.version.replace(/([^a-z]*)[a-z]{1}[0-9]*/,'$1');
-				if (version < json.numero || (version == json.numero && /[a-z]+/.test(Main.k.version))) {
+				if (Main.k.version < json.numero || (version == json.numero && /[a-z]+/.test(Main.k.version))) {
 					$("#updatebtn").css("display", "block");
 				} else {
 					if(typeof(lastVersion) != 'undefined' && lastVersion != GM_info.script.version){
