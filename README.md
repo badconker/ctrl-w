@@ -8,6 +8,16 @@ Mush (Spanish) : http://mush.twinoid.es
 
 Initially created by kill0u, now maintained by badconker.
 
+Download
+======
+<ul>
+	<li><strong><a href="https://github.com/badconker/ctrl-w/raw/release/CTRLW.user.js">Last stable release</a></strong></li>
+	<li><a href="https://github.com/badconker/ctrl-w/raw/beta/CTRLW.user.js">Last beta version </a></li>
+	<li><a href="https://github.com/badconker/ctrl-w/raw/master/CTRLW.user.js">Last developpement version (at your own risk :p)</a></li>
+</ul>
+
+
+
 Translators
 ======
 
