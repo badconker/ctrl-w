@@ -9,7 +9,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.33.3b1
+// @version     0.33.3b2
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -97,82 +97,129 @@ Main.k.initData = function() {
 
 	Main.k.BMAXWIDTH = 1160;
 	Main.k.HEROES =   ["jin_su", "frieda", "kuan_ti", "janice", "roland", "hua", "paola", "chao", "finola", "stephen", "ian", "chun", "raluca", "gioele", "eleesha", "terrence", "andie", "derek"];
-	Main.k.COMMANDERS = ["jin_su", "chao", "gioele", "stephen", "frieda", "kuan_ti", "hua", "roland", "raluca", "finola", "paola", "terrence", "eleesha", "ian", "janice", "chun"];
-	Main.k.COMMS = ["paola", "eleesha", "stephen", "janice", "roland", "hua", "jin_su", "kuan_ti", "gioele", "chun", "ian", "finola", "terrence", "frieda", "chao", "raluca"];
-	Main.k.ADMINS =   ["janice", "terrence", "eleesha", "raluca", "finola", "frieda", "ian", "stephen", "paola", "jin_su", "hua", "kuan_ti", "gioele", "chun", "roland", "chao"];
+	Main.k.COMMANDERS = ["jin_su", "chao", "gioele", "stephen", "frieda", "kuan_ti", "hua", "derek", "roland", "raluca", "finola", "paola", "terrence", "eleesha", "andie", "ian", "janice", "chun"];
+	Main.k.COMMS = ["paola", "eleesha", "andie", "stephen", "janice", "roland", "hua", "derek", "jin_su", "kuan_ti", "gioele", "chun", "ian", "finola", "terrence", "frieda", "chao", "raluca"];
+	Main.k.ADMINS =   ["janice", "terrence", "eleesha", "raluca", "finola", "andie", "frieda", "ian", "stephen", "paola", "jin_su", "hua", "kuan_ti", "gioele", "chun", "roland", "chao", "derek"];
 
-	Main.k.HEROES.short_desc = [
-		/* Translators: This translation must be copied from the game. */
-		Main.k.text.gettext("Commandant suprême du Daedalus."), 
-		/* Translators: This translation must be copied from the game. */
-		Main.k.text.gettext("Scientifique millénaire."),
-		/* Translators: This translation must be copied from the game. */
-		Main.k.text.gettext("Grand architecte du Daedalus."),
-		/* Translators: This translation must be copied from the game. */
-		Main.k.text.gettext("Psychologue Digitale aux atouts certains."),
-		/* Translators: This translation must be copied from the game. */
-		Main.k.text.gettext("Humoriste pilote de chasse à ses heures."),
-		/* Translators: This translation must be copied from the game. */
-		Main.k.text.gettext("Exploratrice de l'extrême."),
-		/* Translators: This translation must be copied from the game. */
-		Main.k.text.gettext("Officier principal des Communications du Daedalus."),
-		/* Translators: This translation must be copied from the game. */
-		Main.k.text.gettext("Chef de la sécurité du Daedalus."),
-		/* Translators: This translation must be copied from the game. */
-		Main.k.text.gettext("Biologiste de renommée internationale, pionnière dans l'étude du Mush."),
-		/* Translators: This translation must be copied from the game. */
-		Main.k.text.gettext("Cuisinier le plus dangereux de la galaxie.")
-		/* Translators: This translation must be copied from the game. */,
-		Main.k.text.gettext("Chercheur frugivore flexible."),
-		/* Translators: This translation must be copied from the game. */
-		Main.k.text.gettext("Dernier espoir de l'Humanité."),
-		/* Translators: This translation must be copied from the game. */
-		Main.k.text.gettext("Génie de la physique quantique félinophile."),
-		/* Translators: This translation must be copied from the game. */
-		Main.k.text.gettext("Armateur philantrophobe."),
-		/* Translators: This translation must be copied from the game. */
-		Main.k.text.gettext("Investigatrice déchue de premier plan."),
-		/* Translators: This translation must be copied from the game. */
-		Main.k.text.gettext("Technophile motorisé.")
-	];
-
-	Main.k.HEROES.tutorials = {
-		/* Translators: Thread id for this character's tutorial. */
-		mush: Main.k.text.gettext("tutorial_id:mush"),
-		/* Translators: Thread id for this character's tutorial. */
-		eleesha: Main.k.text.gettext("tutorial_id:eleesha"),
-		/* Translators: Thread id for this character's tutorial. */
-		janice: Main.k.text.gettext("tutorial_id:janice"),
-		/* Translators: Thread id for this character's tutorial. */
-		chao: Main.k.text.gettext("tutorial_id:chao"),
-		/* Translators: Thread id for this character's tutorial. */
-		terrence: Main.k.text.gettext("tutorial_id:terrence"),
-		/* Translators: Thread id for this character's tutorial. */
-		paola: Main.k.text.gettext("tutorial_id:paola"),
-		/* Translators: Thread id for this character's tutorial. */
-		raluca: Main.k.text.gettext("tutorial_id:raluca"),
-		/* Translators: Thread id for this character's tutorial. */
-		roland: Main.k.text.gettext("tutorial_id:roland"),
-		/* Translators: Thread id for this character's tutorial. */
-		ian: Main.k.text.gettext("tutorial_id:ian"),
-		/* Translators: Thread id for this character's tutorial. */
-		frieda: Main.k.text.gettext("tutorial_id:frieda"),
-		/* Translators: Thread id for this character's tutorial. */
-		finola: Main.k.text.gettext("tutorial_id:finola"),
-		/* Translators: Thread id for this character's tutorial. */
-		"jin su": Main.k.text.gettext("tutorial_id:jin su"),
-		/* Translators: Thread id for this character's tutorial. */
-		gioele: Main.k.text.gettext("tutorial_id:gioele"),
-		/* Translators: Thread id for this character's tutorial. */
-		"kuan ti": Main.k.text.gettext("tutorial_id:kuan ti"),
-		/* Translators: Thread id for this character's tutorial. */
-		chun: Main.k.text.gettext("tutorial_id:chun"),
-		/* Translators: Thread id for this character's tutorial. */
-		hua: Main.k.text.gettext("tutorial_id:hua"),
-		/* Translators: Thread id for this character's tutorial. */
-		stephen: Main.k.text.gettext("tutorial_id:stephen")
-	};
-
+	Main.k.HEROES.replace = {
+		andie:'finola',
+		derek:'chao'
+	}
+	Main.k.h = {
+		mush:{
+			/* Translators: Thread id for this character's tutorial. */
+			tutorial:Main.k.text.gettext("tutorial_id:mush"),
+		},
+		jin_su:{
+			/* Translators: This translation must be copied from the game. */
+			short_desc:Main.k.text.gettext("Commandant suprême du Daedalus."),
+			/* Translators: Thread id for this character's tutorial. */
+			tutorial:Main.k.text.gettext("tutorial_id:jin_su"),
+		},
+		frieda:{
+			/* Translators: This translation must be copied from the game. */
+			short_desc:Main.k.text.gettext("Scientifique millénaire."),
+			/* Translators: Thread id for this character's tutorial. */
+			tutorial:Main.k.text.gettext("tutorial_id:frieda"),
+		},
+		kuan_ti:{
+			/* Translators: This translation must be copied from the game. */
+			short_desc:Main.k.text.gettext("Grand architecte du Daedalus."),
+			/* Translators: Thread id for this character's tutorial. */
+			tutorial:Main.k.text.gettext("tutorial_id:kuan_ti"),
+		},
+		janice:{
+			/* Translators: This translation must be copied from the game. */
+			short_desc:Main.k.text.gettext("Psychologue Digitale aux atouts certains."),
+			/* Translators: Thread id for this character's tutorial. */
+			tutorial:Main.k.text.gettext("tutorial_id:janice"),
+		},
+		roland:{
+			/* Translators: This translation must be copied from the game. */
+			short_desc:Main.k.text.gettext("Humoriste pilote de chasse à ses heures."),
+			/* Translators: Thread id for this character's tutorial. */
+			tutorial:Main.k.text.gettext("tutorial_id:roland"),
+		},
+		hua:{
+			/* Translators: This translation must be copied from the game. */
+			short_desc:Main.k.text.gettext("Exploratrice de l'extrême."),
+			/* Translators: Thread id for this character's tutorial. */
+			tutorial:Main.k.text.gettext("tutorial_id:hua"),
+		},
+		paola:{
+			/* Translators: This translation must be copied from the game. */
+			short_desc:Main.k.text.gettext("Officier principal des Communications du Daedalus."),
+			/* Translators: Thread id for this character's tutorial. */
+			tutorial:Main.k.text.gettext("tutorial_id:paola"),
+		},
+		chao:{
+			/* Translators: This translation must be copied from the game. */
+			short_desc:Main.k.text.gettext("Chef de la sécurité du Daedalus."),
+			/* Translators: Thread id for this character's tutorial. */
+			tutorial:Main.k.text.gettext("tutorial_id:chao"),
+		},
+		finola:{
+			/* Translators: This translation must be copied from the game. */
+			short_desc:Main.k.text.gettext("Biologiste de renommée internationale, pionnière dans l'étude du Mush."),
+			/* Translators: Thread id for this character's tutorial. */
+			tutorial:Main.k.text.gettext("tutorial_id:finola"),
+		},
+		stephen:{
+			/* Translators: This translation must be copied from the game. */
+			short_desc:Main.k.text.gettext("Cuisinier le plus dangereux de la galaxie."),
+			/* Translators: Thread id for this character's tutorial. */
+			tutorial:Main.k.text.gettext("tutorial_id:stephen"),
+		},
+		ian:{
+			/* Translators: This translation must be copied from the game. */
+			short_desc:Main.k.text.gettext("Chercheur frugivore flexible."),
+			/* Translators: Thread id for this character's tutorial. */
+			tutorial:Main.k.text.gettext("tutorial_id:ian"),
+		},
+		chun:{
+			/* Translators: This translation must be copied from the game. */
+			short_desc:Main.k.text.gettext("Dernier espoir de l'Humanité."),
+			/* Translators: Thread id for this character's tutorial. */
+			tutorial:Main.k.text.gettext("tutorial_id:chun"),
+		},
+		raluca:{
+			/* Translators: This translation must be copied from the game. */
+			short_desc:Main.k.text.gettext("Génie de la physique quantique félinophile."),
+			/* Translators: Thread id for this character's tutorial. */
+			tutorial:Main.k.text.gettext("tutorial_id:raluca"),
+		},
+		gioele:{
+			/* Translators: This translation must be copied from the game. */
+			short_desc:Main.k.text.gettext("Armateur philantrophobe."),
+			/* Translators: Thread id for this character's tutorial. */
+			tutorial:Main.k.text.gettext("tutorial_id:gioele"),
+		},
+		eleesha:{
+			/* Translators: This translation must be copied from the game. */
+			short_desc:Main.k.text.gettext("Investigatrice déchue de premier plan."),
+			/* Translators: Thread id for this character's tutorial. */
+			tutorial:Main.k.text.gettext("tutorial_id:eleesha"),
+		},
+		terrence:{
+			/* Translators: This translation must be copied from the game. */
+			short_desc:Main.k.text.gettext("Technophile motorisé."),
+			/* Translators: Thread id for this character's tutorial. */
+			tutorial:Main.k.text.gettext("tutorial_id:terrence"),
+		},
+		andie:{
+			/* Translators: This translation must be copied from the game. */
+			short_desc:Main.k.text.gettext("Fayot de la fédération."),
+			/* Translators: Thread id for this character's tutorial. */
+			tutorial:Main.k.text.gettext("tutorial_id:andie"),
+		},
+		derek:{
+			/* Translators: This translation must be copied from the game. */
+			short_desc:Main.k.text.gettext("Héros malgré lui."),
+			/* Translators: Thread id for this character's tutorial. */
+			tutorial:Main.k.text.gettext("tutorial_id:derek"),
+		}
+		
+	}
 	Main.k.cssToHeroes = [];
 	Main.k.cssToHeroes["-1185px"] = "janice";
 	Main.k.cssToHeroes["-1282px"] = "chao";
@@ -293,9 +340,9 @@ Main.k.displayMainMenu = function() {
 	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/help'><li><img src='/img/icons/skills/genius.png' />"+Main.k.text.gettext("Aide Mush")+"</li></a>").appendTo(help_ss);
 	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/patchlog'><li><img src='/img/icons/skills/persistent.png' />"+Main.k.text.gettext("Patchlog")+"</li></a>").appendTo(help_ss);
 
-	if (Main.k.ownHero && Main.k.HEROES.tutorials[Main.k.ownHero] != "tutorial_id:"+Main.k.ownHero) {
+	if (Main.k.ownHero && typeof(Main.k.h[Main.k.ownHero]) != 'undefined') {
 		var charname = Main.k.ownHero.replace("_", "");
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumAdviceId")+"|thread/" + Main.k.HEROES.tutorials[Main.k.ownHero] + "'><li><img src='/img/icons/ui/" + charname + ".png' />" + Main.k.text.strargs(Main.k.text.gettext("Tuto %1"), [Main.k.ownHero.capitalize()]) + "</li></a>").appendTo(help_ss);
+		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumAdviceId")+"|thread/" + Main.k.h[Main.k.ownHero].tutorial + "'><li><img src='/img/icons/ui/" + charname + ".png' />" + Main.k.text.strargs(Main.k.text.gettext("Tuto %1"), [Main.k.ownHero.capitalize()]) + "</li></a>").appendTo(help_ss);
 	}
 	/* Translators: Wiki url */
 	$("<a class='kssmenuel ext' href='"+Main.k.text.gettext("http://www.twinpedia.com/mush")+
@@ -408,11 +455,6 @@ Main.k.GetHeroNameFromTopic = function(topic) {
 
 	// If no hero found (hero = "" or hero = undefined), use jin su
 	return hero ? hero : "jin_su";
-}
-Main.k.getShortDesc = function(hero) {
-	for (var i=0; i<Main.k.HEROES.length; i++) {
-		if (Main.k.HEROES[i] == hero) return Main.k.HEROES.short_desc[i];
-	}
 }
 Main.k.SyncAstropad = function(tgt){
 	if($('#astro_maj_inventaire').length > 0){
@@ -1373,7 +1415,17 @@ Main.k.css.bubbles = function() {
 Main.k.tabs = {};
 Main.k.tabs.playing = function() {
 	Main.k.css.ingame();
-
+	
+	//replace heroes
+	$.each(Main.k.HEROES.replace, function(k,v){
+		if($('.'+k).length > 0){
+			var index = $.inArray(v,Main.k.HEROES);
+		}else{
+			var index = $.inArray(k,Main.k.HEROES);
+		}
+		Main.k.HEROES.splice(index,1);
+	});
+	
 	// Open links in a new tab
 	$("ul.kmenu a.ext").on("click", function() { Main.k.window.open(this.href); return false; });
 	Main.k.hasTalkie = $("#walltab").length > 0;
@@ -4512,7 +4564,6 @@ Main.k.tabs.playing = function() {
 					.appendTo(titles);
 				}
 			}
-
 			if (display) {
 				var heroDiv = $("<div>").addClass("hero").appendTo(heroes_list);
 
@@ -4539,50 +4590,28 @@ Main.k.tabs.playing = function() {
 			Main.k.AliveHeroes.push(bubble);
 		}
 		// Display unavailable heroes
-		if (missingheroes.length > 0) {
-			var missingDiv = $("<div>").addClass("missingheroes").appendTo(heroes_list);
-
-			for (var i=0; i<missingheroes.length; i++) {
-				if (i%5 == 0) $("<br/>").appendTo(missingDiv);
-				var hero = missingheroes[i];
-				var bubble = hero.surname.replace(/(\s)/g, "_").toLowerCase();
+		var missingDiv = $("<div>").addClass("missingheroes").appendTo(heroes_list);
+		var j=0;
+		for (var i=0; i<Main.k.HEROES.length; i++) {
+			var hero = Main.k.HEROES[i];
+			var h = Main.k.h[hero];
+			if (!Main.k.ArrayContains(Main.k.AliveHeroes, hero)) {
+				if ((j+missingheroes.length)%5 == 0) $("<br/>").appendTo(missingDiv);
+				j++;
+				var bubble = hero.replace(/(\s)/g, "_").toLowerCase();
 
 				$("<img>").addClass("body " + bubble)
 				.attr("src", "/img/design/pixel.gif")
 				.css("cursor", "pointer")
-				.attr("_hid", hero.id)
-				.attr("_title", hero.name)
-				.attr("_desc", hero.short_desc + "</p><p><strong>"+Main.k.text.gettext("Cliquez pour plus d'informations <br/>/!&#92; Fonctionnalité non codée")+"</strong>")
+				.attr("_hid", -1)
+				.attr("_title", hero)
+				.attr("_desc", h.short_desc + "</p><p><strong>"+Main.k.text.gettext("Cliquez pour plus d'informations <br/>/!&#92; Fonctionnalité non codée")+"</strong>")
 				.on("mouseover", Main.k.CustomTip)
 				.on("mouseout", Main.hideTip)
 				.on("click", function() {
-					Main.k.Profiles.display($(this).attr("_hid"));
+					Main.k.Profiles.display($(this).attr("_hid"), hero);
 				})
 				.appendTo(missingDiv);
-			}
-
-			var j=0;
-			for (var i=0; i<Main.k.HEROES.length; i++) {
-				var hero = Main.k.HEROES[i];
-
-				if (!Main.k.ArrayContains(Main.k.AliveHeroes, hero)) {
-					if ((j+missingheroes.length)%5 == 0) $("<br/>").appendTo(missingDiv);
-					j++;
-					var bubble = hero.replace(/(\s)/g, "_").toLowerCase();
-
-					$("<img>").addClass("body " + bubble)
-					.attr("src", "/img/design/pixel.gif")
-					.css("cursor", "pointer")
-					.attr("_hid", -1)
-					.attr("_title", hero)
-					.attr("_desc", Main.k.getShortDesc(bubble) + "</p><p><strong>"+Main.k.text.gettext("Cliquez pour plus d'informations <br/>/!&#92; Fonctionnalité non codée")+"</strong>")
-					.on("mouseover", Main.k.CustomTip)
-					.on("mouseout", Main.hideTip)
-					.on("click", function() {
-						Main.k.Profiles.display($(this).attr("_hid"), hero);
-					})
-					.appendTo(missingDiv);
-				}
 			}
 		}
 		// ----------------------------------- //
@@ -4611,12 +4640,13 @@ Main.k.tabs.playing = function() {
 						var p = li.html().split(",");
 						for (var j=0; j<p.length; j++) {
 							var hero = p[j].trim();
+							var h = Main.k.h[hero];
 							var bubble = hero.replace(/(\s)/g, "_").toLowerCase();
 
 							$("<img>").addClass("body " + bubble)
 							.attr("src", "/img/design/pixel.gif")
 							.attr("_title", hero)
-							.attr("_desc", Main.k.getShortDesc(bubble))
+							.attr("_desc", h.short_desc)
 							.on("mouseover", Main.k.CustomTip)
 							.on("mouseout", Main.hideTip)
 							.appendTo(players);
