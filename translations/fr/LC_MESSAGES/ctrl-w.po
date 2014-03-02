@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ctrl+w\n"
 "Report-Msgid-Bugs-To: http://twd.io/e/KKyl0g\n"
-"POT-Creation-Date: 2014-03-02 13:45+0100\n"
+"POT-Creation-Date: 2014-03-02 15:38+0100\n"
 "PO-Revision-Date: 2014-03-02 13:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -313,10 +313,11 @@ msgstr ""
 msgid "http://www.twinpedia.com/_media/favicon.ico"
 msgstr ""
 
-#: ..\CTRLW.user.js:464
+#: ..\CTRLW.user.js:350
 msgid "Twinpedia"
 msgstr ""
 
+#: ..\CTRLW.user.js:464
 msgid "Astropad synchronisé."
 msgstr ""
 
