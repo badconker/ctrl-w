@@ -278,7 +278,7 @@ Main.k.displayMainMenu = function() {
 	var fix = $("ul.mtabs").length > 0 ? 70 : 20;
 	$("#maincontainer, .boxcontainer").css("margin", fix + "px auto 0");
 
-	Main.k.ownHero = ($(".who").length > 0 ) ? $(".who").html().toLowerCase().trim() : false;
+	Main.k.ownHero = ($(".hero h1.who").length > 0 ) ? $(".who").html().toLowerCase().trim() : false;
 	Main.k.silver = true; //TODO
 	Main.k.fds = ($("a.butmini[href='/fds']").length > 0);
 	var menu = $("<ul>").addClass("kmenu").insertBefore("#maincontainer, .boxcontainer");
@@ -347,7 +347,7 @@ Main.k.displayMainMenu = function() {
 	/* Translators: Wiki url */
 	$("<a class='kssmenuel ext' href='"+Main.k.text.gettext("http://www.twinpedia.com/mush")+
 	/* Translators: Wiki favicon url */
-	"'><li><img src='"+Main.k.text.gettext("http://www.twinpedia.com/_media/favicon.ico")+"' />Twinpedia</li></a>").appendTo(help_ss);
+	"'><li><img src='"+Main.k.text.gettext("http://www.twinpedia.com/_media/favicon.ico")+"' />"+Main.k.text.gettext("Twinpedia")+"</li></a>").appendTo(help_ss);
 	$("<a class='kssmenuel ext' href='http://pictoid.bsimo.fr/g/mush'><li><img src='/img/icons/ui/win_triumph.png' />Pictoid</li></a>").appendTo(help_ss);
 
 	if (Main.k.fds) {

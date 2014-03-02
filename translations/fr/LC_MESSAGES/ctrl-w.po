@@ -314,6 +314,9 @@ msgid "http://www.twinpedia.com/_media/favicon.ico"
 msgstr ""
 
 #: ..\CTRLW.user.js:464
+msgid "Twinpedia"
+msgstr ""
+
 msgid "Astropad synchronisé."
 msgstr ""
 

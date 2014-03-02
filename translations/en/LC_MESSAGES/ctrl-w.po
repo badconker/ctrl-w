@@ -192,7 +192,6 @@ msgstr ""
 
 #. Translators: Thread id for this character's tutorial. */
 #: ..\CTRLW.user.js:213
-#, fuzzy
 msgid "tutorial_id:andie"
 msgstr "32488283"
 
@@ -203,7 +202,6 @@ msgstr ""
 
 #. Translators: Thread id for this character's tutorial. */
 #: ..\CTRLW.user.js:219
-#, fuzzy
 msgid "tutorial_id:derek"
 msgstr "32323021"
 
@@ -319,6 +317,9 @@ msgid "http://www.twinpedia.com/_media/favicon.ico"
 msgstr "http://mushpedia.com/favicon.ico"
 
 #: ..\CTRLW.user.js:464
+msgid "Twinpedia"
+msgstr "Mushpedia"
+
 msgid "Astropad synchronisé."
 msgstr "Astropad synchronised."
 
