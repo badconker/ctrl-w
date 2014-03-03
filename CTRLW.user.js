@@ -4640,8 +4640,8 @@ Main.k.tabs.playing = function() {
 						var p = li.html().split(",");
 						for (var j=0; j<p.length; j++) {
 							var hero = p[j].trim();
-							var h = Main.k.h[hero];
 							var bubble = hero.replace(/(\s)/g, "_").toLowerCase();
+							var h = Main.k.h[bubble];
 
 							$("<img>").addClass("body " + bubble)
 							.attr("src", "/img/design/pixel.gif")
