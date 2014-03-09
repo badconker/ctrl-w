@@ -38,7 +38,7 @@ var Utils = unsafeWindow.Utils;
 var Closet = unsafeWindow.Closet;
 var mt = unsafeWindow.mt;
 var jQuery = unsafeWindow.jQuery;
-
+var window = unsafeWindow;
 Main.k = function() {};
 Main.k.window = unsafeWindow;
 Main.k.version = GM_info.script.version;
@@ -1896,29 +1896,56 @@ Main.k.tabs.playing = function() {
 		} else Tools.send2Store("mush_wallReply_" + tgt.attr("id"),tgt.val());
 	}
 
-	Main.loadMoreWall = function(jq) {
+	Main.loadMoreWall = function() {
 		if(Main.lmwProcessing) return;
 		Main.lmwProcessing = true;
-		var w = Main.getChannel(Main.curChatIndex()).find("div.wall div.unit").last();
+		Main.lmw_spin++;
+		var chan = Main.getChannel(Main.curChatIndex()).find("div.wall div.unit");
+		var w = chan.last();
 		var wp = w.closest(".wall");
 		if(w.length > 0) {
 			JqEx.postLoading(wp);
-			Tools.ping("/retrWallAfter/" + w.data("k"),function(content) {
-				var jq1 = $(content);
+			var url = "/retrWallAfter/" + Std.string(w.data("k"));
+			Tools.ping(url,function(content) {
+				var jq = new js.JQuery(content);
 				JqEx.remLoading(wp);
-				w.removeClass("cdLast"); // TODO: remove?
-				wp.append(jq1.find(".wall").html());
+				var subWall = Lambda.list(jq.find(".wall form"));
+				var $it0 = subWall.iterator();
+				while( $it0.hasNext() ) {
+					var e = $it0.next();
+					var u = e.find(".unit");
+					if(u == null) continue;
+					var $it1 = (function($this) {
+						var $r;
+						var _this = wp.find(".unit");
+						$r = (_this.iterator)();
+						return $r;
+					}(this));
+					while( $it1.hasNext() ) {
+						var we = $it1.next();
+						var uk = u.data("k");
+						var wk = we.data("k");
+						haxe.Log.trace(uk + " <>  " + wk,{ fileName : "Main.hx", lineNumber : 3841, className : "Main", methodName : "loadMoreWall"});
+						if(wk == uk) subWall.remove(e);
+					}
+				}
+				var $it2 = subWall.iterator();
+				while( $it2.hasNext() ) {
+					var w1 = $it2.next();
+					wp.append(w1.html());
+				}
 				Main.lmwProcessing = false;
-
+				
+				/***** CTRL+W *****/
 				if (Main.k.Options.cbubbles) Main.k.customBubbles();
-
+	
 				// Never hide unread msg
 				$("table.treereply tr.not_read.cdRepl").css("display", "table-row");
+				/***** CTRL+W *****/
+				
 			});
-		} else {
-			Main.lmwProcessing = false;
-		}
-	}
+		} else Main.lmwProcessing = false;
+	};
 	Main.resetJs = function(doActions, skipK) {
 		if(doActions == null) doActions = true;
 		$(".cdLoading").remove();
