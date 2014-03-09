@@ -38,7 +38,7 @@ var Utils = unsafeWindow.Utils;
 var Closet = unsafeWindow.Closet;
 var mt = unsafeWindow.mt;
 var jQuery = unsafeWindow.jQuery;
-var window = unsafeWindow;
+
 Main.k = function() {};
 Main.k.window = unsafeWindow;
 Main.k.version = GM_info.script.version;
