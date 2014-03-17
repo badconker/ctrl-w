@@ -485,7 +485,7 @@ Main.k.displayRemainingCyclesToNextLevel = function (){
 				var xp_by_cycle = 1
 			}
 			var i_cycles = RegExp.$2;
-			var remaining_cycles = i_cycles -(Main.k.Game.data.xp * xp_by_cycle);
+			var remaining_cycles = Math.ceil(i_cycles/xp_by_cycle - Main.k.Game.data.xp / xp_by_cycle);
 			$(this).attr('onmouseover',$(this).attr('onmouseover').replace(regex,"$1"+remaining_cycles+"$3"));
 		}
 		
@@ -526,10 +526,12 @@ Main.k.Game.updatePlayerInfos = function() {
 		if(jobject.find('#cdActualXp').length > 0){
 			Main.k.Game.data.xp = jobject.find('#cdActualXp').text();
 		}
-		if($('#experience .banner').length > 0){
-			Main.k.Game.data.player_status = 'bronze';
-		}else{
+		if(jobject.find('#experience .bought.goldactive').length > 0){
+			Main.k.Game.data.player_status = 'gold';
+		}else if(jobject.find('#experience .bought').length > 0){
 			Main.k.Game.data.player_status = 'silver';
+		}else{
+			Main.k.Game.data.player_status = 'bronze';
 		}
 		$this.save();
 		Main.k.MushUpdate();
@@ -4437,7 +4439,7 @@ Main.k.tabs.playing = function() {
 		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/new.png' /> "+ Main.k.text.gettext("Mise à jour"), null, null, Main.k.text.gettext("Mise à jour du script"),
 			"Une nouvelle version du script CTRL+W est disponible.")
 		.appendTo(leftbar).attr("id", "updatebtn").css("display", "none").find("a").on("mousedown", Main.k.UpdateDialog);
-		$('<div id="player_status" sqtyle="text-align:center">bronze</div>').appendTo(leftbar);
+		$('<div id="player_status" style="text-align:center;font-size:10px;">bronze</div>').appendTo(leftbar);
 		// Message Manager
 		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/archive.png' style='vertical-align: -20%' /> "+ Main.k.text.gettext("Msg Manager"), null, null, Main.k.text.gettext("Message Manager"),
 			Main.k.text.gettext("Ne manquez plus de messages ! Tous les topics avec des messages non lus seront mis en évidence, et vous pourrez effectuer des recherches par auteur ou contenu."))
@@ -4611,7 +4613,7 @@ Main.k.tabs.playing = function() {
 			
 			
 		}
-		$('#player_status').text(Main.k.Game.data.player_status);
+		$('#player_status').text('current status : '+ Main.k.Game.data.player_status);
 		Main.k.displayRemainingCyclesToNextLevel();
 		
 		// Heroes
