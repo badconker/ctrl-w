@@ -467,6 +467,75 @@ Main.k.SyncAstropad = function(tgt){
 		);
 	}
 }
+// Shows the actual number of remaining cycles
+Main.k.displayRemainingCyclesToNextLevel = function (){
+	
+	$('.levelingame').each(function(){
+		var regex = /(<p>.*>)([0-9]+)(.*<\/p>)/;
+		if($(this).attr('onmouseover_save') !== undefined){
+			var attr = $(this).attr('onmouseover_save');
+		}else{
+			var attr = $(this).attr('onmouseover');
+			$(this).attr('onmouseover_save',attr);
+		}
+		if(regex.exec(attr) != null){
+			if(Main.k.Game.data.player_status == 'gold'){
+				var xp_by_cycle = 2
+			}else{
+				var xp_by_cycle = 1
+			}
+			var i_cycles = RegExp.$2;
+			var remaining_cycles = i_cycles -(Main.k.Game.data.xp * xp_by_cycle);
+			$(this).attr('onmouseover',$(this).attr('onmouseover').replace(regex,"$1"+remaining_cycles+"$3"));
+		}
+		
+	});
+}
+
+// == Game Manager
+Main.k.Game = {};
+Main.k.Game.data = {};
+Main.k.Game.data.day = 0;
+Main.k.Game.data.cycle = 0;
+Main.k.Game.data.xp = 1;
+Main.k.Game.data.player_status = 'bronze';
+Main.k.Game.init = function() {
+	var cook = js.Cookie.get("ctrlwgame");
+	if (!cook){
+		return
+	};
+	Main.k.Game.data = JSON.parse(cook);
+	console.log(Main.k.Game.data);
+}
+Main.k.Game.save = function() {
+	js.Cookie.set("ctrlwgame",JSON.stringify(Main.k.Game.data),420000000);
+}
+Main.k.Game.updateDayAndCycle = function(day,cycle) {
+	if(day != this.data.day || cycle != this.data.cycle){
+		this.data.day = day;
+		this.data.cycle = cycle;
+		this.updatePlayerInfos();
+		this.save();
+	}
+}
+Main.k.Game.updatePlayerInfos = function() {
+	var $this = this;
+	Tools.ping('/me',function(content) {
+		var body = '<div id="body-mock">' + content.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/g, '') + '</div>';
+		var jobject = $(body);
+		if(jobject.find('#cdActualXp').length > 0){
+			Main.k.Game.data.xp = jobject.find('#cdActualXp').text();
+		}
+		if($('#experience .banner').length > 0){
+			Main.k.Game.data.player_status = 'bronze';
+		}else{
+			Main.k.Game.data.player_status = 'silver';
+		}
+		$this.save();
+		Main.k.MushUpdate();
+		
+	});
+}
 
 // == Options Manager  ========================================
 Main.k.Options = {};
@@ -4368,7 +4437,7 @@ Main.k.tabs.playing = function() {
 		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/new.png' /> "+ Main.k.text.gettext("Mise à jour"), null, null, Main.k.text.gettext("Mise à jour du script"),
 			"Une nouvelle version du script CTRL+W est disponible.")
 		.appendTo(leftbar).attr("id", "updatebtn").css("display", "none").find("a").on("mousedown", Main.k.UpdateDialog);
-
+		$('<div id="player_status" sqtyle="text-align:center">bronze</div>').appendTo(leftbar);
 		// Message Manager
 		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/archive.png' style='vertical-align: -20%' /> "+ Main.k.text.gettext("Msg Manager"), null, null, Main.k.text.gettext("Message Manager"),
 			Main.k.text.gettext("Ne manquez plus de messages ! Tous les topics avec des messages non lus seront mis en évidence, et vous pourrez effectuer des recherches par auteur ou contenu."))
@@ -4390,6 +4459,7 @@ Main.k.tabs.playing = function() {
 			Main.doChatPacks();
 			Main.topChat();
 			Main.onChanDone(ChatType.Local[1],true)
+			Main.k.refreshAll();
 		});
 		// ----------------------------------- //
 
@@ -4530,7 +4600,20 @@ Main.k.tabs.playing = function() {
 
 		// Never hide unread msg
 		$("table.treereply tr.not_read.cdRepl").css("display", "table-row");
-
+		
+		// Day and cycle save
+		if($('.cycletime').length > 0){
+			var regex = new RegExp(/.*([0-9]{1}).*-.*([0-9]{1})/);
+			var result = regex.exec($('.cycletime').text());
+			if(result != null){
+				Main.k.Game.updateDayAndCycle(result[1],result[2]);
+			}
+			
+			
+		}
+		$('#player_status').text(Main.k.Game.data.player_status);
+		Main.k.displayRemainingCyclesToNextLevel();
+		
 		// Heroes
 		// ----------------------------------- //
 		var heroes_list = $("#heroes_list").empty();
@@ -5391,6 +5474,7 @@ eval(GM_getResourceText('mush'));
 // Script initialization
 Main.k.initLang();
 Main.k.Options.init();
+Main.k.Game.init();
 Main.k.initData();
 Main.k.displayMainMenu();
 
