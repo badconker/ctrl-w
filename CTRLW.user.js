@@ -520,6 +520,7 @@ Main.k.Game.updateDayAndCycle = function(day,cycle) {
 	if(day != this.data.day || cycle != this.data.cycle){
 		this.data.day = day;
 		this.data.cycle = cycle;
+		Main.k.onCycleChange();
 		this.updatePlayerInfos();
 		this.save();
 	}
@@ -4495,7 +4496,6 @@ Main.k.tabs.playing = function() {
 			Main.doChatPacks();
 			Main.topChat();
 			Main.onChanDone(ChatType.Local[1],true)
-			Main.k.refreshAll();
 		});
 		// ----------------------------------- //
 
@@ -4630,6 +4630,12 @@ Main.k.tabs.playing = function() {
 		$(Main.k.window).resize(Main.k.Resize);
 		$("#chatBlock").on("resize", Main.k.Resize);
 	}
+	Main.k.onCycleChange = function(){
+		// Script updates
+		// ----------------------------------- //
+		Main.k.UpdateCheck();
+		// ----------------------------------- //
+	};
 	Main.k.MushUpdate = function() {
 		var leftbar = $(".usLeftbar");
 		Main.k.hasTalkie = $("#walltab").length > 0;
@@ -5187,12 +5193,6 @@ Main.k.tabs.playing = function() {
 				.on("mouseout", Main.hideTip);
 			}
 		}
-		// ----------------------------------- //
-
-
-		// Script updates
-		// ----------------------------------- //
-		Main.k.UpdateCheck();
 		// ----------------------------------- //
 
 		// Update manager?
