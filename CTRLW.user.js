@@ -2696,7 +2696,9 @@ Main.k.tabs.playing = function() {
 		var o_replace = {};
 		/* Translators: This translation must be copied from the game. (Consummables description) */
 		o_replace[Main.k.text.gettext("Guérie la maladie")] = ':pa_heal:';
+		/* Translators: This translation must be copied from the game. (Consummables description) */
 		o_replace[Main.k.text.gettext("satiété")] = ':pa_cook:';
+		/* Translators: This translation must be copied from the game. (Consummables description) */
 		o_replace[Main.k.text.gettext("Provoque la maladie")] = ':ill:';
 		
 		var a_ignore = [];
