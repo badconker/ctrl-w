@@ -10,7 +10,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.33.4
+// @version     0.33.5
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -2354,39 +2354,55 @@ Main.k.tabs.playing = function() {
 	// == User Script  ============================================
 	// ============================================================
 	Main.k.UpdateData = {currversion: 0, changelog: []};
-	Main.k.UpdateCheck = function() {
+	Main.k.UpdateCheck = function(online) {
 		var lastVersion = js.Cookie.get('ctrlwVersion');
 		if(typeof(lastVersion) != 'undefined' && lastVersion < Main.k.version){
 			var version_update = lastVersion;
 		}else{
 			var version_update = Main.k.version
 		}
-		$.ajax({
-			url :Main.k.servurl + "/versions/update/"+ version_update,
-			dataType : 'jsonp',
-			success: function(json) {
-				Main.k.UpdateData.currversion = json.numero;
-				if(typeof(json['changelog_long_'+Main.k.lang]) != 'undefined'){
-					Main.k.UpdateData.changelog = json['changelog_long_'+Main.k.lang];
-				}else{
-					Main.k.UpdateData.changelog = json.changelog_long;
+		if(GM_getValue('currentOnlineVersionScript') == undefined || online == true){
+			$.ajax({
+				url :Main.k.servurl + "/versions/update/"+ version_update,
+				dataType : 'jsonp',
+				success: function(json) {
+					console.log('online',json);
+					setTimeout(function() {
+					    GM_setValue('currentOnlineVersionScript',JSON.stringify(json));
+					}, 0);
+					
+					
+					Main.k.UpdateCheckScriptVersion(json);
+				},
+				error: function(xhr,statut,http){
+					console.warn(xhr,statut,http);
 				}
-				Main.k.UpdateData.url = json.url;
-				var version = Main.k.version.replace(/([^a-z]*)[a-z]{1}[0-9]*/,'$1');
-				if (Main.k.version < json.numero || (version == json.numero && /[a-z]+/.test(Main.k.version))) {
-					$("#updatebtn").css("display", "block");
-				} else {
-					if(typeof(lastVersion) != 'undefined' && lastVersion != GM_info.script.version){
-						Main.k.AutoUpdateDialog();
-					}
-					js.Cookie.set('ctrlwVersion',GM_info.script.version,420000000);
-					$("#updatebtn").css("display", "none");
-				}
-			},
-			error: function(xhr,statut,http){
-				console.warn(xhr,statut,http);
+			});
+			
+		}else{
+			console.log('local');
+			Main.k.UpdateCheckScriptVersion(JSON.parse(GM_getValue('currentOnlineVersionScript')));
+		}
+		
+	}
+	Main.k.UpdateCheckScriptVersion = function(json){
+		Main.k.UpdateData.currversion = json.numero;
+		if(typeof(json['changelog_long_'+Main.k.lang]) != 'undefined'){
+			Main.k.UpdateData.changelog = json['changelog_long_'+Main.k.lang];
+		}else{
+			Main.k.UpdateData.changelog = json.changelog_long;
+		}
+		Main.k.UpdateData.url = json.url;
+		var version = Main.k.version.replace(/([^a-z]*)[a-z]{1}[0-9]*/,'$1');
+		if (Main.k.version < json.numero || (version == json.numero && /[a-z]+/.test(Main.k.version))) {
+			$("#updatebtn").css("display", "block");
+		} else {
+			if(typeof(lastVersion) != 'undefined' && lastVersion != GM_info.script.version){
+				Main.k.AutoUpdateDialog();
 			}
-		});
+			js.Cookie.set('ctrlwVersion',GM_info.script.version,420000000);
+			$("#updatebtn").css("display", "none");
+		}
 	}
 	Main.k.UpdateDialog = function() {
 		var okHref = Main.k.UpdateData.url;
@@ -4640,13 +4656,13 @@ Main.k.tabs.playing = function() {
 	Main.k.onCycleChange = function(){
 		// Script updates
 		// ----------------------------------- //
-		Main.k.UpdateCheck();
+		Main.k.UpdateCheck(true);
 		// ----------------------------------- //
 	};
 	Main.k.MushUpdate = function() {
 		var leftbar = $(".usLeftbar");
 		Main.k.hasTalkie = $("#walltab").length > 0;
-
+		
 		// Never hide unread msg
 		$("table.treereply tr.not_read.cdRepl").css("display", "table-row");
 		
@@ -4660,6 +4676,12 @@ Main.k.tabs.playing = function() {
 			
 			
 		}
+		
+		// Script updates
+		// ----------------------------------- //
+		Main.k.UpdateCheck(false);
+		// ----------------------------------- //
+		
 		$('#player_status').html('<img src="'+Main.k.statusImages[Main.k.Game.data.player_status]+'" alt="'+Main.k.Game.data.player_status.capitalize()+'" title="'+Main.k.Game.data.player_status.capitalize()+'" />');
 		Main.k.displayRemainingCyclesToNextLevel();
 		
