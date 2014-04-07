@@ -4756,7 +4756,7 @@ Main.k.tabs.playing = function() {
 				heroDiv.append(statuses);
 				heroDiv.append(titles);
 			} else {
-				missingheroes.push(hero);
+				missingheroes.push(bubble);
 			}
 
 			Main.k.AliveHeroes.push(bubble);
@@ -4767,8 +4767,8 @@ Main.k.tabs.playing = function() {
 		for (var i=0; i<Main.k.HEROES.length; i++) {
 			var hero = Main.k.HEROES[i];
 			var h = Main.k.h[hero];
-			if (!Main.k.ArrayContains(Main.k.AliveHeroes, hero)) {
-				if ((j+missingheroes.length)%5 == 0) $("<br/>").appendTo(missingDiv);
+			if (!Main.k.ArrayContains(Main.k.AliveHeroes, hero) || Main.k.ArrayContains(missingheroes,hero)) {
+				if (j%5 == 0) $("<br/>").appendTo(missingDiv);
 				j++;
 				var bubble = hero.replace(/(\s)/g, "_").toLowerCase();
 
