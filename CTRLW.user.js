@@ -10,7 +10,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.33.5
+// @version     0.33.6
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -4497,7 +4497,6 @@ Main.k.tabs.playing = function() {
 		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/new.png' /> "+ Main.k.text.gettext("Mise à jour"), null, null, Main.k.text.gettext("Mise à jour du script"),
 			"Une nouvelle version du script CTRL+W est disponible.")
 		.appendTo(leftbar).attr("id", "updatebtn").css("display", "none").find("a").on("mousedown", Main.k.UpdateDialog);
-		$('<div id="player_status" style="float:right;margin-left:10px;line-height:26px;"><img src="'+Main.k.statusImages['bronze']+'" alt="Bronze" title="Bronze" /></div>').appendTo('h1.who');
 		// Message Manager
 		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/archive.png' style='vertical-align: -20%' /> "+ Main.k.text.gettext("Msg Manager"), null, null, Main.k.text.gettext("Message Manager"),
 			Main.k.text.gettext("Ne manquez plus de messages ! Tous les topics avec des messages non lus seront mis en évidence, et vous pourrez effectuer des recherches par auteur ou contenu."))
@@ -4681,7 +4680,10 @@ Main.k.tabs.playing = function() {
 		// ----------------------------------- //
 		Main.k.UpdateCheck(false);
 		// ----------------------------------- //
-		
+		if($('#player_status').length == 0){
+			$('h1.who').text($.trim($('h1.who').text()));
+			$('<div id="player_status" style="float:right;margin-left:10px;line-height:26px;"><img src="'+Main.k.statusImages['bronze']+'" alt="Bronze" title="Bronze" /></div>').appendTo('h1.who');
+		}
 		$('#player_status').html('<img src="'+Main.k.statusImages[Main.k.Game.data.player_status]+'" alt="'+Main.k.Game.data.player_status.capitalize()+'" title="'+Main.k.Game.data.player_status.capitalize()+'" />');
 		Main.k.displayRemainingCyclesToNextLevel();
 		
