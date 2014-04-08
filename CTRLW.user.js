@@ -2366,7 +2366,6 @@ Main.k.tabs.playing = function() {
 				url :Main.k.servurl + "/versions/update/"+ version_update,
 				dataType : 'jsonp',
 				success: function(json) {
-					console.log('online',json);
 					setTimeout(function() {
 					    GM_setValue('currentOnlineVersionScript',JSON.stringify(json));
 					}, 0);
@@ -2380,7 +2379,6 @@ Main.k.tabs.playing = function() {
 			});
 			
 		}else{
-			console.log('local');
 			Main.k.UpdateCheckScriptVersion(JSON.parse(GM_getValue('currentOnlineVersionScript')));
 		}
 		
