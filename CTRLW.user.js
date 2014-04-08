@@ -4679,8 +4679,7 @@ Main.k.tabs.playing = function() {
 		Main.k.UpdateCheck(false);
 		// ----------------------------------- //
 		if($('#player_status').length == 0){
-			$('h1.who').text($.trim($('h1.who').text()));
-			$('<div id="player_status" style="float:right;margin-left:10px;line-height:26px;"><img src="'+Main.k.statusImages['bronze']+'" alt="Bronze" title="Bronze" /></div>').appendTo('h1.who');
+			$('<div id="player_status" style="position: absolute;right:6px;bottom:0"><img src="'+Main.k.statusImages['bronze']+'" alt="Bronze" title="Bronze" /></div>').appendTo('.sheetmain');
 		}
 		$('#player_status').html('<img src="'+Main.k.statusImages[Main.k.Game.data.player_status]+'" alt="'+Main.k.Game.data.player_status.capitalize()+'" title="'+Main.k.Game.data.player_status.capitalize()+'" />');
 		Main.k.displayRemainingCyclesToNextLevel();
