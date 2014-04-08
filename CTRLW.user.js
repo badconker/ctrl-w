@@ -2370,7 +2370,7 @@ Main.k.tabs.playing = function() {
 					}, 0);
 					
 					
-					Main.k.UpdateCheckScriptVersion(json);
+					Main.k.UpdateCheckScriptVersion(json,lastVersion);
 				},
 				error: function(xhr,statut,http){
 					console.warn(xhr,statut,http);
@@ -2378,11 +2378,11 @@ Main.k.tabs.playing = function() {
 			});
 			
 		}else{
-			Main.k.UpdateCheckScriptVersion(JSON.parse(GM_getValue('currentOnlineVersionScript')));
+			Main.k.UpdateCheckScriptVersion(JSON.parse(GM_getValue('currentOnlineVersionScript')),lastVersion);
 		}
 		
 	}
-	Main.k.UpdateCheckScriptVersion = function(json){
+	Main.k.UpdateCheckScriptVersion = function(json,lastVersion){
 		Main.k.UpdateData.currversion = json.numero;
 		if(typeof(json['changelog_long_'+Main.k.lang]) != 'undefined'){
 			Main.k.UpdateData.changelog = json['changelog_long_'+Main.k.lang];
