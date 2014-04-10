@@ -10,7 +10,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.33.7
+// @version     0.33.8b2
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -482,7 +482,7 @@ Main.k.SyncAstropad = function(tgt){
 Main.k.displayRemainingCyclesToNextLevel = function (){
 	
 	$('.levelingame').each(function(){
-		var regex = /(<p>.*>)([0-9]+)(.*<\/p>)/;
+		var regex = /(<p>.*>[^0-9]?)([0-9]+)(.*<\/p>)/;
 		if($(this).attr('onmouseover_save') !== undefined){
 			var attr = $(this).attr('onmouseover_save');
 		}else{
