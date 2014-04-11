@@ -10,7 +10,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.33.8b2
+// @version     0.33.8b3
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -482,7 +482,7 @@ Main.k.SyncAstropad = function(tgt){
 Main.k.displayRemainingCyclesToNextLevel = function (){
 	
 	$('.levelingame').each(function(){
-		var regex = /(<p>.*>[^0-9]?)([0-9]+)(.*<\/p>)/;
+		var regex = /(<p>.*>[^0-9]?)([0-9]+)([a-zA-Z ]*)(<)(.*<\/p>)/;
 		if($(this).attr('onmouseover_save') !== undefined){
 			var attr = $(this).attr('onmouseover_save');
 		}else{
@@ -497,7 +497,14 @@ Main.k.displayRemainingCyclesToNextLevel = function (){
 			}
 			var i_cycles = RegExp.$2;
 			var remaining_cycles = Math.ceil(i_cycles/xp_by_cycle - Main.k.Game.data.xp / xp_by_cycle);
-			$(this).attr('onmouseover',$(this).attr('onmouseover').replace(regex,"$1"+remaining_cycles+"$3"));
+			
+			var nb_days = Math.round(remaining_cycles / 8);
+			var s_days = '';
+			if(nb_days > 0){
+				days = Main.k.text.strargs(Main.k.text.ngettext("(~%1 jour)","(~%1 jours)",nb_days),[nb_days]);
+				days = ' '+days;
+			}
+			$(this).attr('onmouseover',$(this).attr('onmouseover').replace(regex,"$1"+remaining_cycles+"$3"+days+"$4"+"$5"));
 		}
 		
 	});
