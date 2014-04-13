@@ -10,7 +10,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.33.8b3
+// @version     0.33.8b4
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -501,10 +501,10 @@ Main.k.displayRemainingCyclesToNextLevel = function (){
 			var nb_days = Math.round(remaining_cycles / 8);
 			var s_days = '';
 			if(nb_days > 0){
-				days = Main.k.text.strargs(Main.k.text.ngettext("(~%1 jour)","(~%1 jours)",nb_days),[nb_days]);
-				days = ' '+days;
+				s_days = Main.k.text.strargs(Main.k.text.ngettext("(~%1 jour)","(~%1 jours)",nb_days),[nb_days]);
+				s_days = ' '+s_days;
 			}
-			$(this).attr('onmouseover',$(this).attr('onmouseover').replace(regex,"$1"+remaining_cycles+"$3"+days+"$4"+"$5"));
+			$(this).attr('onmouseover',$(this).attr('onmouseover').replace(regex,"$1"+remaining_cycles+"$3"+s_days+"$4"+"$5"));
 		}
 		
 	});
