@@ -10,7 +10,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.33.8b4
+// @version     0.33.8b5
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -496,7 +496,7 @@ Main.k.displayRemainingCyclesToNextLevel = function (){
 				var xp_by_cycle = 1
 			}
 			var i_cycles = RegExp.$2;
-			var remaining_cycles = Math.ceil(i_cycles/xp_by_cycle - Main.k.Game.data.xp / xp_by_cycle);
+			var remaining_cycles = Math.ceil(i_cycles - Main.k.Game.data.xp / xp_by_cycle);
 			
 			var nb_days = Math.round(remaining_cycles / 8);
 			var s_days = '';
