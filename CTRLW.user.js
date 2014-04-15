@@ -10,7 +10,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.33.8b5
+// @version     0.33.8b6
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -446,6 +446,9 @@ Main.k.MakeButton = function(content, href, onclick, tiptitle, tipdesc) {
 
 	return but;
 }
+Main.k.quickNotice = function(msg){
+	mt.js.Twinoid.quickNotice("<img src='" + Main.k.servurl + "/img/ctrlw_sml.png' height='14' alt='"+GM_info.name+"' title='"+GM_info.name+"'/> : "+msg);
+};
 Main.k.GetHeroNameFromTopic = function(topic) {
 	var hero = '';
 	var div = null;
@@ -471,6 +474,7 @@ Main.k.GetHeroNameFromTopic = function(topic) {
 Main.k.SyncAstropad = function(tgt){
 	if($('#astro_maj_inventaire').length > 0){
 		$('#astro_maj_inventaire').trigger('click');
+		Main.k.quickNotice(Main.k.text.gettext("Astropad synchronisé."));
 		Main.showTip(tgt,
 			"<div class='tiptop' ><div class='tipbottom'><div class='tipbg'><div class='tipcontent'>" +
 			Main.k.text.gettext("Astropad synchronisé.") + 
