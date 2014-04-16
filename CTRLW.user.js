@@ -10,7 +10,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.33.8b6
+// @version     0.33.8
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -447,7 +447,7 @@ Main.k.MakeButton = function(content, href, onclick, tiptitle, tipdesc) {
 	return but;
 }
 Main.k.quickNotice = function(msg){
-	mt.js.Twinoid.quickNotice("<img src='" + Main.k.servurl + "/img/ctrlw_sml.png' height='14' alt='"+GM_info.name+"' title='"+GM_info.name+"'/> : "+msg);
+	//mt.js.Twinoid.quickNotice("<img src='" + Main.k.servurl + "/img/ctrlw_sml.png' height='14' alt='"+GM_info.name+"' title='"+GM_info.name+"'/> : "+msg);
 };
 Main.k.GetHeroNameFromTopic = function(topic) {
 	var hero = '';
@@ -703,7 +703,7 @@ Main.k.css.customMenu = function() {
 	$("<style>").attr("type", "text/css").html("\
 	body.gold #maincontainer{margin-top:543px !important;}\
 	#menuBar { display: none; }\
-	.mxhead a.logo, .mxhead a.logo3 { position: relative! important; display: block; }\
+	.mxhead a.logo, .mxhead a.logo4 { position: relative! important; display: block; }\
 	.mxhead {padding:0}\
 	.kmenu {\
 		margin: 10px auto 20px;\
@@ -4476,11 +4476,11 @@ Main.k.tabs.playing = function() {
 		// Handle Mush Logo (option)
 		if (Main.k.Options.dlogo) {
 			$("#content").css({ position: "absolute", top: "120px", left: "125px" });
-			$("#content .logo, #content .logo3").css({ top: "-100px" });
+			$("#content .logo, #content .logo4").css({ top: "-100px" });
 			$("body").css("background-position", "50% 20px");
 		} else {
 			$("#content").css({ position: "absolute", top: "40px", left: "125px" });
-			$("#content .logo, #content .logo3").css({ display: "none" });
+			$("#content .logo, #content .logo4").css({ display: "none" });
 		}
 		var vending = $(".butmini.distr").css("display", "none");
 		if (vending.length > 0) {
