@@ -10,7 +10,7 @@
 // @resource    translation:fr https://raw.github.com/badconker/ctrl-w/release/translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en https://raw.github.com/badconker/ctrl-w/release/translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es https://raw.github.com/badconker/ctrl-w/release/translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.33.7
+// @version     0.33.9
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -446,6 +446,9 @@ Main.k.MakeButton = function(content, href, onclick, tiptitle, tipdesc) {
 
 	return but;
 }
+Main.k.quickNotice = function(msg){
+	//mt.js.Twinoid.quickNotice("<img src='" + Main.k.servurl + "/img/ctrlw_sml.png' height='14' alt='"+GM_info.name+"' title='"+GM_info.name+"'/> : "+msg);
+};
 Main.k.GetHeroNameFromTopic = function(topic) {
 	var hero = '';
 	var div = null;
@@ -471,6 +474,7 @@ Main.k.GetHeroNameFromTopic = function(topic) {
 Main.k.SyncAstropad = function(tgt){
 	if($('#astro_maj_inventaire').length > 0){
 		$('#astro_maj_inventaire').trigger('click');
+		Main.k.quickNotice(Main.k.text.gettext("Astropad synchronisé."));
 		Main.showTip(tgt,
 			"<div class='tiptop' ><div class='tipbottom'><div class='tipbg'><div class='tipcontent'>" +
 			Main.k.text.gettext("Astropad synchronisé.") + 
@@ -482,7 +486,7 @@ Main.k.SyncAstropad = function(tgt){
 Main.k.displayRemainingCyclesToNextLevel = function (){
 	
 	$('.levelingame').each(function(){
-		var regex = /(<p>.*>)([0-9]+)(.*<\/p>)/;
+		var regex = /(<p>.*>[^0-9]?)([0-9]+)([a-zA-Z ]*)(<)(.*<\/p>)/;
 		if($(this).attr('onmouseover_save') !== undefined){
 			var attr = $(this).attr('onmouseover_save');
 		}else{
@@ -496,8 +500,15 @@ Main.k.displayRemainingCyclesToNextLevel = function (){
 				var xp_by_cycle = 1
 			}
 			var i_cycles = RegExp.$2;
-			var remaining_cycles = Math.ceil(i_cycles/xp_by_cycle - Main.k.Game.data.xp / xp_by_cycle);
-			$(this).attr('onmouseover',$(this).attr('onmouseover').replace(regex,"$1"+remaining_cycles+"$3"));
+			var remaining_cycles = Math.ceil(i_cycles - Main.k.Game.data.xp / xp_by_cycle);
+			
+			var nb_days = Math.round(remaining_cycles / 8);
+			var s_days = '';
+			if(nb_days > 0){
+				s_days = Main.k.text.strargs(Main.k.text.ngettext("(~%1 jour)","(~%1 jours)",nb_days),[nb_days]);
+				s_days = ' '+s_days;
+			}
+			$(this).attr('onmouseover',$(this).attr('onmouseover').replace(regex,"$1"+remaining_cycles+"$3"+s_days+"$4"+"$5"));
 		}
 		
 	});
@@ -692,7 +703,7 @@ Main.k.css.customMenu = function() {
 	$("<style>").attr("type", "text/css").html("\
 	body.gold #maincontainer{margin-top:543px !important;}\
 	#menuBar { display: none; }\
-	.mxhead a.logo, .mxhead a.logo3 { position: relative! important; display: block; }\
+	.mxhead a[class^=logo] { position: relative! important; display: block; }\
 	.mxhead {padding:0}\
 	.kmenu {\
 		margin: 10px auto 20px;\
@@ -2360,13 +2371,13 @@ Main.k.tabs.playing = function() {
 		}else{
 			var version_update = Main.k.version
 		}
-		if(GM_getValue('currentOnlineVersionScript') == undefined || online == true){
+		if(localStorage.getItem('ctrlw_update_cache') == null || online == true){
 			$.ajax({
 				url :Main.k.servurl + "/versions/update/"+ version_update,
 				dataType : 'jsonp',
 				success: function(json) {
 					setTimeout(function() {
-					    GM_setValue('currentOnlineVersionScript',JSON.stringify(json));
+					    localStorage.setItem('ctrlw_update_cache',JSON.stringify(json));
 					}, 0);
 					
 					
@@ -2378,7 +2389,7 @@ Main.k.tabs.playing = function() {
 			});
 			
 		}else{
-			Main.k.UpdateCheckScriptVersion(JSON.parse(GM_getValue('currentOnlineVersionScript')),lastVersion);
+			Main.k.UpdateCheckScriptVersion(JSON.parse(localStorage.getItem('ctrlw_update_cache')),lastVersion);
 		}
 		
 	}
@@ -4465,11 +4476,11 @@ Main.k.tabs.playing = function() {
 		// Handle Mush Logo (option)
 		if (Main.k.Options.dlogo) {
 			$("#content").css({ position: "absolute", top: "120px", left: "125px" });
-			$("#content .logo, #content .logo3").css({ top: "-100px" });
+			$("#content [class^=logo]").css({ top: "-100px" });
 			$("body").css("background-position", "50% 20px");
 		} else {
 			$("#content").css({ position: "absolute", top: "40px", left: "125px" });
-			$("#content .logo, #content .logo3").css({ display: "none" });
+			$("#content [class^=logo]").css({ display: "none" });
 		}
 		var vending = $(".butmini.distr").css("display", "none");
 		if (vending.length > 0) {
