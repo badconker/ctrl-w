@@ -10,7 +10,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.33.8
+// @version     0.33.9
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -2371,13 +2371,13 @@ Main.k.tabs.playing = function() {
 		}else{
 			var version_update = Main.k.version
 		}
-		if(GM_getValue('currentOnlineVersionScript') == undefined || online == true){
+		if(localStorage.getItem('ctrlw_update_cache') == null || online == true){
 			$.ajax({
 				url :Main.k.servurl + "/versions/update/"+ version_update,
 				dataType : 'jsonp',
 				success: function(json) {
 					setTimeout(function() {
-					    GM_setValue('currentOnlineVersionScript',JSON.stringify(json));
+					    localStorage.setItem('ctrlw_update_cache',JSON.stringify(json));
 					}, 0);
 					
 					
@@ -2389,7 +2389,7 @@ Main.k.tabs.playing = function() {
 			});
 			
 		}else{
-			Main.k.UpdateCheckScriptVersion(JSON.parse(GM_getValue('currentOnlineVersionScript')),lastVersion);
+			Main.k.UpdateCheckScriptVersion(JSON.parse(localStorage.getItem('ctrlw_update_cache')),lastVersion);
 		}
 		
 	}
