@@ -703,7 +703,7 @@ Main.k.css.customMenu = function() {
 	$("<style>").attr("type", "text/css").html("\
 	body.gold #maincontainer{margin-top:543px !important;}\
 	#menuBar { display: none; }\
-	.mxhead a.logo, .mxhead a.logo4 { position: relative! important; display: block; }\
+	.mxhead a[class^=logo] { position: relative! important; display: block; }\
 	.mxhead {padding:0}\
 	.kmenu {\
 		margin: 10px auto 20px;\
@@ -4476,11 +4476,11 @@ Main.k.tabs.playing = function() {
 		// Handle Mush Logo (option)
 		if (Main.k.Options.dlogo) {
 			$("#content").css({ position: "absolute", top: "120px", left: "125px" });
-			$("#content .logo, #content .logo4").css({ top: "-100px" });
+			$("#content [class^=logo]").css({ top: "-100px" });
 			$("body").css("background-position", "50% 20px");
 		} else {
 			$("#content").css({ position: "absolute", top: "40px", left: "125px" });
-			$("#content .logo, #content .logo4").css({ display: "none" });
+			$("#content [class^=logo]").css({ display: "none" });
 		}
 		var vending = $(".butmini.distr").css("display", "none");
 		if (vending.length > 0) {
