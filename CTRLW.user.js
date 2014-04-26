@@ -1815,6 +1815,22 @@ Main.k.tabs.playing = function() {
 
 
 	// == Extend Main  ============================================
+	Main.k.extend = {};
+	Main.k.extend.updateContent =  Main.updateContent;
+	Main.updateContent = function(url,seek,dest,cb) {
+		Main.k.extend.updateContent(url,seek,dest,function(){
+			if(cb != null) cb();
+			if(/\/choosePeer\?charId=[0-9]+&idx=([0-9]+)/.test(url)){
+				var tab_class = '.cdPrivateTab' + RegExp.$1;
+				Main.k.MushUpdate();
+				if($(tab_class).length > 0){
+					$(tab_class).trigger('click');
+				}
+				
+			}
+		});
+	};
+	
 	Main.onChatInput = function(event,jq) {
 		var tgt = new js.JQuery(event.target);
 		tgt.siblings("input").show();
@@ -2155,6 +2171,7 @@ Main.k.tabs.playing = function() {
 
 		if (!skipK) Main.k.MushUpdate();
 	}
+	
 	Main.k.fakeSelected = null;
 	Main.k.fakeSelectItem = function(frm) {
 		frm = $(frm);
