@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: ctrl+w\n"
 "Report-Msgid-Bugs-To: http://twd.io/e/KKyl0g\n"
 "POT-Creation-Date: 2014-04-26 10:43+0200\n"
-"PO-Revision-Date: 2014-04-11 18:43+0100\n"
+"PO-Revision-Date: 2014-04-26 11:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: English\n"
 "Language: en\n"
@@ -562,7 +562,7 @@ msgstr "diseased"
 
 #: ..\CTRLW.user.js:2708
 msgid "soif"
-msgstr "thirty"
+msgstr "thirsty"
 
 #: ..\CTRLW.user.js:2709
 msgid "desséché"
