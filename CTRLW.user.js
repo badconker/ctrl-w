@@ -513,7 +513,20 @@ Main.k.displayRemainingCyclesToNextLevel = function (){
 		
 	});
 }
-
+Main.k.showLoading = function(){
+	if($('.ctrlw_overlay_loading').length == 0){
+		var overlay = $('<div class="ctrlw_overlay_loading"></div>');
+		$('body').append(overlay);
+		overlay.after('<div class="ctrlw_loading_ball_wrapper"><div class="ctrlw_loading_ball"></div><div class="ctrlw_loading_ball1"></div></div>');
+		
+	}
+}
+Main.k.clearCache = function(){
+	Main.k.showLoading();
+	Main.k.Game.clear();
+	localStorage.removeItem('ctrlw_update_cache');
+	window.location.reload();
+}
 // == Game Manager
 Main.k.Game = {};
 Main.k.Game.data = {};
@@ -522,15 +535,18 @@ Main.k.Game.data.cycle = 0;
 Main.k.Game.data.xp = 1;
 Main.k.Game.data.player_status = 'bronze';
 Main.k.Game.init = function() {
-	var cook = js.Cookie.get("ctrlwgame");
-	if (!cook){
+	var ctrlw_game = localStorage.getItem("ctrlw_game");
+	if (ctrlw_game == null){
 		return
 	};
-	Main.k.Game.data = JSON.parse(cook);
+	Main.k.Game.data = JSON.parse(ctrlw_game);
 }
 Main.k.Game.save = function() {
-	js.Cookie.set("ctrlwgame",JSON.stringify(Main.k.Game.data),420000000);
+	localStorage.setItem("ctrlw_game",JSON.stringify(Main.k.Game.data),420000000);
 }
+Main.k.Game.clear = function(){
+	localStorage.removeItem("ctrlw_game");
+};
 Main.k.Game.updateDayAndCycle = function(day,cycle) {
 	if(day != this.data.day || cycle != this.data.cycle){
 		this.data.day = day;
@@ -560,7 +576,6 @@ Main.k.Game.updatePlayerInfos = function() {
 		
 	});
 }
-
 // == Options Manager  ========================================
 Main.k.Options = {};
 Main.k.Options.initialized = false;
@@ -617,6 +632,12 @@ Main.k.Options.open = function() {
 			.prependTo(p);
 			if (opt[1]) chk.attr("checked", "checked");
 		}
+		
+		Main.k.MakeButton("<img src='/img/icons/ui/reported.png' style='vertical-align: -20%' /> "+ Main.k.text.gettext("Vider le cache du script"), null, null, Main.k.text.gettext("Vider le cache du script"),
+			Main.k.text.gettext("Ce bouton vous permet de vider le cache du script pour, par exemple, prendre en compte tout de suite votre mode Or ou forcer une vérification de mise à jour. A utiliser avec parcimonie svp."))
+		.appendTo(td).find("a").on("mousedown", function(){
+			Main.k.clearCache();
+		});
 	}
 
 	Main.k.folding.display([null,null, "#options_col"], "options");
@@ -791,6 +812,86 @@ Main.k.css.ingame = function() {
 	Main.k.css.bubbles();
 
 	$("<style>").attr("type", "text/css").html("\
+	.ctrlw_overlay_loading{\
+		background-color: #4E5162;\
+    	background-image: url('http://data.twinoid.com/img/design/mask.png');\
+		height : 100%;\
+		left : 0;\
+		opacity:0.9;\
+		position : fixed;\
+		top : 0;\
+		width : 100%;\
+		z-index:1000;\
+	}\
+	.ctrlw_loading_ball_wrapper{\
+		position:fixed;\
+		left:50%;\
+		top:50%;\
+		z-index:1001;\
+	}\
+	.ctrlw_loading_ball {\
+	    background-color: rgba(0,0,0,0);\
+	    border: 5px solid rgba(0,183,229,0.9);\
+	    opacity: 1;\
+	    border-top: 5px solid rgba(0,0,0,0);\
+	    border-left: 5px solid rgba(0,0,0,0);\
+	    border-radius: 50px;\
+	    box-shadow: 0 0 35px #2187e7;\
+	    width: 50px;\
+	    height: 50px;\
+	    margin: 0 auto;\
+	    -moz-animation: spin .5s infinite linear;\
+	    -webkit-animation: spin .5s infinite linear;\
+	}\
+	.ctrlw_loading_ball1 {\
+	    background-color: rgba(0,0,0,0);\
+	    border: 5px solid rgba(0,183,229,0.9);\
+	    opacity: 1;\
+	    border-top: 5px solid rgba(0,0,0,0);\
+	    border-left: 5px solid rgba(0,0,0,0);\
+	    border-radius: 50px;\
+	    box-shadow: 0 0 15px #2187e7;\
+	    width: 30px;\
+	    height: 30px;\
+	    margin: 0 auto;\
+	    position: relative;\
+	    top: -50px;\
+	    -moz-animation: spinoff .5s infinite linear;\
+	    -webkit-animation: spinoff .5s infinite linear;\
+	}\
+	@-moz-keyframes spin {\
+	    0% {\
+	        -moz-transform: rotate(0deg);\
+	    }\
+	    100% {\
+	        -moz-transform: rotate(360deg);\
+	    };\
+	}\
+	@-moz-keyframes spinoff {\
+	    0% {\
+	        -moz-transform: rotate(0deg);\
+	    }\
+	\
+	    100% {\
+	        -moz-transform: rotate(-360deg);\
+	    };\
+	}\
+	@-webkit-keyframes spin {\
+	    0% {\
+	        -webkit-transform: rotate(0deg);\
+	    }\
+	    100% {\
+	        -webkit-transform: rotate(360deg);\
+	    };\
+	}\
+	@-webkit-keyframes spinoff {\
+	    0% {\
+	        -webkit-transform: rotate(0deg);\
+	    }\
+	    100% {\
+	        -webkit-transform: rotate(-360deg);\
+	    };\
+	}\
 	.mxhead { height: 0; }\
 	.cdReadMeHook { display: none! important; }\
 	.tabon { background-image: url(" + Main.k.servurl + "/img/tabon.png)! important; }\
