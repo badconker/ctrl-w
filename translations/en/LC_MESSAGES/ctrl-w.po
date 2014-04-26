@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: ctrl+w\n"
 "Report-Msgid-Bugs-To: http://twd.io/e/KKyl0g\n"
 "POT-Creation-Date: 2014-04-26 10:43+0200\n"
-"PO-Revision-Date: 2014-04-26 11:32+0100\n"
+"PO-Revision-Date: 2014-04-26 11:44+0100\n"
 "Last-Translator: \n"
 "Language-Team: English\n"
 "Language: en\n"
@@ -186,7 +186,7 @@ msgstr "32323021"
 #. Translators: This translation must be copied from the game. */
 #: ..\CTRLW.user.js:219
 msgid "Fayot de la fédération."
-msgstr ""
+msgstr "Federation boot-licker"
 
 #. Translators: Thread id for this character's tutorial. */
 #: ..\CTRLW.user.js:221
@@ -196,7 +196,7 @@ msgstr "32488283"
 #. Translators: This translation must be copied from the game. */
 #: ..\CTRLW.user.js:225
 msgid "Héros malgré lui."
-msgstr ""
+msgstr "A true hero in spite of everything"
 
 #. Translators: Thread id for this character's tutorial. */
 #: ..\CTRLW.user.js:227
