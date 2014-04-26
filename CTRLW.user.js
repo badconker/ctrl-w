@@ -4623,6 +4623,32 @@ Main.k.tabs.playing = function() {
 		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/new.png' /> "+ Main.k.text.gettext("Mise à jour"), null, null, Main.k.text.gettext("Mise à jour du script"),
 			"Une nouvelle version du script CTRL+W est disponible.")
 		.appendTo(leftbar).attr("id", "updatebtn").css("display", "none").find("a").on("mousedown", Main.k.UpdateDialog);
+		
+		//Mush Helper script
+		$( window ).load(function() {
+			setTimeout(function(){
+				if($('#mushUSMenu').length > 0){
+					var wrapper_mhs = $('#mushUSMenu').parents(":eq(2)");
+					wrapper_mhs.css('left', '-'+(wrapper_mhs.width())+'px');
+					var arrow = wrapper_mhs.find('.arrowright');
+					arrow.attr('class','arrowleft');
+					arrow.off('click');
+					arrow.toggle(function(){
+						wrapper_mhs.animate({left:0},500);
+					},function(){
+						wrapper_mhs.animate({left:'-'+wrapper_mhs.width()+'px'},500);
+					});
+					
+					Main.k.MakeButton("<img src='http://mush.twinoid.com/img/icons/ui/talkie.png' style='vertical-align: -20%' /> "+ 'MHS', null, null, 'Mush Helper Script'
+					).insertAfter($('#updatebtn')).find("a").on("mousedown", function(){
+						wrapper_mhs.find('.arrowleft').trigger('click');
+					});
+				}
+				
+			},10);
+			
+		});
+		
 		// Message Manager
 		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/archive.png' style='vertical-align: -20%' /> "+ Main.k.text.gettext("Msg Manager"), null, null, Main.k.text.gettext("Message Manager"),
 			Main.k.text.gettext("Ne manquez plus de messages ! Tous les topics avec des messages non lus seront mis en évidence, et vous pourrez effectuer des recherches par auteur ou contenu."))
