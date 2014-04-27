@@ -6,6 +6,8 @@
 // @include     http://mush.twinoid.es/*
 // @downloadURL https://raw.github.com/badconker/ctrl-w/release/CTRLW.user.js
 // @require     lib/Gettext.js
+// @resource    css:jgrowl lib/jquery.jgrowl.css
+// @resource    jgrowl lib/jquery.jgrowl.js
 // @resource    mush lib/Mush.js
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
@@ -50,10 +52,6 @@ Main.k.window = window;
 Main.k.domain = document.domain;
 Main.k.mushurl = 'http://' + document.domain;
 
-
-
-				
-				
 
 String.prototype.capitalize = function() {
 	return this.replace(/(?:^|\s)\S/g, function(a) {
@@ -447,7 +445,8 @@ Main.k.MakeButton = function(content, href, onclick, tiptitle, tipdesc) {
 	return but;
 }
 Main.k.quickNotice = function(msg){
-	//mt.js.Twinoid.quickNotice("<img src='" + Main.k.servurl + "/img/ctrlw_sml.png' height='14' alt='"+GM_info.name+"' title='"+GM_info.name+"'/> : "+msg);
+	$.jGrowl("<img src='http://imgup.motion-twin.com/twinoid/8/5/ab7aced9_4030.jpg' height='16' alt='notice'/> "+msg);
+	
 };
 Main.k.GetHeroNameFromTopic = function(topic) {
 	var hero = '';
@@ -823,6 +822,20 @@ Main.k.css.ingame = function() {
 	Main.k.css.bubbles();
 
 	$("<style>").attr("type", "text/css").html("\
+	.blink-limited {\
+	  -moz-animation: blink 1s 3 linear;\
+	  -webkit-animation: blink 1s 3 linear;\
+	}\
+	@-moz-keyframes blink {\
+	  from { opacity: 1; }\
+	  50% { opacity: 0; }\
+	  to { opacity: 1; }\
+	}\
+	@-webkit-keyframes blink {\
+	  from { opacity: 1; }\
+	  50% { opacity: 0; }\
+	  to { opacity: 1; }\
+	}\
 	.ctrlw_overlay_loading{\
 		background-color: #4E5162;\
     	background-image: url('http://data.twinoid.com/img/design/mask.png');\
@@ -1181,7 +1194,7 @@ Main.k.css.ingame = function() {
 		margin: 0 2px;\
 	}\
 	.usLeftbar .but img { \
-		opacity: 1! important;\
+		opacity: 1;\
 	}\
 	.usLeftbar .hero .skills { \
 		top: 2px;\
@@ -4635,9 +4648,11 @@ Main.k.tabs.playing = function() {
 			"Une nouvelle version du script CTRL+W est disponible.")
 		.appendTo(leftbar).attr("id", "updatebtn").css("display", "none").find("a").on("mousedown", Main.k.UpdateDialog);
 		
-		//Mush Helper script
+		
+		//Integration with others scripts
 		$( window ).load(function() {
 			setTimeout(function(){
+				//Mush Helper script
 				if($('#mushUSMenu').length > 0){
 					var wrapper_mhs = $('#mushUSMenu').parents(":eq(2)");
 					wrapper_mhs.css('left', '-'+(wrapper_mhs.width())+'px');
@@ -4654,6 +4669,15 @@ Main.k.tabs.playing = function() {
 					).insertAfter($('#updatebtn')).find("a").on("mousedown", function(){
 						wrapper_mhs.find('.arrowleft').trigger('click');
 					});
+				}
+				
+				var s_astro_icon = '';
+				if($('#astro_maj_inventaire').length > 0){
+					var img_astro = $('<img class="" src="/img/icons/ui/pa_comp.png" height="14"/>');
+					$('#share-inventory-button a img').remove();
+					$('#share-inventory-button a').prepend(img_astro);
+					img_astro.addClass('blink-limited');
+					
 				}
 				
 			},10);
@@ -4713,9 +4737,10 @@ Main.k.tabs.playing = function() {
 		$("<div>").css({"clear": "both", "height": "5px"}).appendTo(leftbar);
 
 		// Inventory actions
-		Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> " + Main.k.text.gettext("Partager"), null, null, Main.k.text.gettext("Partager l'inventaire"),
+		Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> " + Main.k.text.gettext("Partager") , null, null, Main.k.text.gettext("Partager l'inventaire"),
 			Main.k.text.gettext("<p>Insère l'inventaire de la pièce dans la zone de texte active, de la forme&nbsp;:</p><p><strong>Couloir central :</strong> <i>Combinaison</i>, <i>Couteau</i>, <i>Médikit</i>, <i>Extincteur</i></p><p><strong>Partage aussi sur Astropad si celui-ci est installé.</strong></p>")
 		).appendTo(leftbar)
+		.attr('id','share-inventory-button')
 		.find("a").on("mousedown", function(e) {
 			Main.k.SyncAstropad(e);
 			$('textarea:focus').each(function(e) {
@@ -5697,10 +5722,15 @@ Main.k.tabs.gameover = function() {
 	});
 }
 
+// Script initialization
+GM_addStyle (GM_getResourceText ('css:jgrowl'));
+eval(GM_getResourceText('jgrowl'));
+$.jGrowl.defaults.closerTemplate = '';
+$.jGrowl.defaults.theme = 'ctrl-w';
+$.jGrowl.defaults.themeState = '';
 
 eval(GM_getResourceText('mush'));
 
-// Script initialization
 Main.k.initLang();
 Main.k.Options.init();
 Main.k.Game.init();
