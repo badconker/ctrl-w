@@ -500,6 +500,11 @@ Main.k.displayRemainingCyclesToNextLevel = function (){
 				var xp_by_cycle = 1
 			}
 			var i_cycles = RegExp.$2;
+			var i_cycles_save = localStorage.getItem('ctrlw_remaining_cycles');
+			localStorage.setItem('ctrlw_remaining_cycles',i_cycles);
+			if(i_cycles_save != i_cycles){
+				Main.k.Game.updatePlayerInfos();
+			}
 			var remaining_cycles = Math.ceil(i_cycles - Main.k.Game.data.xp / xp_by_cycle);
 			
 			var nb_days = Math.round(remaining_cycles / 8);
@@ -510,9 +515,11 @@ Main.k.displayRemainingCyclesToNextLevel = function (){
 			}
 			$(this).attr('onmouseover',$(this).attr('onmouseover').replace(regex,"$1"+remaining_cycles+"$3"+s_days+"$4"+"$5"));
 		}
-		
 	});
-}
+	if($('.levelingame_no_anim').length > 0){
+		localStorage.setItem('ctrlw_remaining_cycles',0);
+	}
+};
 Main.k.showLoading = function(){
 	if($('.ctrlw_overlay_loading').length == 0){
 		var overlay = $('<div class="ctrlw_overlay_loading"></div>');
@@ -520,13 +527,16 @@ Main.k.showLoading = function(){
 		overlay.after('<div class="ctrlw_loading_ball_wrapper"><div class="ctrlw_loading_ball"></div><div class="ctrlw_loading_ball1"></div></div>');
 		
 	}
-}
+};
+Main.k.hideLoading = function(){
+	$('.ctrlw_overlay_loading,.ctrlw_loading_ball_wrapper').remove();
+};
 Main.k.clearCache = function(){
 	Main.k.showLoading();
 	Main.k.Game.clear();
 	localStorage.removeItem('ctrlw_update_cache');
 	window.location.reload();
-}
+};
 // == Game Manager
 Main.k.Game = {};
 Main.k.Game.data = {};
@@ -557,6 +567,7 @@ Main.k.Game.updateDayAndCycle = function(day,cycle) {
 	}
 }
 Main.k.Game.updatePlayerInfos = function() {
+	Main.k.showLoading();
 	var $this = this;
 	Tools.ping('/me',function(content) {
 		var body = '<div id="body-mock">' + content.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/g, '') + '</div>';
@@ -573,7 +584,7 @@ Main.k.Game.updatePlayerInfos = function() {
 		}
 		$this.save();
 		Main.k.MushUpdate();
-		
+		Main.k.hideLoading();
 	});
 }
 // == Options Manager  ========================================
