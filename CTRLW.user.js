@@ -8,9 +8,11 @@
 // @require     https://raw.github.com/badconker/ctrl-w/release/lib/Gettext.js
 // @resource    mush https://raw.github.com/badconker/ctrl-w/release/lib/Mush.js
 // @resource    translation:fr https://raw.github.com/badconker/ctrl-w/release/translations/fr/LC_MESSAGES/ctrl-w.po
+// @resource    css:jgrowl https://raw.github.com/badconker/ctrl-w/release/lib/jquery.jgrowl.css
+// @resource    jgrowl https://raw.github.com/badconker/ctrl-w/release/lib/jquery.jgrowl.js
 // @resource    translation:en https://raw.github.com/badconker/ctrl-w/release/translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es https://raw.github.com/badconker/ctrl-w/release/translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.33.9
+// @version     0.33.11
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -50,10 +52,6 @@ Main.k.window = window;
 Main.k.domain = document.domain;
 Main.k.mushurl = 'http://' + document.domain;
 
-
-
-				
-				
 
 String.prototype.capitalize = function() {
 	return this.replace(/(?:^|\s)\S/g, function(a) {
@@ -447,7 +445,8 @@ Main.k.MakeButton = function(content, href, onclick, tiptitle, tipdesc) {
 	return but;
 }
 Main.k.quickNotice = function(msg){
-	//mt.js.Twinoid.quickNotice("<img src='" + Main.k.servurl + "/img/ctrlw_sml.png' height='14' alt='"+GM_info.name+"' title='"+GM_info.name+"'/> : "+msg);
+	$.jGrowl("<img src='http://imgup.motion-twin.com/twinoid/8/5/ab7aced9_4030.jpg' height='16' alt='notice'/> "+msg);
+	
 };
 Main.k.GetHeroNameFromTopic = function(topic) {
 	var hero = '';
@@ -500,6 +499,11 @@ Main.k.displayRemainingCyclesToNextLevel = function (){
 				var xp_by_cycle = 1
 			}
 			var i_cycles = RegExp.$2;
+			var i_cycles_save = localStorage.getItem('ctrlw_remaining_cycles');
+			localStorage.setItem('ctrlw_remaining_cycles',i_cycles);
+			if(i_cycles_save != i_cycles && i_cycles_save != null){
+				Main.k.Game.updatePlayerInfos();
+			}
 			var remaining_cycles = Math.ceil(i_cycles - Main.k.Game.data.xp / xp_by_cycle);
 			
 			var nb_days = Math.round(remaining_cycles / 8);
@@ -510,10 +514,29 @@ Main.k.displayRemainingCyclesToNextLevel = function (){
 			}
 			$(this).attr('onmouseover',$(this).attr('onmouseover').replace(regex,"$1"+remaining_cycles+"$3"+s_days+"$4"+"$5"));
 		}
-		
 	});
-}
-
+	if($('.levelingame_no_anim').length > 0){
+		localStorage.setItem('ctrlw_remaining_cycles',0);
+	}
+};
+Main.k.showLoading = function(){
+	if($('.ctrlw_overlay_loading').length == 0){
+		var overlay = $('<div class="ctrlw_overlay_loading"></div>');
+		$('body').append(overlay);
+		overlay.after('<div class="ctrlw_loading_ball_wrapper"><div class="ctrlw_loading_ball"></div><div class="ctrlw_loading_ball1"></div></div>');
+		
+	}
+};
+Main.k.hideLoading = function(){
+	$('.ctrlw_overlay_loading,.ctrlw_loading_ball_wrapper').remove();
+};
+Main.k.clearCache = function(){
+	Main.k.showLoading();
+	Main.k.Game.clear();
+	localStorage.removeItem('ctrlw_update_cache');
+	localStorage.removeItem('ctrlw_remaining_cycles');
+	window.location.reload();
+};
 // == Game Manager
 Main.k.Game = {};
 Main.k.Game.data = {};
@@ -522,15 +545,18 @@ Main.k.Game.data.cycle = 0;
 Main.k.Game.data.xp = 1;
 Main.k.Game.data.player_status = 'bronze';
 Main.k.Game.init = function() {
-	var cook = js.Cookie.get("ctrlwgame");
-	if (!cook){
+	var ctrlw_game = localStorage.getItem("ctrlw_game");
+	if (ctrlw_game == null){
 		return
 	};
-	Main.k.Game.data = JSON.parse(cook);
+	Main.k.Game.data = JSON.parse(ctrlw_game);
 }
 Main.k.Game.save = function() {
-	js.Cookie.set("ctrlwgame",JSON.stringify(Main.k.Game.data),420000000);
+	localStorage.setItem("ctrlw_game",JSON.stringify(Main.k.Game.data),420000000);
 }
+Main.k.Game.clear = function(){
+	localStorage.removeItem("ctrlw_game");
+};
 Main.k.Game.updateDayAndCycle = function(day,cycle) {
 	if(day != this.data.day || cycle != this.data.cycle){
 		this.data.day = day;
@@ -541,6 +567,7 @@ Main.k.Game.updateDayAndCycle = function(day,cycle) {
 	}
 }
 Main.k.Game.updatePlayerInfos = function() {
+	Main.k.showLoading();
 	var $this = this;
 	Tools.ping('/me',function(content) {
 		var body = '<div id="body-mock">' + content.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/g, '') + '</div>';
@@ -557,10 +584,10 @@ Main.k.Game.updatePlayerInfos = function() {
 		}
 		$this.save();
 		Main.k.MushUpdate();
-		
+		Main.k.hideLoading();
+		Main.k.quickNotice(Main.k.text.gettext('Infos du joueur mises à jour.'));
 	});
 }
-
 // == Options Manager  ========================================
 Main.k.Options = {};
 Main.k.Options.initialized = false;
@@ -617,6 +644,12 @@ Main.k.Options.open = function() {
 			.prependTo(p);
 			if (opt[1]) chk.attr("checked", "checked");
 		}
+		
+		Main.k.MakeButton("<img src='/img/icons/ui/reported.png' style='vertical-align: -20%' /> "+ Main.k.text.gettext("Vider le cache du script"), null, null, Main.k.text.gettext("Vider le cache du script"),
+			Main.k.text.gettext("Ce bouton vous permet de vider le cache du script pour, par exemple, prendre en compte tout de suite votre mode Or ou forcer une vérification de mise à jour. A utiliser avec parcimonie svp."))
+		.appendTo(td).find("a").on("mousedown", function(){
+			Main.k.clearCache();
+		});
 	}
 
 	Main.k.folding.display([null,null, "#options_col"], "options");
@@ -791,6 +824,100 @@ Main.k.css.ingame = function() {
 	Main.k.css.bubbles();
 
 	$("<style>").attr("type", "text/css").html("\
+	.blink-limited {\
+	  -moz-animation: blink 1s 3 linear;\
+	  -webkit-animation: blink 1s 3 linear;\
+	}\
+	@-moz-keyframes blink {\
+	  from { opacity: 1; }\
+	  50% { opacity: 0; }\
+	  to { opacity: 1; }\
+	}\
+	@-webkit-keyframes blink {\
+	  from { opacity: 1; }\
+	  50% { opacity: 0; }\
+	  to { opacity: 1; }\
+	}\
+	.ctrlw_overlay_loading{\
+		background-color: #4E5162;\
+    	background-image: url('http://data.twinoid.com/img/design/mask.png');\
+		height : 100%;\
+		left : 0;\
+		opacity:0.9;\
+		position : fixed;\
+		top : 0;\
+		width : 100%;\
+		z-index:1000;\
+	}\
+	.ctrlw_loading_ball_wrapper{\
+		position:fixed;\
+		left:50%;\
+		top:50%;\
+		z-index:1001;\
+	}\
+	.ctrlw_loading_ball {\
+	    background-color: rgba(0,0,0,0);\
+	    border: 5px solid rgba(0,183,229,0.9);\
+	    opacity: 1;\
+	    border-top: 5px solid rgba(0,0,0,0);\
+	    border-left: 5px solid rgba(0,0,0,0);\
+	    border-radius: 50px;\
+	    box-shadow: 0 0 35px #2187e7;\
+	    width: 50px;\
+	    height: 50px;\
+	    margin: 0 auto;\
+	    -moz-animation: spin .5s infinite linear;\
+	    -webkit-animation: spin .5s infinite linear;\
+	}\
+	.ctrlw_loading_ball1 {\
+	    background-color: rgba(0,0,0,0);\
+	    border: 5px solid rgba(0,183,229,0.9);\
+	    opacity: 1;\
+	    border-top: 5px solid rgba(0,0,0,0);\
+	    border-left: 5px solid rgba(0,0,0,0);\
+	    border-radius: 50px;\
+	    box-shadow: 0 0 15px #2187e7;\
+	    width: 30px;\
+	    height: 30px;\
+	    margin: 0 auto;\
+	    position: relative;\
+	    top: -50px;\
+	    -moz-animation: spinoff .5s infinite linear;\
+	    -webkit-animation: spinoff .5s infinite linear;\
+	}\
+	@-moz-keyframes spin {\
+	    0% {\
+	        -moz-transform: rotate(0deg);\
+	    }\
+	    100% {\
+	        -moz-transform: rotate(360deg);\
+	    };\
+	}\
+	@-moz-keyframes spinoff {\
+	    0% {\
+	        -moz-transform: rotate(0deg);\
+	    }\
+	\
+	    100% {\
+	        -moz-transform: rotate(-360deg);\
+	    };\
+	}\
+	@-webkit-keyframes spin {\
+	    0% {\
+	        -webkit-transform: rotate(0deg);\
+	    }\
+	    100% {\
+	        -webkit-transform: rotate(360deg);\
+	    };\
+	}\
+	@-webkit-keyframes spinoff {\
+	    0% {\
+	        -webkit-transform: rotate(0deg);\
+	    }\
+	    100% {\
+	        -webkit-transform: rotate(-360deg);\
+	    };\
+	}\
 	.mxhead { height: 0; }\
 	.cdReadMeHook { display: none! important; }\
 	.tabon { background-image: url(" + Main.k.servurl + "/img/tabon.png)! important; }\
@@ -1069,7 +1196,7 @@ Main.k.css.ingame = function() {
 		margin: 0 2px;\
 	}\
 	.usLeftbar .but img { \
-		opacity: 1! important;\
+		opacity: 1;\
 	}\
 	.usLeftbar .hero .skills { \
 		top: 2px;\
@@ -1714,6 +1841,22 @@ Main.k.tabs.playing = function() {
 
 
 	// == Extend Main  ============================================
+	Main.k.extend = {};
+	Main.k.extend.updateContent =  Main.updateContent;
+	Main.updateContent = function(url,seek,dest,cb) {
+		Main.k.extend.updateContent(url,seek,dest,function(){
+			if(cb != null) cb();
+			if(/\/choosePeer\?charId=[0-9]+&idx=([0-9]+)/.test(url)){
+				var tab_class = '.cdPrivateTab' + RegExp.$1;
+				Main.k.MushUpdate();
+				if($(tab_class).length > 0){
+					$(tab_class).trigger('click');
+				}
+				
+			}
+		});
+	};
+	
 	Main.onChatInput = function(event,jq) {
 		var tgt = new js.JQuery(event.target);
 		tgt.siblings("input").show();
@@ -2054,6 +2197,7 @@ Main.k.tabs.playing = function() {
 
 		if (!skipK) Main.k.MushUpdate();
 	}
+	
 	Main.k.fakeSelected = null;
 	Main.k.fakeSelectItem = function(frm) {
 		frm = $(frm);
@@ -2364,20 +2508,28 @@ Main.k.tabs.playing = function() {
 	// == User Script  ============================================
 	// ============================================================
 	Main.k.UpdateData = {currversion: 0, changelog: []};
-	Main.k.UpdateCheck = function(online) {
+	Main.k.UpdateCheck = function() {
+		if(Main.k.UpdateCheck.b_in_progress == undefined){
+			Main.k.UpdateCheck.b_in_progress = false;
+		}
+		if(Main.k.UpdateCheck.b_in_progress == true){
+			return;
+		}
 		var lastVersion = js.Cookie.get('ctrlwVersion');
 		if(typeof(lastVersion) != 'undefined' && lastVersion < Main.k.version){
 			var version_update = lastVersion;
 		}else{
 			var version_update = Main.k.version
 		}
-		if(localStorage.getItem('ctrlw_update_cache') == null || online == true){
+		if(localStorage.getItem('ctrlw_update_cache') == null){
+			Main.k.UpdateCheck.b_in_progress = true;
 			$.ajax({
 				url :Main.k.servurl + "/versions/update/"+ version_update,
 				dataType : 'jsonp',
 				success: function(json) {
 					setTimeout(function() {
 					    localStorage.setItem('ctrlw_update_cache',JSON.stringify(json));
+					    Main.k.UpdateCheck.b_in_progress = false;
 					}, 0);
 					
 					
@@ -4505,6 +4657,43 @@ Main.k.tabs.playing = function() {
 		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/new.png' /> "+ Main.k.text.gettext("Mise à jour"), null, null, Main.k.text.gettext("Mise à jour du script"),
 			"Une nouvelle version du script CTRL+W est disponible.")
 		.appendTo(leftbar).attr("id", "updatebtn").css("display", "none").find("a").on("mousedown", Main.k.UpdateDialog);
+		
+		
+		//Integration with others scripts
+		$( window ).load(function() {
+			setTimeout(function(){
+				//Mush Helper script
+				if($('#mushUSMenu').length > 0){
+					var wrapper_mhs = $('#mushUSMenu').parents(":eq(2)");
+					wrapper_mhs.css('left', '-'+(wrapper_mhs.width())+'px');
+					var arrow = wrapper_mhs.find('.arrowright');
+					arrow.attr('class','arrowleft');
+					arrow.off('click');
+					arrow.toggle(function(){
+						wrapper_mhs.animate({left:0},500);
+					},function(){
+						wrapper_mhs.animate({left:'-'+wrapper_mhs.width()+'px'},500);
+					});
+					
+					Main.k.MakeButton("<img src='http://mush.twinoid.com/img/icons/ui/talkie.png' style='vertical-align: -20%' /> "+ 'MHS', null, null, 'Mush Helper Script'
+					).insertAfter($('#updatebtn')).find("a").on("mousedown", function(){
+						wrapper_mhs.find('.arrowleft').trigger('click');
+					});
+				}
+				
+				var s_astro_icon = '';
+				if($('#astro_maj_inventaire').length > 0){
+					var img_astro = $('<img class="" src="/img/icons/ui/pa_comp.png" height="14"/>');
+					$('#share-inventory-button a img').remove();
+					$('#share-inventory-button a').prepend(img_astro);
+					img_astro.addClass('blink-limited');
+					
+				}
+				
+			},10);
+			
+		});
+		
 		// Message Manager
 		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/archive.png' style='vertical-align: -20%' /> "+ Main.k.text.gettext("Msg Manager"), null, null, Main.k.text.gettext("Message Manager"),
 			Main.k.text.gettext("Ne manquez plus de messages ! Tous les topics avec des messages non lus seront mis en évidence, et vous pourrez effectuer des recherches par auteur ou contenu."))
@@ -4558,9 +4747,10 @@ Main.k.tabs.playing = function() {
 		$("<div>").css({"clear": "both", "height": "5px"}).appendTo(leftbar);
 
 		// Inventory actions
-		Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> " + Main.k.text.gettext("Partager"), null, null, Main.k.text.gettext("Partager l'inventaire"),
+		Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> " + Main.k.text.gettext("Partager") , null, null, Main.k.text.gettext("Partager l'inventaire"),
 			Main.k.text.gettext("<p>Insère l'inventaire de la pièce dans la zone de texte active, de la forme&nbsp;:</p><p><strong>Couloir central :</strong> <i>Combinaison</i>, <i>Couteau</i>, <i>Médikit</i>, <i>Extincteur</i></p><p><strong>Partage aussi sur Astropad si celui-ci est installé.</strong></p>")
 		).appendTo(leftbar)
+		.attr('id','share-inventory-button')
 		.find("a").on("mousedown", function(e) {
 			Main.k.SyncAstropad(e);
 			$('textarea:focus').each(function(e) {
@@ -4663,7 +4853,7 @@ Main.k.tabs.playing = function() {
 	Main.k.onCycleChange = function(){
 		// Script updates
 		// ----------------------------------- //
-		Main.k.UpdateCheck(true);
+		localStorage.removeItem('ctrlw_update_cache')
 		// ----------------------------------- //
 	};
 	Main.k.MushUpdate = function() {
@@ -4686,7 +4876,7 @@ Main.k.tabs.playing = function() {
 		
 		// Script updates
 		// ----------------------------------- //
-		Main.k.UpdateCheck(false);
+		Main.k.UpdateCheck();
 		// ----------------------------------- //
 		if($('#player_status').length == 0){
 			$('<div id="player_status" style="position: absolute;right:6px;bottom:0"><img src="'+Main.k.statusImages['bronze']+'" alt="Bronze" title="Bronze" /></div>').appendTo('.sheetmain');
@@ -5542,10 +5732,15 @@ Main.k.tabs.gameover = function() {
 	});
 }
 
+// Script initialization
+GM_addStyle (GM_getResourceText ('css:jgrowl'));
+eval(GM_getResourceText('jgrowl'));
+$.jGrowl.defaults.closerTemplate = '';
+$.jGrowl.defaults.theme = 'ctrl-w';
+$.jGrowl.defaults.themeState = '';
 
 eval(GM_getResourceText('mush'));
 
-// Script initialization
 Main.k.initLang();
 Main.k.Options.init();
 Main.k.Game.init();
