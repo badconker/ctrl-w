@@ -584,6 +584,7 @@ Main.k.Game.updatePlayerInfos = function() {
 		$this.save();
 		Main.k.MushUpdate();
 		Main.k.hideLoading();
+		Main.k.quickNotice(Main.k.text.gettext('Infos du joueur mises à jour.'));
 	});
 }
 // == Options Manager  ========================================
