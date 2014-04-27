@@ -501,7 +501,7 @@ Main.k.displayRemainingCyclesToNextLevel = function (){
 			var i_cycles = RegExp.$2;
 			var i_cycles_save = localStorage.getItem('ctrlw_remaining_cycles');
 			localStorage.setItem('ctrlw_remaining_cycles',i_cycles);
-			if(i_cycles_save != i_cycles){
+			if(i_cycles_save != i_cycles && i_cycles_save != null){
 				Main.k.Game.updatePlayerInfos();
 			}
 			var remaining_cycles = Math.ceil(i_cycles - Main.k.Game.data.xp / xp_by_cycle);
@@ -534,6 +534,7 @@ Main.k.clearCache = function(){
 	Main.k.showLoading();
 	Main.k.Game.clear();
 	localStorage.removeItem('ctrlw_update_cache');
+	localStorage.removeItem('ctrlw_remaining_cycles');
 	window.location.reload();
 };
 // == Game Manager
@@ -2507,20 +2508,28 @@ Main.k.tabs.playing = function() {
 	// == User Script  ============================================
 	// ============================================================
 	Main.k.UpdateData = {currversion: 0, changelog: []};
-	Main.k.UpdateCheck = function(online) {
+	Main.k.UpdateCheck = function() {
+		if(Main.k.UpdateCheck.b_in_progress == undefined){
+			Main.k.UpdateCheck.b_in_progress = false;
+		}
+		if(Main.k.UpdateCheck.b_in_progress == true){
+			return;
+		}
 		var lastVersion = js.Cookie.get('ctrlwVersion');
 		if(typeof(lastVersion) != 'undefined' && lastVersion < Main.k.version){
 			var version_update = lastVersion;
 		}else{
 			var version_update = Main.k.version
 		}
-		if(localStorage.getItem('ctrlw_update_cache') == null || online == true){
+		if(localStorage.getItem('ctrlw_update_cache') == null){
+			Main.k.UpdateCheck.b_in_progress = true;
 			$.ajax({
 				url :Main.k.servurl + "/versions/update/"+ version_update,
 				dataType : 'jsonp',
 				success: function(json) {
 					setTimeout(function() {
 					    localStorage.setItem('ctrlw_update_cache',JSON.stringify(json));
+					    Main.k.UpdateCheck.b_in_progress = false;
 					}, 0);
 					
 					
@@ -4844,7 +4853,7 @@ Main.k.tabs.playing = function() {
 	Main.k.onCycleChange = function(){
 		// Script updates
 		// ----------------------------------- //
-		Main.k.UpdateCheck(true);
+		localStorage.removeItem('ctrlw_update_cache')
 		// ----------------------------------- //
 	};
 	Main.k.MushUpdate = function() {
@@ -4867,7 +4876,7 @@ Main.k.tabs.playing = function() {
 		
 		// Script updates
 		// ----------------------------------- //
-		Main.k.UpdateCheck(false);
+		Main.k.UpdateCheck();
 		// ----------------------------------- //
 		if($('#player_status').length == 0){
 			$('<div id="player_status" style="position: absolute;right:6px;bottom:0"><img src="'+Main.k.statusImages['bronze']+'" alt="Bronze" title="Bronze" /></div>').appendTo('.sheetmain');
