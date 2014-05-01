@@ -314,7 +314,7 @@ Main.k.displayMainMenu = function() {
 
 	var rankings_ss = $("<ul>").appendTo(rankings);
 	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/ranking'><li><img src='/img/icons/skills/persistent.png' />"+Main.k.text.gettext("Classements")+"</li></a>").appendTo(rankings_ss);
-	$("<a class='kssmenuel ext' href='http://twinorank.kubegb.fr/'><li><img src='/img/icons/skills/persistent.png' />Twin-O-Rank</li></a>").appendTo(rankings_ss);
+	$("<a class='kssmenuel ext' href='http://twinorank.kubegb.fr/jeux/Mush' target='_blank'><li><img src='/img/icons/skills/persistent.png' />Twin-O-Rank</li></a>").appendTo(rankings_ss);
 
 	var forum_ss = $("<ul>").appendTo(forum);
 	if(Main.k.text.gettext("ForumDiscussionId") != "ForumDiscussionId") {
@@ -355,10 +355,10 @@ Main.k.displayMainMenu = function() {
 		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumAdviceId")+"|thread/" + Main.k.h[Main.k.ownHero].tutorial + "'><li><img src='/img/icons/ui/" + charname + ".png' />" + Main.k.text.strargs(Main.k.text.gettext("Tuto %1"), [Main.k.ownHero.capitalize()]) + "</li></a>").appendTo(help_ss);
 	}
 	/* Translators: Wiki url */
-	$("<a class='kssmenuel ext' href='"+Main.k.text.gettext("http://www.twinpedia.com/mush")+
+	$("<a class='kssmenuel ext' target='_blank' href='"+Main.k.text.gettext("http://www.twinpedia.com/mush")+
 	/* Translators: Wiki favicon url */
 	"'><li><img src='"+Main.k.text.gettext("http://www.twinpedia.com/_media/favicon.ico")+"' />"+Main.k.text.gettext("Twinpedia")+"</li></a>").appendTo(help_ss);
-	$("<a class='kssmenuel ext' href='http://pictoid.bsimo.fr/g/mush'><li><img src='/img/icons/ui/win_triumph.png' />Pictoid</li></a>").appendTo(help_ss);
+	$("<a class='kssmenuel ext' href='http://pictoid.bsimo.fr/g/mush' target='_blank'><li><img src='/img/icons/ui/win_triumph.png' />Pictoid</li></a>").appendTo(help_ss);
 
 	if (Main.k.fds) {
 		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/77714'><li><img src='/img/icons/skills/cold_blood.png' />Magistrature</li></a>").appendTo(forum_ss);
