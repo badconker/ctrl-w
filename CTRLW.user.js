@@ -1649,16 +1649,6 @@ Main.k.tabs = {};
 Main.k.tabs.playing = function() {
 	Main.k.css.ingame();
 	
-	//replace heroes
-	$.each(Main.k.HEROES.replace, function(k,v){
-		if($('.'+k).length > 0){
-			var index = $.inArray(v,Main.k.HEROES);
-		}else{
-			var index = $.inArray(k,Main.k.HEROES);
-		}
-		Main.k.HEROES.splice(index,1);
-	});
-	
 	// Open links in a new tab
 	$("ul.kmenu a.ext").on("click", function() { Main.k.window.open(this.href); return false; });
 	Main.k.hasTalkie = $("#walltab").length > 0;
@@ -4956,28 +4946,24 @@ Main.k.tabs.playing = function() {
 					.appendTo(titles);
 				}
 			}
-			if (display) {
-				var heroDiv = $("<div>").addClass("hero").appendTo(heroes_list);
+			var heroDiv = $("<div>").addClass("hero").appendTo(heroes_list);
 
-				$("<img>").addClass("body " + bubble)
-				.attr("src", "/img/design/pixel.gif")
-				.css("cursor", "pointer")
-				.attr("_hid", hero.id)
-				.attr("_title", hero.name)
-				.attr("_desc", hero.short_desc + "</p><p><strong>"+Main.k.text.gettext("Cliquez pour plus d'informations <br/>/!&#92; Fonctionnalité non codée")+"</strong>")
-				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip)
-				.on("click", function() {
-					Main.k.Profiles.display($(this).attr("_hid"));
-				})
-				.appendTo(heroDiv);
+			$("<img>").addClass("body " + bubble)
+			.attr("src", "/img/design/pixel.gif")
+			.css("cursor", "pointer")
+			.attr("_hid", hero.id)
+			.attr("_title", hero.name)
+			.attr("_desc", hero.short_desc + "</p><p><strong>"+Main.k.text.gettext("Cliquez pour plus d'informations <br/>/!&#92; Fonctionnalité non codée")+"</strong>")
+			.on("mouseover", Main.k.CustomTip)
+			.on("mouseout", Main.hideTip)
+			.on("click", function() {
+				Main.k.Profiles.display($(this).attr("_hid"));
+			})
+			.appendTo(heroDiv);
 
-				heroDiv.append(skills);
-				heroDiv.append(statuses);
-				heroDiv.append(titles);
-			} else {
-				missingheroes.push(bubble);
-			}
+			heroDiv.append(skills);
+			heroDiv.append(statuses);
+			heroDiv.append(titles);
 
 			Main.k.AliveHeroes.push(bubble);
 		}
@@ -4987,7 +4973,7 @@ Main.k.tabs.playing = function() {
 		for (var i=0; i<Main.k.HEROES.length; i++) {
 			var hero = Main.k.HEROES[i];
 			var h = Main.k.h[hero];
-			if (!Main.k.ArrayContains(Main.k.AliveHeroes, hero) || Main.k.ArrayContains(missingheroes,hero)) {
+			if (!Main.k.ArrayContains(Main.k.AliveHeroes, hero)) {
 				if (j%5 == 0) $("<br/>").appendTo(missingDiv);
 				j++;
 				var bubble = hero.replace(/(\s)/g, "_").toLowerCase();
@@ -4996,7 +4982,7 @@ Main.k.tabs.playing = function() {
 				.attr("src", "/img/design/pixel.gif")
 				.css("cursor", "pointer")
 				.attr("_hid", -1)
-				.attr("_title", hero)
+				.attr("_title", Main.k.COMPLETE_SURNAME(hero))
 				.attr("_desc", h.short_desc + "</p><p><strong>"+Main.k.text.gettext("Cliquez pour plus d'informations <br/>/!&#92; Fonctionnalité non codée")+"</strong>")
 				.on("mouseover", Main.k.CustomTip)
 				.on("mouseout", Main.hideTip)
@@ -5448,13 +5434,23 @@ Main.k.tabs.playing = function() {
 		var $it = Main.k.heroes.iterator();
 		var heroes = "";
 		var tab_heroes = jQuery.extend([], Main.k.HEROES);
-
+		var tab_heroes_same_room = [];
 		while ($it.hasNext()) {
 			var hero = $it.next();
+			tab_heroes_same_room.push(Main.k.surnameToBubble(hero.surname));
 			tab_heroes = jQuery.grep(tab_heroes, function(value) {
 			  return value != Main.k.surnameToBubble(hero.surname);
 			});
 		}
+		//replace heroes
+		$.each(Main.k.HEROES.replace, function(k,v){
+			if($('.'+k).length > 0 || $.inArray(k,tab_heroes_same_room) != -1){
+				var index = $.inArray(v,Main.k.HEROES);
+			}else{
+				var index = $.inArray(k,Main.k.HEROES);
+			}
+			Main.k.HEROES.splice(index,1);
+		});
 	};
 	Main.k.MushInit();
 	Main.k.MushUpdate();
