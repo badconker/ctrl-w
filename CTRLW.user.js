@@ -483,7 +483,6 @@ Main.k.SyncAstropad = function(tgt){
 }
 // Shows the actual number of remaining cycles
 Main.k.displayRemainingCyclesToNextLevel = function (){
-	
 	$('.levelingame').each(function(){
 		var regex = /(<p>.*>[^0-9]?)([0-9]+)([a-zA-Z ]*)(<)(.*<\/p>)/;
 		if($(this).attr('onmouseover_save') !== undefined){
@@ -505,6 +504,9 @@ Main.k.displayRemainingCyclesToNextLevel = function (){
 				Main.k.Game.updatePlayerInfos();
 			}
 			var remaining_cycles = Math.ceil(i_cycles - Main.k.Game.data.xp / xp_by_cycle);
+			console.info('remaining_cycles',remaining_cycles);
+			console.info('Main.k.Game.data.xp',Main.k.Game.data.xp);
+			console.info('xp_by_cycle',xp_by_cycle);
 			var i_daily_cycle = 8;
 			if($('.miniConf img[src*="fast_cycle"]').length > 0){
 				i_daily_cycle = 12;
@@ -516,7 +518,7 @@ Main.k.displayRemainingCyclesToNextLevel = function (){
 				s_days = Main.k.text.strargs(Main.k.text.ngettext("(~%1 jour)","(~%1 jours)",nb_days),[nb_days]);
 				s_days = ' '+s_days;
 			}
-			$(this).attr('onmouseover',$(this).attr('onmouseover').replace(regex,"$1"+remaining_cycles+"$3"+s_days+"$4"+"$5"));
+			$(this).attr('onmouseover',attr.replace(regex,"$1"+remaining_cycles+"$3"+s_days+"$4"+"$5"));
 		}
 	});
 	if($('.levelingame_no_anim').length > 0){
