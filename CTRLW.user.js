@@ -505,8 +505,12 @@ Main.k.displayRemainingCyclesToNextLevel = function (){
 				Main.k.Game.updatePlayerInfos();
 			}
 			var remaining_cycles = Math.ceil(i_cycles - Main.k.Game.data.xp / xp_by_cycle);
+			var i_daily_cycle = 8;
+			if($('.miniConf img[src*="fast_cycle"]').length > 0){
+				i_daily_cycle = 12;
+			}
 			
-			var nb_days = Math.round(remaining_cycles / 8);
+			var nb_days = Math.round(remaining_cycles / i_daily_cycle);
 			var s_days = '';
 			if(nb_days > 0){
 				s_days = Main.k.text.strargs(Main.k.text.ngettext("(~%1 jour)","(~%1 jours)",nb_days),[nb_days]);
