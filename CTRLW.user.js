@@ -12,7 +12,7 @@
 // @resource    jgrowl https://raw.github.com/badconker/ctrl-w/release/lib/jquery.jgrowl.js
 // @resource    translation:en https://raw.github.com/badconker/ctrl-w/release/translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es https://raw.github.com/badconker/ctrl-w/release/translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.34.1
+// @version     0.34.2
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -314,7 +314,7 @@ Main.k.displayMainMenu = function() {
 
 	var rankings_ss = $("<ul>").appendTo(rankings);
 	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/ranking'><li><img src='/img/icons/skills/persistent.png' />"+Main.k.text.gettext("Classements")+"</li></a>").appendTo(rankings_ss);
-	$("<a class='kssmenuel ext' href='http://twinorank.kubegb.fr/'><li><img src='/img/icons/skills/persistent.png' />Twin-O-Rank</li></a>").appendTo(rankings_ss);
+	$("<a class='kssmenuel ext' href='http://twinorank.kubegb.fr/jeux/Mush' target='_blank'><li><img src='/img/icons/skills/persistent.png' />Twin-O-Rank</li></a>").appendTo(rankings_ss);
 
 	var forum_ss = $("<ul>").appendTo(forum);
 	if(Main.k.text.gettext("ForumDiscussionId") != "ForumDiscussionId") {
@@ -355,10 +355,10 @@ Main.k.displayMainMenu = function() {
 		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumAdviceId")+"|thread/" + Main.k.h[Main.k.ownHero].tutorial + "'><li><img src='/img/icons/ui/" + charname + ".png' />" + Main.k.text.strargs(Main.k.text.gettext("Tuto %1"), [Main.k.ownHero.capitalize()]) + "</li></a>").appendTo(help_ss);
 	}
 	/* Translators: Wiki url */
-	$("<a class='kssmenuel ext' href='"+Main.k.text.gettext("http://www.twinpedia.com/mush")+
+	$("<a class='kssmenuel ext' target='_blank' href='"+Main.k.text.gettext("http://www.twinpedia.com/mush")+
 	/* Translators: Wiki favicon url */
 	"'><li><img src='"+Main.k.text.gettext("http://www.twinpedia.com/_media/favicon.ico")+"' />"+Main.k.text.gettext("Twinpedia")+"</li></a>").appendTo(help_ss);
-	$("<a class='kssmenuel ext' href='http://pictoid.bsimo.fr/g/mush'><li><img src='/img/icons/ui/win_triumph.png' />Pictoid</li></a>").appendTo(help_ss);
+	$("<a class='kssmenuel ext' href='http://pictoid.bsimo.fr/g/mush' target='_blank'><li><img src='/img/icons/ui/win_triumph.png' />Pictoid</li></a>").appendTo(help_ss);
 
 	if (Main.k.fds) {
 		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/77714'><li><img src='/img/icons/skills/cold_blood.png' />Magistrature</li></a>").appendTo(forum_ss);
@@ -483,7 +483,6 @@ Main.k.SyncAstropad = function(tgt){
 }
 // Shows the actual number of remaining cycles
 Main.k.displayRemainingCyclesToNextLevel = function (){
-	
 	$('.levelingame').each(function(){
 		var regex = /(<p>.*>[^0-9]?)([0-9]+)([a-zA-Z ]*)(<)(.*<\/p>)/;
 		if($(this).attr('onmouseover_save') !== undefined){
@@ -505,14 +504,21 @@ Main.k.displayRemainingCyclesToNextLevel = function (){
 				Main.k.Game.updatePlayerInfos();
 			}
 			var remaining_cycles = Math.ceil(i_cycles - Main.k.Game.data.xp / xp_by_cycle);
+			console.info('remaining_cycles',remaining_cycles);
+			console.info('Main.k.Game.data.xp',Main.k.Game.data.xp);
+			console.info('xp_by_cycle',xp_by_cycle);
+			var i_daily_cycle = 8;
+			if($('.miniConf img[src*="fast_cycle"]').length > 0){
+				i_daily_cycle = 12;
+			}
 			
-			var nb_days = Math.round(remaining_cycles / 8);
+			var nb_days = Math.round(remaining_cycles / i_daily_cycle);
 			var s_days = '';
 			if(nb_days > 0){
 				s_days = Main.k.text.strargs(Main.k.text.ngettext("(~%1 jour)","(~%1 jours)",nb_days),[nb_days]);
 				s_days = ' '+s_days;
 			}
-			$(this).attr('onmouseover',$(this).attr('onmouseover').replace(regex,"$1"+remaining_cycles+"$3"+s_days+"$4"+"$5"));
+			$(this).attr('onmouseover',attr.replace(regex,"$1"+remaining_cycles+"$3"+s_days+"$4"+"$5"));
 		}
 	});
 	if($('.levelingame_no_anim').length > 0){
@@ -1648,16 +1654,6 @@ Main.k.css.bubbles = function() {
 Main.k.tabs = {};
 Main.k.tabs.playing = function() {
 	Main.k.css.ingame();
-	
-	//replace heroes
-	$.each(Main.k.HEROES.replace, function(k,v){
-		if($('.'+k).length > 0){
-			var index = $.inArray(v,Main.k.HEROES);
-		}else{
-			var index = $.inArray(k,Main.k.HEROES);
-		}
-		Main.k.HEROES.splice(index,1);
-	});
 	
 	// Open links in a new tab
 	$("ul.kmenu a.ext").on("click", function() { Main.k.window.open(this.href); return false; });
@@ -4956,28 +4952,24 @@ Main.k.tabs.playing = function() {
 					.appendTo(titles);
 				}
 			}
-			if (display) {
-				var heroDiv = $("<div>").addClass("hero").appendTo(heroes_list);
+			var heroDiv = $("<div>").addClass("hero").appendTo(heroes_list);
 
-				$("<img>").addClass("body " + bubble)
-				.attr("src", "/img/design/pixel.gif")
-				.css("cursor", "pointer")
-				.attr("_hid", hero.id)
-				.attr("_title", hero.name)
-				.attr("_desc", hero.short_desc + "</p><p><strong>"+Main.k.text.gettext("Cliquez pour plus d'informations <br/>/!&#92; Fonctionnalité non codée")+"</strong>")
-				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip)
-				.on("click", function() {
-					Main.k.Profiles.display($(this).attr("_hid"));
-				})
-				.appendTo(heroDiv);
+			$("<img>").addClass("body " + bubble)
+			.attr("src", "/img/design/pixel.gif")
+			.css("cursor", "pointer")
+			.attr("_hid", hero.id)
+			.attr("_title", hero.name)
+			.attr("_desc", hero.short_desc + "</p><p><strong>"+Main.k.text.gettext("Cliquez pour plus d'informations <br/>/!&#92; Fonctionnalité non codée")+"</strong>")
+			.on("mouseover", Main.k.CustomTip)
+			.on("mouseout", Main.hideTip)
+			.on("click", function() {
+				Main.k.Profiles.display($(this).attr("_hid"));
+			})
+			.appendTo(heroDiv);
 
-				heroDiv.append(skills);
-				heroDiv.append(statuses);
-				heroDiv.append(titles);
-			} else {
-				missingheroes.push(bubble);
-			}
+			heroDiv.append(skills);
+			heroDiv.append(statuses);
+			heroDiv.append(titles);
 
 			Main.k.AliveHeroes.push(bubble);
 		}
@@ -4987,7 +4979,7 @@ Main.k.tabs.playing = function() {
 		for (var i=0; i<Main.k.HEROES.length; i++) {
 			var hero = Main.k.HEROES[i];
 			var h = Main.k.h[hero];
-			if (!Main.k.ArrayContains(Main.k.AliveHeroes, hero) || Main.k.ArrayContains(missingheroes,hero)) {
+			if (!Main.k.ArrayContains(Main.k.AliveHeroes, hero)) {
 				if (j%5 == 0) $("<br/>").appendTo(missingDiv);
 				j++;
 				var bubble = hero.replace(/(\s)/g, "_").toLowerCase();
@@ -4996,7 +4988,7 @@ Main.k.tabs.playing = function() {
 				.attr("src", "/img/design/pixel.gif")
 				.css("cursor", "pointer")
 				.attr("_hid", -1)
-				.attr("_title", hero)
+				.attr("_title", Main.k.COMPLETE_SURNAME(hero))
 				.attr("_desc", h.short_desc + "</p><p><strong>"+Main.k.text.gettext("Cliquez pour plus d'informations <br/>/!&#92; Fonctionnalité non codée")+"</strong>")
 				.on("mouseover", Main.k.CustomTip)
 				.on("mouseout", Main.hideTip)
@@ -5448,13 +5440,23 @@ Main.k.tabs.playing = function() {
 		var $it = Main.k.heroes.iterator();
 		var heroes = "";
 		var tab_heroes = jQuery.extend([], Main.k.HEROES);
-
+		var tab_heroes_same_room = [];
 		while ($it.hasNext()) {
 			var hero = $it.next();
+			tab_heroes_same_room.push(Main.k.surnameToBubble(hero.surname));
 			tab_heroes = jQuery.grep(tab_heroes, function(value) {
 			  return value != Main.k.surnameToBubble(hero.surname);
 			});
 		}
+		//replace heroes
+		$.each(Main.k.HEROES.replace, function(k,v){
+			if($('.'+k).length > 0 || $.inArray(k,tab_heroes_same_room) != -1){
+				var index = $.inArray(v,Main.k.HEROES);
+			}else{
+				var index = $.inArray(k,Main.k.HEROES);
+			}
+			Main.k.HEROES.splice(index,1);
+		});
 	};
 	Main.k.MushInit();
 	Main.k.MushUpdate();
