@@ -357,7 +357,7 @@ Main.k.displayMainMenu = function() {
 	/* Translators: Wiki url */
 	$("<a class='kssmenuel ext' target='_blank' href='"+Main.k.text.gettext("http://www.twinpedia.com/mush")+
 	/* Translators: Wiki favicon url */
-	"'><li><img src='"+Main.k.text.gettext("http://www.twinpedia.com/_media/favicon.ico")+"' />"+Main.k.text.gettext("Twinpedia")+"</li></a>").appendTo(help_ss);
+	"'><li><img data-async_src='"+Main.k.text.gettext("http://www.twinpedia.com/_media/favicon.ico")+"' />"+Main.k.text.gettext("Twinpedia")+"</li></a>").appendTo(help_ss);
 	$("<a class='kssmenuel ext' href='http://pictoid.bsimo.fr/g/mush' target='_blank'><li><img src='/img/icons/ui/win_triumph.png' />Pictoid</li></a>").appendTo(help_ss);
 
 	if (Main.k.fds) {
@@ -4686,7 +4686,13 @@ Main.k.tabs.playing = function() {
 				}
 				
 			},10);
-			
+
+            //For scripts which use load event
+            $('img[data-async_src]').each(function(){
+               $(this).attr('src',$(this).attr('data-async_src'));
+               $(this).removeAttr('data-async_src');
+            });
+
 		});
 		
 		// Message Manager
