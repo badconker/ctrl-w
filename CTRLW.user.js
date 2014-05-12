@@ -358,7 +358,7 @@ Main.k.displayMainMenu = function() {
 	$("<a class='kssmenuel ext' target='_blank' href='"+Main.k.text.gettext("http://www.twinpedia.com/mush")+
 	/* Translators: Wiki favicon url */
 	"'><li><img data-async_src='"+Main.k.text.gettext("http://www.twinpedia.com/_media/favicon.ico")+"' />"+Main.k.text.gettext("Twinpedia")+"</li></a>").appendTo(help_ss);
-	$("<a class='kssmenuel ext' href='http://pictoid.bsimo.fr/g/mush' target='_blank'><li><img src='/img/icons/ui/win_triumph.png' />Pictoid</li></a>").appendTo(help_ss);
+	$("<a class='kssmenuel ext' href='http://pictoid.fr/mush/picto' target='_blank'><li><img data-async_src='http://pictoid.fr/favicon.png' />Pictoid</li></a>").appendTo(help_ss);
 
 	if (Main.k.fds) {
 		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/77714'><li><img src='/img/icons/skills/cold_blood.png' />Magistrature</li></a>").appendTo(forum_ss);
