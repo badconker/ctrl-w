@@ -12,12 +12,11 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.34.3
+// @version     0.35b1
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
 var $ = unsafeWindow.jQuery;
-var $hxClasses = unsafeWindow.$hxClasses;
 var _tid = unsafeWindow._tid;
 var ArrayEx = unsafeWindow.ArrayEx;
 var ChatType = unsafeWindow.ChatType;
@@ -28,7 +27,6 @@ var HxOverrides = unsafeWindow.HxOverrides;
 var JqEx = unsafeWindow.JqEx;
 var js = unsafeWindow.js;
 var Lambda = unsafeWindow.Lambda;
-var prx = unsafeWindow.prx;
 var Reflect = unsafeWindow.Reflect;
 var Selection = unsafeWindow.Selection;
 var Std = unsafeWindow.Std;
@@ -37,7 +35,6 @@ var StringTools = unsafeWindow.StringTools;
 var Tag = unsafeWindow.Tag;
 var Tools = unsafeWindow.Tools;
 var Utils = unsafeWindow.Utils;
-var Closet = unsafeWindow.Closet;
 var mt = unsafeWindow.mt;
 var jQuery = unsafeWindow.jQuery;
 
@@ -59,14 +56,16 @@ String.prototype.capitalize = function() {
 	});
 };
 String.prototype.replaceFromObj = function(obj) {
-  var retStr = this
+  var retStr = this;
   for (var x in obj) {
-    retStr = retStr.replace(new RegExp(x, 'g'), obj[x])
+	if(obj.hasOwnProperty(x)){
+		retStr = retStr.replace(new RegExp(x, 'g'), obj[x]);
+	}
   }
-  return retStr
-}
+  return retStr;
+};
 RegExp.escape = function(s) {
-    return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+	return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 };
 
 Main.k.initLang = function() {
@@ -96,7 +95,7 @@ Main.k.initLang = function() {
 	} catch(err) { // GM_getResourceText throws errors if things don't exist
 		console.error("Error getting translation data:", err);
 	}
-}
+};
 Main.k.initData = function() {
 	// Define if we are ingame
 	Main.k.playing = Main.heroes.iterator().hasNext();
@@ -110,122 +109,122 @@ Main.k.initData = function() {
 	Main.k.HEROES.replace = {
 		andie:'finola',
 		derek:'chao'
-	}
+	};
 	Main.k.h = {
 		mush:{
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:mush"),
+			tutorial:Main.k.text.gettext("tutorial_id:mush")
 		},
 		jin_su:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Commandant suprême du Daedalus."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:jin_su"),
+			tutorial:Main.k.text.gettext("tutorial_id:jin_su")
 		},
 		frieda:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Scientifique millénaire."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:frieda"),
+			tutorial:Main.k.text.gettext("tutorial_id:frieda")
 		},
 		kuan_ti:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Grand architecte du Daedalus."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:kuan_ti"),
+			tutorial:Main.k.text.gettext("tutorial_id:kuan_ti")
 		},
 		janice:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Psychologue Digitale aux atouts certains."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:janice"),
+			tutorial:Main.k.text.gettext("tutorial_id:janice")
 		},
 		roland:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Humoriste pilote de chasse à ses heures."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:roland"),
+			tutorial:Main.k.text.gettext("tutorial_id:roland")
 		},
 		hua:{
 			/* Translators: This translation must be copied from the game. */
-			short_desc:Main.k.text.gettext("Exploratrice de l'extrême."),
+			short_desc:Main.k.text.gettext("Exploratrice de l'EXTRÊME."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:hua"),
+			tutorial:Main.k.text.gettext("tutorial_id:hua")
 		},
 		paola:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Officier principal des Communications du Daedalus."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:paola"),
+			tutorial:Main.k.text.gettext("tutorial_id:paola")
 		},
 		chao:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Chef de la sécurité du Daedalus."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:chao"),
+			tutorial:Main.k.text.gettext("tutorial_id:chao")
 		},
 		finola:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Biologiste de renommée internationale, pionnière dans l'étude du Mush."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:finola"),
+			tutorial:Main.k.text.gettext("tutorial_id:finola")
 		},
 		stephen:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Cuisinier le plus dangereux de la galaxie."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:stephen"),
+			tutorial:Main.k.text.gettext("tutorial_id:stephen")
 		},
 		ian:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Chercheur frugivore flexible."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:ian"),
+			tutorial:Main.k.text.gettext("tutorial_id:ian")
 		},
 		chun:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Dernier espoir de l'Humanité."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:chun"),
+			tutorial:Main.k.text.gettext("tutorial_id:chun")
 		},
 		raluca:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Génie de la physique quantique félinophile."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:raluca"),
+			tutorial:Main.k.text.gettext("tutorial_id:raluca")
 		},
 		gioele:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Armateur philantrophobe."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:gioele"),
+			tutorial:Main.k.text.gettext("tutorial_id:gioele")
 		},
 		eleesha:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Investigatrice déchue de premier plan."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:eleesha"),
+			tutorial:Main.k.text.gettext("tutorial_id:eleesha")
 		},
 		terrence:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Technophile motorisé."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:terrence"),
+			tutorial:Main.k.text.gettext("tutorial_id:terrence")
 		},
 		andie:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Fayot de la fédération."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:andie"),
+			tutorial:Main.k.text.gettext("tutorial_id:andie")
 		},
 		derek:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Héros malgré lui."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:derek"),
+			tutorial:Main.k.text.gettext("tutorial_id:derek")
 		}
 		
-	}
+	};
 	Main.k.cssToHeroes = [];
 	Main.k.cssToHeroes["-1185px"] = "janice";
 	Main.k.cssToHeroes["-1282px"] = "chao";
@@ -280,7 +279,7 @@ Main.k.initData = function() {
 	Main.k.statusImages['bronze'] = 'http://imgup.motion-twin.com/twinoid/6/b/8b8ae4d5_4030.jpg';
 	Main.k.statusImages['silver'] = 'http://imgup.motion-twin.com/twinoid/a/e/3c341777_4030.jpg';
 	Main.k.statusImages['gold'] = 'http://imgup.motion-twin.com/twinoid/c/1/4e43e15c_4030.jpg';
-}
+};
 Main.k.displayMainMenu = function() {
 	Main.k.css.customMenu();
 
@@ -296,7 +295,7 @@ Main.k.displayMainMenu = function() {
 	var account = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/me'>"+Main.k.text.gettext("Mon compte")+"</a></li>").appendTo(menu);
 
 	if(Main.k.text.gettext("ForumCastingsId") != "ForumCastingsId") {
-		var casting = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/group/list'>"+Main.k.text.gettext("Castings")+"</a></li>").appendTo(menu);
+		$("<li class='kmenuel'><a href='"+Main.k.mushurl+"/group/list'>"+Main.k.text.gettext("Castings")+"</a></li>").appendTo(menu);
 	}
 	var rankings = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/ranking'>"+Main.k.text.gettext("Classements")+"</a></li>").appendTo(menu);
 	var forum = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/tid/forum'>"+Main.k.text.gettext("Forum")+"</a></li>").appendTo(menu);
@@ -307,81 +306,81 @@ Main.k.displayMainMenu = function() {
 	.css("display", "none").attr("id", "vendingmenu").appendTo(play_ss);
 
 	var account_ss = $("<ul>").attr("id", "accountmenu").appendTo(account);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me'><li><img src='/img/icons/skills/persistent.png' />"+Main.k.text.gettext("Expérience")+"</li></a>").appendTo(account_ss);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me?profile'><li><img src='/img/icons/skills/opportunist.png' />"+Main.k.text.gettext("Ma fiche")+"</li></a>").appendTo(account_ss);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me?config'><li><img src='/img/icons/skills/engineer.png' />"+Main.k.text.gettext("Mes réglages")+"</li></a>").appendTo(account_ss);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/me?news'><li><img src='/img/icons/skills/radio_expert.png' />"+Main.k.text.gettext("News")+"</li></a>").appendTo(account_ss);
+	$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/me'><img src='/img/icons/skills/persistent.png' />"+Main.k.text.gettext("Expérience")+"</a></li>").appendTo(account_ss);
+	$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/me?profile'><img src='/img/icons/skills/opportunist.png' />"+Main.k.text.gettext("Ma fiche")+"</a></li>").appendTo(account_ss);
+	$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/me?config'><img src='/img/icons/skills/engineer.png' />"+Main.k.text.gettext("Mes réglages")+"</a></li>").appendTo(account_ss);
+	$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/me?news'><img src='/img/icons/skills/radio_expert.png' />"+Main.k.text.gettext("News")+"</a></li>").appendTo(account_ss);
 
 	var rankings_ss = $("<ul>").appendTo(rankings);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/ranking'><li><img src='/img/icons/skills/persistent.png' />"+Main.k.text.gettext("Classements")+"</li></a>").appendTo(rankings_ss);
-	$("<a class='kssmenuel ext' href='http://twinorank.kubegb.fr/jeux/Mush' target='_blank'><li><img src='/img/icons/skills/persistent.png' />Twin-O-Rank</li></a>").appendTo(rankings_ss);
+	$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/ranking'><img src='/img/icons/skills/persistent.png' />"+Main.k.text.gettext("Classements")+"</a></li>").appendTo(rankings_ss);
+	$("<li><a class='kssmenuel ext' href='http://twinorank.kubegb.fr/jeux/Mush' target='_blank'><img src='/img/icons/skills/persistent.png' />Twin-O-Rank</a></li>").appendTo(rankings_ss);
 
 	var forum_ss = $("<ul>").appendTo(forum);
 	if(Main.k.text.gettext("ForumDiscussionId") != "ForumDiscussionId") {
 		/* Translators: Forum Discussion id */
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumDiscussionId")+
+		$("<li><a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumDiscussionId")+
 		/* Translators: Forum Discussion label */
-		"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.gettext("Discussion")+"</li></a>").appendTo(forum_ss);
+		"'><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.gettext("Discussion")+"</a></li>").appendTo(forum_ss);
 	}
 	if(Main.k.text.gettext("ForumAdviceId") != "ForumAdviceId") {
 		/* Translators: Forum Advice id */
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumAdviceId")+
+		$("<li><a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumAdviceId")+
 		/* Translators: Forum Advice label */
-		"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.gettext("Entraide")+"</li></a>").appendTo(forum_ss);
+		"'><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.gettext("Entraide")+"</a></li>").appendTo(forum_ss);
 	}
 	if(Main.k.text.gettext("ForumLoungeId") != "ForumLoungeId") {
 		/* Translators: Forum Lounge id */
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumLoungeId")+
+		$("<li><a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumLoungeId")+
 		/* Translators: Forum Lounge label */
-		"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.gettext("Détente")+"</li></a>").appendTo(forum_ss);
+		"'><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.gettext("Détente")+"</a></li>").appendTo(forum_ss);
 	}
 	if(Main.k.text.gettext("ForumCastingsId") != "ForumCastingsId") {
 		/* Translators: Forum Castings id */
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumCastingsId")+
+		$("<li><a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumCastingsId")+
 		/* Translators: Forum Castings label */
-		"'><li><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.gettext("Castings")+"</li></a>").appendTo(forum_ss);
+		"'><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.gettext("Castings")+"</a></li>").appendTo(forum_ss);
 	}
 	if(Main.k.text.gettext("ForumOfficersId") != "ForumOfficersId") {
 		/* Translators: Forum Officers id */
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumOfficersId")+"'><li><img src='/img/icons/skills/rebel.png' />"+Main.k.text.gettext("Officiers")+"</li></a>").appendTo(forum_ss);
+		$("<li><a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumOfficersId")+"'><img src='/img/icons/skills/rebel.png' />"+Main.k.text.gettext("Officiers")+"</a></li>").appendTo(forum_ss);
 	}
 
 	var help_ss = $("<ul>").appendTo(help);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/help'><li><img src='/img/icons/skills/genius.png' />"+Main.k.text.gettext("Aide Mush")+"</li></a>").appendTo(help_ss);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/patchlog'><li><img src='/img/icons/skills/persistent.png' />"+Main.k.text.gettext("Patchlog")+"</li></a>").appendTo(help_ss);
+	$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/help'><img src='/img/icons/skills/genius.png' />"+Main.k.text.gettext("Aide Mush")+"</a></li>").appendTo(help_ss);
+	$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/patchlog'><img src='/img/icons/skills/persistent.png' />"+Main.k.text.gettext("Patchlog")+"</a></li>").appendTo(help_ss);
 
 	if (Main.k.ownHero && typeof(Main.k.h[Main.k.ownHero]) != 'undefined') {
 		var charname = Main.k.ownHero.replace("_", "");
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumAdviceId")+"|thread/" + Main.k.h[Main.k.ownHero].tutorial + "'><li><img src='/img/icons/ui/" + charname + ".png' />" + Main.k.text.strargs(Main.k.text.gettext("Tuto %1"), [Main.k.ownHero.capitalize()]) + "</li></a>").appendTo(help_ss);
+		$("<li><a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumAdviceId")+"|thread/" + Main.k.h[Main.k.ownHero].tutorial + "'><img src='/img/icons/ui/" + charname + ".png' />" + Main.k.text.strargs(Main.k.text.gettext("Tuto %1"), [Main.k.ownHero.capitalize()]) + "</a></li>").appendTo(help_ss);
 	}
 	/* Translators: Wiki url */
-	$("<a class='kssmenuel ext' target='_blank' href='"+Main.k.text.gettext("http://www.twinpedia.com/mush")+
+	$("<li><a class='kssmenuel ext' target='_blank' href='"+Main.k.text.gettext("http://www.twinpedia.com/mush")+
 	/* Translators: Wiki favicon url */
-	"'><li><img data-async_src='"+Main.k.text.gettext("http://www.twinpedia.com/_media/favicon.ico")+"' />"+Main.k.text.gettext("Twinpedia")+"</li></a>").appendTo(help_ss);
-	$("<a class='kssmenuel ext' href='http://pictoid.fr/mush/picto' target='_blank'><li><img data-async_src='http://pictoid.fr/favicon.png' />Pictoid</li></a>").appendTo(help_ss);
+	"'><img data-async_src='"+Main.k.text.gettext("http://www.twinpedia.com/_media/favicon.ico")+"' />"+Main.k.text.gettext("Twinpedia")+"</a></li>").appendTo(help_ss);
+	$("<li><a class='kssmenuel ext' href='http://pictoid.fr/mush/picto' target='_blank'><img data-async_src='http://pictoid.fr/favicon.png' />Pictoid</a></li>").appendTo(help_ss);
 
 	if (Main.k.fds) {
-		$("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/77714'><li><img src='/img/icons/skills/cold_blood.png' />Magistrature</li></a>").appendTo(forum_ss);
+		$("<li><a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/77714'><img src='/img/icons/skills/cold_blood.png' />Magistrature</a></li>").appendTo(forum_ss);
 
-		$("<a class='kssmenuel' href='"+Main.k.mushurl+"/fds'><li><img src='/img/icons/skills/cold_blood.png' />FDS</li></a>").appendTo(play_ss);
+		$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/fds'><img src='/img/icons/skills/cold_blood.png' />FDS</a></li>").appendTo(play_ss);
 	}
 }
 
 Main.k.ArrayContains = function(arr, o) {
-	for (a in arr) {
+	for (var a in arr) {
 		if (a == o) return true;
 	}
 	for (var i=0; i<arr.length; i++) {
 		if (arr[i] == o) return true;
 	}
 	return false;
-}
+};
 Main.k.EliminateDuplicates = function(arr) {
 	var i, len=arr.length, out=[], obj={};
 	for (i=0;i<len;i++) obj[arr[i]]=0;
 	for (i in obj) out.push(i);
 	return out;
-}
+};
 Main.k.CreatePopup = function() {
 	var popup = {};
 
@@ -393,8 +392,8 @@ Main.k.CreatePopup = function() {
 	}).appendTo(popup.dom);
 
 	return popup;
-}
-Main.k.OpenPopup = function(popup) { $("body").append(popup); }
+};
+Main.k.OpenPopup = function(popup) { $("body").append(popup); };
 Main.k.ClosePopup = function() {
 	var popup = $("#usPopup");
 	if (!popup.get()) return;
@@ -405,7 +404,7 @@ Main.k.ClosePopup = function() {
 		tgt.focus();
 		tgt.attr("id", "");
 	}
-}
+};
 Main.k.CustomTip = function(e) {
 	var tgt = (e || event).target;
 	var title = tgt.getAttribute("_title");
@@ -426,7 +425,7 @@ Main.k.CustomTip = function(e) {
 		(desc ? "<p>" + desc.replace("\n", "") + "</p>" : "") +
 		"</div></div></div></div>"
 	);
-}
+};
 Main.k.MakeButton = function(content, href, onclick, tiptitle, tipdesc) {
 	var but = $("<div>").addClass("action but");
 	var butbr = $("<div>").addClass("butright").appendTo(but);
@@ -443,11 +442,14 @@ Main.k.MakeButton = function(content, href, onclick, tiptitle, tipdesc) {
 	}
 
 	return but;
-}
+};
 Main.k.quickNotice = function(msg){
 	$.jGrowl("<img src='http://imgup.motion-twin.com/twinoid/8/5/ab7aced9_4030.jpg' height='16' alt='notice'/> "+msg);
 	
 };
+/**
+ * @return string
+ */
 Main.k.GetHeroNameFromTopic = function(topic) {
 	var hero = '';
 	var div = null;
@@ -469,10 +471,11 @@ Main.k.GetHeroNameFromTopic = function(topic) {
 
 	// If no hero found (hero = "" or hero = undefined), use jin su
 	return hero ? hero : "jin_su";
-}
+};
 Main.k.SyncAstropad = function(tgt){
-	if($('#astro_maj_inventaire').length > 0){
-		$('#astro_maj_inventaire').trigger('click');
+	var $astro_maj_inventaire = $('#astro_maj_inventaire');
+	if($astro_maj_inventaire.length > 0){
+		$astro_maj_inventaire.trigger('click');
 		Main.k.quickNotice(Main.k.text.gettext("Astropad synchronisé."));
 		Main.showTip(tgt,
 			"<div class='tiptop' ><div class='tipbottom'><div class='tipbg'><div class='tipcontent'>" +
@@ -480,22 +483,23 @@ Main.k.SyncAstropad = function(tgt){
 			"</div></div></div></div>"
 		);
 	}
-}
+};
 // Shows the actual number of remaining cycles
 Main.k.displayRemainingCyclesToNextLevel = function (){
 	$('.levelingame').each(function(){
+		var attr, xp_by_cycle;
 		var regex = /(<p>.*>[^0-9]?)([0-9]+)([a-zA-Z ]*)(<)(.*<\/p>)/;
 		if($(this).attr('onmouseover_save') !== undefined){
-			var attr = $(this).attr('onmouseover_save');
+			attr = $(this).attr('onmouseover_save');
 		}else{
-			var attr = $(this).attr('onmouseover');
+			attr = $(this).attr('onmouseover');
 			$(this).attr('onmouseover_save',attr);
 		}
 		if(regex.exec(attr) != null){
 			if(Main.k.Game.data.player_status == 'gold'){
-				var xp_by_cycle = 2
+				xp_by_cycle = 2
 			}else{
-				var xp_by_cycle = 1
+				xp_by_cycle = 1
 			}
 			var i_cycles = RegExp.$2;
 			var i_cycles_save = localStorage.getItem('ctrlw_remaining_cycles');
@@ -504,9 +508,6 @@ Main.k.displayRemainingCyclesToNextLevel = function (){
 				Main.k.Game.updatePlayerInfos();
 			}
 			var remaining_cycles = Math.ceil(i_cycles - Main.k.Game.data.xp / xp_by_cycle);
-			console.info('remaining_cycles',remaining_cycles);
-			console.info('Main.k.Game.data.xp',Main.k.Game.data.xp);
-			console.info('xp_by_cycle',xp_by_cycle);
 			var i_daily_cycle = 8;
 			if($('.miniConf img[src*="fast_cycle"]').length > 0){
 				i_daily_cycle = 12;
@@ -553,13 +554,13 @@ Main.k.Game.data.player_status = 'bronze';
 Main.k.Game.init = function() {
 	var ctrlw_game = localStorage.getItem("ctrlw_game");
 	if (ctrlw_game == null){
-		return
-	};
+		return;
+	}
 	Main.k.Game.data = JSON.parse(ctrlw_game);
-}
+};
 Main.k.Game.save = function() {
-	localStorage.setItem("ctrlw_game",JSON.stringify(Main.k.Game.data),420000000);
-}
+	localStorage.setItem("ctrlw_game",JSON.stringify(Main.k.Game.data));
+};
 Main.k.Game.clear = function(){
 	localStorage.removeItem("ctrlw_game");
 };
@@ -571,7 +572,7 @@ Main.k.Game.updateDayAndCycle = function(day,cycle) {
 		this.updatePlayerInfos();
 		this.save();
 	}
-}
+};
 Main.k.Game.updatePlayerInfos = function() {
 	Main.k.showLoading();
 	var $this = this;
@@ -593,7 +594,7 @@ Main.k.Game.updatePlayerInfos = function() {
 		Main.k.hideLoading();
 		Main.k.quickNotice(Main.k.text.gettext('Infos du joueur mises à jour.'));
 	});
-}
+};
 // == Options Manager  ========================================
 Main.k.Options = {};
 Main.k.Options.initialized = false;
@@ -659,7 +660,7 @@ Main.k.Options.open = function() {
 	}
 
 	Main.k.folding.display([null,null, "#options_col"], "options");
-}
+};
 Main.k.Options.update = function(e) {
 	var tgt = $(e.target);
 	var key = $(tgt).attr("optname");
@@ -669,7 +670,7 @@ Main.k.Options.update = function(e) {
 	Main.k.Options.updateOpt(key,val);
 	Main.k.Options.updateCookie();
 	if (Main.k.Options.options[i][3]) Main.k.Options.options[i][3]();
-}
+};
 Main.k.Options.updateOpt = function(key, val) {
 	switch(key) {
 		case "custombubbles":
@@ -700,7 +701,7 @@ Main.k.Options.updateOpt = function(key, val) {
 		//	Main.k.Options.options[4][1] = (val == "y");
 		//	break;
 	}
-}
+};
 Main.k.Options.updateCookie = function() {
 	var cook = "";
 	for (var i=0; i<Main.k.Options.options.length; i++) {
@@ -710,7 +711,7 @@ Main.k.Options.updateCookie = function() {
 	}
 
 	js.Cookie.set("ctrlwoptions",cook,420000000);
-}
+};
 Main.k.Options.init = function() {
 	Main.k.Options.options = [
 	//  Option Name,	Option Object,				Need refresh,	After(),				Desc
@@ -718,7 +719,7 @@ Main.k.Options.init = function() {
 		["cbubblesNB",	Main.k.Options.cbubblesNB,	false,			Main.k.customBubbles,	Main.k.text.gettext("Simplifier la mise en forme personnalisée des messages (suppression de l'image de fond).")],
 		["dlogo",		Main.k.Options.dlogo,		true,			null,					Main.k.text.gettext("Afficher le logo Mush au dessus des onglets.")],
 		["splitpjt",	Main.k.Options.splitpjt,	false,			Main.k.updateBottom,	Main.k.text.gettext("Séparer les projets / recherches / pilgred sous la zone de jeu.")],
-		["mushNoConf",	Main.k.Options.mushNoConf,	false,			null,					Main.k.text.gettext("Désactiver les confirmations d'actions bénéfiques pour l'équipages en tant que Mush.")],
+		["mushNoConf",	Main.k.Options.mushNoConf,	false,			null,					Main.k.text.gettext("Désactiver les confirmations d'actions bénéfiques pour l'équipages en tant que Mush.")]
 		//["altpa",		Main.k.Options.altpa,		true,			null,					"Utiliser des images alternatives pour les pa / pm."]
 	];
 
@@ -733,7 +734,7 @@ Main.k.Options.init = function() {
 
 		Main.k.Options.updateOpt(key,val);
 	}
-}
+};
 // == /Options Manager  =======================================
 
 
@@ -825,7 +826,7 @@ Main.k.css.customMenu = function() {
 		height: 16px;\
 	}\
 	").appendTo("head");
-}
+};
 Main.k.css.ingame = function() {
 	Main.k.css.bubbles();
 
@@ -846,7 +847,7 @@ Main.k.css.ingame = function() {
 	}\
 	.ctrlw_overlay_loading{\
 		background-color: #4E5162;\
-    	background-image: url('http://data.twinoid.com/img/design/mask.png');\
+		background-image: url('http://data.twinoid.com/img/design/mask.png');\
 		height : 100%;\
 		left : 0;\
 		opacity:0.9;\
@@ -862,67 +863,67 @@ Main.k.css.ingame = function() {
 		z-index:1001;\
 	}\
 	.ctrlw_loading_ball {\
-	    background-color: rgba(0,0,0,0);\
-	    border: 5px solid rgba(0,183,229,0.9);\
-	    opacity: 1;\
-	    border-top: 5px solid rgba(0,0,0,0);\
-	    border-left: 5px solid rgba(0,0,0,0);\
-	    border-radius: 50px;\
-	    box-shadow: 0 0 35px #2187e7;\
-	    width: 50px;\
-	    height: 50px;\
-	    margin: 0 auto;\
-	    -moz-animation: spin .5s infinite linear;\
-	    -webkit-animation: spin .5s infinite linear;\
+		background-color: rgba(0,0,0,0);\
+		border: 5px solid rgba(0,183,229,0.9);\
+		opacity: 1;\
+		border-top: 5px solid rgba(0,0,0,0);\
+		border-left: 5px solid rgba(0,0,0,0);\
+		border-radius: 50px;\
+		box-shadow: 0 0 35px #2187e7;\
+		width: 50px;\
+		height: 50px;\
+		margin: 0 auto;\
+		-moz-animation: spin .5s infinite linear;\
+		-webkit-animation: spin .5s infinite linear;\
 	}\
 	.ctrlw_loading_ball1 {\
-	    background-color: rgba(0,0,0,0);\
-	    border: 5px solid rgba(0,183,229,0.9);\
-	    opacity: 1;\
-	    border-top: 5px solid rgba(0,0,0,0);\
-	    border-left: 5px solid rgba(0,0,0,0);\
-	    border-radius: 50px;\
-	    box-shadow: 0 0 15px #2187e7;\
-	    width: 30px;\
-	    height: 30px;\
-	    margin: 0 auto;\
-	    position: relative;\
-	    top: -50px;\
-	    -moz-animation: spinoff .5s infinite linear;\
-	    -webkit-animation: spinoff .5s infinite linear;\
+		background-color: rgba(0,0,0,0);\
+		border: 5px solid rgba(0,183,229,0.9);\
+		opacity: 1;\
+		border-top: 5px solid rgba(0,0,0,0);\
+		border-left: 5px solid rgba(0,0,0,0);\
+		border-radius: 50px;\
+		box-shadow: 0 0 15px #2187e7;\
+		width: 30px;\
+		height: 30px;\
+		margin: 0 auto;\
+		position: relative;\
+		top: -50px;\
+		-moz-animation: spinoff .5s infinite linear;\
+		-webkit-animation: spinoff .5s infinite linear;\
 	}\
 	@-moz-keyframes spin {\
-	    0% {\
-	        -moz-transform: rotate(0deg);\
-	    }\
-	    100% {\
-	        -moz-transform: rotate(360deg);\
-	    };\
+		0% {\
+			-moz-transform: rotate(0deg);\
+		}\
+		100% {\
+			-moz-transform: rotate(360deg);\
+		};\
 	}\
 	@-moz-keyframes spinoff {\
-	    0% {\
-	        -moz-transform: rotate(0deg);\
-	    }\
+		0% {\
+			-moz-transform: rotate(0deg);\
+		}\
 	\
-	    100% {\
-	        -moz-transform: rotate(-360deg);\
-	    };\
+		100% {\
+			-moz-transform: rotate(-360deg);\
+		};\
 	}\
 	@-webkit-keyframes spin {\
-	    0% {\
-	        -webkit-transform: rotate(0deg);\
-	    }\
-	    100% {\
-	        -webkit-transform: rotate(360deg);\
-	    };\
+		0% {\
+			-webkit-transform: rotate(0deg);\
+		}\
+		100% {\
+			-webkit-transform: rotate(360deg);\
+		};\
 	}\
 	@-webkit-keyframes spinoff {\
-	    0% {\
-	        -webkit-transform: rotate(0deg);\
-	    }\
-	    100% {\
-	        -webkit-transform: rotate(-360deg);\
-	    };\
+		0% {\
+			-webkit-transform: rotate(0deg);\
+		}\
+		100% {\
+			-webkit-transform: rotate(-360deg);\
+		};\
 	}\
 	.mxhead { height: 0; }\
 	.cdReadMeHook { display: none! important; }\
@@ -1512,7 +1513,7 @@ Main.k.css.ingame = function() {
 	}\
 	").appendTo("head");
 	if (navigator.userAgent.indexOf("Firefox")==-1) $(".usLeftbar .hero .icons").css("padding-right", "30px");
-}
+};
 Main.k.css.bubbles = function() {
 	var d = "3px";
 	var custombubbles_glow = "text-shadow: 0 0 " + d + " #FFF, 0 0 " + d + " #FFF, 0 0 " + d + " #FFF, 0 0 " + d + " #FFF, 0 0 " + d + " #FFF, 0 0 " + d + " #FFF, 0 0 " + d + " #FFF;";
@@ -1646,7 +1647,7 @@ Main.k.css.bubbles = function() {
 		color: #fff;\
 	}\
 	").appendTo("head");
-}
+};
 
 
 
@@ -1654,14 +1655,15 @@ Main.k.css.bubbles = function() {
 Main.k.tabs = {};
 Main.k.tabs.playing = function() {
 	Main.k.css.ingame();
-	
+
 	// Open links in a new tab
 	$("ul.kmenu a.ext").on("click", function() { Main.k.window.open(this.href); return false; });
 	Main.k.hasTalkie = $("#walltab").length > 0;
 
 	$('#swf_ISO_MODULE').click(function(){
-		if($('.fakeitem.on').length == 1){
-			Main.k.fakeSelectItem($('.fakeitem.on'));
+		var fake_on = $('.fakeitem.on');
+		if(fake_on.length == 1){
+			Main.k.fakeSelectItem(fake_on);
 		}
 	});
 
@@ -1732,9 +1734,9 @@ Main.k.tabs.playing = function() {
 	$.fn.insertAtCaret = function(text) {
 		return this.each(function() {
 			if (this.selectionStart || this.selectionStart == '0') {
-				startPos = this.selectionStart;
-				endPos = this.selectionEnd;
-				scrollTop = this.scrollTop;
+				var startPos = this.selectionStart;
+				var endPos = this.selectionEnd;
+				var scrollTop = this.scrollTop;
 				this.value = this.value.substring(0, startPos) + text + this.value.substring(endPos, this.value.length);
 				this.focus();
 				this.selectionStart = startPos + text.length;
@@ -1746,13 +1748,13 @@ Main.k.tabs.playing = function() {
 				this.value = this.value;
 			}
 		});
-	}
+	};
 	$.fn.insertAroundCaret = function(b, a) {
 		return this.each(function() {
 			if (this.selectionStart || this.selectionStart == '0') {
-				startPos = this.selectionStart;
-				endPos = this.selectionEnd;
-				scrollTop = this.scrollTop;
+				var startPos = this.selectionStart;
+				var endPos = this.selectionEnd;
+				var scrollTop = this.scrollTop;
 				this.value = this.value.substring(0, startPos) + b + this.value.substring(startPos, endPos) + a + this.value.substring(endPos, this.value.length);
 				this.focus();
 				this.selectionStart = startPos + b.length;
@@ -1764,7 +1766,7 @@ Main.k.tabs.playing = function() {
 				this.value = this.value;
 			}
 		});
-	}
+	};
 	/*haxe.remoting.ExternalConnection.prototype.call = function(params) {
 		var s = new haxe.Serializer();
 		s.serialize(params);
@@ -1869,7 +1871,7 @@ Main.k.tabs.playing = function() {
 				Tools.send2Store("mush_chatContent_" + jq.attr("id"),tgt.val());
 			}
 		} else Tools.send2Store("mush_chatContent_" + jq.attr("id"),tgt.val());
-	}
+	};
 	Main.onWallFocus = function(jq) {//TODO: MULTILANG
 		if(jq.data("default")) {
 			jq.val(Main.getText("edit_me"));
@@ -1878,7 +1880,7 @@ Main.k.tabs.playing = function() {
 		if (!jq.parent().find(".formatbtn").get(0)) {
 			jq.attr("onblur", "");
 
-			td = jq.parent().parent().siblings("td").first();
+			var td = jq.parent().parent().siblings("td").first();
 			var sharediv = $("<div>").css({
 				"margin-top": "20px",
 				"margin-left": "5px"
@@ -2004,13 +2006,13 @@ Main.k.tabs.playing = function() {
 			// Bold
 			$("<a>").addClass("butmini formatbtn").html("<strong>B</strong>").attr("href", "#").appendTo(formatdiv)
 			.on("click", function() {
-				var t = $(this).parent().parent().find("textarea").insertAroundCaret("**","**");
+				$(this).parent().parent().find("textarea").insertAroundCaret("**","**");
 			});
 
 			// Italic
 			$("<a>").addClass("butmini formatbtn").html("<i>I</i>").attr("href", "#").appendTo(formatdiv)
 			.on("click", function() {
-				var t = $(this).parent().parent().find("textarea").insertAroundCaret("//","//");
+				$(this).parent().parent().find("textarea").insertAroundCaret("//","//");
 			});
 
 			// Add smile
@@ -2063,13 +2065,12 @@ Main.k.tabs.playing = function() {
 			.on("mouseover", Main.k.CustomTip)
 			.on("mouseout", Main.hideTip);
 		}
-	}
+	};
 	Main.onChatFocus = function(t,i) {
 		if(t.data("default")) {
 			t.val("");
 			t.data("default",false);
 		}
-		null;
 		if(0 == (Main.rst & 1 << i)) {
 			Main.rst |= 1 << i;
 
@@ -2091,7 +2092,7 @@ Main.k.tabs.playing = function() {
 				t.siblings("input").attr("tabindex",1);
 			}
 		}
-	}
+	};
 	// Still need correction to insert line break at caret
 	// But nice try blackmagic, anyway~
 	Main.onWallInput = function(event) {
@@ -2108,11 +2109,8 @@ Main.k.tabs.playing = function() {
 				};
 				if(Main.isTuto()) {
 					updtArr.unshift("floating_ui_start");
-					"floating_ui_start";
 					updtArr.unshift("cdDialogs");
-					"cdDialogs";
 					updtArr.push("ode");
-					"ode";
 				}
 				var stVal = StringTools.urlEncode(val);
 				var url = "/wallReply?k=" + tgt.closest(".unit").data("k") + "&msg=" + stVal;
@@ -2126,7 +2124,7 @@ Main.k.tabs.playing = function() {
 				Tools.send2Store("mush_wallReply_" + tgt.attr("id"),tgt.val());
 			}
 		} else Tools.send2Store("mush_wallReply_" + tgt.attr("id"),tgt.val());
-	}
+	};
 
 	Main.loadMoreWall = function() {
 		if(Main.lmwProcessing) return;
@@ -2192,18 +2190,20 @@ Main.k.tabs.playing = function() {
 		Main.onRealLoad();
 
 		if (!skipK) Main.k.MushUpdate();
-	}
+	};
 	
 	Main.k.fakeSelected = null;
 	Main.k.fakeSelectItem = function(frm) {
+		var $inventorySel, invbloc;
 		frm = $(frm);
 		if (frm.hasClass("on")) {
 			Main.closet.hide(true);
-			$(".inventory .selected").parent().removeClass("on");
-			$(".inventory .selected").remove();
+			$inventorySel = $(".inventory .selected");
+			$inventorySel.parent().removeClass("on");
+			$inventorySel.remove();
 
 			//$(".inv").css("display", "none");
-			var invbloc = $("#cdInventory .invcolorbg");
+			invbloc = $("#cdInventory").find(".invcolorbg");
 			//invbloc.css("display", "none");
 			//invbloc.find(".exceed").css("display", "block");
 			invbloc.find(".arrowleft").css("display", "block");
@@ -2213,16 +2213,17 @@ Main.k.tabs.playing = function() {
 
 		} else {
 			Main.closet.show(true,false);
-			Main.rmMan.getProxy(Clients.ISO_MODULE)._cancelSelection()
+			Main.rmMan.getProxy(Clients.ISO_MODULE)._cancelSelection();
 			Main.k.fakeSelected = frm;
-			$(".inventory .selected").parent().removeClass("on");
-			$(".inventory .selected").remove();
+			$inventorySel = $(".inventory .selected");
+			$inventorySel.parent().removeClass("on");
+			$inventorySel.remove();
 			//$(".inv").css("display", "block");
 			$(".inv").addClass("placard_on");
 			//$(".inv").css("margin-top", "-194px");
 
 			Main.sel.selectBySerial(frm.attr("serial_fake"));
-			var invbloc = $("#cdInventory .invcolorbg");
+			invbloc = $("#cdInventory").find(".invcolorbg");
 			invbloc.css("display", "block");
 			//invbloc.find(".exceed").css("display", "none");
 			invbloc.find(".arrowleft").css("display", "none");
@@ -2231,7 +2232,7 @@ Main.k.tabs.playing = function() {
 			frm.addClass("on");
 			if (frm.find(".selected").length == 0) frm.prepend($("<div>").addClass("selected"));
 		}
-	}
+	};
 	Main.selectItem = function(frm) {
 		frm = $(frm);
 		if (frm.hasClass("fakeitem")) return;
@@ -2240,16 +2241,17 @@ Main.k.tabs.playing = function() {
 		} else {
 			Main.sel.selectBySerial(frm.attr("serial"));
 		}
-	}
+	};
 
 	// Seems to work again; if not use next method instead
 	Main.sel.selectBySerial = function(serial) {
+		var prx, $inv, allItems, $inventorySel, realJMe, $inventory;
 		var jMe = $("[serial='" + serial + "']");
 		//if (jMe.length == 0) return; // << from flash
 		js.Cookie.set(CrossConsts.COOK_SEL,StringTools.urlEncode(serial),3600);
 
 		var parentId = "";
-		var realJMe = null;
+		realJMe = null;
 		jMe.each(function() {
 			if ($(this).parent().attr("id") != undefined) {
 				realJMe = $(this);
@@ -2261,10 +2263,11 @@ Main.k.tabs.playing = function() {
 			var islab = (realJMe.parent().parent().parent().attr("id") == "research_module");
 
 			if (islab) {
+				var $cdActionList = $("#cdActionList");
 				if (realJMe.hasClass("fakeselected")) {
 					// Clear selection
 					realJMe.removeClass("fakeselected");
-					$("#cdActionList div").not(".move").remove();
+					$cdActionList.find("div").not(".move").remove();
 					Main.cancelSelection(realJMe);
 					this.currentInvSelection = null;
 
@@ -2275,15 +2278,16 @@ Main.k.tabs.playing = function() {
 
 					return;
 				}
-
-				var allItems = $("#myInventory .item").not(".cdEmptySlot").add("[serverselected=true]");
+				$inventory = $("#myInventory");
+				$inventory.find(".item").not(".cdEmptySlot").add("[serverselected=true]");
 				$(".cdCharColSel").remove();
-				$("#myInventory .selected").parent().removeClass("on");
-				$("#myInventory .selected").remove();
+				$inventorySel = $inventory.find(".selected");
+				$inventorySel.parent().removeClass("on");
+				$inventorySel.remove();
 				realJMe.addClass("fakeselected");
 
-				var realJMe = $("[data-tip='" + realJMe.attr("data-tip") + "']").not("[serial='" + serial + "']");
-				var serial = realJMe.attr("serial");
+				realJMe = $("[data-tip='" + realJMe.attr("data-tip") + "']").not("[serial='" + serial + "']");
+				serial = realJMe.attr("serial");
 				this.currentInvSelection = null;
 				Main.cancelSelection(realJMe);
 				Main.acListMaintainer.heroWorking = true;
@@ -2294,19 +2298,22 @@ Main.k.tabs.playing = function() {
 
 
 				var actions = $("div[webdata='" + serial + "']");
-				$("#cdActionList").find("div").hide();
+
+				$cdActionList.find("div").hide();
 				actions.each(function() {
-					$(this).clone().appendTo("#cdActionList");
-				})
+					$(this).clone().appendTo($cdActionList);
+				});
 
 
 				$("<div class='action stSel'> " + realJMe.attr("data-name").split("\\'").join("'") + " :</div>").prependTo("#cdActionList");
 
 			} else {
-				var allItems = $("#myInventory .item").not(".cdEmptySlot").add("[serverselected=true]");
+				$inventory = $("#myInventory");
+				allItems = $inventory.find(".item").not(".cdEmptySlot").add("[serverselected=true]");
 				$(".cdCharColSel").remove();
-				$("#myInventory .selected").parent().removeClass("on");
-				$("#myInventory .selected").remove();
+				$inventorySel = $inventory.find(".selected");
+				$inventorySel.parent().removeClass("on");
+				$inventorySel.remove();
 				realJMe.addClass("on").prepend(new Tag("div").attr("class","selected").toString());
 
 				var pre = $("<div class='action stSel cdCharColSel'> " + realJMe.data("name").split("\\'").join("'") + " :</div>");
@@ -2325,9 +2332,10 @@ Main.k.tabs.playing = function() {
 				Main.acListMaintainer.refreshHeroInv();
 			}
 		} else if (parentId == "room") {
-			var allItems = $(".inventory .item").not(".cdEmptySlot");
-			$(".inventory .selected").parent().removeClass("on");
-			$(".inventory .selected").remove();
+			allItems = $(".inventory .item").not(".cdEmptySlot");
+			$inventorySel = $(".inventory .selected");
+			$inventorySel.parent().removeClass("on");
+			$inventorySel.remove();
 
 			// Select object
 			realJMe.addClass("on");
@@ -2341,8 +2349,9 @@ Main.k.tabs.playing = function() {
 				};
 			});
 
-			$(".inv").css("display", "block");
-			var invbloc = $("#cdInventory .invcolorbg");
+			$inv = $(".inv");
+			$inv.css("display", "block");
+			var invbloc = $("#cdInventory").find(" .invcolorbg");
 			invbloc.css("display", "block");
 			invbloc.find(".exceed").css("display", "block");
 			invbloc.find(".arrowleft").css("display", "block");
@@ -2352,27 +2361,29 @@ Main.k.tabs.playing = function() {
 			Main.acListMaintainer.refreshRoomInv();
 			Main.k.fakeSelected = null;
 
-			var prx = Main.rmMan.getProxy(Clients.ISO_MODULE);
+			prx = Main.rmMan.getProxy(Clients.ISO_MODULE);
 			if(prx != null) {
 				if(Main.closet.visible) prx._setBaseLine(CrossConsts.BASELINE_CLOSET); else prx._setBaseLine(CrossConsts.BASELINE_ACTIONS);
 			}
-			$(".inv").css("visibility","visible");
+			$inv.css("visibility","visible");
 		} else {
 			Main.closet.visible = false;
 			Main.cancelSelection(Main.k.fakeSelected);
 			Main.acListMaintainer.refreshRoomInv();
 			this.currentRoomSelection = serial;
 			Main.acListMaintainer.refreshRoomInv();
-			var prx = Main.rmMan.getProxy(Clients.ISO_MODULE);
+			prx = Main.rmMan.getProxy(Clients.ISO_MODULE);
 			if(prx != null) prx._setBaseLine(CrossConsts.BASELINE_ACTIONS);
-			$(".inv").css("display","block");
-			$(".inv").css("visibility","visible");
-			$(".inv").css("margin-top", "-108px");
-			$("#cdInventory .invcolorbg").css("display", "none");
+			$inv = $(".inv");
+			$inv.css("display","block");
+			$inv.css("visibility","visible");
+			$inv.css("margin-top", "-108px");
+			var $cdInventory = $("#cdInventory");
+			$cdInventory.find(".invcolorbg").css("display", "none");
 			$("#cdItemActions").addClass("selectplayer");
-			$("#cdInventory").removeClass("placard_on");
+			$cdInventory.removeClass("placard_on");
 		}
-	}
+	};
 	Main.confirmAction = function(frm,text,fct){
 		/* Translators: message confirmation when you are Mush and you are doing a beneficial action. Only the paragraph, not the title. Copy it from the game. */
 		var regex = new RegExp('.*'+RegExp.escape(Main.k.text.gettext("Cette action est bénéfique pour l'équipage du Deaedalus et votre rôle est de les convertir ou de détruire le Daedalus. Êtes-vous vraiment sûr de vouloir faire cela ?"))+'.*');
@@ -2385,7 +2396,7 @@ Main.k.tabs.playing = function() {
 				return;
 			},fct == Main.ajaxAction ? "ok" : "");
 		}
-	}
+	};
 	
 	Main.confirmCustomProjAction = function(frm,text) {
 		Main.confirmAction(frm,text,Main.customProjAction);
@@ -2505,6 +2516,7 @@ Main.k.tabs.playing = function() {
 	// ============================================================
 	Main.k.UpdateData = {currversion: 0, changelog: []};
 	Main.k.UpdateCheck = function() {
+		var version_update;
 		if(Main.k.UpdateCheck.b_in_progress == undefined){
 			Main.k.UpdateCheck.b_in_progress = false;
 		}
@@ -2513,9 +2525,9 @@ Main.k.tabs.playing = function() {
 		}
 		var lastVersion = js.Cookie.get('ctrlwVersion');
 		if(typeof(lastVersion) != 'undefined' && lastVersion < Main.k.version){
-			var version_update = lastVersion;
+			version_update = lastVersion;
 		}else{
-			var version_update = Main.k.version
+			version_update = Main.k.version
 		}
 		if(localStorage.getItem('ctrlw_update_cache') == null){
 			Main.k.UpdateCheck.b_in_progress = true;
@@ -2524,8 +2536,8 @@ Main.k.tabs.playing = function() {
 				dataType : 'jsonp',
 				success: function(json) {
 					setTimeout(function() {
-					    localStorage.setItem('ctrlw_update_cache',JSON.stringify(json));
-					    Main.k.UpdateCheck.b_in_progress = false;
+						localStorage.setItem('ctrlw_update_cache',JSON.stringify(json));
+						Main.k.UpdateCheck.b_in_progress = false;
 					}, 0);
 					
 					
@@ -2540,7 +2552,16 @@ Main.k.tabs.playing = function() {
 			Main.k.UpdateCheckScriptVersion(JSON.parse(localStorage.getItem('ctrlw_update_cache')),lastVersion);
 		}
 		
-	}
+	};
+	/**
+	 *
+	 * @param {object} json infos about current version
+	 * @param {string} json.numero Version number
+	 * @param {string} json.changelog_long Changelog
+	 * @param {string} json.user_num_version Version number of the installed script
+	 * @param {int} json.user_code_version Version code of the installed script
+	 * @param lastVersion
+	 */
 	Main.k.UpdateCheckScriptVersion = function(json,lastVersion){
 		Main.k.UpdateData.currversion = json.numero;
 		if(typeof(json['changelog_long_'+Main.k.lang]) != 'undefined'){
@@ -2558,7 +2579,7 @@ Main.k.tabs.playing = function() {
 			js.Cookie.set('ctrlwVersion',GM_info.script.version,420000000);
 			$("#updatebtn").css("display", "none");
 		}
-	}
+	};
 	Main.k.UpdateDialog = function() {
 		var okHref = Main.k.UpdateData.url;
 		// Create popup
@@ -2583,12 +2604,12 @@ Main.k.tabs.playing = function() {
 		var ok = "<div class='updatesactions'><div id=\"ok\" class=\"but updatesbtn\" ><div class=\"butright\"><div class=\"butbg\"><a onclick=\"$('#final').show();\" href=\""+okHref+"\">"+Main.k.text.gettext("Mettre à jour")+"</a></div></div></div>";
 		var cancelAc = "'Main.k.ClosePopup();'";
 		var cancel = "<div id=\"cancel\" class=\"but updatesbtn\" onclick=" + cancelAc + "><div class=\"butright\"><div class=\"butbg\"><a href=\"#\">" + Main.getText("cancel") + "</a></div></div></div></div>";
-		var finalisation = '<div id="final" class="updatesactions" style="display:none"><div><strong>'+Main.k.text.gettext("Pour finaliser la mise à jour, après avoir installé le script, veuillez cliquer sur le bouton ci-dessous.")+'</strong></div><div class="but updatesbtn" onclick="Main.k.ClosePopup();window.location.reload();"><div class="butright"><div class="butbg"><a href="#">'+Main.k.text.gettext("Finaliser la mise à jour")+'</a></div></div></div></div></div>'
+		var finalisation = '<div id="final" class="updatesactions" style="display:none"><div><strong>'+Main.k.text.gettext("Pour finaliser la mise à jour, après avoir installé le script, veuillez cliquer sur le bouton ci-dessous.")+'</strong></div><div class="but updatesbtn" onclick="Main.k.ClosePopup();window.location.reload();"><div class="butright"><div class="butbg"><a href="#">'+Main.k.text.gettext("Finaliser la mise à jour")+'</a></div></div></div></div></div>';
 		$("<div>").html(content + ok + cancel + finalisation).appendTo(popup.content);
 
 		// Display popup
 		Main.k.OpenPopup(popup.dom);
-	}
+	};
 	Main.k.AutoUpdateDialog = function() {
 		// Create popup
 		var popup = Main.k.CreatePopup();
@@ -2615,8 +2636,8 @@ Main.k.tabs.playing = function() {
 
 		// Display popup
 		Main.k.OpenPopup(popup.dom);
-	}
-	Main.k.COMPLETE_SURNAME = function(n) { return n.replace("_", " ").capitalize(); }
+	};
+	Main.k.COMPLETE_SURNAME = function(n) { return n.replace("_", " ").capitalize(); };
 	Main.k.LoadJS = function(url, params, after) {
 		var s = js.Lib.document.createElement("script");
 		s.async = true;
@@ -2626,7 +2647,7 @@ Main.k.tabs.playing = function() {
 		s.src = _tid.makeUrl(url,p);
 		if (after != null) s.onload = after;
 		js.Lib.document.body.appendChild(s);
-	}
+	};
 	Main.k.postMessage = function(k, msg, after) {
 		// Save msg
 		var stVal = StringTools.urlEncode(msg);
@@ -2644,7 +2665,7 @@ Main.k.tabs.playing = function() {
 		var updtArr = ["cdTabsChat","chatBlock","char_col"];
 		var url = "/wallReply?k=" + k + "&msg=" + stVal;
 		Main.updateContent(url,updtArr,null,sendChatProc);
-	}
+	};
 	Main.k.newTopic = function(msg, after) {
 		// Save msg
 		var stVal = StringTools.urlEncode(msg);
@@ -2662,7 +2683,7 @@ Main.k.tabs.playing = function() {
 		var updtArr = ["cdTabsChat","chatBlock","char_col"];
 		var url = "/newWallThread?message=" + stVal;
 		Main.updateContent(url,updtArr,null,sendChatProc);
-	}
+	};
 	Main.k.displayLastSent = function(show) {
 		var btn = $("#lastsentmsg");
 		if (show) {
@@ -2672,7 +2693,10 @@ Main.k.tabs.playing = function() {
 			btn.css("display", "none");
 			js.Cookie.set("lastsentmsg", "");
 		}
-	}
+	};
+	/**
+	 * @return string
+	 */
 	Main.k.FormatInventory = function() {
 		// Room name
 		var inv = "**" + $("#input").attr("d_name") + " :** ";
@@ -2723,6 +2747,7 @@ Main.k.tabs.playing = function() {
 		var ndrones = 0;
 		var $it = Main.items.iterator();
 		while( $it.hasNext() ) {
+			/** @type {{iid:string}} **/
 			var item = $it.next();
 			if (item.iid == "CAMERA") ncamera++;
 			else if (item.iid == "HELP_DRONE") ndrones++;
@@ -2734,7 +2759,10 @@ Main.k.tabs.playing = function() {
 		if (ncamera || ndrones) inv += "]";
 
 		return inv;
-	}
+	};
+	/**
+	 * @return string
+	 */
 	Main.k.FormatPlants = function() {
 		var ret = "**//" + Main.k.text.gettext("plantes").capitalize() + " : //**";
 
@@ -2760,7 +2788,10 @@ Main.k.tabs.playing = function() {
 		});
 
 		return ret;
-	}
+	};
+	/**
+	 * @return string
+	 */
 	Main.k.FormatProjects = function() {//TODO: MULTILANG
 		var ret = "**//Projets : //**";
 
@@ -2771,9 +2802,9 @@ Main.k.tabs.playing = function() {
 			t = t.replace(/<p>/ig, " ");
 			t = t.replace(/<\/?[^>]+>/g, "");
 			return t;
-		}
+		};
 
-		$("#cdModuleContent ul.dev li.cdProjCard").each(function(i) {
+		$("#cdModuleContent").find("ul.dev li.cdProjCard").each(function(i) {
 			var name = $(this).find("h3").html().trim();
 			var pct = $(this).find("span").html().trim();
 			var desc = parse($(this).find("div.desc").html().trim());
@@ -2786,7 +2817,10 @@ Main.k.tabs.playing = function() {
 		});
 
 		return ret;
-	}
+	};
+	/**
+	 * @return string;
+	 */
 	Main.k.FormatResearch = function() {
 		var ret = "**//"+Main.k.text.gettext("Recherches")+" : //**";
 
@@ -2797,9 +2831,9 @@ Main.k.tabs.playing = function() {
 			t = t.replace(/<p>/ig, " ");
 			t = t.replace(/<\/?[^>]+>/g, "");
 			return t;
-		}
+		};
 
-		$("#cdModuleContent ul.dev li.cdProjCard").each(function(i) {
+		$("#cdModuleContent").find("ul.dev li.cdProjCard").each(function(i) {
 			var h3 = $(this).find("h3").clone();
 			h3.find("em").remove();
 			var name = parse(h3.html().trim());
@@ -2813,7 +2847,10 @@ Main.k.tabs.playing = function() {
 		});
 
 		return ret;
-	}
+	};
+	/**
+	 * @return string;
+	 */
 	Main.k.FormatPlanets = function() {//TODO: MULTILANG
 		var ret = "**//Planètes : //**";
 
@@ -2824,9 +2861,9 @@ Main.k.tabs.playing = function() {
 			t = t.replace(/<p>/ig, " ");
 			t = t.replace(/<\/?[^>]+>/g, "");
 			return t;
-		}
+		};
 
-		$("#navModule .planet").not(".planetoff").each(function(i) {
+		$("#navModule").find(".planet").not(".planetoff").each(function(i) {
 			// Name + Planet img
 			var name = $(this).find("h3").html().trim();
 			var img = $(this).find("img.previmg").attr("src");
@@ -2854,18 +2891,24 @@ Main.k.tabs.playing = function() {
 		});
 
 		return ret;
-	}
+	};
+	/**
+	 * @return string;
+	 */
 	Main.k.FormatBIOS = function() {//TODO: MULTILANG
 		var ret = "**//Paramètres BIOS : //**";
 
-		$('#biosModule ul.dev li').each(function() {
+		$('#biosModule').find('ul.dev li').each(function() {
 			var biosParam = $(this);
 			ret += "\n**" + $(this).children("h3:first").text().trim() + "** : ";
 			ret += $(this).find("input[checked='checked']").siblings("label").text();
 		});
 
 		return ret;
-	}
+	};
+	/**
+	 * @return string;
+	 */
 	Main.k.FormatPharma = function() {
 		var ret = "**//" + Main.k.text.gettext("Consommables :") + " //**";
 		
@@ -2881,8 +2924,9 @@ Main.k.tabs.playing = function() {
 		/* Translators: This translation must be copied from the game. (Consummables description) */
 		a_ignore.push(Main.k.text.gettext("Impérissable"));
 		var regex_ignore = new RegExp('^('+a_ignore.join('|')+'$)');
-		
-		$("#room").find("li").not(".cdEmptySlot").each(function() {
+
+		var $room = $("#room");
+		$room.find("li").not(".cdEmptySlot").each(function() {
 			var name = $(this).attr("data-name").capitalize();
 			var desc = $(this).attr("data-desc");
 
@@ -2917,16 +2961,23 @@ Main.k.tabs.playing = function() {
 		ret = ret.replace(/<img[^>]+lp\.png[^>]+>/g, ":hp:");
 
 		return ret;
-	}
+	};
+	/**
+	 * @return string;
+	 */
 	Main.k.FormatLife = function() {//TODO: MULTILANG
 		var pv = $("table.pvsm td").not(".barmoral").find("span").html().trim();
 		var moral = $("table.pvsm td.barmoral span").html().trim();
 		return pv + " :mush_hp: / " + moral + " :mush_moral:";
-	}
+	};
+	/**
+	 * @return string;
+	 */
 	Main.k.Resize = function() {
 		var leftbar = $(".usLeftbar");
 		var content = $("#content");
-		var bw = $("body").width();
+		var $body = $("body");
+		var bw = $body.width();
 		var lbw = 126; //leftbar.width();
 		var w = Math.min(Main.k.BMAXWIDTH, bw - lbw - 30);
 		content.css("width", w);
@@ -2935,12 +2986,12 @@ Main.k.tabs.playing = function() {
 			content.css("left", (bw - w) / 2 + "px");
 
 			// Fix background position
-			if (Main.k.Options.dlogo) $("body").css("background-position", "-" + ((1830-bw)/2) + "px 20px");
+			if (Main.k.Options.dlogo) $body.css("background-position", "-" + ((1830-bw)/2) + "px 20px");
 		} else {
 			content.css("left", lbw + 15 + "px");
 
 			// Fix background position
-			if (Main.k.Options.dlogo) $("body").css("background-position", "-272px 20px");
+			if (Main.k.Options.dlogo) $body.css("background-position", "-272px 20px");
 		}
 
 		var content_height = content.height() + content.position().top;
@@ -2949,7 +3000,7 @@ Main.k.tabs.playing = function() {
 		} else {
 			content.css("height", leftbar.height() - content.position().top + 11);
 		}
-	}
+	};
 	Main.k.ToggleDisplay = function() {
 		if (this.className == "displaymore") {
 			this.className = "displayless";
@@ -2958,17 +3009,18 @@ Main.k.tabs.playing = function() {
 			this.className = "displaymore";
 			$("" + $(this).attr("_target")).css("display", "none");
 		}
-		Main.k.Resize;
-	}
+		Main.k.Resize();
+	};
 	Main.k.ExtendPilgred = function() {
+		var $cdBottomBlock = $("#cdBottomBlock");
 		$("#pilgredbonus").remove();
-		var pilgred = $("#cdBottomBlock div.pilgred").parent().css({
+		var pilgred = $cdBottomBlock.find("div.pilgred").parent().css({
 			position: "relative",
 			"margin-right": "160px"
 		});
 
 		// Double research points
-		var research = $("#cdBottomBlock div.research");
+		var research = $cdBottomBlock.find("div.research");
 		var researchtriumph = 0;
 		research.each(function() {
 			var name = $(this).parent().find("img").attr("src").replace("/img/cards/research/", "").replace(".png", "");
@@ -2999,9 +3051,11 @@ Main.k.tabs.playing = function() {
 			.html(res)
 			.appendTo(pilgred)
 			.on("mouseover", Main.k.CustomTip)
-			.on("mouseout", Main.hideTip);;
-	}
+			.on("mouseout", Main.hideTip);
+	};
 	Main.k.maxAgo = function(a,b) {//TODO: MULTILANG
+		var min_a, min_b;
+
 		// TODO: factorize code
 
 		// undefined
@@ -3017,15 +3071,15 @@ Main.k.tabs.playing = function() {
 		if (reg_min.test(a)) {
 			if (!reg_min.test(b)) return b;
 
-			var min_a = parseInt(reg_min.exec(a)[1]);
-			var min_b = parseInt(reg_min.exec(b)[1]);
+			min_a = parseInt(reg_min.exec(a)[1]);
+			min_b = parseInt(reg_min.exec(b)[1]);
 			if (min_a <= min_b) return b;
 			return a;
 		} else if (reg_min.test(b)) {
 			if (!reg_min.test(a)) return a;
 
-			var min_a = parseInt(reg_min.exec(a)[1]);
-			var min_b = parseInt(reg_min.exec(b)[1]);
+			min_a = parseInt(reg_min.exec(a)[1]);
+			min_b = parseInt(reg_min.exec(b)[1]);
 			if (min_a <= min_b) return b;
 			return a;
 		}
@@ -3035,15 +3089,15 @@ Main.k.tabs.playing = function() {
 		if (reg_hours.test(a)) {
 			if (!reg_hours.test(b)) return b;
 
-			var min_a = parseInt(reg_hours.exec(a)[1]);
-			var min_b = parseInt(reg_hours.exec(b)[1]);
+			min_a = parseInt(reg_hours.exec(a)[1]);
+			min_b = parseInt(reg_hours.exec(b)[1]);
 			if (min_a <= min_b) return b;
 			return a;
 		} else if (reg_hours.test(b)) {
 			if (!reg_hours.test(a)) return a;
 
-			var min_a = parseInt(reg_hours.exec(a)[1]);
-			var min_b = parseInt(reg_hours.exec(b)[1]);
+			min_a = parseInt(reg_hours.exec(a)[1]);
+			min_b = parseInt(reg_hours.exec(b)[1]);
 			if (min_a <= min_b) return b;
 			return a;
 		}
@@ -3053,23 +3107,24 @@ Main.k.tabs.playing = function() {
 		if (reg_days.test(a)) {
 			if (!reg_days.test(b)) return b;
 
-			var min_a = parseInt(reg_days.exec(a)[1]);
-			var min_b = parseInt(reg_days.exec(b)[1]);
+			min_a = parseInt(reg_days.exec(a)[1]);
+			min_b = parseInt(reg_days.exec(b)[1]);
 			if (min_a <= min_b) return b;
 			return a;
 		} else if (reg_days.test(b)) {
 			if (!reg_days.test(a)) return a;
 
-			var min_a = parseInt(reg_days.exec(a)[1]);
-			var min_b = parseInt(reg_days.exec(b)[1]);
+			min_a = parseInt(reg_days.exec(a)[1]);
+			min_b = parseInt(reg_days.exec(b)[1]);
 			if (min_a <= min_b) return b;
 			return a;
 		}
 
 		// ?
 		return a;
-	}
+	};
 	Main.k.minAgo = function(a,b) {//TODO: MULTILANG
+		var min_a, min_b;
 		// TODO: factorize code
 
 		// undefined
@@ -3085,15 +3140,15 @@ Main.k.tabs.playing = function() {
 		if (reg_min.test(a)) {
 			if (!reg_min.test(b)) return a;
 
-			var min_a = parseInt(reg_min.exec(a)[1]);
-			var min_b = parseInt(reg_min.exec(b)[1]);
+			min_a = parseInt(reg_min.exec(a)[1]);
+			min_b = parseInt(reg_min.exec(b)[1]);
 			if (min_a <= min_b) return a;
 			return b;
 		} else if (reg_min.test(b)) {
 			if (!reg_min.test(a)) return b;
 
-			var min_a = parseInt(reg_min.exec(a)[1]);
-			var min_b = parseInt(reg_min.exec(b)[1]);
+			min_a = parseInt(reg_min.exec(a)[1]);
+			min_b = parseInt(reg_min.exec(b)[1]);
 			if (min_a <= min_b) return a;
 			return b;
 		}
@@ -3103,15 +3158,15 @@ Main.k.tabs.playing = function() {
 		if (reg_hours.test(a)) {
 			if (!reg_hours.test(b)) return a;
 
-			var min_a = parseInt(reg_hours.exec(a)[1]);
-			var min_b = parseInt(reg_hours.exec(b)[1]);
+			min_a = parseInt(reg_hours.exec(a)[1]);
+			min_b = parseInt(reg_hours.exec(b)[1]);
 			if (min_a <= min_b) return a;
 			return b;
 		} else if (reg_hours.test(b)) {
 			if (!reg_hours.test(a)) return b;
 
-			var min_a = parseInt(reg_hours.exec(a)[1]);
-			var min_b = parseInt(reg_hours.exec(b)[1]);
+			min_a = parseInt(reg_hours.exec(a)[1]);
+			min_b = parseInt(reg_hours.exec(b)[1]);
 			if (min_a <= min_b) return a;
 			return b;
 		}
@@ -3121,22 +3176,22 @@ Main.k.tabs.playing = function() {
 		if (reg_days.test(a)) {
 			if (!reg_days.test(b)) return a;
 
-			var min_a = parseInt(reg_days.exec(a)[1]);
-			var min_b = parseInt(reg_days.exec(b)[1]);
+			min_a = parseInt(reg_days.exec(a)[1]);
+			min_b = parseInt(reg_days.exec(b)[1]);
 			if (min_a <= min_b) return a;
 			return b;
 		} else if (reg_days.test(b)) {
 			if (!reg_days.test(a)) return b;
 
-			var min_a = parseInt(reg_days.exec(a)[1]);
-			var min_b = parseInt(reg_days.exec(b)[1]);
+			min_a = parseInt(reg_days.exec(a)[1]);
+			min_b = parseInt(reg_days.exec(b)[1]);
 			if (min_a <= min_b) return a;
 			return b;
 		}
 
 		// ?
 		return a;
-	}
+	};
 	Main.k.extendAgo = function(ago) {//TODO: MULTILANG
 		var one = (parseInt(/([0-9]+)/.exec(ago)[1]) == 1);
 
@@ -3146,15 +3201,15 @@ Main.k.tabs.playing = function() {
 		ago = ago.replace("&lt;1m", "moins d'une minute");
 		ago = ago.replace("~", "environ ");
 		return ago;
-	}
+	};
 	Main.k.surnameToBubble = function(surname){
 		return surname.replace(/(\s)/g, "_").toLowerCase();
-	}
+	};
 	Main.k.customBubbles = function() {
 		var bubbles = $(".bubble");
 		if (Main.k.Options.cbubbles) {
 			bubbles.each(function() {
-				charname = Main.k.GetHeroNameFromTopic($(this).parent());
+				var charname = Main.k.GetHeroNameFromTopic($(this).parent());
 				$(this).addClass("bubble_" + charname);
 				if (Main.k.Options.cbubblesNB) $(this).addClass("custombubbles_nobackground");
 			});
@@ -3165,15 +3220,16 @@ Main.k.tabs.playing = function() {
 				bubbles.removeClass("bubble_" + Main.k.HEROES[i]);
 			}
 		}
-	}
+	};
 	Main.k.updateBottom = function() {
-		if ($("#cdBottomBlock div.pilgred").length > 0) Main.k.ExtendPilgred();
-		$("#cdBottomBlock div.split").remove();
+		var $cdBottomBlock = $("#cdBottomBlock");
+		if ($cdBottomBlock.find("div.pilgred").length > 0) Main.k.ExtendPilgred();
+		$cdBottomBlock.find("div.split").remove();
 		if (Main.k.Options.splitpjt) {
-			if ($("#cdBottomBlock div.project").length > 0) $("<div>").addClass("split").insertAfter($("#cdBottomBlock div.project").last().parent());
-			if ($("#cdBottomBlock div.research").length > 0) $("<div>").addClass("split").insertAfter($("#cdBottomBlock div.research").last().parent());
+			if ($cdBottomBlock.find("div.project").length > 0) $("<div>").addClass("split").insertAfter($cdBottomBlock.find("div.project").last().parent());
+			if ($cdBottomBlock.find("div.research").length > 0) $("<div>").addClass("split").insertAfter($cdBottomBlock.find("div.research").last().parent());
 		}
-	}
+	};
 
 	// Game zone fold/unfold
 	Main.k.folding = {};
@@ -3216,11 +3272,11 @@ Main.k.tabs.playing = function() {
 				Main.k.folding.busy = false;
 				if (afterdisplay && typeof afterdisplay == 'function') afterdisplay();
 			});
-		}
+		};
 
 		// Fold previous cols, then unfold new cols
 		Main.k.folding.fold(tofold, after);
-	}
+	};
 	Main.k.folding.displayGame = function(afterdisplay) {
 		if (Main.k.folding.busy) return;
 		Main.k.folding.busy = true;
@@ -3248,11 +3304,11 @@ Main.k.tabs.playing = function() {
 				Main.k.folding.busy = false;
 				if (afterdisplay) afterdisplay();
 			});
-		}
+		};
 
 		// Fold previous cols, then unfold new cols
 		Main.k.folding.fold(tofold, after);
-	}
+	};
 	Main.k.folding.fold = function(cols, after) {
 		// Init CSS transform
 		for (var i=0; i<cols.length; i++) {
@@ -3271,7 +3327,7 @@ Main.k.tabs.playing = function() {
 
 			if (after) after();
 		}, 250);
-	}
+	};
 	Main.k.folding.unfold = function(cols, after) {
 		// Display new cols
 		for (var i=0; i<cols.length; i++) {
@@ -3309,7 +3365,7 @@ Main.k.tabs.playing = function() {
 				}
 			}, 230);
 		}, 20);
-	}
+	};
 
 	Main.k.About = {};
 	Main.k.About.initialized = false;
@@ -3397,7 +3453,7 @@ Main.k.tabs.playing = function() {
 		}
 
 		Main.k.folding.display([null,null, "#about_col"], "about");
-	}
+	};
 
 
 	// == Profile Manager  ========================================
@@ -3424,7 +3480,7 @@ Main.k.tabs.playing = function() {
 		}
 
 		Main.k.folding.display([null,null, "#profile_col"], "profiles");
-	}
+	};
 	Main.k.Profiles.display = function(i) {
 		Main.k.Profiles.current = i;
 		if (Main.k.folding.displayed != "profiles") {
@@ -3434,7 +3490,7 @@ Main.k.tabs.playing = function() {
 
 		// Display hero
 		// TODO
-	}
+	};
 	// == /Profile Manager  =======================================
 
 
@@ -3444,6 +3500,7 @@ Main.k.tabs.playing = function() {
 	Main.k.Manager.initialized = false;
 	Main.k.Manager.heroes = [];
 	Main.k.Manager.open = function(after) {
+		var tabs, r, rbg;
 		if (Main.k.folding.displayed == "manager" || Main.k.folding.displayed == "manager_mini") {
 			Main.k.folding.displayGame();
 			return;
@@ -3460,15 +3517,16 @@ Main.k.tabs.playing = function() {
 
 			// Topics
 			// ----------------------------------------------------------
+			var $tableInterFirst = $("table.inter tr").first();
 			var td_topics = $("<td>").addClass("chat_box").css({
 				"padding-right": "6px",
 				"padding-top": "1px",
 				width: "330px",
 				transform: "scale(0,1)"
-			}).attr("id", "topics_col").appendTo($("table.inter tr").first());
+			}).attr("id", "topics_col").appendTo($tableInterFirst);
 
 			// Tabs
-			var tabs = $("<ul>").addClass("tabschat customtabs").css({margin: 0, position: "relative"}).appendTo(td_topics);
+			tabs = $("<ul>").addClass("tabschat customtabs").css({margin: 0, position: "relative"}).appendTo(td_topics);
 			$("<img>").attr("src", "/img/icons/ui/tip.png").appendTo($("<li>").addClass("tab taboff").attr("id", "tabstats").appendTo(tabs));
 			$("<img>").attr("src", "http://twinoid.com/img/icons/new.png").appendTo($("<li>").addClass("tab taboff").attr("id", "tabnew").appendTo(tabs));
 			$("<img>").attr("src", "http://twinoid.com/img/icons/search.png").appendTo($("<li>").addClass("tab taboff").attr("id", "tabsearch").appendTo(tabs));
@@ -3476,8 +3534,8 @@ Main.k.tabs.playing = function() {
 			$("<img>").attr("src", "/img/icons/ui/fav.png").appendTo($("<li>").addClass("tab tabon").attr("id", "tabfav").appendTo(tabs));
 
 			// Tab content
-			var r = $("<div>").addClass("right").css("margin-top", 0).appendTo(td_topics);
-			var rbg = $("<div>").addClass("rightbg chattext").css({
+			r = $("<div>").addClass("right").css("margin-top", 0).appendTo(td_topics);
+			rbg = $("<div>").addClass("rightbg chattext").css({
 				"resize": "none"
 			}).appendTo(r);
 
@@ -3493,7 +3551,8 @@ Main.k.tabs.playing = function() {
 			rbg.find(".tabcontent").css("display", "none");
 
 			// Tooltips
-			$("#tabstats").attr("_title", "Statistiques").attr("_desc", Main.k.text.gettext("Affiche les statistiques, et permet de gérer le nombre de messages chargés dans la page."));
+			var $tabstats = $("#tabstats");
+			$tabstats.attr("_title", "Statistiques").attr("_desc", Main.k.text.gettext("Affiche les statistiques, et permet de gérer le nombre de messages chargés dans la page."));
 			$("#tabnew").attr("_title", "Nouveaux Messages").attr("_desc", Main.k.text.gettext("Beaucoup de messages à lire ? Le manager permet de rattraper son retard plus facilement. En chargeant tous les messages dans l'onglet Statistiques, vous pouvez aussi voir les messages non lus manqués à cause du bug (Mush) des messages."));
 			$("#tabsearch").attr("_title", "Recherche de Messages").attr("_desc", Main.k.text.gettext("Une discussion à retrouver ? Envie de savoir combien d'incendies se sont déclarés ? (@neron incendie daedalus)"));
 			/* Translators: This translation must be copied from the game. */
@@ -3512,18 +3571,18 @@ Main.k.tabs.playing = function() {
 				"padding-top": "1px",
 				width: "330px",
 				transform: "scale(0,1)"
-			}).attr("id", "topic_col").appendTo($("table.inter tr").first());
+			}).attr("id", "topic_col").appendTo($tableInterFirst);
 
 			// Tabs
-			var tabs = $("<ul>").addClass("tabschat customtabs").css({margin: 0, position: "relative"}).appendTo(td_topic);
+			tabs = $("<ul>").addClass("tabschat customtabs").css({margin: 0, position: "relative"}).appendTo(td_topic);
 			$("<img>").attr("src", "/img/icons/ui/wall.png").appendTo(
 				$("<li>").addClass("tab tabon").attr("id", "tabtopic").attr("_title", "Discussion").attr("_desc", Main.k.text.gettext("Le canal de discussion est indispensable pour s'organiser avec l'équipage.</p><p>Pour participer vous devez posséder un <strong>talkie-walkie</strong>.")).appendTo(tabs)
 			);
 
 
 			// List
-			var r = $("<div>").addClass("right").css("margin-top", 0).appendTo(td_topic);
-			var rbg = $("<div>").addClass("rightbg chattext").css({
+			r = $("<div>").addClass("right").css("margin-top", 0).appendTo(td_topic);
+			rbg = $("<div>").addClass("rightbg chattext").css({
 				resize: "none"
 			}).appendTo(r);
 
@@ -3569,10 +3628,10 @@ Main.k.tabs.playing = function() {
 				transform: "scale(0,1)",
 				"padding-top": "1px",
 				"text-align": "right"
-			}).attr("id", "reply_col").appendTo($("table.inter tr").first());
+			}).attr("id", "reply_col").appendTo($tableInterFirst);
 
 			// Tabs
-			var tabs = $("<ul>").addClass("tabschat customtabs").css({
+			tabs = $("<ul>").addClass("tabschat customtabs").css({
 				margin: 0,
 				"text-align": "left",
 				position: "relative"
@@ -3587,8 +3646,8 @@ Main.k.tabs.playing = function() {
 			tabs.find(".tab").on("mouseout", Main.hideTip);
 			tabs.find(".tab").on("click", function() { Main.k.Manager.selectReplyTab(this); });
 
-			var r = $("<div>").addClass("right").css("margin-top", 0).appendTo(td_reply);
-			var rbg = $("<div>").addClass("rightbg chattext").css({
+			r = $("<div>").addClass("right").css("margin-top", 0).appendTo(td_reply);
+			rbg = $("<div>").addClass("rightbg chattext").css({
 				"resize": "none",
 				"text-align": "center",
 				"position": "relative"
@@ -3618,11 +3677,11 @@ Main.k.tabs.playing = function() {
 
 		// Load data
 		Main.k.Manager.update();
-		Main.k.Manager.selectTab($("#tabstats"));
+		Main.k.Manager.selectTab($tabstats);
 
-		$("#manager_togglemini a").html("<img src='/img/icons/ui/less.png' /> "+Main.k.text.gettext("Réduire le Manager"));
+		$("#manager_togglemini").find("a").html("<img src='/img/icons/ui/less.png' /> "+Main.k.text.gettext("Réduire le Manager"));
 		Main.k.folding.display(["#topics_col", "#topic_col", "#reply_col"], "manager", after);
-	}
+	};
 	Main.k.Manager.replywaiting = "";
 	Main.k.Manager.openOn = function(_target, val, k) {
 		if (val && val.length > 0) Main.k.Manager.replywaiting = val;
@@ -3634,46 +3693,50 @@ Main.k.tabs.playing = function() {
 			var after = function() {
 				var k = Main.k.Manager.displayedTopic;
 				Main.k.Manager.selectTopic(k);
-			}
+			};
 			Main.k.Manager.open(after);
 		}
-	}
-	Main.k.Manager.minimize = function() {
+	};
+	Main.k.Manager.minimize = function(){
+		var $manager_togglemini = $("#manager_togglemini");
 		if (Main.k.folding.displayed == "manager") {
-			$("#manager_togglemini a").html("<img src='/img/icons/ui/more.png' /> Agrandir le Manager");
+			$manager_togglemini.find("a").html("<img src='/img/icons/ui/more.png' /> Agrandir le Manager");
 			Main.k.folding.display([Main.k.folding.gamecols[0], Main.k.folding.gamecols[1], "#reply_col"], "manager_mini");
 		} else {
-			$("#manager_togglemini a").html("<img src='/img/icons/ui/less.png' /> "+Main.k.text.gettext("Réduire le Manager"));
+			$manager_togglemini.find("a").html("<img src='/img/icons/ui/less.png' /> "+Main.k.text.gettext("Réduire le Manager"));
 			Main.k.folding.display(["#topics_col", "#topic_col", "#reply_col"], "manager");
 		}
-	}
+	};
 	Main.k.Manager.selectTab = function(el) {
 		// Select tab
-		$("#topics_col .tab").removeClass("tabon").addClass("taboff");
+		var $topic_col = $("#topics_col");
+		$topic_col.find(".tab").removeClass("tabon").addClass("taboff");
 		$(el).removeClass("taboff").addClass("tabon");
 
 		// Display content
-		$("#topics_col .tabcontent").css("display", "none");
+		$topic_col.find(".tabcontent").css("display", "none");
 		$("#" + $(el).attr("id") + "_content").css("display", "block");
-	}
+	};
 	Main.k.Manager.selectTopicTab = function(el) {
 		// Select tab
-		$("#topic_col .tab").removeClass("tabon").addClass("taboff");
+		var $topic_col = $("#topics_col");
+		$topic_col.find(".tab").removeClass("tabon").addClass("taboff");
 		$(el).removeClass("taboff").addClass("tabon");
 
 		// Display content
-		$("#topic_col .tabcontent").css("display", "none");
+		$topic_col.find(".tabcontent").css("display", "none");
 		$("#" + $(el).attr("id") + "_content").css("display", "block");
-	}
+	};
 	Main.k.Manager.selectReplyTab = function(el) {
+		var $reply_col = $('#reply_col');
 		// Select tab
-		$("#reply_col .tab").removeClass("tabon").addClass("taboff");
+		$reply_col.find(".tab").removeClass("tabon").addClass("taboff");
 		$(el).removeClass("taboff").addClass("tabon");
 
 		// Display content
-		$("#reply_col .tabcontent").css("display", "none");
+		$reply_col.find(".tabcontent").css("display", "none");
 		$("#" + $(el).attr("id") + "_content").css("display", "block");
-	}
+	};
 	Main.k.Manager.topics = [];
 	Main.k.Manager.replies = [];
 	Main.k.Manager.lastago = "";
@@ -3709,12 +3772,13 @@ Main.k.tabs.playing = function() {
 			Main.k.Manager.lmwProcessing = false;
 			Main.k.Manager.update();
 		}
-	}
+	};
 	Main.k.Manager.parseWall = function(wall) {
 		if (!wall.find) wall = $(wall);
 		var topics = wall.find(".mainmessage");
 
 		topics.each(function() {
+			var topic_ago;
 			var tid = $(this).closest(".unit").attr("data-k");
 			var editing = (Main.k.Manager.loadedtopics[tid]);
 
@@ -3823,7 +3887,7 @@ Main.k.tabs.playing = function() {
 
 			Main.k.Manager.lastago = Main.k.maxAgo(topic_ago, Main.k.Manager.lastago);
 		});
-	}
+	};
 	Main.k.Manager.parseTopic = function(topic, highlight) {
 		var topicDOM = $("<div>").addClass("reply bubble unit");
 		if (Main.k.Options.cbubbles) topicDOM.addClass("bubble_" + topic.author);
@@ -3851,7 +3915,7 @@ Main.k.tabs.playing = function() {
 		$("<span>").addClass("ago").html(topic.ago).appendTo(topicDOM);
 
 		return topicDOM;
-	}
+	};
 	Main.k.Manager.displayedTopic = null;
 	Main.k.Manager.displayTopic = function(ti, lwords) {
 		var displaymore = true; // TEMP
@@ -3935,20 +3999,21 @@ Main.k.tabs.playing = function() {
 				});
 			}
 		}
-	}
+	};
 	Main.k.Manager.displayAllReplies = function() {
-		$("#tabtopic_content").find(".messread").each(function() {
+		var $tabtopic_content = $("#tabtopic_content");
+		$tabtopic_content.find(".messread").each(function() {
 			$(this).removeClass("messread");
 		});
-		$("#tabtopic_content").find(".displaymore").addClass("messread");
-	}
+		$tabtopic_content.find(".displaymore").addClass("messread");
+	};
 	Main.k.Manager.getTopicByTid = function(tid) {
 		for (var i=0; i<Main.k.Manager.topics.length; i++) {
 			var t = Main.k.Manager.topics[i];
 			if (t.mushid == tid) return t;
 		}
 		return false;
-	}
+	};
 	Main.k.Manager.clearSess = function() {
 		// Clear sid cookie
 		js.Cookie.set("sid", "", -42, "/", "."+Main.k.domain+"");
@@ -3968,9 +4033,10 @@ Main.k.tabs.playing = function() {
 			var el = $('#cdContent', $('#sessionframe').contents()).clone();
 			el.find("embed").remove();
 
+			var $cdContent = $("#cdContent");
 			// Replace flash
-			$("#cdContent").replaceWith(el);
-			eval($("#cdContent").find("script").html());
+			$cdContent.replaceWith(el);
+			eval($cdContent.find("script").html());
 
 			// Delete iframe
 			$("#sessionframe").remove();
@@ -3990,7 +4056,7 @@ Main.k.tabs.playing = function() {
 			Main.k.Manager.loadedreplies = [];
 			Main.k.Manager.update();
 		});
-	}
+	};
 	Main.k.Manager.updateHeroes = function() {
 		Main.k.Manager.initHeroes();
 
@@ -4004,12 +4070,12 @@ Main.k.tabs.playing = function() {
 				Main.k.Manager.heroes[reply.author].mess++;
 			}
 		}
-	}
+	};
 	Main.k.Manager.sortedheroes = [];
 	Main.k.Manager.sortHeroes = function() {
 		// Init
 		Main.k.Manager.sortedheroes = [];
-		for (h in Main.k.Manager.heroes) {
+		for (var h in Main.k.Manager.heroes) {
 			var hero = Main.k.Manager.heroes[h];
 			if (!hero || hero.mess == undefined) continue;
 
@@ -4032,11 +4098,12 @@ Main.k.tabs.playing = function() {
 			}
 			return a1 > b1 ? 1 : -1;
 		});
-	}
+	};
 	Main.k.Manager.loadingMessages = function() {
-		$("#recap_div").empty();
-		$("<p>").addClass("warning").html(Main.k.text.gettext("Chargement en cours...")).appendTo($("#recap_div"));
-	}
+		var $recap_div = $("#recap_div");
+		$recap_div.empty();
+		$("<p>").addClass("warning").html(Main.k.text.gettext("Chargement en cours...")).appendTo($recap_div);
+	};
 	Main.k.Manager.fillStats = function() {
 		var tab = $("#tabstats_content").empty();
 		tab.css({
@@ -4123,25 +4190,26 @@ Main.k.tabs.playing = function() {
 			$("<span>").html(msg).appendTo(heroDiv);
 			
 			/* Translators: %1 = character name, %2 = message count */
-			popup_msg += "\n"+Main.k.text.strargs(Main.k.text.ngettext("**%1 : ** //%2// message","**%1 : ** //%2// messages",hero.mess),[Main.k.COMPLETE_SURNAME(hero.name),hero.mess]);;
+			popup_msg += "\n"+Main.k.text.strargs(Main.k.text.ngettext("**%1 : ** //%2// message","**%1 : ** //%2// messages",hero.mess),[Main.k.COMPLETE_SURNAME(hero.name),hero.mess]);
 		}
 
 		// Code for sharing msg count
 		$("<textarea>").val(popup_msg).appendTo(recap);
-	}
+	};
 	Main.k.Manager.fillNewFav = function() {
+		var topic, topicDOM, actions;
 		var active_topics = $("#tabnew_content").empty().css("color", "rgb(9, 10, 97)");
 		var favtopics = $("#tabfav_content").empty().css("color", "rgb(9, 10, 97)");
 
 		var allread = true;
 		var favorites = [];
 		for (var i=0; i<this.topics.length; i++) {
-			var topic = this.topics[i];
+			topic = this.topics[i];
 
 			if (topic.fav) favorites.push(topic);
 			if (!topic.read) {
 				allread = false;
-				var topicDOM = this.parseTopic(topic);
+				topicDOM = this.parseTopic(topic);
 				if (topic.author == "neron") {
 					topicDOM.find("img").remove();
 					topicDOM.addClass("mainmessage neron_talks");
@@ -4158,7 +4226,7 @@ Main.k.tabs.playing = function() {
 				}
 
 				// Actions
-				var actions = $("<a>").addClass("topicact").attr("href", "#topic" + i)
+				actions = $("<a>").addClass("topicact").attr("href", "#topic" + i)
 				.on("click", function() { Main.k.Manager.displayTopic(parseInt(/([0-9]+)/.exec(this.href)[1])); return false; })
 				.html(Main.k.text.strargs(Main.k.text.ngettext("%1 réponse","%1 réponses",topic.replies.length),[topic.replies.length])+ " - " + Main.k.text.strargs(Main.k.text.ngettext("%1 message non lu","%1 messages non lus",unread),[unread]))
 				.appendTo(active_topics);
@@ -4167,10 +4235,10 @@ Main.k.tabs.playing = function() {
 		if (allread) $("<p>").addClass("warning").html(Main.k.text.gettext("Aucun message non lu.")).appendTo(active_topics);
 
 		if (favorites.length == 0) $("<p>").addClass("warning").html(Main.k.text.gettext("Vous n'avez pas de favoris.")).appendTo(active_topics);
-		for (var i=0; i<favorites.length; i++) {
-			var topic = favorites[i];
+		for (i=0; i<favorites.length; i++) {
+			topic = favorites[i];
 
-			var topicDOM = this.parseTopic(topic);
+			topicDOM = this.parseTopic(topic);
 			if (topic.author == "neron") {
 				topicDOM.find("img").remove();
 				topicDOM.addClass("mainmessage neron_talks");
@@ -4178,12 +4246,12 @@ Main.k.tabs.playing = function() {
 			favtopics.append(topicDOM);
 
 			// Actions
-			var actions = $("<a>").addClass("topicact").attr("href", "#topic" + topic.id)
+			actions = $("<a>").addClass("topicact").attr("href", "#topic" + topic.id)
 			.on("click", function() { Main.k.Manager.displayTopic(parseInt(/([0-9]+)/.exec(this.href)[1])); return false; })
 			.html(Main.k.text.strargs(Main.k.text.ngettext("%1 réponse","%1 réponses",topic.replies.length),[topic.replies.length]))
 			.appendTo(favtopics);
 		}
-	}
+	};
 	Main.k.Manager.fillWall = function() {
 		var wall = $("#tabwall_content").empty().css("color", "rgb(9, 10, 97)");
 		for (var i=0; i<this.topics.length; i++) {
@@ -4210,7 +4278,7 @@ Main.k.tabs.playing = function() {
 			.html(Main.k.text.strargs(Main.k.text.ngettext("%1 réponse","%1 réponses",topic.replies.length),[topic.replies.length]))
 			.appendTo(wall);
 		}
-	}
+	};
 	Main.k.Manager.fillSearch = function() {
 		var search = $("#tabsearch_content").empty().css("color", "rgb(9, 10, 97)");
 
@@ -4226,12 +4294,12 @@ Main.k.tabs.playing = function() {
 			top: "4px",
 			left: "4px"
 		}).addClass("butmini")
-		.html('<img src="/img/icons/ui/guide.png"></img>')
+		.html('<img src="/img/icons/ui/guide.png"/>')
 		.appendTo(searchbar)
 		.on("click", Main.k.Manager.fillSearch);
 
 		$("<a>").css("cursor", "pointer").addClass("butmini")
-		.html('<img src="http://twinoid.com/img/icons/search.png"></img>')
+		.html('<img src="http://twinoid.com/img/icons/search.png"/>')
 		.appendTo(searchbar)
 		.on("click", Main.k.Manager.search);
 
@@ -4240,15 +4308,16 @@ Main.k.tabs.playing = function() {
 		$("<p>").addClass("help").html(Main.k.text.gettext("- Vous pouvez rechercher plusieurs mots, dans le désordre, complets ou non, qu'importe le contenu entre eux dans le message.")).appendTo(results);
 		$("<p>").addClass("help").html(Main.k.text.gettext("- Pour rechercher les messages d'un joueur en particulier, utilisez <i>@personnage</i> (le prénom en minuscule, avec un _ pour kuan_ti et jin_su).")).appendTo(results);
 		$("<p>").addClass("help").html(Main.k.text.gettext("- Pour rechercher uniquement dans le premier message des topics, utilisez <i>@topic</i>.")).appendTo(results);
-	}
+	};
 	Main.k.Manager.search = function() {
+		var word, reg, res, res1;
 		var val = $("#searchfield").val().trim();
 		var results = [];
 		var max_results = 500;
 		var topiconly = false;
-
+		var $searchresults = $("#searchresults");
 		// Clear results
-		$("#searchresults").empty();
+		$searchresults.empty();
 
 		// Get searched words
 		var tmp = val.split(/\s+/);
@@ -4271,13 +4340,13 @@ Main.k.tabs.playing = function() {
 
 			// Ignored keyword
 			if (tmp[i][0] == "!") {
-				var word = tmp[i].replace(/([^a-z0-9-éèêëàâœôöîïüûùç'%_]+)/gi, "");
+				word = tmp[i].replace(/([^a-z0-9-éèêëàâœôöîïüûùç'%_]+)/gi, "");
 				if (word.length > 2) iwords.push(word);
 				continue;
 			}
 
 			// Keyword
-			var word = tmp[i].replace(/([^a-z0-9-éèêëàâœôöîïüûùç'%_]+)/gi, "");
+			word = tmp[i].replace(/([^a-z0-9-éèêëàâœôöîïüûùç'%_]+)/gi, "");
 			if (word.length > 2) lwords.push(word);
 		}
 
@@ -4292,8 +4361,8 @@ Main.k.tabs.playing = function() {
 			var nwords = lwords.length;
 			var matched_topics = 0;
 
-			for (var i=0; i<Main.k.Manager.topics.length && matched_topics < max_results; i++) {
-				var topic = Main.k.Manager.topics[i];
+			for (i=0; i<Main.k.Manager.topics.length && matched_topics < max_results; i++) {
+				topic = Main.k.Manager.topics[i];
 				var matched = false;
 				var autmatched = false;
 				var imatched = false;
@@ -4320,10 +4389,10 @@ Main.k.tabs.playing = function() {
 
 				// Search by keywords
 				if (!imatched && lwords.length > 0 && (authors.length == 0 || autmatched)) {
-					var reg = new RegExp(words, "gi");
-					var res = topic.msg.match(reg);
+					reg = new RegExp(words, "gi");
+					res = topic.msg.match(reg);
 					if (res && res.length >= nwords) {
-						var res1 = Main.k.EliminateDuplicates(res);
+						res1 = Main.k.EliminateDuplicates(res);
 						if (res.length == res1.length) matched = true;
 					}
 				}
@@ -4347,7 +4416,7 @@ Main.k.tabs.playing = function() {
 
 					// Ignored keywords
 					if (iwords.length > 0) {
-						var reg = new RegExp( "(" + iwords.join("|") + ")", "gi");
+						reg = new RegExp( "(" + iwords.join("|") + ")", "gi");
 						if (m.msg.match(reg)) {
 							matched = false;
 							imatched = true;
@@ -4356,10 +4425,10 @@ Main.k.tabs.playing = function() {
 
 					// Search by keywords
 					if (!imatched && lwords.length > 0 && (authors.length == 0 || autmatched)) {
-						var reg = new RegExp(words, "gi");
-						var res = m.msg.match(reg);
+						reg = new RegExp(words, "gi");
+						res = m.msg.match(reg);
 						if (res && res.length >= nwords) {
-							var res1 = Main.k.EliminateDuplicates(res);
+							res1 = Main.k.EliminateDuplicates(res);
 							if (res.length == res1.length) matched = true;
 						}
 					}
@@ -4376,27 +4445,27 @@ Main.k.tabs.playing = function() {
 		if (results.length > 0) {
 			// Récap'
 			$("<p>").addClass("warning").html(Main.k.text.strargs(Main.k.text.ngettext("%1 résultat (maximum : %2).","%1 résultats (maximum : %2).",results.length),[results.length,max_results]))
-			.appendTo($("#searchresults"));
+			.appendTo($searchresults);
 
 			// Display topics
-			for (var i=0; i<results.length; i++) {
+			for (i=0; i<results.length; i++) {
 				var topic = results[i];
 
 				var topicDOM = Main.k.Manager.parseTopic(topic, lwords);
-				$("#searchresults").append(topicDOM);
+				$searchresults.append(topicDOM);
 
 				// Actions
 				$("<a>").addClass("topicact").attr("href", "#topic" + topic.id)
 				.on("click", function() { Main.k.Manager.displayTopic(parseInt(/([0-9]+)/.exec(this.href)[1]), lwords); return false; })
-				.html(Main.k.text.strargs(Main.k.text.ngettext("%1 réponse","%1 réponses",topic.replies.length),[topic.replies.length])).appendTo($("#searchresults"));
+				.html(Main.k.text.strargs(Main.k.text.ngettext("%1 réponse","%1 réponses",topic.replies.length),[topic.replies.length])).appendTo($searchresults);
 			}
 
 		} else if (authors.length >= 1 || lwords.length >= 1 || iwords.length >= 1) {
-			$("<p>").addClass("warning").html(Main.k.text.gettext("Aucun résultat.")).appendTo($("#searchresults"));
+			$("<p>").addClass("warning").html(Main.k.text.gettext("Aucun résultat.")).appendTo($searchresults);
 		} else {
-			$("<p>").addClass("warning").html(Main.k.text.gettext("Le texte recherché est trop court.")).appendTo($("#searchresults"));
+			$("<p>").addClass("warning").html(Main.k.text.gettext("Le texte recherché est trop court.")).appendTo($searchresults);
 		}
-	}
+	};
 	Main.k.Manager.searchHero = function(event) {
 		var tgt = $(event.target);
 		if (!tgt.attr("class")) tgt = tgt.parent();
@@ -4405,7 +4474,7 @@ Main.k.tabs.playing = function() {
 		Main.k.Manager.selectTab($("#tabsearch"));
 		$("#searchfield").val("@" + hero);
 		Main.k.Manager.search();
-	}
+	};
 	Main.k.Manager.replyloaded = false;
 	Main.k.Manager.fillReply = function() {
 		if (Main.k.Manager.replyloaded) {
@@ -4421,11 +4490,12 @@ Main.k.tabs.playing = function() {
 				Main.k.Manager.replyloaded = true;
 
 				// Remove inactive tags
-				$("#tabreply_content").find(".tid_advanced").remove();
-				$("#tabreply_content").find(".tid_button").remove();
-				$("#tabreply_content").find(".tid_options").remove();
-				$("#tabreply_content").find(".tid_editorBut_question").remove();
-				$("#tabreply_content").find(".tid_editorBut__user").remove();
+				var $tabreply_content = $("#tabreply_content");
+				$tabreply_content.find(".tid_advanced").remove();
+				$tabreply_content.find(".tid_button").remove();
+				$tabreply_content.find(".tid_options").remove();
+				$tabreply_content.find(".tid_editorBut_question").remove();
+				$tabreply_content.find(".tid_editorBut__user").remove();
 				// TODO: remove inactive tags in main chat
 
 				var preview = $("#tid_wallPost_preview").attr("id", "").addClass("reply bubble");
@@ -4439,12 +4509,13 @@ Main.k.tabs.playing = function() {
 				$("<div>").addClass("clear").appendTo(preview);
 
 				// Actions
-				var buttons = $("<div>").addClass("tid_buttons").appendTo($("#tabreply_content"));
+				var buttons = $("<div>").addClass("tid_buttons").appendTo($tabreply_content);
 				var answer = Main.k.MakeButton("<img src='http://twinoid.com/img/icons/reply.png' /> "+ Main.k.text.gettext("Répondre au topic"),null,function() {
-					var val = $("#tid_wallPost").val();
+					var $tid_wallPost = $("#tid_wallPost");
+					var val = $tid_wallPost.val();
 					var k = Main.k.Manager.displayedTopic;
 					Main.k.postMessage(k, val, Main.k.Manager.update);
-					$("#tid_wallPost").val("");
+					$tid_wallPost.val("");
 
 					Main.k.Manager.waitingforupdate = true;
 					setTimeout(function() {
@@ -4459,9 +4530,10 @@ Main.k.tabs.playing = function() {
 				.on("mouseout", Main.hideTip);
 
 				var newtopic = Main.k.MakeButton("<img src='http://twinoid.com/img/icons/reply.png' /> " + Main.k.text.gettext("Nouveau topic"),null,function() {
-					var val = $("#tid_wallPost").val();
+					var $tid_wallPost = $("#tid_wallPost");
+					var val = $tid_wallPost.val();
 					Main.k.newTopic(val, Main.k.Manager.update);
-					$("#tid_wallPost").val("");
+					$tid_wallPost.val("");
 				})
 				.css({display: "inline-block", margin: "4px 4px 8px"})
 				.appendTo(buttons)
@@ -4475,10 +4547,11 @@ Main.k.tabs.playing = function() {
 					js.Lib.window["editor_tid_wallPost"] = {};
 				}
 				// Modify preview
-				js.Lib.window["editor_tid_wallPost"].preview = $("#tid_wallPost_preview");
+				js.Lib.window["editor_tid_wallPost"].preview = preview;
 
 				// Remove inactive icons
 				js.Lib.window["editor_tid_wallPost"].loadSmileys = function(q) {
+					var k;
 					var _g = this;
 					this.initIcons();
 					if(this.smileysPanel.find(".tid_active").removeClass("tid_active")["is"](q)) return this.hideSmileys(true);
@@ -4487,7 +4560,9 @@ Main.k.tabs.playing = function() {
 					var cat = null;
 					if(cid != "_funtag") {
 						var $it0 = this.config.icons.iterator();
+
 						while( $it0.hasNext() ) {
+							/** @type {{category:string}} **/
 							var c = $it0.next();
 							if(c.category == cid) {
 								cat = c;
@@ -4500,10 +4575,10 @@ Main.k.tabs.playing = function() {
 					s.b += "<div class=\"tid_smileyPopUp\">";
 					if(cid == "_funtag") {
 						s.b += Std.string("<div class=\"tid_title\">" + this.config.funTitle + "</div>");
-						var keys = new Array();
+						var keys = [];
 						var $it1 = this.config.fun.keys();
 						while( $it1.hasNext() ) {
-							var k = $it1.next();
+							k = $it1.next();
 							keys.push(k);
 						}
 						keys.sort(function(a,b) {
@@ -4511,7 +4586,7 @@ Main.k.tabs.playing = function() {
 						});
 						var _g1 = 0;
 						while(_g1 < keys.length) {
-							var k = keys[_g1];
+							k = keys[_g1];
 							++_g1;
 							s.b += Std.string("<a class=\"tid_fun\" href=\"#\" tid_s=\"" + StringTools.htmlEscape("{" + k + "}") + "\"><img src=\"http://" + _tid.host + "/img/icons/" + this.config.fun.get(k).i + ".png\" alt=\"" + k + "\" title=\"" + StringTools.htmlEscape(this.config.fun.get(k).n) + "\"/>" + StringTools.htmlEscape(this.config.fun.get(k).n) + "</a>");
 						}
@@ -4572,7 +4647,7 @@ Main.k.tabs.playing = function() {
 						return false;
 					});
 					return false;
-				}
+				};
 
 				// Auto-load Mush icons
 				//$("#editor_tid_wallPost").loadSmileys($("#editor_tid_wallPost a.tid_smcat[tid_cat='Mush']"));
@@ -4584,13 +4659,13 @@ Main.k.tabs.playing = function() {
 				}
 			});
 		}
-	}
+	};
 	Main.k.Manager.initHeroes = function() {
 		Main.k.Manager.heroes["neron"] = { name: "neron", mess: 0, av: 0, a: 0 };
 		for (var i=0; i<Main.k.HEROES.length; i++) {
 			Main.k.Manager.heroes[Main.k.HEROES[i]] = { name: Main.k.HEROES[i], mess: 0, topic: 0 };
 		}
-	}
+	};
 	Main.k.Manager.waitingforupdate = false;
 	Main.k.Manager.update = function() {
 		Main.k.Manager.waitingforupdate = false;
@@ -4606,11 +4681,11 @@ Main.k.tabs.playing = function() {
 		if (Main.k.Manager.displayedTopic) {
 			Main.k.Manager.displayTopic(Main.k.Manager.getTopicByTid(Main.k.Manager.displayedTopic).id);
 		}
-	}
+	};
 	Main.k.Manager.selectTopic = function(k) {
 		var tid = Main.k.Manager.getTopicByTid(k).id;
 		Main.k.Manager.displayTopic(tid);
-	}
+	};
 	// == /MessageManager =========================================
 
 
@@ -4620,14 +4695,16 @@ Main.k.tabs.playing = function() {
 	Main.k.MushInit = function() {
 		Main.k.AliveHeroes = [];
 		Main.k.MushInitHeroes();
+
+		var $content = $("#content");
 		// Handle Mush Logo (option)
 		if (Main.k.Options.dlogo) {
-			$("#content").css({ position: "absolute", top: "120px", left: "125px" });
-			$("#content [class^=logo]").css({ top: "-100px" });
+			$content.css({ position: "absolute", top: "120px", left: "125px" });
+			$content.find("[class^=logo]").css({ top: "-100px" });
 			$("body").css("background-position", "50% 20px");
 		} else {
-			$("#content").css({ position: "absolute", top: "40px", left: "125px" });
-			$("#content [class^=logo]").css({ display: "none" });
+			$content.css({ position: "absolute", top: "40px", left: "125px" });
+			$content.find("[class^=logo]").css({ display: "none" });
 		}
 		var vending = $(".butmini.distr").css("display", "none");
 		if (vending.length > 0) {
@@ -4636,7 +4713,7 @@ Main.k.tabs.playing = function() {
 
 		// Add left bar
 		// ----------------------------------- //
-		var leftbar = $("<div>").addClass("usLeftbar").insertBefore($("#content"));
+		var leftbar = $("<div>").addClass("usLeftbar").insertBefore($content);
 		Main.k.MakeButton("<img src='" + Main.k.servurl + "/img/ctrlw_sml.png' height='16' /> " +  Main.k.version, null, Main.k.About.open, Main.k.text.gettext("à propos").capitalize(), Main.k.text.gettext("Cliquez ici pour plus d'informations sur le script.")).css({
 			display: "inline-block",
 			margin: "0 auto 10px"
@@ -4657,9 +4734,10 @@ Main.k.tabs.playing = function() {
 		//Integration with others scripts
 		$( window ).load(function() {
 			setTimeout(function(){
+				var $mushUSMenu = $('#mushUSMenu');
 				//Mush Helper script
-				if($('#mushUSMenu').length > 0){
-					var wrapper_mhs = $('#mushUSMenu').parents(":eq(2)");
+				if($mushUSMenu.length > 0){
+					var wrapper_mhs = $mushUSMenu.parents(":eq(2)");
 					wrapper_mhs.css('left', '-'+(wrapper_mhs.width())+'px');
 					var arrow = wrapper_mhs.find('.arrowright');
 					arrow.attr('class','arrowleft');
@@ -4679,8 +4757,9 @@ Main.k.tabs.playing = function() {
 				var s_astro_icon = '';
 				if($('#astro_maj_inventaire').length > 0){
 					var img_astro = $('<img class="" src="/img/icons/ui/pa_comp.png" height="14"/>');
-					$('#share-inventory-button a img').remove();
-					$('#share-inventory-button a').prepend(img_astro);
+					var $share_inventory_button = $('#share-inventory-button');
+					$share_inventory_button.find('a img').remove();
+					$share_inventory_button.find('a').prepend(img_astro);
 					img_astro.addClass('blink-limited');
 					
 				}
@@ -4734,7 +4813,7 @@ Main.k.tabs.playing = function() {
 
 		// Heroes
 		// ----------------------------------- //
-		var t = $("<h3>").html(Main.k.text.gettext("équipage").capitalize()).appendTo(leftbar);
+		t = $("<h3>").html(Main.k.text.gettext("équipage").capitalize()).appendTo(leftbar);
 		$("<span>").addClass("displaymore").attr("_target", "#heroes_list").appendTo(t).on("click", Main.k.ToggleDisplay);
 		$("<div>").attr("id", "heroes_list").css("display", "none").appendTo(leftbar);
 		// ----------------------------------- //
@@ -4742,7 +4821,7 @@ Main.k.tabs.playing = function() {
 
 		// Inventory
 		// ----------------------------------- //
-		var t = $("<h3>").html(Main.k.text.gettext("inventaire").capitalize()).appendTo(leftbar);
+		t = $("<h3>").html(Main.k.text.gettext("inventaire").capitalize()).appendTo(leftbar);
 		$("<span>").addClass("displaymore").attr("_target", ".kobject_list").appendTo(t).on("click", Main.k.ToggleDisplay);
 		$("<div>").addClass("inventory kobject_list").css("display", "none").appendTo(leftbar);
 		$("<div>").css({"clear": "both", "height": "5px"}).appendTo(leftbar);
@@ -4775,14 +4854,18 @@ Main.k.tabs.playing = function() {
 		// ----------------------------------- //
 
 		// Fix "o²"
-		$(".spaceshipstatus li").first().attr("onmouseover", $(".spaceshipstatus li").first().attr("onmouseover").replace(/\(o²\)\s+/g, ""));
+		var $spaceshipstatus_li = $(".spaceshipstatus li");
+		$spaceshipstatus_li.first().attr("onmouseover", $spaceshipstatus_li.first().attr("onmouseover").replace(/\(o²\)\s+/g, ""));
 
 		// Lab - Nexus - Pilgred - Plants - Planets
 		// ----------------------------------- //
 		$("<div>").attr("id", "project_list").appendTo(leftbar);
 		// ----------------------------------- //
-	}
+	};
 	Main.k.MushAfterInit = function() {
+		/** @type {{skills:List}} **/
+		var hero;
+		var i;
 		// Display title list
 		var maxshown = 4;
 		var titles_list = $("#titles_list");
@@ -4798,8 +4881,8 @@ Main.k.tabs.playing = function() {
 		.on("mouseout", Main.hideTip)
 		.appendTo(commanders);
 		var commander_nb = 0;
-		for (var i=0; commander_nb<maxshown && i<Main.k.HEROES.length; i++) {
-			var hero = Main.k.COMMANDERS[i];
+		for (i=0; commander_nb<maxshown && i<Main.k.HEROES.length; i++) {
+			hero = Main.k.COMMANDERS[i];
 			if (Main.k.ArrayContains(Main.k.AliveHeroes, hero)) {
 				commander_nb++;
 				$("<img>").addClass("body " + hero).attr("src", "/img/design/pixel.gif").css("cursor", "pointer").appendTo(commanders);
@@ -4817,8 +4900,8 @@ Main.k.tabs.playing = function() {
 		.on("mouseout", Main.hideTip)
 		.appendTo(admins);
 		var admin_nb = 0;
-		for (var i=0; admin_nb<maxshown && i<Main.k.HEROES.length; i++) {
-			var hero = Main.k.ADMINS[i];
+		for (i=0; admin_nb<maxshown && i<Main.k.HEROES.length; i++) {
+			hero = Main.k.ADMINS[i];
 			if (Main.k.ArrayContains(Main.k.AliveHeroes, hero)) {
 				admin_nb++;
 				$("<img>").addClass("body " + hero).attr("src", "/img/design/pixel.gif").css("cursor", "pointer").appendTo(admins);
@@ -4836,8 +4919,8 @@ Main.k.tabs.playing = function() {
 		.on("mouseout", Main.hideTip)
 		.appendTo(comms);
 		var comms_nb = 0;
-		for (var i=0; comms_nb<maxshown && i<Main.k.HEROES.length; i++) {
-			var hero = Main.k.COMMS[i];
+		for (i=0; comms_nb<maxshown && i<Main.k.HEROES.length; i++) {
+			hero = Main.k.COMMS[i];
 			if (Main.k.ArrayContains(Main.k.AliveHeroes, hero)) {
 				comms_nb++;
 				$("<img>").addClass("body " + hero).attr("src", "/img/design/pixel.gif").css("cursor", "pointer").appendTo(comms);
@@ -4850,24 +4933,28 @@ Main.k.tabs.playing = function() {
 		Main.k.Resize();
 		$(Main.k.window).resize(Main.k.Resize);
 		$("#chatBlock").on("resize", Main.k.Resize);
-	}
+	};
 	Main.k.onCycleChange = function(){
 		// Script updates
 		// ----------------------------------- //
-		localStorage.removeItem('ctrlw_update_cache')
+		localStorage.removeItem('ctrlw_update_cache');
 		// ----------------------------------- //
 	};
 	Main.k.MushUpdate = function() {
-		var leftbar = $(".usLeftbar");
+		/** @type {{surname:string,statuses:List, titles:List}} **/
+		var hero;
+		var bubble, t, i, j;
+		var $usLeftbar = $(".usLeftbar");
 		Main.k.hasTalkie = $("#walltab").length > 0;
 		
 		// Never hide unread msg
 		$("table.treereply tr.not_read.cdRepl").css("display", "table-row");
 		
 		// Day and cycle save
-		if($('.cycletime').length > 0){
-			var regex = new RegExp(/.*([0-9]{1}).*-.*([0-9]{1})/);
-			var result = regex.exec($('.cycletime').text());
+		var cycle_time = $('.cycletime');
+		if(cycle_time.length > 0){
+			var regex = new RegExp('/.*([0-9]{1}).*-.*([0-9]{1})/');
+			var result = regex.exec(cycle_time.text());
 			if(result != null){
 				Main.k.Game.updateDayAndCycle(result[1],result[2]);
 			}
@@ -4879,10 +4966,11 @@ Main.k.tabs.playing = function() {
 		// ----------------------------------- //
 		Main.k.UpdateCheck();
 		// ----------------------------------- //
-		if($('#player_status').length == 0){
-			$('<div id="player_status" style="position: absolute;right:6px;bottom:0"><img src="'+Main.k.statusImages['bronze']+'" alt="Bronze" title="Bronze" /></div>').appendTo('.sheetmain');
+		var $player_status = $('#player_status');
+		if($player_status.length == 0){
+            $player_status = $('<div id="player_status" style="position: absolute;right:6px;bottom:0"><img src="'+Main.k.statusImages['bronze']+'" alt="Bronze" title="Bronze" /></div>').appendTo('.sheetmain');
 		}
-		$('#player_status').html('<img src="'+Main.k.statusImages[Main.k.Game.data.player_status]+'" alt="'+Main.k.Game.data.player_status.capitalize()+'" title="'+Main.k.Game.data.player_status.capitalize()+'" />');
+		$player_status.html('<img src="'+Main.k.statusImages[Main.k.Game.data.player_status]+'" alt="'+Main.k.Game.data.player_status.capitalize()+'" title="'+Main.k.Game.data.player_status.capitalize()+'" />');
 		Main.k.displayRemainingCyclesToNextLevel();
 		
 		// Heroes
@@ -4891,18 +4979,18 @@ Main.k.tabs.playing = function() {
 
 		// Display players' skills & statuses
 		var $it = Main.heroes.iterator();
-		var heroes = "";
 		var missingheroes = [];
 		while ($it.hasNext()) {
-			var hero = $it.next();
+			hero = $it.next();
 			var display = false;
-			var bubble = hero.surname.replace(/(\s)/g, "_").toLowerCase();
+			bubble = hero.surname.replace(/(\s)/g, "_").toLowerCase();
 
 			var statuses = $("<div>").addClass("icons statuses");
 			if (hero.statuses) {
 				var $_statuses = hero.statuses.iterator();
 				while( $_statuses.hasNext() ) {
 					display = true;
+					/** @type {{img:string,desc:string}} **/
 					var status = $_statuses.next();
 
 					$("<img>").attr("src", "/img/icons/ui/status/" + status.img + ".png")
@@ -4981,28 +5069,30 @@ Main.k.tabs.playing = function() {
 		}
 		// Display unavailable heroes
 		var missingDiv = $("<div>").addClass("missingheroes").appendTo(heroes_list);
-		var j=0;
-		for (var i=0; i<Main.k.HEROES.length; i++) {
-			var hero = Main.k.HEROES[i];
-			var h = Main.k.h[hero];
-			if (!Main.k.ArrayContains(Main.k.AliveHeroes, hero)) {
-				if (j%5 == 0) $("<br/>").appendTo(missingDiv);
-				j++;
-				var bubble = hero.replace(/(\s)/g, "_").toLowerCase();
+		j=0;
+		for (i=0; i<Main.k.HEROES.length; i++) {
+			(function() {
+				var hero = Main.k.HEROES[i];
+				var h = Main.k.h[hero];
+				if (!Main.k.ArrayContains(Main.k.AliveHeroes, hero)) {
+					if (j % 5 == 0) $("<br/>").appendTo(missingDiv);
+					j++;
+					bubble = hero.replace(/(\s)/g, "_").toLowerCase();
 
-				$("<img>").addClass("body " + bubble)
-				.attr("src", "/img/design/pixel.gif")
-				.css("cursor", "pointer")
-				.attr("_hid", -1)
-				.attr("_title", Main.k.COMPLETE_SURNAME(hero))
-				.attr("_desc", h.short_desc + "</p><p><strong>"+Main.k.text.gettext("Cliquez pour plus d'informations <br/>/!&#92; Fonctionnalité non codée")+"</strong>")
-				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip)
-				.on("click", function() {
-					Main.k.Profiles.display($(this).attr("_hid"), hero);
-				})
-				.appendTo(missingDiv);
-			}
+					$("<img>").addClass("body " + bubble)
+						.attr("src", "/img/design/pixel.gif")
+						.css("cursor", "pointer")
+						.attr("_hid", -1)
+						.attr("_title", Main.k.COMPLETE_SURNAME(hero))
+						.attr("_desc", h.short_desc + "</p><p><strong>" + Main.k.text.gettext("Cliquez pour plus d'informations <br/>/!&#92; Fonctionnalité non codée") + "</strong>")
+						.on("mouseover", Main.k.CustomTip)
+						.on("mouseout", Main.hideTip)
+						.on("click", function () {
+							Main.k.Profiles.display($(this).attr("_hid"), hero);
+						})
+						.appendTo(missingDiv);
+				}
+			})();
 		}
 		// ----------------------------------- //
 
@@ -5012,11 +5102,11 @@ Main.k.tabs.playing = function() {
 		var exploring = $(".exploring .exploring2");
 		$("#expblock").empty();
 		if (exploring.length > 0) {
-			var t = $("<h3>").html("Exploration").appendTo("#expblock");
+			t = $("<h3>").html("Exploration").appendTo("#expblock");
 			$("<span>").addClass("displayless").attr("_target", "#expblockdiv").appendTo(t).on("click", Main.k.ToggleDisplay);
-			expblock = $("<div>").attr("id", "expblockdiv").appendTo("#expblock");
+			var expblock = $("<div>").attr("id", "expblockdiv").appendTo("#expblock");
 
-			var i = 0;
+			i = 0;
 			var planetname = "";
 			var back = "";
 			exploring.find("li").each(function() {
@@ -5046,7 +5136,7 @@ Main.k.tabs.playing = function() {
 					case 0:
 						imgsrc = "planet";
 					case 2:
-						if (imgsrc == "") imgsrc = "casio"
+						if (imgsrc == "") imgsrc = "casio";
 						$("<p>").css({
 							color: "#DDD",
 							"font-size": "12px",
@@ -5073,9 +5163,9 @@ Main.k.tabs.playing = function() {
 		var mwidth = 120; //$(".usLeftbar").width();
 		//$("#room").addClass("roominventory"); // New class used for cancelSelection
 		$(".kobject_list").empty();
-		var objects = $("#room");
-		if (objects.find("[data-id='TREE_POT']").size()) hasPlants = true;
-		objects.find("li").not(".cdEmptySlot").not("[data-id='TREE_POT']").each(function() {
+		var $room = $("#room");
+		if ($room.find("[data-id='TREE_POT']").size()) hasPlants = true;
+		$room.find("li").not(".cdEmptySlot").not("[data-id='TREE_POT']").each(function() {
 			var li = $("<li>")
 				.addClass("item fakeitem")
 				.attr("serial_fake", $(this).attr("serial"))
@@ -5119,15 +5209,17 @@ Main.k.tabs.playing = function() {
 		// Lab - Nexus - Pilgred - Plants - Planets
 		// ----------------------------------- //
 		var project_list = $("#project_list").empty();
-		var projects = $("#cdModuleContent ul.dev li.cdProjCard");
-
+		var $cdModuleContent = $("#cdModuleContent");
+		var projects = $cdModuleContent.find("ul.dev li.cdProjCard");
+		var projectsdiv;
+		var $research_module = $("#research_module");
 		// Research
-		if ($("#research_module").length > 0 && projects.length > 0) {
-			var t = $("<h3>").html(Main.k.text.gettext("Laboratoire")).appendTo(project_list);
+		if ($research_module.length > 0 && projects.length > 0) {
+			t = $("<h3>").html(Main.k.text.gettext("Laboratoire")).appendTo(project_list);
 			$("<span>").addClass("displayless").attr("_target", "#projectspreview")
 			.on("click", Main.k.ToggleDisplay).appendTo(t);
 
-			var projectsdiv = $("<div>").addClass("projectspreview labpreview").attr("id", "projectspreview").appendTo(project_list);
+			projectsdiv = $("<div>").addClass("projectspreview labpreview").attr("id", "projectspreview").appendTo(project_list);
 			projects.each(function(i) {
 				var projectdiv = $("<div>").addClass("projectpreview").appendTo(projectsdiv);
 
@@ -5172,17 +5264,17 @@ Main.k.tabs.playing = function() {
 				});
 				return false;
 			});
-			$("#research_module ul.inventory li.item").on("click", function(){
+			$research_module.find(" ul.inventory li.item").on("click", function(){
 				Main.selectItem($(this));
 			});
 
 		// Projects
-		} else if (projects.length > 0 && /Coeur\sde\sNERON/.test($("#cdModuleContent h2").html().trim())) {
-			var t = $("<h3>").html("Projets Neron").appendTo(project_list);
+		} else if (projects.length > 0 && /Coeur\sde\sNERON/.test($cdModuleContent.find("h2").html().trim())) {
+			t = $("<h3>").html("Projets Neron").appendTo(project_list);
 			$("<span>").addClass("displayless").attr("_target", "#projectspreview")
 			.on("click", Main.k.ToggleDisplay).appendTo(t);
 
-			var projectsdiv = $("<div>").addClass("projectspreview").attr("id", "projectspreview").appendTo(project_list);
+			projectsdiv = $("<div>").addClass("projectspreview").attr("id", "projectspreview").appendTo(project_list);
 			projects.each(function(i) {
 				var projectdiv = $("<div>").addClass("projectpreview").appendTo(projectsdiv);
 
@@ -5226,11 +5318,11 @@ Main.k.tabs.playing = function() {
 			var nav = $("#navModule");
 			var planets = nav.find(".planet").not(".planetoff");
 			if (planets.length > 0) {
-				var t = $("<h3>").html("Planètes").appendTo(project_list);
+				t = $("<h3>").html("Planètes").appendTo(project_list);
 				$("<span>").addClass("displayless").attr("_target", "#projectspreview")
 				.on("click", Main.k.ToggleDisplay).appendTo(t);
 
-				var projectsdiv = $("<div>").addClass("projectspreview planetpreview").attr("id", "projectspreview").appendTo(project_list);
+				projectsdiv = $("<div>").addClass("projectspreview planetpreview").attr("id", "projectspreview").appendTo(project_list);
 				planets.each(function(i) {
 					// Print planet
 					var planet = $("<div>").addClass("planetpreview").appendTo(projectsdiv);
@@ -5273,16 +5365,16 @@ Main.k.tabs.playing = function() {
 		}
 
 		// Plants
-		$(".usLeftbar").find("#plantmanager").remove();
+		$usLeftbar.find("#plantmanager").remove();
 		if (hasPlants) {
 			// Create div
-			var plantsDIV = $("<div>").attr("id", "plantmanager").appendTo(leftbar);
-			var t = $("<h3>").html(Main.k.text.gettext("Plantes")).appendTo(plantsDIV);
+			var plantsDIV = $("<div>").attr("id", "plantmanager").appendTo($usLeftbar);
+			t = $("<h3>").html(Main.k.text.gettext("Plantes")).appendTo(plantsDIV);
 			$("<span>").addClass("displayless").attr("_target", ".kplantlist").appendTo(t).on("click", Main.k.ToggleDisplay);
 
 			// List plants
 			var plantlist = $("<div>").addClass("kplantlist plants inventory").css("max-width", mwidth + "px").appendTo(plantsDIV);
-			$("#room").find("[data-id='TREE_POT']").each(function() {
+			$room.find("[data-id='TREE_POT']").each(function() {
 				$("<li>")
 					.addClass("item fakeitem")
 					.attr("serial", $(this).attr("serial"))
@@ -5297,7 +5389,7 @@ Main.k.tabs.playing = function() {
 					.attr("_desc", $(this).attr("data-desc").split("\\'").join("'"))
 					.on("mouseover", Main.k.CustomTip)
 					.on("mouseout", Main.hideTip);
-			})
+			});
 
 			// Plants actions
 			$("<div>").css("clear", "both").css("height", "5px").appendTo(plantsDIV);
@@ -5316,7 +5408,8 @@ Main.k.tabs.playing = function() {
 
 		// Enhance alerts
 		// ----------------------------------- //
-		var alarm = $("#topinfo_bar .alarm");
+		var $topinfo_bar = $("#topinfo_bar");
+		var alarm = $topinfo_bar.find(".alarm");
 		if (alarm.length > 0) {
 			alarm.find(".alertnb").remove();
 			var alarm_equip = "/img/icons/ui/alert.png";
@@ -5351,7 +5444,7 @@ Main.k.tabs.playing = function() {
 
 				// Display nb if needed
 				if (alarm_nb!=0) {
-					updatebg = true;
+					var updatebg = true;
 
 					$(this).css({
 						position: "relative",
@@ -5369,12 +5462,14 @@ Main.k.tabs.playing = function() {
 
 
 			});
-			$("#topinfo_bar .alarm_on").css("background-image", "url(" + Main.k.servurl + "/img/alertpleft.gif)");
-			$("#topinfo_bar .alarm_right_on").css("background-image", "url(" + Main.k.servurl + "/img/alertpright.gif)");
-			$("#topinfo_bar .alarm_bg_on").css("background-image", "url(" + Main.k.servurl + "/img/alertbg.gif)");
+
+
+			$topinfo_bar.find(".alarm_on").css("background-image", "url(" + Main.k.servurl + "/img/alertpleft.gif)");
+			$topinfo_bar.find(".alarm_right_on").css("background-image", "url(" + Main.k.servurl + "/img/alertpright.gif)");
+			$topinfo_bar.find(".alarm_bg_on").css("background-image", "url(" + Main.k.servurl + "/img/alertbg.gif)");
 		}
 		//Display shield is needed
-		var spaceshipstatus = $("#topinfo_bar .spaceshipstatus");
+		var spaceshipstatus = $topinfo_bar.find(".spaceshipstatus");
 		if (spaceshipstatus.length > 0) {
 			spaceshipstatus.find(".spaceshipstatus-info").remove();
 			spaceshipstatus.find("img").each(function() {
@@ -5398,13 +5493,13 @@ Main.k.tabs.playing = function() {
 
 		// Enhance private chats
 		// ----------------------------------- //
-		for (var i=0; i<3; i++) {
-			var tab = $("#cdTabsChat .cdPrivateTab" + i);
+		for (i=0; i<3; i++) {
+			var tab = $("#cdTabsChat").find(".cdPrivateTab" + i);
 			var tabcontent = $("#cdPrivate" + i);
 			if (tab.length > 0 && tabcontent.length > 0) {
 				var tip = "";
 				var heroes = tabcontent.find(".mini_priv");
-				for (var j=0; j<heroes.length; j++) {
+				for (j=0; j<heroes.length; j++) {
 					var mouseover = $(heroes[j]).attr("onmouseover");
 					var name = /<h1>([^<]+)<\/h1>/.exec(mouseover)[1];
 					var co = /[a-zA-Z]+\s?:\s([^<]+)/.exec(mouseover)[1].toLowerCase();
@@ -5428,7 +5523,7 @@ Main.k.tabs.playing = function() {
 		Main.k.customBubbles();
 
 		// Fix PAbis
-		$("#cdPaBloc img[src='/img/design/pa1bis.png']").attr("src", Main.k.servurl + "/img/pa1bis.png");
+		$("#cdPaBloc").find("img[src='/img/design/pa1bis.png']").attr("src", Main.k.servurl + "/img/pa1bis.png");
 
 		// Fix dimensions
 		Main.k.Resize();
@@ -5440,7 +5535,7 @@ Main.k.tabs.playing = function() {
 		} else {
 			//Main.k.displayLastSent(false);
 		}
-	}
+	};
 	Main.k.MushInitHeroes = function(){
 		Main.k.heroes = jQuery.extend(true, {}, Main.heroes);
 		var $it = Main.k.heroes.iterator();
@@ -5448,18 +5543,22 @@ Main.k.tabs.playing = function() {
 		var tab_heroes = jQuery.extend([], Main.k.HEROES);
 		var tab_heroes_same_room = [];
 		while ($it.hasNext()) {
-			var hero = $it.next();
-			tab_heroes_same_room.push(Main.k.surnameToBubble(hero.surname));
-			tab_heroes = jQuery.grep(tab_heroes, function(value) {
-			  return value != Main.k.surnameToBubble(hero.surname);
-			});
+			(function() {
+				/** @type {{surname:string}} **/
+				var hero = $it.next();
+				tab_heroes_same_room.push(Main.k.surnameToBubble(hero.surname));
+				tab_heroes = jQuery.grep(tab_heroes, function (value) {
+					return value != Main.k.surnameToBubble(hero.surname);
+				});
+			})();
 		}
 		//replace heroes
 		$.each(Main.k.HEROES.replace, function(k,v){
+			var index;
 			if($('.'+k).length > 0 || $.inArray(k,tab_heroes_same_room) != -1){
-				var index = $.inArray(v,Main.k.HEROES);
+				index = $.inArray(v,Main.k.HEROES);
 			}else{
-				var index = $.inArray(k,Main.k.HEROES);
+				index = $.inArray(k,Main.k.HEROES);
 			}
 			Main.k.HEROES.splice(index,1);
 		});
@@ -5472,7 +5571,7 @@ Main.k.tabs.playing = function() {
 	$(document).keypress(function(e){
 		if (e.keyCode === 27) Main.k.ClosePopup();
 	});
-}
+};
 Main.k.tabs.credits = function() {
 	$("blockquote").css("overflow", "visible");
 	$("blockquote p").css({
@@ -5480,7 +5579,7 @@ Main.k.tabs.credits = function() {
 		"font-size": "10pt",
 		"margin-top": "10px"
 	});
-	$("#extra .nova").css("display", "none");
+	$("#extra").find(".nova").css("display", "none");
 
 	// Add menu
 	$("<div>").addClass("mainmenu").html('<ul id="menuBar">\
@@ -5493,30 +5592,32 @@ Main.k.tabs.credits = function() {
 	// Enhance mushs
 	$(".scoremush").siblings("h3").css("color", "rgb(255, 64, 89)");
 	$(".triumphmush").siblings(".dude").find("h3").css("color", "rgb(255, 64, 89)");
-}
+};
 Main.k.tabs.myprofile = function() {
 	// Fix Experience
 	$(".charboostbg ul.slots").css("display", "none");
 	$("ul.boost li.charboost").css("height", "200px");
 
 	// Fix menu
-	$("#accountmenu a").each(function() {
+	$("#accountmenu").find("a").each(function() {
 		$(this).on("click", function() {
 			var r = /\?([a-z]+)$/;
 			if (r.test(this.href)) {
 				$('.cdTabTgt').hide();
 				$("#" + r.exec(this.href)[1]).show();
-				$("#" + r.exec(this.href)[1] + "tab").addClass('active');
-				$("#" + r.exec(this.href)[1] + "tab").siblings().removeClass('active');
+				var sel = $("#" + r.exec(this.href)[1] + "tab");
+				sel.addClass('active');
+				sel.siblings().removeClass('active');
 			} else {
 				$('.cdTabTgt').hide();
 				$("#experience").show();
-				$("#experiencetab").addClass('active');
-				$("#experiencetab").siblings().removeClass('active');
+				var $experiencetab = $("#experiencetab");
+				$experiencetab.addClass('active');
+				$experiencetab.siblings().removeClass('active');
 			}
 			return false;
 		})
-	})
+	});
 
 	// Autoselect tab
 	var url = Main.k.window.location;
@@ -5524,10 +5625,11 @@ Main.k.tabs.myprofile = function() {
 	if (r.test(url)) {
 		$('.cdTabTgt').hide();
 		$("#" + r.exec(url)[1]).show();
-		$("#" + r.exec(url)[1] + "tab").addClass('active');
-		$("#" + r.exec(url)[1] + "tab").siblings().removeClass('active');
+		var sel = $("#" + r.exec(url)[1] + "tab");
+		sel.addClass('active');
+		sel.siblings().removeClass('active');
 	}
-}
+};
 Main.k.tabs.ranking = function() {
 
 	Main.k.SwitchRankingTab = function(event) {
@@ -5549,7 +5651,7 @@ Main.k.tabs.ranking = function() {
 				$("div.cdGlobal").removeClass("hide");
 				break;
 		}
-	}
+	};
 
 	$("<style>").attr("type", "text/css").html("\
 	span.rankhead {\
@@ -5567,8 +5669,8 @@ Main.k.tabs.ranking = function() {
 	}\
 	").appendTo($("head"));
 
-
-	$("#category_triumph, #category_nova").css({
+	var $cat_triumph_nova = $("#category_triumph, #category_nova");
+	$cat_triumph_nova.css({
 		margin: "0",
 		width: "50%",
 		float: "left",
@@ -5578,14 +5680,14 @@ Main.k.tabs.ranking = function() {
 	$("th").each(function() {
 		var txt = $(this).html().trim();
 		if (txt == "Héros Favori") $(this).html("");
-	})
+	});
 
 	$("ul.tablefilter").first().clone().css({
 		float: "right",
 		width: "auto"
 	}).prependTo("#ranking").find("li").attr("onclick", "").on("click", Main.k.SwitchRankingTab);
-	$("#category_triumph, #category_nova").find(".tablefilter, .clear").remove();
-	$("#ranking th.distinctions").css("width", "auto");
+	$cat_triumph_nova.find(".tablefilter, .clear").remove();
+	$("#ranking").find("th.distinctions").css("width", "auto");
 	$(".bgtablesummar").css("margin", "0 5px");
 	$("table.summar").css("width", "100%");
 	$("table.summar tr.top td").css("font-size", "12pt");
@@ -5598,7 +5700,7 @@ Main.k.tabs.ranking = function() {
 	var headers = $("<div>").css({"margin": "20px auto 10px", "text-align": "center", position: "relative"}).prependTo("#category_triumph, #category_nova");
 	headers.first().html("<span class='rankhead'>Triomphe</span><img alt='Triomphe' src='" + Main.k.servurl + "/img/rank_triumph.png' />");
 	headers.last().html("<span class='rankhead'>Super NOVA</span><img alt='NOVA' src='" + Main.k.servurl + "/img/rank_nova.png' />");
-}
+};
 Main.k.tabs.expPerma = function() {
 	if (Main.k.Options.cbubbles) {
 		Main.k.css.bubbles();
@@ -5611,7 +5713,7 @@ Main.k.tabs.expPerma = function() {
 				var herof = hero.replace("_", " ").capitalize();
 				heroes_replace.push('<span class="colored_' + hero + '"><img src="/img/icons/ui/' + hero.replace("_", "") + '.png" /> ' + herof + '</span>');
 				heroes.push(herof);
-			})
+			});
 
 			var html = $(this).html();
 			for (var i=0; i<heroes.length; i++) {
@@ -5621,7 +5723,7 @@ Main.k.tabs.expPerma = function() {
 			$(this).html(html);
 		})
 	}
-}
+};
 Main.k.tabs.gameover = function() {
 	// Triumph logs
 	var logs = $("#logtri li span, #logtri div div li");
@@ -5631,12 +5733,13 @@ Main.k.tabs.gameover = function() {
 		research: 0,		// 6
 		hunter: 0,			// 1
 		expe: 0,			// 3
-		planet: 0,			// 5
+		planet: 0			// 5
 	};
 
 	var reg = /([0-9]+)\sx\s([^\(]+)\s\(\s(?:\+|-)\s([0-9]+)\s\)/;
-	$("#logtri div").css("display", "block");
-	$("#logtri .rreadmore").css("display", "none");
+	var $logtri = $("#logtri");
+	$logtri.find("div").css("display", "block");
+	$logtri.find(".rreadmore").css("display", "none");
 	logs.each(function() {
 		var counted = false;
 		var data = reg.exec($(this).html());
@@ -5716,7 +5819,7 @@ Main.k.tabs.gameover = function() {
 	}
 	if (logcount.hunter) {
 		/* Translators: This translation must be copied from the game. */
-		$("<li>").html(logcount.hunter + " x "+ Main.k.text.gettext("Défenseur du Daedalus") + " ( + " + logcount.hunter * 1 + " )")
+		$("<li>").html(logcount.hunter + " x "+ Main.k.text.gettext("Défenseur du Daedalus") + " ( + " + logcount.hunter + " )")
 		.attr("_title", Main.k.text.gettext("Défenseur du Daedalus"))
 		.attr("_desc", Main.k.text.gettext("Gagné pour chaque Hunter abattu."))
 		.on("mouseover", Main.k.CustomTip)
@@ -5725,7 +5828,7 @@ Main.k.tabs.gameover = function() {
 	}
 	if (logcount.humanC) {
 		/* Translators: This translation must be copied from the game. */
-		$("<li>").html(logcount.humanC + " x "+ Main.k.text.gettext("Cycle Humain") + " ( + " + logcount.humanC * 1 + " )")
+		$("<li>").html(logcount.humanC + " x "+ Main.k.text.gettext("Cycle Humain") + " ( + " + logcount.humanC + " )")
 		.attr("_title", Main.k.text.gettext("Cycle Humain"))
 		.attr("_desc", Main.k.text.gettext("Gagné à chaque cycle."))
 		.on("mouseover", Main.k.CustomTip)
@@ -5737,10 +5840,10 @@ Main.k.tabs.gameover = function() {
 	$(document).on('click','a.like',function(){
 		$(this).replaceWith('<img class="cdLoading" src="/img/icons/ui/loading1.gif" alt="loading..." />');
 	});
-}
+};
 
 // Script initialization
-GM_addStyle (GM_getResourceText ('css:jgrowl'));
+GM_addStyle(GM_getResourceText ('css:jgrowl'));
 eval(GM_getResourceText('jgrowl'));
 $.jGrowl.defaults.closerTemplate = '';
 $.jGrowl.defaults.theme = 'ctrl-w';
@@ -5783,7 +5886,7 @@ if (Main.k.playing && $("#topinfo_bar").length > 0) {
 	$("#maincontainer, .boxcontainer").css("margin", "0 auto 0");
 	$(".kmenu").css({
 		position: "relative",
-		top: "180px",
+		top: "180px"
 	});
 	$("a.logostart").css("top", "20px");
 }
