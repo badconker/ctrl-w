@@ -12,7 +12,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.35b2
+// @version     0.35b3
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -4957,7 +4957,7 @@ Main.k.tabs.playing = function() {
 		// Day and cycle save
 		var cycle_time = $('.cycletime');
 		if(cycle_time.length > 0){
-			var regex = new RegExp('/.*([0-9]{1}).*-.*([0-9]{1})/');
+			var regex = new RegExp('.*([0-9]{1}).*-.*([0-9]{1})');
 			var result = regex.exec(cycle_time.text());
 			if(result != null){
 				Main.k.Game.updateDayAndCycle(result[1],result[2]);
