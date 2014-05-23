@@ -12,7 +12,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.35b3
+// @version     0.35b4
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -107,8 +107,8 @@ Main.k.initData = function() {
 	Main.k.ADMINS =   ["janice", "terrence", "eleesha", "raluca", "finola", "andie", "frieda", "ian", "stephen", "paola", "jin_su", "hua", "kuan_ti", "gioele", "chun", "roland", "chao", "derek"];
 
 	Main.k.HEROES.replace = {
-		andie:'finola',
-		derek:'chao'
+		finola:'andie',
+		chao:'derek'
 	};
 	Main.k.h = {
 		mush:{
@@ -119,112 +119,137 @@ Main.k.initData = function() {
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Commandant suprême du Daedalus."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:jin_su")
+			tutorial:Main.k.text.gettext("tutorial_id:jin_su"),
+			dev_surname_long:'kim_jin_su'
 		},
 		frieda:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Scientifique millénaire."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:frieda")
+			tutorial:Main.k.text.gettext("tutorial_id:frieda"),
+			dev_surname_long:'frieda_bergmann'
 		},
 		kuan_ti:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Grand architecte du Daedalus."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:kuan_ti")
+			tutorial:Main.k.text.gettext("tutorial_id:kuan_ti"),
+			dev_surname_long:'lai_kuan_ti'
 		},
 		janice:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Psychologue Digitale aux atouts certains."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:janice")
+			tutorial:Main.k.text.gettext("tutorial_id:janice"),
+			dev_surname_long:'janice_kent'
 		},
 		roland:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Humoriste pilote de chasse à ses heures."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:roland")
+			tutorial:Main.k.text.gettext("tutorial_id:roland"),
+			dev_surname_long:'roland_zuccali'
 		},
 		hua:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Exploratrice de l'EXTRÊME."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:hua")
+			tutorial:Main.k.text.gettext("tutorial_id:hua"),
+			dev_surname_long:'jiang_hua'
 		},
 		paola:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Officier principal des Communications du Daedalus."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:paola")
+			tutorial:Main.k.text.gettext("tutorial_id:paola"),
+			dev_surname_long:'paola_rinaldo'
 		},
 		chao:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Chef de la sécurité du Daedalus."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:chao")
+			tutorial:Main.k.text.gettext("tutorial_id:chao"),
+			dev_surname_long:'wang_chao'
 		},
 		finola:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Biologiste de renommée internationale, pionnière dans l'étude du Mush."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:finola")
+			tutorial:Main.k.text.gettext("tutorial_id:finola"),
+			dev_surname_long:'finola_keegan'
 		},
 		stephen:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Cuisinier le plus dangereux de la galaxie."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:stephen")
+			tutorial:Main.k.text.gettext("tutorial_id:stephen"),
+			dev_surname_long:'stephen_seagull'
 		},
 		ian:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Chercheur frugivore flexible."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:ian")
+			tutorial:Main.k.text.gettext("tutorial_id:ian"),
+			dev_surname_long:'ian_soulton'
 		},
 		chun:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Dernier espoir de l'Humanité."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:chun")
+			tutorial:Main.k.text.gettext("tutorial_id:chun"),
+			dev_surname_long:'zhong_chun'
 		},
 		raluca:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Génie de la physique quantique félinophile."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:raluca")
+			tutorial:Main.k.text.gettext("tutorial_id:raluca"),
+			dev_surname_long:'raluca_tomescu'
 		},
 		gioele:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Armateur philantrophobe."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:gioele")
+			tutorial:Main.k.text.gettext("tutorial_id:gioele"),
+			dev_surname_long:'gioele_rinaldo'
 		},
 		eleesha:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Investigatrice déchue de premier plan."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:eleesha")
+			tutorial:Main.k.text.gettext("tutorial_id:eleesha"),
+			dev_surname_long:'eleesha_williams'
 		},
 		terrence:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Technophile motorisé."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:terrence")
+			tutorial:Main.k.text.gettext("tutorial_id:terrence"),
+			dev_surname_long:'terrence_archer'
 		},
 		andie:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Fayot de la fédération."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:andie")
+			tutorial:Main.k.text.gettext("tutorial_id:andie"),
+			dev_surname_long:'andie_graham'
 		},
 		derek:{
 			/* Translators: This translation must be copied from the game. */
 			short_desc:Main.k.text.gettext("Héros malgré lui."),
 			/* Translators: Thread id for this character's tutorial. */
-			tutorial:Main.k.text.gettext("tutorial_id:derek")
+			tutorial:Main.k.text.gettext("tutorial_id:derek"),
+			dev_surname_long:'derek_hogan'
 		}
 		
 	};
+	$.each(Main.k.h,function(k,h){
+		var $this = $(this)[0];
+		if(typeof($this.dev_surname_long) != 'undefined'){
+			$this.name = $this.dev_surname_long.replace("_", " ").capitalize();
+		}
+	});
+	console.log('paola',(Main.k.h['paola']));
 	Main.k.cssToHeroes = [];
 	Main.k.cssToHeroes["-1185px"] = "janice";
 	Main.k.cssToHeroes["-1282px"] = "chao";
@@ -279,6 +304,36 @@ Main.k.initData = function() {
 	Main.k.statusImages['bronze'] = 'http://imgup.motion-twin.com/twinoid/6/b/8b8ae4d5_4030.jpg';
 	Main.k.statusImages['silver'] = 'http://imgup.motion-twin.com/twinoid/a/e/3c341777_4030.jpg';
 	Main.k.statusImages['gold'] = 'http://imgup.motion-twin.com/twinoid/c/1/4e43e15c_4030.jpg';
+};
+Main.k.init = function(){
+	Main.k.initLang();
+	Main.k.Options.init();
+	Main.k.Game.init();
+	Main.k.initData();
+	Main.k.displayMainMenu();
+	//Integration with others scripts
+	$( window ).load(function() {
+
+		//For scripts which use load event
+		$('img[data-async_src]').each(function(){
+			$(this).attr('src',$(this).attr('data-async_src'));
+			$(this).removeAttr('data-async_src');
+		});
+
+	});
+};
+Main.k.getFullName = function(dev_surname) {
+	return dev_surname.replace(/_/g, " ").capitalize();
+};
+Main.k.getHeroBySurname = function(dev_surname) {
+	console.info('Main.heroes',Main.heroes);
+	var $it = Main.heroes.iterator();
+	while ($it.hasNext()) {
+		var hero = $it.next();
+		console.log(dev_surname,hero.dev_surname);
+		if (hero.dev_surname == dev_surname) return hero;
+	}
+	return null;
 };
 Main.k.displayMainMenu = function() {
 	Main.k.css.customMenu();
@@ -364,8 +419,14 @@ Main.k.displayMainMenu = function() {
 
 		$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/fds'><img src='/img/icons/skills/cold_blood.png' />FDS</a></li>").appendTo(play_ss);
 	}
-}
+};
 
+/**
+ *
+ * @param arr
+ * @param o
+ * @returns {boolean}
+ */
 Main.k.ArrayContains = function(arr, o) {
 	for (var a in arr) {
 		if (a == o) return true;
@@ -551,9 +612,11 @@ Main.k.Game.data.day = 0;
 Main.k.Game.data.cycle = 0;
 Main.k.Game.data.xp = 1;
 Main.k.Game.data.player_status = 'bronze';
+Main.k.Game.data.players = {};
 Main.k.Game.init = function() {
 	var ctrlw_game = localStorage.getItem("ctrlw_game");
 	if (ctrlw_game == null){
+
 		return;
 	}
 	Main.k.Game.data = JSON.parse(ctrlw_game);
@@ -595,6 +658,8 @@ Main.k.Game.updatePlayerInfos = function() {
 		Main.k.quickNotice(Main.k.text.gettext('Infos du joueur mises à jour.'));
 	});
 };
+
+
 // == Options Manager  ========================================
 Main.k.Options = {};
 Main.k.Options.initialized = false;
@@ -1195,13 +1260,13 @@ Main.k.css.ingame = function() {
 		float: none! important;\
 		margin: 0 -3px! important;\
 	}\
-	.usLeftbar .hero .icons { \
+	.usLeftbar .hero .icons{\
 		white-space: nowrap;\
 		position: relative;\
 		left: -2px;\
 	}\
 	.usLeftbar img:hover { \
-		opacity: 1! important;\
+		opacity: 1 !important;\
 	}\
 	.usLeftbar .but { \
 		margin: 0 2px;\
@@ -1215,14 +1280,22 @@ Main.k.css.ingame = function() {
 	.usLeftbar .hero .skills span.skill { \
 		position: relative;\
 	}\
-	.usLeftbar .hero .skills span.skill img.actmush { \
+	.icons.skills .skill{\
+		display: inline-block;\
+		font-size: 0;\
+		position: relative;\
+	}\
+	.icons.skills{\
+		height: 18px;\
+		margin-bottom:3px;\
+	}\
+	.usLeftbar .hero .skills span.skill img.actmush,\
+	.icons.skills .skill img.actmush\
+	 { \
 		position: absolute;\
-		bottom: 1px;\
+		bottom: -3px;\
 		right: 0px;\
 		opacity: 1! important;\
-	}\
-	.usLeftbar .hero .statuses { \
-		top: -2px;\
 	}\
 	.usLeftbar .hero .titles { \
 		position: absolute;\
@@ -1231,9 +1304,6 @@ Main.k.css.ingame = function() {
 		width: 16px;\
 		line-height: 12px;\
 		z-index: 2;\
-	}\
-	.usLeftbar .titles_title { \
-		display:none;\
 	}\
 	.usLeftbar .titles_list .icon { \
 		margin: 0px 5px 3px 4px;\
@@ -1770,6 +1840,61 @@ Main.k.tabs.playing = function() {
 				this.value = this.value;
 			}
 		});
+	};
+	$.fn.addHeroDescToolTip = function(dev_surname){
+		var $desc = $('<div/>');
+		var $tooltip_title = $('<div/>');
+		var name;
+		var o_hero = Main.k.Profiles.get(dev_surname);
+		$tooltip_title.append(o_hero.name);
+
+		$.each(o_hero.titles,function(k,title){
+			$("<img>").attr("src", "/img/icons/ui/" + title.img + ".png")
+				.css({
+					'margin-left': '5px',
+					'line-height': '7px'
+				})
+				.attr("alt", title.img)
+				.appendTo($tooltip_title);
+		});
+		if(o_hero.statuses.length > 0){
+			var $statuses = $("<p>").addClass("icons statuses").css('float','right');
+			$.each(o_hero.statuses,function(k,status){
+				$("<img>").attr("src", "/img/icons/ui/status/" + status.img + ".png")
+					.attr("height", "14").attr("alt", status.img)
+					.appendTo($statuses);
+			});
+			$desc.append($statuses);
+		}
+		if(o_hero.skills.length > 0) {
+			var $skills = $("<p>").addClass("icons skills");
+			$.each(o_hero.skills, function (k, skill) {
+				var $skilldom = $("<span>").addClass("skill").appendTo($skills);
+
+				$("<img>").attr("src", "/img/icons/skills/" + skill.img + ".png")
+					.attr("height", "19").attr("alt", skill.img)
+					.appendTo($skilldom);
+
+				if (Main.k.compInactiveMush[skill.img]) {
+					$("<img>").attr("src", Main.k.servurl_badconker + "/img/non-mush.png").addClass("actmush")
+						.attr("width", "10").attr("height", "10")
+						.appendTo($skilldom);
+				}
+				$desc.append($skills);
+			});
+		}
+
+		$desc.append('<div class="clear"></div>');
+		$desc.append('<p>' + o_hero.short_desc + '</p>');
+
+
+		$desc.append('<p><strong>' + Main.k.text.gettext("Cliquez pour plus d'informations") + '</strong></p>');
+		$(this)
+			.attr("_title", $tooltip_title.html())
+			.attr("_desc", $desc.html())
+			.on("mouseover", Main.k.CustomTip)
+			.on("mouseout", Main.hideTip);
+		return $(this);
 	};
 	/*haxe.remoting.ExternalConnection.prototype.call = function(params) {
 		var s = new haxe.Serializer();
@@ -3460,19 +3585,19 @@ Main.k.tabs.playing = function() {
 	};
 
 
-	// == Profile Manager  ========================================
+	// == Profiles Manager  ========================================
 	Main.k.Profiles = {};
 	Main.k.Profiles.initialized = false;
-	Main.k.Profiles.current = 0;
-	Main.k.Profiles.open = function() {//TODO: MULTILANG
-		if (Main.k.folding.displayed == "profiles") {
-			Main.k.folding.displayGame();
-			return;
-		}
+	Main.k.Profiles.current = null;
+	Main.k.Profiles.open = function() {
+		/** @type {{surname:string,statuses:List, titles:List, dev_surname:string}} **/
+		var o_hero;
+		console.log('Main.k.folding.displayed',Main.k.folding.displayed);
 
 		if (!Main.k.Profiles.initialized) {
 			Main.k.Profiles.initialized = true;
-
+			var h = Main.k.h[Main.k.Profiles.current];
+			console.log(h);
 			var td = $("<td>").addClass("chat_box").css({
 				"padding-right": "6px",
 				"padding-top": "1px",
@@ -3480,22 +3605,316 @@ Main.k.tabs.playing = function() {
 				color: "rgb(9,10,97)"
 			}).attr("id", "profile_col").appendTo($("table.inter tr").first());
 
-			$("<p>").addClass("warning").html(Main.k.text.gettext("Les profils de joueurs seront disponibles prochainement.")).appendTo(td);
-		}
+			var header = $("<div>").addClass("header").css({
+				background: "rgba(52,74,146,0.35)"
+			}).appendTo(td);
+			$("<img>").css({
+				height: "120px",
+				float: "left",
+				margin: "4px"
+			}).attr("src", "/img/art/char/" + h.dev_surname_long + ".jpg").appendTo(header);
+			$("<h3>").css({
+				position: "relative",
+				margin: "2px 5px 5px 94px",
+				color: "#EEE",
+				"border-bottom": "2px solid #EEE",
+				"padding-bottom": "2px",
+				"font-size": "17px"
+			}).html("<span>" + Main.k.getFullName(Main.k.Profiles.current) + "</span>").appendTo(header);
+			Main.k.MakeButton("<img src='/img/icons/ui/awake.png' />",null,function(event) {
+				Main.k.Profiles.save(Main.k.Profiles.current);
+				Main.k.Profiles.update();
+			}).css({
+				position: "absolute",
+				top: "2px",
+				right: "3px"
+			})
+				.addClass('spy')
+				.appendTo($("h3",header)).find("a")
+				.attr("_title", Main.k.text.gettext("Espionnage"))
+				.attr("_desc", Main.k.text.gettext("Vous êtes dans la même pièce que cette personne ; vous pouvez donc l'examiner de plus près.</p><p><strong>Cliquez ici pour enregistrer les compétences visibles, statuts publiques et titres de ce personnage.</strong>"))
+				.on("mouseover", Main.k.CustomTip)
+				.on("mouseout", Main.hideTip);
+			/*$("<textarea>").css({
+				margin: "5px auto",
+				display: "block",
+				width: "230px",
+				height: "60px",
+				resize: "none",
+				border: "1px solid #333",
+				padding: "2px 4px",
+				color: "#555",
+				"font-size": "12px"
+			}).appendTo(header);
+			Main.k.MakeButton("<img src='/img/icons/ui/conceptor.png' /> Gribouiller",null,function(event) {
+				if (Main.k.pid == "") return;
+				var txt = $(event.target).closest(".header").find("textarea").first();
+				var pid = Main.k.pid;
+				var hero = Main.k.Profiles.current;
+				var data = encodeURIComponent(txt.val());
+				var dc = /([0-9]+)[^0-9]+([0-9]+)/.exec($("#kCalendar p").text());
 
-		Main.k.folding.display([null,null, "#profile_col"], "profiles");
+				txt.val("");
+				/*var url = Main.k.website2 + "/s/" + Main.k.scriptid + "/" + Main.k.scriptkey + "/p/" +
+					pid + "/sethero/" + hero + "/?t=2&c=" + dc[1] + "," + dc[2] + "&d=" + data;
+				$.getScript(url);
+			}).css({
+				margin: "0 80px 0 164px"
+			}).appendTo(header).find("a")
+				.attr("_title", "Gribouiller")
+				.attr("_desc", "Enregistrez des notes sur ce personnage. Le jour + cycle de la rédaction de la note seront stockés pour vous y retrouver plus facilement.")
+				.on("mouseover", Main.k.CustomTip)
+				.on("mouseout", Main.hideTip);*/
+			$('<div>')
+				.css({
+					position: 'relative'
+				})
+				.addClass('hero-details')
+				.appendTo(header);
+			$("<div>").addClass("clear").appendTo(header);
+			var r = $("<div>").addClass("right").css({
+				"margin-top": "10px"
+			}).appendTo(td);
+			var rbg = $("<div>").attr("id", "kProfileLogs").addClass("rightbg chattext").css({
+				resize: "none",
+				height: "280px",
+				"min-height": "0"
+			}).appendTo(r);
+
+			var close = $("<div>").css({
+				"text-align": "center",
+				margin: "10px 0 0"
+			}).appendTo(td);
+			Main.k.MakeButton("<img src='/img/icons/ui/pageleft.png' /> Retour au jeu", null, Main.k.Profiles.close).css("display", "inline-block").appendTo(close);
+
+		}
+		Main.k.Profiles.update();
+		Main.k.folding.display([null,null, "#profile_col"], "profiles", function() {
+		});
 	};
-	Main.k.Profiles.display = function(i) {
-		Main.k.Profiles.current = i;
-		if (Main.k.folding.displayed != "profiles") {
+	Main.k.Profiles.display = function(surname) {
+		console.group('Main.k.Profiles.display');
+		console.log('surname',surname);
+		console.log(Main.k.folding.displayed +' == "profiles" && ' + surname + ' == '+ Main.k.Profiles.current);
+		if (Main.k.folding.displayed == "profiles" && surname == Main.k.Profiles.current) {
+			Main.k.Profiles.close();
+		}else{
+			Main.k.Profiles.current = surname;
 			Main.k.Profiles.open();
+		}
+		console.groupEnd();
+	};
+	Main.k.Profiles.update = function() {
+		console.group('Main.k.Profiles.update');
+		if(Main.k.Profiles.current == null){
 			return;
 		}
+		console.log('Main.k.Profiles.current',Main.k.Profiles.current);
+		var $profile_col = $("#profile_col");
+		var $header = $profile_col.find(".header");
+		var $hero_details = $profile_col.find('.hero-details');
+
+		var $this = this;
+		var h = Main.k.h[Main.k.Profiles.current];
+
+		$hero_details.empty();
 
 		// Display hero
-		// TODO
+		$header.find("img").first().attr("src", "/img/art/char/" + h.dev_surname_long + ".jpg");
+		$header.find("h3 span").html(Main.k.getFullName(Main.k.Profiles.current));
+
+		var o_hero = this.get(Main.k.Profiles.current);
+		var $spy_button = $profile_col.find('.spy');
+		if($.inArray(Main.k.Profiles.current,Main.k.heroes_same_room) != -1){
+			$spy_button.show();
+		}else{
+			$spy_button.hide();
+		}
+		console.log('o_hero',o_hero);
+		if(o_hero != null){
+			var statuses = $("<div>").addClass("icons statuses");
+			$.each(o_hero.statuses,function(k,status){
+				$("<img>").attr("src", "/img/icons/ui/status/" + status.img + ".png")
+					.attr("height", "14").attr("alt", status.img)
+					.attr("_title", status.name)
+					.attr("_desc", status.desc)
+					.on("mouseover", Main.k.CustomTip)
+					.on("mouseout", Main.hideTip)
+					.appendTo(statuses);
+			});
+
+			var skills = $("<div>").addClass("icons skills");
+			$.each(o_hero.skills,function(k,skill){
+					var skilldom = $("<span>").addClass("skill").appendTo(skills);
+
+					$("<img>").attr("src", "/img/icons/skills/" + skill.img + ".png")
+						.attr("height", "19").attr("alt", skill.img)
+						.attr("_title", skill.name)
+						.attr("_desc", skill.desc + (Main.k.compInactiveMush[skill.img] ? "<p><strong>"+Main.k.text.gettext("Compétence inactive mush")+"</strong></p>" : ""))
+						.on("mouseover", Main.k.CustomTip)
+						.on("mouseout", Main.hideTip)
+						.appendTo(skilldom);
+
+					if (Main.k.compInactiveMush[skill.img]) {
+						$("<img>").attr("src", Main.k.servurl_badconker + "/img/non-mush.png").addClass("actmush")
+							.attr("width", "10").attr("height", "10")
+							.attr("_title", Main.k.text.gettext("Compétence inactive mush"))
+							.attr("_desc", Main.k.text.gettext("Cette compétence est inactive quand on est mush (source : Twinpedia)."))
+							.on("mouseover", Main.k.CustomTip)
+							.on("mouseout", Main.hideTip)
+							.appendTo(skilldom);
+					}
+			});
+
+			var titles = $("<div>")
+				.css({
+					position: 'absolute',
+					right: '5px',
+					top: 0
+				})
+				.addClass("titles");
+			console.info('o_hero.titles',o_hero.titles);
+			$.each(o_hero.titles,function(k,title){
+				console.log(title);
+				$("<img>").attr("src", "/img/icons/ui/" + title.img + ".png")
+					.attr("alt", title.img)
+					.attr("_title", title.name)
+					.attr("_desc", title.desc)
+					.on("mouseover", Main.k.CustomTip)
+					.on("mouseout", Main.hideTip)
+					.appendTo(titles);
+			});
+
+			$hero_details.append(skills);
+			$hero_details.append(statuses);
+			$hero_details.append(titles);
+		}else{
+			$("<div>")
+				.html(Main.k.text.gettext('Aucune donnée enregistrée'))
+				.css({
+					color:'#FFF'
+				})
+				.appendTo($hero_details);
+
+		}
+		$('<label />')
+			.attr('for','hero_details_dead')
+			.append(
+				$('<img>')
+					.attr({
+						src: '/img/icons/ui/dead.png',
+						alt: 'dead',
+						title: 'dead'
+					})
+			)
+			.append(
+				$('<input />')
+					.attr({
+						id: 'hero_details_dead',
+						type: 'checkbox'
+					})
+					.prop('checked',o_hero.dead)
+					.on('change',function(){
+						var o_hero = $this.get();
+						o_hero.dead = $(this).prop('checked');
+						$this.save(o_hero);
+					})
+			)
+			.appendTo($hero_details);
+
+		console.groupEnd();
 	};
-	// == /Profile Manager  =======================================
+	Main.k.Profiles.create = function(dev_surname){
+		console.info('Main.k.Profiles.create',dev_surname);
+		return {
+			'name': Main.k.h[dev_surname].name,
+			'dev_surname': dev_surname,
+			'short_desc': Main.k.h[dev_surname].short_desc,
+			'statuses': [],
+			'titles': [],
+			'skills': [],
+			'dead': false
+		};
+	};
+	Main.k.Profiles.save = function(profile){
+		console.group('Main.k.Profiles.save');
+		console.log('profile',profile);
+		var profiles = JSON.parse(localStorage.getItem('ctrlw_profiles'));
+		if(profiles == null){
+			profiles = {};
+		}
+		if(typeof(profile) == 'string'){
+			profile = this.convertHeroToProfile(Main.k.getHeroBySurname(profile));
+		}
+		profiles[profile.dev_surname] = profile;
+		localStorage.setItem('ctrlw_profiles',JSON.stringify(profiles));
+		console.groupEnd();
+		Main.k.MushUpdate();
+	};
+	Main.k.Profiles.get = function(hero){
+		if(typeof(hero) == 'undefined'){
+			hero = Main.k.Profiles.current;
+		}
+		var profiles = JSON.parse(localStorage.getItem('ctrlw_profiles'));
+		if(profiles != null && typeof(profiles[hero]) != 'undefined') {
+			console.groupEnd();
+			return profiles[hero]
+		}else{
+			console.groupEnd();
+			return Main.k.Profiles.create(hero);
+		}
+	};
+	Main.k.Profiles.convertHeroToProfile = function(o_hero_orig) {
+		console.group('convertHeroToSimpleHero');
+		console.trace();
+		console.log('o_hero_orig',o_hero_orig);
+		var profile = this.get(o_hero_orig.dev_surname);
+		if(profile == null){
+			profile = Main.k.Profiles.create(o_hero_orig.dev_surname);
+		}
+		profile.statuses = [];
+		profile.titles = [];
+		profile.skills = [];
+
+		profile.short_desc = o_hero_orig.short_desc;
+		profile.name = o_hero_orig.name;
+		profile.dev_surname = o_hero_orig.dev_surname;
+		profile.dead = false;
+		if (o_hero_orig.statuses) {
+			var $_statuses = o_hero_orig.statuses.iterator();
+			while( $_statuses.hasNext() ) {
+				/** @type {{img:string,desc:string}} **/
+				profile.statuses.push($_statuses.next());
+			}
+		}
+
+		var skills = $("<div>").addClass("icons skills");
+		if (o_hero_orig.skills) {
+			var $_skills = o_hero_orig.skills.iterator();
+			while( $_skills.hasNext() ) {
+				profile.skills.push($_skills.next());
+			}
+		}
+
+		var titles = $("<div>").addClass("titles");
+		if (o_hero_orig.titles) {
+			var $_titles = o_hero_orig.titles.iterator();
+			while( $_titles.hasNext() ) {
+				profile.titles.push($_titles.next());
+			}
+		}
+		console.groupEnd();
+		return profile;
+	};
+	Main.k.Profiles.close = function(){
+		console.log('Main.k.Profiles.close');
+		Main.k.Profiles.current = null;
+		Main.k.folding.displayGame();
+	};
+	Main.k.Profiles.clear = function(){
+		localStorage.removeItem('ctrlw_profiles');
+	};
+// == /Profiles Manager  =======================================
 
 
 
@@ -4770,14 +5189,37 @@ Main.k.tabs.playing = function() {
 				
 			},10);
 
-            //For scripts which use load event
-            $('img[data-async_src]').each(function(){
-               $(this).attr('src',$(this).attr('data-async_src'));
-               $(this).removeAttr('data-async_src');
-            });
-
 		});
-		
+
+		var regex = new RegExp('ext/mush.vg/([^/]+)/.*');
+		var result = regex.exec($('#ode').find('#input').attr('wallkey'));
+		console.warn('result',result);
+		if(result != null){
+			var game_id = result[1];
+			var storage_game_id = localStorage.getItem('ctrlw_game_id');
+			if(storage_game_id == null){
+				localStorage.setItem('ctrlw_game_id',game_id);
+				storage_game_id = game_id;
+			}
+
+			if(storage_game_id !=  game_id){
+				// new game
+				Main.k.MakeButton(Main.k.text.gettext("Nouvelle partie"), null, null, Main.k.text.gettext("Nouvelle partie"),
+					Main.k.text.gettext("Vous venez de commencer une nouvelle partie ? Utilisez ce bouton pour supprimer les informations de votre ancienne partie"))
+					.attr('id','button_new_game')
+					.appendTo(leftbar).find("a").on("mousedown", function(){
+						if(confirm(Main.k.text.gettext("Êtes vous sûr de vouloir effacer les informations de la partie précédente ?"))){
+							Main.k.Profiles.clear();
+							localStorage.setItem('ctrlw_game_id',game_id);
+							Main.k.MushUpdate();
+							$('#button_new_game').remove();
+						}
+
+					});
+			}
+
+		}
+
 		// Message Manager
 		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/archive.png' style='vertical-align: -20%' /> "+ Main.k.text.gettext("Msg Manager"), null, null, Main.k.text.gettext("Message Manager"),
 			Main.k.text.gettext("Ne manquez plus de messages ! Tous les topics avec des messages non lus seront mis en évidence, et vous pourrez effectuer des recherches par auteur ou contenu."))
@@ -4867,70 +5309,6 @@ Main.k.tabs.playing = function() {
 		// ----------------------------------- //
 	};
 	Main.k.MushAfterInit = function() {
-		/** @type {{skills:List}} **/
-		var hero;
-		var i;
-		// Display title list
-		var maxshown = 4;
-		var titles_list = $("#titles_list");
-
-		// Commanders
-		var commanders = $("<div>").appendTo(titles_list);
-		$("<img>").addClass("icon").attr("src", "/img/icons/ui/title_01.png")
-		/* Translators: This translation must be copied from the game. */
-		.attr("_title", Main.k.text.gettext("Commandant"))
-		/* Translators: This translation must be copied from the game. */
-		.attr("_desc", Main.k.text.gettext("Le Commandant décide des planètes que le Daedalus explorera."))
-		.on("mouseover", Main.k.CustomTip)
-		.on("mouseout", Main.hideTip)
-		.appendTo(commanders);
-		var commander_nb = 0;
-		for (i=0; commander_nb<maxshown && i<Main.k.HEROES.length; i++) {
-			hero = Main.k.COMMANDERS[i];
-			if (Main.k.ArrayContains(Main.k.AliveHeroes, hero)) {
-				commander_nb++;
-				$("<img>").addClass("body " + hero).attr("src", "/img/design/pixel.gif").css("cursor", "pointer").appendTo(commanders);
-			}
-		}
-
-		// Admins
-		var admins = $("<div>").appendTo(titles_list);
-		$("<img>").addClass("icon").attr("src", "/img/icons/ui/title_02.png")
-		/* Translators: This translation must be copied from the game. */
-		.attr("_title", Main.k.text.gettext("Administrateur NERON"))
-		/* Translators: This translation must be copied from the game. */
-		.attr("_desc", Main.k.text.gettext("Le responsable NERON semble avoir une certaine influence auprès de l'ordinateur de bord. Il est notamment le seul à avoir la possibilité de transmettre des messages à tout l'équipage."))
-		.on("mouseover", Main.k.CustomTip)
-		.on("mouseout", Main.hideTip)
-		.appendTo(admins);
-		var admin_nb = 0;
-		for (i=0; admin_nb<maxshown && i<Main.k.HEROES.length; i++) {
-			hero = Main.k.ADMINS[i];
-			if (Main.k.ArrayContains(Main.k.AliveHeroes, hero)) {
-				admin_nb++;
-				$("<img>").addClass("body " + hero).attr("src", "/img/design/pixel.gif").css("cursor", "pointer").appendTo(admins);
-			}
-		}
-
-		// Comms manager
-		var comms = $("<div>").appendTo(titles_list);
-		$("<img>").addClass("icon").attr("src", "/img/icons/ui/title_03.png")
-		/* Translators: This translation must be copied from the game. */
-		.attr("_title", Main.k.text.gettext("Responsable de Communications"))
-		/* Translators: This translation must be copied from the game. */
-		.attr("_desc", Main.k.text.gettext("Le Responsable de Communications est la seule personne habilitée à décider quels seront les téléchargements prioritaires du Centre de Communication."))
-		.on("mouseover", Main.k.CustomTip)
-		.on("mouseout", Main.hideTip)
-		.appendTo(comms);
-		var comms_nb = 0;
-		for (i=0; comms_nb<maxshown && i<Main.k.HEROES.length; i++) {
-			hero = Main.k.COMMS[i];
-			if (Main.k.ArrayContains(Main.k.AliveHeroes, hero)) {
-				comms_nb++;
-				$("<img>").addClass("body " + hero).attr("src", "/img/design/pixel.gif").css("cursor", "pointer").appendTo(comms);
-			}
-		}
-		// ----------------------------------- //
 
 
 		// Fix dimensions
@@ -4945,7 +5323,7 @@ Main.k.tabs.playing = function() {
 		// ----------------------------------- //
 	};
 	Main.k.MushUpdate = function() {
-		/** @type {{surname:string,statuses:List, titles:List}} **/
+		/** @type {{surname:string,statuses:List, titles:List, dev_surname:string}} **/
 		var hero;
 		var bubble, t, i, j;
 		var $usLeftbar = $(".usLeftbar");
@@ -4972,11 +5350,111 @@ Main.k.tabs.playing = function() {
 		// ----------------------------------- //
 		var $player_status = $('#player_status');
 		if($player_status.length == 0){
-            $player_status = $('<div id="player_status" style="position: absolute;right:6px;bottom:0"><img src="'+Main.k.statusImages['bronze']+'" alt="Bronze" title="Bronze" /></div>').appendTo('.sheetmain');
+			$player_status = $('<div id="player_status" style="position: absolute;right:6px;bottom:0"><img src="'+Main.k.statusImages['bronze']+'" alt="Bronze" title="Bronze" /></div>').appendTo('.sheetmain');
 		}
 		$player_status.html('<img src="'+Main.k.statusImages[Main.k.Game.data.player_status]+'" alt="'+Main.k.Game.data.player_status.capitalize()+'" title="'+Main.k.Game.data.player_status.capitalize()+'" />');
 		Main.k.displayRemainingCyclesToNextLevel();
-		
+
+		// Titles
+		// ----------------------------------- //
+		/** @type {{skills:List}} **/
+		// Display title list
+		var o_hero;
+		var maxshown = 4;
+		var titles_list = $("#titles_list");
+		titles_list.empty();
+
+		// Commanders
+		var commanders = $("<div>").appendTo(titles_list);
+		$("<img>").addClass("icon").attr("src", "/img/icons/ui/title_01.png")
+			/* Translators: This translation must be copied from the game. */
+			.attr("_title", Main.k.text.gettext("Commandant"))
+			/* Translators: This translation must be copied from the game. */
+			.attr("_desc", Main.k.text.gettext("Le Commandant décide des planètes que le Daedalus explorera."))
+			.on("mouseover", Main.k.CustomTip)
+			.on("mouseout", Main.hideTip)
+			.appendTo(commanders);
+		var commander_nb = 0;
+		for (i=0; commander_nb<maxshown && i<Main.k.COMMANDERS.length; i++) {
+			hero = Main.k.COMMANDERS[i];
+			if($.inArray(hero,Main.k.HEROES) != -1) {
+				o_hero = Main.k.Profiles.get(hero);
+				if (!o_hero.dead) {
+					commander_nb++;
+					$("<img>")
+						.addClass("body " + hero)
+						.attr("src", "/img/design/pixel.gif")
+						.css("cursor", "pointer")
+						.data('dev_surname',hero)
+						.on('click',function(){
+							Main.k.Profiles.display($(this).data('dev_surname'));
+						})
+						.appendTo(commanders);
+				}
+			}
+		}
+
+		// Admins
+		var admins = $("<div>").appendTo(titles_list);
+		$("<img>").addClass("icon").attr("src", "/img/icons/ui/title_02.png")
+			/* Translators: This translation must be copied from the game. */
+			.attr("_title", Main.k.text.gettext("Administrateur NERON"))
+			/* Translators: This translation must be copied from the game. */
+			.attr("_desc", Main.k.text.gettext("Le responsable NERON semble avoir une certaine influence auprès de l'ordinateur de bord. Il est notamment le seul à avoir la possibilité de transmettre des messages à tout l'équipage."))
+			.on("mouseover", Main.k.CustomTip)
+			.on("mouseout", Main.hideTip)
+			.appendTo(admins);
+		var admin_nb = 0;
+		for (i=0; admin_nb<maxshown && i<Main.k.ADMINS.length; i++) {
+			hero = Main.k.ADMINS[i];
+			if($.inArray(hero,Main.k.HEROES) != -1) {
+				o_hero = Main.k.Profiles.get(hero);
+				if (!o_hero.dead) {
+					admin_nb++;
+					$("<img>")
+						.addClass("body " + hero)
+						.attr("src", "/img/design/pixel.gif")
+						.css("cursor", "pointer")
+						.data('dev_surname',hero)
+						.on('click',function(){
+							Main.k.Profiles.display($(this).data('dev_surname'));
+						})
+						.appendTo(admins);
+				}
+			}
+		}
+
+		// Comms manager
+		var comms = $("<div>").appendTo(titles_list);
+		$("<img>").addClass("icon").attr("src", "/img/icons/ui/title_03.png")
+			/* Translators: This translation must be copied from the game. */
+			.attr("_title", Main.k.text.gettext("Responsable de Communications"))
+			/* Translators: This translation must be copied from the game. */
+			.attr("_desc", Main.k.text.gettext("Le Responsable de Communications est la seule personne habilitée à décider quels seront les téléchargements prioritaires du Centre de Communication."))
+			.on("mouseover", Main.k.CustomTip)
+			.on("mouseout", Main.hideTip)
+			.appendTo(comms);
+		var comms_nb = 0;
+		for (i=0; comms_nb<maxshown && i<Main.k.COMMS.length; i++) {
+			hero = Main.k.COMMS[i];
+			if($.inArray(hero,Main.k.HEROES) != -1){
+				o_hero = Main.k.Profiles.get(hero);
+				if(!o_hero.dead) {
+					comms_nb++;
+					$("<img>")
+						.addClass("body " + hero)
+						.attr("src", "/img/design/pixel.gif")
+						.css("cursor", "pointer")
+						.data('dev_surname',hero)
+						.on('click',function(){
+							Main.k.Profiles.display($(this).data('dev_surname'));
+						})
+						.appendTo(comms);
+				}
+			}
+		}
+		// ----------------------------------- //
+
 		// Heroes
 		// ----------------------------------- //
 		var heroes_list = $("#heroes_list").empty();
@@ -4987,7 +5465,26 @@ Main.k.tabs.playing = function() {
 		while ($it.hasNext()) {
 			hero = $it.next();
 			var display = false;
-			bubble = hero.surname.replace(/(\s)/g, "_").toLowerCase();
+			bubble = hero.dev_surname;
+			var $save = $('<a href="#"><img src="/img/icons/ui/awake.png" /></a>')
+				.css({
+					'font-size': 0,
+					position: 'absolute',
+					right: 0,
+					bottom: 0
+				})
+				.attr("_title", Main.k.text.gettext("Espionnage"))
+				.attr("_desc", Main.k.text.gettext("Vous êtes dans la même pièce que cette personne ; vous pouvez donc l'examiner de plus près.</p><p><strong>Cliquez ici pour enregistrer les compétences visibles, statuts publiques et titres de ce personnage.</strong>"))
+				.data('dev_surname',bubble)
+				.on("mouseover", Main.k.CustomTip)
+				.on("mouseout", Main.hideTip)
+				.click(function(e){
+					e.preventDefault();
+					var dev_surname = $(this).data('dev_surname');
+					Main.k.Profiles.save(dev_surname);
+					Main.k.Profiles.display(dev_surname);
+				});
+
 
 			var statuses = $("<div>").addClass("icons statuses");
 			if (hero.statuses) {
@@ -5016,7 +5513,7 @@ Main.k.tabs.playing = function() {
 					var skilldom = $("<span>").addClass("skill").appendTo(skills);
 
 					$("<img>").attr("src", "/img/icons/skills/" + skill.img + ".png")
-					.attr("height", "18").attr("alt", skill.img)
+					.attr("height", "19").attr("alt", skill.img)
 					.attr("_title", skill.name)
 					.attr("_desc", skill.desc + (Main.k.compInactiveMush[skill.img] ? "<p><strong>"+Main.k.text.gettext("Compétence inactive mush")+"</strong></p>" : ""))
 					.on("mouseover", Main.k.CustomTip)
@@ -5051,25 +5548,24 @@ Main.k.tabs.playing = function() {
 				}
 			}
 			var heroDiv = $("<div>").addClass("hero").appendTo(heroes_list);
-
-			$("<img>").addClass("body " + bubble)
-			.attr("src", "/img/design/pixel.gif")
-			.css("cursor", "pointer")
-			.attr("_hid", hero.id)
-			.attr("_title", hero.name)
-			.attr("_desc", hero.short_desc + "</p><p><strong>"+Main.k.text.gettext("Cliquez pour plus d'informations <br/>/!&#92; Fonctionnalité non codée")+"</strong>")
-			.on("mouseover", Main.k.CustomTip)
-			.on("mouseout", Main.hideTip)
-			.on("click", function() {
-				Main.k.Profiles.display($(this).attr("_hid"));
-			})
-			.appendTo(heroDiv);
+			console.log('hero',hero);
+			$("<img>")
+				.addClass("body " + bubble)
+				.attr("src", "/img/design/pixel.gif")
+				.css("cursor", "pointer")
+				.attr("data-dev_surname", hero.dev_surname)
+				.addHeroDescToolTip(hero.dev_surname)
+				.on("click", function() {
+					console.warn($(this).attr("data-dev_surname"));
+					Main.k.Profiles.display($(this).attr("data-dev_surname"));
+				})
+				.appendTo(heroDiv);
 
 			heroDiv.append(skills);
 			heroDiv.append(statuses);
 			heroDiv.append(titles);
+			heroDiv.append($save);
 
-			Main.k.AliveHeroes.push(bubble);
 		}
 		// Display unavailable heroes
 		var missingDiv = $("<div>").addClass("missingheroes").appendTo(heroes_list);
@@ -5078,7 +5574,7 @@ Main.k.tabs.playing = function() {
 			(function() {
 				var hero = Main.k.HEROES[i];
 				var h = Main.k.h[hero];
-				if (!Main.k.ArrayContains(Main.k.AliveHeroes, hero)) {
+				if (!Main.k.ArrayContains(Main.k.heroes_same_room, hero)) {
 					if (j % 5 == 0) $("<br/>").appendTo(missingDiv);
 					j++;
 					bubble = hero.replace(/(\s)/g, "_").toLowerCase();
@@ -5086,13 +5582,9 @@ Main.k.tabs.playing = function() {
 					$("<img>").addClass("body " + bubble)
 						.attr("src", "/img/design/pixel.gif")
 						.css("cursor", "pointer")
-						.attr("_hid", -1)
-						.attr("_title", Main.k.COMPLETE_SURNAME(hero))
-						.attr("_desc", h.short_desc + "</p><p><strong>" + Main.k.text.gettext("Cliquez pour plus d'informations <br/>/!&#92; Fonctionnalité non codée") + "</strong>")
-						.on("mouseover", Main.k.CustomTip)
-						.on("mouseout", Main.hideTip)
+						.addHeroDescToolTip(hero)
 						.on("click", function () {
-							Main.k.Profiles.display($(this).attr("_hid"), hero);
+							Main.k.Profiles.display(hero);
 						})
 						.appendTo(missingDiv);
 				}
@@ -5541,8 +6033,9 @@ Main.k.tabs.playing = function() {
 		}
 	};
 	Main.k.MushInitHeroes = function(){
-		Main.k.heroes = jQuery.extend(true, {}, Main.heroes);
-		var $it = Main.k.heroes.iterator();
+		Main.k.heroes = {};
+		Main.k.heroes_same_room = [];
+		var $it = Main.heroes.iterator();
 		var heroes = "";
 		var tab_heroes = jQuery.extend([], Main.k.HEROES);
 		var tab_heroes_same_room = [];
@@ -5550,12 +6043,17 @@ Main.k.tabs.playing = function() {
 			(function() {
 				/** @type {{surname:string}} **/
 				var hero = $it.next();
+
+				//Main.k.heroes[hero.dev_surname] = Main.k.convertHeroToSimpleHero(hero,null);
+
 				tab_heroes_same_room.push(Main.k.surnameToBubble(hero.surname));
 				tab_heroes = jQuery.grep(tab_heroes, function (value) {
 					return value != Main.k.surnameToBubble(hero.surname);
 				});
 			})();
+
 		}
+		Main.k.heroes_same_room = tab_heroes_same_room;
 		//replace heroes
 		$.each(Main.k.HEROES.replace, function(k,v){
 			var index;
@@ -5566,6 +6064,8 @@ Main.k.tabs.playing = function() {
 			}
 			Main.k.HEROES.splice(index,1);
 		});
+
+		console.info('Main.k.heroes',Main.k.heroes);
 	};
 	Main.k.MushInit();
 	Main.k.MushUpdate();
@@ -5855,11 +6355,8 @@ $.jGrowl.defaults.themeState = '';
 
 eval(GM_getResourceText('mush'));
 
-Main.k.initLang();
-Main.k.Options.init();
-Main.k.Game.init();
-Main.k.initData();
-Main.k.displayMainMenu();
+
+Main.k.init();
 
 // If ingame
 if (Main.k.playing && $("#topinfo_bar").length > 0) {
