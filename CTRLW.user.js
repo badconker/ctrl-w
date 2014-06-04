@@ -306,6 +306,11 @@ Main.k.initData = function() {
 	Main.k.statusImages['gold'] = 'http://imgup.motion-twin.com/twinoid/c/1/4e43e15c_4030.jpg';
 };
 Main.k.init = function(){
+	//hack for new session detection
+	if($('#menuBar').find('a').length < 4){
+		localStorage.setItem('ctrlw_newsession',1);
+	}
+
 	Main.k.initLang();
 	Main.k.Options.init();
 	Main.k.Game.init();
@@ -504,10 +509,19 @@ Main.k.MakeButton = function(content, href, onclick, tiptitle, tipdesc) {
 
 	return but;
 };
-Main.k.quickNotice = function(msg){
-	$.jGrowl("<img src='http://imgup.motion-twin.com/twinoid/8/5/ab7aced9_4030.jpg' height='16' alt='notice'/> "+msg);
-	
+Main.k.quickNotice = function(msg,type){
+	if(typeof(type) == 'undefined' || type == 'info'){
+		$.jGrowl("<img src='http://imgup.motion-twin.com/twinoid/8/5/ab7aced9_4030.jpg' height='16' alt='notice'/> "+msg);
+	}else if(type == 'error'){
+		$.jGrowl("<img src='http://imgup.motion-twin.com/twinoid/9/a/8429c028_4030.jpg' height='16' alt='notice'/> "+msg,{
+			theme:'ctrlw-error',
+			life: 6000
+		});
+	}
 };
+Main.k.quickNoticeError = function(msg){
+	Main.k.quickNotice(msg,'error');
+}
 /**
  * @return string
  */
@@ -1268,7 +1282,8 @@ Main.k.css.ingame = function() {
 	.usLeftbar img:hover { \
 		opacity: 1 !important;\
 	}\
-	.usLeftbar .but { \
+	.usLeftbar .but,\
+	.ctrlw.but{ \
 		margin: 0 2px;\
 	}\
 	.usLeftbar .but img { \
@@ -1585,6 +1600,23 @@ Main.k.css.ingame = function() {
 	#cdMainContent{\
 		position:relative;\
 	}\
+	.ctrlw_col input{\
+		color: #090A61;\
+	}\
+	.ctrlw-row-options{\
+		background: none repeat scroll 0 0 rgba(255, 255, 255, 0.1);\
+		border: 1px dashed #EEEEEE;\
+		clear: both;\
+		color: #EEEEEE;\
+		margin: 10px 20px;\
+		padding: 5px;\
+	}\
+	.ctrlw_col{\
+		color: rgb(9,10,97);\
+	}\
+	.ctrlw_col p{\
+		margin: 10px 0;\
+	}\
 	").appendTo("head");
 	if (navigator.userAgent.indexOf("Firefox")==-1) $(".usLeftbar .hero .icons").css("padding-right", "30px");
 };
@@ -1728,6 +1760,7 @@ Main.k.css.bubbles = function() {
 
 Main.k.tabs = {};
 Main.k.tabs.playing = function() {
+	var callbacks_storage_sync = $.Callbacks();
 	Main.k.css.ingame();
 
 	// Open links in a new tab
@@ -1861,7 +1894,7 @@ Main.k.tabs.playing = function() {
 			var $statuses = $("<p>").addClass("icons statuses").css('float','right');
 			$.each(o_hero.statuses,function(k,status){
 				$("<img>").attr("src", "/img/icons/ui/status/" + status.img + ".png")
-					.attr("height", "14").attr("alt", status.img)
+					.attr("height", "16").attr("alt", status.img)
 					.appendTo($statuses);
 			});
 			$desc.append($statuses);
@@ -3584,6 +3617,289 @@ Main.k.tabs.playing = function() {
 		Main.k.folding.display([null,null, "#about_col"], "about");
 	};
 
+	// == Sync Manager  ========================================
+	Main.k.Sync = {};
+	Main.k.Sync.initialized = false;
+	Main.k.Sync.push_timer = null;
+	Main.k.Sync.open = function(){
+		if(!Main.k.Sync.initialized){
+			this.initialized = true;
+			var td = $("<td>").addClass("chat_box ctrlw_col").css({
+				"padding-right": "6px",
+				"padding-top": "1px",
+				transform: "scale(0,1)"
+			}).attr("id", "sync_col").appendTo($("table.inter tr").first());
+
+			var regex = new RegExp('[0-9]+$');
+			var result = regex.exec($('#tid_openRight').attr('href'));
+			var sync_key = localStorage.getItem('ctrlw_sync_key');
+			$('<p>').addClass('ctrlw-row-options').append(
+				$('<label>')
+					.html('<span style="display: inline-block; width:10%">'+Main.k.text.gettext("Clé :")+'</span>')
+					.append(
+						$('<input>')
+							.attr({
+								type: 'text',
+								placeholder: Main.k.text.gettext('Collez votre clé ici'),
+								id:'ctrlw-sync-key'
+							})
+							.css({
+								'text-align': 'center',
+								display: 'inline-block',
+								width: '80%',
+								'margin-right': '10px'
+							})
+							.val(sync_key != null ? sync_key : '')
+							.on('keyup',function(){
+
+								var val = $(this).val();
+								if(typeof($(this).data('val')) == 'undefined' && val != ''){
+									$(this).data('val',val);
+								}
+								var old_val = $(this).data('val');
+								console.warn(old_val, val,localStorage.getItem('ctrlw_sync_key'));
+								if(val.length > 20 && localStorage.getItem('ctrlw_sync_key') != val && old_val != val){
+									var $status_sync = $('.status_sync');
+									$status_sync.hide();
+									$('.status_sync_load').show();
+									$.when(Main.k.Sync.pull(val) ).then(function(){
+										localStorage.setItem('ctrlw_sync_key',val);
+										$status_sync.hide();
+										$('.status_sync_ok').show();
+									}).fail(function(){
+										$status_sync.hide();
+										$('.status_sync_ko').show();
+
+									});
+
+								}
+								$(this).data('val',val);
+							})
+					)
+					.append(
+						$('<div>')
+							.css({
+								display: 'inline-block',
+								position: 'relative',
+								top: '2px'
+							})
+							.append(
+								$('<img>')
+									.attr({
+										'src': '/img/icons/ui/alert.png'
+									})
+									.addClass('status_sync status_sync_ko')
+									.css({
+										'margin-left': '5px',
+										display: (sync_key != null ? 'none' : 'inline'),
+										position: 'relative',
+										top: '-2px'
+									})
+							)
+							.append(
+								$('<img>')
+									.attr({
+										'src': '/img/icons/ui/reported.png'
+									})
+									.addClass('status_sync status_sync_ok')
+									.css({
+										'margin-left': '5px',
+										display: (sync_key == null ? 'none' : 'inline')
+									})
+							)
+							.append('<img class="cdLoading status_sync status_sync_load" src="/img/icons/ui/loading1.gif" alt="loading..." style="display:none"/>')
+
+					)
+			)
+			.appendTo(td);
+			$('<p>')
+				.css({
+					'text-align': 'center'
+				})
+				.append(
+					Main.k.MakeButton("<img src='/img/icons/ui/neron_fluw.png' /> "+Main.k.text.gettext("Générer une nouvelle clé"), null, Main.k.Sync.createKey)
+						.css("display", "inline-block")
+						.addClass('ctrlw')
+				)
+			.appendTo(td);
+			$('<p>')
+				.css({
+					'text-align': 'center'
+				})
+				.append(
+				Main.k.MakeButton("<img src='http://imgup.motion-twin.com/twinoid/6/4/6666e528_4030.jpg' /> "+Main.k.text.gettext("Supprimer la clé"), null, function(){
+						if(confirm(Main.k.text.gettext('Si vous supprimer la clé, vous ne pourrez plus synchronier vos données, voulez vous continuer ?'))){
+							$('.status_sync').hide();
+							$('.status_sync_ko').show();
+							localStorage.removeItem('ctrlw_sync_key');
+							$('#ctrlw-sync-key').val('');
+						}
+					})
+					.css("display", "inline-block")
+					.addClass('ctrlw')
+				)
+				.appendTo(td);
+			$('<p class="info">')
+				.html(Main.k.text.gettext("Afin de pouvoir synchroniser vos données vous devez rentrer votre clé d'authentification. " +
+					"Si vous n'en n'avez pas, cliquez sur le bouton \"Générer une nouvelle clé\""))
+				.appendTo(td);
+			$('<p class="warning">'+Main.k.text.gettext("Conservez précieusement votre clé (dans votre bloc-note Twinoid par exemple) afin de pouvoir récupérer vos données.")+'<p>')
+				.appendTo(td);
+		}
+		Main.k.folding.display([null,null, "#sync_col"], "sync", function() {
+		});
+	};
+	Main.k.Sync.display = function(surname) {
+		if (Main.k.folding.displayed == "sync") {
+			Main.k.Sync.close();
+		}else{
+			Main.k.Sync.open();
+		}
+	};
+	Main.k.Sync.close = function(){
+		Main.k.folding.displayGame();
+	};
+	Main.k.Sync.createKey = function(){
+		var $status_sync = $('.status_sync');
+		$status_sync.hide();
+		$('.status_sync_load').show();
+		$.ajax({
+			url :Main.k.servurl + "/sync/createkey",
+			dataType : 'jsonp',
+			success: function(json) {
+				localStorage.setItem('ctrlw_sync_key',json.key);
+				$('#ctrlw-sync-key').val(json.key);
+				$status_sync.hide();
+				$('.status_sync_ok').show();
+				Main.k.Sync.push();
+			},
+			error: function(xhr,statut,http){
+				var message = JSON.parse(xhr.responseText).message;
+				$status_sync.hide();
+				$('.status_sync_ko').show();
+				Main.k.quickNoticeError('Une erreur s\'est produite : '+ message);
+				console.warn(xhr,statut,http);
+			}
+		});
+	};
+	Main.k.Sync.pull = function(key) {
+		var button = $('#ctrlw_sync_button');
+		button.find('img').hide();
+		button.find('.ctrlw_down').show();
+		var dfd = new jQuery.Deferred();
+		if(typeof(key) == 'undefined'){
+			key = localStorage.getItem('ctrlw_sync_key');
+		}
+		if(key == null){
+			dfd.reject('key_null');
+		}else{
+			$.ajax({
+				url :Main.k.servurl + "/sync/pull",
+				type: 'POST',
+				data :{
+					last_update_time : localStorage.getItem('ctrlw_sync_last_update_time'),
+					key: key
+				},
+				dataType : 'jsonp',
+				success: function(json) {
+					if(json.error == 'auth'){
+						Main.k.quickNoticeError('Cette clé n\'existe pas');
+						dfd.reject('auth');
+					}else{
+						if(json.status == 'outdated'){
+							console.warn(JSON.parse(json.sync.profiles));
+							localStorage.setItem('ctrlw_profiles',json.sync.profiles);
+							Main.k.quickNotice(Main.k.text.gettext('Mise à jour des données locales'));
+							Main.k.MushUpdate();
+						}
+						dfd.resolve();
+					}
+
+				},
+				error: function(xhr,statut,http){
+					alert('error Main.k.Sync.pull');
+					console.warn(xhr,statut,http);
+					dfd.reject('ajax_error');
+
+
+				},
+				complete:function(){
+					button.find('img').hide();
+					button.find('.ctrlw_normal').show();
+				}
+			});
+		}
+
+		return dfd.promise();
+	};
+	Main.k.Sync.push = function() {
+		var button = $('#ctrlw_sync_button');
+		button.find('img').hide();
+		button.find('.ctrlw_up').show();
+		var key = localStorage.getItem('ctrlw_sync_key');
+		if(key == null){
+			return;
+		}
+		GM_xmlhttpRequest({
+			method: "POST",
+			url: Main.k.servurl + "/sync/push",
+			data : $.param({
+				last_update_time : localStorage.getItem('ctrlw_sync_last_update_time'),
+				mush_time: $('#input').attr('now'),
+				profiles: localStorage.getItem('ctrlw_profiles'),
+				key: key
+			}),
+			headers: {
+				"Content-Type": "application/x-www-form-urlencoded"
+			},
+			onload: function(response) {
+				console.warn('response',response);
+
+				if(response.status == 200){
+					var json = JSON.parse(response.responseText);
+					console.warn('json',json);
+					if(json.status == 'ok'){
+						localStorage.setItem('ctrlw_sync_last_update_time',$('#input').attr('now'));
+					}else{
+						console.warn('json.status',json.status);
+						if(typeof(json.status) !='undefined'){
+							if(typeof(json.error) !='undefined' && json.error == 'auth'){
+								Main.k.quickNoticeError(Main.k.text.gettext('Synchronisation impossible, clé incorrecte'));
+							}else if(confirm(Main.k.text.gettext('Vos données locales sont plus anciennes que les données du serveurs, voulez vous les écraser ?'))){
+								Main.k.Sync.pull();
+							}
+						}
+					}
+					button.find('img').hide();
+					button.find('.ctrlw_normal').show();
+				}else{
+					Main.k.quickNoticeError('Sync push, fatal error')
+				}
+
+
+			},
+			onerror: function(xhr,statut,http){
+				alert('error Main.k.Sync.push');
+				console.warn(xhr,statut,http);
+			}
+		});
+	};
+	Main.k.Sync.pushDelay = function() {
+		var button = $('#ctrlw_sync_button');
+		button.find('img').hide();
+		button.find('.ctrlw_wheels').show();
+		clearTimeout(Main.k.Sync.push_timer);
+		Main.k.Sync.push_timer = setTimeout(function(){
+			button.find('img').hide();
+			button.find('.ctrlw_normal').show();
+			Main.k.Sync.push();
+			Main.k.Sync.push_timer = null;
+		},10 * 1000);
+	};
+	callbacks_storage_sync.add(Main.k.Sync.pushDelay);
+
+
+	// == /Sync Manager  =======================================
 
 	// == Profiles Manager  ========================================
 	Main.k.Profiles = {};
@@ -3629,7 +3945,7 @@ Main.k.tabs.playing = function() {
 				top: "2px",
 				right: "3px"
 			})
-				.addClass('spy')
+				.addClass('spy ctrlw')
 				.appendTo($("h3",header)).find("a")
 				.attr("_title", Main.k.text.gettext("Espionnage"))
 				.attr("_desc", Main.k.text.gettext("Vous êtes dans la même pièce que cette personne ; vous pouvez donc l'examiner de plus près.</p><p><strong>Cliquez ici pour enregistrer les compétences visibles, statuts publiques et titres de ce personnage.</strong>"))
@@ -3735,7 +4051,7 @@ Main.k.tabs.playing = function() {
 			var statuses = $("<div>").addClass("icons statuses");
 			$.each(o_hero.statuses,function(k,status){
 				$("<img>").attr("src", "/img/icons/ui/status/" + status.img + ".png")
-					.attr("height", "14").attr("alt", status.img)
+					.attr("height", "16").attr("alt", status.img)
 					.attr("_title", status.name)
 					.attr("_desc", status.desc)
 					.on("mouseover", Main.k.CustomTip)
@@ -3825,7 +4141,6 @@ Main.k.tabs.playing = function() {
 		console.groupEnd();
 	};
 	Main.k.Profiles.create = function(dev_surname){
-		console.info('Main.k.Profiles.create',dev_surname);
 		return {
 			'name': Main.k.h[dev_surname].name,
 			'dev_surname': dev_surname,
@@ -3848,6 +4163,7 @@ Main.k.tabs.playing = function() {
 		}
 		profiles[profile.dev_surname] = profile;
 		localStorage.setItem('ctrlw_profiles',JSON.stringify(profiles));
+		callbacks_storage_sync.fire();
 		console.groupEnd();
 		Main.k.MushUpdate();
 	};
@@ -3913,6 +4229,7 @@ Main.k.tabs.playing = function() {
 	};
 	Main.k.Profiles.clear = function(){
 		localStorage.removeItem('ctrlw_profiles');
+		callbacks_storage_sync.fire();
 	};
 // == /Profiles Manager  =======================================
 
@@ -5116,6 +5433,11 @@ Main.k.tabs.playing = function() {
 
 	Main.k.AliveHeroes = [];
 	Main.k.MushInit = function() {
+		if (localStorage.getItem('ctrlw_newsession') != null) {
+			localStorage.removeItem('ctrlw_newsession');
+			Main.k.Sync.pull();
+		}
+
 		Main.k.AliveHeroes = [];
 		Main.k.MushInitHeroes();
 
@@ -5137,87 +5459,81 @@ Main.k.tabs.playing = function() {
 		// Add left bar
 		// ----------------------------------- //
 		var leftbar = $("<div>").addClass("usLeftbar").insertBefore($content);
-		Main.k.MakeButton("<img src='" + Main.k.servurl + "/img/ctrlw_sml.png' height='16' /> " +  Main.k.version, null, Main.k.About.open, Main.k.text.gettext("à propos").capitalize(), Main.k.text.gettext("Cliquez ici pour plus d'informations sur le script.")).css({
+		Main.k.MakeButton("<img src='" + Main.k.servurl + "/img/ctrlw_sml.png' height='16' /> " + Main.k.version, null, Main.k.About.open, Main.k.text.gettext("à propos").capitalize(), Main.k.text.gettext("Cliquez ici pour plus d'informations sur le script.")).css({
 			display: "inline-block",
 			margin: "0 auto 10px"
 		}).appendTo($("<div>").css("text-align", "center").appendTo(leftbar));
 		// ----------------------------------- //
 
+		// Sync Push on leave
+		// ----------------------------------- //
+		$(window).bind('beforeunload', function(event){
+			console.warn('beforeunload',Main.k.Sync.push_timer);
+			if(Main.k.Sync.push_timer != null){
+				return true;
+			}
+
+		});
+		// ----------------------------------- //
 
 		// Misc tools
 		// ----------------------------------- //
 		$("<h3>").addClass("first").html(Main.k.text.gettext("outils").capitalize()).appendTo(leftbar);
 
 		// Update Manager
-		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/new.png' /> "+ Main.k.text.gettext("Mise à jour"), null, null, Main.k.text.gettext("Mise à jour du script"),
+		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/new.png' /> " + Main.k.text.gettext("Mise à jour"), null, null, Main.k.text.gettext("Mise à jour du script"),
 			"Une nouvelle version du script CTRL+W est disponible.")
-		.appendTo(leftbar).attr("id", "updatebtn").css("display", "none").find("a").on("mousedown", Main.k.UpdateDialog);
-		
-		
+			.appendTo(leftbar).attr("id", "updatebtn").css("display", "none").find("a").on("mousedown", Main.k.UpdateDialog);
+
+
 		//Integration with others scripts
-		$( window ).load(function() {
-			setTimeout(function(){
+		$(window).load(function () {
+			setTimeout(function () {
 				var $mushUSMenu = $('#mushUSMenu');
 				//Mush Helper script
-				if($mushUSMenu.length > 0){
+				if ($mushUSMenu.length > 0) {
 					var wrapper_mhs = $mushUSMenu.parents(":eq(2)");
-					wrapper_mhs.css('left', '-'+(wrapper_mhs.width())+'px');
+					wrapper_mhs.css('left', '-' + (wrapper_mhs.width()) + 'px');
 					var arrow = wrapper_mhs.find('.arrowright');
-					arrow.attr('class','arrowleft');
+					arrow.attr('class', 'arrowleft');
 					arrow.off('click');
-					arrow.toggle(function(){
-						wrapper_mhs.animate({left:0},500);
-					},function(){
-						wrapper_mhs.animate({left:'-'+wrapper_mhs.width()+'px'},500);
+					arrow.toggle(function () {
+						wrapper_mhs.animate({left: 0}, 500);
+					}, function () {
+						wrapper_mhs.animate({left: '-' + wrapper_mhs.width() + 'px'}, 500);
 					});
-					
-					Main.k.MakeButton("<img src='http://mush.twinoid.com/img/icons/ui/talkie.png' style='vertical-align: -20%' /> "+ 'MHS', null, null, 'Mush Helper Script'
-					).insertAfter($('#updatebtn')).find("a").on("mousedown", function(){
-						wrapper_mhs.find('.arrowleft').trigger('click');
-					});
+
+					Main.k.MakeButton("<img src='http://mush.twinoid.com/img/icons/ui/talkie.png' style='vertical-align: -20%' /> " + 'MHS', null, null, 'Mush Helper Script'
+					).insertAfter($('#updatebtn')).find("a").on("mousedown", function () {
+							wrapper_mhs.find('.arrowleft').trigger('click');
+						});
 				}
-				
+
 				var s_astro_icon = '';
-				if($('#astro_maj_inventaire').length > 0){
+				if ($('#astro_maj_inventaire').length > 0) {
 					var img_astro = $('<img class="" src="/img/icons/ui/pa_comp.png" height="14"/>');
 					var $share_inventory_button = $('#share-inventory-button');
 					$share_inventory_button.find('a img').remove();
 					$share_inventory_button.find('a').prepend(img_astro);
 					img_astro.addClass('blink-limited');
-					
+
 				}
-				
-			},10);
+
+			}, 10);
 
 		});
+		if (Main.k.Game.data.day < 3){
+			Main.k.MakeButton(Main.k.text.gettext("Nouvelle partie ?"), null, null, Main.k.text.gettext("Nouvelle partie"),
+				Main.k.text.gettext("Vous venez de commencer une nouvelle partie ? Utilisez ce bouton pour supprimer les informations de votre ancienne partie"))
+				.attr('id', 'button_new_game')
+				.appendTo(leftbar).find("a").on("mousedown", function () {
+					if (confirm(Main.k.text.gettext("Êtes vous sûr de vouloir effacer les informations de la partie précédente ?"))) {
+						Main.k.Profiles.clear();
+						Main.k.MushUpdate();
+						$('#button_new_game').remove();
+					}
 
-		var regex = new RegExp('ext/mush.vg/([^/]+)/.*');
-		var result = regex.exec($('#ode').find('#input').attr('wallkey'));
-		console.warn('result',result);
-		if(result != null){
-			var game_id = result[1];
-			var storage_game_id = localStorage.getItem('ctrlw_game_id');
-			if(storage_game_id == null){
-				localStorage.setItem('ctrlw_game_id',game_id);
-				storage_game_id = game_id;
-			}
-
-			if(storage_game_id !=  game_id){
-				// new game
-				Main.k.MakeButton(Main.k.text.gettext("Nouvelle partie"), null, null, Main.k.text.gettext("Nouvelle partie"),
-					Main.k.text.gettext("Vous venez de commencer une nouvelle partie ? Utilisez ce bouton pour supprimer les informations de votre ancienne partie"))
-					.attr('id','button_new_game')
-					.appendTo(leftbar).find("a").on("mousedown", function(){
-						if(confirm(Main.k.text.gettext("Êtes vous sûr de vouloir effacer les informations de la partie précédente ?"))){
-							Main.k.Profiles.clear();
-							localStorage.setItem('ctrlw_game_id',game_id);
-							Main.k.MushUpdate();
-							$('#button_new_game').remove();
-						}
-
-					});
-			}
-
+				});
 		}
 
 		// Message Manager
@@ -5228,6 +5544,16 @@ Main.k.tabs.playing = function() {
 		// Options Manager
 		Main.k.MakeButton("<img src='/img/icons/ui/pa_eng.png' style='vertical-align: -20%' /> "+ Main.k.text.gettext("Options"), null, null, Main.k.text.gettext("Gérer les options"), Main.k.text.gettext("Certaines fonctionnalitées de Ctrl+W sont configurables. Cliquez ici pour spécifier vos préférences."))
 		.appendTo(leftbar).find("a").on("mousedown", Main.k.Options.open);
+
+		// Sync Manager
+		Main.k.MakeButton("<img src='/img/icons/ui/comm.png' style='vertical-align: -20%' class=\"ctrlw_normal\"/>" +
+				"<img src='http://imgup.motion-twin.com/twinoid/a/c/1d84a74e_4030.jpg' style='vertical-align: -20%;display:none' class=\"ctrlw_down\" />" +
+				"<img src='http://imgup.motion-twin.com/twinoid/8/f/0c596094_4030.jpg' style='vertical-align: -20%;display:none' class=\"ctrlw_up\" /> "+
+				"<img src='http://imgup.motion-twin.com/twinoid/3/a/830c06f5_4030.jpg' style='vertical-align: -20%;display:none' class=\"ctrlw_wheels\" /> "+
+				Main.k.text.gettext("Sync"), null, null, Main.k.text.gettext("Sync"), Main.k.text.gettext("Permet de synchroniser les données du script entre vos différents navigateurs")
+			)
+			.attr('id','ctrlw_sync_button')
+			.appendTo(leftbar).find("a").on("mousedown", Main.k.Sync.display);
 
 		// Page reloader
 		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/refresh.png' style='vertical-align: -20%' /> "+ Main.k.text.gettext("Actualiser"), null, null, Main.k.text.gettext("Actualiser"),
