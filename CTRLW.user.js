@@ -3840,6 +3840,7 @@ Main.k.tabs.playing = function() {
 		if(key == null){
 			return;
 		}
+		console.info('xhr Sync.push');
 		GM_xmlhttpRequest({
 			method: "POST",
 			url: Main.k.servurl + "/sync/push",
@@ -3951,36 +3952,7 @@ Main.k.tabs.playing = function() {
 				.attr("_desc", Main.k.text.gettext("Vous êtes dans la même pièce que cette personne ; vous pouvez donc l'examiner de plus près.</p><p><strong>Cliquez ici pour enregistrer les compétences visibles, statuts publiques et titres de ce personnage.</strong>"))
 				.on("mouseover", Main.k.CustomTip)
 				.on("mouseout", Main.hideTip);
-			/*$("<textarea>").css({
-				margin: "5px auto",
-				display: "block",
-				width: "230px",
-				height: "60px",
-				resize: "none",
-				border: "1px solid #333",
-				padding: "2px 4px",
-				color: "#555",
-				"font-size": "12px"
-			}).appendTo(header);
-			Main.k.MakeButton("<img src='/img/icons/ui/conceptor.png' /> Gribouiller",null,function(event) {
-				if (Main.k.pid == "") return;
-				var txt = $(event.target).closest(".header").find("textarea").first();
-				var pid = Main.k.pid;
-				var hero = Main.k.Profiles.current;
-				var data = encodeURIComponent(txt.val());
-				var dc = /([0-9]+)[^0-9]+([0-9]+)/.exec($("#kCalendar p").text());
 
-				txt.val("");
-				/*var url = Main.k.website2 + "/s/" + Main.k.scriptid + "/" + Main.k.scriptkey + "/p/" +
-					pid + "/sethero/" + hero + "/?t=2&c=" + dc[1] + "," + dc[2] + "&d=" + data;
-				$.getScript(url);
-			}).css({
-				margin: "0 80px 0 164px"
-			}).appendTo(header).find("a")
-				.attr("_title", "Gribouiller")
-				.attr("_desc", "Enregistrez des notes sur ce personnage. Le jour + cycle de la rédaction de la note seront stockés pour vous y retrouver plus facilement.")
-				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip);*/
 			$('<div>')
 				.css({
 					position: 'relative'
@@ -4051,7 +4023,7 @@ Main.k.tabs.playing = function() {
 			var statuses = $("<div>").addClass("icons statuses");
 			$.each(o_hero.statuses,function(k,status){
 				$("<img>").attr("src", "/img/icons/ui/status/" + status.img + ".png")
-					.attr("height", "16").attr("alt", status.img)
+					.attr("alt", status.img)
 					.attr("_title", status.name)
 					.attr("_desc", status.desc)
 					.on("mouseover", Main.k.CustomTip)
@@ -5896,6 +5868,9 @@ Main.k.tabs.playing = function() {
 		// Display unavailable heroes
 		var missingDiv = $("<div>").addClass("missingheroes").appendTo(heroes_list);
 		j=0;
+		var $div_hero;
+		var a_divs_heroes_alive = [];
+		var a_divs_heroes_dead = [];
 		for (i=0; i<Main.k.HEROES.length; i++) {
 			(function() {
 				var hero = Main.k.HEROES[i];
@@ -5904,18 +5879,42 @@ Main.k.tabs.playing = function() {
 					if (j % 5 == 0) $("<br/>").appendTo(missingDiv);
 					j++;
 					bubble = hero.replace(/(\s)/g, "_").toLowerCase();
-
-					$("<img>").addClass("body " + bubble)
-						.attr("src", "/img/design/pixel.gif")
-						.css("cursor", "pointer")
-						.addHeroDescToolTip(hero)
-						.on("click", function () {
-							Main.k.Profiles.display(hero);
+					o_hero = Main.k.Profiles.get(hero);
+					$div_hero = $('<div>').css({
+							display: 'inline-block',
+							position: 'relative'
 						})
-						.appendTo(missingDiv);
+						.append(
+							$("<img>").addClass("body " + bubble)
+								.attr("src", "/img/design/pixel.gif")
+								.css("cursor", "pointer")
+								.addHeroDescToolTip(hero)
+								.on("click", function () {
+									Main.k.Profiles.display(hero);
+								})
+						);
+					if(o_hero.dead == true){
+						a_divs_heroes_dead.push($div_hero);
+						$('<img>').attr({
+								src: '/img/icons/ui/dead.png'
+							})
+							.css({
+								position: 'absolute',
+								bottom: '-6px',
+								right: '-2px',
+								'pointer-events': 'none'
+							})
+							.appendTo($div_hero);
+					}else{
+						a_divs_heroes_alive.push($div_hero);
+
+					}
 				}
 			})();
 		}
+		$.each($.merge(a_divs_heroes_alive,a_divs_heroes_dead),function(k,$div){
+			missingDiv.append($div);
+		});
 		// ----------------------------------- //
 
 
