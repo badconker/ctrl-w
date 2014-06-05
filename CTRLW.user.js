@@ -3651,27 +3651,28 @@ Main.k.tabs.playing = function() {
 							})
 							.data('val',localStorage.getItem('ctrlw_sync_key'))
 							.val(sync_key != null ? sync_key : '')
-							.on('keyup',function(){
-
-								var val = $(this).val();
-								var old_val = $(this).data('val');
-								console.warn(old_val, val,localStorage.getItem('ctrlw_sync_key'));
-								if(val.length > 20 && localStorage.getItem('ctrlw_sync_key') != val && old_val != val){
-									var $status_sync = $('.status_sync');
-									$status_sync.hide();
-									$('.status_sync_load').show();
-									$.when(Main.k.Sync.pull(val) ).then(function(){
-										localStorage.setItem('ctrlw_sync_key',val);
+							.on('paste',function(elem){
+								var $this = $(this);
+								setTimeout(function () {
+									var val = $this.val();
+									var old_val = $this.data('val');
+									if (val.length > 20 && localStorage.getItem('ctrlw_sync_key') != val && old_val != val) {
+										var $status_sync = $('.status_sync');
 										$status_sync.hide();
-										$('.status_sync_ok').show();
-									}).fail(function(){
-										$status_sync.hide();
-										$('.status_sync_ko').show();
+										$('.status_sync_load').show();
+										$.when(Main.k.Sync.pull(val)).then(function () {
+											localStorage.setItem('ctrlw_sync_key', val);
+											$status_sync.hide();
+											$('.status_sync_ok').show();
+										}).fail(function () {
+											$status_sync.hide();
+											$('.status_sync_ko').show();
 
-									});
+										});
 
-								}
-								$(this).data('val',val);
+									}
+									$this.data('val', val);
+								},10);
 							})
 					)
 					.append(
