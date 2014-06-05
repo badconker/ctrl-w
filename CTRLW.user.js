@@ -12,7 +12,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.35b6
+// @version     0.35b7
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -3649,13 +3649,11 @@ Main.k.tabs.playing = function() {
 								width: '80%',
 								'margin-right': '10px'
 							})
+							.data('val',localStorage.getItem('ctrlw_sync_key'))
 							.val(sync_key != null ? sync_key : '')
 							.on('keyup',function(){
 
 								var val = $(this).val();
-								if(typeof($(this).data('val')) == 'undefined' && val != ''){
-									$(this).data('val',val);
-								}
 								var old_val = $(this).data('val');
 								console.warn(old_val, val,localStorage.getItem('ctrlw_sync_key'));
 								if(val.length > 20 && localStorage.getItem('ctrlw_sync_key') != val && old_val != val){
