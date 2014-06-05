@@ -3841,49 +3841,51 @@ Main.k.tabs.playing = function() {
 			return;
 		}
 		console.info('xhr Sync.push');
-		GM_xmlhttpRequest({
-			method: "POST",
-			url: Main.k.servurl + "/sync/push",
-			data : $.param({
-				last_update_time : localStorage.getItem('ctrlw_sync_last_update_time'),
-				mush_time: $('#input').attr('now'),
-				profiles: localStorage.getItem('ctrlw_profiles'),
-				key: key
-			}),
-			headers: {
-				"Content-Type": "application/x-www-form-urlencoded"
-			},
-			onload: function(response) {
-				console.warn('response',response);
+		setTimeout(function() {
+			GM_xmlhttpRequest({
+				method: "POST",
+				url: Main.k.servurl + "/sync/push",
+				data : $.param({
+					last_update_time : localStorage.getItem('ctrlw_sync_last_update_time'),
+					mush_time: $('#input').attr('now'),
+					profiles: localStorage.getItem('ctrlw_profiles'),
+					key: key
+				}),
+				headers: {
+					"Content-Type": "application/x-www-form-urlencoded"
+				},
+				onload: function(response) {
+					console.warn('response',response);
 
-				if(response.status == 200){
-					var json = JSON.parse(response.responseText);
-					console.warn('json',json);
-					if(json.status == 'ok'){
-						localStorage.setItem('ctrlw_sync_last_update_time',$('#input').attr('now'));
-					}else{
-						console.warn('json.status',json.status);
-						if(typeof(json.status) !='undefined'){
-							if(typeof(json.error) !='undefined' && json.error == 'auth'){
-								Main.k.quickNoticeError(Main.k.text.gettext('Synchronisation impossible, clé incorrecte'));
-							}else if(confirm(Main.k.text.gettext('Vos données locales sont plus anciennes que les données du serveurs, voulez vous les écraser ?'))){
-								Main.k.Sync.pull();
+					if(response.status == 200){
+						var json = JSON.parse(response.responseText);
+						console.warn('json',json);
+						if(json.status == 'ok'){
+							localStorage.setItem('ctrlw_sync_last_update_time',$('#input').attr('now'));
+						}else{
+							console.warn('json.status',json.status);
+							if(typeof(json.status) !='undefined'){
+								if(typeof(json.error) !='undefined' && json.error == 'auth'){
+									Main.k.quickNoticeError(Main.k.text.gettext('Synchronisation impossible, clé incorrecte'));
+								}else if(confirm(Main.k.text.gettext('Vos données locales sont plus anciennes que les données du serveurs, voulez vous les écraser ?'))){
+									Main.k.Sync.pull();
+								}
 							}
 						}
+						button.find('img').hide();
+						button.find('.ctrlw_normal').show();
+					}else{
+						Main.k.quickNoticeError('Sync push, fatal error')
 					}
-					button.find('img').hide();
-					button.find('.ctrlw_normal').show();
-				}else{
-					Main.k.quickNoticeError('Sync push, fatal error')
+
+
+				},
+				onerror: function(xhr,statut,http){
+					alert('error Main.k.Sync.push');
+					console.warn(xhr,statut,http);
 				}
-
-
-			},
-			onerror: function(xhr,statut,http){
-				alert('error Main.k.Sync.push');
-				console.warn(xhr,statut,http);
-			}
 		});
+		}, 0);
 	};
 	Main.k.Sync.pushDelay = function() {
 		var button = $('#ctrlw_sync_button');
