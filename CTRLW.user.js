@@ -12,7 +12,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.35b8
+// @version     0.35b9
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -586,6 +586,8 @@ Main.k.displayRemainingCyclesToNextLevel = function (){
 			var i_daily_cycle = 8;
 			if($('.miniConf img[src*="fast_cycle"]').length > 0){
 				i_daily_cycle = 12;
+			}else if($('.miniConf img[src$="blitz_cycle.png"]').length > 0){
+				i_daily_cycle = 24;
 			}
 			
 			var nb_days = Math.round(remaining_cycles / i_daily_cycle);
