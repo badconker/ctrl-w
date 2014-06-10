@@ -5449,7 +5449,7 @@ Main.k.tabs.playing = function() {
 		$(window).bind('beforeunload', function(event){
 			console.warn('beforeunload',Main.k.Sync.push_timer);
 			if(Main.k.Sync.push_timer != null){
-				return true;
+				return Main.k.text.gettext("CTRL+W : Veuillez attendre la fin de la mise synchronisation avant de quitter cette page.");
 			}
 
 		});
