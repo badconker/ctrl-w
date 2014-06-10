@@ -5640,7 +5640,7 @@ Main.k.tabs.playing = function() {
 		// Day and cycle save
 		var cycle_time = $('.cycletime');
 		if(cycle_time.length > 0){
-			var regex = new RegExp('.*([0-9]{1}).*-.*([0-9]{1})');
+			var regex = new RegExp("\\D+([0-9]{1,2}).*-.*([0-9]{1})");
 			var result = regex.exec(cycle_time.text());
 			if(result != null){
 				Main.k.Game.updateDayAndCycle(result[1],result[2]);
