@@ -3729,7 +3729,7 @@ Main.k.tabs.playing = function() {
 				})
 				.append(
 				Main.k.MakeButton("<img src='http://imgup.motion-twin.com/twinoid/6/4/6666e528_4030.jpg' /> "+Main.k.text.gettext("Supprimer la clé"), null, function(){
-						if(confirm(Main.k.text.gettext('Si vous supprimer la clé, vous ne pourrez plus synchronier vos données, voulez vous continuer ?'))){
+						if(confirm(Main.k.text.gettext('Si vous supprimez la clé, vous ne pourrez plus synchroniser vos données, voulez vous continuer ?'))){
 							$('.status_sync').hide();
 							$('.status_sync_ko').show();
 							localStorage.removeItem('ctrlw_sync_key');
@@ -3741,7 +3741,7 @@ Main.k.tabs.playing = function() {
 				)
 				.appendTo(td);
 			$('<p class="info">')
-				.html(Main.k.text.gettext("Afin de pouvoir synchroniser vos données vous devez rentrer votre clé d'authentification. " +
+				.html(Main.k.text.gettext("Afin de pouvoir synchroniser vos données vous devez entrer votre clé d'authentification. " +
 					"Si vous n'en n'avez pas, cliquez sur le bouton \"Générer une nouvelle clé\""))
 				.appendTo(td);
 			$('<p class="warning">'+Main.k.text.gettext("Conservez précieusement votre clé (dans votre bloc-note Twinoid par exemple) afin de pouvoir récupérer vos données.")+'<p>')
@@ -3956,7 +3956,7 @@ Main.k.tabs.playing = function() {
 				.addClass('spy ctrlw')
 				.appendTo($("h3",header)).find("a")
 				.attr("_title", Main.k.text.gettext("Espionnage"))
-				.attr("_desc", Main.k.text.gettext("Vous êtes dans la même pièce que cette personne ; vous pouvez donc l'examiner de plus près.</p><p><strong>Cliquez ici pour enregistrer les compétences visibles, statuts publiques et titres de ce personnage.</strong>"))
+				.attr("_desc", Main.k.text.gettext("<p>Vous êtes dans la même pièce que cette personne ; vous pouvez donc l'examiner de plus près.</p><p><strong>Cliquez ici pour enregistrer les compétences visibles, statuts publiques et titres de ce personnage.</strong><p>"))
 				.on("mouseover", Main.k.CustomTip)
 				.on("mouseout", Main.hideTip);
 
@@ -5449,7 +5449,7 @@ Main.k.tabs.playing = function() {
 		$(window).bind('beforeunload', function(event){
 			console.warn('beforeunload',Main.k.Sync.push_timer);
 			if(Main.k.Sync.push_timer != null){
-				return Main.k.text.gettext("CTRL+W : Veuillez attendre la fin de la mise synchronisation avant de quitter cette page.");
+				return Main.k.text.gettext("CTRL+W : Veuillez attendre la fin de la synchronisation avant de quitter cette page.");
 			}
 
 		});
@@ -5779,7 +5779,7 @@ Main.k.tabs.playing = function() {
 					bottom: 0
 				})
 				.attr("_title", Main.k.text.gettext("Espionnage"))
-				.attr("_desc", Main.k.text.gettext("Vous êtes dans la même pièce que cette personne ; vous pouvez donc l'examiner de plus près.</p><p><strong>Cliquez ici pour enregistrer les compétences visibles, statuts publiques et titres de ce personnage.</strong>"))
+				.attr("_desc", Main.k.text.gettext("<p>Vous êtes dans la même pièce que cette personne ; vous pouvez donc l'examiner de plus près.</p><p><strong>Cliquez ici pour enregistrer les compétences visibles, statuts publiques et titres de ce personnage.</strong></p>"))
 				.data('dev_surname',bubble)
 				.on("mouseover", Main.k.CustomTip)
 				.on("mouseout", Main.hideTip)
