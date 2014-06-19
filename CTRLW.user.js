@@ -12,7 +12,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.34.3
+// @version     0.34.4b1
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -2915,6 +2915,7 @@ Main.k.tabs.playing = function() {
 		ret = ret.replace(/<img[^>]+pa_slot2[^>]+>/g, ":pm:");
 		ret = ret.replace(/<img[^>]+moral[^>]+>/g, ":moral:");
 		ret = ret.replace(/<img[^>]+lp\.png[^>]+>/g, ":hp:");
+		ret = ret.replace(/<img[^>]+>/g, "");
 
 		return ret;
 	}
