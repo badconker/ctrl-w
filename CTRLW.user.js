@@ -44,7 +44,6 @@ Main.k.version = GM_info.script.version;
 Main.k.website = "http://ks26782.kimsufi.com/ctrlw";
 Main.k.servurl = "http://ctrl-w.badconker.com";
 Main.k.servurl_badconker = 'http://ctrlw.badconker.com';
-Main.k.topicurl = "http://twd.io/e/KKyl0g";
 Main.k.window = window;
 Main.k.domain = document.domain;
 Main.k.mushurl = 'http://' + document.domain;
@@ -499,6 +498,11 @@ Main.k.MakeButton = function(content, href, onclick, tiptitle, tipdesc) {
 
 	var buta = $("<a>").attr("href", href ? href : "#").html(content).appendTo(butbg)
 	.on("click", onclick ? onclick : href ? null : function() { return false; });
+
+	/* Translators: domain name*/
+	if(href !=null && href.indexOf(Main.k.text.gettext('mush.vg'))){
+		buta.attr('target','_blank');
+	}
 
 	if (tiptitle || tipdesc) {
 		if (tiptitle) buta.attr("_title", tiptitle);
@@ -3561,7 +3565,7 @@ Main.k.tabs.playing = function() {
 				margin: "0 auto 0px"
 			}).attr("src", Main.k.servurl + "/img/ctrlw1.png").appendTo(links);
 			$("<br/>").appendTo(links);
-			Main.k.MakeButton("<img src='/img/icons/ui/planet.png' /> Site Web", Main.k.website).css({
+			Main.k.MakeButton("<img src='/img/icons/ui/planet.png' /> Groupe Twinoid", 'http://twinoid.com/g/ctrl-w').css({
 				margin: "0 2px",
 				display: "inline-block"
 			}).appendTo(links);
@@ -3573,10 +3577,14 @@ Main.k.tabs.playing = function() {
 			.attr("_desc", Main.k.text.gettext("Venez discuter sur IRC avec les autres utilisateurs du script. \
 			Vous pourrez également y trouver de l'aide ou faire des suggestions.</p><p><strong>Chan #ctrlw sur Quakenet</strong>"))
 			.on("mouseover", Main.k.CustomTip).on("mouseout", Main.hideTip);
-			Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> "+Main.k.text.gettext("Topic (Forum Mush)"), Main.k.topicurl).css({
-				margin: "0 2px",
-				display: "inline-block"
-			}).appendTo(links);
+
+			Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> "+Main.k.text.gettext("Topic (Forum Mush)"),
+				/* Translators: Script topic (Mush forum) */
+					Main.k.text.gettext("http://twd.io/e/0fdb0w")).css({
+					margin: "0 2px",
+					display: "inline-block"
+				}
+			).appendTo(links);
 
 			// Disclaimer
 			$("<p>").css({

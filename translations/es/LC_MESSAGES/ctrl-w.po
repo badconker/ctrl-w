@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CTRL+W Spanish\n"
-"Report-Msgid-Bugs-To: http://twd.io/e/KKyl0g\n"
-"POT-Creation-Date: 2014-06-14 17:10+0200\n"
+"Report-Msgid-Bugs-To: http://twd.io/e/0fdb0w\n"
+"POT-Creation-Date: 2014-06-21 15:30+0200\n"
 "PO-Revision-Date: 2014-02-27 13:03+0100\n"
 "Last-Translator: Michael Johnson &lt;michael@nightexcessive.us&gt;\n"
 "Language-Team: Kohaku <HikaruKuroda@gmail.com>\n"
@@ -19,342 +19,347 @@ msgstr ""
 "X-Generator: Poedit 1.6.4\n"
 
 #. Translators: Thread id for this character's tutorial. */
-#: ..\CTRLW.user.js:116
+#: ..\CTRLW.user.js:115
 msgid "tutorial_id:mush"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:120
+#: ..\CTRLW.user.js:119
 msgid "Commandant suprême du Daedalus."
 msgstr "Comandante supremo del Daedalus."
 
 #. Translators: Thread id for this character's tutorial. */
-#: ..\CTRLW.user.js:122
+#: ..\CTRLW.user.js:121
 msgid "tutorial_id:jin_su"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:127
+#: ..\CTRLW.user.js:126
 msgid "Scientifique millénaire."
 msgstr "Científico millonario."
 
 #. Translators: Thread id for this character's tutorial. */
-#: ..\CTRLW.user.js:129
+#: ..\CTRLW.user.js:128
 msgid "tutorial_id:frieda"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:134
+#: ..\CTRLW.user.js:133
 msgid "Grand architecte du Daedalus."
 msgstr "Gran arquitecto del Daedalus."
 
 #. Translators: Thread id for this character's tutorial. */
-#: ..\CTRLW.user.js:136
+#: ..\CTRLW.user.js:135
 msgid "tutorial_id:kuan_ti"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:141
+#: ..\CTRLW.user.js:140
 msgid "Psychologue Digitale aux atouts certains."
 msgstr "Encargada del soporte psicológico e informático del equipo."
 
 #. Translators: Thread id for this character's tutorial. */
-#: ..\CTRLW.user.js:143
+#: ..\CTRLW.user.js:142
 msgid "tutorial_id:janice"
 msgstr "Comediante amateur y piloto de élite. Nacido para destruir Hunters."
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:148
+#: ..\CTRLW.user.js:147
 msgid "Humoriste pilote de chasse à ses heures."
 msgstr "Exploradora de lo extremo."
 
 #. Translators: Thread id for this character's tutorial. */
-#: ..\CTRLW.user.js:150
+#: ..\CTRLW.user.js:149
 msgid "tutorial_id:roland"
 msgstr "Oficial de Comunicaciones y antiguo activista."
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:155
+#: ..\CTRLW.user.js:154
 #, fuzzy
 msgid "Exploratrice de l'EXTRÊME."
 msgstr "Jefe de seguridad del Daedalus."
 
 #. Translators: Thread id for this character's tutorial. */
-#: ..\CTRLW.user.js:157
+#: ..\CTRLW.user.js:156
 msgid "tutorial_id:hua"
 msgstr "Bióloga de renombre, pionera en el estudio del Mush."
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:162
+#: ..\CTRLW.user.js:161
 msgid "Officier principal des Communications du Daedalus."
 msgstr "El cocinero más peligroso de la galaxia."
 
 #. Translators: Thread id for this character's tutorial. */
-#: ..\CTRLW.user.js:164
+#: ..\CTRLW.user.js:163
 msgid "tutorial_id:paola"
 msgstr "Científico botánico obsesivo."
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:169
+#: ..\CTRLW.user.js:168
 msgid "Chef de la sécurité du Daedalus."
 msgstr "La última esperanza de la humanidad."
 
 #. Translators: Thread id for this character's tutorial. */
-#: ..\CTRLW.user.js:171
+#: ..\CTRLW.user.js:170
 msgid "tutorial_id:chao"
 msgstr "Genio de la física cuántica y amante de los gatos."
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:176
+#: ..\CTRLW.user.js:175
 msgid "Biologiste de renommée internationale, pionnière dans l'étude du Mush."
 msgstr "Filántropo amateur listo para el combate."
 
 #. Translators: Thread id for this character's tutorial. */
-#: ..\CTRLW.user.js:178
+#: ..\CTRLW.user.js:177
 msgid "tutorial_id:finola"
 msgstr "Investigadora de primera clase."
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:183
+#: ..\CTRLW.user.js:182
 msgid "Cuisinier le plus dangereux de la galaxie."
 msgstr "Tecnófilo motorizado con una obsesión malsana por los drones."
 
 #. Translators: Thread id for this character's tutorial. */
-#: ..\CTRLW.user.js:185
+#: ..\CTRLW.user.js:184
 msgid "tutorial_id:stephen"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:190
+#: ..\CTRLW.user.js:189
 msgid "Chercheur frugivore flexible."
 msgstr ""
 
 #. Translators: Thread id for this character's tutorial. */
-#: ..\CTRLW.user.js:192
+#: ..\CTRLW.user.js:191
 msgid "tutorial_id:ian"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:197
+#: ..\CTRLW.user.js:196
 msgid "Dernier espoir de l'Humanité."
 msgstr ""
 
 #. Translators: Thread id for this character's tutorial. */
-#: ..\CTRLW.user.js:199
+#: ..\CTRLW.user.js:198
 msgid "tutorial_id:chun"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:204
+#: ..\CTRLW.user.js:203
 msgid "Génie de la physique quantique félinophile."
 msgstr ""
 
 #. Translators: Thread id for this character's tutorial. */
-#: ..\CTRLW.user.js:206
+#: ..\CTRLW.user.js:205
 msgid "tutorial_id:raluca"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:211
+#: ..\CTRLW.user.js:210
 msgid "Armateur philantrophobe."
 msgstr ""
 
 #. Translators: Thread id for this character's tutorial. */
-#: ..\CTRLW.user.js:213
+#: ..\CTRLW.user.js:212
 msgid "tutorial_id:gioele"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:218
+#: ..\CTRLW.user.js:217
 msgid "Investigatrice déchue de premier plan."
 msgstr ""
 
 #. Translators: Thread id for this character's tutorial. */
-#: ..\CTRLW.user.js:220
+#: ..\CTRLW.user.js:219
 msgid "tutorial_id:eleesha"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:225
+#: ..\CTRLW.user.js:224
 msgid "Technophile motorisé."
 msgstr ""
 
 #. Translators: Thread id for this character's tutorial. */
-#: ..\CTRLW.user.js:227
+#: ..\CTRLW.user.js:226
 msgid "tutorial_id:terrence"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:232
+#: ..\CTRLW.user.js:231
 msgid "Fayot de la fédération."
 msgstr ""
 
 #. Translators: Thread id for this character's tutorial. */
-#: ..\CTRLW.user.js:234
+#: ..\CTRLW.user.js:233
 msgid "tutorial_id:andie"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:239
+#: ..\CTRLW.user.js:238
 msgid "Héros malgré lui."
 msgstr ""
 
 #. Translators: Thread id for this character's tutorial. */
-#: ..\CTRLW.user.js:241
+#: ..\CTRLW.user.js:240
 msgid "tutorial_id:derek"
 msgstr ""
 
-#: ..\CTRLW.user.js:354
+#: ..\CTRLW.user.js:353
 msgid "Jouer"
 msgstr "Jugar"
 
-#: ..\CTRLW.user.js:355
+#: ..\CTRLW.user.js:354
 msgid "Mon compte"
 msgstr "Mi cuenta"
 
 #. Translators: Forum Castings id */
-#: ..\CTRLW.user.js:357 ..\CTRLW.user.js:397 ..\CTRLW.user.js:399
+#: ..\CTRLW.user.js:356 ..\CTRLW.user.js:396 ..\CTRLW.user.js:398
 msgid "ForumCastingsId"
 msgstr "109820"
 
 #. Translators: Forum Castings label */
-#: ..\CTRLW.user.js:358 ..\CTRLW.user.js:401
+#: ..\CTRLW.user.js:357 ..\CTRLW.user.js:400
 msgid "Castings"
 msgstr "Reality Mush"
 
-#: ..\CTRLW.user.js:360 ..\CTRLW.user.js:375
+#: ..\CTRLW.user.js:359 ..\CTRLW.user.js:374
 msgid "Classements"
 msgstr "Clasificación"
 
-#: ..\CTRLW.user.js:361
+#: ..\CTRLW.user.js:360
 msgid "Forum"
 msgstr "Foro"
 
-#: ..\CTRLW.user.js:362
+#: ..\CTRLW.user.js:361
 msgid "Aide"
 msgstr "Ayuda"
 
-#: ..\CTRLW.user.js:365
+#: ..\CTRLW.user.js:364
 msgid "Distributeur"
 msgstr "Distributeur"
 
-#: ..\CTRLW.user.js:369
+#: ..\CTRLW.user.js:368
 msgid "Expérience"
 msgstr "Experiencia"
 
-#: ..\CTRLW.user.js:370
+#: ..\CTRLW.user.js:369
 msgid "Ma fiche"
 msgstr "Mi ficha"
 
-#: ..\CTRLW.user.js:371
+#: ..\CTRLW.user.js:370
 msgid "Mes réglages"
 msgstr "Mis opciones"
 
-#: ..\CTRLW.user.js:372
+#: ..\CTRLW.user.js:371
 msgid "News"
 msgstr "Noticias"
 
 #. Translators: Forum Discussion id */
-#: ..\CTRLW.user.js:379 ..\CTRLW.user.js:381
+#: ..\CTRLW.user.js:378 ..\CTRLW.user.js:380
 msgid "ForumDiscussionId"
 msgstr "90971"
 
 #. Translators: Forum Discussion label */
-#: ..\CTRLW.user.js:383
+#: ..\CTRLW.user.js:382
 msgid "Discussion"
 msgstr "Discusión"
 
 #. Translators: Forum Advice id */
-#: ..\CTRLW.user.js:385 ..\CTRLW.user.js:387 ..\CTRLW.user.js:414
+#: ..\CTRLW.user.js:384 ..\CTRLW.user.js:386 ..\CTRLW.user.js:413
 msgid "ForumAdviceId"
 msgstr "109815"
 
 #. Translators: Forum Advice label */
-#: ..\CTRLW.user.js:389
+#: ..\CTRLW.user.js:388
 msgid "Entraide"
 msgstr "Ayuda"
 
 #. Translators: Forum Lounge id */
-#: ..\CTRLW.user.js:391 ..\CTRLW.user.js:393
+#: ..\CTRLW.user.js:390 ..\CTRLW.user.js:392
 msgid "ForumLoungeId"
 msgstr "90971"
 
 #. Translators: Forum Lounge label */
-#: ..\CTRLW.user.js:395
+#: ..\CTRLW.user.js:394
 msgid "Détente"
 msgstr "Lounge"
 
 #. Translators: Forum Officers id */
-#: ..\CTRLW.user.js:403 ..\CTRLW.user.js:405
+#: ..\CTRLW.user.js:402 ..\CTRLW.user.js:404
 msgid "ForumOfficersId"
 msgstr "http://mush.twinoid.es/tid/forum#!view/115451"
 
-#: ..\CTRLW.user.js:405
+#: ..\CTRLW.user.js:404
 msgid "Officiers"
 msgstr "Oficiales"
 
-#: ..\CTRLW.user.js:409
+#: ..\CTRLW.user.js:408
 msgid "Aide Mush"
 msgstr "Ayuda Mush"
 
-#: ..\CTRLW.user.js:410
+#: ..\CTRLW.user.js:409
 msgid "Patchlog"
 msgstr "Historial de actualizaciones"
 
-#: ..\CTRLW.user.js:414
+#: ..\CTRLW.user.js:413
 msgid "Tuto %1"
 msgstr "Consejos para %1"
 
 #. Translators: Wiki url */
-#: ..\CTRLW.user.js:417
+#: ..\CTRLW.user.js:416
 msgid "http://www.twinpedia.com/mush"
 msgstr "http://www.twinpedia.com/mush"
 
 #. Translators: Wiki favicon url */
-#: ..\CTRLW.user.js:419
+#: ..\CTRLW.user.js:418
 msgid "http://www.twinpedia.com/_media/favicon.ico"
 msgstr "http://www.twinpedia.com/_media/favicon.ico"
 
-#: ..\CTRLW.user.js:419
+#: ..\CTRLW.user.js:418
 msgid "Twinpedia"
 msgstr "Twinpedia"
 
-#: ..\CTRLW.user.js:554 ..\CTRLW.user.js:557
+#. Translators: domain name*/
+#: ..\CTRLW.user.js:503
+msgid "mush.vg"
+msgstr ""
+
+#: ..\CTRLW.user.js:558 ..\CTRLW.user.js:561
 msgid "Astropad synchronisé."
 msgstr "¡AstroPad sincronizado!"
 
-#: ..\CTRLW.user.js:596
+#: ..\CTRLW.user.js:600
 msgid "(~%1 jour)"
 msgid_plural "(~%1 jours)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ..\CTRLW.user.js:674
+#: ..\CTRLW.user.js:678
 #, fuzzy
 msgid "Infos du joueur mises à jour."
 msgstr "Termina la actualización"
 
-#: ..\CTRLW.user.js:706
+#: ..\CTRLW.user.js:710
 msgid "Plus d'options disponibles prochainement."
 msgstr "Más opciones disponibles próximamente."
 
-#: ..\CTRLW.user.js:712
+#: ..\CTRLW.user.js:716
 msgid "Nécessite un rechargement de la page."
 msgstr "Es necesario refrescar la página."
 
-#: ..\CTRLW.user.js:736
+#: ..\CTRLW.user.js:740
 #, fuzzy
 msgid "Vider le cache du script"
 msgstr "Actualizar script"
 
-#: ..\CTRLW.user.js:737
+#: ..\CTRLW.user.js:741
 msgid ""
 "Ce bouton vous permet de vider le cache du script pour, par exemple, prendre "
 "en compte tout de suite votre mode Or ou forcer une vérification de mise à "
 "jour. A utiliser avec parcimonie svp."
 msgstr ""
 
-#: ..\CTRLW.user.js:799
+#: ..\CTRLW.user.js:803
 msgid ""
 "Activer la mise en forme personnalisée des messages (bordure + couleur nom + "
 "image de fond)."
@@ -362,7 +367,7 @@ msgstr ""
 "Utiliza el estilo personalizado para los mensajes (nombre y bordes "
 "coloreados más imágenes de fondo)."
 
-#: ..\CTRLW.user.js:800
+#: ..\CTRLW.user.js:804
 msgid ""
 "Simplifier la mise en forme personnalisée des messages (suppression de "
 "l'image de fond)."
@@ -370,15 +375,15 @@ msgstr ""
 "Simplifica el diseño de interfaz personalizado (oculta las imágenes de "
 "fondo)."
 
-#: ..\CTRLW.user.js:801
+#: ..\CTRLW.user.js:805
 msgid "Afficher le logo Mush au dessus des onglets."
 msgstr "Mostrar el logo de Mush sobre las pestañas."
 
-#: ..\CTRLW.user.js:802
+#: ..\CTRLW.user.js:806
 msgid "Séparer les projets / recherches / pilgred sous la zone de jeu."
 msgstr "Separar los proyectos NERON de los de investigación y Pilgred."
 
-#: ..\CTRLW.user.js:803
+#: ..\CTRLW.user.js:807
 msgid ""
 "Désactiver les confirmations d'actions bénéfiques pour l'équipages en tant "
 "que Mush."
@@ -386,16 +391,16 @@ msgstr ""
 "Desactivar la confirmación de acciones beneficiosas para la tripulación al "
 "jugar como Mush."
 
-#: ..\CTRLW.user.js:1926
+#: ..\CTRLW.user.js:1930
 #, fuzzy
 msgid "Cliquez pour plus d'informations"
 msgstr "Haz click aquí para más información sobre Ctrl+W."
 
-#: ..\CTRLW.user.js:2060
+#: ..\CTRLW.user.js:2064
 msgid "Partager son état de santé"
 msgstr "Compartir salud"
 
-#: ..\CTRLW.user.js:2061
+#: ..\CTRLW.user.js:2065
 #, fuzzy
 msgid ""
 "<p>Insère votre nombre de points de vie et de moral dans la zone de texte "
@@ -404,11 +409,11 @@ msgstr ""
 "&lt;p&gt;Copia tus puntos de vida y moral al cuadro de texto activo, con el "
 "formato siguiente:&lt;/p&gt;&lt;p&gt;TODO: Ejemplo&lt;/p&gt;"
 
-#: ..\CTRLW.user.js:2073 ..\CTRLW.user.js:5581
+#: ..\CTRLW.user.js:2077 ..\CTRLW.user.js:5590
 msgid "Partager l'inventaire"
 msgstr "Compartir el inventario"
 
-#: ..\CTRLW.user.js:2074
+#: ..\CTRLW.user.js:2078
 #, fuzzy
 msgid ""
 "Insère l'inventaire de la pièce dans la zone de texte active, de la "
@@ -423,22 +428,22 @@ msgstr ""
 "&lt;strong&gt;Si has instalado AstroPad, también sincronizará la información "
 "con otros jugadores.&lt;/strong&gt;&lt;/p&gt;"
 
-#: ..\CTRLW.user.js:2096
+#: ..\CTRLW.user.js:2100
 msgid "Partager l'état des plantes"
 msgstr "Compartir las plantas"
 
-#: ..\CTRLW.user.js:2097
+#: ..\CTRLW.user.js:2101
 #, fuzzy
 msgid ""
 "<p>Insère l'état des plantes dans la zone de texte active.</p><p>TODO: "
 "Exemple</p>"
 msgstr "&lt;p&gt;Copia la lista de plantas al cuadro de texto activo."
 
-#: ..\CTRLW.user.js:2110
+#: ..\CTRLW.user.js:2114
 msgid "Partager les projets"
 msgstr "Compartir los proyectos"
 
-#: ..\CTRLW.user.js:2111
+#: ..\CTRLW.user.js:2115
 #, fuzzy
 msgid ""
 "Insère la liste de projets dans la zone de texte active, de la forme&nbsp;:</"
@@ -458,11 +463,11 @@ msgstr ""
 "Descripción&lt;br/&gt;Bonus : &lt;i&gt;Artillero&lt;/i&gt;, &lt;i&gt;"
 "Piloto&lt;/i&gt;&lt;/li&gt;"
 
-#: ..\CTRLW.user.js:2127 ..\CTRLW.user.js:6082
+#: ..\CTRLW.user.js:2131 ..\CTRLW.user.js:6091
 msgid "Partager les recherches"
 msgstr "Compartir investigaciones"
 
-#: ..\CTRLW.user.js:2128
+#: ..\CTRLW.user.js:2132
 #, fuzzy
 msgid ""
 "Insère la liste de recherches dans la zone de texte active, de la "
@@ -483,11 +488,11 @@ msgstr ""
 "br/&gt;Descripción&lt;br/&gt;Bonus: &lt;i&gt;Biólogo&lt;/i&gt;, &lt;i&gt;"
 "Médico&lt;/i&gt;&lt;/li&gt;"
 
-#: ..\CTRLW.user.js:2144
+#: ..\CTRLW.user.js:2148
 msgid "Partager les paramètres BIOS"
 msgstr "Compartir los parámetros de la BIOS"
 
-#: ..\CTRLW.user.js:2145 ..\CTRLW.user.js:6183
+#: ..\CTRLW.user.js:2149 ..\CTRLW.user.js:6192
 #, fuzzy
 msgid ""
 "Insère la liste de paramètres BIOS Neron dans la zone de texte active, de la "
@@ -496,11 +501,11 @@ msgstr ""
 "Copia la lista de parámetros de la BIOS NERON al cuadro de texto activo, con "
 "el siguiente formato&amp;nbsp;:&lt;/p&gt;&lt;p&gt;TODO: aperçu"
 
-#: ..\CTRLW.user.js:2158 ..\CTRLW.user.js:6163
+#: ..\CTRLW.user.js:2162 ..\CTRLW.user.js:6172
 msgid "Partager les planètes"
 msgstr "Compartir los planetas"
 
-#: ..\CTRLW.user.js:2159
+#: ..\CTRLW.user.js:2163
 #, fuzzy
 msgid ""
 "<p>Insère les détails des planètes dans la zone de texte active.</p><p>TODO: "
@@ -509,28 +514,28 @@ msgstr ""
 "&lt;p&gt;Copia la información del planeta al cuadro de texto activo.&lt;/"
 "p&gt;&lt;p&gt;TODO: Exemple&lt;/p&gt;"
 
-#: ..\CTRLW.user.js:2187
+#: ..\CTRLW.user.js:2191
 msgid "Insérer un smiley"
 msgstr "Insetar un icono."
 
-#: ..\CTRLW.user.js:2188
+#: ..\CTRLW.user.js:2192
 msgid "Bientôt disponible."
 msgstr "Disponible próximamente."
 
-#: ..\CTRLW.user.js:2200
+#: ..\CTRLW.user.js:2204
 msgid "Vider la zone de texte."
 msgstr "Cuadro de texto vacío."
 
-#: ..\CTRLW.user.js:2214
+#: ..\CTRLW.user.js:2218
 msgid "Fermer la zone de texte."
 msgstr "Cerrar el cuadro de texto."
 
-#: ..\CTRLW.user.js:2228
+#: ..\CTRLW.user.js:2232
 msgid "Ouvrir le manager."
 msgstr "Abrir el gestor."
 
 #. Translators: message confirmation when you are Mush and you are doing a beneficial action. Only the paragraph, not the title. Copy it from the game. */
-#: ..\CTRLW.user.js:2553
+#: ..\CTRLW.user.js:2557
 msgid ""
 "Cette action est bénéfique pour l'équipage du Deaedalus et votre rôle est de "
 "les convertir ou de détruire le Daedalus. Êtes-vous vraiment sûr de vouloir "
@@ -540,15 +545,15 @@ msgstr ""
 "es convertirlos en Mush o destruir la nave. ¿Estás seguro de que quieres "
 "hacer esto?"
 
-#: ..\CTRLW.user.js:2759
+#: ..\CTRLW.user.js:2763
 msgid "Version "
 msgstr "Versión"
 
-#: ..\CTRLW.user.js:2768
+#: ..\CTRLW.user.js:2772
 msgid "Mettre à jour"
 msgstr "Actualizar"
 
-#: ..\CTRLW.user.js:2771
+#: ..\CTRLW.user.js:2775
 msgid ""
 "Pour finaliser la mise à jour, après avoir installé le script, veuillez "
 "cliquer sur le bouton ci-dessous."
@@ -556,115 +561,115 @@ msgstr ""
 "Para terminar la actualización, haz click en el botón tras instalar el "
 "script."
 
-#: ..\CTRLW.user.js:2771
+#: ..\CTRLW.user.js:2775
 msgid "Finaliser la mise à jour"
 msgstr "Termina la actualización"
 
-#: ..\CTRLW.user.js:2788
+#: ..\CTRLW.user.js:2792
 msgid "Dernière version de CTRL+W installée (%1) :"
 msgstr "Última versión de CTRL+W instalada (%1):"
 
-#: ..\CTRLW.user.js:2798
+#: ..\CTRLW.user.js:2802
 msgid "Très bien, merci !"
 msgstr "¡Muy bien, gracias!"
 
-#: ..\CTRLW.user.js:2888
+#: ..\CTRLW.user.js:2892
 msgid "apprentron"
 msgstr "libro mago"
 
-#: ..\CTRLW.user.js:2900
+#: ..\CTRLW.user.js:2904
 msgid "charges"
 msgstr "cargas"
 
-#: ..\CTRLW.user.js:2907
+#: ..\CTRLW.user.js:2911
 msgid "vide"
 msgstr "vacío"
 
-#: ..\CTRLW.user.js:2920
+#: ..\CTRLW.user.js:2924
 msgid "caméra"
 msgstr "cámara"
 
-#: ..\CTRLW.user.js:2922
+#: ..\CTRLW.user.js:2926
 msgid "drone"
 msgstr "dron"
 
-#: ..\CTRLW.user.js:2931
+#: ..\CTRLW.user.js:2935
 msgid "plantes"
 msgstr "plantas"
 
-#: ..\CTRLW.user.js:2945
+#: ..\CTRLW.user.js:2949
 msgid "malade"
 msgstr "enfermo"
 
-#: ..\CTRLW.user.js:2946
+#: ..\CTRLW.user.js:2950
 msgid "soif"
 msgstr "sediento"
 
-#: ..\CTRLW.user.js:2947
+#: ..\CTRLW.user.js:2951
 msgid "desséché"
 msgstr "seco"
 
-#: ..\CTRLW.user.js:2948
+#: ..\CTRLW.user.js:2952
 msgid "RAS"
 msgstr "nada que informar"
 
-#: ..\CTRLW.user.js:2989
+#: ..\CTRLW.user.js:2993
 msgid "Recherches"
 msgstr ""
 
-#: ..\CTRLW.user.js:3077
+#: ..\CTRLW.user.js:3081
 msgid "Consommables :"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. (Consummables description) */
-#: ..\CTRLW.user.js:3081
+#: ..\CTRLW.user.js:3085
 msgid "Guérie la maladie"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. (Consummables description) */
-#: ..\CTRLW.user.js:3083
+#: ..\CTRLW.user.js:3087
 msgid "satiété"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. (Consummables description) */
-#: ..\CTRLW.user.js:3085
+#: ..\CTRLW.user.js:3089
 msgid "Provoque la maladie"
 msgstr ""
 
 #. Translators: This translation must be copied from the game. (Consummables description) */
-#: ..\CTRLW.user.js:3089
+#: ..\CTRLW.user.js:3093
 msgid "Impérissable"
 msgstr ""
 
-#: ..\CTRLW.user.js:3199 ..\CTRLW.user.js:3206
+#: ..\CTRLW.user.js:3204 ..\CTRLW.user.js:3211
 msgid "Triomphe retour sur sol"
 msgstr ""
 
-#: ..\CTRLW.user.js:3200
+#: ..\CTRLW.user.js:3205
 msgid "Retour sur Sol :"
 msgstr ""
 
-#: ..\CTRLW.user.js:3201
+#: ..\CTRLW.user.js:3206
 msgid "Bonus recherches : "
 msgstr ""
 
-#: ..\CTRLW.user.js:3202
+#: ..\CTRLW.user.js:3207
 msgid "Malus mush en vie : "
 msgstr ""
 
-#: ..\CTRLW.user.js:3203
+#: ..\CTRLW.user.js:3208
 msgid "Total :"
 msgstr ""
 
-#: ..\CTRLW.user.js:3207
+#: ..\CTRLW.user.js:3212
 msgid "Ne tient pas compte des mushs anonymes."
 msgstr ""
 
-#: ..\CTRLW.user.js:3571
+#: ..\CTRLW.user.js:3576
 msgid "Chan IRC"
 msgstr "IRC"
 
-#: ..\CTRLW.user.js:3572
+#: ..\CTRLW.user.js:3577
 #, fuzzy
 msgid ""
 "Venez discuter sur IRC avec les autres utilisateurs du script. \t\t\tVous "
@@ -675,11 +680,16 @@ msgstr ""
 "ayuda y ofrecer consejo&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Chan #ctrlw on "
 "Quakenet&lt;/strong&gt;"
 
-#: ..\CTRLW.user.js:3575
+#: ..\CTRLW.user.js:3581
 msgid "Topic (Forum Mush)"
 msgstr "Tema (Foro de Mush)"
 
-#: ..\CTRLW.user.js:3585
+#. Translators: Script topic (Mush forum) */
+#: ..\CTRLW.user.js:3583
+msgid "http://twd.io/e/0fdb0w"
+msgstr ""
+
+#: ..\CTRLW.user.js:3594
 #, fuzzy
 msgid ""
 "Script développé par <a href='http://twinoid.com/user/8297'>kill0u</a>, "
@@ -698,65 +708,65 @@ msgstr ""
 "NightExcessive&lt;/a&gt;&lt;br/&gt;Traduccción al español por : &lt;a "
 "href='http://twinoid.com/user/6031682'&gt;Kohaku&lt;/a&gt;&lt;br&gt;"
 
-#: ..\CTRLW.user.js:3616
+#: ..\CTRLW.user.js:3625
 msgid "Retour au jeu"
 msgstr "Volver al juego"
 
-#: ..\CTRLW.user.js:3640
+#: ..\CTRLW.user.js:3649
 msgid "Clé :"
 msgstr ""
 
-#: ..\CTRLW.user.js:3645
+#: ..\CTRLW.user.js:3654
 msgid "Collez votre clé ici"
 msgstr ""
 
-#: ..\CTRLW.user.js:3721
+#: ..\CTRLW.user.js:3730
 msgid "Générer une nouvelle clé"
 msgstr ""
 
-#: ..\CTRLW.user.js:3731
+#: ..\CTRLW.user.js:3740
 msgid "Supprimer la clé"
 msgstr ""
 
-#: ..\CTRLW.user.js:3732
+#: ..\CTRLW.user.js:3741
 msgid ""
 "Si vous supprimez la clé, vous ne pourrez plus synchroniser vos données, "
 "voulez vous continuer ?"
 msgstr ""
 
-#: ..\CTRLW.user.js:3744
+#: ..\CTRLW.user.js:3753
 msgid ""
 "Afin de pouvoir synchroniser vos données vous devez entrer votre clé "
 "d'authentification. Si vous n'en n'avez pas, cliquez sur le bouton \"Générer "
 "une nouvelle clé\""
 msgstr ""
 
-#: ..\CTRLW.user.js:3747
+#: ..\CTRLW.user.js:3756
 msgid ""
 "Conservez précieusement votre clé (dans votre bloc-note Twinoid par exemple) "
 "afin de pouvoir récupérer vos données."
 msgstr ""
 
-#: ..\CTRLW.user.js:3813
+#: ..\CTRLW.user.js:3822
 #, fuzzy
 msgid "Mise à jour des données locales"
 msgstr "Actualizar script"
 
-#: ..\CTRLW.user.js:3870
+#: ..\CTRLW.user.js:3879
 msgid "Synchronisation impossible, clé incorrecte"
 msgstr ""
 
-#: ..\CTRLW.user.js:3871
+#: ..\CTRLW.user.js:3880
 msgid ""
 "Vos données locales sont plus anciennes que les données du serveurs, voulez "
 "vous les écraser ?"
 msgstr ""
 
-#: ..\CTRLW.user.js:3958 ..\CTRLW.user.js:5781
+#: ..\CTRLW.user.js:3967 ..\CTRLW.user.js:5790
 msgid "Espionnage"
 msgstr ""
 
-#: ..\CTRLW.user.js:3959
+#: ..\CTRLW.user.js:3968
 msgid ""
 "<p>Vous êtes dans la même pièce que cette personne ; vous pouvez donc "
 "l'examiner de plus près.</p><p><strong>Cliquez ici pour enregistrer les "
@@ -764,20 +774,20 @@ msgid ""
 "strong><p>"
 msgstr ""
 
-#: ..\CTRLW.user.js:4048 ..\CTRLW.user.js:4056 ..\CTRLW.user.js:5823
-#: ..\CTRLW.user.js:5831
+#: ..\CTRLW.user.js:4057 ..\CTRLW.user.js:4065 ..\CTRLW.user.js:5832
+#: ..\CTRLW.user.js:5840
 msgid "Compétence inactive mush"
 msgstr "Habilidad inactiva al jugar como Mush."
 
-#: ..\CTRLW.user.js:4057 ..\CTRLW.user.js:5832
+#: ..\CTRLW.user.js:4066 ..\CTRLW.user.js:5841
 msgid "Cette compétence est inactive quand on est mush (source : Twinpedia)."
 msgstr "Esta habilidad está desactivada al jugar como Mush."
 
-#: ..\CTRLW.user.js:4088
+#: ..\CTRLW.user.js:4097
 msgid "Aucune donnée enregistrée"
 msgstr ""
 
-#: ..\CTRLW.user.js:4274
+#: ..\CTRLW.user.js:4283
 msgid ""
 "Affiche les statistiques, et permet de gérer le nombre de messages chargés "
 "dans la page."
@@ -785,7 +795,7 @@ msgstr ""
 "Muestra diversas estadísticas y te permite definir el número de mensajes que "
 "cargan por página."
 
-#: ..\CTRLW.user.js:4275
+#: ..\CTRLW.user.js:4284
 msgid ""
 "Beaucoup de messages à lire ? Le manager permet de rattraper son retard plus "
 "facilement. En chargeant tous les messages dans l'onglet Statistiques, vous "
@@ -797,7 +807,7 @@ msgstr ""
 "de Estadísticas, podrás leer incluso los mensajes no leídos debido a fallos "
 "del juego."
 
-#: ..\CTRLW.user.js:4276
+#: ..\CTRLW.user.js:4285
 msgid ""
 "Une discussion à retrouver ? Envie de savoir combien d'incendies se sont "
 "déclarés ? (@neron incendie daedalus)"
@@ -806,7 +816,7 @@ msgstr ""
 "(@neron incendie daedalus)"
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:4278 ..\CTRLW.user.js:4298
+#: ..\CTRLW.user.js:4287 ..\CTRLW.user.js:4307
 #, fuzzy
 msgid ""
 "Le canal de discussion est indispensable pour s'organiser avec l'équipage.</"
@@ -817,16 +827,16 @@ msgstr ""
 "talkie&lt;/strong&gt;."
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:4280
+#: ..\CTRLW.user.js:4289
 msgid "Votre sélection de sujets favoris."
 msgstr "Tus temas favoritos."
 
-#: ..\CTRLW.user.js:4312
+#: ..\CTRLW.user.js:4321
 msgid "Aucun topic sélectionné."
 msgstr "No has seleccionado ningún tema."
 
 #. Translators: The beginning must be copied from the game. */
-#: ..\CTRLW.user.js:4316
+#: ..\CTRLW.user.js:4325
 #, fuzzy
 msgid ""
 "Ssshh, personne nous entend ici... Le Canal Mush est le <em>canal privé</em> "
@@ -838,11 +848,11 @@ msgstr ""
 "img/icons/ui/mush.png' /&gt;.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;/!&amp;#92; "
 "Característica no desarrollada&lt;/strong&gt;"
 
-#: ..\CTRLW.user.js:4319 ..\CTRLW.user.js:4377 ..\CTRLW.user.js:4378
+#: ..\CTRLW.user.js:4328 ..\CTRLW.user.js:4386 ..\CTRLW.user.js:4387
 msgid "Disponible prochainement."
 msgstr "Disponible próximamente."
 
-#: ..\CTRLW.user.js:4322 ..\CTRLW.user.js:4328 ..\CTRLW.user.js:4334
+#: ..\CTRLW.user.js:4331 ..\CTRLW.user.js:4337 ..\CTRLW.user.js:4343
 #, fuzzy
 msgid ""
 "Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!&#92; "
@@ -851,19 +861,19 @@ msgstr ""
 "Conversación privada con:&lt;br/&gt;[lista de participantes]&lt;/p&gt;&lt;"
 "p&gt;&lt;strong&gt;/!&amp;#92; Característica en desarrollo&lt;/strong&gt;"
 
-#: ..\CTRLW.user.js:4358
+#: ..\CTRLW.user.js:4367
 msgid "Nouveau message"
 msgstr "Nuevo mensaje"
 
-#: ..\CTRLW.user.js:4358
+#: ..\CTRLW.user.js:4367
 msgid "Répondez à un topic / une discussion ou créez un nouveau topic."
 msgstr "Responder al tema o crear uno nuevo."
 
-#: ..\CTRLW.user.js:4359
+#: ..\CTRLW.user.js:4368
 msgid "Annonces vocodées"
 msgstr "Anuncios de NERON"
 
-#: ..\CTRLW.user.js:4359
+#: ..\CTRLW.user.js:4368
 #, fuzzy
 msgid ""
 "Assistant pour les Admin. Néron pour faciliter la création d'annonces "
@@ -871,11 +881,11 @@ msgid ""
 msgstr ""
 "Asistente para los Administradores de Neron en la creación de anuncios."
 
-#: ..\CTRLW.user.js:4360
+#: ..\CTRLW.user.js:4369
 msgid "Messages pré-enregistrés"
 msgstr "Mensajes pre-grabados"
 
-#: ..\CTRLW.user.js:4360
+#: ..\CTRLW.user.js:4369
 msgid ""
 "Messages récurrents & autres (à définir).</p><p><strong>/!&#92; "
 "Fonctionnalité non codée</strong>"
@@ -883,19 +893,19 @@ msgstr ""
 "Mensajes repetidos &amp; más (a definir).&lt;/p&gt;&lt;p&gt;&lt;strong&gt;/!"
 "&amp;#92; Característica no desarrollada&lt;/strong&gt;"
 
-#: ..\CTRLW.user.js:4388
+#: ..\CTRLW.user.js:4397
 msgid "Fermer le Manager"
 msgstr "Cerrar el gestor"
 
-#: ..\CTRLW.user.js:4401 ..\CTRLW.user.js:4425
+#: ..\CTRLW.user.js:4410 ..\CTRLW.user.js:4434
 msgid "Réduire le Manager"
 msgstr "Reducir el tamaño del gestor"
 
-#: ..\CTRLW.user.js:4824
+#: ..\CTRLW.user.js:4833
 msgid "Chargement en cours..."
 msgstr "Cargando..."
 
-#: ..\CTRLW.user.js:4832
+#: ..\CTRLW.user.js:4841
 msgid ""
 "Gérez le nombre de messages chargés.Le manager est plus complet lorsque tous "
 "les messages sont chargés, mais le jeu devient beaucoup plus lent à cause du "
@@ -905,15 +915,15 @@ msgstr ""
 "historial de mensajes completo, pero el juego se ralentizará debido a que "
 "recarga el historial en cada acción."
 
-#: ..\CTRLW.user.js:4845
+#: ..\CTRLW.user.js:4854
 msgid "Tout charger"
 msgstr "Cargar"
 
-#: ..\CTRLW.user.js:4851
+#: ..\CTRLW.user.js:4860
 msgid "Charger tous les messages"
 msgstr ""
 
-#: ..\CTRLW.user.js:4851
+#: ..\CTRLW.user.js:4860
 #, fuzzy
 msgid ""
 "Chargez tous les messages pour profiter pleinement du manager : recherches "
@@ -928,15 +938,15 @@ msgstr ""
 "p&gt;&lt;p&gt;&lt;strong&gt;Esta acción puede tardar un tiempo considerable "
 "dependiendo del tamaño del historial de mensajes.&lt;/strong&gt;"
 
-#: ..\CTRLW.user.js:4856
+#: ..\CTRLW.user.js:4865
 msgid "Décharger"
 msgstr "Vaciar"
 
-#: ..\CTRLW.user.js:4862
+#: ..\CTRLW.user.js:4871
 msgid "Décharger les messages"
 msgstr ""
 
-#: ..\CTRLW.user.js:4862
+#: ..\CTRLW.user.js:4871
 #, fuzzy
 msgid ""
 "Déchargez la liste de messages pour alléger le jeu. Lorsque vous chargez des "
@@ -952,33 +962,33 @@ msgstr ""
 "tiene un tamaño considerable.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Esta acción "
 "detiene el juego unos segundos.&lt;/strong&gt;"
 
-#: ..\CTRLW.user.js:4881
+#: ..\CTRLW.user.js:4890
 #, fuzzy
 msgid "Total : <b>%1</b> message chargé"
 msgid_plural "Total : <b>%1</b> messages chargés"
 msgstr[0] "Total: &lt;b&gt;%1&lt;/b&gt; mensaje cargado"
 msgstr[1] "Total: &lt;b&gt;%1&lt;/b&gt; mensajes cargados"
 
-#: ..\CTRLW.user.js:4883
+#: ..\CTRLW.user.js:4892
 #, fuzzy
 msgid "en <b>%1</b> topic. <br/> (depuis %2)"
 msgid_plural "en <b>%1</b> topics. <br/> (depuis %2)"
 msgstr[0] "en &lt;b&gt;%1&lt;/b&gt; tema. &lt;br/&gt; (para %2)"
 msgstr[1] "en &lt;b&gt;%1&lt;/b&gt; temas. &lt;br/&gt; (para %2)"
 
-#: ..\CTRLW.user.js:4887
+#: ..\CTRLW.user.js:4896
 msgid "Total : %1 message"
 msgid_plural "Total : %1 messages"
 msgstr[0] "Total: %1 mensaje"
 msgstr[1] "Total: %1 mensajes"
 
-#: ..\CTRLW.user.js:4897 ..\CTRLW.user.js:4899
+#: ..\CTRLW.user.js:4906 ..\CTRLW.user.js:4908
 msgid "<b>%1</b> message"
 msgid_plural "<b>%1</b> messages"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ..\CTRLW.user.js:4901
+#: ..\CTRLW.user.js:4910
 #, fuzzy
 msgid "dont <b>%1</b> topic."
 msgid_plural "dont <b>%1</b> topics."
@@ -986,44 +996,44 @@ msgstr[0] "del cual &lt;b&gt;%1&lt;/b&gt; tema."
 msgstr[1] "de los cuales &lt;b&gt;%1&lt;/b&gt; temas."
 
 #. Translators: %1 = character name, %2 = message count */
-#: ..\CTRLW.user.js:4912
+#: ..\CTRLW.user.js:4921
 msgid "**%1 : ** //%2// message"
 msgid_plural "**%1 : ** //%2// messages"
 msgstr[0] "**%1 : ** //%2// mensaje"
 msgstr[1] "**%1 : ** //%2// mensajes"
 
-#: ..\CTRLW.user.js:4950 ..\CTRLW.user.js:4970 ..\CTRLW.user.js:4997
-#: ..\CTRLW.user.js:5179
+#: ..\CTRLW.user.js:4959 ..\CTRLW.user.js:4979 ..\CTRLW.user.js:5006
+#: ..\CTRLW.user.js:5188
 msgid "%1 réponse"
 msgid_plural "%1 réponses"
 msgstr[0] "%1 respuesta"
 msgstr[1] "%1 respuestas"
 
-#: ..\CTRLW.user.js:4950
+#: ..\CTRLW.user.js:4959
 msgid "%1 message non lu"
 msgid_plural "%1 messages non lus"
 msgstr[0] "%1 mensaje sin leer"
 msgstr[1] "%1 mensajes sin leer"
 
-#: ..\CTRLW.user.js:4954
+#: ..\CTRLW.user.js:4963
 msgid "Aucun message non lu."
 msgstr "No hay mensajes sin leer."
 
-#: ..\CTRLW.user.js:4956
+#: ..\CTRLW.user.js:4965
 msgid "Vous n'avez pas de favoris."
 msgstr "No tienes favoritos."
 
-#: ..\CTRLW.user.js:5026
+#: ..\CTRLW.user.js:5035
 msgid "Fonction de recherche"
 msgstr "Buscar"
 
-#: ..\CTRLW.user.js:5027
+#: ..\CTRLW.user.js:5036
 msgid ""
 "- Vous pouvez rechercher plusieurs mots, dans le désordre, complets ou non, "
 "qu'importe le contenu entre eux dans le message."
 msgstr "- Puedes buscar varias palabras, incluso desordenadas, completas o no."
 
-#: ..\CTRLW.user.js:5028
+#: ..\CTRLW.user.js:5037
 #, fuzzy
 msgid ""
 "- Pour rechercher les messages d'un joueur en particulier, utilisez "
@@ -1033,7 +1043,7 @@ msgstr ""
 "- Para buscar mensajes de un jugador en concreto, usa &lt;i&gt;"
 "@character&lt;/i&gt; (nombre en minúsculas, con _ para kuan_ti y jin_su)."
 
-#: ..\CTRLW.user.js:5029
+#: ..\CTRLW.user.js:5038
 #, fuzzy
 msgid ""
 "- Pour rechercher uniquement dans le premier message des topics, utilisez "
@@ -1042,96 +1052,96 @@ msgstr ""
 "- Para limitar la búsqueda a los primeros mensajes de los temas, usa &lt;"
 "i&gt;@topic&lt;/i&gt;."
 
-#: ..\CTRLW.user.js:5166
+#: ..\CTRLW.user.js:5175
 msgid "%1 résultat (maximum : %2)."
 msgid_plural "%1 résultats (maximum : %2)."
 msgstr[0] "%1 resultado (máximo: %2)."
 msgstr[1] "%1 resultados(máximo: %2)."
 
-#: ..\CTRLW.user.js:5183
+#: ..\CTRLW.user.js:5192
 msgid "Aucun résultat."
 msgstr "Ningún resultado obtenido."
 
-#: ..\CTRLW.user.js:5185
+#: ..\CTRLW.user.js:5194
 msgid "Le texte recherché est trop court."
 msgstr "El texto de búsqueda es demasiado corto."
 
-#: ..\CTRLW.user.js:5207
+#: ..\CTRLW.user.js:5216
 msgid "Chargement…"
 msgstr "Cargando..."
 
-#: ..\CTRLW.user.js:5232
+#: ..\CTRLW.user.js:5241
 msgid "Répondre au topic"
 msgstr "Responder al tema"
 
-#: ..\CTRLW.user.js:5247
+#: ..\CTRLW.user.js:5256
 msgid "Envoyer ce message en tant que réponse au topic affiché ci-contre."
 msgstr "Enviar este mensaje como respuesta al tema actual."
 
-#: ..\CTRLW.user.js:5251
+#: ..\CTRLW.user.js:5260
 msgid "Nouveau topic"
 msgstr "Nuevo tema"
 
-#: ..\CTRLW.user.js:5260
+#: ..\CTRLW.user.js:5269
 msgid "Poster ce message en tant que nouveau topic."
 msgstr "Enviar este mensaje como un nuevo tema."
 
-#: ..\CTRLW.user.js:5441
+#: ..\CTRLW.user.js:5450
 msgid "à propos"
 msgstr "Acerca de..."
 
-#: ..\CTRLW.user.js:5441
+#: ..\CTRLW.user.js:5450
 msgid "Cliquez ici pour plus d'informations sur le script."
 msgstr "Haz click aquí para más información sobre Ctrl+W."
 
-#: ..\CTRLW.user.js:5452
+#: ..\CTRLW.user.js:5461
 msgid ""
 "CTRL+W : Veuillez attendre la fin de la synchronisation avant de quitter "
 "cette page."
 msgstr ""
 
-#: ..\CTRLW.user.js:5460
+#: ..\CTRLW.user.js:5469
 msgid "outils"
 msgstr "herramientas"
 
-#: ..\CTRLW.user.js:5463
+#: ..\CTRLW.user.js:5472
 msgid "Mise à jour"
 msgstr "Actualizar"
 
-#: ..\CTRLW.user.js:5463
+#: ..\CTRLW.user.js:5472
 msgid "Mise à jour du script"
 msgstr "Actualizar script"
 
-#: ..\CTRLW.user.js:5505
+#: ..\CTRLW.user.js:5514
 #, fuzzy
 msgid "Nouvelle partie ?"
 msgstr "Nuevo planeta"
 
-#: ..\CTRLW.user.js:5505
+#: ..\CTRLW.user.js:5514
 #, fuzzy
 msgid "Nouvelle partie"
 msgstr "Nuevo planeta"
 
-#: ..\CTRLW.user.js:5506
+#: ..\CTRLW.user.js:5515
 msgid ""
 "Vous venez de commencer une nouvelle partie ? Utilisez ce bouton pour "
 "supprimer les informations de votre ancienne partie"
 msgstr ""
 
-#: ..\CTRLW.user.js:5509
+#: ..\CTRLW.user.js:5518
 msgid ""
 "Êtes vous sûr de vouloir effacer les informations de la partie précédente ?"
 msgstr ""
 
-#: ..\CTRLW.user.js:5519
+#: ..\CTRLW.user.js:5528
 msgid "Msg Manager"
 msgstr "Mensajería"
 
-#: ..\CTRLW.user.js:5519
+#: ..\CTRLW.user.js:5528
 msgid "Message Manager"
 msgstr "Gestor de mensajes"
 
-#: ..\CTRLW.user.js:5520
+#: ..\CTRLW.user.js:5529
 msgid ""
 "Ne manquez plus de messages ! Tous les topics avec des messages non lus "
 "seront mis en évidence, et vous pourrez effectuer des recherches par auteur "
@@ -1140,15 +1150,15 @@ msgstr ""
 "¡No vuelvas a perderte un mensaje nunca más! Todos los mensajes no leídos "
 "serán resaltados, y podrás hacer búsquedas por autor o contenido."
 
-#: ..\CTRLW.user.js:5524
+#: ..\CTRLW.user.js:5533
 msgid "Options"
 msgstr "Opciones"
 
-#: ..\CTRLW.user.js:5524
+#: ..\CTRLW.user.js:5533
 msgid "Gérer les options"
 msgstr "Gestionar las opciones"
 
-#: ..\CTRLW.user.js:5524
+#: ..\CTRLW.user.js:5533
 msgid ""
 "Certaines fonctionnalitées de Ctrl+W sont configurables. Cliquez ici pour "
 "spécifier vos préférences."
@@ -1156,20 +1166,20 @@ msgstr ""
 "Algunas características de Ctrl+W son configurables. Haz click aquí para "
 "establecer tus preferencias."
 
-#: ..\CTRLW.user.js:5532
+#: ..\CTRLW.user.js:5541
 msgid "Sync"
 msgstr ""
 
-#: ..\CTRLW.user.js:5532
+#: ..\CTRLW.user.js:5541
 msgid ""
 "Permet de synchroniser les données du script entre vos différents navigateurs"
 msgstr ""
 
-#: ..\CTRLW.user.js:5538
+#: ..\CTRLW.user.js:5547
 msgid "Actualiser"
 msgstr "Actualizar"
 
-#: ..\CTRLW.user.js:5539
+#: ..\CTRLW.user.js:5548
 #, fuzzy
 msgid ""
 "Actualiser la page sans tout recharger. <strong>Fonctionnalité en cours "
@@ -1178,24 +1188,24 @@ msgstr ""
 "Actualiza el estado del juego sin tener que refrescar la página. &lt;"
 "strong&gt;Característica en optimización.&lt;/strong&gt;"
 
-#: ..\CTRLW.user.js:5559
+#: ..\CTRLW.user.js:5568
 msgid "titres"
 msgstr "títulos"
 
-#: ..\CTRLW.user.js:5567
+#: ..\CTRLW.user.js:5576
 msgid "équipage"
 msgstr "tripulación"
 
-#: ..\CTRLW.user.js:5575
+#: ..\CTRLW.user.js:5584
 msgid "inventaire"
 msgstr "inventario"
 
-#: ..\CTRLW.user.js:5581 ..\CTRLW.user.js:6082 ..\CTRLW.user.js:6163
-#: ..\CTRLW.user.js:6182 ..\CTRLW.user.js:6224
+#: ..\CTRLW.user.js:5590 ..\CTRLW.user.js:6091 ..\CTRLW.user.js:6172
+#: ..\CTRLW.user.js:6191 ..\CTRLW.user.js:6233
 msgid "Partager"
 msgstr "Compartir"
 
-#: ..\CTRLW.user.js:5582
+#: ..\CTRLW.user.js:5591
 #, fuzzy
 msgid ""
 "<p>Insère l'inventaire de la pièce dans la zone de texte active, de la "
@@ -1210,15 +1220,15 @@ msgstr ""
 "&lt;strong&gt;Si has instalado AstroPad, también sincronizará la información "
 "con otros jugadores.&lt;/strong&gt;&lt;/p&gt;"
 
-#: ..\CTRLW.user.js:5593
+#: ..\CTRLW.user.js:5602
 msgid "Consommables"
 msgstr "Consumibles"
 
-#: ..\CTRLW.user.js:5593
+#: ..\CTRLW.user.js:5602
 msgid "Partager les effets des consommables"
 msgstr "Compartir las propiedades del consumible"
 
-#: ..\CTRLW.user.js:5594
+#: ..\CTRLW.user.js:5603
 #, fuzzy
 msgid ""
 "Insère la liste des consommables avec leurs effets dans la zone de texte "
@@ -1228,22 +1238,22 @@ msgstr ""
 "el siguiente formato&amp;nbsp;:&lt;/p&gt;&lt;p&gt;TODO: aperçu&lt;/p&gt;"
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:5676
+#: ..\CTRLW.user.js:5685
 msgid "Commandant"
 msgstr "Comandante"
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:5678
+#: ..\CTRLW.user.js:5687
 msgid "Le Commandant décide des planètes que le Daedalus explorera."
 msgstr "El Comandante gobierna el Daedalus y hacia dónde va."
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:5706
+#: ..\CTRLW.user.js:5715
 msgid "Administrateur NERON"
 msgstr "Administrador de NERON"
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:5708
+#: ..\CTRLW.user.js:5717
 msgid ""
 "Le responsable NERON semble avoir une certaine influence auprès de "
 "l'ordinateur de bord. Il est notamment le seul à avoir la possibilité de "
@@ -1254,12 +1264,12 @@ msgstr ""
 "toda la tripulación haciéndose pasar por NERON."
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:5736
+#: ..\CTRLW.user.js:5745
 msgid "Responsable de Communications"
 msgstr "Oficial de Comunicaciones"
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:5738
+#: ..\CTRLW.user.js:5747
 msgid ""
 "Le Responsable de Communications est la seule personne habilitée à décider "
 "quels seront les téléchargements prioritaires du Centre de Communication."
@@ -1268,7 +1278,7 @@ msgstr ""
 "Sol ha sido reestablecido. Adicionalmente, puede realizar comunicados a toda "
 "la tripulación."
 
-#: ..\CTRLW.user.js:5782
+#: ..\CTRLW.user.js:5791
 msgid ""
 "<p>Vous êtes dans la même pièce que cette personne ; vous pouvez donc "
 "l'examiner de plus près.</p><p><strong>Cliquez ici pour enregistrer les "
@@ -1276,11 +1286,11 @@ msgid ""
 "strong></p>"
 msgstr ""
 
-#: ..\CTRLW.user.js:6046
+#: ..\CTRLW.user.js:6055
 msgid "Laboratoire"
 msgstr ""
 
-#: ..\CTRLW.user.js:6083
+#: ..\CTRLW.user.js:6092
 #, fuzzy
 msgid ""
 "<p>Insère la liste de recherches dans la zone de texte active, de la "
@@ -1301,7 +1311,7 @@ msgstr ""
 "br/&gt;Descripción&lt;br/&gt;Bonus: &lt;i&gt;Biólogo&lt;/i&gt;, &lt;i&gt;"
 "Médico&lt;/i&gt;&lt;/li&gt;"
 
-#: ..\CTRLW.user.js:6131
+#: ..\CTRLW.user.js:6140
 #, fuzzy
 msgid ""
 "<p>Insère la liste de projets dans la zone de texte active, de la "
@@ -1321,7 +1331,7 @@ msgstr ""
 "Descripción&lt;br/&gt;Bonus : &lt;i&gt;Artillero&lt;/i&gt;, &lt;i&gt;"
 "Piloto&lt;/i&gt;&lt;/li&gt;"
 
-#: ..\CTRLW.user.js:6164
+#: ..\CTRLW.user.js:6173
 #, fuzzy
 msgid ""
 "Insère la liste de planètes dans la zone de texte active, de la forme&nbsp;:"
@@ -1330,76 +1340,76 @@ msgstr ""
 "Copia la lista de planetas al cuadro de texto activo, con el siguiente "
 "formato&amp;nbsp;:&lt;/p&gt;&lt;p&gt;TODO: aperçu"
 
-#: ..\CTRLW.user.js:6182
+#: ..\CTRLW.user.js:6191
 msgid "Partager les paramètres"
 msgstr "Compartir los parámetros"
 
-#: ..\CTRLW.user.js:6200 ..\CTRLW.user.js:6224
+#: ..\CTRLW.user.js:6209 ..\CTRLW.user.js:6233
 msgid "Plantes"
 msgstr "Plantas"
 
-#: ..\CTRLW.user.js:6224
+#: ..\CTRLW.user.js:6233
 msgid "Partager l'état des plantes."
 msgstr "Compartir el estado de los planetas"
 
-#: ..\CTRLW.user.js:6334
+#: ..\CTRLW.user.js:6343
 msgid "connecté(e)"
 msgstr "conectado(a)"
 
-#: ..\CTRLW.user.js:6338
+#: ..\CTRLW.user.js:6347
 msgid "Canal privé"
 msgstr "Canal privado"
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:6584 ..\CTRLW.user.js:6667 ..\CTRLW.user.js:6668
+#: ..\CTRLW.user.js:6593 ..\CTRLW.user.js:6676 ..\CTRLW.user.js:6677
 msgid "Cycle Humain"
 msgstr "Ciclo humano"
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:6589
+#: ..\CTRLW.user.js:6598
 msgid "Recherche Mineur"
 msgstr "Investigación menor"
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:6594 ..\CTRLW.user.js:6649 ..\CTRLW.user.js:6650
+#: ..\CTRLW.user.js:6603 ..\CTRLW.user.js:6658 ..\CTRLW.user.js:6659
 msgid "Recherche"
 msgstr "Investigación"
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:6599
+#: ..\CTRLW.user.js:6608
 msgid "Défenseur Du Daedalus"
 msgstr "Defensor del Daedalus"
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:6604 ..\CTRLW.user.js:6631 ..\CTRLW.user.js:6632
+#: ..\CTRLW.user.js:6613 ..\CTRLW.user.js:6640 ..\CTRLW.user.js:6641
 #, fuzzy
 msgid "Expédition"
 msgstr "Experiencia"
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:6609
+#: ..\CTRLW.user.js:6618
 msgid "Nouvel Planète"
 msgstr "Nuevo planeta"
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:6622 ..\CTRLW.user.js:6623
+#: ..\CTRLW.user.js:6631 ..\CTRLW.user.js:6632
 msgid "Nouvelle Planète"
 msgstr "Nuevo planeta"
 
-#: ..\CTRLW.user.js:6624
+#: ..\CTRLW.user.js:6633
 msgid "Gagné à chaque planète (arrivée en orbite)."
 msgstr "Conseguido al llegar a la órbita de cada planeta."
 
-#: ..\CTRLW.user.js:6633
+#: ..\CTRLW.user.js:6642
 msgid "Gagné à chaque exploration."
 msgstr "Conseguido en cada exploración."
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:6640 ..\CTRLW.user.js:6641
+#: ..\CTRLW.user.js:6649 ..\CTRLW.user.js:6650
 msgid "Recherche Mineure"
 msgstr "Investigación menor"
 
-#: ..\CTRLW.user.js:6642 ..\CTRLW.user.js:6651
+#: ..\CTRLW.user.js:6651 ..\CTRLW.user.js:6660
 msgid ""
 "Gagné lorsque la recherche est terminée ainsi qu'une seconde fois lors du "
 "retour sur SOL."
@@ -1408,15 +1418,15 @@ msgstr ""
 "Sol."
 
 #. Translators: This translation must be copied from the game. */
-#: ..\CTRLW.user.js:6658 ..\CTRLW.user.js:6659
+#: ..\CTRLW.user.js:6667 ..\CTRLW.user.js:6668
 msgid "Défenseur du Daedalus"
 msgstr "Defensor del Daedalus"
 
-#: ..\CTRLW.user.js:6660
+#: ..\CTRLW.user.js:6669
 msgid "Gagné pour chaque Hunter abattu."
 msgstr "Conseguido por cada Hunter abatido."
 
-#: ..\CTRLW.user.js:6669
+#: ..\CTRLW.user.js:6678
 msgid "Gagné à chaque cycle."
 msgstr "Conseguido en cada ciclo."
 
