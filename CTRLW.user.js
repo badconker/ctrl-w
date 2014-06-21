@@ -3123,6 +3123,7 @@ Main.k.tabs.playing = function() {
 		ret = ret.replace(/<img[^>]+pa_slot2[^>]+>/g, ":pm:");
 		ret = ret.replace(/<img[^>]+moral[^>]+>/g, ":moral:");
 		ret = ret.replace(/<img[^>]+lp\.png[^>]+>/g, ":hp:");
+		ret = ret.replace(/<img[^>]+>/g, "");
 
 		return ret;
 	};
