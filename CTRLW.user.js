@@ -48,7 +48,7 @@ Main.k.topicurl = "http://twd.io/e/KKyl0g";
 Main.k.window = window;
 Main.k.domain = document.domain;
 Main.k.mushurl = 'http://' + document.domain;
-
+Main.k.debug = true;
 
 String.prototype.capitalize = function() {
 	return this.replace(/(?:^|\s)\S/g, function(a) {
@@ -629,10 +629,10 @@ Main.k.Game.data.cycle = 0;
 Main.k.Game.data.xp = 1;
 Main.k.Game.data.player_status = 'bronze';
 Main.k.Game.data.players = {};
+Main.k.Game.data.msgs_prerecorded = new Array();
 Main.k.Game.init = function() {
 	var ctrlw_game = localStorage.getItem("ctrlw_game");
 	if (ctrlw_game == null){
-
 		return;
 	}
 	Main.k.Game.data = JSON.parse(ctrlw_game);
@@ -659,22 +659,76 @@ Main.k.Game.updatePlayerInfos = function() {
 		var body = '<div id="body-mock">' + content.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/g, '') + '</div>';
 		var jobject = $(body);
 		if(jobject.find('#cdActualXp').length > 0){
-			Main.k.Game.data.xp = jobject.find('#cdActualXp').text();
+			this.data.xp = jobject.find('#cdActualXp').text();
 		}
 		if(jobject.find('#experience .bought.goldactive').length > 0){
-			Main.k.Game.data.player_status = 'gold';
+			this.player_status = 'gold';
 		}else if(jobject.find('#experience .bought').length > 0){
-			Main.k.Game.data.player_status = 'silver';
+			this.data.player_status = 'silver';
 		}else{
-			Main.k.Game.data.player_status = 'bronze';
+			this.data.player_status = 'bronze';
 		}
-		$this.save();
+		this.save();
 		Main.k.MushUpdate();
 		Main.k.hideLoading();
 		Main.k.quickNotice(Main.k.text.gettext('Infos du joueur mises à jour.'));
 	});
 };
 
+Main.k.Game.displayMsgsPrerecorded = function(){
+    messages_prerecorded = [];
+    if(this.data.msgs_prerecorded != undefined){
+        messages_prerecorded = this.data.msgs_prerecorded;
+    }
+    
+    if(messages_prerecorded.length > 0){
+        var infos = "";
+        infos += "taille : "+messages_prerecorded.length+"\n\n";
+        
+        for(var idMsg = 0;idMsg < messages_prerecorded.length;idMsg++){
+            infos += messages_prerecorded[idMsg][0] + " : " + messages_prerecorded[idMsg][1]+"\n";
+        }
+        return infos;
+    }
+    return "Il n'y a pas de messages pre-enregistrés";   
+}
+
+Main.k.Game.addMsgPrerecorded = function(title, message) {
+    messages_prerecorded = [];
+    if(this.data.msgs_prerecorded != undefined){
+        messages_prerecorded = this.data.msgs_prerecorded ;
+    }
+    
+    for(var idMsg = 0;idMsg < messages_prerecorded.length;idMsg++){
+        if(title == messages_prerecorded[idMsg][0]){
+            throw new this.Exception("MessageAlreadyExists");
+        }
+    }
+    
+    messages_prerecorded.push([title,message]);
+   
+    this.data.msgs_prerecorded = messages_prerecorded;
+    
+    this.save();
+}
+Main.k.Game.delMsgsPrerecorded = function(title) {
+    if(this.data.msgs_prerecorded[title] != undefined){
+        delete this.data.msgs_prerecorded[title];
+    }
+    else{
+        throw new this.Exception("MessageNotExist");
+    }
+}
+
+Main.k.Game.delAllMsgsPrerecorded = function() {
+    this.data.msgs_prerecorded = [];
+    this.save();
+}
+
+Main.k.Game.Exception = function(message){
+    this.message = message;
+    this.name = "GameException";
+}
 
 // == Options Manager  ========================================
 Main.k.Options = {};
@@ -1386,25 +1440,25 @@ Main.k.css.ingame = function() {
 		background-color : #74CBF3! important;\
 		font-variant: small-caps;\
 	}\
-	#tabreply_content .loading { \
+	#tabreply_content .loading, #tabcustom_content .loading { \
 		text-align: center;\
 		margin-top: 42px;\
 	}\
-	#tabreply_content .wall { \
+	#tabreply_content .wall, #tabcustom_content .wall { \
 		resize: none;\
 	}\
-	#tabreply_content .tid_buttons { \
+	#tabreply_content .tid_buttons, #tabcustom_content .tid_buttons { \
 		position: absolute;\
 		bottom: 0px; left: 0; width: 100%;\
 		text-align: center;\
 	}\
-	#tabreply_content .tid_button { \
+	#tabreply_content .tid_button, #tabcustom_content .tid_button { \
 		min-width: 0! important;\
 		display: inline-block;\
 		margin: 10px 4px;\
 		padding: 3px 8px;\
 	}\
-	#tabreply_content textarea { \
+	#tabreply_content textarea, #tabcustom_content textarea { \
 		width: 95%;\
 		height: 80px! important;\
 		resize: none! important;\
@@ -1419,20 +1473,20 @@ Main.k.css.ingame = function() {
 		overflow: auto;\
 		text-align: left;\
 	}\
-	#tabreply_content form { \
+	#tabreply_content form, #tabcustom_content form  { \
 		height: 100%! important;\
 	}\
-	#tabreply_content .tid_wrapper { \
+	#tabreply_content .tid_wrapper, #tabcustom_content .tid_wrapper { \
 		height: 100%! important;\
 		padding: 4px;\
 	}\
-	#tabreply_content .tid_smileyPanel { \
+	#tabreply_content .tid_smileyPanel, #tabcustom_content .tid_smileyPanel { \
 		margin: 2px auto;\
 	}\
-	#tabreply_content .tid_smileyPopUp .tid_wrapper { \
+	#tabreply_content .tid_smileyPopUp .tid_wrapper, #tabcustom_content .tid_smileyPopUp .tid_wrapper  { \
 		max-height: 80px! important;\
 	}\
-	#tabreply_content .reply { \
+	#tabreply_content .reply, #tabcustom_content .reply  { \
 		overflow-y: auto! important;\
 		height: 80px! important;\
 		width: 95%! important;\
@@ -4376,7 +4430,6 @@ Main.k.tabs.playing = function() {
 			var vocod = $("<div>").attr("id", "tabneron_content").css("display", "none").addClass("tabcontent wall").appendTo(rbg);
 			var custom = $("<div>").attr("id", "tabcustom_content").css("display", "none").addClass("tabcontent wall").appendTo(rbg);
 			$("<p>").addClass("warning").html(Main.k.text.gettext("Disponible prochainement.")).appendTo(vocod);
-			$("<p>").addClass("warning").html(Main.k.text.gettext("Disponible prochainement.")).appendTo(custom);
 
 			// Actions
 			var mini = Main.k.MakeButton("<img src='/img/icons/ui/less.png' /> Réduire le Manager",null,function() {
@@ -5195,12 +5248,14 @@ Main.k.tabs.playing = function() {
 		$("#searchfield").val("@" + hero);
 		Main.k.Manager.search();
 	};
+	
 	Main.k.Manager.replyloaded = false;
+	
 	Main.k.Manager.fillReply = function() {
 		if (Main.k.Manager.replyloaded) {
 			// Update message content
 			if (Main.k.Manager.replywaiting != "") {
-				$("#tid_wallPost").val(Main.k.Manager.replywaiting);
+				$("#tabreply_content .tid_wallPost").val(Main.k.Manager.replywaiting);
 				Main.k.Manager.replywaiting = "";
 			}
 		} else {
@@ -5218,20 +5273,23 @@ Main.k.tabs.playing = function() {
 				$tabreply_content.find(".tid_editorBut__user").remove();
 				// TODO: remove inactive tags in main chat
 
-				var preview = $("#tid_wallPost_preview").attr("id", "").addClass("reply bubble");
+                $("#tabreply_content #tid_wallPost_preview").attr("id", "").addClass("tid_wallPost_preview");
+                $("#tabreply_content #tid_wallPost").attr("id", "").addClass("tid_wallPost");
+                 
+				var preview = $("#tabreply_content .tid_wallPost_preview").attr("id", "").addClass("reply bubble");
 				if (Main.k.Options.cbubbles) preview.addClass("bubble_" + Main.k.ownHero);
 				if (Main.k.Options.cbubblesNB) preview.addClass("custombubbles_nobackground");
 
 				var bubble = Main.k.ownHero.replace(/(\s)/g, "_").toLowerCase();
 				$("<div>").addClass("char " + bubble).appendTo(preview);
 				$("<span>").addClass("buddy").html(Main.k.ownHero.capitalize() + " : ").appendTo(preview);
-				$("<p>").addClass("tid_preview tid_editorContent").attr("id", "tid_wallPost_preview").appendTo(preview);
+				$("<p>").addClass("tid_preview tid_editorContent tid_wallPost_preview").appendTo(preview);
 				$("<div>").addClass("clear").appendTo(preview);
 
 				// Actions
 				var buttons = $("<div>").addClass("tid_buttons").appendTo($tabreply_content);
 				var answer = Main.k.MakeButton("<img src='http://twinoid.com/img/icons/reply.png' /> "+ Main.k.text.gettext("Répondre au topic"),null,function() {
-					var $tid_wallPost = $("#tid_wallPost");
+					var $tid_wallPost = $("#tabreply_content .tid_wallPost");
 					var val = $tid_wallPost.val();
 					var k = Main.k.Manager.displayedTopic;
 					Main.k.postMessage(k, val, Main.k.Manager.update);
@@ -5250,7 +5308,7 @@ Main.k.tabs.playing = function() {
 				.on("mouseout", Main.hideTip);
 
 				var newtopic = Main.k.MakeButton("<img src='http://twinoid.com/img/icons/reply.png' /> " + Main.k.text.gettext("Nouveau topic"),null,function() {
-					var $tid_wallPost = $("#tid_wallPost");
+					var $tid_wallPost = $("#tabreply_content .tid_wallPost");
 					var val = $tid_wallPost.val();
 					Main.k.newTopic(val, Main.k.Manager.update);
 					$tid_wallPost.val("");
@@ -5374,12 +5432,245 @@ Main.k.tabs.playing = function() {
 
 				// Update message content
 				if (Main.k.Manager.replywaiting != "") {
-					$("#tid_wallPost").val(Main.k.Manager.replywaiting);
+					$("#tabreply_content .tid_wallPost").val(Main.k.Manager.replywaiting);
 					Main.k.Manager.replywaiting = "";
 				}
 			});
 		}
 	};
+	
+    Main.k.Manager.fillCustom = function() {
+        if (Main.k.Manager.replyloaded) {
+            // Update message content
+            if (Main.k.Manager.replywaiting != "") {
+                $("#tabcustom_content .tid_wallPost").val(Main.k.Manager.replywaiting);
+                Main.k.Manager.replywaiting = "";
+            }
+        } else {
+            var newpost = $("#tabcustom_content").empty();
+            newpost.html("<div class='loading'><img src='http://twinoid.com/img/loading.gif' alt='Chargement' /> "+Main.k.text.gettext("Chargement…")+"</div>");
+            Main.k.LoadJS('/mod/wall/post', {_id: "tabcustom_content"}, function() {
+                Main.k.Manager.replyloaded = true;
+
+                // Remove inactive tags
+                var $tabcustom_content = $("#tabcustom_content");
+                $tabcustom_content.find(".tid_advanced").remove();
+                $tabcustom_content.find(".tid_button").remove();
+                $tabcustom_content.find(".tid_options").remove();
+                $tabcustom_content.find(".tid_editorBut_question").remove();
+                $tabcustom_content.find(".tid_editorBut__user").remove();
+                // TODO: remove inactive tags in main chat
+
+                $("#tabcustom_content #tid_wallPost_preview").attr("id", "").addClass("tid_wallPost_preview");
+                $("#tabcustom_content #tid_wallPost").attr("id", "").addClass("tid_wallPost");
+
+                var preview = $("#tabcustom_content .tid_wallPost_preview").addClass("reply bubble");
+                if (Main.k.Options.cbubbles) preview.addClass("bubble_" + Main.k.ownHero);
+                if (Main.k.Options.cbubblesNB) preview.addClass("custombubbles_nobackground");
+
+                var bubble = Main.k.ownHero.replace(/(\s)/g, "_").toLowerCase();
+                $("<div>").addClass("char " + bubble).appendTo(preview);
+                $("<span>").addClass("buddy").html(Main.k.ownHero.capitalize() + " : ").appendTo(preview);
+                $("<p>").addClass("tid_preview tid_editorContent tid_wallPost_preview").appendTo(preview);
+                $("<div>").addClass("clear").appendTo(preview);
+
+                // Actions
+                var buttons = $("<div>").addClass("tid_buttons").appendTo($tabcustom_content);
+                var answer = Main.k.MakeButton("<img src='http://twinoid.com/img/icons/reply.png' /> "+ Main.k.text.gettext("Répondre au topic"),null,function() {
+                    var $tid_wallPost = $("#tabcustom_content .tid_wallPost");
+                    var val = $tid_wallPost.val();
+                    var k = Main.k.Manager.displayedTopic;
+                    Main.k.postMessage(k, val, Main.k.Manager.update);
+                    $tid_wallPost.val("");
+
+                    Main.k.Manager.waitingforupdate = true;
+                    setTimeout(function() {
+                        if (Main.k.Manager.waitingforupdate) Main.k.Manager.update();
+                    }, 5000);
+                })
+                .css({display: "inline-block", margin: "4px 4px 8px"})
+                .appendTo(buttons)
+                .find("a")
+                .attr("_title", "Répondre").attr("_desc", Main.k.text.gettext("Envoyer ce message en tant que réponse au topic affiché ci-contre."))
+                .on("mouseover", Main.k.CustomTip)
+                .on("mouseout", Main.hideTip);
+
+                var newtopic = Main.k.MakeButton("<img src='http://twinoid.com/img/icons/reply.png' /> " + Main.k.text.gettext("Nouveau topic"),null,function() {
+                    var $tid_wallPost = $("#tabcustom_content .tid_wallPost");
+                    var val = $tid_wallPost.val();
+                    Main.k.newTopic(val, Main.k.Manager.update);
+                    $tid_wallPost.val("");
+                })
+                .css({display: "inline-block", margin: "4px 4px 8px"})
+                .appendTo(buttons)
+                .find("a")
+                .attr("_title", "Nouveau topic").attr("_desc", Main.k.text.gettext("Poster ce message en tant que nouveau topic."))
+                .on("mouseover", Main.k.CustomTip)
+                .on("mouseout", Main.hideTip);
+                
+                var addmsg = Main.k.MakeButton("<img src='http://mush.vg/img/icons/ui/fav.png' /> " + Main.k.text.gettext("Ajouter le message aux favoris"),null,function() {
+                    var $tid_wallPost = $("#tabcustom_content .tid_wallPost");
+                    var val = $tid_wallPost.val();
+                    var title = prompt("Entrez un titre pour le message suivant : \n"+val,"");
+                    if(title != null){
+                        try{
+                            Main.k.Game.addMsgPrerecorded(title,val);
+                        }
+                        catch(e){
+                            if(e.name == "GameException"){
+                                alert("Le message existe déjà.");
+                            }
+                            else if(Main.k.debug){
+                                alert(e.name+"\n"+e.message+"\n"+e.s)
+                            }
+                        }
+                    }
+                })
+                .css({display: "inline-block", margin: "4px 4px 8px"})
+                .appendTo(buttons)
+                .find("a")
+                .attr("_title", "Nouveau topic").attr("_desc", Main.k.text.gettext("Poster ce message en tant que nouveau topic."))
+                .on("mouseover", Main.k.CustomTip)
+                .on("mouseout", Main.hideTip);
+                
+                var delallmsg = Main.k.MakeButton("<img src='http://mush.vg/img/icons/ui/bin.png' /> " + Main.k.text.gettext("Décharger"),null,function() {
+                    Main.k.Game.delAllMsgsPrerecorded();
+                })
+                .css({display: "inline-block", margin: "4px 4px 8px"})
+                .appendTo(buttons)
+                .find("a")
+                .attr("_title", "Nouveau topic").attr("_desc", Main.k.text.gettext("Poster ce message en tant que nouveau topic."))
+                .on("mouseover", Main.k.CustomTip)
+                .on("mouseout", Main.hideTip);
+                
+                 var displaymsgs = Main.k.MakeButton("<img src='http://twinoid.com/img/icons/search.png' /> " + Main.k.text.gettext("Affiche les messages pre-enregistés"),null,function() {
+                    alert(Main.k.Game.displayMsgsPrerecorded());
+                })
+                .css({display: "inline-block", margin: "4px 4px 8px"})
+                .appendTo(buttons)
+                .find("a")
+                .attr("_title", "Nouveau topic").attr("_desc", Main.k.text.gettext("Poster ce message en tant que nouveau topic."))
+                .on("mouseover", Main.k.CustomTip)
+                .on("mouseout", Main.hideTip);
+                
+                if(typeof(js.Lib.window["editor_tid_wallPost"]) == 'undefined'){
+                    js.Lib.window["editor_tid_wallPost"] = {};
+                }
+                // Modify preview
+                js.Lib.window["editor_tid_wallPost"].preview = preview;
+
+                // Remove inactive icons
+                js.Lib.window["editor_tid_wallPost"].loadSmileys = function(q) {
+                    var k;
+                    var _g = this;
+                    this.initIcons();
+                    if(this.smileysPanel.find(".tid_active").removeClass("tid_active")["is"](q)) return this.hideSmileys(true);
+                    this.hideSmileys(false);
+                    var cid = q.attr("tid_cat");
+                    var cat = null;
+                    if(cid != "_funtag") {
+                        var $it0 = this.config.icons.iterator();
+
+                        while( $it0.hasNext() ) {
+                            /** @type {{category:string}} **/
+                            var c = $it0.next();
+                            if(c.category == cid) {
+                                cat = c;
+                                break;
+                            }
+                        }
+                        if(cat == null) return false;
+                    }
+                    var s = new StringBuf();
+                    s.b += "<div class=\"tid_smileyPopUp\">";
+                    if(cid == "_funtag") {
+                        s.b += Std.string("<div class=\"tid_title\">" + this.config.funTitle + "</div>");
+                        var keys = [];
+                        var $it1 = this.config.fun.keys();
+                        while( $it1.hasNext() ) {
+                            k = $it1.next();
+                            keys.push(k);
+                        }
+                        keys.sort(function(a,b) {
+                            return Reflect.compare(a,b);
+                        });
+                        var _g1 = 0;
+                        while(_g1 < keys.length) {
+                            k = keys[_g1];
+                            ++_g1;
+                            s.b += Std.string("<a class=\"tid_fun\" href=\"#\" tid_s=\"" + StringTools.htmlEscape("{" + k + "}") + "\"><img src=\"http://" + _tid.host + "/img/icons/" + this.config.fun.get(k).i + ".png\" alt=\"" + k + "\" title=\"" + StringTools.htmlEscape(this.config.fun.get(k).n) + "\"/>" + StringTools.htmlEscape(this.config.fun.get(k).n) + "</a>");
+                        }
+                    } else {
+                        s.b += Std.string("<div class=\"tid_title\">" + cat.category + "</div>");
+                        s.b += "<div class=\"tid_wrapper\">";
+                        var $it2 = cat.icons.iterator();
+                        var a = true;
+                        while( $it2.hasNext() ) {
+                            var i = $it2.next();
+
+                            // Ignore incorrect icons
+                            if (cat.category == "Mush") {
+                                // Delete inactive icons
+                                if (i.image == "/ui/o2.png") continue;
+                                if (i.tag == ":mush_pa_gen:") continue;
+                                if (i.tag == ":mush_pa_mov:") continue;
+                                if (i.tag == ":mush_planet:") continue;
+
+                                // Modify incorrect icons
+                                if (i.tag == ":mush_pa:") {
+                                    i.tag = ":pa:";
+                                    i.image = "/img/icons/ui/pa_slot1.png";
+                                } else if (i.tag == ":mush_pm:") {
+                                    i.tag = ":pm:";
+                                    i.image = "/img/icons/ui/pa_slot2.png";
+                                } else if (i.tag == ":mush_exp:") {
+                                    i.tag = ":xp:";
+                                    i.image = "/img/icons/ui/xp.png";
+                                }
+                            }
+
+                            var str = i.tag;
+                            var desc = i.tag;
+                            if(i.alt != null) {
+                                str = i.alt;
+                                desc = i.alt + ", " + i.tag;
+                            }
+                            var mh = "";
+                            if(i.max != null) mh += "<span class=\"tid_max tid_max_" + i.tag.split(":").join("") + "\">" + i.max + "</span>";
+                            s.b += Std.string("<a class=\"tid_smiley\" href=\"#\">" + mh + "<img src=\"" + cat.url + i.image + "\" tid_s=\"" + StringTools.htmlEscape(str) + "\" title=\"" + StringTools.htmlEscape(desc) + "\"/></a>");
+                        }
+                        s.b += "</div>";
+                    }
+                    s.b += "<div class=\"tid_clear\"></div>";
+                    s.b += "</div>";
+                    q.addClass("tid_active");
+                    var pop = $(s.b);
+                    q.parent().append(pop);
+                    pop.hide().slideDown(200);
+                    if(cid == "_funtag") pop.find("a.tid_fun").click(function() {
+                        _g.insert($(this).attr("tid_s"));
+                        return false;
+                    }); else pop.find("a.tid_smiley").click(function() {
+                        var m = $(this).find(".tid_max");
+                        if(m.length > 0 && Std.parseInt(m.html()) == 0) return false;
+                        _g.insert($(this).find("img").attr("tid_s"));
+                        return false;
+                    });
+                    return false;
+                };
+
+                // Auto-load Mush icons
+                //$("#editor_tid_wallPost").loadSmileys($("#editor_tid_wallPost a.tid_smcat[tid_cat='Mush']"));
+
+                // Update message content
+                if (Main.k.Manager.replywaiting != "") {
+                    $("#tabcustom_content .tid_wallPost").val(Main.k.Manager.replywaiting);
+                    Main.k.Manager.replywaiting = "";
+                }
+            });
+        }
+    };
+    
 	Main.k.Manager.initHeroes = function() {
 		Main.k.Manager.heroes["neron"] = { name: "neron", mess: 0, av: 0, a: 0 };
 		for (var i=0; i<Main.k.HEROES.length; i++) {
@@ -5396,6 +5687,7 @@ Main.k.tabs.playing = function() {
 		Main.k.Manager.fillWall();
 		Main.k.Manager.fillSearch();
 		Main.k.Manager.fillReply();
+		Main.k.Manager.fillCustom();
 
 		// Update current displayed topic
 		if (Main.k.Manager.displayedTopic) {
