@@ -48,7 +48,7 @@ Main.k.topicurl = "http://twd.io/e/KKyl0g";
 Main.k.window = window;
 Main.k.domain = document.domain;
 Main.k.mushurl = 'http://' + document.domain;
-Main.k.debug = true;
+Main.k.debug = false;
 
 String.prototype.capitalize = function() {
 	return this.replace(/(?:^|\s)\S/g, function(a) {
@@ -725,11 +725,11 @@ Main.k.Game.addMsgPrerecorded = function(title, message) {
    
     this.data.msgs_prerecorded = messages_prerecorded;
     this.save();
-    Main.k.Manager.replyloaded = false;
+    Main.k.Manager.customloaded = false;
     Main.k.Manager.update();
 }
 
-Main.k.Game.delMsgsPrerecorded = function(title) {
+Main.k.Game.delMsgPrerecorded = function(title) {
     messages_prerecorded = [];
     if(this.data.msgs_prerecorded != undefined){
         messages_prerecorded = this.data.msgs_prerecorded ;
@@ -737,17 +737,13 @@ Main.k.Game.delMsgsPrerecorded = function(title) {
     
     for(var idMsg = 0;idMsg < messages_prerecorded.length;idMsg++){
         if(title == messages_prerecorded[idMsg][0]){
-            delete messages_prerecorded[idMsg];
+            messages_prerecorded.splice(idMsg,1);
         }
     }
     
-    throw new this.Exception("MessageNotExists");
-}
-
-Main.k.Game.delAllMsgsPrerecorded = function() {
-    this.data.msgs_prerecorded = [];
+    this.data.msgs_prerecorded =  messages_prerecorded;
     this.save();
-    Main.k.Manager.replyloaded = false;
+    Main.k.Manager.customloaded = false;
     Main.k.Manager.update();
 }
 
@@ -1474,9 +1470,9 @@ Main.k.css.ingame = function() {
 		resize: none;\
 	}\
 	#tabreply_content .tid_buttons, #tabcustom_content .tid_buttons { \
-		position: absolute;\
-		bottom: 0px; left: 0; width: 100%;\
+		width: 100%;\
 		text-align: center;\
+		margin: 5px 0;\
 	}\
 	#tabreply_content .tid_button, #tabcustom_content .tid_button { \
 		min-width: 0! important;\
@@ -1484,7 +1480,7 @@ Main.k.css.ingame = function() {
 		margin: 10px 4px;\
 		padding: 3px 8px;\
 	}\
-	#tabreply_content textarea, #tabcustom_content textarea { \
+	#tabreply_content textarea, #tabcustom_content textarea, #tabreply_content .reply, #tabcustom_content .reply { \
 		width: 95%;\
 		height: 80px! important;\
 		resize: none! important;\
@@ -1512,12 +1508,6 @@ Main.k.css.ingame = function() {
 	#tabreply_content .tid_smileyPopUp .tid_wrapper, #tabcustom_content .tid_smileyPopUp .tid_wrapper  { \
 		max-height: 80px! important;\
 	}\
-	#tabreply_content .reply, #tabcustom_content .reply  { \
-		overflow-y: auto! important;\
-		height: 80px! important;\
-		width: 95%! important;\
-		text-align: left;\
-	}\
 	#tabcustom_content .array_messages_prerecorded { \
 	    padding: 10px 10px 10px 35px;\
         background-color: #e1f9fe;\
@@ -1532,6 +1522,9 @@ Main.k.css.ingame = function() {
         border: 1px solid #aad4e5;\
         border-radius : 3px;\
         cursor:  pointer;\
+    }\
+    #tabcustom_content .selected{ \
+        background-color: #a1c9ce;\
     }\
 	.recap p { \
 		border: 1px solid rgb(9,10,97);\
@@ -5479,8 +5472,10 @@ Main.k.tabs.playing = function() {
 		}
 	};
 	
+	Main.k.Manager.customloaded = false;
+	
     Main.k.Manager.fillCustom = function() {
-        if (Main.k.Manager.replyloaded) {
+        if (Main.k.Manager.customloaded) {
             // Update message content
             if (Main.k.Manager.replywaiting != "") {
                 $("#tabcustom_content .tid_wallPost").val(Main.k.Manager.replywaiting);
@@ -5549,7 +5544,7 @@ Main.k.tabs.playing = function() {
                 .on("mouseover", Main.k.CustomTip)
                 .on("mouseout", Main.hideTip);
                 
-                var addmsg = Main.k.MakeButton("<img src='http://mush.vg/img/icons/ui/fav.png' /> " + Main.k.text.gettext("Ajouter le message aux favoris"),null,function() {
+                var addmsg = Main.k.MakeButton("<img src='http://mush.vg/img/icons/ui/fav.png' /> " + Main.k.text.gettext("Ajouter aux favoris"),null,function() {
                     var $tid_wallPost = $("#tabcustom_content .tid_wallPost");
                     var val = $tid_wallPost.val();
                     var title = prompt("Entrez un titre pour le message suivant : \n"+val,"");
@@ -5574,18 +5569,8 @@ Main.k.tabs.playing = function() {
                 .on("mouseover", Main.k.CustomTip)
                 .on("mouseout", Main.hideTip);
                 
-                var delallmsg = Main.k.MakeButton("<img src='http://mush.vg/img/icons/ui/bin.png' /> " + Main.k.text.gettext("Décharger"),null,function() {
-                    Main.k.Game.delAllMsgsPrerecorded();
-                })
-                .css({display: "inline-block", margin: "4px 4px 8px"})
-                .appendTo(buttons)
-                .find("a")
-                .attr("_title", "Nouveau topic").attr("_desc", Main.k.text.gettext("Poster ce message en tant que nouveau topic."))
-                .on("mouseover", Main.k.CustomTip)
-                .on("mouseout", Main.hideTip);
-                
-                 var displaymsgs = Main.k.MakeButton("<img src='http://twinoid.com/img/icons/search.png' /> " + Main.k.text.gettext("Affiche les messages pre-enregistés"),null,function() {
-                    alert(Main.k.Game.displayMsgsPrerecorded());
+                var delallmsg = Main.k.MakeButton("<img src='http://mush.vg/img/icons/ui/bin.png' /> " + Main.k.text.gettext("Supprimer un favori"),null,function() {
+                    Main.k.Game.delMsgPrerecorded($("#tabcustom_content .array_messages_prerecorded .selected").text() );
                 })
                 .css({display: "inline-block", margin: "4px 4px 8px"})
                 .appendTo(buttons)
@@ -5717,9 +5702,14 @@ Main.k.tabs.playing = function() {
                     
                     $("#tabcustom_content .message_prerecorded").each(function(){
                         $(this).click(function(){
-                            alert($(this).text());
                             var $tid_wallPost = $("#tabcustom_content .tid_wallPost");
                             $tid_wallPost.val(Main.k.Game.getMsgPrerecorded($(this).text()));
+                            
+                            $("#tabcustom_content .message_prerecorded").each(function(){
+                                $(this).removeClass("selected");
+                            });
+                            $(this).addClass("selected");
+                            
                         });
                     })
                    }
