@@ -693,6 +693,22 @@ Main.k.Game.displayMsgsPrerecorded = function(){
     return "Il n'y a pas de messages pre-enregistrés";   
 }
 
+Main.k.Game.getMsgPrerecorded = function(title){
+    messages_prerecorded = [];
+    if(this.data.msgs_prerecorded != undefined){
+        messages_prerecorded = this.data.msgs_prerecorded ;
+    }
+    
+    for(var idMsg = 0;idMsg < messages_prerecorded.length;idMsg++){
+        if(title == messages_prerecorded[idMsg][0]){
+            return messages_prerecorded[idMsg][1];
+        }
+    }
+    
+    return "";
+}
+
+
 Main.k.Game.addMsgPrerecorded = function(title, message) {
     messages_prerecorded = [];
     if(this.data.msgs_prerecorded != undefined){
@@ -708,21 +724,31 @@ Main.k.Game.addMsgPrerecorded = function(title, message) {
     messages_prerecorded.push([title,message]);
    
     this.data.msgs_prerecorded = messages_prerecorded;
-    
     this.save();
+    Main.k.Manager.replyloaded = false;
+    Main.k.Manager.update();
 }
+
 Main.k.Game.delMsgsPrerecorded = function(title) {
-    if(this.data.msgs_prerecorded[title] != undefined){
-        delete this.data.msgs_prerecorded[title];
+    messages_prerecorded = [];
+    if(this.data.msgs_prerecorded != undefined){
+        messages_prerecorded = this.data.msgs_prerecorded ;
     }
-    else{
-        throw new this.Exception("MessageNotExist");
+    
+    for(var idMsg = 0;idMsg < messages_prerecorded.length;idMsg++){
+        if(title == messages_prerecorded[idMsg][0]){
+            delete messages_prerecorded[idMsg];
+        }
     }
+    
+    throw new this.Exception("MessageNotExists");
 }
 
 Main.k.Game.delAllMsgsPrerecorded = function() {
     this.data.msgs_prerecorded = [];
     this.save();
+    Main.k.Manager.replyloaded = false;
+    Main.k.Manager.update();
 }
 
 Main.k.Game.Exception = function(message){
@@ -1491,8 +1517,22 @@ Main.k.css.ingame = function() {
 		height: 80px! important;\
 		width: 95%! important;\
 		text-align: left;\
-		margin: 5px auto;\
 	}\
+	#tabcustom_content .array_messages_prerecorded { \
+	    padding: 10px 10px 10px 35px;\
+        background-color: #e1f9fe;\
+        border-bottom: 1px solid #aad4e5;\
+        border-top: 1px solid #aad4e5;\
+        text-align: center;\
+	}\
+    #tabcustom_content .message_prerecorded { \
+        margin: 2px;\
+        padding: 2px 4px;\
+        box-shadow: inset 0 0 3px #aad4e5, 0px 1px 0px #fff;\
+        border: 1px solid #aad4e5;\
+        border-radius : 3px;\
+        cursor:  pointer;\
+    }\
 	.recap p { \
 		border: 1px solid rgb(9,10,97);\
 		background: rgba(255,255,255,0.3);\
@@ -5447,6 +5487,7 @@ Main.k.tabs.playing = function() {
                 Main.k.Manager.replywaiting = "";
             }
         } else {
+
             var newpost = $("#tabcustom_content").empty();
             newpost.html("<div class='loading'><img src='http://twinoid.com/img/loading.gif' alt='Chargement' /> "+Main.k.text.gettext("Chargement…")+"</div>");
             Main.k.LoadJS('/mod/wall/post', {_id: "tabcustom_content"}, function() {
@@ -5460,7 +5501,7 @@ Main.k.tabs.playing = function() {
                 $tabcustom_content.find(".tid_editorBut_question").remove();
                 $tabcustom_content.find(".tid_editorBut__user").remove();
                 // TODO: remove inactive tags in main chat
-
+                
                 $("#tabcustom_content #tid_wallPost_preview").attr("id", "").addClass("tid_wallPost_preview");
                 $("#tabcustom_content #tid_wallPost").attr("id", "").addClass("tid_wallPost");
 
@@ -5655,12 +5696,33 @@ Main.k.tabs.playing = function() {
                         if(m.length > 0 && Std.parseInt(m.html()) == 0) return false;
                         _g.insert($(this).find("img").attr("tid_s"));
                         return false;
-                    });
+                    });              
                     return false;
                 };
 
                 // Auto-load Mush icons
                 //$("#editor_tid_wallPost").loadSmileys($("#editor_tid_wallPost a.tid_smcat[tid_cat='Mush']"));
+
+
+                   var array_msg = $("<p>").addClass("array_messages_prerecorded").prependTo( $("#tabcustom_content") );
+                
+                   var messages_prerecorded = [];
+                   if(Main.k.Game.data.msgs_prerecorded != "undefine" ){
+                       messages_prerecorded = Main.k.Game.data.msgs_prerecorded;
+                   }
+                
+                   for(var idMsg = 0;idMsg<messages_prerecorded.length;idMsg++){
+                    $("<span>"+ messages_prerecorded[idMsg][0] +"</span>").addClass("message_prerecorded")
+                    .appendTo(array_msg);
+                    
+                    $("#tabcustom_content .message_prerecorded").each(function(){
+                        $(this).click(function(){
+                            alert($(this).text());
+                            var $tid_wallPost = $("#tabcustom_content .tid_wallPost");
+                            $tid_wallPost.val(Main.k.Game.getMsgPrerecorded($(this).text()));
+                        });
+                    })
+                   }
 
                 // Update message content
                 if (Main.k.Manager.replywaiting != "") {
