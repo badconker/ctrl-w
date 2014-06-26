@@ -11,9 +11,10 @@ Initially created by kill0u, now maintained by badconker.
 Download
 ======
 <ul>
-	<li><strong><a href="https://github.com/badconker/ctrl-w/raw/release/CTRLW.user.js">Last stable release</a></strong></li>
+	<li><strong><a href="https://github.com/badconker/ctrl-w/raw/release/CTRLW.user.js">Last stable release (with absolute urls)</a></strong></li>
 	<li><a href="https://github.com/badconker/ctrl-w/raw/beta/CTRLW.user.js">Last beta version </a></li>
-	<li><a href="https://github.com/badconker/ctrl-w/raw/master/CTRLW.user.js">Last developpement version (at your own risk :p)</a></li>
+	<li><a href="https://github.com/badconker/ctrl-w/raw/master/CTRLW.user.js">Last stable release (with relative urls)</a></li>
+	<li><a href="https://github.com/badconker/ctrl-w/raw/dev/CTRLW.user.js">Developpement branch (Pull your requests here pls)</a></li>
 </ul>
 
 
