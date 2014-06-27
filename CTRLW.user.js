@@ -472,6 +472,76 @@ Main.k.ClosePopup = function() {
 		tgt.attr("id", "");
 	}
 };
+
+Main.k.CreateAlert = function() {
+	var alert = {};
+	alert.dom = $("<div>")
+	.css({
+		"z-index" : "10",
+		"position" : "absolute",
+		"height": $("body").outerHeight(),
+		"width": "100%",
+		"background-color":"rgba(0,0,255,0.5)"})
+	.click(function(){
+		$(alert.dom).remove();$(alert.popup).remove();});
+		
+	alert.popup = $("<div>")
+	.css({
+		"width": "100%",
+		"z-index" : "11",
+		"position":"absolute",});
+	$("<div>")
+	.css({
+		"background-color" : "#74cbf3",
+		"padding":"10px",
+		"position":"relative",
+		"box-shadow":"-1px 2px 5px 1px rgba(0, 0, 0, 0.7)", 
+		"width" : "500px",
+		"margin" : "300px auto 0 auto",
+		"color" : "black",
+		"border-radius":"5px"})
+	.appendTo(alert.popup);
+		
+	$("<img/>")
+	.attr("alt","fermeture de l'alert")
+	.attr("src","img/icons/ui/less.png")
+	.css({"width":"23px","right":"10px","position":"absolute"})
+	.click(function(){
+		$(alert.dom).remove();$(alert.popup).remove();})
+	.appendTo(alert.popup.children());
+	
+	alert.popup_title = $("<div>")
+	.css({"height":"45px","vertical-align":"middle","margin-bottom":"5px"})
+	.appendTo(alert.popup.children());
+	
+	alert.content = $("<p>")
+	.css({
+		"border-radius":"3px",
+		"background-color":"white",
+		"padding":"10px"})
+	.appendTo(alert.popup.children());
+	
+	$("<img/>")
+	.attr("alt","neron")
+	.attr("src","/img/design/neron_chat.png")
+	.css({"float":"left","height":"45px","margin-right":"5px"})
+	.appendTo(alert.popup_title);
+	$("<h1>").text("NERON").appendTo(alert.popup_title);
+	
+	return alert;
+};
+Main.k.OpenAlert = function(alert){
+	$("body").prepend(alert.popup);
+	$("body").prepend(alert.dom);
+	
+};
+Main.k.CreateSimpleAlert = function(message){
+	var simpleAlert = Main.k.CreateAlert("");
+	simpleAlert.content.text(message);
+	Main.k.OpenAlert(simpleAlert);
+}
+
+
 Main.k.CustomTip = function(e) {
 	var tgt = (e || event).target;
 	var title = tgt.getAttribute("_title");
@@ -5493,24 +5563,13 @@ Main.k.tabs.playing = function() {
                     }
                     catch(e){
                         if(e.name == "MessageAlreadyExist"){
-							alert("Le message existe déjà.");
-							var popupAlert = Main.k.CreatePopup();
-							// Fill popup content
-							var content = "<div class='updatescontent'>" + maj_content + "</div>";
-							var ok = "<div class='updatesactions'><div id=\"ok\" class=\"but updatesbtn\" ><div class=\"butright\"><div class=\"butbg\"><a onclick=\"$('#final').show();\" href=\""+okHref+"\">"+Main.k.text.gettext("Mettre à jour")+"</a></div></div></div>";
-							var cancelAc = "'Main.k.ClosePopup();'";
-							var cancel = "<div id=\"cancel\" class=\"but updatesbtn\" onclick=" + cancelAc + "><div class=\"butright\"><div class=\"butbg\"><a href=\"#\">" + Main.getText("cancel") + "</a></div></div></div></div>";
-							var finalisation = '<div id="final" class="updatesactions" style="display:none"><div><strong>'+Main.k.text.gettext("Pour finaliser la mise à jour, après avoir installé le script, veuillez cliquer sur le bouton ci-dessous.")+'</strong></div><div class="but updatesbtn" onclick="Main.k.ClosePopup();window.location.reload();"><div class="butright"><div class="butbg"><a href="#">'+Main.k.text.gettext("Finaliser la mise à jour")+'</a></div></div></div></div></div>';
-							$("<div>").html(content + ok + cancel + finalisation).appendTo(popup.content);
-
-							// Display popup
-							Main.k.OpenPopup(popup.dom);
+							Main.k.CreateSimpleAlert("Le message existe déjà.");
                         }
 						else if(e.name == "TitleEmpty"){
-							alert("Le titre est vide");
+							Main.k.CreateSimpleAlert("Le titre est vide.");
 						}
 						else if(e.name == "MessageEmpty"){
-							alert("Le message est vide");
+							Main.k.CreateSimpleAlert("Le message est vide.");
 						}
                         else if(Main.k.debug){
                             Main.k.treatingBug(e);
@@ -5532,7 +5591,7 @@ Main.k.tabs.playing = function() {
 					}
 					catch(e){
 						if(e.name == "MessageNotExist"){
-							alert("Le message que vous voulez supprmier n'éxiste pas");
+							Main.k.CreateSimpleAlert("Le message que vous voulez supprmier n'existe pas.");
 						}
 						else if(Main.k.debug){
 							Main.k.treatingBug(e);
