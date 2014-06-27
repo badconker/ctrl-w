@@ -48,7 +48,8 @@ Main.k.topicurl = "http://twd.io/e/KKyl0g";
 Main.k.window = window;
 Main.k.domain = document.domain;
 Main.k.mushurl = 'http://' + document.domain;
-Main.k.debug = false;
+Main.k.debug = true;
+Main.k.errorList = [];
 
 String.prototype.capitalize = function() {
 	return this.replace(/(?:^|\s)\S/g, function(a) {
@@ -621,6 +622,23 @@ Main.k.clearCache = function(){
 	localStorage.removeItem('ctrlw_remaining_cycles');
 	window.location.reload();
 };
+// BUG
+Main.k.treatingBug = function(e){
+	Main.k.errorList += e;
+}
+Main.k.displayBug = function(e){
+	var displayBug = "";
+	var error = [];
+	if(Main.k.errorList != undefined){
+		error = Main.k.errorList; 
+	}
+	
+	for(var idBug = 0;idBug < error.length;idBug++){
+		displayBug += "Name : "+error[idBug].name+"Message : "+error[idBug].message+"\n";
+	}
+	if(error.length > 0) {alert("nbError : "+error.length+"\n\n"+displayBug);}
+}
+
 // == Game Manager
 Main.k.Game = {};
 Main.k.Game.data = {};
@@ -629,7 +647,6 @@ Main.k.Game.data.cycle = 0;
 Main.k.Game.data.xp = 1;
 Main.k.Game.data.player_status = 'bronze';
 Main.k.Game.data.players = {};
-Main.k.Game.data.msgs_prerecorded = new Array();
 Main.k.Game.init = function() {
 	var ctrlw_game = localStorage.getItem("ctrlw_game");
 	if (ctrlw_game == null){
@@ -675,82 +692,6 @@ Main.k.Game.updatePlayerInfos = function() {
 	});
 };
 
-Main.k.Game.displayMsgsPrerecorded = function(){
-    messages_prerecorded = [];
-    if(this.data.msgs_prerecorded != undefined){
-        messages_prerecorded = this.data.msgs_prerecorded;
-    }
-    
-    if(messages_prerecorded.length > 0){
-        var infos = "";
-        infos += "taille : "+messages_prerecorded.length+"\n\n";
-        
-        for(var idMsg = 0;idMsg < messages_prerecorded.length;idMsg++){
-            infos += messages_prerecorded[idMsg][0] + " : " + messages_prerecorded[idMsg][1]+"\n";
-        }
-        return infos;
-    }
-    return "Il n'y a pas de messages pre-enregistrés";   
-}
-
-Main.k.Game.getMsgPrerecorded = function(title){
-    messages_prerecorded = [];
-    if(this.data.msgs_prerecorded != undefined){
-        messages_prerecorded = this.data.msgs_prerecorded ;
-    }
-    
-    for(var idMsg = 0;idMsg < messages_prerecorded.length;idMsg++){
-        if(title == messages_prerecorded[idMsg][0]){
-            return messages_prerecorded[idMsg][1];
-        }
-    }
-    
-    return "";
-}
-
-
-Main.k.Game.addMsgPrerecorded = function(title, message) {
-    messages_prerecorded = [];
-    if(this.data.msgs_prerecorded != undefined){
-        messages_prerecorded = this.data.msgs_prerecorded ;
-    }
-    
-    for(var idMsg = 0;idMsg < messages_prerecorded.length;idMsg++){
-        if(title == messages_prerecorded[idMsg][0]){
-            throw new this.Exception("MessageAlreadyExists");
-        }
-    }
-    
-    messages_prerecorded.push([title,message]);
-   
-    this.data.msgs_prerecorded = messages_prerecorded;
-    this.save();
-    Main.k.Manager.customloaded = false;
-    Main.k.Manager.update();
-}
-
-Main.k.Game.delMsgPrerecorded = function(title) {
-    messages_prerecorded = [];
-    if(this.data.msgs_prerecorded != undefined){
-        messages_prerecorded = this.data.msgs_prerecorded ;
-    }
-    
-    for(var idMsg = 0;idMsg < messages_prerecorded.length;idMsg++){
-        if(title == messages_prerecorded[idMsg][0]){
-            messages_prerecorded.splice(idMsg,1);
-        }
-    }
-    
-    this.data.msgs_prerecorded =  messages_prerecorded;
-    this.save();
-    Main.k.Manager.customloaded = false;
-    Main.k.Manager.update();
-}
-
-Main.k.Game.Exception = function(message){
-    this.message = message;
-    this.name = "GameException";
-}
 
 // == Options Manager  ========================================
 Main.k.Options = {};
@@ -5283,7 +5224,6 @@ Main.k.tabs.playing = function() {
 	};
 	
 	Main.k.Manager.replyloaded = false;
-	
 	Main.k.Manager.fillReply = function() {
 		if (Main.k.Manager.replyloaded) {
 			// Update message content
@@ -5473,7 +5413,6 @@ Main.k.tabs.playing = function() {
 	};
 	
 	Main.k.Manager.customloaded = false;
-	
     Main.k.Manager.fillCustom = function() {
         if (Main.k.Manager.customloaded) {
             // Update message content
@@ -5486,7 +5425,7 @@ Main.k.tabs.playing = function() {
             var newpost = $("#tabcustom_content").empty();
             newpost.html("<div class='loading'><img src='http://twinoid.com/img/loading.gif' alt='Chargement' /> "+Main.k.text.gettext("Chargement…")+"</div>");
             Main.k.LoadJS('/mod/wall/post', {_id: "tabcustom_content"}, function() {
-                Main.k.Manager.replyloaded = true;
+                Main.k.Manager.customloaded = true;
 
                 // Remove inactive tags
                 var $tabcustom_content = $("#tabcustom_content");
@@ -5548,34 +5487,62 @@ Main.k.tabs.playing = function() {
                     var $tid_wallPost = $("#tabcustom_content .tid_wallPost");
                     var val = $tid_wallPost.val();
                     var title = prompt("Entrez un titre pour le message suivant : \n"+val,"");
-                    if(title != null){
-                        try{
-                            Main.k.Game.addMsgPrerecorded(title,val);
+
+                    try{
+						Main.k.Manager.addMsgPrerecorded(title,val);
+                    }
+                    catch(e){
+                        if(e.name == "MessageAlreadyExist"){
+							alert("Le message existe déjà.");
+							var popupAlert = Main.k.CreatePopup();
+							// Fill popup content
+							var content = "<div class='updatescontent'>" + maj_content + "</div>";
+							var ok = "<div class='updatesactions'><div id=\"ok\" class=\"but updatesbtn\" ><div class=\"butright\"><div class=\"butbg\"><a onclick=\"$('#final').show();\" href=\""+okHref+"\">"+Main.k.text.gettext("Mettre à jour")+"</a></div></div></div>";
+							var cancelAc = "'Main.k.ClosePopup();'";
+							var cancel = "<div id=\"cancel\" class=\"but updatesbtn\" onclick=" + cancelAc + "><div class=\"butright\"><div class=\"butbg\"><a href=\"#\">" + Main.getText("cancel") + "</a></div></div></div></div>";
+							var finalisation = '<div id="final" class="updatesactions" style="display:none"><div><strong>'+Main.k.text.gettext("Pour finaliser la mise à jour, après avoir installé le script, veuillez cliquer sur le bouton ci-dessous.")+'</strong></div><div class="but updatesbtn" onclick="Main.k.ClosePopup();window.location.reload();"><div class="butright"><div class="butbg"><a href="#">'+Main.k.text.gettext("Finaliser la mise à jour")+'</a></div></div></div></div></div>';
+							$("<div>").html(content + ok + cancel + finalisation).appendTo(popup.content);
+
+							// Display popup
+							Main.k.OpenPopup(popup.dom);
                         }
-                        catch(e){
-                            if(e.name == "GameException"){
-                                alert("Le message existe déjà.");
-                            }
-                            else if(Main.k.debug){
-                                alert(e.name+"\n"+e.message+"\n"+e.s)
-                            }
+						else if(e.name == "TitleEmpty"){
+							alert("Le titre est vide");
+						}
+						else if(e.name == "MessageEmpty"){
+							alert("Le message est vide");
+						}
+                        else if(Main.k.debug){
+                            Main.k.treatingBug(e);
                         }
                     }
+                    
                 })
                 .css({display: "inline-block", margin: "4px 4px 8px"})
                 .appendTo(buttons)
                 .find("a")
-                .attr("_title", "Nouveau topic").attr("_desc", Main.k.text.gettext("Poster ce message en tant que nouveau topic."))
+                .attr("_title", "Ajouter aux favoris").attr("_desc", Main.k.text.gettext("Ajouter un message à votre liste des messages pré-enregistrés."))
                 .on("mouseover", Main.k.CustomTip)
                 .on("mouseout", Main.hideTip);
                 
-                var delallmsg = Main.k.MakeButton("<img src='http://mush.vg/img/icons/ui/bin.png' /> " + Main.k.text.gettext("Supprimer un favori"),null,function() {
-                    Main.k.Game.delMsgPrerecorded($("#tabcustom_content .array_messages_prerecorded .selected").text() );
-                })
+                var delmsg = Main.k.MakeButton("<img src='http://mush.vg/img/icons/ui/bin.png' /> " + Main.k.text.gettext("Supprimer un favori"),null,function() {
+                    try{
+						var title = $("#tabcustom_content .array_messages_prerecorded .selected").text();
+						Main.k.Manager.delMsgPrerecorded( title );
+					}
+					catch(e){
+						if(e.name == "MessageNotExist"){
+							alert("Le message que vous voulez supprmier n'éxiste pas");
+						}
+						else if(Main.k.debug){
+							Main.k.treatingBug(e);
+						}
+					}
+				})
                 .css({display: "inline-block", margin: "4px 4px 8px"})
                 .appendTo(buttons)
                 .find("a")
-                .attr("_title", "Nouveau topic").attr("_desc", Main.k.text.gettext("Poster ce message en tant que nouveau topic."))
+                .attr("_title", "Supprimer un favori").attr("_desc", Main.k.text.gettext("Supprimer une message de votre liste des messges pré-enregistrés."))
                 .on("mouseover", Main.k.CustomTip)
                 .on("mouseout", Main.hideTip);
                 
@@ -5689,37 +5656,43 @@ Main.k.tabs.playing = function() {
                 //$("#editor_tid_wallPost").loadSmileys($("#editor_tid_wallPost a.tid_smcat[tid_cat='Mush']"));
 
 
-                   var array_msg = $("<p>").addClass("array_messages_prerecorded").prependTo( $("#tabcustom_content") );
+                var array_msg = $("<p>").addClass("array_messages_prerecorded").prependTo( $("#tabcustom_content") );
                 
-                   var messages_prerecorded = [];
-                   if(Main.k.Game.data.msgs_prerecorded != "undefine" ){
-                       messages_prerecorded = Main.k.Game.data.msgs_prerecorded;
-                   }
+                var messages_prerecorded = [];
+                if(Main.k.Manager.msgs_prerecorded != undefined ){
+                    messages_prerecorded = Main.k.Manager.msgs_prerecorded;
+                }
                 
-                   for(var idMsg = 0;idMsg<messages_prerecorded.length;idMsg++){
+                for(var idMsg = 0;idMsg<messages_prerecorded.length;idMsg++){
                     $("<span>"+ messages_prerecorded[idMsg][0] +"</span>").addClass("message_prerecorded")
-                    .appendTo(array_msg);
-                    
-                    $("#tabcustom_content .message_prerecorded").each(function(){
-                        $(this).click(function(){
-                            var $tid_wallPost = $("#tabcustom_content .tid_wallPost");
-                            $tid_wallPost.val(Main.k.Game.getMsgPrerecorded($(this).text()));
-                            
-                            $("#tabcustom_content .message_prerecorded").each(function(){
-                                $(this).removeClass("selected");
-                            });
-                            $(this).addClass("selected");
-                            
-                        });
-                    })
-                   }
+                    .appendTo(array_msg)
+					.click(function(){
+							if($(this).is(".selected")){
+								$("#tabcustom_content .array_messages_prerecorded .selected").removeClass("selected");
+								$("#tabcustom_content .tid_wallPost").val("");	
+							}else {
+								$("#tabcustom_content .array_messages_prerecorded .selected").removeClass("selected");
+								$(this).addClass("selected");
+								
+								var msgPrerecorded = "";
+								try{
+									msgPrerecorded = Main.k.Manager.getMsgPrerecorded($(this).text());
+								}catch(e){
+									if(Main.k.debug){
+										Main.k.treatingBug(e);
+									}
+								}
+								$("#tabcustom_content .tid_wallPost").val(msgPrerecorded);			
+							}
+					});
+                }
+            });
 
                 // Update message content
                 if (Main.k.Manager.replywaiting != "") {
                     $("#tabcustom_content .tid_wallPost").val(Main.k.Manager.replywaiting);
                     Main.k.Manager.replywaiting = "";
                 }
-            });
         }
     };
     
@@ -5750,6 +5723,77 @@ Main.k.tabs.playing = function() {
 		var tid = Main.k.Manager.getTopicByTid(k).id;
 		Main.k.Manager.displayTopic(tid);
 	};
+	
+	Main.k.Manager.msgs_prerecorded = new Array();
+	Main.k.Manager.getMsgPrerecorded = function(title){
+		messages_prerecorded = [];
+		if(this.msgs_prerecorded != undefined){
+			messages_prerecorded = this.msgs_prerecorded ;
+		}
+    
+		for(var idMsg = 0;idMsg < messages_prerecorded.length;idMsg++){
+			if(title == messages_prerecorded[idMsg][0]){
+				return messages_prerecorded[idMsg][1];
+			}
+		}
+    
+		throw new this.Exception("MessageNotExist");
+	}
+	Main.k.Manager.addMsgPrerecorded = function(title, message) {
+		if(title == ""){
+			throw new this.Exception("TitleEmpty");
+		}
+		else if(message == ""){
+			throw new this.Exception("MessageEmpty");
+		}
+		
+		messages_prerecorded = [];
+		if(this.msgs_prerecorded != undefined){
+			messages_prerecorded = this.msgs_prerecorded ;
+		}
+		
+		for(var idMsg = 0;idMsg < messages_prerecorded.length;idMsg++){
+			if(title == messages_prerecorded[idMsg][0]){
+				throw new this.Exception("MessageAlreadyExist");
+			}
+		}
+		
+		messages_prerecorded.push([title,message]);
+		this.msgs_prerecorded = messages_prerecorded;
+		this.saveMsgsPrerecorded();
+		this.customloaded = false;
+		this.fillCustom();
+	}
+	Main.k.Manager.delMsgPrerecorded = function(title) {
+		messages_prerecorded = [];
+		var isFound = false;
+		if(this.msgs_prerecorded != undefined){
+			messages_prerecorded = this.msgs_prerecorded ;
+		}
+		for(var idMsg = 0;idMsg < messages_prerecorded.length;idMsg++){
+			if(title == messages_prerecorded[idMsg][0]){
+				messages_prerecorded.splice(idMsg,1);
+				isFound = true;
+			}
+		}
+		
+		if(isFound){
+			this.msgs_prerecorded = messages_prerecorded;
+			this.saveMsgsPrerecorded();
+			this.customloaded = false;
+			this.fillCustom();
+		}
+		else{
+			throw new this.Exception("MessageNotExist");
+		}
+	}
+	Main.k.Manager.saveMsgsPrerecorded = function() {
+		localStorage.setItem("ctrlw_msgs_prerecorded",JSON.stringify(Main.k.Manager.msgs_prerecorded));
+	};
+	
+	Main.k.Manager.Exception = function(name){
+		this.name = name;
+	}
 	// == /MessageManager =========================================
 
 
@@ -7068,3 +7112,5 @@ if (Main.k.playing && $("#topinfo_bar").length > 0) {
 	});
 	$("a.logostart").css("top", "20px");
 }
+
+if (Main.k.debug) {Main.k.displayBug();}
