@@ -1896,14 +1896,46 @@ Main.k.tabs.playing = function() {
 				.attr("alt", title.img)
 				.appendTo($tooltip_title);
 		});
+		var $statuses = $("<div>").addClass("icons statuses").css('float','right');
+		$desc.append($statuses);
 		if(o_hero.statuses.length > 0){
-			var $statuses = $("<p>").addClass("icons statuses").css('float','right');
 			$.each(o_hero.statuses,function(k,status){
 				$("<img>").attr("src", "/img/icons/ui/status/" + status.img + ".png")
 					.attr("height", "16").attr("alt", status.img)
 					.appendTo($statuses);
 			});
-			$desc.append($statuses);
+		}
+		if(typeof(o_hero.spores) != 'undefined'){
+			var $spores = $('<div>')
+				.css({
+					position: 'relative',
+					display: 'inline-block',
+					'margin-left': '2px',
+					top: '2px'
+				})
+				.appendTo($statuses);
+
+			$("<img>").attr("src", "/img/icons/ui/spore.png")
+				.attr("height", "16").attr("alt", o_hero.spores.name)
+				.attr("_title", o_hero.spores.name)
+				.attr("_desc", o_hero.spores.desc)
+				.on("mouseover", Main.k.CustomTip)
+				.on("mouseout", Main.hideTip)
+				.appendTo($spores);
+
+			$('<span>')
+				.text(o_hero.spores.nb)
+				.css({
+					color: '#FFF',
+					'font-size': "10px",
+					position: 'absolute',
+					left: '4px',
+					top: '1px',
+					opacity: 0.7,
+					'pointer-events': 'none'
+
+				})
+				.appendTo($spores);
 		}
 		if(o_hero.skills.length > 0) {
 			var $skills = $("<p>").addClass("icons skills");
@@ -4046,6 +4078,39 @@ Main.k.tabs.playing = function() {
 					.on("mouseout", Main.hideTip)
 					.appendTo(statuses);
 			});
+			if(typeof(o_hero.spores) != 'undefined'){
+				console.warn(o_hero.spores);
+				var $spores = $('<div>')
+					.css({
+						position: 'relative',
+						display: 'inline-block',
+						'margin-left': '2px',
+						top: '2px'
+					})
+					.appendTo(statuses);
+
+				$("<img>").attr("src", "/img/icons/ui/spore.png")
+					.attr("height", "16").attr("alt", o_hero.spores.name)
+					.attr("_title", o_hero.spores.name)
+					.attr("_desc", o_hero.spores.desc)
+					.on("mouseover", Main.k.CustomTip)
+					.on("mouseout", Main.hideTip)
+					.appendTo($spores);
+
+				$('<span>')
+					.text(o_hero.spores.nb)
+					.css({
+						color: '#FFF',
+						'font-size': "10px",
+						position: 'absolute',
+						left: '4px',
+						top: '1px',
+						opacity: 0.7,
+						'pointer-events': 'none'
+
+					})
+					.appendTo($spores);
+			}
 
 			var skills = $("<div>").addClass("icons skills");
 			$.each(o_hero.skills,function(k,skill){
@@ -4179,6 +4244,7 @@ Main.k.tabs.playing = function() {
 		profile.statuses = [];
 		profile.titles = [];
 		profile.skills = [];
+		profile.spores = null;
 
 		profile.short_desc = o_hero_orig.short_desc;
 		profile.name = o_hero_orig.name;
@@ -4206,6 +4272,9 @@ Main.k.tabs.playing = function() {
 			while( $_titles.hasNext() ) {
 				profile.titles.push($_titles.next());
 			}
+		}
+		if (o_hero_orig.spores) {
+			profile.spores = o_hero_orig.spores;
 		}
 		console.groupEnd();
 		return profile;
@@ -5637,7 +5706,7 @@ Main.k.tabs.playing = function() {
 		// ----------------------------------- //
 	};
 	Main.k.MushUpdate = function() {
-		/** @type {{surname:string,statuses:List, titles:List, dev_surname:string}} **/
+		/** @type {{surname:string,statuses:List, titles:List, dev_surname:string, spores:string}} **/
 		var hero;
 		var bubble, t, i, j;
 		var $usLeftbar = $(".usLeftbar");
@@ -5817,6 +5886,37 @@ Main.k.tabs.playing = function() {
 					.appendTo(statuses);
 				}
 			}
+			if (hero.spores) {
+				var $spores = $('<div>')
+					.css({
+						position: 'relative',
+						display: 'inline-block',
+						'margin-left': '2px',
+						top: '2px'
+					})
+					.appendTo(statuses);
+
+				$("<img>").attr("src", "/img/icons/ui/spore.png")
+					.attr("height", "16").attr("alt", hero.spores.name)
+					.attr("_title", hero.spores.name)
+					.attr("_desc", hero.spores.desc)
+					.on("mouseover", Main.k.CustomTip)
+					.on("mouseout", Main.hideTip)
+					.appendTo($spores);
+
+				$('<span>')
+					.text(hero.spores.nb)
+					.css({
+						'font-size': "10px",
+						position: 'absolute',
+						left: '4px',
+						top: '3px',
+						opacity: 0.7,
+						'pointer-events': 'none'
+
+					})
+					.appendTo($spores);
+			}
 
 			var skills = $("<div>").addClass("icons skills");
 			if (hero.skills) {
@@ -5862,7 +5962,6 @@ Main.k.tabs.playing = function() {
 				}
 			}
 			var heroDiv = $("<div>").addClass("hero").appendTo(heroes_list);
-			console.log('hero',hero);
 			$("<img>")
 				.addClass("body " + bubble)
 				.attr("src", "/img/design/pixel.gif")
@@ -6406,7 +6505,6 @@ Main.k.tabs.playing = function() {
 			Main.k.HEROES.splice(index,1);
 		});
 
-		console.info('Main.k.heroes',Main.k.heroes);
 	};
 	Main.k.MushInit();
 	Main.k.MushUpdate();
