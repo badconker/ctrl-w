@@ -472,74 +472,54 @@ Main.k.ClosePopup = function() {
 		tgt.attr("id", "");
 	}
 };
+Main.k.CreateNeronAlert = function(message){
+		var neronAlert = Main.k.CreatePopup();
+		neronAlert.content.css({
+			"height": "auto",
+			"max-height": "90%",
+			"width": "500px",
+			"color": "#FFF"
+		});
+		
+		var content = "<div class='neron_alert_title'><img alt='neron' src='/img/design/neron_chat.png' /><h1>NERON</h1></div><p>"+ message +"</p>"
+		
+		// Fill neronAlert content
+		var cancelAc = "'Main.k.ClosePopup();'";
+		var ok = "<div id=\"cancel\" class=\"but updatesbtn\" onclick=" + cancelAc + "><div class=\"butright\"><div class=\"butbg\"><a href=\"#\">" + Main.k.text.gettext("ok") + "</a></div></div></div></div>";
+		$("<div>")
+		.attr("id","neron_alert_content")
+		.html(content + ok)
+		.appendTo(neronAlert.content);
 
-Main.k.CreateAlert = function() {
-	var alert = {};
-	alert.dom = $("<div>")
-	.css({
-		"z-index" : "10",
-		"position" : "absolute",
-		"height": $("body").outerHeight(),
-		"width": "100%",
-		"background-color":"rgba(0,0,255,0.5)"})
-	.click(function(){
-		$(alert.dom).remove();$(alert.popup).remove();});
-		
-	alert.popup = $("<div>")
-	.css({
-		"width": "100%",
-		"z-index" : "11",
-		"position":"absolute",});
-	$("<div>")
-	.css({
-		"background-color" : "#74cbf3",
-		"padding":"10px",
-		"position":"relative",
-		"box-shadow":"-1px 2px 5px 1px rgba(0, 0, 0, 0.7)", 
-		"width" : "500px",
-		"margin" : "300px auto 0 auto",
-		"color" : "black",
-		"border-radius":"5px"})
-	.appendTo(alert.popup);
-		
-	$("<img/>")
-	.attr("alt","fermeture de l'alert")
-	.attr("src","img/icons/ui/less.png")
-	.css({"width":"23px","right":"10px","position":"absolute"})
-	.click(function(){
-		$(alert.dom).remove();$(alert.popup).remove();})
-	.appendTo(alert.popup.children());
-	
-	alert.popup_title = $("<div>")
-	.css({"height":"45px","vertical-align":"middle","margin-bottom":"5px"})
-	.appendTo(alert.popup.children());
-	
-	alert.content = $("<p>")
-	.css({
-		"border-radius":"3px",
-		"background-color":"white",
-		"padding":"10px"})
-	.appendTo(alert.popup.children());
-	
-	$("<img/>")
-	.attr("alt","neron")
-	.attr("src","/img/design/neron_chat.png")
-	.css({"float":"left","height":"45px","margin-right":"5px"})
-	.appendTo(alert.popup_title);
-	$("<h1>").text("NERON").appendTo(alert.popup_title);
-	
-	return alert;
-};
-Main.k.OpenAlert = function(alert){
-	$("body").prepend(alert.popup);
-	$("body").prepend(alert.dom);
-	
-};
-Main.k.CreateSimpleAlert = function(message){
-	var simpleAlert = Main.k.CreateAlert("");
-	simpleAlert.content.text(message);
-	Main.k.OpenAlert(simpleAlert);
+		// Display neronAlert
+		Main.k.OpenPopup(neronAlert.dom);
 }
+Main.k.CreateNeronPrompt = function(){
+		var NeronPrompt = Main.k.CreatePopup();
+		NeronPrompt.content.css({
+			"height": "auto",
+			"max-height": "90%",
+			"width": "500px",
+			"color": "#FFF"
+		});
+		
+		var cancelAc = "'Main.k.ClosePopup();'";
+		// Fill prompt content
+		var validate = "<div id=\"validate\" class=\"but updatesbtn\" ><div class=\"butright\"><div class=\"butbg\"><a href=\"#\">" + Main.k.text.gettext("valider") + "</a></div></div></div></div>";
+		var cancel = "<div id=\"cancel\" class=\"but updatesbtn\" onclick="+cancelAc+"><div class=\"butright\"><div class=\"butbg\"><a href=\"#\">" + Main.k.text.gettext("annuler") + "</a></div></div></div></div>";
+		var input = "<input type='text' name='neron_prompt'>";
+		var content = "<div class='neron_alert_title' ><img alt='neron' src='/img/design/neron_chat.png' /><h1>NERON</h1></div><p>" + Main.k.text.gettext("Saisissez le titre du message") + " : </p>";
+		
+		
+		$("<div>")
+		.attr("id","neron_alert_content")
+		.html(content + input + "<br/>" + validate + cancel)
+		.appendTo(NeronPrompt.content);
+		
+		// Display prompt
+		Main.k.OpenPopup(NeronPrompt.dom);
+}
+
 
 
 Main.k.CustomTip = function(e) {
@@ -1664,7 +1644,7 @@ Main.k.css.ingame = function() {
 	}\
 	.usPopup .usPopupContent { \
 		position: relative;\
-		margin: 30px auto;\
+		margin: 100px auto 0 auto;\
 		background: rgba(28, 56, 126, 0.976);\
 		box-shadow: 0px 0px 3px 3px rgba(57, 101, 251, 0.5), 0px 0px 3px 3px rgba(57, 101, 251, 0.5) inset;\
 		resize: none! important;\
@@ -1680,13 +1660,34 @@ Main.k.css.ingame = function() {
 		margin-left: 20px;\
 		list-style-type: square;\
 	}\
-	.updatesactions { \
+	.updatesactions{ \
 		text-align: center;\
 		margin-bottom: 10px;\
 	}\
 	.updatesbtn { \
 		display: inline-block;\
 		margin: 0 3px;\
+	}\
+	#neron_alert_content {\
+		text-align: center;\
+	}\
+	#neron_alert_content .neron_alert_title{ \
+		height:45px;\
+		text-align: left;\
+		margin-top: 10px;\
+		margin-left: 10px\
+	}\
+	#neron_alert_content .neron_alert_title img{ \
+		float:left;\
+		height:45px;\
+		margin-right:5px;\
+	}\
+	#neron_alert_content p{\
+		margin-bottom: 10px;\
+	}\
+	#neron_alert_content input{\
+		color: black;\
+		margin-bottom: 10px;\
 	}\
 	#char_col, #room_col, #chat_col, #topics_col, #topic_col, #reply_col, #options_col, #about_col, #profile_col {\
 		transition: all 200ms;\
@@ -5555,26 +5556,29 @@ Main.k.tabs.playing = function() {
                 
                 var addmsg = Main.k.MakeButton("<img src='http://mush.vg/img/icons/ui/fav.png' /> " + Main.k.text.gettext("Ajouter aux favoris"),null,function() {
                     var $tid_wallPost = $("#tabcustom_content .tid_wallPost");
-                    var val = $tid_wallPost.val();
-                    var title = prompt("Entrez un titre pour le message suivant : \n"+val,"");
-
-                    try{
-						Main.k.Manager.addMsgPrerecorded(title,val);
-                    }
-                    catch(e){
-                        if(e.name == "MessageAlreadyExist"){
-							Main.k.CreateSimpleAlert("Le message existe déjà.");
-                        }
-						else if(e.name == "TitleEmpty"){
-							Main.k.CreateSimpleAlert("Le titre est vide.");
+                    var message = $tid_wallPost.val();
+                    Main.k.CreateNeronPrompt();
+					$("#validate").click(function(){
+						var title = $("#neron_alert_content input").val();
+						Main.k.ClosePopup();
+						try{
+							Main.k.Manager.addMsgPrerecorded(title,message);
 						}
-						else if(e.name == "MessageEmpty"){
-							Main.k.CreateSimpleAlert("Le message est vide.");
+						catch(e){
+							if(e.name == "MessageAlreadyExist"){
+								Main.k.CreateNeronAlert(Main.k.text.gettext("Le message existe déjà."));
+							}
+							else if(e.name == "TitleEmpty"){
+								Main.k.CreateNeronAlert(Main.k.text.gettext("Le titre est vide."));
+							}
+							else if(e.name == "MessageEmpty"){
+								Main.k.CreateNeronAlert(Main.k.text.gettext("Le message est vide."));
+							}
+							else if(Main.k.debug){
+								Main.k.treatingBug(e);
+							}
 						}
-                        else if(Main.k.debug){
-                            Main.k.treatingBug(e);
-                        }
-                    }
+					});
                     
                 })
                 .css({display: "inline-block", margin: "4px 4px 8px"})
@@ -5591,7 +5595,7 @@ Main.k.tabs.playing = function() {
 					}
 					catch(e){
 						if(e.name == "MessageNotExist"){
-							Main.k.CreateSimpleAlert("Le message que vous voulez supprmier n'existe pas.");
+							Main.k.CreateNeronAlert(Main.k.text.gettext("Le message que vous voulez supprimer n'existe pas."));
 						}
 						else if(Main.k.debug){
 							Main.k.treatingBug(e);
@@ -5799,7 +5803,7 @@ Main.k.tabs.playing = function() {
 		throw new this.Exception("MessageNotExist");
 	}
 	Main.k.Manager.addMsgPrerecorded = function(title, message) {
-		if(title == ""){
+		if(title == "" || title == undefined){
 			throw new this.Exception("TitleEmpty");
 		}
 		else if(message == ""){
