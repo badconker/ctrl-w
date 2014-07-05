@@ -47,7 +47,7 @@ Main.k.servurl_badconker = 'http://ctrlw.badconker.com';
 Main.k.window = window;
 Main.k.domain = document.domain;
 Main.k.mushurl = 'http://' + document.domain;
-Main.k.debug = true;
+Main.k.debug = false;
 Main.k.errorList = [];
 
 String.prototype.capitalize = function() {
@@ -444,7 +444,11 @@ Main.k.ArrayContains = function(arr, o) {
 Main.k.EliminateDuplicates = function(arr) {
 	var i, len=arr.length, out=[], obj={};
 	for (i=0;i<len;i++) obj[arr[i]]=0;
-	for (i in obj) out.push(i);
+	for (i in obj){
+		if (obj.hasOwnProperty(i)) {
+			out.push(i);
+		}
+	}
 	return out;
 };
 Main.k.CreatePopup = function() {
@@ -480,7 +484,7 @@ Main.k.CreateNeronAlert = function(message){
 			"color": "#FFF"
 		});
 		
-		var content = "<div class='neron_alert_title'><img alt='neron' src='/img/design/neron_chat.png' /><h1>NERON</h1></div><p>"+ message +"</p>"
+		var content = "<div class='neron_alert_title'><img alt='neron' src='/img/design/neron_chat.png' /><h1>NERON</h1></div><p>"+ message +"</p>";
 		
 		// Fill neronAlert content
 		var cancelAc = "'Main.k.ClosePopup();'";
@@ -492,7 +496,7 @@ Main.k.CreateNeronAlert = function(message){
 
 		// Display neronAlert
 		Main.k.OpenPopup(neronAlert.dom);
-}
+};
 Main.k.CreateNeronPrompt = function(){
 		var NeronPrompt = Main.k.CreatePopup();
 		NeronPrompt.content.css({
@@ -517,7 +521,7 @@ Main.k.CreateNeronPrompt = function(){
 		
 		// Display prompt
 		Main.k.OpenPopup(NeronPrompt.dom);
-}
+};
 
 
 
@@ -576,7 +580,7 @@ Main.k.quickNotice = function(msg,type){
 };
 Main.k.quickNoticeError = function(msg){
 	Main.k.quickNotice(msg,'error');
-}
+};
 /**
  * @return string
  */
@@ -679,7 +683,7 @@ Main.k.clearCache = function(){
 // BUG
 Main.k.treatingBug = function(e){
 	Main.k.errorList += e;
-}
+};
 Main.k.displayBug = function(e){
 	var displayBug = "";
 	var error = [];
@@ -691,7 +695,7 @@ Main.k.displayBug = function(e){
 		displayBug += "Name : "+error[idBug].name+"Message : "+error[idBug].message+"\n";
 	}
 	if(error.length > 0) {alert("nbError : "+error.length+"\n\n"+displayBug);}
-}
+};
 
 // == Game Manager
 Main.k.Game = {};
@@ -730,16 +734,16 @@ Main.k.Game.updatePlayerInfos = function() {
 		var body = '<div id="body-mock">' + content.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/g, '') + '</div>';
 		var jobject = $(body);
 		if(jobject.find('#cdActualXp').length > 0){
-			this.data.xp = jobject.find('#cdActualXp').text();
+			$this.data.xp = jobject.find('#cdActualXp').text();
 		}
 		if(jobject.find('#experience .bought.goldactive').length > 0){
-			this.player_status = 'gold';
+			$this.player_status = 'gold';
 		}else if(jobject.find('#experience .bought').length > 0){
-			this.data.player_status = 'silver';
+			$this.data.player_status = 'silver';
 		}else{
-			this.data.player_status = 'bronze';
+			$this.data.player_status = 'bronze';
 		}
-		this.save();
+		$this.save();
 		Main.k.MushUpdate();
 		Main.k.hideLoading();
 		Main.k.quickNotice(Main.k.text.gettext('Infos du joueur mises à jour.'));
@@ -2004,7 +2008,7 @@ Main.k.tabs.playing = function() {
 					.appendTo($statuses);
 			});
 		}
-		if(typeof(o_hero.spores) != 'undefined'){
+		if(typeof(o_hero.spores) != 'undefined' && o_hero.spores != null){
 			var $spores = $('<div>')
 				.css({
 					position: 'relative',
@@ -2141,6 +2145,7 @@ Main.k.tabs.playing = function() {
 	Main.k.extend = {};
 	Main.k.extend.updateContent =  Main.updateContent;
 	Main.updateContent = function(url,seek,dest,cb) {
+		console.log('update content');
 		Main.k.extend.updateContent(url,seek,dest,function(){
 			if(cb != null) cb();
 			if(/\/choosePeer\?charId=[0-9]+&idx=([0-9]+)/.test(url)){
@@ -3924,6 +3929,7 @@ Main.k.tabs.playing = function() {
 		});
 	};
 	Main.k.Sync.pull = function(key) {
+		console.info('Main.k.Sync.pull');
 		var dfd = new jQuery.Deferred();
 		if(typeof(key) == 'undefined'){
 			key = localStorage.getItem('ctrlw_sync_key');
@@ -3949,7 +3955,10 @@ Main.k.tabs.playing = function() {
 					}else{
 						if(json.status == 'outdated'){
 							console.warn(JSON.parse(json.sync.profiles));
-							localStorage.setItem('ctrlw_profiles',json.sync.profiles);
+							Main.k.Profiles.load(json.sync.profiles,true);
+							if(typeof(json.sync.msgs_prerecorded) != 'undefined'){
+								Main.k.Manager.loadMsgsPrerecorded(json.sync.msgs_prerecorded,true);
+							}
 							Main.k.quickNotice(Main.k.text.gettext('Mise à jour des données locales'));
 							Main.k.MushUpdate();
 						}
@@ -3974,6 +3983,7 @@ Main.k.tabs.playing = function() {
 		return dfd.promise();
 	};
 	Main.k.Sync.push = function() {
+		console.info('xhr Sync.push1');
 		var key = localStorage.getItem('ctrlw_sync_key');
 		if(key == null){
 			return;
@@ -3981,7 +3991,7 @@ Main.k.tabs.playing = function() {
 		var button = $('#ctrlw_sync_button');
 		button.find('img').hide();
 		button.find('.ctrlw_up').show();
-		console.info('xhr Sync.push');
+		console.info('xhr Sync.push2');
 		setTimeout(function() {
 			GM_xmlhttpRequest({
 				method: "POST",
@@ -3989,7 +3999,8 @@ Main.k.tabs.playing = function() {
 				data : $.param({
 					last_update_time : localStorage.getItem('ctrlw_sync_last_update_time'),
 					mush_time: $('#input').attr('now'),
-					profiles: localStorage.getItem('ctrlw_profiles'),
+					profiles: JSON.stringify(Main.k.Profiles.data),
+					msgs_prerecorded: JSON.stringify(Main.k.Manager.msgs_prerecorded),
 					key: key
 				}),
 				headers: {
@@ -4053,11 +4064,11 @@ Main.k.tabs.playing = function() {
 	Main.k.Profiles = {};
 	Main.k.Profiles.initialized = false;
 	Main.k.Profiles.current = null;
+	Main.k.Profiles.data = {};
 	Main.k.Profiles.open = function() {
 		/** @type {{surname:string,statuses:List, titles:List, dev_surname:string}} **/
 		var o_hero;
 		console.log('Main.k.folding.displayed',Main.k.folding.displayed);
-
 		if (!Main.k.Profiles.initialized) {
 			Main.k.Profiles.initialized = true;
 			var h = Main.k.h[Main.k.Profiles.current];
@@ -4086,7 +4097,7 @@ Main.k.tabs.playing = function() {
 				"font-size": "17px"
 			}).html("<span>" + Main.k.getFullName(Main.k.Profiles.current) + "</span>").appendTo(header);
 			Main.k.MakeButton("<img src='/img/icons/ui/awake.png' />",null,function(event) {
-				Main.k.Profiles.save(Main.k.Profiles.current);
+				Main.k.Profiles.set(Main.k.Profiles.current);
 				Main.k.Profiles.update();
 			}).css({
 				position: "absolute",
@@ -4177,7 +4188,7 @@ Main.k.tabs.playing = function() {
 					.on("mouseout", Main.hideTip)
 					.appendTo(statuses);
 			});
-			if(typeof(o_hero.spores) != 'undefined'){
+			if(typeof(o_hero.spores) != 'undefined' && o_hero.spores != null){
 				console.warn(o_hero.spores);
 				var $spores = $('<div>')
 					.css({
@@ -4303,10 +4314,10 @@ Main.k.tabs.playing = function() {
 			'dead': false
 		};
 	};
-	Main.k.Profiles.save = function(profile){
+	Main.k.Profiles.set = function(profile){
 		console.group('Main.k.Profiles.save');
 		console.log('profile',profile);
-		var profiles = JSON.parse(localStorage.getItem('ctrlw_profiles'));
+		var profiles = this.data;
 		if(profiles == null){
 			profiles = {};
 		}
@@ -4314,8 +4325,8 @@ Main.k.tabs.playing = function() {
 			profile = this.convertHeroToProfile(Main.k.getHeroBySurname(profile));
 		}
 		profiles[profile.dev_surname] = profile;
-		localStorage.setItem('ctrlw_profiles',JSON.stringify(profiles));
-		callbacks_storage_sync.fire();
+		this.data = profiles;
+		this.save();
 		console.groupEnd();
 		Main.k.MushUpdate();
 	};
@@ -4323,7 +4334,7 @@ Main.k.tabs.playing = function() {
 		if(typeof(hero) == 'undefined'){
 			hero = Main.k.Profiles.current;
 		}
-		var profiles = JSON.parse(localStorage.getItem('ctrlw_profiles'));
+		var profiles = this.data;
 		if(profiles != null && typeof(profiles[hero]) != 'undefined') {
 			console.groupEnd();
 			return profiles[hero]
@@ -4332,9 +4343,31 @@ Main.k.tabs.playing = function() {
 			return Main.k.Profiles.create(hero);
 		}
 	};
+	Main.k.Profiles.save = function() {
+		localStorage.setItem('ctrlw_profiles',JSON.stringify(this.data));
+		callbacks_storage_sync.fire();
+	};
+	Main.k.Profiles.load = function(profiles,json) {
+		var profiles_json;
+		if(typeof(profiles) != 'undefined'){
+			if(typeof(json) != 'undefined' && !json){
+				profiles_json = JSON.stringify(profiles);
+			}else{
+				profiles_json = profiles;
+				profiles = JSON.parse(profiles);
+			}
+			this.data = profiles;
+			localStorage.setItem('ctrlw_profiles',profiles_json);
+		}else{
+			profiles_json = localStorage.getItem('ctrlw_profiles');
+			if(profiles_json != null){
+				this.data = JSON.parse(profiles_json);
+			}
+		}
+
+	};
 	Main.k.Profiles.convertHeroToProfile = function(o_hero_orig) {
 		console.group('convertHeroToSimpleHero');
-		console.trace();
 		console.log('o_hero_orig',o_hero_orig);
 		var profile = this.get(o_hero_orig.dev_surname);
 		if(profile == null){
@@ -4401,7 +4434,6 @@ Main.k.tabs.playing = function() {
 			Main.k.folding.displayGame();
 			return;
 		}
-
 		// TEMP CONFIG
 		var hasmushchat = true;
 		var haschat1 = true;
@@ -4849,7 +4881,7 @@ Main.k.tabs.playing = function() {
 
 				$(this).find(".recent").remove();
 				$(this).removeClass("not_read");
-				this.onmouseover = undefined;
+				$(this).off('onmouseover');
 			});
 		}
 
@@ -4971,10 +5003,12 @@ Main.k.tabs.playing = function() {
 		// Init
 		Main.k.Manager.sortedheroes = [];
 		for (var h in Main.k.Manager.heroes) {
-			var hero = Main.k.Manager.heroes[h];
-			if (!hero || hero.mess == undefined) continue;
+			if(Main.k.Manager.heroes.hasOwnProperty(h)) {
+				var hero = Main.k.Manager.heroes[h];
+				if (!hero || hero.mess == undefined) continue;
 
-			Main.k.Manager.sortedheroes.push(h);
+				Main.k.Manager.sortedheroes.push(h);
+			}
 		}
 
 		// Sort
@@ -5376,7 +5410,7 @@ Main.k.tabs.playing = function() {
 		if (Main.k.Manager.replyloaded) {
 			// Update message content
 			if (Main.k.Manager.replywaiting != "") {
-				$("#tabreply_content .tid_wallPost").val(Main.k.Manager.replywaiting);
+				 $("#tabreply_content").find(".tid_wallPost").val(Main.k.Manager.replywaiting);
 				Main.k.Manager.replywaiting = "";
 			}
 		} else {
@@ -5394,10 +5428,10 @@ Main.k.tabs.playing = function() {
 				$tabreply_content.find(".tid_editorBut__user").remove();
 				// TODO: remove inactive tags in main chat
 
-                $("#tabreply_content #tid_wallPost_preview").attr("id", "").addClass("tid_wallPost_preview");
-                $("#tabreply_content #tid_wallPost").attr("id", "").addClass("tid_wallPost");
+                $tabreply_content.find(" #tid_wallPost_preview").attr("id", "").addClass("tid_wallPost_preview");
+                $tabreply_content.find(" #tid_wallPost").attr("id", "").addClass("tid_wallPost");
                  
-				var preview = $("#tabreply_content .tid_wallPost_preview").attr("id", "").addClass("reply bubble");
+				var preview = $tabreply_content.find(".tid_wallPost_preview").attr("id", "").addClass("reply bubble");
 				if (Main.k.Options.cbubbles) preview.addClass("bubble_" + Main.k.ownHero);
 				if (Main.k.Options.cbubblesNB) preview.addClass("custombubbles_nobackground");
 
@@ -5410,7 +5444,7 @@ Main.k.tabs.playing = function() {
 				// Actions
 				var buttons = $("<div>").addClass("tid_buttons").appendTo($tabreply_content);
 				var answer = Main.k.MakeButton("<img src='http://twinoid.com/img/icons/reply.png' /> "+ Main.k.text.gettext("Répondre au topic"),null,function() {
-					var $tid_wallPost = $("#tabreply_content .tid_wallPost");
+					var $tid_wallPost = $tabreply_content.find(".tid_wallPost");
 					var val = $tid_wallPost.val();
 					var k = Main.k.Manager.displayedTopic;
 					Main.k.postMessage(k, val, Main.k.Manager.update);
@@ -5429,7 +5463,7 @@ Main.k.tabs.playing = function() {
 				.on("mouseout", Main.hideTip);
 
 				var newtopic = Main.k.MakeButton("<img src='http://twinoid.com/img/icons/reply.png' /> " + Main.k.text.gettext("Nouveau topic"),null,function() {
-					var $tid_wallPost = $("#tabreply_content .tid_wallPost");
+					var $tid_wallPost = $tabreply_content.find(".tid_wallPost");
 					var val = $tid_wallPost.val();
 					Main.k.newTopic(val, Main.k.Manager.update);
 					$tid_wallPost.val("");
@@ -5553,7 +5587,7 @@ Main.k.tabs.playing = function() {
 
 				// Update message content
 				if (Main.k.Manager.replywaiting != "") {
-					$("#tabreply_content .tid_wallPost").val(Main.k.Manager.replywaiting);
+					$tabreply_content.find(".tid_wallPost").val(Main.k.Manager.replywaiting);
 					Main.k.Manager.replywaiting = "";
 				}
 			});
@@ -5565,7 +5599,7 @@ Main.k.tabs.playing = function() {
         if (Main.k.Manager.customloaded) {
             // Update message content
             if (Main.k.Manager.replywaiting != "") {
-                $("#tabcustom_content .tid_wallPost").val(Main.k.Manager.replywaiting);
+                $("#tabcustom_content").find(".tid_wallPost").val(Main.k.Manager.replywaiting);
                 Main.k.Manager.replywaiting = "";
             }
         } else {
@@ -5584,10 +5618,10 @@ Main.k.tabs.playing = function() {
                 $tabcustom_content.find(".tid_editorBut__user").remove();
                 // TODO: remove inactive tags in main chat
                 
-                $("#tabcustom_content #tid_wallPost_preview").attr("id", "").addClass("tid_wallPost_preview");
-                $("#tabcustom_content #tid_wallPost").attr("id", "").addClass("tid_wallPost");
+                $tabcustom_content.find("#tid_wallPost_preview").attr("id", "").addClass("tid_wallPost_preview");
+                $tabcustom_content.find("#tid_wallPost").attr("id", "").addClass("tid_wallPost");
 
-                var preview = $("#tabcustom_content .tid_wallPost_preview").addClass("reply bubble");
+                var preview = $tabcustom_content.find(".tid_wallPost_preview").addClass("reply bubble");
                 if (Main.k.Options.cbubbles) preview.addClass("bubble_" + Main.k.ownHero);
                 if (Main.k.Options.cbubblesNB) preview.addClass("custombubbles_nobackground");
 
@@ -5600,7 +5634,7 @@ Main.k.tabs.playing = function() {
                 // Actions
                 var buttons = $("<div>").addClass("tid_buttons").appendTo($tabcustom_content);
                 var answer = Main.k.MakeButton("<img src='http://twinoid.com/img/icons/reply.png' /> "+ Main.k.text.gettext("Répondre au topic"),null,function() {
-                    var $tid_wallPost = $("#tabcustom_content .tid_wallPost");
+                    var $tid_wallPost = $tabcustom_content.find(".tid_wallPost");
                     var val = $tid_wallPost.val();
                     var k = Main.k.Manager.displayedTopic;
                     Main.k.postMessage(k, val, Main.k.Manager.update);
@@ -5619,7 +5653,7 @@ Main.k.tabs.playing = function() {
                 .on("mouseout", Main.hideTip);
 
                 var newtopic = Main.k.MakeButton("<img src='http://twinoid.com/img/icons/reply.png' /> " + Main.k.text.gettext("Nouveau topic"),null,function() {
-                    var $tid_wallPost = $("#tabcustom_content .tid_wallPost");
+                    var $tid_wallPost = $tabcustom_content.find(".tid_wallPost");
                     var val = $tid_wallPost.val();
                     Main.k.newTopic(val, Main.k.Manager.update);
                     $tid_wallPost.val("");
@@ -5632,11 +5666,11 @@ Main.k.tabs.playing = function() {
                 .on("mouseout", Main.hideTip);
                 
                 var addmsg = Main.k.MakeButton("<img src='http://mush.vg/img/icons/ui/fav.png' /> " + Main.k.text.gettext("Ajouter aux favoris"),null,function() {
-                    var $tid_wallPost = $("#tabcustom_content .tid_wallPost");
+                    var $tid_wallPost = $tabcustom_content.find(".tid_wallPost");
                     var message = $tid_wallPost.val();
                     Main.k.CreateNeronPrompt();
 					$("#validate").click(function(){
-						var title = $("#neron_alert_content input").val();
+						var title = $("#neron_alert_content").find("input").val();
 						Main.k.ClosePopup();
 						try{
 							Main.k.Manager.addMsgPrerecorded(title,message);
@@ -5667,7 +5701,7 @@ Main.k.tabs.playing = function() {
                 
                 var delmsg = Main.k.MakeButton("<img src='http://mush.vg/img/icons/ui/bin.png' /> " + Main.k.text.gettext("Supprimer un favori"),null,function() {
                     try{
-						var title = $("#tabcustom_content .array_messages_prerecorded .selected").text();
+						var title = $tabcustom_content.find(".array_messages_prerecorded .selected").text();
 						Main.k.Manager.delMsgPrerecorded( title );
 					}
 					catch(e){
@@ -5796,7 +5830,7 @@ Main.k.tabs.playing = function() {
                 //$("#editor_tid_wallPost").loadSmileys($("#editor_tid_wallPost a.tid_smcat[tid_cat='Mush']"));
 
 
-                var array_msg = $("<p>").addClass("array_messages_prerecorded").prependTo( $("#tabcustom_content") );
+                var array_msg = $("<p>").addClass("array_messages_prerecorded").prependTo( $tabcustom_content );
                 
                 var messages_prerecorded = [];
                 if(Main.k.Manager.msgs_prerecorded != undefined ){
@@ -5808,10 +5842,10 @@ Main.k.tabs.playing = function() {
                     .appendTo(array_msg)
 					.click(function(){
 							if($(this).is(".selected")){
-								$("#tabcustom_content .array_messages_prerecorded .selected").removeClass("selected");
-								$("#tabcustom_content .tid_wallPost").val("");	
+								$tabcustom_content.find(".array_messages_prerecorded .selected").removeClass("selected");
+								$tabcustom_content.find(".tid_wallPost").val("");
 							}else {
-								$("#tabcustom_content .array_messages_prerecorded .selected").removeClass("selected");
+								$tabcustom_content.find(".array_messages_prerecorded .selected").removeClass("selected");
 								$(this).addClass("selected");
 								
 								var msgPrerecorded = "";
@@ -5822,7 +5856,7 @@ Main.k.tabs.playing = function() {
 										Main.k.treatingBug(e);
 									}
 								}
-								$("#tabcustom_content .tid_wallPost").val(msgPrerecorded);			
+								$tabcustom_content.find(".tid_wallPost").val(msgPrerecorded);
 							}
 					});
                 }
@@ -5830,7 +5864,7 @@ Main.k.tabs.playing = function() {
 
                 // Update message content
                 if (Main.k.Manager.replywaiting != "") {
-                    $("#tabcustom_content .tid_wallPost").val(Main.k.Manager.replywaiting);
+					newpost.find(".tid_wallPost").val(Main.k.Manager.replywaiting);
                     Main.k.Manager.replywaiting = "";
                 }
         }
@@ -5864,9 +5898,9 @@ Main.k.tabs.playing = function() {
 		Main.k.Manager.displayTopic(tid);
 	};
 	
-	Main.k.Manager.msgs_prerecorded = new Array();
+	Main.k.Manager.msgs_prerecorded = [];
 	Main.k.Manager.getMsgPrerecorded = function(title){
-		messages_prerecorded = [];
+		var messages_prerecorded = [];
 		if(this.msgs_prerecorded != undefined){
 			messages_prerecorded = this.msgs_prerecorded ;
 		}
@@ -5878,7 +5912,7 @@ Main.k.tabs.playing = function() {
 		}
     
 		throw new this.Exception("MessageNotExist");
-	}
+	};
 	Main.k.Manager.addMsgPrerecorded = function(title, message) {
 		if(title == "" || title == undefined){
 			throw new this.Exception("TitleEmpty");
@@ -5887,7 +5921,7 @@ Main.k.tabs.playing = function() {
 			throw new this.Exception("MessageEmpty");
 		}
 		
-		messages_prerecorded = [];
+		var messages_prerecorded = [];
 		if(this.msgs_prerecorded != undefined){
 			messages_prerecorded = this.msgs_prerecorded ;
 		}
@@ -5903,9 +5937,9 @@ Main.k.tabs.playing = function() {
 		this.saveMsgsPrerecorded();
 		this.customloaded = false;
 		this.fillCustom();
-	}
+	};
 	Main.k.Manager.delMsgPrerecorded = function(title) {
-		messages_prerecorded = [];
+		var messages_prerecorded = [];
 		var isFound = false;
 		if(this.msgs_prerecorded != undefined){
 			messages_prerecorded = this.msgs_prerecorded ;
@@ -5926,14 +5960,33 @@ Main.k.tabs.playing = function() {
 		else{
 			throw new this.Exception("MessageNotExist");
 		}
-	}
+	};
+	Main.k.Manager.loadMsgsPrerecorded = function(msgs_prerecorded,json) {
+		var msgs_prerecorded_json;
+		if(typeof(msgs_prerecorded) != 'undefined') {
+			if (typeof(json) != 'undefined' && !json) {
+				msgs_prerecorded_json = JSON.stringify(msgs_prerecorded);
+			} else {
+				msgs_prerecorded_json = msgs_prerecorded;
+				msgs_prerecorded = JSON.parse(msgs_prerecorded);
+			}
+			this.msgs_prerecorded = msgs_prerecorded;
+			localStorage.setItem("ctrlw_msgs_prerecorded", msgs_prerecorded_json);
+		}else{
+			msgs_prerecorded_json = localStorage.getItem("ctrlw_msgs_prerecorded");
+			if(msgs_prerecorded_json != null){
+				this.msgs_prerecorded = JSON.parse(msgs_prerecorded_json);
+			}
+		}
+	};
 	Main.k.Manager.saveMsgsPrerecorded = function() {
 		localStorage.setItem("ctrlw_msgs_prerecorded",JSON.stringify(Main.k.Manager.msgs_prerecorded));
+		callbacks_storage_sync.fire();
 	};
 	
 	Main.k.Manager.Exception = function(name){
 		this.name = name;
-	}
+	};
 	// == /MessageManager =========================================
 
 
@@ -5941,11 +5994,14 @@ Main.k.tabs.playing = function() {
 
 	Main.k.AliveHeroes = [];
 	Main.k.MushInit = function() {
+		console.log('MushInit');
 		if (localStorage.getItem('ctrlw_newsession') != null) {
+			console.log('ctrlw_newsession');
 			localStorage.removeItem('ctrlw_newsession');
 			Main.k.Sync.pull();
 		}
-
+		Main.k.Profiles.load();
+		Main.k.Manager.loadMsgsPrerecorded();
 		Main.k.AliveHeroes = [];
 		Main.k.MushInitHeroes();
 
@@ -6157,6 +6213,7 @@ Main.k.tabs.playing = function() {
 		// ----------------------------------- //
 	};
 	Main.k.MushUpdate = function() {
+		console.log('mushupdate');
 		/** @type {{surname:string,statuses:List, titles:List, dev_surname:string, spores:string}} **/
 		var hero;
 		var bubble, t, i, j;
@@ -6315,7 +6372,7 @@ Main.k.tabs.playing = function() {
 				.click(function(e){
 					e.preventDefault();
 					var dev_surname = $(this).data('dev_surname');
-					Main.k.Profiles.save(dev_surname);
+					Main.k.Profiles.set(dev_surname);
 					Main.k.Profiles.display(dev_surname);
 				});
 
