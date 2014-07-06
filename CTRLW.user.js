@@ -728,7 +728,6 @@ Main.k.Game.updateDayAndCycle = function(day,cycle) {
 	}
 };
 Main.k.Game.updatePlayerInfos = function() {
-	Main.k.showLoading();
 	var $this = this;
 	Tools.ping('/me',function(content) {
 		var body = '<div id="body-mock">' + content.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/g, '') + '</div>';
@@ -745,7 +744,6 @@ Main.k.Game.updatePlayerInfos = function() {
 		}
 		$this.save();
 		Main.k.MushUpdate();
-		Main.k.hideLoading();
 		Main.k.quickNotice(Main.k.text.gettext('Infos du joueur mises à jour.'));
 	});
 };
