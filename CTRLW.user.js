@@ -696,7 +696,25 @@ Main.k.displayBug = function(e){
 	}
 	if(error.length > 0) {alert("nbError : "+error.length+"\n\n"+displayBug);}
 };
+Main.k.countdownTimer = {};
+Main.k.countdownTimer.counters = {};
+Main.k.countdownTimer.go = function(seconds, id, callback){
+	var count = seconds;
+	var $this = this;
+	this.counters[id] = setInterval(function(){
+		count--;
+		callback(count);
+		if(count <= 0){
+			clearInterval($this.counters[id]);
+		}
+	}, 1000); //1000 will  run it every 1 second
+};
 
+Main.k.countdownTimer.stop = function (id){
+	if(typeof(this.counters[id]) != "undefined"){
+		clearInterval(this.counters[id]);
+	}
+};
 // == Game Manager
 Main.k.Game = {};
 Main.k.Game.data = {};
@@ -1002,6 +1020,31 @@ Main.k.css.ingame = function() {
 	  from { opacity: 1; }\
 	  50% { opacity: 0; }\
 	  to { opacity: 1; }\
+	}\
+	.but.loading{\
+		overflow:hidden;\
+	}\
+	.but.loading:before{\
+		background: -moz-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,0.65) 50%, rgba(255,255,255,0.1) 95%, rgba(255,255,255,0) 100%); /* FF3.6+ */\
+		background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,0)), color-stop(50%,rgba(255,255,255,0.65)), color-stop(95%,rgba(255,255,255,0.1)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */\
+		background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%,rgba(255,255,255,0.65) 50%,rgba(255,255,255,0.1) 95%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */\
+		background: -o-linear-gradient(left, rgba(255,255,255,0) 0%,rgba(255,255,255,0.65) 50%,rgba(255,255,255,0.1) 95%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */\
+		background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.65) 50%,rgba(255,255,255,0.1) 95%,rgba(255,255,255,0) 100%); /* W3C */\
+		content: '';\
+		height: 21px;\
+		left: 0;\
+		position: absolute;\
+		width: 70px;\
+		-moz-animation: loading-button 1s infinite linear;\
+		-webkit-animation: loading-button 1s infinite linear;\
+	}\
+	@-moz-keyframes loading-button{\
+		from { margin-left: -70px; }\
+		to {margin-left: 100%; }\
+	}\
+	@-webkit-keyframes loading-button{\
+		from { margin-left: -70px; }\
+		to {margin-left: 100%; }\
 	}\
 	.ctrlw_overlay_loading{\
 		background-color: #4E5162;\
@@ -4038,6 +4081,7 @@ Main.k.tabs.playing = function() {
 		}, 0);
 	};
 	Main.k.Sync.pushDelay = function() {
+		var delay = 10;
 		var key = localStorage.getItem('ctrlw_sync_key');
 		if(key == null){
 			return;
@@ -4046,12 +4090,30 @@ Main.k.tabs.playing = function() {
 		button.find('img').hide();
 		button.find('.ctrlw_wheels').show();
 		clearTimeout(Main.k.Sync.push_timer);
+		button.removeClass('loading');
+
+		/* trick for reset animation */
+		var button_clone = button.clone(true);
+		button.before(button_clone).remove();
+		button = button_clone;
+
+		var counter = button.find('.counter');
+		Main.k.countdownTimer.stop('syncdelay');
+		button.addClass('loading');
+		counter.text(delay);
+		Main.k.countdownTimer.go(10,'syncdelay',function(count){
+			button.find('.counter').text(count);
+			if(count <= 0){
+				counter.text('');
+			}
+		});
 		Main.k.Sync.push_timer = setTimeout(function(){
 			button.find('img').hide();
 			button.find('.ctrlw_normal').show();
+			button.removeClass('loading');
 			Main.k.Sync.push();
 			Main.k.Sync.push_timer = null;
-		},10 * 1000);
+		},delay * 1000);
 	};
 	callbacks_storage_sync.add(Main.k.Sync.pushDelay);
 
@@ -6112,7 +6174,7 @@ Main.k.tabs.playing = function() {
 				"<img src='http://imgup.motion-twin.com/twinoid/a/c/1d84a74e_4030.jpg' style='vertical-align: -20%;display:none' class=\"ctrlw_down\" />" +
 				"<img src='http://imgup.motion-twin.com/twinoid/8/f/0c596094_4030.jpg' style='vertical-align: -20%;display:none' class=\"ctrlw_up\" /> "+
 				"<img src='http://imgup.motion-twin.com/twinoid/3/a/830c06f5_4030.jpg' style='vertical-align: -20%;display:none' class=\"ctrlw_wheels\" /> "+
-				Main.k.text.gettext("Sync"), null, null, Main.k.text.gettext("Sync"), Main.k.text.gettext("Permet de synchroniser les données du script entre vos différents navigateurs")
+				'<span class="txt">' + Main.k.text.gettext("Sync") + '</span> <span class="counter"></span>', null, null, Main.k.text.gettext("Sync"), Main.k.text.gettext("Permet de synchroniser les données du script entre vos différents navigateurs")
 			)
 			.attr('id','ctrlw_sync_button')
 			.appendTo(leftbar).find("a").on("mousedown", Main.k.Sync.display);
@@ -6556,6 +6618,7 @@ Main.k.tabs.playing = function() {
 				li.find("span").remove();
 				var imgsrc = "";
 
+				//noinspection FallThroughInSwitchStatementJS
 				switch(i) {
 					case 1:
 						var players = $("<div>").addClass("missingheroes").appendTo(expblock);
