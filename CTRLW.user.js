@@ -304,6 +304,23 @@ Main.k.initData = function() {
 	Main.k.statusImages['bronze'] = 'http://imgup.motion-twin.com/twinoid/6/b/8b8ae4d5_4030.jpg';
 	Main.k.statusImages['silver'] = 'http://imgup.motion-twin.com/twinoid/a/e/3c341777_4030.jpg';
 	Main.k.statusImages['gold'] = 'http://imgup.motion-twin.com/twinoid/c/1/4e43e15c_4030.jpg';
+
+	Main.k.statuses = {
+		'inactive': {
+			/* Translators: This translation must be copied from the game. */
+			'desc' : Main.k.text.gettext('Description inactif'),
+			'img' : 'sleepy',
+			/* Translators: This translation must be copied from the game. */
+			'name' : Main.k.text.gettext('Inactif')
+		},
+		'hinactive': {
+			/* Translators: This translation must be copied from the game. */
+			'desc' : Main.k.text.gettext('Description grand inactif'),
+			'img' : 'noob',
+			/* Translators: This translation must be copied from the game. */
+			'name' : Main.k.text.gettext('Grand inactif')
+		}
+	};
 };
 Main.k.init = function(){
 	//hack for new session detection
@@ -4338,6 +4355,9 @@ Main.k.tabs.playing = function() {
 		}
 		$('<label />')
 			.attr('for','hero_details_dead')
+			.css({
+				display: 'block'
+			})
 			.append(
 				$('<img>')
 					.attr({
@@ -4360,7 +4380,70 @@ Main.k.tabs.playing = function() {
 					})
 			)
 			.appendTo($hero_details);
-
+		$('<label />')
+			.attr('for','hero_details_inactive')
+			.css({
+				display: 'block'
+			})
+			.append(
+				$('<img>')
+					.attr({
+						src: '/img/icons/ui/'+Main.k.statuses['inactive']['img']+'.png',
+						alt: 'inactive',
+						title: 'inactive'
+					})
+				)
+			.append(
+				$('<input />')
+					.attr({
+						id: 'hero_details_inactive',
+						type: 'checkbox'
+					})
+					.prop('checked',$this.hasAttr(o_hero,'statuses',Main.k.statuses['inactive']['img']))
+					.on('change',function(){
+						var o_hero = $this.get();
+						if($(this).prop('checked')){
+							o_hero.statuses.push(Main.k.statuses['inactive']);
+						}else{
+							o_hero = $this.removeAttrFromProfile(o_hero,'statuses',Main.k.statuses['inactive']['img']);
+						}
+						$this.set(o_hero);
+						$this.update();
+					})
+			)
+			.appendTo($hero_details);
+		$('<label />')
+			.attr('for','hero_details_hinactive')
+			.css({
+				display: 'block'
+			})
+			.append(
+				$('<img>')
+					.attr({
+						src: '/img/icons/ui/'+Main.k.statuses['hinactive']['img']+'.png',
+						alt: 'highly inactive',
+						title: 'highly inactive'
+					})
+				)
+			.append(
+				$('<input />')
+					.attr({
+						id: 'hero_details_hinactive',
+						type: 'checkbox'
+					})
+					.prop('checked',$this.hasAttr(o_hero,'statuses',Main.k.statuses['hinactive']['img']))
+					.on('change',function(){
+						var o_hero = $this.get();
+						if($(this).prop('checked')){
+							o_hero.statuses.push(Main.k.statuses['hinactive']);
+						}else{
+							o_hero = $this.removeAttrFromProfile(o_hero,'statuses',Main.k.statuses['hinactive']['img']);
+						}
+						$this.set(o_hero);
+						$this.update();
+					})
+			)
+			.appendTo($hero_details);
 		console.groupEnd();
 	};
 	Main.k.Profiles.create = function(dev_surname){
@@ -4470,6 +4553,35 @@ Main.k.tabs.playing = function() {
 		}
 		console.groupEnd();
 		return profile;
+	};
+	Main.k.Profiles.removeAttrFromProfile = function(profile,type_attribute,value,key_value){
+		console.warn('avant',profile[type_attribute]);
+		if(typeof(key_value) == 'undefined'){
+			key_value = 'img';
+		}
+		var index_to_remove = null;
+		for(var i = 0; i<profile[type_attribute].length; i++){
+			if(profile[type_attribute][i][key_value] == value){
+				index_to_remove = i;
+			}
+		}
+		console.warn('milieu',index_to_remove,profile[type_attribute]);
+		if(index_to_remove != null){
+			profile[type_attribute].splice(index_to_remove,1);
+		}
+		console.warn('apres',profile[type_attribute]);
+		return profile;
+	};
+	Main.k.Profiles.hasAttr = function(profile,type_attribute,value,key_value){
+		if(typeof(key_value) == 'undefined'){
+			key_value = 'img';
+		}
+		for(var i = 0; i<profile[type_attribute].length; i++){
+			if(profile[type_attribute][i][key_value] == value){
+				return true;
+			}
+		}
+		return false;
 	};
 	Main.k.Profiles.close = function(){
 		console.log('Main.k.Profiles.close');
@@ -6552,10 +6664,15 @@ Main.k.tabs.playing = function() {
 		var missingDiv = $("<div>").addClass("missingheroes").appendTo(heroes_list);
 		j=0;
 		var $div_hero;
-		var a_divs_heroes_alive = [];
-		var a_divs_heroes_dead = [];
+		var a_divs_heroes = {
+			'alive': [],
+			'inactive': [],
+			'dead': []
+		};
+		var inactive_status;
 		for (i=0; i<Main.k.HEROES.length; i++) {
 			(function() {
+				inactive_status = null;
 				var hero = Main.k.HEROES[i];
 				var h = Main.k.h[hero];
 				if (!Main.k.ArrayContains(Main.k.heroes_same_room, hero)) {
@@ -6576,8 +6693,16 @@ Main.k.tabs.playing = function() {
 									Main.k.Profiles.display(hero);
 								})
 						);
+
+					for( var inc = 0; inc < o_hero.statuses.length; inc ++){
+						/** @type {{desc:string,img:string, name:string}} **/
+						status = o_hero.statuses[inc];
+						if($.inArray(status.img,['sleepy','noob']) != -1){
+							inactive_status = status.img;
+						}
+					}
 					if(o_hero.dead == true){
-						a_divs_heroes_dead.push($div_hero);
+						a_divs_heroes['dead'].push($div_hero);
 						$('<img>').attr({
 								src: '/img/icons/ui/dead.png'
 							})
@@ -6588,15 +6713,30 @@ Main.k.tabs.playing = function() {
 								'pointer-events': 'none'
 							})
 							.appendTo($div_hero);
+					}else if(inactive_status != null){
+						a_divs_heroes['inactive'].push($div_hero);
+						$('<img>').attr({
+								src: '/img/icons/ui/'+inactive_status+'.png'
+							})
+							.css({
+								position: 'absolute',
+								bottom: '-6px',
+								right: '-2px',
+								'pointer-events': 'none'
+							})
+							.appendTo($div_hero);
 					}else{
-						a_divs_heroes_alive.push($div_hero);
+						a_divs_heroes['alive'].push($div_hero);
 
 					}
 				}
 			})();
 		}
-		$.each($.merge(a_divs_heroes_alive,a_divs_heroes_dead),function(k,$div){
-			missingDiv.append($div);
+		$.each(a_divs_heroes,function(k,a){
+			$.each(a, function(key,$div){
+				missingDiv.append($div);
+			});
+
 		});
 		// ----------------------------------- //
 
