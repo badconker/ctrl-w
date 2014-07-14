@@ -1715,6 +1715,13 @@ Main.k.css.ingame = function() {
 		box-shadow: 0px 0px 3px 3px rgba(57, 101, 251, 0.5), 0px 0px 3px 3px rgba(57, 101, 251, 0.5) inset;\
 		resize: none! important;\
 	}\
+	.popup-content{\
+		margin: 30px;\
+	}\
+	.popup-actions{\
+		margin-bottom: 10px;\
+		text-align: center;\
+	}\
 	.updatescontent { \
 		margin: 30px;\
 	}\
@@ -4040,11 +4047,14 @@ Main.k.tabs.playing = function() {
 
 		return dfd.promise();
 	};
-	Main.k.Sync.push = function() {
+	Main.k.Sync.push = function(force_push) {
 		console.info('xhr Sync.push1');
 		var key = localStorage.getItem('ctrlw_sync_key');
 		if(key == null){
 			return;
+		}
+		if(typeof(force_push) == 'undefined'){
+			force_push = false;
 		}
 		var button = $('#ctrlw_sync_button');
 		button.find('img').hide();
@@ -4059,7 +4069,8 @@ Main.k.tabs.playing = function() {
 					mush_time: $('#input').attr('now'),
 					profiles: JSON.stringify(Main.k.Profiles.data),
 					msgs_prerecorded: JSON.stringify(Main.k.Manager.msgs_prerecorded),
-					key: key
+					key: key,
+					force : force_push ? 1 : 0
 				}),
 				headers: {
 					"Content-Type": "application/x-www-form-urlencoded"
@@ -4068,8 +4079,10 @@ Main.k.tabs.playing = function() {
 					console.warn('response',response);
 
 					if(response.status == 200){
+						/** @type {{sync:<Object{updated_at:string}>,status:string}} **/
 						var json = JSON.parse(response.responseText);
 						console.warn('json',json);
+						//json = JSON.parse(localStorage.getItem('ctrlw_json_test'));
 						if(json.status == 'ok'){
 							localStorage.setItem('ctrlw_sync_last_update_time',$('#input').attr('now'));
 						}else{
@@ -4077,8 +4090,54 @@ Main.k.tabs.playing = function() {
 							if(typeof(json.status) !='undefined'){
 								if(typeof(json.error) !='undefined' && json.error == 'auth'){
 									Main.k.quickNoticeError(Main.k.text.gettext('Synchronisation impossible, clé incorrecte'));
-								}else if(confirm(Main.k.text.gettext('Vos données locales sont plus anciennes que les données du serveurs, voulez vous les écraser ?'))){
-									Main.k.Sync.pull();
+								}else{
+									var popup = Main.k.CreatePopup();
+									popup.content.css({
+										"height": "auto",
+										"max-height": "90%",
+										"width": "700px",
+										"color": "#FFF"
+									});
+
+									// Fill popup content
+									var content = "<div class='sync_ask popup-content'>" + Main.k.text.gettext('Les données distantes sont plus récentes que les données locales. <br/> Que voulez vous faire ?') + '<br/>' +
+										Main.k.text.gettext('Date synchro serveur : ') + new Date(json.sync.mush_time) + '<br/>' +
+										Main.k.text.gettext('Date synchro locale : ') + new Date(parseInt(localStorage.getItem('ctrlw_sync_last_update_time'))) +
+										"</div>";
+									var buttons = $("<div class='popup-actions'>" +
+														"<div id=\"confirm_pull\" class=\"but updatesbtn\" >" +
+															"<div class=\"butright\">" +
+																"<div class=\"butbg\">" +
+																	"<a href=\"#\">"+Main.k.text.gettext("Ecraser les données locales")+"</a>" +
+																"</div>" +
+															"</div>" +
+														"</div>" +
+														"<div id=\"confirm_push\" class=\"but updatesbtn\" >" +
+															"<div class=\"butright\">" +
+																"<div class=\"butbg\">" +
+																	"<a href=\"#\">"+Main.k.text.gettext("Ecraser les données distantes")+"</a>" +
+																"</div>" +
+															"</div>" +
+														"</div>" +
+													 "</div>");
+									buttons.find('#confirm_pull').on('click',function(e){
+										e.preventDefault();
+										Main.k.Sync.pull();
+										Main.k.ClosePopup();
+									});
+									buttons.find('#confirm_push').on('click',function(e){
+										e.preventDefault();
+										Main.k.Sync.push(true);
+										Main.k.ClosePopup();
+									});
+									var cancelAc = "'Main.k.ClosePopup();'";
+									var cancel = "<div id=\"cancel\" class=\"but updatesbtn\" onclick=" + cancelAc + "><div class=\"butright\"><div class=\"butbg\"><a href=\"#\">" + Main.getText("cancel") + "</a></div></div></div></div>";
+									buttons.append(cancel);
+									$("<div>").html(content).append(buttons).appendTo(popup.content);
+
+									// Display popup
+									Main.k.OpenPopup(popup.dom);
+									//Main.k.Sync.pull();
 								}
 							}
 						}
@@ -4118,7 +4177,7 @@ Main.k.tabs.playing = function() {
 		Main.k.countdownTimer.stop('syncdelay');
 		button.addClass('loading');
 		counter.text(delay);
-		Main.k.countdownTimer.go(10,'syncdelay',function(count){
+		Main.k.countdownTimer.go(delay,'syncdelay',function(count){
 			button.find('.counter').text(count);
 			if(count <= 0){
 				counter.text('');
@@ -4175,7 +4234,6 @@ Main.k.tabs.playing = function() {
 			}).html("<span>" + Main.k.getFullName(Main.k.Profiles.current) + "</span>").appendTo(header);
 			Main.k.MakeButton("<img src='/img/icons/ui/awake.png' />",null,function(event) {
 				Main.k.Profiles.set(Main.k.Profiles.current);
-				Main.k.Profiles.update();
 			}).css({
 				position: "absolute",
 				top: "2px",
@@ -7162,6 +7220,8 @@ Main.k.tabs.playing = function() {
 
 		// Update manager?
 		if (Main.k.Manager.opened) Main.k.Manager.update();
+
+		Main.k.Profiles.update();
 
 		// Options
 		Main.k.updateBottom();
