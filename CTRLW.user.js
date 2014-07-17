@@ -4977,6 +4977,14 @@ Main.k.tabs.playing = function() {
 					$(this).find("p, ul").each(function() {
 						topic.msg += "<" + $(this).prop("tagName") + ">" + $(this).html() + "</" + $(this).prop("tagName") + ">";
 					});
+					if(topic.msg == ''){
+						topic.msg = $(this).find('.mainsaid')
+									.clone()    //clone the element
+									.children() //select all the children
+									.remove()   //remove all the children
+									.end()  //again go back to selected element
+									.text();
+					}
 				}
 
 				topic.author = hero;
@@ -5024,6 +5032,14 @@ Main.k.tabs.playing = function() {
 					$(this).find("p, ul").each(function() {
 						reply.msg += "<" + $(this).prop("tagName") + ">" + $(this).html() + "</" + $(this).prop("tagName") + ">";
 					});
+					if(reply.msg == ''){
+						reply.msg = $(this).find('.reply')
+							.clone()    //clone the element
+							.children() //select all the children
+							.remove()   //remove all the children
+							.end()  //again go back to selected element
+							.text();
+					}
 					reply.tid = topic.id;
 					reply.id = idx;
 				}
