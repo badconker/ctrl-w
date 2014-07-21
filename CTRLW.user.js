@@ -4641,6 +4641,20 @@ Main.k.tabs.playing = function() {
 		}
 		return false;
 	};
+	Main.k.Profiles.hasStatusWhichRemoveTitle = function(profile){
+		if(profile.dead){
+			return true;
+		}
+		var status = null;
+		for( var inc = 0; inc < profile.statuses.length; inc ++){
+			/** @type {{desc:string,img:string, name:string}} **/
+			status = profile.statuses[inc];
+			if($.inArray(status.img,[Main.k.statuses.inactive.img,Main.k.statuses.hinactive.img]) != -1){
+				return true;
+			}
+		}
+		return false;
+	};
 	Main.k.Profiles.close = function(){
 		console.log('Main.k.Profiles.close');
 		Main.k.Profiles.current = null;
@@ -6517,7 +6531,7 @@ Main.k.tabs.playing = function() {
 			hero = Main.k.COMMANDERS[i];
 			if($.inArray(hero,Main.k.HEROES) != -1) {
 				o_hero = Main.k.Profiles.get(hero);
-				if (!o_hero.dead) {
+				if (!Main.k.Profiles.hasStatusWhichRemoveTitle(o_hero)) {
 					commander_nb++;
 					$("<img>")
 						.addClass("body " + hero)
@@ -6547,7 +6561,7 @@ Main.k.tabs.playing = function() {
 			hero = Main.k.ADMINS[i];
 			if($.inArray(hero,Main.k.HEROES) != -1) {
 				o_hero = Main.k.Profiles.get(hero);
-				if (!o_hero.dead) {
+				if (!Main.k.Profiles.hasStatusWhichRemoveTitle(o_hero)) {
 					admin_nb++;
 					$("<img>")
 						.addClass("body " + hero)
@@ -6577,7 +6591,7 @@ Main.k.tabs.playing = function() {
 			hero = Main.k.COMMS[i];
 			if($.inArray(hero,Main.k.HEROES) != -1){
 				o_hero = Main.k.Profiles.get(hero);
-				if(!o_hero.dead) {
+				if(!Main.k.Profiles.hasStatusWhichRemoveTitle(o_hero)) {
 					comms_nb++;
 					$("<img>")
 						.addClass("body " + hero)
