@@ -4647,6 +4647,7 @@ Main.k.tabs.playing = function() {
 		Main.k.folding.displayGame();
 	};
 	Main.k.Profiles.clear = function(){
+		Main.k.Profiles.data = {};
 		localStorage.removeItem('ctrlw_profiles');
 		callbacks_storage_sync.fire();
 	};
