@@ -1767,6 +1767,22 @@ Main.k.css.ingame = function() {
 		-webkit-transition: all 200ms;\
 		-o-transition: all 200ms;\
 	}\
+	#profile_col .hero-details{\
+		height: 95px;\
+		margin-left: 95px;\
+		margin-right: 5px;\
+		position: relative;\
+	}\
+	.profile-custom-infos{\
+		border-top: 1px solid #FFF;\
+		bottom: 0;\
+		padding-top: 3px;\
+		position: absolute;\
+		width: 100%;\
+	}\
+	.profile-custom-infos label{\
+		margin-right: 10px;\
+	}\
 	/** pour régler les probleme du au scale css3 sur firefox**/\
 	#char_col .sheetbgcontent table td.two .extrapa{\
 		position:relative;\
@@ -4247,9 +4263,6 @@ Main.k.tabs.playing = function() {
 				.on("mouseout", Main.hideTip);
 
 			$('<div>')
-				.css({
-					position: 'relative'
-				})
 				.addClass('hero-details')
 				.appendTo(header);
 			$("<div>").addClass("clear").appendTo(header);
@@ -4411,11 +4424,9 @@ Main.k.tabs.playing = function() {
 				.appendTo($hero_details);
 
 		}
+		var $custom_infos = $('<div>').addClass('profile-custom-infos').appendTo($hero_details);
 		$('<label />')
 			.attr('for','hero_details_dead')
-			.css({
-				display: 'block'
-			})
 			.append(
 				$('<img>')
 					.attr({
@@ -4437,12 +4448,9 @@ Main.k.tabs.playing = function() {
 						$this.set(o_hero);
 					})
 			)
-			.appendTo($hero_details);
+			.appendTo($custom_infos);
 		$('<label />')
 			.attr('for','hero_details_inactive')
-			.css({
-				display: 'block'
-			})
 			.append(
 				$('<img>')
 					.attr({
@@ -4469,12 +4477,9 @@ Main.k.tabs.playing = function() {
 						$this.update();
 					})
 			)
-			.appendTo($hero_details);
+			.appendTo($custom_infos);
 		$('<label />')
 			.attr('for','hero_details_hinactive')
-			.css({
-				display: 'block'
-			})
 			.append(
 				$('<img>')
 					.attr({
@@ -4501,7 +4506,7 @@ Main.k.tabs.playing = function() {
 						$this.update();
 					})
 			)
-			.appendTo($hero_details);
+			.appendTo($custom_infos);
 		console.groupEnd();
 	};
 	Main.k.Profiles.create = function(dev_surname){
