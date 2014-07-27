@@ -599,6 +599,7 @@ Main.k.quickNoticeError = function(msg){
 	Main.k.quickNotice(msg,'error');
 };
 /**
+ * @param {object} topic
  * @return string
  */
 Main.k.GetHeroNameFromTopic = function(topic) {
@@ -648,9 +649,9 @@ Main.k.displayRemainingCyclesToNextLevel = function (){
 		}
 		if(regex.exec(attr) != null){
 			if(Main.k.Game.data.player_status == 'gold'){
-				xp_by_cycle = 2
+				xp_by_cycle = 2;
 			}else{
-				xp_by_cycle = 1
+				xp_by_cycle = 1;
 			}
 			var i_cycles = RegExp.$2;
 			var i_cycles_save = localStorage.getItem('ctrlw_remaining_cycles');
@@ -2912,7 +2913,7 @@ Main.k.tabs.playing = function() {
 		if(typeof(lastVersion) != 'undefined' && lastVersion < Main.k.version){
 			version_update = lastVersion;
 		}else{
-			version_update = Main.k.version
+			version_update = Main.k.version;
 		}
 		if(localStorage.getItem('ctrlw_update_cache') == null){
 			Main.k.UpdateCheck.b_in_progress = true;
@@ -3746,7 +3747,7 @@ Main.k.tabs.playing = function() {
 						Main.syncInvOffset(null,true);
 						Main.doChatPacks();
 						Main.topChat();
-						Main.onChanDone(ChatType.Local[1],true)
+						Main.onChanDone(ChatType.Local[1],true);
 					}).dequeue("myQueue");
 				}
 			}, 230);
@@ -4160,7 +4161,7 @@ Main.k.tabs.playing = function() {
 						button.find('img').hide();
 						button.find('.ctrlw_normal').show();
 					}else{
-						Main.k.quickNoticeError('Sync push, fatal error')
+						Main.k.quickNoticeError('Sync push, fatal error');
 					}
 
 
@@ -4543,7 +4544,7 @@ Main.k.tabs.playing = function() {
 		var profiles = this.data;
 		if(profiles != null && typeof(profiles[hero]) != 'undefined') {
 			console.groupEnd();
-			return profiles[hero]
+			return profiles[hero];
 		}else{
 			console.groupEnd();
 			return Main.k.Profiles.create(hero);
