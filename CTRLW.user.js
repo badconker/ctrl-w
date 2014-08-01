@@ -3294,6 +3294,118 @@ Main.k.tabs.playing = function() {
 	/**
 	 * @return string;
 	 */
+	Main.k.FormatComm = function(){
+        var comm = "\n //**Communications:**//";
+        
+        var parse = function(t) {
+			t = t.replace(/<img\s+src=\"\/img\/icons\/ui\/triumph.png\"\s+alt=\"triomphe\"[\/\s]*>/ig, ":mush_triumph:");
+			t = t.replace(/&nbsp;/ig, " ");
+			t = t.replace(/\n/ig, "");
+			t = t.replace(/<p>/ig, " ");
+			t = t.replace(/<\/?[^>]+>/g, "");
+			return t;
+		}
+        
+        $('#trackerModule .sensors').each(function() {
+            
+        	var bdd = $(this).find("h2").html().trim();
+            comm += "\n//" + bdd + "//: ";
+            var data = [];
+            $(this).find("p").each(function() {
+				data.push($(this).find("em").html());
+			});
+            
+            if (data.length < 2){
+                data.push("Connexion non établie");
+            }
+            comm += "\n"+ data.join(", ");
+        });
+        
+        $('#trackerModule .neron').each(function() {
+            
+        	var version = $(this).find("h2").html().trim();
+            comm += "\n//" + version + "//\n";
+            
+        });
+        $('#trackerModule .xyloph').each(function() {
+            
+            var bdd = $(this).find("h2").html().trim();
+            var nbr = 0;
+            var data = [];
+            var datanamereg = /<h1>([^<]+)<\/h1>/;
+            $(this).find("li").not(".undone").each(function() {
+                nbr += 1;
+                data.push(datanamereg.exec($(this).attr("onmouseover"))[1]);
+			});
+            
+            if (nbr == 12){
+            	comm += "//" + bdd + "//: ";
+                comm += nbr + "/12\n";
+            }
+            else{
+                if (nbr >0){
+           		    comm += "//" + bdd + "//: ";
+            		comm += nbr + "/12"+"\n ►**"+ data.join("** \n ►**")+"**\n";
+                }
+            }
+            
+            
+            
+        });
+        
+        $('#trackerModule .network .bases').each(function() {
+           
+            var base = "//Décodage: //";
+         	var base_decode;
+            $(this).find("li").each(function(){
+                
+                base_decode = $(this).attr("data-id");
+                $(this).find(".percent").not(".off").each(function(){
+                    base += base_decode+ "► " + $(this).html().trim();
+                });
+            });
+            
+            if (base != "//Décodage: //"){
+            	comm += base +"\n";
+            }
+            
+            var base_fini = "//Base(s) décodée(s): //";
+            var _base ="";
+            var base_signal_perdu = "//Base(s) perdue(s): //";
+            var base_nom = "";
+            var nbr_base_perdu = 0;
+            
+            $(this).find("li").each(function(){
+                
+                base_nom = $(this).attr("data-id");
+                $(this).find("h3").each(function(){
+                    if (($(this).html().trim()) != "???" & ($(this).html().trim()) != ""){
+                        
+                        base_fini += $(this).html().trim() +", ";
+                    }
+                });
+                
+                $(this).find("span").not(".percent").each(function(){
+                   
+                    base_signal_perdu+= base_nom +", ";
+                });
+            });
+            
+            if (base_fini != "//Base(s) décodée(s): //"){
+                comm += base_fini;
+                comm = comm.substring(0,comm.length-2)+"\n";
+            }
+            if (base_signal_perdu != "//Base(s) perdue(s): //"){    
+                comm += base_signal_perdu.substring(0,base_signal_perdu.length-2);
+            }
+            
+            
+        });
+        return comm;
+    	}
+	/**
+	 * @return string;
+	 */
 	Main.k.FormatPharma = function() {
 		var ret = "**//" + Main.k.text.gettext("Consommables :") + " //**";
 		
@@ -7101,7 +7213,34 @@ Main.k.tabs.playing = function() {
 				});
 				return false;
 			});
-		}
+			//Comm
+		}else if ($("#trackerModule").length > 0){
+            var t = $("<h3>").html("Communication").appendTo(project_list);
+            $("<span>").addClass("displayless").attr("_target", ".commPreview")
+				.on("click", Main.k.ToggleDisplay).appendTo(t);
+            var nav = $("#trackerModule");
+            var comm = $("<div>").addClass("commPreview").appendTo(project_list);
+            $("<img>")
+					.attr("src", "http://s30.postimg.org/9safzkpbx/Satellite_icon.png")
+                    .on("mousedown", function(e) {
+					$('textarea:focus').each(function(e) {
+						var txt = Main.k.FormatComm();
+						$(this).insertAtCaret(txt);
+					});
+					return false;
+					}).appendTo(comm);
+            //TODO multi
+            Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> "+Main.k.text.gettext("Partager"), null, null, null,
+					"TODO: aperçu"
+				).appendTo(project_list)
+				.find("a").on("mousedown", function(e) {
+					$('textarea:focus').each(function(e) {
+						var txt = Main.k.FormatComm();
+						$(this).insertAtCaret(txt);
+					});
+					return false;
+				});
+        }
 
 		// Plants
 		$usLeftbar.find("#plantmanager").remove();
