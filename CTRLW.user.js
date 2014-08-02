@@ -7475,8 +7475,16 @@ Main.k.tabs.myprofile = function() {
 	}
 
 	/**** MY FILE ****/
-	$(".cdTripEntry .new").remove();
-
+	$('.cdTripEntry td .char').css('margin','5px 0');
+	$('.cdTripEntry').each(function(){
+		$(this).find('td').eq(-2).css('width','71px');
+	});
+	$('.cdTripEntry .new').remove();
+	$('.cdTripPrevious').on('click',function(){
+		if($('.cdTripPage').text() > 1){
+			$('.cdTripPrevious').show();
+		}
+	});
 
 };
 Main.k.tabs.ranking = function() {
