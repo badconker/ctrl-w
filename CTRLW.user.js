@@ -50,6 +50,9 @@ Main.k.mushurl = 'http://' + document.domain;
 Main.k.debug = false;
 Main.k.errorList = [];
 
+String.prototype.htmlEncode = function() {
+	return $('<div/>').text(this).html();
+};
 String.prototype.capitalize = function() {
 	return this.replace(/(?:^|\s)\S/g, function(a) {
 		return a.toUpperCase();
@@ -1784,6 +1787,31 @@ Main.k.css.ingame = function() {
 	.profile-custom-infos label{\
 		margin-right: 10px;\
 	}\
+	#profile-notes{\
+	}\
+	#profile-notes textarea{\
+		height:40px;\
+	    display: block;\
+	    margin-bottom: 12px;\
+	    margin-top: 5px;\
+	    resize: none;\
+	}\
+	#profile-notes textarea:last-child{\
+		height:146px;\
+		overflow: hidden;\
+	}\
+	#profile-notes .actions {\
+		bottom: 3px;\
+		left: 0;\
+		position: absolute;\
+		right: 0;\
+		text-align: center;\
+	}\
+	#profile-notes .profile-content{\
+		height: 260px;\
+		overflow: hidden;\
+		padding: 0 10px;\
+	}\
 	/** pour régler les probleme du au scale css3 sur firefox**/\
 	#char_col .sheetbgcontent table td.two .extrapa{\
 		position:relative;\
@@ -1791,7 +1819,8 @@ Main.k.css.ingame = function() {
 	#cdMainContent{\
 		position:relative;\
 	}\
-	.ctrlw_col input{\
+	.ctrlw_col input,\
+	.ctrlw_col textarea{\
 		color: #090A61;\
 	}\
 	.ctrlw-row-options{\
@@ -2141,13 +2170,21 @@ Main.k.tabs.playing = function() {
 		}
 
 		$desc.append('<div class="clear"></div>');
-		$desc.append('<p>' + o_hero.short_desc + '</p>');
+		$desc.append('<p>' + o_hero.short_desc.htmlEncode().replace(/([\r\n]+)/g, "<br/>") + '</p>');
 
 
 		$desc.append('<p><strong>' + Main.k.text.gettext("Cliquez pour plus d'informations") + '</strong></p>');
 		$(this)
 			.attr("_title", $tooltip_title.html())
 			.attr("_desc", $desc.html())
+			.on("mouseover", Main.k.CustomTip)
+			.on("mouseout", Main.hideTip);
+		return $(this);
+	};
+	$.fn.addTooltip = function(title,text){
+		$(this)
+			.attr("_title", title)
+			.attr("_desc", text)
 			.on("mouseover", Main.k.CustomTip)
 			.on("mouseout", Main.hideTip);
 		return $(this);
@@ -4226,7 +4263,7 @@ Main.k.tabs.playing = function() {
 			Main.k.Profiles.initialized = true;
 			var h = Main.k.h[Main.k.Profiles.current];
 			console.log(h);
-			var td = $("<td>").addClass("chat_box").css({
+			var td = $("<td>").addClass("chat_box ctrlw_col").css({
 				"padding-right": "6px",
 				"padding-top": "1px",
 				transform: "scale(0,1)",
@@ -4270,17 +4307,69 @@ Main.k.tabs.playing = function() {
 			var r = $("<div>").addClass("right").css({
 				"margin-top": "10px"
 			}).appendTo(td);
-			var rbg = $("<div>").attr("id", "kProfileLogs").addClass("rightbg chattext").css({
+			var $notes = $("<div>").attr("id", "profile-notes").addClass("rightbg chattext").css({
 				resize: "none",
-				height: "280px",
+				height: "293px",
 				"min-height": "0"
 			}).appendTo(r);
+			$notes
+				.append(
+					$('<div>').addClass('profile-content')
+						.append(
+							$('<label>')
+								.attr('for','tiny-notes')
+								.html('<img src="/img/icons/ui/infoalert.png" style="vertical-align: text-bottom"/> '+Main.k.text.gettext('Notes résumées :'))
+								.addTooltip(Main.k.text.gettext('Notes résumées :'),Main.k.text.gettext('Ce texte apparaitra au survol de la souris sur l\'icone du personnage à la place de la description originale du jeu'))
+						)
+							.append(
+							$('<textarea>')
+								.addClass('chatbox')
+								.attr('id','tiny-notes')
+								.on('focus',function(){$(this).addClass('chatboxfocus');})
+								.on('keyup',function(){
+									$('.desc-submit-button img').hide();
+									$('.desc-submit-button img.desc-ko').show();
+								})
+						)
+							.append(
+							$('<label>')
+								.attr('for','long-notes')
+								.text(Main.k.text.gettext('Notes détaillées :'))
+						)
+							.append(
+							$('<textarea>')
+								.addClass('chatbox')
+								.attr('id','long-notes')
+								.on('focus',function(){$(this).addClass('chatboxfocus');})
+								.on('keyup',function(){
+									$('.desc-submit-button img').hide();
+									$('.desc-submit-button img.desc-ko').show();
+								})
+						)
+				);
+			var $actions = $('<div>').addClass('actions').appendTo($notes);
+
+			Main.k.MakeButton(
+					"<img src='/img/icons/ui/alert.png' style=\"display:none\" class=\"desc-ko\" /><img class=\"desc-ok\" style='vertical-align:text-bottom' src='/img/icons/ui/projects_done.png' /> "+Main.k.text.gettext('Enregistrer'),
+					null,
+					function(){
+						var profile = Main.k.Profiles.get();
+						profile.short_desc = $('#tiny-notes').val();
+						profile.long_desc = $('#long-notes').val();
+						Main.k.Profiles.set(profile);
+						$('.desc-submit-button img').hide();
+						$('.desc-submit-button img.desc-ok').show();
+					}
+				)
+				.css("display", "inline-block")
+				.addClass('desc-submit-button')
+				.appendTo($actions);
 
 			var close = $("<div>").css({
 				"text-align": "center",
 				margin: "10px 0 0"
 			}).appendTo(td);
-			Main.k.MakeButton("<img src='/img/icons/ui/pageleft.png' /> Retour au jeu", null, Main.k.Profiles.close).css("display", "inline-block").appendTo(close);
+			Main.k.MakeButton("<img src='/img/icons/ui/pageleft.png' /> "+Main.k.text.gettext('Retour au jeu'), null, Main.k.Profiles.close).css("display", "inline-block").appendTo(close);
 
 		}
 		Main.k.Profiles.update();
@@ -4416,6 +4505,10 @@ Main.k.tabs.playing = function() {
 			$hero_details.append(skills);
 			$hero_details.append(statuses);
 			$hero_details.append(titles);
+
+			$('#long-notes').val(typeof(o_hero.long_desc) != 'undefined' ? o_hero.long_desc.htmlEncode() : '');
+			$('#tiny-notes').val(o_hero.short_desc.htmlEncode());
+
 		}else{
 			$("<div>")
 				.html(Main.k.text.gettext('Aucune donnée enregistrée'))
@@ -4515,6 +4608,7 @@ Main.k.tabs.playing = function() {
 			'name': Main.k.h[dev_surname].name,
 			'dev_surname': dev_surname,
 			'short_desc': Main.k.h[dev_surname].short_desc,
+			'long_desc': '',
 			'statuses': [],
 			'titles': [],
 			'skills': [],
@@ -4586,6 +4680,7 @@ Main.k.tabs.playing = function() {
 		profile.spores = null;
 
 		profile.short_desc = o_hero_orig.short_desc;
+		profile.long_desc = '';
 		profile.name = o_hero_orig.name;
 		profile.dev_surname = o_hero_orig.dev_surname;
 		profile.dead = false;
