@@ -7473,6 +7473,11 @@ Main.k.tabs.myprofile = function() {
 		sel.addClass('active');
 		sel.siblings().removeClass('active');
 	}
+
+	/**** MY FILE ****/
+	$(".cdTripEntry .new").remove();
+
+
 };
 Main.k.tabs.ranking = function() {
 
