@@ -3244,7 +3244,7 @@ Main.k.tabs.playing = function() {
 	/**
 	 * @return string;
 	 */
-	Main.k.FormatResearch = function() {
+	Main.k.FormatResearch = function(short) {
 		var ret = "**//"+Main.k.text.gettext("Recherches")+" : //**";
 
 		var parse = function(t) {
@@ -3264,9 +3264,11 @@ Main.k.tabs.playing = function() {
 			var desc = parse($(this).find("div.desc").html().trim());
 			var bonus1 = /<strong>([^<]+)<\/strong>/.exec($(this).find("div.suggestprogress ul li img").first().attr("onmouseover"))[1].trim().replace("Médeçin", "Médecin");
 			var bonus2 = /<strong>([^<]+)<\/strong>/.exec($(this).find("div.suggestprogress ul li img").last().attr("onmouseover"))[1].trim().replace("Médeçin", "Médecin");
-			ret += "\n**" + name + "** - " + pct + "\n";
-			ret += "" + desc + "\n";
-			ret += "Bonus : //" + bonus1 + "//, //" + bonus2 + "//";
+			ret += "\n**" + name + "** - " + pct;
+			if(typeof(short) == 'undefined' ||  short != true ) {
+				ret += "\n" + desc + "\n";
+				ret += "Bonus : //" + bonus1 + "//, //" + bonus2 + "//";
+			}
 		});
 
 		return ret;
@@ -7198,7 +7200,7 @@ Main.k.tabs.playing = function() {
 			});
 
 			// Research actions
-			Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> "+Main.k.text.gettext("Partager"), null, null, Main.k.text.gettext("Partager les recherches"),
+			Main.k.MakeButton("<img src='/img/icons/ui/guide.png' /> "+Main.k.text.gettext("Partager"), null, null, Main.k.text.gettext("Partager les recherches"),
 				Main.k.text.gettext("<p>Insère la liste de recherches dans la zone de texte active, de la forme&nbsp;:</p><p>" +
 				"<li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li>" +
 				"<li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li>" +
@@ -7211,6 +7213,21 @@ Main.k.tabs.playing = function() {
 				});
 				return false;
 			});
+
+			Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> "+Main.k.text.gettext("Partager v2"), null, null, Main.k.text.gettext("Partager les recherches"),
+				Main.k.text.gettext("<p>Insère la liste de recherches dans la zone de texte active, de la forme&nbsp;:</p><p>" +
+					"<li><strong>Nom de la recherche</strong> - 0%</li>" +
+					"<li><strong>Nom de la recherche</strong> - 0%</li>" +
+					"<li><strong>Nom de la recherche</strong> - 0%</li></p>")
+			).appendTo(project_list)
+				.find("a").addClass("shareresearchbtn").on("mousedown", function(e) {
+					$('textarea:focus').each(function(e) {
+						var txt = Main.k.FormatResearch(true);
+						$(this).insertAtCaret(txt);
+					});
+					return false;
+				});
+
 			$research_module.find(" ul.inventory li.item").on("click", function(){
 				Main.selectItem($(this));
 			});
