@@ -3333,7 +3333,7 @@ Main.k.tabs.playing = function() {
 	 * @return string;
 	 */
 	Main.k.FormatComm = function(){
-        var comm = "\n //**Communications:**//";
+        var comm = "\n //**" + Main.k.text.gettext('Communications:') + "**//";
         
         var parse = function(t) {
 			t = t.replace(/<img\s+src=\"\/img\/icons\/ui\/triumph.png\"\s+alt=\"triomphe\"[\/\s]*>/ig, ":mush_triumph:");
@@ -3354,7 +3354,7 @@ Main.k.tabs.playing = function() {
 			});
             
             if (data.length < 2){
-                data.push("Connexion non établie");
+                data.push(Main.k.text.gettext('Connexion non établie'));
             }
             comm += "\n"+ data.join(", ");
         });
@@ -3393,7 +3393,7 @@ Main.k.tabs.playing = function() {
         
         $('#trackerModule .network .bases').each(function() {
            
-            var base = "//Décodage: //";
+            var base = "//" + Main.k.text.gettext('Décodage: ') + "//";
          	var base_decode;
             $(this).find("li").each(function(){
                 
@@ -3407,9 +3407,9 @@ Main.k.tabs.playing = function() {
             	comm += base +"\n";
             }
             
-            var base_fini = "//Base(s) décodée(s): //";
+            var base_fini = "//" + Main.k.text.gettext('Base(s) décodée(s): ') + "//";
             var _base ="";
-            var base_signal_perdu = "//Base(s) perdue(s): //";
+            var base_signal_perdu = "//" + Main.k.text.gettext('Base(s) perdue(s): ') + "//";
             var base_nom = "";
             var nbr_base_perdu = 0;
             
@@ -3417,7 +3417,7 @@ Main.k.tabs.playing = function() {
                 
                 base_nom = $(this).attr("data-id");
                 $(this).find("h3").each(function(){
-                    if (($(this).html().trim()) != "???" & ($(this).html().trim()) != ""){
+                    if (($(this).html().trim()) != "???" && ($(this).html().trim()) != ""){
                         
                         base_fini += $(this).html().trim() +", ";
                     }
@@ -3425,22 +3425,22 @@ Main.k.tabs.playing = function() {
                 
                 $(this).find("span").not(".percent").each(function(){
                    
-                    base_signal_perdu+= base_nom +", ";
+                    base_signal_perdu += base_nom +", ";
                 });
             });
             
-            if (base_fini != "//Base(s) décodée(s): //"){
+            if (base_fini != "//" + Main.k.text.gettext('Base(s) décodée(s): ') + "//"){
                 comm += base_fini;
                 comm = comm.substring(0,comm.length-2)+"\n";
             }
-            if (base_signal_perdu != "//Base(s) perdue(s): //"){    
+            if (base_signal_perdu != "//" + Main.k.text.gettext('Base(s) perdue(s): ') + "//"){
                 comm += base_signal_perdu.substring(0,base_signal_perdu.length-2);
             }
             
             
         });
         return comm;
-    	}
+    	};
 	/**
 	 * @return string;
 	 */
@@ -7311,7 +7311,7 @@ Main.k.tabs.playing = function() {
 			});
 			//Comm
 		}else if ($("#trackerModule").length > 0){
-            var t = $("<h3>").html("Communication").appendTo(project_list);
+            var t = $("<h3>").html(Main.k.text.gettext("Communication")).appendTo(project_list);
             $("<span>").addClass("displayless").attr("_target", ".commPreview")
 				.on("click", Main.k.ToggleDisplay).appendTo(t);
             var nav = $("#trackerModule");
