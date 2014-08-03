@@ -1,6 +1,7 @@
 // ==UserScript==
 // @name        CTRL+W
 // @namespace   Mush
+// @license		MIT License (Expat)
 // @include     http://mush.vg/*
 // @include     http://mush.twinoid.com/*
 // @include     http://mush.twinoid.es/*
