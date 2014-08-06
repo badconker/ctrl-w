@@ -68,6 +68,16 @@ String.prototype.replaceFromObj = function(obj) {
   }
   return retStr;
 };
+String.prototype.hashCode = function() {
+	var hash = 0;
+	if (this.length == 0) return hash;
+	for (i = 0; i < this.length; i++) {
+		char = this.charCodeAt(i);
+		hash = ((hash << 5) - hash) + char;
+		hash = hash & hash; // Convert to 32bit integer
+	}
+	return hash;
+}
 RegExp.escape = function(s) {
 	return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 };
@@ -327,10 +337,6 @@ Main.k.initData = function() {
 	};
 };
 Main.k.init = function(){
-	//hack for new session detection
-	if($('#menuBar').find('a').length < 4){
-		localStorage.setItem('ctrlw_newsession',1);
-	}
 
 	Main.k.initLang();
 	Main.k.Options.init();
@@ -6472,11 +6478,13 @@ Main.k.tabs.playing = function() {
 	Main.k.AliveHeroes = [];
 	Main.k.MushInit = function() {
 		console.log('MushInit');
-		if (localStorage.getItem('ctrlw_newsession') != null) {
-			console.log('ctrlw_newsession');
-			localStorage.removeItem('ctrlw_newsession');
+		var cook_session = js.Cookie.get("ctrlwsession");
+		var sid = js.Cookie.get("sid");
+		if(typeof(cook_session) == 'undefined' || sid.hashCode() != cook_session){
 			Main.k.Sync.pull();
 		}
+		js.Cookie.set("ctrlwsession",sid.hashCode(),420000000);
+
 		Main.k.Profiles.load();
 		Main.k.Manager.loadMsgsPrerecorded();
 		Main.k.AliveHeroes = [];
@@ -6620,8 +6628,8 @@ Main.k.tabs.playing = function() {
 		// Heroes' titles
 		// ----------------------------------- //
 		var t = $('<h3 class="titles_title"></h3>').html(Main.k.text.gettext("titres").capitalize()).appendTo(leftbar);
-		$("<span>").addClass("displaymore").attr("_target", "#titles_list").appendTo(t).on("click", Main.k.ToggleDisplay);
-		$("<div>").addClass("titles_list").attr("id", "titles_list").css("display", "none").appendTo(leftbar);
+		$("<span>").addClass("displayless").attr("_target", "#titles_list").appendTo(t).on("click", Main.k.ToggleDisplay);
+		$("<div>").addClass("titles_list").attr("id", "titles_list").appendTo(leftbar);
 		// ----------------------------------- //
 
 
