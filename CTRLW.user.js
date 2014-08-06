@@ -6563,12 +6563,13 @@ Main.k.tabs.playing = function() {
 			}, 10);
 
 		});
-		if (Main.k.Game.data.day < 3){
+		if (localStorage.getItem('ctrlw_newgame') != null){
 			Main.k.MakeButton(Main.k.text.gettext("Nouvelle partie ?"), null, null, Main.k.text.gettext("Nouvelle partie"),
 				Main.k.text.gettext("Vous venez de commencer une nouvelle partie ? Utilisez ce bouton pour supprimer les informations de votre ancienne partie"))
 				.attr('id', 'button_new_game')
 				.appendTo(leftbar).find("a").on("mousedown", function () {
 					if (confirm(Main.k.text.gettext("Êtes vous sûr de vouloir effacer les informations de la partie précédente ?"))) {
+						localStorage.removeItem('ctrlw_newgame');
 						Main.k.Profiles.clear();
 						Main.k.MushUpdate();
 						$('#button_new_game').remove();
@@ -7900,6 +7901,10 @@ if (Main.k.playing && $("#topinfo_bar").length > 0) {
 		top: "180px"
 	});
 	$("a.logostart").css("top", "20px");
+//new game
+}else if($('.choosehero2').length > 0){
+	Main.k.Game.clear();
+	localStorage.setItem('ctrlw_newgame',1);
 }
 
 if (Main.k.debug) {Main.k.displayBug();}
