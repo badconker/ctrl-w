@@ -6688,6 +6688,7 @@ Main.k.tabs.playing = function() {
 		// Script updates
 		// ----------------------------------- //
 		localStorage.removeItem('ctrlw_update_cache');
+		localStorage.removeItem('ctrlw_remaining_cycles',0);
 		// ----------------------------------- //
 	};
 	Main.k.MushUpdate = function() {
