@@ -6489,6 +6489,9 @@ Main.k.tabs.playing = function() {
 		console.log('MushInit');
 		var cook_session = js.Cookie.get("ctrlwsession");
 		var sid = js.Cookie.get("sid");
+		if(typeof(sid) == 'undefined'){
+			sid = js.Cookie.get("mush_sid");
+		}
 		if(typeof(cook_session) == 'undefined' || sid.hashCode() != cook_session){
 			Main.k.Sync.pull();
 		}
