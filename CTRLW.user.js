@@ -1979,6 +1979,13 @@ Main.k.css.bubbles = function() {
 		background: #38F;\
 		color: #fff;\
 	}\
+	.planet .analyse .buttons .but{\
+		display :inline-block;\
+	}\
+	.planet .analyse .buttons .share-planet.but{\
+		margin-right:5px;\
+		width:20px;\
+	}\
 	").appendTo("head");
 };
 
@@ -3283,7 +3290,7 @@ Main.k.tabs.playing = function() {
 	/**
 	 * @return string;
 	 */
-	Main.k.FormatPlanets = function() {//TODO: MULTILANG
+	Main.k.FormatPlanets = function(index) {//TODO: MULTILANG
 		var ret = "**//Planètes : //**";
 
 		var parse = function(t) {
@@ -3296,6 +3303,9 @@ Main.k.tabs.playing = function() {
 		};
 
 		$("#navModule").find(".planet").not(".planetoff").each(function(i) {
+			if(index != null && i != index){
+				return true;
+			}
 			// Name + Planet img
 			var name = $(this).find("h3").html().trim();
 			var img = $(this).find("img.previmg").attr("src");
@@ -7308,7 +7318,34 @@ Main.k.tabs.playing = function() {
 					var planet = $("<div>").addClass("planetpreview").appendTo(projectsdiv);
 					$("<img>").attr("width", "40")
 					.attr("src", $(this).find("img.previmg").attr("src"))
+					.css({'cursor':'pointer'})
+					.on("mousedown", function(e) {
+						$('textarea:focus').each(function(e) {
+							var txt = Main.k.FormatPlanets(i);
+							$(this).insertAtCaret(txt);
+						});
+						return false;
+					})
 					.appendTo(planet);
+					if($(this).find('.share-planet').length == 0){
+						var $button_share_planet = Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> ", null, null, Main.k.text.gettext("Partager la planète"),
+							Main.k.text.gettext("Partage uniquement cette planète dans l'inventaire")
+						)
+						.addClass('share-planet');
+						$button_share_planet.find("a").on("mousedown", function(e) {
+							$('textarea:focus').each(function(e) {
+								var txt = Main.k.FormatPlanets(i);
+								$(this).insertAtCaret(txt);
+							});
+							return false;
+						});
+
+						if($(this).find('.bin').length > 0){
+							$button_share_planet.prependTo($(this).find('.bin'));
+						}else{
+							$button_share_planet.insertBefore($(this).find('.mtPs '));
+						}
+					}
 				});
 
 				// Planets actions
@@ -7318,7 +7355,7 @@ Main.k.tabs.playing = function() {
 				).appendTo(project_list)
 				.find("a").on("mousedown", function(e) {
 					$('textarea:focus').each(function(e) {
-						var txt = Main.k.FormatPlanets();
+						var txt = Main.k.FormatPlanets(null);
 						$(this).insertAtCaret(txt);
 					});
 					return false;
