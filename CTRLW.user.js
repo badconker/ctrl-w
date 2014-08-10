@@ -4488,7 +4488,8 @@ Main.k.tabs.playing = function() {
 			Main.k.MakeButton(
 					"<img src='/img/icons/ui/alert.png' style=\"display:none\" class=\"desc-ko\" /><img class=\"desc-ok\" style='vertical-align:text-bottom' src='/img/icons/ui/projects_done.png' /> "+Main.k.text.gettext('Enregistrer'),
 					null,
-					function(){
+					function(e){
+						e.preventDefault();
 						var profile = Main.k.Profiles.get();
 						profile.short_desc = $('#tiny-notes').val();
 						profile.long_desc = $('#long-notes').val();
@@ -4814,9 +4815,6 @@ Main.k.tabs.playing = function() {
 		profile.titles = [];
 		profile.skills = [];
 		profile.spores = null;
-
-		profile.short_desc = o_hero_orig.short_desc;
-		profile.long_desc = '';
 		profile.name = o_hero_orig.name;
 		profile.dev_surname = o_hero_orig.dev_surname;
 		profile.dead = false;
@@ -6651,6 +6649,9 @@ Main.k.tabs.playing = function() {
 		// Heroes
 		// ----------------------------------- //
 		t = $("<h3>").html(Main.k.text.gettext("équipage").capitalize()).appendTo(leftbar);
+		$("<span>").addClass("displayless").attr("_target", "#crew_list").appendTo(t).on("click", Main.k.ToggleDisplay);
+		$("<div>").attr("id", "crew_list").css("display", "block").appendTo(leftbar);
+		t = $("<h3>").html(Main.k.text.gettext("Présent(s)").capitalize()).appendTo(leftbar);
 		$("<span>").addClass("displaymore").attr("_target", "#heroes_list").appendTo(t).on("click", Main.k.ToggleDisplay);
 		$("<div>").attr("id", "heroes_list").css("display", "none").appendTo(leftbar);
 		// ----------------------------------- //
@@ -6990,8 +6991,9 @@ Main.k.tabs.playing = function() {
 			heroDiv.append($save);
 
 		}
-		// Display unavailable heroes
-		var missingDiv = $("<div>").addClass("missingheroes").appendTo(heroes_list);
+		var crew_list = $("#crew_list").empty();
+		// Display all heroes
+		var missingDiv = $("<div>").addClass("missingheroes").appendTo(crew_list);
 		j=0;
 		var $div_hero;
 		var a_divs_heroes = {
@@ -7005,60 +7007,58 @@ Main.k.tabs.playing = function() {
 				inactive_status = null;
 				var hero = Main.k.HEROES[i];
 				var h = Main.k.h[hero];
-				if (!Main.k.ArrayContains(Main.k.heroes_same_room, hero)) {
-					if (j % 5 == 0) $("<br/>").appendTo(missingDiv);
-					j++;
-					bubble = hero.replace(/(\s)/g, "_").toLowerCase();
-					o_hero = Main.k.Profiles.get(hero);
-					$div_hero = $('<div>').css({
-							display: 'inline-block',
-							position: 'relative'
+				if (j % 5 == 0) $("<br/>").appendTo(missingDiv);
+				j++;
+				bubble = hero.replace(/(\s)/g, "_").toLowerCase();
+				o_hero = Main.k.Profiles.get(hero);
+				$div_hero = $('<div>').css({
+						display: 'inline-block',
+						position: 'relative'
+					})
+					.append(
+						$("<img>").addClass("body " + bubble)
+							.attr("src", "/img/design/pixel.gif")
+							.css("cursor", "pointer")
+							.addHeroDescToolTip(hero)
+							.on("click", function () {
+								Main.k.Profiles.display(hero);
+							})
+					);
+
+				for( var inc = 0; inc < o_hero.statuses.length; inc ++){
+					/** @type {{desc:string,img:string, name:string}} **/
+					status = o_hero.statuses[inc];
+					if($.inArray(status.img,['sleepy','noob']) != -1){
+						inactive_status = status.img;
+					}
+				}
+				if(o_hero.dead == true){
+					a_divs_heroes['dead'].push($div_hero);
+					$('<img>').attr({
+							src: '/img/icons/ui/dead.png'
 						})
-						.append(
-							$("<img>").addClass("body " + bubble)
-								.attr("src", "/img/design/pixel.gif")
-								.css("cursor", "pointer")
-								.addHeroDescToolTip(hero)
-								.on("click", function () {
-									Main.k.Profiles.display(hero);
-								})
-						);
+						.css({
+							position: 'absolute',
+							bottom: '-6px',
+							right: '-2px',
+							'pointer-events': 'none'
+						})
+						.appendTo($div_hero);
+				}else if(inactive_status != null){
+					a_divs_heroes['inactive'].push($div_hero);
+					$('<img>').attr({
+							src: '/img/icons/ui/'+inactive_status+'.png'
+						})
+						.css({
+							position: 'absolute',
+							bottom: '-6px',
+							right: '-2px',
+							'pointer-events': 'none'
+						})
+						.appendTo($div_hero);
+				}else{
+					a_divs_heroes['alive'].push($div_hero);
 
-					for( var inc = 0; inc < o_hero.statuses.length; inc ++){
-						/** @type {{desc:string,img:string, name:string}} **/
-						status = o_hero.statuses[inc];
-						if($.inArray(status.img,['sleepy','noob']) != -1){
-							inactive_status = status.img;
-						}
-					}
-					if(o_hero.dead == true){
-						a_divs_heroes['dead'].push($div_hero);
-						$('<img>').attr({
-								src: '/img/icons/ui/dead.png'
-							})
-							.css({
-								position: 'absolute',
-								bottom: '-6px',
-								right: '-2px',
-								'pointer-events': 'none'
-							})
-							.appendTo($div_hero);
-					}else if(inactive_status != null){
-						a_divs_heroes['inactive'].push($div_hero);
-						$('<img>').attr({
-								src: '/img/icons/ui/'+inactive_status+'.png'
-							})
-							.css({
-								position: 'absolute',
-								bottom: '-6px',
-								right: '-2px',
-								'pointer-events': 'none'
-							})
-							.appendTo($div_hero);
-					}else{
-						a_divs_heroes['alive'].push($div_hero);
-
-					}
 				}
 			})();
 		}
