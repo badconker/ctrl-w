@@ -6648,12 +6648,12 @@ Main.k.tabs.playing = function() {
 
 		// Heroes
 		// ----------------------------------- //
-		t = $("<h3>").html(Main.k.text.gettext("équipage").capitalize()).appendTo(leftbar);
-		$("<span>").addClass("displayless").attr("_target", "#crew_list").appendTo(t).on("click", Main.k.ToggleDisplay);
-		$("<div>").attr("id", "crew_list").css("display", "block").appendTo(leftbar);
 		t = $("<h3>").html(Main.k.text.gettext("Présent(s)").capitalize()).appendTo(leftbar);
 		$("<span>").addClass("displaymore").attr("_target", "#heroes_list").appendTo(t).on("click", Main.k.ToggleDisplay);
 		$("<div>").attr("id", "heroes_list").css("display", "none").appendTo(leftbar);
+		t = $("<h3>").html(Main.k.text.gettext("équipage").capitalize()).appendTo(leftbar);
+		$("<span>").addClass("displayless").attr("_target", "#crew_list").appendTo(t).on("click", Main.k.ToggleDisplay);
+		$("<div>").attr("id", "crew_list").css("display", "block").appendTo(leftbar);
 		// ----------------------------------- //
 
 
