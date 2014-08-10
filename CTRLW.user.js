@@ -3342,7 +3342,7 @@ Main.k.tabs.playing = function() {
 	 * @return string;
 	 */
 	Main.k.FormatComm = function(){
-        var comm = "\n //**" + Main.k.text.gettext('Communications:') + "**//";
+        var comm = "//**" + Main.k.text.gettext('Communications:') + "**//";
         
         var parse = function(t) {
 			t = t.replace(/<img\s+src=\"\/img\/icons\/ui\/triumph.png\"\s+alt=\"triomphe\"[\/\s]*>/ig, ":mush_triumph:");
@@ -3351,9 +3351,9 @@ Main.k.tabs.playing = function() {
 			t = t.replace(/<p>/ig, " ");
 			t = t.replace(/<\/?[^>]+>/g, "");
 			return t;
-		}
-        
-        $('#trackerModule .sensors').each(function() {
+		};
+        var $trackerModule = $('#trackerModule');
+		$trackerModule.find('.sensors').each(function() {
             
         	var bdd = $(this).find("h2").html().trim();
             comm += "\n//" + bdd + "//: ";
@@ -3363,18 +3363,21 @@ Main.k.tabs.playing = function() {
 			});
             
             if (data.length < 2){
-                data.push(Main.k.text.gettext('Connexion non établie'));
-            }
-            comm += "\n"+ data.join(", ");
+                data.push(' :alert:');
+            }else{
+				data.pop();
+				data.push(' :com:');
+			}
+            comm += data.join("");
         });
-        
-        $('#trackerModule .neron').each(function() {
+
+		$trackerModule.find('.neron').each(function() {
             
         	var version = $(this).find("h2").html().trim();
             comm += "\n//" + version + "//\n";
             
         });
-        $('#trackerModule .xyloph').each(function() {
+		$trackerModule.find('.xyloph').each(function() {
             
             var bdd = $(this).find("h2").html().trim();
             var nbr = 0;
@@ -3382,7 +3385,7 @@ Main.k.tabs.playing = function() {
             var datanamereg = /<h1>([^<]+)<\/h1>/;
             $(this).find("li").not(".undone").each(function() {
                 nbr += 1;
-                data.push(datanamereg.exec($(this).attr("onmouseover"))[1]);
+                data.push(datanamereg.exec($(this).attr("onmouseover"))[1].replace('\\',''));
 			});
             
             if (nbr == 12){
@@ -3392,15 +3395,15 @@ Main.k.tabs.playing = function() {
             else{
                 if (nbr >0){
            		    comm += "//" + bdd + "//: ";
-            		comm += nbr + "/12"+"\n ►**"+ data.join("** \n ►**")+"**\n";
+            		comm += nbr + "/12"+"\n ▶ **"+ data.join("** \n ▶ **")+"**\n";
                 }
             }
             
             
             
         });
-        
-        $('#trackerModule .network .bases').each(function() {
+
+		$trackerModule.find('.network .bases').each(function() {
            
             var base = "//" + Main.k.text.gettext('Décodage: ') + "//";
          	var base_decode;
@@ -3970,7 +3973,9 @@ Main.k.tabs.playing = function() {
 			}).html(Main.k.text.gettext("Script développé par <a href='http://twinoid.com/user/8297'>kill0u</a>, maintenu par <a href='http://twinoid.com/user/1244143'>badconker</a><br/>"+
 			"Le logo, les images (mise en forme personnalisée des messages) et le design du site web ont été faits par "+
 			"<a href='http://twinoid.com/user/2992052'>Gnux</a>.<br/>"+
-			Main.k.text.gettext("Contributeurs : ") + "<a href='http://twinoid.com/user/362197'>FloKy</a>, <a href='http://twinoid.com/user/8011565'>NightExcessive</a><br/>"+
+			Main.k.text.gettext("Contributeurs : ") + "<a href='http://twinoid.com/user/362197'>FloKy</a>" +
+				", <a href='http://twinoid.com/user/5140898'>_Fraise__</a>"+
+				", <a href='http://twinoid.com/user/8011565'>NightExcessive</a><br/>"+
 			Main.k.text.gettext("Traducteurs : ") + "<a href='http://twinoid.com/user/7845671'>Avistew</a>")).appendTo(td);
 			
 			// Coming soon
@@ -7339,13 +7344,13 @@ Main.k.tabs.playing = function() {
 			});
 			//Comm
 		}else if ($("#trackerModule").length > 0){
-            var t = $("<h3>").html(Main.k.text.gettext("Communication")).appendTo(project_list);
+            var t = $("<h3>").html(Main.k.text.gettext("Com.")).appendTo(project_list);
             $("<span>").addClass("displayless").attr("_target", ".commPreview")
 				.on("click", Main.k.ToggleDisplay).appendTo(t);
             var nav = $("#trackerModule");
-            var comm = $("<div>").addClass("commPreview").appendTo(project_list);
-            $("<img>")
-					.attr("src", "http://s30.postimg.org/9safzkpbx/Satellite_icon.png")
+            var comm = $("<div>").addClass("commPreview").css({'text-align':'center','cursor':'pointer'}).appendTo(project_list);
+            var $img_com = $("<img>")
+					.attr("src", "/img/design/sensor01.png")
                     .on("mousedown", function(e) {
 					$('textarea:focus').each(function(e) {
 						var txt = Main.k.FormatComm();
@@ -7353,6 +7358,9 @@ Main.k.tabs.playing = function() {
 					});
 					return false;
 					}).appendTo(comm);
+			setInterval(function(){
+				$img_com.attr('src',$('#trackerModule').find('.sensors img').attr('src'));
+			},100);
             //TODO multi
             Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> "+Main.k.text.gettext("Partager"), null, null, null,
 					"TODO: aperçu"
