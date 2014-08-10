@@ -1979,11 +1979,7 @@ Main.k.css.bubbles = function() {
 		background: #38F;\
 		color: #fff;\
 	}\
-	.planet .analyse .buttons .but{\
-		display :inline-block;\
-	}\
 	.planet .analyse .buttons .share-planet.but{\
-		margin-right:5px;\
 		width:20px;\
 	}\
 	").appendTo("head");
@@ -7339,12 +7335,7 @@ Main.k.tabs.playing = function() {
 							});
 							return false;
 						});
-
-						if($(this).find('.bin').length > 0){
-							$button_share_planet.prependTo($(this).find('.bin'));
-						}else{
-							$button_share_planet.insertBefore($(this).find('.mtPs '));
-						}
+						$('<td>').append($button_share_planet).insertAfter($(this).find('.buttons td:last-child'));
 					}
 				});
 
