@@ -4643,8 +4643,8 @@ Main.k.tabs.playing = function() {
 			$hero_details.append(statuses);
 			$hero_details.append(titles);
 
-			$('#long-notes').val(typeof(o_hero.long_desc) != 'undefined' ? o_hero.long_desc.htmlEncode() : '');
-			$('#tiny-notes').val(o_hero.short_desc.htmlEncode());
+			$('#long-notes').val(typeof(o_hero.long_desc) != 'undefined' ? o_hero.long_desc : '');
+			$('#tiny-notes').val(o_hero.short_desc);
 
 		}else{
 			$("<div>")
