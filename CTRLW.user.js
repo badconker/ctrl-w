@@ -3003,7 +3003,7 @@ Main.k.tabs.playing = function() {
 			Main.k.UpdateData.changelog = json.changelog_long;
 		}
 		Main.k.UpdateData.url = json.url;
-		if (json.user_code_version < json.code) {
+		if (json.user_code_version < json.code && (json.user_num_version == GM_info.script.version || json.user_code_version == 0)) {
 			$("#updatebtn").css("display", "block");
 		} else {
 			if(typeof(lastVersion) != 'undefined' && lastVersion != GM_info.script.version){
