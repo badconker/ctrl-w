@@ -4210,7 +4210,7 @@ Main.k.tabs.playing = function() {
 							if(typeof(json.sync.msgs_prerecorded) != 'undefined'){
 								Main.k.Manager.loadMsgsPrerecorded(json.sync.msgs_prerecorded,true);
 							}
-							Main.k.quickNotice(Main.k.text.gettext('Mise à jour des données locales'));
+							Main.k.quickNotice(Main.k.text.gettext('Synchronisation effctuée'));
 							Main.k.MushUpdate();
 						}
 						dfd.resolve();
