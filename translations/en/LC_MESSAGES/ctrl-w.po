@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: ctrl+w\n"
 "Report-Msgid-Bugs-To: http://twd.io/e/0fdb0w\n"
 "POT-Creation-Date: 2014-06-21 15:30+0200\n"
-"PO-Revision-Date: 2014-06-21 15:31+0100\n"
+"PO-Revision-Date: 2014-09-04 18:20+0100\n"
 "Last-Translator: \n"
 "Language-Team: English\n"
 "Language: en\n"
@@ -390,7 +390,7 @@ msgstr "Disable confirmations for actions beneficial to the crew as Mush"
 #: ..\CTRLW.user.js:1930
 #, fuzzy
 msgid "Cliquez pour plus d'informations"
-msgstr "Click here for more information about Ctrl+W."
+msgstr "Click here for more information."
 
 #: ..\CTRLW.user.js:2064
 msgid "Partager son état de santé"
@@ -686,19 +686,22 @@ msgstr "Back to game"
 
 #: ..\CTRLW.user.js:3649
 msgid "Clé :"
-msgstr ""
+msgstr "Key: "
 
 #: ..\CTRLW.user.js:3654
+#, fuzzy
 msgid "Collez votre clé ici"
-msgstr ""
+msgstr "Copy your key here"
 
 #: ..\CTRLW.user.js:3730
+#, fuzzy
 msgid "Générer une nouvelle clé"
-msgstr ""
+msgstr "Generate a new key"
 
 #: ..\CTRLW.user.js:3740
+#, fuzzy
 msgid "Supprimer la clé"
-msgstr ""
+msgstr "Delete the key"
 
 #: ..\CTRLW.user.js:3741
 msgid ""
@@ -1070,12 +1073,12 @@ msgstr "Update Script"
 #: ..\CTRLW.user.js:5514
 #, fuzzy
 msgid "Nouvelle partie ?"
-msgstr "New Planet"
+msgstr "New game ?"
 
 #: ..\CTRLW.user.js:5514
 #, fuzzy
 msgid "Nouvelle partie"
-msgstr "New Planet"
+msgstr "New game"
 
 #: ..\CTRLW.user.js:5515
 msgid ""
@@ -1122,7 +1125,7 @@ msgstr ""
 
 #: ..\CTRLW.user.js:5541
 msgid "Sync"
-msgstr ""
+msgstr "Sync"
 
 #: ..\CTRLW.user.js:5541
 msgid ""

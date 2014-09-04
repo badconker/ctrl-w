@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: CTRL+W Spanish\n"
 "Report-Msgid-Bugs-To: http://twd.io/e/0fdb0w\n"
 "POT-Creation-Date: 2014-06-21 15:30+0200\n"
-"PO-Revision-Date: 2014-02-27 13:03+0100\n"
+"PO-Revision-Date: 2014-07-21 00:15+0100\n"
 "Last-Translator: Michael Johnson &lt;michael@nightexcessive.us&gt;\n"
 "Language-Team: Kohaku <HikaruKuroda@gmail.com>\n"
 "Language: es\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.6.4\n"
+"X-Generator: Poedit 1.6.6\n"
 
 #. Translators: Thread id for this character's tutorial. */
 #: ..\CTRLW.user.js:115
@@ -26,7 +26,7 @@ msgstr ""
 #. Translators: This translation must be copied from the game. */
 #: ..\CTRLW.user.js:119
 msgid "Commandant suprême du Daedalus."
-msgstr "Comandante supremo del Daedalus."
+msgstr "Reconocido navegante y comandante supremo del Daedalus."
 
 #. Translators: Thread id for this character's tutorial. */
 #: ..\CTRLW.user.js:121
@@ -36,7 +36,7 @@ msgstr ""
 #. Translators: This translation must be copied from the game. */
 #: ..\CTRLW.user.js:126
 msgid "Scientifique millénaire."
-msgstr "Científico millonario."
+msgstr "Experta en astrofísica y los misterios del universo."
 
 #. Translators: Thread id for this character's tutorial. */
 #: ..\CTRLW.user.js:128
@@ -46,7 +46,7 @@ msgstr ""
 #. Translators: This translation must be copied from the game. */
 #: ..\CTRLW.user.js:133
 msgid "Grand architecte du Daedalus."
-msgstr "Gran arquitecto del Daedalus."
+msgstr "Ingeniero creador del Daedalus, hombre clave en la misión."
 
 #. Translators: Thread id for this character's tutorial. */
 #: ..\CTRLW.user.js:135
@@ -61,43 +61,42 @@ msgstr "Encargada del soporte psicológico e informático del equipo."
 #. Translators: Thread id for this character's tutorial. */
 #: ..\CTRLW.user.js:142
 msgid "tutorial_id:janice"
-msgstr "Comediante amateur y piloto de élite. Nacido para destruir Hunters."
+msgstr ""
 
 #. Translators: This translation must be copied from the game. */
 #: ..\CTRLW.user.js:147
 msgid "Humoriste pilote de chasse à ses heures."
-msgstr "Exploradora de lo extremo."
+msgstr "Humorista y piloto de combate en sus horas libres."
 
 #. Translators: Thread id for this character's tutorial. */
 #: ..\CTRLW.user.js:149
 msgid "tutorial_id:roland"
-msgstr "Oficial de Comunicaciones y antiguo activista."
+msgstr ""
 
 #. Translators: This translation must be copied from the game. */
 #: ..\CTRLW.user.js:154
-#, fuzzy
 msgid "Exploratrice de l'EXTRÊME."
-msgstr "Jefe de seguridad del Daedalus."
+msgstr "Exploradora de lo extremo."
 
 #. Translators: Thread id for this character's tutorial. */
 #: ..\CTRLW.user.js:156
 msgid "tutorial_id:hua"
-msgstr "Bióloga de renombre, pionera en el estudio del Mush."
+msgstr ""
 
 #. Translators: This translation must be copied from the game. */
 #: ..\CTRLW.user.js:161
 msgid "Officier principal des Communications du Daedalus."
-msgstr "El cocinero más peligroso de la galaxia."
+msgstr "Oficial de comunicaciones en el Daedalus."
 
 #. Translators: Thread id for this character's tutorial. */
 #: ..\CTRLW.user.js:163
 msgid "tutorial_id:paola"
-msgstr "Científico botánico obsesivo."
+msgstr ""
 
 #. Translators: This translation must be copied from the game. */
 #: ..\CTRLW.user.js:168
 msgid "Chef de la sécurité du Daedalus."
-msgstr "La última esperanza de la humanidad."
+msgstr "Jefe de seguridad del Daedalus."
 
 #. Translators: Thread id for this character's tutorial. */
 #: ..\CTRLW.user.js:170
@@ -107,17 +106,17 @@ msgstr "Genio de la física cuántica y amante de los gatos."
 #. Translators: This translation must be copied from the game. */
 #: ..\CTRLW.user.js:175
 msgid "Biologiste de renommée internationale, pionnière dans l'étude du Mush."
-msgstr "Filántropo amateur listo para el combate."
+msgstr "Bióloga de renombre, pionera en el estudio del Mush."
 
 #. Translators: Thread id for this character's tutorial. */
 #: ..\CTRLW.user.js:177
 msgid "tutorial_id:finola"
-msgstr "Investigadora de primera clase."
+msgstr ""
 
 #. Translators: This translation must be copied from the game. */
 #: ..\CTRLW.user.js:182
 msgid "Cuisinier le plus dangereux de la galaxie."
-msgstr "Tecnófilo motorizado con una obsesión malsana por los drones."
+msgstr "El cocinero más peligroso de la galaxia."
 
 #. Translators: Thread id for this character's tutorial. */
 #: ..\CTRLW.user.js:184
@@ -127,7 +126,7 @@ msgstr ""
 #. Translators: This translation must be copied from the game. */
 #: ..\CTRLW.user.js:189
 msgid "Chercheur frugivore flexible."
-msgstr ""
+msgstr "Científico botánico obsesivo."
 
 #. Translators: Thread id for this character's tutorial. */
 #: ..\CTRLW.user.js:191
@@ -137,7 +136,7 @@ msgstr ""
 #. Translators: This translation must be copied from the game. */
 #: ..\CTRLW.user.js:196
 msgid "Dernier espoir de l'Humanité."
-msgstr ""
+msgstr "Última esperanza para la humanidad"
 
 #. Translators: Thread id for this character's tutorial. */
 #: ..\CTRLW.user.js:198
@@ -147,7 +146,7 @@ msgstr ""
 #. Translators: This translation must be copied from the game. */
 #: ..\CTRLW.user.js:203
 msgid "Génie de la physique quantique félinophile."
-msgstr ""
+msgstr "Genio de la física cuántica y amante de los felinos."
 
 #. Translators: Thread id for this character's tutorial. */
 #: ..\CTRLW.user.js:205
@@ -157,7 +156,7 @@ msgstr ""
 #. Translators: This translation must be copied from the game. */
 #: ..\CTRLW.user.js:210
 msgid "Armateur philantrophobe."
-msgstr ""
+msgstr "Magnate, filántropo y constructor del Daedalus."
 
 #. Translators: Thread id for this character's tutorial. */
 #: ..\CTRLW.user.js:212
@@ -167,7 +166,7 @@ msgstr ""
 #. Translators: This translation must be copied from the game. */
 #: ..\CTRLW.user.js:217
 msgid "Investigatrice déchue de premier plan."
-msgstr ""
+msgstr "Periodista investigadora de las conspiraciones entre humanos y Mush"
 
 #. Translators: Thread id for this character's tutorial. */
 #: ..\CTRLW.user.js:219
@@ -177,7 +176,7 @@ msgstr ""
 #. Translators: This translation must be copied from the game. */
 #: ..\CTRLW.user.js:224
 msgid "Technophile motorisé."
-msgstr ""
+msgstr "Técnico en armamento, con una revancha por cobrarse."
 
 #. Translators: Thread id for this character's tutorial. */
 #: ..\CTRLW.user.js:226
@@ -187,7 +186,7 @@ msgstr ""
 #. Translators: This translation must be copied from the game. */
 #: ..\CTRLW.user.js:231
 msgid "Fayot de la fédération."
-msgstr ""
+msgstr "Uno de los mejores agentes de la FDS, al servicio del Daedalus."
 
 #. Translators: Thread id for this character's tutorial. */
 #: ..\CTRLW.user.js:233
@@ -197,7 +196,7 @@ msgstr ""
 #. Translators: This translation must be copied from the game. */
 #: ..\CTRLW.user.js:238
 msgid "Héros malgré lui."
-msgstr ""
+msgstr "Héroe y mujeriego galáctico."
 
 #. Translators: Thread id for this character's tutorial. */
 #: ..\CTRLW.user.js:240
@@ -236,7 +235,7 @@ msgstr "Ayuda"
 
 #: ..\CTRLW.user.js:364
 msgid "Distributeur"
-msgstr "Distributeur"
+msgstr "Máquina expendedora"
 
 #: ..\CTRLW.user.js:368
 msgid "Expérience"
@@ -322,7 +321,7 @@ msgstr "Twinpedia"
 #. Translators: domain name*/
 #: ..\CTRLW.user.js:503
 msgid "mush.vg"
-msgstr ""
+msgstr "mush.twinoid.es"
 
 #: ..\CTRLW.user.js:558 ..\CTRLW.user.js:561
 msgid "Astropad synchronisé."
@@ -331,8 +330,8 @@ msgstr "¡AstroPad sincronizado!"
 #: ..\CTRLW.user.js:600
 msgid "(~%1 jour)"
 msgid_plural "(~%1 jours)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "(~%1 día)"
+msgstr[1] "(~%1 días)"
 
 #: ..\CTRLW.user.js:678
 #, fuzzy
@@ -465,7 +464,7 @@ msgstr ""
 
 #: ..\CTRLW.user.js:2131 ..\CTRLW.user.js:6091
 msgid "Partager les recherches"
-msgstr "Compartir investigaciones"
+msgstr "Compartir las investigaciones"
 
 #: ..\CTRLW.user.js:2132
 #, fuzzy
@@ -615,7 +614,7 @@ msgstr "nada que informar"
 
 #: ..\CTRLW.user.js:2993
 msgid "Recherches"
-msgstr ""
+msgstr "Investigatiónes :"
 
 #: ..\CTRLW.user.js:3081
 msgid "Consommables :"
@@ -624,12 +623,12 @@ msgstr ""
 #. Translators: This translation must be copied from the game. (Consummables description) */
 #: ..\CTRLW.user.js:3085
 msgid "Guérie la maladie"
-msgstr ""
+msgstr "Cura la enfermedad"
 
 #. Translators: This translation must be copied from the game. (Consummables description) */
 #: ..\CTRLW.user.js:3087
 msgid "satiété"
-msgstr ""
+msgstr "saciedad"
 
 #. Translators: This translation must be copied from the game. (Consummables description) */
 #: ..\CTRLW.user.js:3089
@@ -639,31 +638,31 @@ msgstr ""
 #. Translators: This translation must be copied from the game. (Consummables description) */
 #: ..\CTRLW.user.js:3093
 msgid "Impérissable"
-msgstr ""
+msgstr "No perecible"
 
 #: ..\CTRLW.user.js:3204 ..\CTRLW.user.js:3211
 msgid "Triomphe retour sur sol"
-msgstr ""
+msgstr "Gloria vuelta al Sistema Solar"
 
 #: ..\CTRLW.user.js:3205
 msgid "Retour sur Sol :"
-msgstr ""
+msgstr "Retorno al Sistema Solar :"
 
 #: ..\CTRLW.user.js:3206
 msgid "Bonus recherches : "
-msgstr ""
+msgstr "Bonus investigatiónes"
 
 #: ..\CTRLW.user.js:3207
 msgid "Malus mush en vie : "
-msgstr ""
+msgstr "Malus mush "
 
 #: ..\CTRLW.user.js:3208
 msgid "Total :"
-msgstr ""
+msgstr "Total :"
 
 #: ..\CTRLW.user.js:3212
 msgid "Ne tient pas compte des mushs anonymes."
-msgstr ""
+msgstr "Ignora los mush incógnitos."
 
 #: ..\CTRLW.user.js:3576
 msgid "Chan IRC"
@@ -764,7 +763,7 @@ msgstr ""
 
 #: ..\CTRLW.user.js:3967 ..\CTRLW.user.js:5790
 msgid "Espionnage"
-msgstr ""
+msgstr "Espionaje"
 
 #: ..\CTRLW.user.js:3968
 msgid ""
@@ -785,7 +784,7 @@ msgstr "Esta habilidad está desactivada al jugar como Mush."
 
 #: ..\CTRLW.user.js:4097
 msgid "Aucune donnée enregistrée"
-msgstr ""
+msgstr "Información no disponible"
 
 #: ..\CTRLW.user.js:4283
 msgid ""
@@ -1288,7 +1287,7 @@ msgstr ""
 
 #: ..\CTRLW.user.js:6055
 msgid "Laboratoire"
-msgstr ""
+msgstr "Laboratorio"
 
 #: ..\CTRLW.user.js:6092
 #, fuzzy
