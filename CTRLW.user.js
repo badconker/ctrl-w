@@ -6,6 +6,11 @@
 // @include     http://mush.twinoid.com/*
 // @include     http://mush.twinoid.es/*
 // @downloadURL https://raw.github.com/badconker/ctrl-w/release/CTRLW.user.js
+// @grant       GM_xmlhttpRequest
+// @grant       GM_addStyle
+// @grant       GM_getResourceText
+// @grant		unsafeWindow
+// @require     http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js
 // @require     lib/Gettext.js
 // @resource    css:jgrowl lib/jquery.jgrowl.css
 // @resource    jgrowl lib/jquery.jgrowl.js
@@ -17,17 +22,16 @@
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
-var $ = unsafeWindow.jQuery;
 var _tid = unsafeWindow._tid;
-var ArrayEx = unsafeWindow.ArrayEx;
+  /*var ArrayEx = unsafeWindow.ArrayEx;
 var ChatType = unsafeWindow.ChatType;
 var Clients = unsafeWindow.Clients;
 var CrossConsts = unsafeWindow.CrossConsts;
 var haxe = unsafeWindow.haxe;
-var HxOverrides = unsafeWindow.HxOverrides;
-var JqEx = unsafeWindow.JqEx;
+var HxOverrides = unsafeWindow.HxOverrides;*/
 var js = unsafeWindow.js;
-var Lambda = unsafeWindow.Lambda;
+js.JQuery = $;
+/*var Lambda = unsafeWindow.Lambda;
 var Reflect = unsafeWindow.Reflect;
 var Selection = unsafeWindow.Selection;
 var Std = unsafeWindow.Std;
@@ -35,11 +39,28 @@ var StringBuf = unsafeWindow.StringBuf;
 var StringTools = unsafeWindow.StringTools;
 var Tag = unsafeWindow.Tag;
 var Tools = unsafeWindow.Tools;
-var Utils = unsafeWindow.Utils;
+var Utils = unsafeWindow.Utils;*/
 var mt = unsafeWindow.mt;
-var jQuery = unsafeWindow.jQuery;
+var mush_query = unsafeWindow.$;
+console = unsafeWindow.console;
 
-Main.k = function() {};
+if (typeof(exportFunction) == 'undefined') {
+	var exportFunction = function(foo, scope, defAs){
+		return foo;
+	}
+}
+if (typeof(createObjectIn) == 'undefined') {
+	var createObjectIn = function(obj,options){
+		return {};
+	}
+}
+if (typeof(cloneInto) == 'undefined') {
+	var cloneInto = function(obj,targetScope,options){
+		return obj;
+	}
+}
+Main.k = createObjectIn(unsafeWindow.Main, {defineAs: "k"});
+
 Main.k.window = unsafeWindow;
 Main.k.version = GM_info.script.version;
 Main.k.website = "http://ks26782.kimsufi.com/ctrlw";
@@ -81,7 +102,16 @@ String.prototype.hashCode = function() {
 RegExp.escape = function(s) {
 	return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 };
+function addFctToPage (text, name) {
+	var D                                   = document;
+	var scriptNode                          = D.createElement ('script');
+	scriptNode.type                         = "text/javascript";
+	if (text)       scriptNode.textContent  = text;
+	if (name)		scriptNode.textContent  = name + ' = ' + text;
 
+	var targ = D.getElementsByTagName ('head')[0] || D.body || D.documentElement;
+	targ.appendChild (scriptNode);
+}
 Main.k.initLang = function() {
 	// Language detection
 	switch(Main.k.domain) {
@@ -94,10 +124,22 @@ Main.k.initLang = function() {
 		default:
 			Main.k.lang = "fr";
 	}
-
-	Main.k.text = new Gettext({
+	/*Main.k.text = new Gettext({
 		domain: "ctrl-w"
-	});
+	});*/
+	/*for (var id in Main.k.text) {
+		if (typeof(Main.k.text[id]) == "function") {
+			console.log('export Main.k.text.'+id)
+			exportFunction(Main.k.text[id], unsafeWindow.Main.k.text, {defineAs: id});
+		}
+	}*/
+	Main.k.textInit = exportFunction(function(){Main.k.text = new Gettext({
+		domain: "ctrl-w"
+	});}, unsafeWindow);
+	//console.warn(Main.k.text);
+	Main.k.textInit();
+	//unsafeWindow.Main.k.text = cloneInto(Main.k.text,unsafeWindow,{cloneFunctions:true});
+	//console.warn(Main.k.text);
 	try {
 		var translationDataText = GM_getResourceText("translation:"+Main.k.lang);
 		if(typeof translationDataText == 'undefined') {
@@ -255,7 +297,7 @@ Main.k.initData = function() {
 			tutorial:Main.k.text.gettext("tutorial_id:derek"),
 			dev_surname_long:'derek_hogan'
 		}
-		
+
 	};
 	$.each(Main.k.h,function(k,h){
 		var $this = $(this)[0];
@@ -313,7 +355,7 @@ Main.k.initData = function() {
 	Main.k.researchGlory["myco_dialect"] = 6;//
 	Main.k.researchGlory["mush_predator"] = 6;//
 	Main.k.researchGlory["anti_mush_serum"] = 16;//
-	
+
 	Main.k.statusImages = [];
 	Main.k.statusImages['bronze'] = 'http://imgup.motion-twin.com/twinoid/6/b/8b8ae4d5_4030.jpg';
 	Main.k.statusImages['silver'] = 'http://imgup.motion-twin.com/twinoid/a/e/3c341777_4030.jpg';
@@ -482,7 +524,7 @@ Main.k.CreatePopup = function() {
 	var popup = {};
 
 	popup.dom = $("<td>").attr("id", "usPopup").addClass("usPopup chat_box");
-	popup.mask = $("<div>").addClass("usPopupMask").on("click", Main.k.ClosePopup).appendTo(popup.dom);
+	popup.mask = $("<div>").addClass("usPopupMask").attr('onclick','Main.k.ClosePopup();').appendTo(popup.dom);
 	popup.content = $("<div>").addClass("usPopupContent chattext").css({
 		"width": (Main.k.window.innerWidth - 300) + "px",
 		"height": (Main.k.window.innerHeight - 100) + "px"
@@ -502,6 +544,7 @@ Main.k.ClosePopup = function() {
 		tgt.attr("id", "");
 	}
 };
+exportFunction(Main.k.ClosePopup, unsafeWindow.Main.k, {defineAs: "ClosePopup"});
 Main.k.CreateNeronAlert = function(message){
 		var neronAlert = Main.k.CreatePopup();
 		neronAlert.content.css({
@@ -510,16 +553,18 @@ Main.k.CreateNeronAlert = function(message){
 			"width": "500px",
 			"color": "#FFF"
 		});
-		
-		var content = "<div class='neron_alert_title'><img alt='neron' src='/img/design/neron_chat.png' /><h1>NERON</h1></div><p>"+ message +"</p>";
-		
+
+		var content = "<img class=\"img_neron\" alt='neron' src='/img/design/neron_chat.png' /><p>"+ message +"</p>";
 		// Fill neronAlert content
 		var cancelAc = "'Main.k.ClosePopup();'";
 		var ok = "<div id=\"cancel\" class=\"but updatesbtn\" onclick=" + cancelAc + "><div class=\"butright\"><div class=\"butbg\"><a href=\"#\">" + Main.k.text.gettext("ok") + "</a></div></div></div></div>";
-		$("<div>")
-		.attr("id","neron_alert_content")
-		.html(content + ok)
-		.appendTo(neronAlert.content);
+		var buttons = $('<div class="neron_alert_buttons"></div>');
+		buttons.append(ok);
+		$('<div>')
+			.attr("id","neron_alert_content")
+			.append(content)
+			.append(buttons)
+			.appendTo(neronAlert.content);
 
 		// Display neronAlert
 		Main.k.OpenPopup(neronAlert.dom);
@@ -532,20 +577,20 @@ Main.k.CreateNeronPrompt = function(){
 			"width": "500px",
 			"color": "#FFF"
 		});
-		
+
 		var cancelAc = "'Main.k.ClosePopup();'";
 		// Fill prompt content
 		var validate = "<div id=\"validate\" class=\"but updatesbtn\" ><div class=\"butright\"><div class=\"butbg\"><a href=\"#\">" + Main.k.text.gettext("valider") + "</a></div></div></div></div>";
 		var cancel = "<div id=\"cancel\" class=\"but updatesbtn\" onclick="+cancelAc+"><div class=\"butright\"><div class=\"butbg\"><a href=\"#\">" + Main.k.text.gettext("annuler") + "</a></div></div></div></div>";
 		var input = "<input type='text' name='neron_prompt'>";
-		var content = "<div class='neron_alert_title' ><img alt='neron' src='/img/design/neron_chat.png' /><h1>NERON</h1></div><p>" + Main.k.text.gettext("Saisissez le titre du message") + " : </p>";
-		
-		
+		var content = "<img class=\"img_neron\" alt='neron' src='/img/design/neron_chat.png' /><p>" + Main.k.text.gettext("Saisissez le titre du message") + " : </p>";
+
+
 		$("<div>")
 		.attr("id","neron_alert_content")
 		.html(content + input + "<br/>" + validate + cancel)
 		.appendTo(NeronPrompt.content);
-		
+
 		// Display prompt
 		Main.k.OpenPopup(NeronPrompt.dom);
 };
@@ -641,7 +686,7 @@ Main.k.SyncAstropad = function(tgt){
 		Main.k.quickNotice(Main.k.text.gettext("Astropad synchronisé."));
 		Main.showTip(tgt,
 			"<div class='tiptop' ><div class='tipbottom'><div class='tipbg'><div class='tipcontent'>" +
-			Main.k.text.gettext("Astropad synchronisé.") + 
+			Main.k.text.gettext("Astropad synchronisé.") +
 			"</div></div></div></div>"
 		);
 	}
@@ -676,7 +721,7 @@ Main.k.displayRemainingCyclesToNextLevel = function (){
 			}else if($('.miniConf img[src$="blitz_cycle.png"]').length > 0){
 				i_daily_cycle = 24;
 			}
-			
+
 			var nb_days = Math.round(remaining_cycles / i_daily_cycle);
 			var s_days = '';
 			if(nb_days > 0){
@@ -695,7 +740,7 @@ Main.k.showLoading = function(){
 		var overlay = $('<div class="ctrlw_overlay_loading"></div>');
 		$('body').append(overlay);
 		overlay.after('<div class="ctrlw_loading_ball_wrapper"><div class="ctrlw_loading_ball"></div><div class="ctrlw_loading_ball1"></div></div>');
-		
+
 	}
 };
 Main.k.hideLoading = function(){
@@ -716,9 +761,9 @@ Main.k.displayBug = function(e){
 	var displayBug = "";
 	var error = [];
 	if(Main.k.errorList != undefined){
-		error = Main.k.errorList; 
+		error = Main.k.errorList;
 	}
-	
+
 	for(var idBug = 0;idBug < error.length;idBug++){
 		displayBug += "Name : "+error[idBug].name+"Message : "+error[idBug].message+"\n";
 	}
@@ -851,7 +896,7 @@ Main.k.Options.open = function() {
 			.prependTo(p);
 			if (opt[1]) chk.attr("checked", "checked");
 		}
-		
+
 		Main.k.MakeButton("<img src='/img/icons/ui/reported.png' style='vertical-align: -20%' /> "+ Main.k.text.gettext("Vider le cache du script"), null, null, Main.k.text.gettext("Vider le cache du script"),
 			Main.k.text.gettext("Ce bouton vous permet de vider le cache du script pour, par exemple, prendre en compte tout de suite votre mode Or ou forcer une vérification de mise à jour. A utiliser avec parcimonie svp."))
 		.appendTo(td).find("a").on("mousedown", function(){
@@ -1753,25 +1798,22 @@ Main.k.css.ingame = function() {
 		margin: 0 3px;\
 	}\
 	#neron_alert_content {\
-		text-align: center;\
+		padding: 10px;\
 	}\
-	#neron_alert_content .neron_alert_title{ \
-		height:45px;\
-		text-align: left;\
-		margin-top: 10px;\
-		margin-left: 10px\
-	}\
-	#neron_alert_content .neron_alert_title img{ \
+	#neron_alert_content .img_neron{\
 		float:left;\
 		height:45px;\
-		margin-right:5px;\
+		margin:0 8px 5px 0;\
 	}\
 	#neron_alert_content p{\
-		margin-bottom: 10px;\
+		margin: 10px 0;\
 	}\
 	#neron_alert_content input{\
 		color: black;\
 		margin-bottom: 10px;\
+	}\
+	.neron_alert_buttons{\
+		text-align: center;\
 	}\
 	#char_col, #room_col, #chat_col, #topics_col, #topic_col, #reply_col, #options_col, #about_col, #profile_col {\
 		transition: all 200ms;\
@@ -2271,7 +2313,7 @@ Main.k.tabs.playing = function() {
 
 
 	// == Extend Main  ============================================
-	Main.k.extend = {};
+	Main.k.extend = createObjectIn(unsafeWindow.Main.k, {defineAs: "extend"});
 	Main.k.extend.updateContent =  Main.updateContent;
 	Main.updateContent = function(url,seek,dest,cb) {
 		console.log('update content');
@@ -2283,33 +2325,48 @@ Main.k.tabs.playing = function() {
 				if($(tab_class).length > 0){
 					$(tab_class).trigger('click');
 				}
-				
+
 			}
 		});
 	};
-	
-	Main.onChatInput = function(event,jq) {
-		var tgt = new js.JQuery(event.target);
-		tgt.siblings("input").show();
-		if(event.keyCode == 13) {
-			if(!event.ctrlKey) {
-				event.preventDefault();
-				var pr = tgt.parent();
-				pr.submit();
-				Tools.send2Store("mush_chatContent_" + jq.attr("id"),"");
-				jq.data("default",true);
-			} else {
-				// Insert line break at caret, not at the end...
-				tgt.insertAtCaret("\n");
-				Tools.send2Store("mush_chatContent_" + jq.attr("id"),tgt.val());
+	//exportFunction(Main.updateContent, unsafeWindow.Main, {defineAs: "updateContent"});
+	addFctToPage(Main.updateContent,'Main.updateContent');
+
+	//Main.k.extend.onChatFocus = Main.onChatFocus;
+	Main.k.extend.onChatFocus = function(t,i) {
+		//Main.k.extend.onChatFocus(t,i);
+		console.log('Main.rst',Main.rst);
+		if (0 == (Main.rst & 1 << i)) {
+			console.log('Main.rst if');
+			Main.rst |= 1 << i;
+
+			if (!t.parent().find(".formatbtn").get(0)) {
+				t.attr("onblur", "");
+
+				// Add formatting
+				$("<a>").addClass("butmini chatformatbtn").html("<img src='/img/icons/ui/pam.png' /> Formater").attr("href", "#").appendTo(t.parent())
+					.on("click", function () {
+						var tgt = $(this);
+						if (tgt.hasClass("butmini")) tgt = tgt.parent().find("textarea");
+
+						Main.k.Manager.openOn("newtopic", tgt.val());
+						return false;
+					});
+
+				// Display chat button & fix tabindex
+				t.siblings("input").show();
+				t.siblings("input").attr("tabindex", 1);
 			}
-		} else Tools.send2Store("mush_chatContent_" + jq.attr("id"),tgt.val());
-	};
-	Main.onWallFocus = function(jq) {//TODO: MULTILANG
-		if(jq.data("default")) {
-			jq.val(Main.getText("edit_me"));
-			jq.data("default",false);
 		}
+		console.log('onchatfocus end');
+	};
+
+	//addFctToPage(Main.onChatFocus,'Main.onChatFocus');
+
+	//Main.k.extend.onWallFocus =  Main.onWallFocus;
+	Main.k.extend.onWallFocus = function() {//TODO: MULTILANG
+		jq = $(this);
+		console.info('Main.onWallFocus');
 		if (!jq.parent().find(".formatbtn").get(0)) {
 			jq.attr("onblur", "");
 
@@ -2321,113 +2378,113 @@ Main.k.tabs.playing = function() {
 
 			// Life
 			$("<a>").addClass("butmini formatbtn").html("<img src='" + Main.k.servurl + "/img/viemoral.png' />").attr("href", "#").appendTo(sharediv)
-			.on("click", function() {
-				var txt = Main.k.FormatLife();
-				$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
-				return false;
-			})
-			.attr("_title", Main.k.text.gettext("Partager son état de santé"))
-			.attr("_desc", Main.k.text.gettext("<p>Insère votre nombre de points de vie et de moral dans la zone de texte active, de la forme&nbsp;:</p><p>TODO: example</p>"))
-			.on("mouseover", Main.k.CustomTip)
-			.on("mouseout", Main.hideTip);
+				.on("click", function() {
+					var txt = Main.k.FormatLife();
+					$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
+					return false;
+				})
+				.attr("_title", Main.k.text.gettext("Partager son état de santé"))
+				.attr("_desc", Main.k.text.gettext("<p>Insère votre nombre de points de vie et de moral dans la zone de texte active, de la forme&nbsp;:</p><p>TODO: example</p>"))
+				.on("mouseover", Main.k.CustomTip)
+				.on("mouseout", Main.hideTip);
 
 			// Inventory
 			$("<a>").addClass("butmini formatbtn").html("<img src='http://data.hordes.fr/gfx/icons/item_bag.gif' />").attr("href", "#").appendTo(sharediv)
-			.on("click", function(e) {
-				var txt = Main.k.FormatInventory();
-				$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
-				Main.k.SyncAstropad(e);
-				return false;
-			})
-			.attr("_title", Main.k.text.gettext("Partager l'inventaire"))
-			.attr("_desc", Main.k.text.gettext("Insère l'inventaire de la pièce dans la zone de texte active, de la forme&nbsp;:</p><p><strong>Couloir central :</strong> <i>Combinaison</i>, <i>Couteau</i>, <i>Médikit</i>, <i>Extincteur</i></p><p><strong>Partage aussi sur Astropad si celui-ci est installé.</strong></p>"))
-			.on("mouseover", Main.k.CustomTip)
-			.on("mouseout", Main.hideTip);
+				.on("click", function(e) {
+					var txt = Main.k.FormatInventory();
+					$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
+					Main.k.SyncAstropad(e);
+					return false;
+				})
+				.attr("_title", Main.k.text.gettext("Partager l'inventaire"))
+				.attr("_desc", Main.k.text.gettext("Insère l'inventaire de la pièce dans la zone de texte active, de la forme&nbsp;:</p><p><strong>Couloir central :</strong> <i>Combinaison</i>, <i>Couteau</i>, <i>Médikit</i>, <i>Extincteur</i></p><p><strong>Partage aussi sur Astropad si celui-ci est installé.</strong></p>"))
+				.on("mouseover", Main.k.CustomTip)
+				.on("mouseout", Main.hideTip);
 
 			// Conso
 			if ($("#pharmashare").css("display") != "none") {
 				$("<a>").addClass("butmini formatbtn").html("<img src='/img/icons/ui/sat.png' />").attr("href", "#").appendTo(sharediv)
-				.on("click", function() {
-					var txt = Main.k.FormatPharma();
-					$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
-					return false;
-				});
+					.on("click", function() {
+						var txt = Main.k.FormatPharma();
+						$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
+						return false;
+					});
 			}
 
 			// Plants
 			if ($("#plantmanager").length > 0) {
 				$("<a>").addClass("butmini formatbtn").html("<img src='/img/icons/ui/plant_youngling.png' />").attr("href", "#").appendTo(sharediv)
-				.on("click", function() {
-					var txt = Main.k.FormatPlants();
-					$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
-					return false;
-				})
-				.attr("_title", Main.k.text.gettext("Partager l'état des plantes"))
-				.attr("_desc", Main.k.text.gettext("<p>Insère l'état des plantes dans la zone de texte active.</p><p>TODO: Exemple</p>"))
-				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip);
+					.on("click", function() {
+						var txt = Main.k.FormatPlants();
+						$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
+						return false;
+					})
+					.attr("_title", Main.k.text.gettext("Partager l'état des plantes"))
+					.attr("_desc", Main.k.text.gettext("<p>Insère l'état des plantes dans la zone de texte active.</p><p>TODO: Exemple</p>"))
+					.on("mouseover", Main.k.CustomTip)
+					.on("mouseout", Main.hideTip);
 			}
 
 			// Projects
 			if ($(".shareprojectbtn").length > 0) {
 				$("<a>").addClass("butmini formatbtn").html("<img src='/img/icons/ui/conceptor.png' />").attr("href", "#").appendTo(sharediv)
-				.on("click", function() {
-					var txt = Main.k.FormatProjects();
-					$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
-					return false;
-				})
-				.attr("_title", Main.k.text.gettext("Partager les projets"))
-				.attr("_desc", Main.k.text.gettext("Insère la liste de projets dans la zone de texte active, de la forme&nbsp;:</p><p>" +
-				"<li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li>" +
-				"<li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li>" +
-				"<li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li>"))
-				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip);
+					.on("click", function() {
+						var txt = Main.k.FormatProjects();
+						$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
+						return false;
+					})
+					.attr("_title", Main.k.text.gettext("Partager les projets"))
+					.attr("_desc", Main.k.text.gettext("Insère la liste de projets dans la zone de texte active, de la forme&nbsp;:</p><p>" +
+						"<li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li>" +
+						"<li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li>" +
+						"<li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li>"))
+					.on("mouseover", Main.k.CustomTip)
+					.on("mouseout", Main.hideTip);
 			}
 
 			// Research
 			if ($(".shareresearchbtn").length > 0) {
 				$("<a>").addClass("butmini formatbtn").html("<img src='/img/icons/ui/microsc.png' />").attr("href", "#").appendTo(sharediv)
-				.on("click", function() {
-					var txt = Main.k.FormatResearch();
-					$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
-					return false;
-				})
-				.attr("_title", Main.k.text.gettext("Partager les recherches"))
-				.attr("_desc", Main.k.text.gettext("Insère la liste de recherches dans la zone de texte active, de la forme&nbsp;:</p><p>" +
-				"<li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li>" +
-				"<li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li>" +
-				"<li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li>"))
-				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip);
+					.on("click", function() {
+						var txt = Main.k.FormatResearch();
+						$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
+						return false;
+					})
+					.attr("_title", Main.k.text.gettext("Partager les recherches"))
+					.attr("_desc", Main.k.text.gettext("Insère la liste de recherches dans la zone de texte active, de la forme&nbsp;:</p><p>" +
+						"<li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li>" +
+						"<li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li>" +
+						"<li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li>"))
+					.on("mouseover", Main.k.CustomTip)
+					.on("mouseout", Main.hideTip);
 			}
 
 			// BIOS
 			if ($("#biosModule").length > 0) {
 				$("<a>").addClass("butmini formatbtn").html("<img src='/img/icons/ui/pa_core.png' />").attr("href", "#").appendTo(sharediv)
-				.on("click", function() {
-					var txt = Main.k.FormatBIOS();
-					$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
-					return false;
-				})
-				.attr("_title", Main.k.text.gettext("Partager les paramètres BIOS"))
-				.attr("_desc", Main.k.text.gettext("Insère la liste de paramètres BIOS Neron dans la zone de texte active, de la forme&nbsp;:</p><p>TODO: aperçu"))
-				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip);
+					.on("click", function() {
+						var txt = Main.k.FormatBIOS();
+						$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
+						return false;
+					})
+					.attr("_title", Main.k.text.gettext("Partager les paramètres BIOS"))
+					.attr("_desc", Main.k.text.gettext("Insère la liste de paramètres BIOS Neron dans la zone de texte active, de la forme&nbsp;:</p><p>TODO: aperçu"))
+					.on("mouseover", Main.k.CustomTip)
+					.on("mouseout", Main.hideTip);
 			}
 
 			// Planets
 			if ($("#navModule").length > 0) {
 				$("<a>").addClass("butmini formatbtn").html("<img src='/img/icons/ui/planet.png' />").attr("href", "#").appendTo(sharediv)
-				.on("click", function() {
-					var txt = Main.k.FormatPlanets();
-					$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
-					return false;
-				})
-				.attr("_title", Main.k.text.gettext("Partager les planètes"))
-				.attr("_desc", Main.k.text.gettext("<p>Insère les détails des planètes dans la zone de texte active.</p><p>TODO: Exemple</p>"))
-				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip);
+					.on("click", function() {
+						var txt = Main.k.FormatPlanets();
+						$(this).parent().parent().siblings("td").first().find("textarea").insertAtCaret(txt);
+						return false;
+					})
+					.attr("_title", Main.k.text.gettext("Partager les planètes"))
+					.attr("_desc", Main.k.text.gettext("<p>Insère les détails des planètes dans la zone de texte active.</p><p>TODO: Exemple</p>"))
+					.on("mouseover", Main.k.CustomTip)
+					.on("mouseout", Main.hideTip);
 			}
 
 
@@ -2438,128 +2495,80 @@ Main.k.tabs.playing = function() {
 
 			// Bold
 			$("<a>").addClass("butmini formatbtn").html("<strong>B</strong>").attr("href", "#").appendTo(formatdiv)
-			.on("click", function() {
-				$(this).parent().parent().find("textarea").insertAroundCaret("**","**");
-			});
+				.on("click", function() {
+					$(this).parent().parent().find("textarea").insertAroundCaret("**","**");
+				});
 
 			// Italic
 			$("<a>").addClass("butmini formatbtn").html("<i>I</i>").attr("href", "#").appendTo(formatdiv)
-			.on("click", function() {
-				$(this).parent().parent().find("textarea").insertAroundCaret("//","//");
-			});
+				.on("click", function() {
+					$(this).parent().parent().find("textarea").insertAroundCaret("//","//");
+				});
 
 			// Add smile
 			$("<a>").addClass("butmini formatbtn").html("<img src='/img/icons/ui/moral.png' />").attr("href", "#").appendTo(formatdiv)
-			.on("click", function() {
-				// TODO
-			})
-			.attr("_title", Main.k.text.gettext("Insérer un smiley"))
-			.attr("_desc", Main.k.text.gettext("Bientôt disponible."))
-			.on("mouseover", Main.k.CustomTip)
-			.on("mouseout", Main.hideTip);
+				.on("click", function() {
+					// TODO
+				})
+				.attr("_title", Main.k.text.gettext("Insérer un smiley"))
+				.attr("_desc", Main.k.text.gettext("Bientôt disponible."))
+				.on("mouseover", Main.k.CustomTip)
+				.on("mouseout", Main.hideTip);
 
 			// Empty textarea
 			$("<a>").addClass("butmini").html("<img src='/img/icons/ui/bin.png' />").attr("href", "#").appendTo(formatdiv)
-			.on("click", function() {
-				var t = $(this).closest(".unit").find("textarea");
-				t.val("");
-				t.focus();
-				return false;
-			})
-			.attr("_desc", Main.k.text.gettext("Vider la zone de texte."))
-			.on("mouseover", Main.k.CustomTip)
-			.on("mouseout", Main.hideTip);
+				.on("click", function() {
+					var t = $(this).closest(".unit").find("textarea");
+					t.val("");
+					t.focus();
+					return false;
+				})
+				.attr("_desc", Main.k.text.gettext("Vider la zone de texte."))
+				.on("mouseover", Main.k.CustomTip)
+				.on("mouseout", Main.hideTip);
 
 			// Close textarea
 			$("<a>").addClass("butmini").html("<img src='/img/icons/ui/status/unsociable.png' />").attr("href", "#").appendTo(formatdiv)
-			.on("click", function() {
-				var jq = $(this);
-				var jqp = jq.closest(".unit");
-				jqp.find(".tree").not(".cdTreeReply").last().addClass("treelast");
-				jqp.find(".blockreply").addClass("hide");
-				jqp.find("textarea").val("");
-				return false;
-			})
-			.attr("_desc", Main.k.text.gettext("Fermer la zone de texte."))
-			.on("mouseover", Main.k.CustomTip)
-			.on("mouseout", Main.hideTip);
+				.on("click", function() {
+					var jq = $(this);
+					var jqp = jq.closest(".unit");
+					jqp.find(".tree").not(".cdTreeReply").last().addClass("treelast");
+					jqp.find(".blockreply").addClass("hide");
+					jqp.find("textarea").val("");
+					return false;
+				})
+				.attr("_desc", Main.k.text.gettext("Fermer la zone de texte."))
+				.on("mouseover", Main.k.CustomTip)
+				.on("mouseout", Main.hideTip);
 
 			// Add formatting link (manager)
 			$("<span>&nbsp;</span>").appendTo(formatdiv);
 			$("<a>").addClass("butmini formatbtn").html("<img src='/img/icons/ui/pam.png' /> Formater").attr("href", "#").appendTo(formatdiv)
-			.on("click", function() {
-				var tgt = $(this);
-				if (tgt.hasClass("butmini")) tgt = tgt.parent().parent().find("textarea");
-
-				Main.k.Manager.openOn("reply", tgt.val(), tgt.closest(".unit").attr("data-k"));
-				return false;
-			})
-			.attr("_desc", Main.k.text.gettext("Ouvrir le manager."))
-			.on("mouseover", Main.k.CustomTip)
-			.on("mouseout", Main.hideTip);
-		}
-	};
-	Main.onChatFocus = function(t,i) {
-		if(t.data("default")) {
-			t.val("");
-			t.data("default",false);
-		}
-		if(0 == (Main.rst & 1 << i)) {
-			Main.rst |= 1 << i;
-
-			if (!t.parent().find(".formatbtn").get(0)) {
-				t.attr("onblur", "");
-
-				// Add formatting
-				$("<a>").addClass("butmini chatformatbtn").html("<img src='/img/icons/ui/pam.png' /> Formater").attr("href", "#").appendTo(t.parent())
 				.on("click", function() {
 					var tgt = $(this);
-					if (tgt.hasClass("butmini")) tgt = tgt.parent().find("textarea");
+					if (tgt.hasClass("butmini")) tgt = tgt.parent().parent().find("textarea");
 
-					Main.k.Manager.openOn("newtopic", tgt.val());
+					Main.k.Manager.openOn("reply", tgt.val(), tgt.closest(".unit").attr("data-k"));
 					return false;
-				});
-
-				// Display chat button & fix tabindex
-				t.siblings("input").show();
-				t.siblings("input").attr("tabindex",1);
-			}
+				})
+				.attr("_desc", Main.k.text.gettext("Ouvrir le manager."))
+				.on("mouseover", Main.k.CustomTip)
+				.on("mouseout", Main.hideTip);
 		}
 	};
-	// Still need correction to insert line break at caret
-	// But nice try blackmagic, anyway~
-	Main.onWallInput = function(event) {
-		var tgt = new js.JQuery(event.target);
-		var val = tgt.val();
-		if (event.keyCode == 13) {
-			if (!event.ctrlKey && val.length > 1) {
-				var updtArr = ["cdTabsChat","chatBlock","char_col"];
-				var scr = new js.JQuery(".cdWallChannel").scrollTop();
-				var sendChatProc = function() {
-					Main.resetJs();
-					var jq = new js.JQuery(".cdWallChannel");
-					jq.scrollTop(scr + 100);
-				};
-				if(Main.isTuto()) {
-					updtArr.unshift("floating_ui_start");
-					updtArr.unshift("cdDialogs");
-					updtArr.push("ode");
-				}
-				var stVal = StringTools.urlEncode(val);
-				var url = "/wallReply?k=" + tgt.closest(".unit").data("k") + "&msg=" + stVal;
-				Main.updateContent(url,updtArr,null,sendChatProc);
-				Tools.send2Store("mush_wallReply_" + tgt.attr("id"),"");
-				tgt.val(Main.getText("edit_me"));
-				tgt.data("default",true);
-			} else {
-				// Insert line break at caret, not at the end...
-				tgt.insertAtCaret("\n");
-				Tools.send2Store("mush_wallReply_" + tgt.attr("id"),tgt.val());
-			}
-		} else Tools.send2Store("mush_wallReply_" + tgt.attr("id"),tgt.val());
+	Main.k.extend.onChatScroll = function() {
+		var jq = $(this);
+		var curChan = Main.curChatIndex();
+		Main.curScroll.set(curChan,jq.scrollTop());
+		if(curChan == ChatType.Wall[1]) {
+			if(jq.scrollTop() + jq.height() + 8 >= jq.toArray()[0].scrollHeight) Main.k.extend.loadMoreWall();
+		}
 	};
+	Main.loadMoreWall = function(){
 
-	Main.loadMoreWall = function() {
+	};
+	addFctToPage(Main.loadMoreWall,'Main.loadMoreWall');
+	Main.k.extend.loadMoreWall = function(){
 		if(Main.lmwProcessing) return;
 		Main.lmwProcessing = true;
 		Main.lmw_spin++;
@@ -2598,347 +2607,25 @@ Main.k.tabs.playing = function() {
 					wp.append(w1.html());
 				}
 				Main.lmwProcessing = false;
-				
-				/***** CTRL+W *****/
+
+				/**************** CTRL+W *************/
 				if (Main.k.Options.cbubbles) Main.k.customBubbles();
-	
 				// Never hide unread msg
 				$("table.treereply tr.not_read.cdRepl").css("display", "table-row");
-				/***** CTRL+W *****/
-				
+				/**************** CTRL+W *************/
+
 			});
 		} else Main.lmwProcessing = false;
-	};
-	Main.resetJs = function(doActions, skipK) {
-		if(doActions == null) doActions = true;
-		$(".cdLoading").remove();
-		Main.onFirstFrame(false);
-		Main.removeTip();
-		Main.doChat();
-		Main.refreshSelection();
-		if(doActions) Main.acListMaintainer.refresh(true);
-		Main.syncInvOffset(null,true);
-		Main.doChatPacks();
-		Main.topChat();
-		Main.onRealLoad();
 
+	};
+
+	Main.k.extend.resetJs = Main.resetJs;
+	Main.resetJs = function(doActions, skipK) {
+		Main.k.extend.resetJs(doActions);
 		if (!skipK) Main.k.MushUpdate();
 	};
-	
-	Main.k.fakeSelected = null;
-	Main.k.fakeSelectItem = function(frm) {
-		var $inventorySel, invbloc;
-		frm = $(frm);
-		if (frm.hasClass("on")) {
-			Main.closet.hide(true);
-			$inventorySel = $(".inventory .selected");
-			$inventorySel.parent().removeClass("on");
-			$inventorySel.remove();
+	exportFunction(Main.resetJs, unsafeWindow.Main, {defineAs: 'resetJs'});
 
-			//$(".inv").css("display", "none");
-			invbloc = $("#cdInventory").find(".invcolorbg");
-			//invbloc.css("display", "none");
-			//invbloc.find(".exceed").css("display", "block");
-			invbloc.find(".arrowleft").css("display", "block");
-			invbloc.find(".arrowright").css("display", "block");
-			Main.cancelSelection(frm);
-			Main.k.fakeSelected = null;
-
-		} else {
-			Main.closet.show(true,false);
-			Main.rmMan.getProxy(Clients.ISO_MODULE)._cancelSelection();
-			Main.k.fakeSelected = frm;
-			$inventorySel = $(".inventory .selected");
-			$inventorySel.parent().removeClass("on");
-			$inventorySel.remove();
-			//$(".inv").css("display", "block");
-			$(".inv").addClass("placard_on");
-			//$(".inv").css("margin-top", "-194px");
-
-			Main.sel.selectBySerial(frm.attr("serial_fake"));
-			invbloc = $("#cdInventory").find(".invcolorbg");
-			invbloc.css("display", "block");
-			//invbloc.find(".exceed").css("display", "none");
-			invbloc.find(".arrowleft").css("display", "none");
-			invbloc.find(".arrowright").css("display", "none");
-
-			frm.addClass("on");
-			if (frm.find(".selected").length == 0) frm.prepend($("<div>").addClass("selected"));
-		}
-	};
-	Main.selectItem = function(frm) {
-		frm = $(frm);
-		if (frm.hasClass("fakeitem")) return;
-		if (frm.hasClass("on") && frm.parents('#research_module').length < 1) {
-			Main.cancelSelection(frm);
-		} else {
-			Main.sel.selectBySerial(frm.attr("serial"));
-		}
-	};
-
-	// Seems to work again; if not use next method instead
-	Main.sel.selectBySerial = function(serial) {
-		var prx, $inv, allItems, $inventorySel, realJMe, $inventory;
-		var jMe = $("[serial='" + serial + "']");
-		//if (jMe.length == 0) return; // << from flash
-		js.Cookie.set(CrossConsts.COOK_SEL,StringTools.urlEncode(serial),3600);
-
-		var parentId = "";
-		realJMe = null;
-		jMe.each(function() {
-			if ($(this).parent().attr("id") != undefined) {
-				realJMe = $(this);
-				parentId = $(this).parent().attr("id");
-			}
-		});
-
-		if (parentId == "myInventory") {
-			var islab = (realJMe.parent().parent().parent().attr("id") == "research_module");
-
-			if (islab) {
-				var $cdActionList = $("#cdActionList");
-				if (realJMe.hasClass("fakeselected")) {
-					// Clear selection
-					realJMe.removeClass("fakeselected");
-					$cdActionList.find("div").not(".move").remove();
-					Main.cancelSelection(realJMe);
-					this.currentInvSelection = null;
-
-					var tgt = $(".cdActionList");
-					var src = $(".cdActionRepository .heroRoomActions").children().clone();
-					tgt.html(src);
-					$(".cdActionList .move").hide();
-
-					return;
-				}
-				$inventory = $("#myInventory");
-				$inventory.find(".item").not(".cdEmptySlot").add("[serverselected=true]");
-				$(".cdCharColSel").remove();
-				$inventorySel = $inventory.find(".selected");
-				$inventorySel.parent().removeClass("on");
-				$inventorySel.remove();
-				realJMe.addClass("fakeselected");
-
-				realJMe = $("[data-tip='" + realJMe.attr("data-tip") + "']").not("[serial='" + serial + "']");
-				serial = realJMe.attr("serial");
-				this.currentInvSelection = null;
-				Main.cancelSelection(realJMe);
-				Main.acListMaintainer.heroWorking = true;
-				Main.acListMaintainer.refreshHeroInv();
-				Main.acListMaintainer.heroWorking = true;
-				this.currentInvSelection = serial;
-				Main.acListMaintainer.refreshHeroInv();
-
-
-				var actions = $("div[webdata='" + serial + "']");
-
-				$cdActionList.find("div").hide();
-				actions.each(function() {
-					$(this).clone().appendTo($cdActionList);
-				});
-
-
-				$("<div class='action stSel'> " + realJMe.attr("data-name").split("\\'").join("'") + " :</div>").prependTo("#cdActionList");
-
-			} else {
-				$inventory = $("#myInventory");
-				allItems = $inventory.find(".item").not(".cdEmptySlot").add("[serverselected=true]");
-				$(".cdCharColSel").remove();
-				$inventorySel = $inventory.find(".selected");
-				$inventorySel.parent().removeClass("on");
-				$inventorySel.remove();
-				realJMe.addClass("on").prepend(new Tag("div").attr("class","selected").toString());
-
-				var pre = $("<div class='action stSel cdCharColSel'> " + realJMe.data("name").split("\\'").join("'") + " :</div>");
-				$(".cdHeroOne").prepend(pre);
-				Lambda.iter(allItems.toArray(),function(h) {
-					h.onclick = function(e) {
-						Main.selectItem(h);
-					};
-				});
-				realJMe.get().onclick = function(e) {
-					Main.cancelSelection(realJMe);
-				};
-
-				Main.acListMaintainer.heroWorking = false;
-				this.currentInvSelection = serial;
-				Main.acListMaintainer.refreshHeroInv();
-			}
-		} else if (parentId == "room") {
-			allItems = $(".inventory .item").not(".cdEmptySlot");
-			$inventorySel = $(".inventory .selected");
-			$inventorySel.parent().removeClass("on");
-			$inventorySel.remove();
-
-			// Select object
-			realJMe.addClass("on");
-			realJMe.prepend($("<div>").addClass("selected"));
-
-			var lit = realJMe.data("name").split("\\'").join("'");
-			$("#tt_itemname").html(lit);
-			Lambda.iter(allItems.toArray(),function(h1) {
-				h1.onclick = function(e) {
-					Main.selectItem(h1);
-				};
-			});
-
-			$inv = $(".inv");
-			$inv.css("display", "block");
-			var invbloc = $("#cdInventory").find(" .invcolorbg");
-			invbloc.css("display", "block");
-			invbloc.find(".exceed").css("display", "block");
-			invbloc.find(".arrowleft").css("display", "block");
-			invbloc.find(".arrowright").css("display", "block");
-
-			this.currentRoomSelection = serial;
-			Main.acListMaintainer.refreshRoomInv();
-			Main.k.fakeSelected = null;
-
-			prx = Main.rmMan.getProxy(Clients.ISO_MODULE);
-			if(prx != null) {
-				if(Main.closet.visible) prx._setBaseLine(CrossConsts.BASELINE_CLOSET); else prx._setBaseLine(CrossConsts.BASELINE_ACTIONS);
-			}
-			$inv.css("visibility","visible");
-		} else {
-			Main.closet.visible = false;
-			Main.cancelSelection(Main.k.fakeSelected);
-			Main.acListMaintainer.refreshRoomInv();
-			this.currentRoomSelection = serial;
-			Main.acListMaintainer.refreshRoomInv();
-			prx = Main.rmMan.getProxy(Clients.ISO_MODULE);
-			if(prx != null) prx._setBaseLine(CrossConsts.BASELINE_ACTIONS);
-			$inv = $(".inv");
-			$inv.css("display","block");
-			$inv.css("visibility","visible");
-			$inv.css("margin-top", "-108px");
-			var $cdInventory = $("#cdInventory");
-			$cdInventory.find(".invcolorbg").css("display", "none");
-			$("#cdItemActions").addClass("selectplayer");
-			$cdInventory.removeClass("placard_on");
-		}
-	};
-	Main.confirmAction = function(frm,text,fct){
-		/* Translators: message confirmation when you are Mush and you are doing a beneficial action. Only the paragraph, not the title. Copy it from the game. */
-		var regex = new RegExp('.*'+RegExp.escape(Main.k.text.gettext("Cette action est bénéfique pour l'équipage du Deaedalus et votre rôle est de les convertir ou de détruire le Daedalus. Êtes-vous vraiment sûr de vouloir faire cela ?"))+'.*');
-		if(Main.k.Options.mushNoConf && regex.test(text)){
-			fct(frm);
-		}else{
-			Main.jsChoiceBox("",text,Main.getText("ok"),Main.getText("cancel"),function(_) {
-				fct(frm);
-			},function(_) {
-				return;
-			},fct == Main.ajaxAction ? "ok" : "");
-		}
-	};
-	
-	Main.confirmCustomProjAction = function(frm,text) {
-		Main.confirmAction(frm,text,Main.customProjAction);
-	};
-
-	Main.confirmCustomLabAction = function(frm,text) {
-		Main.confirmAction(frm,text,Main.customLabAction);
-	};
-	
-	Main.confirmCustomPilgredAction = function(frm,text) {
-		Main.confirmAction(frm,text,Main.customPilgredAction);
-	};
-
-	Main.confirmAjaxAction = function(frm,text) {
-		Main.confirmAction(frm,text,Main.ajaxAction);
-	};
-
-	/*Main.sel.selectBySerial = function(serial) {
-		js.Cookie.set(CrossConsts.COOK_SEL,StringTools.urlEncode(serial),3600);
-		var jMe = Selection.j("[serial=" + serial + "]:not(.fakeitem)");
-		var domMe = jMe.toArray()[0];
-		if(jMe.parent().attr("id") == "myInventory") {
-			// ******** CTRL+W ******* /
-			if(jMe.parents('#research_module').length > 0){ //is lab
-				var allItems = $("#myInventory .item").not(".cdEmptySlot").add("[serverselected=true]");
-				$(".cdCharColSel").remove();
-				$("#myInventory .selected").parent().removeClass("on");
-				$("#myInventory .selected").remove();
-				var realJMe = $("[data-tip='" + jMe.attr("data-tip") + "']").not("[serial='" + serial + "']");
-				var serial = realJMe.attr("serial");
-				this.currentInvSelection = null;
-				//Main.cancelSelection(realJMe);
-				Main.acListMaintainer.heroWorking = true;
-				Main.acListMaintainer.refreshHeroInv();
-				Main.acListMaintainer.heroWorking = true;
-				this.currentInvSelection = serial;
-				Main.acListMaintainer.refreshHeroInv();
-
-
-				var actions = $("div[webdata='" + serial + "']");
-				$("#cdActionList").find("div").hide();
-				actions.each(function() {
-					$(this).clone().appendTo("#cdActionList");
-				})
-				jMe.addClass("on").prepend(new Tag("div").attr("class","selected").toString());
-				$("<div class='action stSel'> " + realJMe.attr("data-name").split("\\'").join("'") + " :</div>").prependTo("#cdActionList");
-
-			}else{
-			// ******** /CTRL+W ******* /
-				var allItems = JqEx.j("#myInventory .item").not(".cdEmptySlot").add("[serverselected=true]");
-				Selection.j(".cdCharColSel").remove();
-				Selection.j("#myInventory .selected").parent().removeClass("on");
-				Selection.j("#myInventory .selected").remove();
-				jMe.addClass("on").prepend(new Tag("div").attr("class","selected").toString());
-				var pre = Selection.j("<div class='action stSel cdCharColSel'> " + (function($this) {
-					var $r;
-					var s = jMe.data("name");
-					$r = s.split("\\'").join("'");
-					return $r;
-				}(this)) + " :</div>");
-
-				Selection.j(".cdHeroOne").prepend(pre);
-				Lambda.iter(allItems.toArray(),function(h) {
-					h.onclick = function(e) {
-						Main.selectItem(h);
-					};
-				});
-				if(domMe != null) domMe.onclick = function(e) {
-					Main.cancelSelection(jMe);
-				};
-				this.currentInvSelection = serial;
-				Main.acListMaintainer.refreshHeroInv();
-			}
-
-		} else if(jMe.parent().attr("id") == "room") {
-			var allItems = JqEx.j("#room .item").not(".cdEmptySlot");
-			Selection.j("#room .selected").parent().removeClass("on");
-			Selection.j("#room .selected").remove();
-			jMe.addClass("on").prepend(new Tag("div").attr("class","selected").toString());
-			var lit;
-			var s = jMe.data("name");
-			lit = s.split("\\'").join("'");
-			Selection.j("#tt_itemname").html(lit);
-			var tab = allItems.toArray();
-			Lambda.iter(allItems.toArray(),function(h1) {
-				h1.onclick = function(e) {
-					Main.selectItem(h1);
-				};
-			});
-			if(domMe != null) domMe.onclick = function(e) {
-				Main.cancelSelection(jMe);
-			};
-			this.currentRoomSelection = serial;
-			Main.acListMaintainer.refreshRoomInv();
-			var prx = Main.rmMan.getProxy(Clients.ISO_MODULE);
-			if(prx != null) {
-				if(Main.closet.visible) prx._setBaseLine(CrossConsts.BASELINE_CLOSET); else prx._setBaseLine(CrossConsts.BASELINE_ACTIONS);
-			}
-			Selection.j(".inv").css("visibility","visible");
-			Selection.j(".cdDistrib").addClass("placard_on");
-		} else {
-			this.currentRoomSelection = serial;
-			Main.acListMaintainer.refreshRoomInv();
-			var prx = Main.rmMan.getProxy(Clients.ISO_MODULE);
-			if(prx != null) prx._setBaseLine(CrossConsts.BASELINE_ACTIONS);
-			Selection.j(".inv").css("visibility","visible");
-			Selection.j(".cdDistrib").addClass("placard_on");
-		}
-	}*/
 	// == /Extend Main ============================================
 
 
@@ -2964,27 +2651,31 @@ Main.k.tabs.playing = function() {
 		}
 		if(localStorage.getItem('ctrlw_update_cache') == null){
 			Main.k.UpdateCheck.b_in_progress = true;
-			$.ajax({
+			GM_xmlhttpRequest({
+				method: 'GET',
 				url :Main.k.servurl + "/versions/update/"+ version_update,
-				dataType : 'jsonp',
-				success: function(json) {
+				headers: {
+					"Content-Type": "application/x-www-form-urlencoded"
+				},
+				onload: function(json) {
 					setTimeout(function() {
+						console.warn('update_json',json);
 						localStorage.setItem('ctrlw_update_cache',JSON.stringify(json));
 						Main.k.UpdateCheck.b_in_progress = false;
 					}, 0);
-					
-					
+
+
 					Main.k.UpdateCheckScriptVersion(json,lastVersion);
 				},
-				error: function(xhr,statut,http){
+				onerror: function(xhr,statut,http){
 					console.warn(xhr,statut,http);
 				}
 			});
-			
+
 		}else{
 			Main.k.UpdateCheckScriptVersion(JSON.parse(localStorage.getItem('ctrlw_update_cache')),lastVersion);
 		}
-		
+
 	};
 	/**
 	 *
@@ -2997,6 +2688,7 @@ Main.k.tabs.playing = function() {
 	 */
 	Main.k.UpdateCheckScriptVersion = function(json,lastVersion){
 		Main.k.UpdateData.currversion = json.numero;
+		json = JSON.parse(json.response);
 		if(typeof(json['changelog_long_'+Main.k.lang]) != 'undefined'){
 			Main.k.UpdateData.changelog = json['changelog_long_'+Main.k.lang];
 		}else{
@@ -3077,7 +2769,7 @@ Main.k.tabs.playing = function() {
 		var p = Reflect.copy(params);
 		p.jsm = "1";
 		p.lang = "FR";
-		s.src = _tid.makeUrl(url,p);
+		s.src = _tid.makeUrl(url,cloneInto(p,unsafeWindow));
 		if (after != null) s.onload = after;
 		js.Lib.document.body.appendChild(s);
 	};
@@ -3349,7 +3041,7 @@ Main.k.tabs.playing = function() {
 	 */
 	Main.k.FormatComm = function(){
         var comm = "//**" + Main.k.text.gettext('Communications:') + "**//";
-        
+
         var parse = function(t) {
 			t = t.replace(/<img\s+src=\"\/img\/icons\/ui\/triumph.png\"\s+alt=\"triomphe\"[\/\s]*>/ig, ":mush_triumph:");
 			t = t.replace(/&nbsp;/ig, " ");
@@ -3360,14 +3052,14 @@ Main.k.tabs.playing = function() {
 		};
         var $trackerModule = $('#trackerModule');
 		$trackerModule.find('.sensors').each(function() {
-            
+
         	var bdd = $(this).find("h2").html().trim();
             comm += "\n//" + bdd + "//: ";
             var data = [];
             $(this).find("p").each(function() {
 				data.push($(this).find("em").html());
 			});
-            
+
             if (data.length < 2){
                 data.push(' :alert:');
             }else{
@@ -3378,13 +3070,13 @@ Main.k.tabs.playing = function() {
         });
 
 		$trackerModule.find('.neron').each(function() {
-            
+
         	var version = $(this).find("h2").html().trim();
             comm += "\n//" + version + "//\n";
-            
+
         });
 		$trackerModule.find('.xyloph').each(function() {
-            
+
             var bdd = $(this).find("h2").html().trim();
             var nbr = 0;
             var data = [];
@@ -3393,7 +3085,7 @@ Main.k.tabs.playing = function() {
                 nbr += 1;
                 data.push(datanamereg.exec($(this).attr("onmouseover"))[1].replace('\\',''));
 			});
-            
+
             if (nbr == 12){
             	comm += "//" + bdd + "//: ";
                 comm += nbr + "/12\n";
@@ -3404,49 +3096,49 @@ Main.k.tabs.playing = function() {
             		comm += nbr + "/12"+"\n ▶ **"+ data.join("** \n ▶ **")+"**\n";
                 }
             }
-            
-            
-            
+
+
+
         });
 
 		$trackerModule.find('.network .bases').each(function() {
-           
+
             var base = "//" + Main.k.text.gettext('Décodage: ') + "//";
          	var base_decode;
             $(this).find("li").each(function(){
-                
+
                 base_decode = $(this).attr("data-id");
                 $(this).find(".percent").not(".off").each(function(){
                     base += base_decode+ "► " + $(this).html().trim();
                 });
             });
-            
+
             if (base != "//Décodage: //"){
             	comm += base +"\n";
             }
-            
+
             var base_fini = "//" + Main.k.text.gettext('Base(s) décodée(s): ') + "//";
             var _base ="";
             var base_signal_perdu = "//" + Main.k.text.gettext('Base(s) perdue(s): ') + "//";
             var base_nom = "";
             var nbr_base_perdu = 0;
-            
+
             $(this).find("li").each(function(){
-                
+
                 base_nom = $(this).attr("data-id");
                 $(this).find("h3").each(function(){
                     if (($(this).html().trim()) != "???" && ($(this).html().trim()) != ""){
-                        
+
                         base_fini += $(this).html().trim() +", ";
                     }
                 });
-                
+
                 $(this).find("span").not(".percent").each(function(){
-                   
+
                     base_signal_perdu += base_nom +", ";
                 });
             });
-            
+
             if (base_fini != "//" + Main.k.text.gettext('Base(s) décodée(s): ') + "//"){
                 comm += base_fini;
                 comm = comm.substring(0,comm.length-2)+"\n";
@@ -3454,8 +3146,8 @@ Main.k.tabs.playing = function() {
             if (base_signal_perdu != "//" + Main.k.text.gettext('Base(s) perdue(s): ') + "//"){
                 comm += base_signal_perdu.substring(0,base_signal_perdu.length-2);
             }
-            
-            
+
+
         });
         return comm;
     	};
@@ -3464,7 +3156,7 @@ Main.k.tabs.playing = function() {
 	 */
 	Main.k.FormatPharma = function() {
 		var ret = "**//" + Main.k.text.gettext("Consommables :") + " //**";
-		
+
 		var o_replace = {};
 		/* Translators: This translation must be copied from the game. (Consummables description) */
 		o_replace[Main.k.text.gettext("Guérie la maladie")] = ':pa_heal:';
@@ -3472,7 +3164,7 @@ Main.k.tabs.playing = function() {
 		o_replace[Main.k.text.gettext("satiété")] = ':pa_cook:';
 		/* Translators: This translation must be copied from the game. (Consummables description) */
 		o_replace[Main.k.text.gettext("Provoque la maladie")] = ':ill:';
-		
+
 		var a_ignore = [];
 		/* Translators: This translation must be copied from the game. (Consummables description) */
 		a_ignore.push(Main.k.text.gettext("Impérissable"));
@@ -3486,7 +3178,7 @@ Main.k.tabs.playing = function() {
 			if (desc.indexOf("Effets") != -1 || $(this).data('id') == "CONSUMABLE") {
 				var $desc = $(desc);
 				if($desc.has('p')){
-					
+
 					var a_ret_effect = [];
 					$desc.find('p').each(function(){
 						if(!regex_ignore.test($(this).html())){
@@ -3497,11 +3189,11 @@ Main.k.tabs.playing = function() {
 						ret += "\n**" + name + "** : ";
 						ret += a_ret_effect.join(', ');
 					}
-					
-					
+
+
 				}
-				
-				
+
+
 			}
 		});
 
@@ -3983,7 +3675,7 @@ Main.k.tabs.playing = function() {
 				", <a href='http://twinoid.com/user/5140898'>_Fraise__</a>"+
 				", <a href='http://twinoid.com/user/8011565'>NightExcessive</a><br/>"+
 			Main.k.text.gettext("Traducteurs : ") + "<a href='http://twinoid.com/user/7845671'>Avistew</a>")).appendTo(td);
-			
+
 			// Coming soon
 			/*$("<h2>").css({
 				color: "#EEE",
@@ -4160,9 +3852,11 @@ Main.k.tabs.playing = function() {
 		var $status_sync = $('.status_sync');
 		$status_sync.hide();
 		$('.status_sync_load').show();
-		$.ajax({
+		GM_xmlhttpRequest({
 			url :Main.k.servurl + "/sync/createkey",
-			dataType : 'jsonp',
+			headers: {
+				"Content-Type": "application/x-www-form-urlencoded"
+			},
 			success: function(json) {
 				localStorage.setItem('ctrlw_sync_key',json.key);
 				$('#ctrlw-sync-key').val(json.key);
@@ -4191,42 +3885,52 @@ Main.k.tabs.playing = function() {
 			var button = $('#ctrlw_sync_button');
 			button.find('img').hide();
 			button.find('.ctrlw_down').show();
-			$.ajax({
-				url :Main.k.servurl + "/sync/pull",
-				type: 'POST',
-				data :{
+			console.log('Main.k.Sync.pull request');
+			GM_xmlhttpRequest({
+				method: 'POST',
+				url : Main.k.servurl + "/sync/pull",
+				data : $.param({
 					last_update_time : localStorage.getItem('ctrlw_sync_last_update_time'),
 					key: key
+				}),
+				headers: {
+					"Content-Type": "application/x-www-form-urlencoded"
 				},
-				dataType : 'jsonp',
-				success: function(json) {
-					if(json.error == 'auth'){
-						Main.k.quickNoticeError('Cette clé n\'existe pas');
-						dfd.reject('auth');
-					}else{
-						if(json.status == 'outdated'){
-							console.warn(JSON.parse(json.sync.profiles));
-							Main.k.Profiles.load(json.sync.profiles,true);
-							if(typeof(json.sync.msgs_prerecorded) != 'undefined'){
-								Main.k.Manager.loadMsgsPrerecorded(json.sync.msgs_prerecorded,true);
+				onload: function(response) {
+					button.find('img').hide();
+					button.find('.ctrlw_normal').show();
+					if(response.status == 200){
+						var json = JSON.parse(response.responseText);
+						console.log('Main.k.Sync.pull response',json);
+						if(json.error == 'auth'){
+							Main.k.quickNoticeError('Cette clé n\'existe pas');
+							dfd.reject('auth');
+						}else{
+							if(json.status == 'outdated'){
+								console.warn(JSON.parse(json.sync.profiles));
+								Main.k.Profiles.load(json.sync.profiles,true);
+								if(typeof(json.sync.msgs_prerecorded) != 'undefined'){
+									Main.k.Manager.loadMsgsPrerecorded(json.sync.msgs_prerecorded,true);
+								}
+								Main.k.quickNotice(Main.k.text.gettext('Synchronisation effectuée'));
+								Main.k.MushUpdate();
 							}
-							Main.k.quickNotice(Main.k.text.gettext('Synchronisation effectuée'));
-							Main.k.MushUpdate();
+							dfd.resolve();
 						}
-						dfd.resolve();
+					}else{
+						Main.k.quickNoticeError('Sync pull, fatal error');
 					}
 
+
 				},
-				error: function(xhr,statut,http){
+				onerror: function(xhr,statut,http){
 					alert('error Main.k.Sync.pull');
 					console.warn(xhr,statut,http);
+					button.find('img').hide();
+					button.find('.ctrlw_normal').show();
 					dfd.reject('ajax_error');
 
 
-				},
-				complete:function(){
-					button.find('img').hide();
-					button.find('.ctrlw_normal').show();
 				}
 			});
 		}
@@ -4339,7 +4043,7 @@ Main.k.tabs.playing = function() {
 					alert('error Main.k.Sync.push');
 					console.warn(xhr,statut,http);
 				}
-		});
+			});
 		}, 0);
 	};
 	Main.k.Sync.pushDelay = function() {
@@ -4782,6 +4486,7 @@ Main.k.tabs.playing = function() {
 		callbacks_storage_sync.fire();
 	};
 	Main.k.Profiles.load = function(profiles,json) {
+		console.info('Main.k.Profiles.load');
 		var profiles_json;
 		if(typeof(profiles) != 'undefined'){
 			if(typeof(json) != 'undefined' && !json){
@@ -4905,6 +4610,7 @@ Main.k.tabs.playing = function() {
 	Main.k.Manager.initialized = false;
 	Main.k.Manager.heroes = [];
 	Main.k.Manager.open = function(after) {
+		console.log('manager open debut');
 		var tabs, r, rbg;
 		if (Main.k.folding.displayed == "manager" || Main.k.folding.displayed == "manager_mini") {
 			Main.k.folding.displayGame();
@@ -5581,7 +5287,7 @@ Main.k.tabs.playing = function() {
 		var total_msg = topic_nb + answer_nb;
 		//A continuer ici
 		var recap_p = $("<p>").html(Main.k.text.strargs(Main.k.text.ngettext("Total : <b>%1</b> message chargé","Total : <b>%1</b> messages chargés",total_msg),[total_msg])
-		
+
 		+ " "+ Main.k.text.strargs(Main.k.text.ngettext("en <b>%1</b> topic. <br/> (depuis %2)","en <b>%1</b> topics. <br/> (depuis %2)",topic_nb),[topic_nb,Main.k.extendAgo(Main.k.Manager.lastago)])).appendTo(recap);
 
 		// Hero count
@@ -5598,8 +5304,8 @@ Main.k.tabs.playing = function() {
 			if (hero.name == "neron") {
 				heroDiv.attr("_desc", Main.k.text.strargs(Main.k.text.ngettext("<b>%1</b> message","<b>%1</b> messages",hero.mess),[hero.mess])); // dont <b>" + hero.a + "</b> annonces officielles et <b>" + hero.av + "</b> annonces vocodées.");
 			} else {
-				heroDiv.attr("_desc", Main.k.text.strargs(Main.k.text.ngettext("<b>%1</b> message","<b>%1</b> messages",hero.mess),[hero.mess]) 
-				
+				heroDiv.attr("_desc", Main.k.text.strargs(Main.k.text.ngettext("<b>%1</b> message","<b>%1</b> messages",hero.mess),[hero.mess])
+
 				+ " "+Main.k.text.strargs(Main.k.text.ngettext("dont <b>%1</b> topic.","dont <b>%1</b> topics.",hero.topic),[hero.topic]));
 			}
 			heroDiv.on("mouseover", Main.k.CustomTip);
@@ -5609,7 +5315,7 @@ Main.k.tabs.playing = function() {
 			$("<img>").attr("src", "/img/icons/ui/" + hero.name.replace("_", "") + ".png").appendTo(heroDiv);
 			var msg = (i < max_highlighted) ? hero.mess + "&nbsp;messages" : hero.mess;
 			$("<span>").html(msg).appendTo(heroDiv);
-			
+
 			/* Translators: %1 = character name, %2 = message count */
 			popup_msg += "\n"+Main.k.text.strargs(Main.k.text.ngettext("**%1 : ** //%2// message","**%1 : ** //%2// messages",hero.mess),[Main.k.COMPLETE_SURNAME(hero.name),hero.mess]);
 		}
@@ -5896,7 +5602,7 @@ Main.k.tabs.playing = function() {
 		$("#searchfield").val("@" + hero);
 		Main.k.Manager.search();
 	};
-	
+
 	Main.k.Manager.replyloaded = false;
 	Main.k.Manager.fillReply = function() {
 		if (Main.k.Manager.replyloaded) {
@@ -5922,7 +5628,7 @@ Main.k.tabs.playing = function() {
 
                 $tabreply_content.find(" #tid_wallPost_preview").attr("id", "").addClass("tid_wallPost_preview");
                 $tabreply_content.find(" #tid_wallPost").attr("id", "").addClass("tid_wallPost");
-                 
+
 				var preview = $tabreply_content.find(".tid_wallPost_preview").attr("id", "").addClass("reply bubble");
 				if (Main.k.Options.cbubbles) preview.addClass("bubble_" + Main.k.ownHero);
 				if (Main.k.Options.cbubblesNB) preview.addClass("custombubbles_nobackground");
@@ -5967,7 +5673,7 @@ Main.k.tabs.playing = function() {
 				.on("mouseover", Main.k.CustomTip)
 				.on("mouseout", Main.hideTip);
 
-				
+
 				if(typeof(js.Lib.window["editor_tid_wallPost"]) == 'undefined'){
 					js.Lib.window["editor_tid_wallPost"] = {};
 				}
@@ -6085,7 +5791,7 @@ Main.k.tabs.playing = function() {
 			});
 		}
 	};
-	
+
 	Main.k.Manager.customloaded = false;
     Main.k.Manager.fillCustom = function() {
         if (Main.k.Manager.customloaded) {
@@ -6109,7 +5815,7 @@ Main.k.tabs.playing = function() {
                 $tabcustom_content.find(".tid_editorBut_question").remove();
                 $tabcustom_content.find(".tid_editorBut__user").remove();
                 // TODO: remove inactive tags in main chat
-                
+
                 $tabcustom_content.find("#tid_wallPost_preview").attr("id", "").addClass("tid_wallPost_preview");
                 $tabcustom_content.find("#tid_wallPost").attr("id", "").addClass("tid_wallPost");
 
@@ -6156,7 +5862,7 @@ Main.k.tabs.playing = function() {
                 .attr("_title", "Nouveau topic").attr("_desc", Main.k.text.gettext("Poster ce message en tant que nouveau topic."))
                 .on("mouseover", Main.k.CustomTip)
                 .on("mouseout", Main.hideTip);
-                
+
                 var addmsg = Main.k.MakeButton("<img src='http://mush.vg/img/icons/ui/fav.png' /> " + Main.k.text.gettext("Ajouter aux favoris"),null,function() {
                     var $tid_wallPost = $tabcustom_content.find(".tid_wallPost");
                     var message = $tid_wallPost.val();
@@ -6182,7 +5888,7 @@ Main.k.tabs.playing = function() {
 							}
 						}
 					});
-                    
+
                 })
                 .css({display: "inline-block", margin: "4px 4px 8px"})
                 .appendTo(buttons)
@@ -6190,7 +5896,7 @@ Main.k.tabs.playing = function() {
                 .attr("_title", "Ajouter aux favoris").attr("_desc", Main.k.text.gettext("Ajouter un message à votre liste des messages pré-enregistrés."))
                 .on("mouseover", Main.k.CustomTip)
                 .on("mouseout", Main.hideTip);
-                
+
                 var delmsg = Main.k.MakeButton("<img src='http://mush.vg/img/icons/ui/bin.png' /> " + Main.k.text.gettext("Supprimer un favori"),null,function() {
                     try{
 						var title = $tabcustom_content.find(".array_messages_prerecorded .selected").text();
@@ -6211,7 +5917,7 @@ Main.k.tabs.playing = function() {
                 .attr("_title", "Supprimer un favori").attr("_desc", Main.k.text.gettext("Supprimer une message de votre liste des messges pré-enregistrés."))
                 .on("mouseover", Main.k.CustomTip)
                 .on("mouseout", Main.hideTip);
-                
+
                 if(typeof(js.Lib.window["editor_tid_wallPost"]) == 'undefined'){
                     js.Lib.window["editor_tid_wallPost"] = {};
                 }
@@ -6314,7 +6020,7 @@ Main.k.tabs.playing = function() {
                         if(m.length > 0 && Std.parseInt(m.html()) == 0) return false;
                         _g.insert($(this).find("img").attr("tid_s"));
                         return false;
-                    });              
+                    });
                     return false;
                 };
 
@@ -6323,12 +6029,12 @@ Main.k.tabs.playing = function() {
 
 
                 var array_msg = $("<p>").addClass("array_messages_prerecorded").prependTo( $tabcustom_content );
-                
+
                 var messages_prerecorded = [];
                 if(Main.k.Manager.msgs_prerecorded != undefined ){
                     messages_prerecorded = Main.k.Manager.msgs_prerecorded;
                 }
-                
+
                 for(var idMsg = 0;idMsg<messages_prerecorded.length;idMsg++){
                     $("<span>"+ messages_prerecorded[idMsg][0] +"</span>").addClass("message_prerecorded")
                     .appendTo(array_msg)
@@ -6339,7 +6045,7 @@ Main.k.tabs.playing = function() {
 							}else {
 								$tabcustom_content.find(".array_messages_prerecorded .selected").removeClass("selected");
 								$(this).addClass("selected");
-								
+
 								var msgPrerecorded = "";
 								try{
 									msgPrerecorded = Main.k.Manager.getMsgPrerecorded($(this).text());
@@ -6361,7 +6067,7 @@ Main.k.tabs.playing = function() {
                 }
         }
     };
-    
+
 	Main.k.Manager.initHeroes = function() {
 		Main.k.Manager.heroes["neron"] = { name: "neron", mess: 0, av: 0, a: 0 };
 		for (var i=0; i<Main.k.HEROES.length; i++) {
@@ -6389,20 +6095,20 @@ Main.k.tabs.playing = function() {
 		var tid = Main.k.Manager.getTopicByTid(k).id;
 		Main.k.Manager.displayTopic(tid);
 	};
-	
+
 	Main.k.Manager.msgs_prerecorded = [];
 	Main.k.Manager.getMsgPrerecorded = function(title){
 		var messages_prerecorded = [];
 		if(this.msgs_prerecorded != undefined){
 			messages_prerecorded = this.msgs_prerecorded ;
 		}
-    
+
 		for(var idMsg = 0;idMsg < messages_prerecorded.length;idMsg++){
 			if(title == messages_prerecorded[idMsg][0]){
 				return messages_prerecorded[idMsg][1];
 			}
 		}
-    
+
 		throw new this.Exception("MessageNotExist");
 	};
 	Main.k.Manager.addMsgPrerecorded = function(title, message) {
@@ -6412,18 +6118,18 @@ Main.k.tabs.playing = function() {
 		else if(message == ""){
 			throw new this.Exception("MessageEmpty");
 		}
-		
+
 		var messages_prerecorded = [];
 		if(this.msgs_prerecorded != undefined){
 			messages_prerecorded = this.msgs_prerecorded ;
 		}
-		
+
 		for(var idMsg = 0;idMsg < messages_prerecorded.length;idMsg++){
 			if(title == messages_prerecorded[idMsg][0]){
 				throw new this.Exception("MessageAlreadyExist");
 			}
 		}
-		
+
 		messages_prerecorded.push([title,message]);
 		this.msgs_prerecorded = messages_prerecorded;
 		this.saveMsgsPrerecorded();
@@ -6442,7 +6148,7 @@ Main.k.tabs.playing = function() {
 				isFound = true;
 			}
 		}
-		
+
 		if(isFound){
 			this.msgs_prerecorded = messages_prerecorded;
 			this.saveMsgsPrerecorded();
@@ -6475,7 +6181,7 @@ Main.k.tabs.playing = function() {
 		localStorage.setItem("ctrlw_msgs_prerecorded",JSON.stringify(Main.k.Manager.msgs_prerecorded));
 		callbacks_storage_sync.fire();
 	};
-	
+
 	Main.k.Manager.Exception = function(name){
 		this.name = name;
 	};
@@ -6700,11 +6406,11 @@ Main.k.tabs.playing = function() {
 		// ----------------------------------- //
 	};
 	Main.k.MushAfterInit = function() {
-
+		console.info('Main.k.MushAfterInit',$().jquery);
 
 		// Fix dimensions
 		Main.k.Resize();
-		$(Main.k.window).resize(Main.k.Resize);
+		$(window).resize(Main.k.Resize);
 		$("#chatBlock").on("resize", Main.k.Resize);
 	};
 	Main.k.onCycleChange = function(){
@@ -6716,15 +6422,31 @@ Main.k.tabs.playing = function() {
 	};
 	Main.k.MushUpdate = function() {
 		console.log('mushupdate');
+
+		// Events
+		// ----------------------------------- //
+		var $chatbox = $('#wall').find('.chatbox');
+		$chatbox.off('focus');
+		$chatbox.on('focus',function(){
+			Main.k.extend.onChatFocus($(this),$(this).attr('id').replace(/[^0-9]+/,""));
+		});
+		var $wall_chatbox = $('.cdReplyBlock .chatbox');
+		$wall_chatbox.off('focus');
+		$wall_chatbox.on('focus',Main.k.extend.onWallFocus);
+
+		var $chatBlock = $('#chatBlock');
+		$chatBlock.off('scroll')
+		$chatBlock.on('scroll',Main.k.extend.onChatScroll);
+
 		/** @type {{surname:string,statuses:List, titles:List, dev_surname:string, spores:string}} **/
 		var hero;
 		var bubble, t, i, j;
 		var $usLeftbar = $(".usLeftbar");
 		Main.k.hasTalkie = $("#walltab").length > 0;
-		
+
 		// Never hide unread msg
 		$("table.treereply tr.not_read.cdRepl").css("display", "table-row");
-		
+
 		// Day and cycle save
 		var cycle_time = $('.cycletime');
 		if(cycle_time.length > 0){
@@ -6733,10 +6455,10 @@ Main.k.tabs.playing = function() {
 			if(result != null){
 				Main.k.Game.updateDayAndCycle(result[1],result[2]);
 			}
-			
-			
+
+
 		}
-		
+
 		// Script updates
 		// ----------------------------------- //
 		Main.k.UpdateCheck();
@@ -7140,6 +6862,7 @@ Main.k.tabs.playing = function() {
 		var $room = $("#room");
 		if ($room.find("[data-id='TREE_POT']").size()) hasPlants = true;
 		$room.find("li").not(".cdEmptySlot").not("[data-id='TREE_POT']").each(function() {
+			var $this = $(this);
 			var li = $("<li>")
 				.addClass("item fakeitem")
 				.attr("serial_fake", $(this).attr("serial"))
@@ -7147,7 +6870,12 @@ Main.k.tabs.playing = function() {
 				.attr("data-id", "TREE_POT")
 				.css("list-style-type", "none")
 				.html($(this).html())
-				.on("click", function() { Main.k.fakeSelectItem(this); })
+				.on("click", function() {
+					if(!$('#cdInventory').hasClass('placard_on')){
+						Main.closet.show();
+					}
+					mush_query('[serial="'+$this.attr('serial')+'"]').trigger('click') ;
+				})
 				.appendTo(".kobject_list")
 				.find("td")
 				.attr("_title", $(this).attr("data-name").split("\\'").join("'"))
@@ -7252,9 +6980,83 @@ Main.k.tabs.playing = function() {
 					});
 					return false;
 				});
-
+			/*console.warn('item research',$research_module.find(" ul.inventory li.item"));
+			console.log($('.heroSerialActions div').length)
+			$research_module.find(" ul.inventory").html($('#room').html());
+			var $roomActions = $('.roomItemActions').children().clone();
+			console.log($('.roomItemActions').children().length,$('.roomItemActions').children());
+			//$roomActions.attr('webdata',$roomActions.attr('serial'));
+			$('.heroSerialActions').append($roomActions);
+			console.log($('.heroSerialActions div').length);*/
+			mush_query('#char_col #myInventory > li').removeAttr('onclick');
+			$('#char_col #myInventory > li').on('click',function(){
+				Main.k.CreateNeronAlert(Main.k.text.gettext("Veuillez utiliser l'inventaire du labo s'il vous plaît"));
+			});
+			$research_module.find(" ul.inventory li.item").off('click');
 			$research_module.find(" ul.inventory li.item").on("click", function(){
-				Main.selectItem($(this));
+				console.log('select',$(this));
+				serial = $(this).attr('serial');
+				var jMe = $("[serial='" + serial + "']");
+				console.log('avant cookie');
+				js.Cookie.set(CrossConsts.COOK_SEL,StringTools.urlEncode(serial),3600);
+				console.log('apres cookie');
+				var parentId = "";
+				var parent;
+				realJMe = $(this);
+//				jMe.each(function() {
+//					if ($(this).parent().attr("id") != undefined && !$(this).parents('#char_col')) {
+//						realJMe = $(this);
+//						parent = $(this).parent();
+//						parentId = parent.attr("id");
+//					}
+//				});
+//				if (parentId == "myInventory") {
+					if (realJMe.hasClass("fakeselected")) {
+// Clear selection
+						realJMe.removeClass("fakeselected");
+						$("#cdActionList div").not(".move").remove();
+						//Main.cancelSelection(mush_query(realJMe[0]));
+						$("#myInventory .selected").parent().removeClass("on");
+						$("#myInventory .selected").remove();
+						Main.sel.currentInvSelection = null;
+						var tgt = $(".cdActionList");
+						var src = $(".cdActionRepository .heroRoomActions").children().clone();
+						tgt.html(src);
+						$(".cdActionList .move").hide();
+						return;
+					}
+					realJMe.addClass("on");
+					console.warn('realJMe',realJMe);
+					var allItems = $("#myInventory .item").not(".cdEmptySlot").add("[serverselected=true]");
+					$(".cdCharColSel").remove();
+					$("#myInventory .selected").parent().removeClass("on");
+					$("#myInventory .selected").remove();
+					$("#myInventory .fakeselected").removeClass('fakeselected');
+					realJMe.addClass("fakeselected");
+					var $div = $('<div>').prependTo(realJMe).addClass('selected');
+					console.log('selected_parent',$div.parent());
+					var realJMe = $("[data-tip='" + realJMe.attr("data-tip") + "']").not("[serial='" + serial + "']");
+					console.warn('realJMe',realJMe);
+					var serial = realJMe.attr("serial");
+					Main.sel.currentInvSelection = null;
+					console.warn(1,$('#myInventory .selected'));
+					//Main.cancelSelection(mush_query(realJMe[0]));
+					console.warn(2,$('#myInventory .selected'));
+					Main.acListMaintainer.heroWorking = true;
+					Main.sel.currentInvSelection = serial;
+//					Main.acListMaintainer.refreshHeroInv();
+					Main.acListMaintainer.heroWorking = true;
+					//this.currentInvSelection = serial;
+					Main.acListMaintainer.refreshHeroInv();
+					console.warn($('#myInventory .selected'));
+					var actions = $("div[webdata='" + serial + "']");
+					console.log('actions',actions);
+					$("#cdActionList").find("div").hide();
+					actions.each(function () {
+						$(this).clone().appendTo("#cdActionList");
+					});
+					$("<div class='action stSel'> " + realJMe.attr("data-name").split("\\'").join("'") + " :</div>").prependTo("#cdActionList");
+//				}
 			});
 
 		// Projects
@@ -7416,14 +7218,19 @@ Main.k.tabs.playing = function() {
 			// List plants
 			var plantlist = $("<div>").addClass("kplantlist plants inventory").css("max-width", mwidth + "px").appendTo(plantsDIV);
 			$room.find("[data-id='TREE_POT']").each(function() {
+				var $this = $(this);
 				$("<li>")
 					.addClass("item fakeitem")
-					.attr("serial", $(this).attr("serial"))
+					.attr("serial_fake", $(this).attr("serial"))
 					.attr("data-name", $(this).attr("data-name"))
 					.attr("data-id", "TREE_POT")
 					.css("list-style-type", "none")
 					.html($(this).html())
-					.on("click", function() { Main.k.fakeSelectItem(this); })
+					.on("click", function() {
+						if(!$('#cdInventory').hasClass('placard_on')){
+							Main.closet.show();
+						}
+						mush_query('[serial="'+$this.attr('serial')+'"]').trigger('click') ; })
 					.appendTo(plantlist)
 					.find("td")
 					.attr("_title", $(this).attr("data-name").split("\\'").join("'"))
@@ -7913,7 +7720,6 @@ $.jGrowl.defaults.theme = 'ctrl-w';
 $.jGrowl.defaults.themeState = '';
 
 eval(GM_getResourceText('mush'));
-
 
 Main.k.init();
 
