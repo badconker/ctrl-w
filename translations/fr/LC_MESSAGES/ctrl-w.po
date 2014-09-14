@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ctrl+w\n"
 "Report-Msgid-Bugs-To: http://twd.io/e/0fdb0w\n"
-"POT-Creation-Date: 2014-09-04 20:08+0200\n"
+"POT-Creation-Date: 2014-09-14 20:33+0200\n"
 "PO-Revision-Date: 2014-03-02 13:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -741,7 +741,7 @@ msgid ""
 msgstr ""
 
 #: ..\CTRLW.user.js:4213
-msgid "Synchronisation effctuée"
+msgid "Synchronisation effectuée"
 msgstr ""
 
 #: ..\CTRLW.user.js:4278

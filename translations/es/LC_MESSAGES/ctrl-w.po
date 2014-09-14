@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CTRL+W Spanish\n"
 "Report-Msgid-Bugs-To: http://twd.io/e/0fdb0w\n"
-"POT-Creation-Date: 2014-09-04 20:08+0200\n"
-"PO-Revision-Date: 2014-09-14 20:23+0100\n"
+"POT-Creation-Date: 2014-09-14 20:33+0200\n"
+"PO-Revision-Date: 2014-09-14 20:33+0100\n"
 "Last-Translator: \n"
 "Language-Team: Kohaku <HikaruKuroda@gmail.com>\n"
 "Language: es\n"
@@ -819,7 +819,8 @@ msgstr ""
 "con el fin de poder recuperar sus datos."
 
 #: ..\CTRLW.user.js:4213
-msgid "Synchronisation effctuée"
+#, fuzzy
+msgid "Synchronisation effectuée"
 msgstr "Sincronización completada"
 
 #: ..\CTRLW.user.js:4278
