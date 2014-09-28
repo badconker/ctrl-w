@@ -6200,6 +6200,7 @@ Main.k.tabs.playing = function() {
 		}
 		if(typeof(cook_session) == 'undefined' || sid.hashCode() != cook_session){
 			Main.k.Sync.pull();
+			localStorage.removeItem('ctrlw_newgame');
 		}
 		js.Cookie.set("ctrlwsession",sid.hashCode(),420000000);
 
