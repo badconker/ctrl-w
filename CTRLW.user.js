@@ -10,7 +10,7 @@
 // @grant       GM_addStyle
 // @grant       GM_getResourceText
 // @grant		unsafeWindow
-// @require     http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js
+// @require     lib/jquery-1.11.1.min.js
 // @require     lib/Gettext.js
 // @resource    css:jgrowl lib/jquery.jgrowl.css
 // @resource    jgrowl lib/jquery.jgrowl.js
