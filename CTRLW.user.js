@@ -6989,6 +6989,10 @@ Main.k.tabs.playing = function() {
 			//$roomActions.attr('webdata',$roomActions.attr('serial'));
 			$('.heroSerialActions').append($roomActions);
 			console.log($('.heroSerialActions div').length);*/
+			var tgt = $(".cdActionList");
+			var src = $(".cdActionRepository .heroRoomActions").children().clone();
+			tgt.html(src);
+			$(".cdActionList .move").hide();
 			mush_query('#char_col #myInventory > li').removeAttr('onclick');
 			$('#char_col #myInventory > li').on('click',function(){
 				Main.k.CreateNeronAlert(Main.k.text.gettext("Veuillez utiliser l'inventaire du labo s'il vous plaît"));
@@ -7020,10 +7024,6 @@ Main.k.tabs.playing = function() {
 						$("#myInventory .selected").parent().removeClass("on");
 						$("#myInventory .selected").remove();
 						Main.sel.currentInvSelection = null;
-						var tgt = $(".cdActionList");
-						var src = $(".cdActionRepository .heroRoomActions").children().clone();
-						tgt.html(src);
-						$(".cdActionList .move").hide();
 						return;
 					}
 					realJMe.addClass("on");
