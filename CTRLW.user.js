@@ -41,7 +41,7 @@ var Tag = unsafeWindow.Tag;
 var Tools = unsafeWindow.Tools;
 var Utils = unsafeWindow.Utils;*/
 var mt = unsafeWindow.mt;
-var mush_query = unsafeWindow.$;
+var mush_jquery = unsafeWindow.$;
 console = unsafeWindow.console;
 
 if (typeof(exportFunction) == 'undefined') {
@@ -682,7 +682,7 @@ Main.k.GetHeroNameFromTopic = function(topic) {
 Main.k.SyncAstropad = function(tgt){
 	var $astro_maj_inventaire = $('#astro_maj_inventaire');
 	if($astro_maj_inventaire.length > 0){
-		$astro_maj_inventaire.trigger('click');
+		$astro_maj_inventaire[0].click();
 		Main.k.quickNotice(Main.k.text.gettext("Astropad synchronisé."));
 		Main.showTip(tgt,
 			"<div class='tiptop' ><div class='tipbottom'><div class='tipbg'><div class='tipcontent'>" +
@@ -6875,7 +6875,7 @@ Main.k.tabs.playing = function() {
 					if(!$('#cdInventory').hasClass('placard_on')){
 						Main.closet.show();
 					}
-					mush_query('[serial="'+$this.attr('serial')+'"]').trigger('click') ;
+					mush_jquery('[serial="'+$this.attr('serial')+'"]').trigger('click') ;
 				})
 				.appendTo(".kobject_list")
 				.find("td")
@@ -6993,7 +6993,7 @@ Main.k.tabs.playing = function() {
 			var src = $(".cdActionRepository .heroRoomActions").children().clone();
 			tgt.html(src);
 			$(".cdActionList .move").hide();
-			mush_query('#char_col #myInventory > li').removeAttr('onclick');
+			mush_jquery('#char_col #myInventory > li').removeAttr('onclick');
 			$('#char_col #myInventory > li').on('click',function(){
 				Main.k.CreateNeronAlert(Main.k.text.gettext("Veuillez utiliser l'inventaire du labo s'il vous plaît"));
 			});
@@ -7020,7 +7020,7 @@ Main.k.tabs.playing = function() {
 // Clear selection
 						realJMe.removeClass("fakeselected");
 						$("#cdActionList div").not(".move").remove();
-						//Main.cancelSelection(mush_query(realJMe[0]));
+						//Main.cancelSelection(mush_jquery(realJMe[0]));
 						$("#myInventory .selected").parent().removeClass("on");
 						$("#myInventory .selected").remove();
 						Main.sel.currentInvSelection = null;
@@ -7041,7 +7041,7 @@ Main.k.tabs.playing = function() {
 					var serial = realJMe.attr("serial");
 					Main.sel.currentInvSelection = null;
 					console.warn(1,$('#myInventory .selected'));
-					//Main.cancelSelection(mush_query(realJMe[0]));
+					//Main.cancelSelection(mush_jquery(realJMe[0]));
 					console.warn(2,$('#myInventory .selected'));
 					Main.acListMaintainer.heroWorking = true;
 					Main.sel.currentInvSelection = serial;
@@ -7231,7 +7231,7 @@ Main.k.tabs.playing = function() {
 						if(!$('#cdInventory').hasClass('placard_on')){
 							Main.closet.show();
 						}
-						mush_query('[serial="'+$this.attr('serial')+'"]').trigger('click') ; })
+						mush_jquery('[serial="'+$this.attr('serial')+'"]').trigger('click') ; })
 					.appendTo(plantlist)
 					.find("td")
 					.attr("_title", $(this).attr("data-name").split("\\'").join("'"))
