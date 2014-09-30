@@ -2687,8 +2687,8 @@ Main.k.tabs.playing = function() {
 	 * @param lastVersion
 	 */
 	Main.k.UpdateCheckScriptVersion = function(json,lastVersion){
-		Main.k.UpdateData.currversion = json.numero;
 		json = JSON.parse(json.response);
+		Main.k.UpdateData.currversion = json.numero;
 		if(typeof(json['changelog_long_'+Main.k.lang]) != 'undefined'){
 			Main.k.UpdateData.changelog = json['changelog_long_'+Main.k.lang];
 		}else{
