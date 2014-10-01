@@ -6728,9 +6728,11 @@ Main.k.tabs.playing = function() {
 		};
 		var inactive_status;
 		for (i=0; i<Main.k.HEROES.length; i++) {
-			(function() {
 				inactive_status = null;
 				var hero = Main.k.HEROES[i];
+				if(hero == Main.k.ownHero){
+					continue;
+				}
 				var h = Main.k.h[hero];
 				if (j % 5 == 0) $("<br/>").appendTo(missingDiv);
 				j++;
@@ -6785,7 +6787,6 @@ Main.k.tabs.playing = function() {
 					a_divs_heroes['alive'].push($div_hero);
 
 				}
-			})();
 		}
 		$.each(a_divs_heroes,function(k,a){
 			$.each(a, function(key,$div){
