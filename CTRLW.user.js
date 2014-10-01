@@ -18,7 +18,7 @@
 // @resource    jgrowl https://raw.github.com/badconker/ctrl-w/release/lib/jquery.jgrowl.js
 // @resource    translation:en https://raw.github.com/badconker/ctrl-w/release/translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es https://raw.github.com/badconker/ctrl-w/release/translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.35.1
+// @version     0.35.2
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -42,7 +42,6 @@ var Tools = unsafeWindow.Tools;
 var Utils = unsafeWindow.Utils;*/
 var mt = unsafeWindow.mt;
 var mush_jquery = unsafeWindow.$;
-console = unsafeWindow.console;
 
 if (typeof(exportFunction) == 'undefined') {
 	var exportFunction = function(foo, scope, defAs){
@@ -71,6 +70,13 @@ Main.k.domain = document.domain;
 Main.k.mushurl = 'http://' + document.domain;
 Main.k.debug = false;
 Main.k.errorList = [];
+if(Main.k.debug){
+	var console = unsafeWindow.console;
+}else{
+	var console = {}
+	console.log = console.error = console.info = console.debug = console.warn = console.trace = console.dir = console.dirxml = console.group = console.groupEnd = console.time = console.timeEnd = console.assert = console.profile = function() {};
+}
+
 
 String.prototype.htmlEncode = function() {
 	return $('<div/>').text(this).html();
@@ -883,7 +889,7 @@ Main.k.Options.open = function() {
 				margin: "10px 20px",
 				clear: "both"
 			})
-			.html('<div style="margin-left: 30px;">' + html + '</div>')
+			.html('<label style="margin-left: 30px;display:block" for="ctrlw_'+opt[0]+'">' + html + '</label>')
 			.appendTo(td);
 
 			var chk = $("<input>").css({
@@ -891,6 +897,7 @@ Main.k.Options.open = function() {
 			})
 			.attr("type", "checkbox")
 			.attr("optname", opt[0])
+			.attr("id", 'ctrlw_'+opt[0])
 			.attr("opti", i)
 			.on("change", Main.k.Options.update)
 			.prependTo(p);
@@ -909,7 +916,7 @@ Main.k.Options.open = function() {
 Main.k.Options.update = function(e) {
 	var tgt = $(e.target);
 	var key = $(tgt).attr("optname");
-	var val = $(tgt).attr("checked") ? "y" : "n";
+	var val = $(tgt).is(":checked") ? "y" : "n";
 	var i = $(tgt).attr("opti");
 
 	Main.k.Options.updateOpt(key,val);
@@ -917,6 +924,7 @@ Main.k.Options.update = function(e) {
 	if (Main.k.Options.options[i][3]) Main.k.Options.options[i][3]();
 };
 Main.k.Options.updateOpt = function(key, val) {
+	console.log(key,val);
 	switch(key) {
 		case "custombubbles":
 		case "cbubbles":
@@ -936,10 +944,6 @@ Main.k.Options.updateOpt = function(key, val) {
 		case "splitpjt":
 			Main.k.Options.splitpjt = (val == "y");
 			Main.k.Options.options[3][1] = (val == "y");
-			break;
-		case "mushNoConf":
-			Main.k.Options.mushNoConf = (val == "y");
-			Main.k.Options.options[4][1] = (val == "y");
 			break;
 		//case "altpa":
 		//	Main.k.Options.altpa = (val == "y");
@@ -964,7 +968,6 @@ Main.k.Options.init = function() {
 		["cbubblesNB",	Main.k.Options.cbubblesNB,	false,			Main.k.customBubbles,	Main.k.text.gettext("Simplifier la mise en forme personnalisée des messages (suppression de l'image de fond).")],
 		["dlogo",		Main.k.Options.dlogo,		true,			null,					Main.k.text.gettext("Afficher le logo Mush au dessus des onglets.")],
 		["splitpjt",	Main.k.Options.splitpjt,	false,			Main.k.updateBottom,	Main.k.text.gettext("Séparer les projets / recherches / pilgred sous la zone de jeu.")],
-		["mushNoConf",	Main.k.Options.mushNoConf,	false,			null,					Main.k.text.gettext("Désactiver les confirmations d'actions bénéfiques pour l'équipages en tant que Mush.")]
 		//["altpa",		Main.k.Options.altpa,		true,			null,					"Utiliser des images alternatives pour les pa / pm."]
 	];
 
@@ -6725,9 +6728,11 @@ Main.k.tabs.playing = function() {
 		};
 		var inactive_status;
 		for (i=0; i<Main.k.HEROES.length; i++) {
-			(function() {
 				inactive_status = null;
 				var hero = Main.k.HEROES[i];
+				if(hero == Main.k.ownHero){
+					continue;
+				}
 				var h = Main.k.h[hero];
 				if (j % 5 == 0) $("<br/>").appendTo(missingDiv);
 				j++;
@@ -6782,7 +6787,6 @@ Main.k.tabs.playing = function() {
 					a_divs_heroes['alive'].push($div_hero);
 
 				}
-			})();
 		}
 		$.each(a_divs_heroes,function(k,a){
 			$.each(a, function(key,$div){
