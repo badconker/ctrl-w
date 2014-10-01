@@ -889,7 +889,7 @@ Main.k.Options.open = function() {
 				margin: "10px 20px",
 				clear: "both"
 			})
-			.html('<div style="margin-left: 30px;">' + html + '</div>')
+			.html('<label style="margin-left: 30px;display:block" for="ctrlw_'+opt[0]+'">' + html + '</label>')
 			.appendTo(td);
 
 			var chk = $("<input>").css({
@@ -897,6 +897,7 @@ Main.k.Options.open = function() {
 			})
 			.attr("type", "checkbox")
 			.attr("optname", opt[0])
+			.attr("id", 'ctrlw_'+opt[0])
 			.attr("opti", i)
 			.on("change", Main.k.Options.update)
 			.prependTo(p);
@@ -915,7 +916,7 @@ Main.k.Options.open = function() {
 Main.k.Options.update = function(e) {
 	var tgt = $(e.target);
 	var key = $(tgt).attr("optname");
-	var val = $(tgt).attr("checked") ? "y" : "n";
+	var val = $(tgt).is(":checked") ? "y" : "n";
 	var i = $(tgt).attr("opti");
 
 	Main.k.Options.updateOpt(key,val);
@@ -923,6 +924,7 @@ Main.k.Options.update = function(e) {
 	if (Main.k.Options.options[i][3]) Main.k.Options.options[i][3]();
 };
 Main.k.Options.updateOpt = function(key, val) {
+	console.log(key,val);
 	switch(key) {
 		case "custombubbles":
 		case "cbubbles":
@@ -942,10 +944,6 @@ Main.k.Options.updateOpt = function(key, val) {
 		case "splitpjt":
 			Main.k.Options.splitpjt = (val == "y");
 			Main.k.Options.options[3][1] = (val == "y");
-			break;
-		case "mushNoConf":
-			Main.k.Options.mushNoConf = (val == "y");
-			Main.k.Options.options[4][1] = (val == "y");
 			break;
 		//case "altpa":
 		//	Main.k.Options.altpa = (val == "y");
@@ -970,7 +968,6 @@ Main.k.Options.init = function() {
 		["cbubblesNB",	Main.k.Options.cbubblesNB,	false,			Main.k.customBubbles,	Main.k.text.gettext("Simplifier la mise en forme personnalisée des messages (suppression de l'image de fond).")],
 		["dlogo",		Main.k.Options.dlogo,		true,			null,					Main.k.text.gettext("Afficher le logo Mush au dessus des onglets.")],
 		["splitpjt",	Main.k.Options.splitpjt,	false,			Main.k.updateBottom,	Main.k.text.gettext("Séparer les projets / recherches / pilgred sous la zone de jeu.")],
-		["mushNoConf",	Main.k.Options.mushNoConf,	false,			null,					Main.k.text.gettext("Désactiver les confirmations d'actions bénéfiques pour l'équipages en tant que Mush.")]
 		//["altpa",		Main.k.Options.altpa,		true,			null,					"Utiliser des images alternatives pour les pa / pm."]
 	];
 
