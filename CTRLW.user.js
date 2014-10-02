@@ -6747,8 +6747,9 @@ Main.k.tabs.playing = function() {
 							.attr("src", "/img/design/pixel.gif")
 							.css("cursor", "pointer")
 							.addHeroDescToolTip(hero)
+							.data('dev_surname',hero)
 							.on("click", function () {
-								Main.k.Profiles.display(hero);
+								Main.k.Profiles.display($(this).data('dev_surname'));
 							})
 					);
 
