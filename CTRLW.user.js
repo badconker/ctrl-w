@@ -6293,20 +6293,6 @@ Main.k.tabs.playing = function() {
 			}, 10);
 
 		});
-		if (localStorage.getItem('ctrlw_newgame') != null){
-			Main.k.MakeButton(Main.k.text.gettext("Nouvelle partie ?"), null, null, Main.k.text.gettext("Nouvelle partie"),
-				Main.k.text.gettext("Vous venez de commencer une nouvelle partie ? Utilisez ce bouton pour supprimer les informations de votre ancienne partie"))
-				.attr('id', 'button_new_game')
-				.appendTo(leftbar).find("a").on("mousedown", function () {
-					if (confirm(Main.k.text.gettext("Êtes vous sûr de vouloir effacer les informations de la partie précédente ?"))) {
-						localStorage.removeItem('ctrlw_newgame');
-						Main.k.Profiles.clear();
-						Main.k.MushUpdate();
-						$('#button_new_game').remove();
-					}
-
-				});
-		}
 
 		// Message Manager
 		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/archive.png' style='vertical-align: -20%' /> "+ Main.k.text.gettext("Msg Manager"), null, null, Main.k.text.gettext("Message Manager"),
@@ -6339,6 +6325,19 @@ Main.k.tabs.playing = function() {
 			Main.doChatPacks();
 			Main.topChat();
 			Main.onChanDone(ChatType.Local[1],true)
+		});
+
+		Main.k.MakeButton(Main.k.text.gettext("Nouvelle partie ?"), null, null, Main.k.text.gettext("Nouvelle partie"),
+		Main.k.text.gettext("Vous venez de commencer une nouvelle partie ? Utilisez ce bouton pour supprimer les informations de votre ancienne partie"))
+		.attr('id', 'button_new_game')
+		.appendTo(leftbar).find("a").on("mousedown", function () {
+			if (confirm(Main.k.text.gettext("Êtes vous sûr de vouloir effacer les informations de la partie précédente ?"))) {
+				localStorage.removeItem('ctrlw_newgame');
+				Main.k.Profiles.clear();
+				Main.k.MushUpdate();
+				//$('#button_new_game').remove();
+			}
+
 		});
 		// ----------------------------------- //
 
