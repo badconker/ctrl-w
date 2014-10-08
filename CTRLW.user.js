@@ -18,7 +18,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.35.3
+// @version     0.35.4
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -3861,17 +3861,22 @@ Main.k.tabs.playing = function() {
 		$('.status_sync_load').show();
 		GM_xmlhttpRequest({
 			url :Main.k.servurl + "/sync/createkey",
-			headers: {
-				"Content-Type": "application/x-www-form-urlencoded"
-			},
-			success: function(json) {
-				localStorage.setItem('ctrlw_sync_key',json.key);
-				$('#ctrlw-sync-key').val(json.key);
+			method: "GET",
+			onload: function(json) {
 				$status_sync.hide();
 				$('.status_sync_ok').show();
+				try {
+					json = JSON.parse(json.response);
+				} catch (e) {
+					Main.k.quickNoticeError('Une erreur serveur s\'est produite');
+					console.error('json key',json);
+					return false;
+				}
+				localStorage.setItem('ctrlw_sync_key',json.key);
+				$('#ctrlw-sync-key').val(json.key);
 				Main.k.Sync.push();
 			},
-			error: function(xhr,statut,http){
+			onerror: function(xhr,statut,http){
 				var message = JSON.parse(xhr.responseText).message;
 				$status_sync.hide();
 				$('.status_sync_ko').show();
