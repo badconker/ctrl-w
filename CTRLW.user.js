@@ -3681,7 +3681,7 @@ Main.k.tabs.playing = function() {
 			Main.k.text.gettext("Contributeurs : ") + "<a href='http://twinoid.com/user/362197'>FloKy</a>" +
 				", <a href='http://twinoid.com/user/5140898'>_Fraise__</a>"+
 				", <a href='http://twinoid.com/user/8011565'>NightExcessive</a><br/>"+
-			Main.k.text.gettext("Traducteurs : ") + "<a href='http://twinoid.com/user/7845671'>Avistew (en)</a>, <a href='http://twinoid.com/user/6031682'>Kohaku (es)</a>, <a href='http://twinoid.com/user/531084'>R3my (es)</a>")).appendTo(td);
+			Main.k.text.gettext("Traducteurs : ") + "<a href='http://twinoid.com/user/7845671'>Avistew (en)</a>, <a href='http://twinoid.com/user/6031682'>Kohaku (es)</a>, <a href='http://twinoid.com/user/531084'>R3my (es)</a>, <br/><a href='http://twinoid.com/user/21696'>Javiernh (es)</a>")).appendTo(td);
 
 			// Coming soon
 			/*$("<h2>").css({
