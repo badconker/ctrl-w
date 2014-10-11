@@ -311,7 +311,7 @@ Main.k.initData = function() {
 			$this.name = $this.dev_surname_long.replace("_", " ").capitalize();
 		}
 	});
-	console.log('paola',(Main.k.h['paola']));
+
 	Main.k.cssToHeroes = [];
 	Main.k.cssToHeroes["-1185px"] = "janice";
 	Main.k.cssToHeroes["-1282px"] = "chao";
@@ -2363,7 +2363,25 @@ Main.k.tabs.playing = function() {
 		}
 		console.log('onchatfocus end');
 	};
-
+	Main.k.extend.onChatInput = function(event) {
+		var jq = $(this);
+		var tgt = new mush_jquery(event.target);
+		tgt.siblings("input").show();
+		if(event.keyCode == 13) {
+			if(!event.ctrlKey) {
+				event.preventDefault();
+				var pr = tgt.parent();
+				pr.submit();
+				Tools.send2Store("mush_chatContent_" + jq.attr("id"),"");
+				//jq.val('');
+				tgt.data("default",true);
+			} else {
+				// Insert line break at caret, not at the end...
+				$(tgt).insertAtCaret("\n");
+				Tools.send2Store("mush_chatContent_" + jq.attr("id"),tgt.val());
+			}
+		} else Tools.send2Store("mush_chatContent_" + jq.attr("id"),tgt.val());
+	};
 	//addFctToPage(Main.onChatFocus,'Main.onChatFocus');
 
 	//Main.k.extend.onWallFocus =  Main.onWallFocus;
@@ -6446,8 +6464,16 @@ Main.k.tabs.playing = function() {
 		$wall_chatbox.off('focus');
 		$wall_chatbox.on('focus',Main.k.extend.onWallFocus);
 
+		var $chatbox = $('#privateform .chatbox, #wall .chatbox');
+		$chatbox.off('keydown input');
+		$chatbox.removeAttr('onkeydown');
+		$chatbox.on('keydown', Main.k.extend.onChatInput);
+		$chatbox.on('input', function(){
+			Tools.send2Store("mush_chatContent_" + $(this).attr("id"),$(this).val());
+		});
+
 		var $chatBlock = $('#chatBlock');
-		$chatBlock.off('scroll')
+		$chatBlock.off('scroll');
 		$chatBlock.on('scroll',Main.k.extend.onChatScroll);
 
 		/** @type {{surname:string,statuses:List, titles:List, dev_surname:string, spores:string}} **/
