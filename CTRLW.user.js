@@ -11,13 +11,13 @@
 // @grant       GM_getResourceText
 // @grant       unsafeWindow
 // @require     lib/jquery-1.11.1.min.js
-// @require     lib/Gettext.js
-// @resource    css:jgrowl lib/jquery.jgrowl.css
-// @resource    jgrowl lib/jquery.jgrowl.js
-// @resource    mush lib/Mush.js
-// @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
-// @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
-// @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
+// @require     https://raw.github.com/badconker/ctrl-w/release/lib/Gettext.js
+// @resource    mush https://raw.github.com/badconker/ctrl-w/release/lib/Mush.js
+// @resource    translation:fr https://raw.github.com/badconker/ctrl-w/release/translations/fr/LC_MESSAGES/ctrl-w.po
+// @resource    css:jgrowl https://raw.github.com/badconker/ctrl-w/release/lib/jquery.jgrowl.css
+// @resource    jgrowl https://raw.github.com/badconker/ctrl-w/release/lib/jquery.jgrowl.js
+// @resource    translation:en https://raw.github.com/badconker/ctrl-w/release/translations/en/LC_MESSAGES/ctrl-w.po
+// @resource    translation:es https://raw.github.com/badconker/ctrl-w/release/translations/es/LC_MESSAGES/ctrl-w.po
 // @version     0.35.4
 // ==/UserScript==
 
@@ -68,7 +68,7 @@ Main.k.servurl_badconker = 'http://ctrlw.badconker.com';
 Main.k.window = window;
 Main.k.domain = document.domain;
 Main.k.mushurl = 'http://' + document.domain;
-Main.k.debug = true;
+Main.k.debug = false;
 Main.k.errorList = [];
 if(Main.k.debug){
 	var console = unsafeWindow.console;
@@ -430,15 +430,17 @@ Main.k.displayMainMenu = function() {
 	var account = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/me'>"+Main.k.text.gettext("Mon compte")+"</a></li>").appendTo(menu);
 
 	if(Main.k.text.gettext("ForumCastingsId") != "ForumCastingsId") {
-		$("<li class='kmenuel'><a href='"+Main.k.mushurl+"/group/list'>"+Main.k.text.gettext("Castings")+"</a></li>").appendTo(menu);
+		var casting = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/group/list'>"+Main.k.text.gettext("Castings")+"</a></li>").appendTo(menu);	// for casting submenu
 	}
 	var rankings = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/ranking'>"+Main.k.text.gettext("Classements")+"</a></li>").appendTo(menu);
 	var forum = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/tid/forum'>"+Main.k.text.gettext("Forum")+"</a></li>").appendTo(menu);
 	var help = $("<li class='kmenuel last'><a href='"+Main.k.mushurl+"/help'>"+Main.k.text.gettext("Aide")+"</a></li>").appendTo(menu);
 
 	var play_ss = $("<ul>").appendTo(play);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/vending'><li><img src='/img/icons/skills/rebel.png' />"+Main.k.text.gettext("Distributeur")+"</li></a>")
-	.css("display", "none").attr("id", "vendingmenu").appendTo(play_ss);
+	if (Main.k.ownHero && typeof(Main.k.h[Main.k.ownHero]) != 'undefined') {	// vending machine is not displayed if isn't in ship window
+		$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/vending'><img src='/img/icons/skills/rebel.png' />"+Main.k.text.gettext("Distributeur")+"</a></li>")
+		.css("display", "none").attr("id", "vendingmenu").appendTo(play_ss);
+	}
 
 	var account_ss = $("<ul>").attr("id", "accountmenu").appendTo(account);
 	$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/me'><img src='/img/icons/skills/persistent.png' />"+Main.k.text.gettext("Expérience")+"</a></li>").appendTo(account_ss);
@@ -488,6 +490,7 @@ Main.k.displayMainMenu = function() {
 		var charname = Main.k.ownHero.replace("_", "");
 		$("<li><a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumAdviceId")+"|thread/" + Main.k.h[Main.k.ownHero].tutorial + "'><img src='/img/icons/ui/" + charname + ".png' />" + Main.k.text.strargs(Main.k.text.gettext("Tuto %1"), [Main.k.ownHero.capitalize()]) + "</a></li>").appendTo(help_ss);
 	}
+	$("<li><a href='http://mushpedia.com/' target='_blank'><img src='http://mushpedia.com/favicon.ico' />Mushpedia</a></li>").appendTo(help_ss);
 	/* Translators: Wiki url */
 	$("<li><a class='kssmenuel ext' target='_blank' href='"+Main.k.text.gettext("http://www.twinpedia.com/mush")+
 	/* Translators: Wiki favicon url */
@@ -495,9 +498,9 @@ Main.k.displayMainMenu = function() {
 	$("<li><a class='kssmenuel ext' href='http://pictoid.fr/mush/picto' target='_blank'><img data-async_src='http://pictoid.fr/favicon.png' />Pictoid</a></li>").appendTo(help_ss);
 
 	if (Main.k.fds) {
-		$("<li><a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/77714'><img src='/img/icons/skills/cold_blood.png' />Magistrature</a></li>").appendTo(forum_ss);
+		$("<li><a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumFDSId")+"'><img src='/img/icons/skills/juge.png' />"+Main.k.text.gettext("Magistrature")+"</a></li>").appendTo(forum_ss);	// icon chage, if you want ;)
 
-		$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/fds'><img src='/img/icons/skills/cold_blood.png' />FDS</a></li>").appendTo(play_ss);
+		$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/fds'><img src='/img/icons/skills/juge.png' />FDS</a></li>").appendTo(play_ss);	// icon chage, if you want ;)
 	}
 };
 
@@ -1036,14 +1039,21 @@ Main.k.css.customMenu = function() {
 		border-bottom-right-radius: 8px;\
 	}\
 	.kmenuel ul { display: none; }\
-	.kmenuel ul a { display: inline; height: auto; width: auto; padding: 0; }\
-	.kmenuel:hover ul {\
+	.kmenuel ul a { display: block; width: 150px; padding: 0px 3px 4px 3px;\ }\
+	.kmenuel:hover > ul {\
 		display: block;\
 		position: absolute;\
 		width: 100%;\
-		top: 33px;\
 		left: 0;\
-		text-align: center;\
+		text-align: right;\
+		z-index: 50;\
+		padding: 0;\
+	}\
+	.kmenuel ul li:hover ul {\
+		display: block;\
+		position: absolute;\
+		width: 100%;\
+		text-align: right;\
 		z-index: 50;\
 		padding: 0;\
 	}\
@@ -1054,8 +1064,9 @@ Main.k.css.customMenu = function() {
 		border: 1px solid rgb(2,16,66);\
 		border-top: none! important;\
 		width: 140px;\
-		height: 22px;\
-		padding: 0 15px 0 5px! important;\
+		height: auto;\
+		//height: 24px;\
+		padding: 0px 15px 0 5px! important;\
 		background: #0071e3;\
 		color: #EEE;\
 		text-shadow: 0 0 1px #000;\
@@ -1064,15 +1075,23 @@ Main.k.css.customMenu = function() {
 	}\
 	.kmenuel ul li:hover {\
 		background: #0094ff;\
+		//background: #57FF79;\
 		text-shadow: 0 0 3px #000;\
 		box-shadow: 0 2px 3px 1px rgba(0,0,0,0.3), inset 0px 4px 8px 0px rgba(0,0,0,0.3);\
+	}\
+	.kmenuel ul li {\
+		position: relative;\
+		height: 22px;\
+	}\
+	.kmenuel ul li ul {\
+		right: -160px;\
+		top: 0px;\
 	}\
 	.kmenuel ul li img {\
 		margin-right : 5px;\
 		position: relative;\
 		top: 2px;\
 		height: 16px;\
-	}\
 	.kmenuel .kssmenuel{\
 		display:block;\
 		line-height: 22px;\
@@ -2986,7 +3005,7 @@ Main.k.tabs.playing = function() {
 	 * @return string;
 	 */
 	Main.k.FormatPlanets = function(index) {//TODO: MULTILANG
-		var ret = "**//Planètes : //**";
+		var ret = "**//"+Main.k.text.gettext("Planètes")+" : //**";
 
 		var parse = function(t) {
 			t = t.replace(/<img\s+src=\"\/img\/icons\/ui\/triumph.png\"\s+alt=\"triomphe\"[\/\s]*>/ig, ":mush_triumph:");
@@ -3009,7 +3028,8 @@ Main.k.tabs.playing = function() {
 			var dir, dist;
 			var pllist = $(this).find("ul.pllist li");
 			if (pllist.length > 0) {
-				dir = /(Nord|Est|Ouest|Sud)/.exec(pllist.eq(-2).html())[1];
+				var regex = new RegExp(Main.k.text.gettext('(Nord|Est|Ouest|Sud)'));
+				dir = regex.exec(pllist.eq(-2).html())[1];
 				dist = /([0-9]+)/.exec(pllist.last().html())[1];
 			}
 
@@ -3022,7 +3042,7 @@ Main.k.tabs.playing = function() {
 			});
 
 			// Print planet
-			ret += "\n**" + name + "** (" + nbcases + " cases)\n";
+			ret += "\n**" + name + "** (" + nbcases + Main.k.text.gettext('cases') + ")\n";
 			if (dist && dir) ret += "//" + dir + " - " + dist + " :mush_fuel:****//\n";
 			ret += cases.join(", ");
 		});
@@ -3120,7 +3140,7 @@ Main.k.tabs.playing = function() {
                 });
             });
 
-            if (base != "//Décodage: //"){
+            if (base != "//" + Main.k.text.gettext('Décodage: ') + "//"){
             	comm += base +"\n";
             }
 
@@ -6929,6 +6949,7 @@ Main.k.tabs.playing = function() {
 		var projects = $cdModuleContent.find("ul.dev li.cdProjCard");
 		var projectsdiv;
 		var $research_module = $("#research_module");
+		var pattcore = new RegExp(Main.k.text.gettext("Coeur\sde\sNERON"));
 		// Research
 		if ($research_module.length > 0 && projects.length > 0) {
 			t = $("<h3>").html(Main.k.text.gettext("Laboratoire")).appendTo(project_list);
@@ -7074,7 +7095,7 @@ Main.k.tabs.playing = function() {
 			});
 
 		// Projects
-		} else if (projects.length > 0 && /Coeur\sde\sNERON/.test($cdModuleContent.find("h2").html().trim())) {
+		} else if (projects.length > 0 && pattcore.test($cdModuleContent.find("h2").html().trim())) {
 			t = $("<h3>").html("Projets Neron").appendTo(project_list);
 			$("<span>").addClass("displayless").attr("_target", "#projectspreview")
 			.on("click", Main.k.ToggleDisplay).appendTo(t);
@@ -7123,7 +7144,7 @@ Main.k.tabs.playing = function() {
 			var nav = $("#navModule");
 			var planets = nav.find(".planet").not(".planetoff");
 			if (planets.length > 0) {
-				t = $("<h3>").html("Planètes").appendTo(project_list);
+				t = $("<h3>").html(Main.k.text.gettext("Planètes")).appendTo(project_list);
 				$("<span>").addClass("displayless").attr("_target", "#projectspreview")
 				.on("click", Main.k.ToggleDisplay).appendTo(t);
 
@@ -7292,8 +7313,9 @@ Main.k.tabs.playing = function() {
 						alarm_nb = parseInt(/>([0-9]+)/i.exec(omo)[1]);
 						break;
 					case alarm_hunter:
-						if (/([0-9]+|un|a)\s+appareil/i.test(omo)) {
-							alarm_nb = /([0-9]+|un|a)\s+appareil/i.exec(omo)[1];
+						var patt = new RegExp(Main.k.text.gettext("([0-9]+|un|a)+ appareil"), "i");
+						if (patt.test(omo)) {
+							alarm_nb = patt.exec(omo)[1];
 						} else if (/>([0-9]+|un|a)/i.test(omo)) {
 							alarm_nb = />([0-9]+|un|a)/i.exec(omo)[1];
 						}
