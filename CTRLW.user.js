@@ -18,7 +18,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.35.5
+// @version     0.35.6
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -2344,7 +2344,6 @@ Main.k.tabs.playing = function() {
 			Main.rst |= 1 << i;
 
 			if (!t.parent().find(".formatbtn").get(0)) {
-				t.attr("onblur", "");
 
 				// Add formatting
 				$("<a>").addClass("butmini chatformatbtn").html("<img src='/img/icons/ui/pam.png' /> Formater").attr("href", "#").appendTo(t.parent())
