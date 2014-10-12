@@ -18,7 +18,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.35.6
+// @version     0.35.7
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -2394,7 +2394,7 @@ Main.k.tabs.playing = function() {
 					var jq = new $(".cdWallChannel");
 					jq.scrollTop(scr + 100);
 				};
-				exportFunction(sendChatProc, unsafeWindow, {defineAs: "sendChatProc"});
+				unsafeWindow.sendChatProc = exportFunction(sendChatProc, unsafeWindow, {defineAs: "sendChatProc"});
 				if(Main.isTuto()) {
 					updtArr.unshift("floating_ui_start");
 					updtArr.unshift("cdDialogs");
