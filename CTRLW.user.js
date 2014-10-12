@@ -2394,7 +2394,7 @@ Main.k.tabs.playing = function() {
 					var jq = new $(".cdWallChannel");
 					jq.scrollTop(scr + 100);
 				};
-				exportFunction(sendChatProc, unsafeWindow, {defineAs: "sendChatProc"});
+				unsafeWindow.sendChatProc = exportFunction(sendChatProc, unsafeWindow, {defineAs: "sendChatProc"});
 				if(Main.isTuto()) {
 					updtArr.unshift("floating_ui_start");
 					updtArr.unshift("cdDialogs");
