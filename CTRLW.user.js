@@ -18,7 +18,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.35.4
+// @version     0.35.5
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -311,7 +311,7 @@ Main.k.initData = function() {
 			$this.name = $this.dev_surname_long.replace("_", " ").capitalize();
 		}
 	});
-	console.log('paola',(Main.k.h['paola']));
+
 	Main.k.cssToHeroes = [];
 	Main.k.cssToHeroes["-1185px"] = "janice";
 	Main.k.cssToHeroes["-1282px"] = "chao";
@@ -967,7 +967,7 @@ Main.k.Options.init = function() {
 		["cbubbles",	Main.k.Options.cbubbles,	false,			Main.k.customBubbles,	Main.k.text.gettext("Activer la mise en forme personnalisée des messages (bordure + couleur nom + image de fond).")],
 		["cbubblesNB",	Main.k.Options.cbubblesNB,	false,			Main.k.customBubbles,	Main.k.text.gettext("Simplifier la mise en forme personnalisée des messages (suppression de l'image de fond).")],
 		["dlogo",		Main.k.Options.dlogo,		true,			null,					Main.k.text.gettext("Afficher le logo Mush au dessus des onglets.")],
-		["splitpjt",	Main.k.Options.splitpjt,	false,			Main.k.updateBottom,	Main.k.text.gettext("Séparer les projets / recherches / pilgred sous la zone de jeu.")],
+		["splitpjt",	Main.k.Options.splitpjt,	false,			Main.k.updateBottom,	Main.k.text.gettext("Séparer les projets / recherches / pilgred sous la zone de jeu.")]
 		//["altpa",		Main.k.Options.altpa,		true,			null,					"Utiliser des images alternatives pour les pa / pm."]
 	];
 
@@ -2363,10 +2363,57 @@ Main.k.tabs.playing = function() {
 		}
 		console.log('onchatfocus end');
 	};
-
-	//addFctToPage(Main.onChatFocus,'Main.onChatFocus');
-
-	//Main.k.extend.onWallFocus =  Main.onWallFocus;
+	Main.k.extend.onChatInput = function(event) {
+		var jq = $(this);
+		var tgt = new mush_jquery(event.target);
+		tgt.siblings("input").show();
+		if(event.keyCode == 13) {
+			if(!event.ctrlKey) {
+				event.preventDefault();
+				var pr = tgt.parent();
+				pr.submit();
+				Tools.send2Store("mush_chatContent_" + jq.attr("id"),"");
+				//jq.val('');
+				tgt.data("default",true);
+			} else {
+				// Insert line break at caret, not at the end...
+				$(tgt).insertAtCaret("\n");
+				Tools.send2Store("mush_chatContent_" + jq.attr("id"),tgt.val());
+			}
+		} else Tools.send2Store("mush_chatContent_" + jq.attr("id"),tgt.val());
+	};
+	Main.k.extend.onWallInput = function(event) {
+		var tgt = new mush_jquery(event.target);
+		var val = tgt.val();
+		if(event.keyCode == 13) {
+			if(!event.ctrlKey && val.length > 1) {
+				event.preventDefault();
+				var updtArr = ["cdTabsChat","chatBlock","char_col"];
+				var scr = new js.JQuery(".cdWallChannel").scrollTop();
+				var sendChatProc = function() {
+					Main.resetJs();
+					var jq = new $(".cdWallChannel");
+					jq.scrollTop(scr + 100);
+				};
+				exportFunction(sendChatProc, unsafeWindow, {defineAs: "sendChatProc"});
+				if(Main.isTuto()) {
+					updtArr.unshift("floating_ui_start");
+					updtArr.unshift("cdDialogs");
+					updtArr.push("ode");
+				}
+				var stVal = encodeURIComponent(val);
+				var url = "/wallReply?k=" + Std.string(tgt.closest(".unit").data("k")) + "&msg=" + stVal;
+				Main.updateContent(url,cloneInto(updtArr,unsafeWindow),null,unsafeWindow.sendChatProc);
+				Tools.send2Store("mush_wallReply_" + tgt.attr("id"),"");
+				tgt.val('');
+				tgt.data("default",true);
+			} else {
+				// Insert line break at caret, not at the end...
+				$(tgt).insertAtCaret("\n");
+				Tools.send2Store("mush_wallReply_" + tgt.attr("id"),tgt.val());
+			}
+		} else Tools.send2Store("mush_wallReply_" + tgt.attr("id"),tgt.val());
+	};
 	Main.k.extend.onWallFocus = function() {//TODO: MULTILANG
 		jq = $(this);
 		console.info('Main.onWallFocus');
@@ -3681,7 +3728,7 @@ Main.k.tabs.playing = function() {
 			Main.k.text.gettext("Contributeurs : ") + "<a href='http://twinoid.com/user/362197'>FloKy</a>" +
 				", <a href='http://twinoid.com/user/5140898'>_Fraise__</a>"+
 				", <a href='http://twinoid.com/user/8011565'>NightExcessive</a><br/>"+
-			Main.k.text.gettext("Traducteurs : ") + "<a href='http://twinoid.com/user/7845671'>Avistew (en)</a>, <a href='http://twinoid.com/user/6031682'>Kohaku (es)</a>, <a href='http://twinoid.com/user/531084'>R3my (es)</a>")).appendTo(td);
+			Main.k.text.gettext("Traducteurs : ") + "<a href='http://twinoid.com/user/7845671'>Avistew (en)</a>, <a href='http://twinoid.com/user/6031682'>Kohaku (es)</a>, <a href='http://twinoid.com/user/531084'>R3my (es)</a>, <br/><a href='http://twinoid.com/user/21696'>Javiernh (es)</a>")).appendTo(td);
 
 			// Coming soon
 			/*$("<h2>").css({
@@ -6437,17 +6484,32 @@ Main.k.tabs.playing = function() {
 
 		// Events
 		// ----------------------------------- //
-		var $chatbox = $('#wall').find('.chatbox');
-		$chatbox.off('focus');
-		$chatbox.on('focus',function(){
+		var $wall_chatbox = $('#wall').find('.chatbox');
+		$wall_chatbox.off('focus');
+		$wall_chatbox.on('focus',function(){
 			Main.k.extend.onChatFocus($(this),$(this).attr('id').replace(/[^0-9]+/,""));
 		});
-		var $wall_chatbox = $('.cdReplyBlock .chatbox');
-		$wall_chatbox.off('focus');
-		$wall_chatbox.on('focus',Main.k.extend.onWallFocus);
+
+		var $wall_replybox = $('.cdReplyBlock .chatbox');
+		$wall_replybox.off('focus');
+		$wall_replybox.on('focus',Main.k.extend.onWallFocus);
+		$wall_replybox.off('keydown input');
+		$wall_replybox.removeAttr('onkeydown');
+		$wall_replybox.on('keydown', Main.k.extend.onWallInput);
+		$wall_replybox.on('input', function(){
+			Tools.send2Store("mush_wallReply_" + $(this).attr("id"),$(this).val());
+		});
+
+		var $chatbox = $('#privateform .chatbox, #wall .chatbox');
+		$chatbox.off('keydown input');
+		$chatbox.removeAttr('onkeydown');
+		$chatbox.on('keydown', Main.k.extend.onChatInput);
+		$chatbox.on('input', function(){
+			Tools.send2Store("mush_chatContent_" + $(this).attr("id"),$(this).val());
+		});
 
 		var $chatBlock = $('#chatBlock');
-		$chatBlock.off('scroll')
+		$chatBlock.off('scroll');
 		$chatBlock.on('scroll',Main.k.extend.onChatScroll);
 
 		/** @type {{surname:string,statuses:List, titles:List, dev_surname:string, spores:string}} **/
