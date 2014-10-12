@@ -2382,9 +2382,38 @@ Main.k.tabs.playing = function() {
 			}
 		} else Tools.send2Store("mush_chatContent_" + jq.attr("id"),tgt.val());
 	};
-	//addFctToPage(Main.onChatFocus,'Main.onChatFocus');
-
-	//Main.k.extend.onWallFocus =  Main.onWallFocus;
+	Main.k.extend.onWallInput = function(event) {
+		var tgt = new mush_jquery(event.target);
+		var val = tgt.val();
+		if(event.keyCode == 13) {
+			if(!event.ctrlKey && val.length > 1) {
+				event.preventDefault();
+				var updtArr = ["cdTabsChat","chatBlock","char_col"];
+				var scr = new js.JQuery(".cdWallChannel").scrollTop();
+				var sendChatProc = function() {
+					Main.resetJs();
+					var jq = new $(".cdWallChannel");
+					jq.scrollTop(scr + 100);
+				};
+				exportFunction(sendChatProc, unsafeWindow, {defineAs: "sendChatProc"});
+				if(Main.isTuto()) {
+					updtArr.unshift("floating_ui_start");
+					updtArr.unshift("cdDialogs");
+					updtArr.push("ode");
+				}
+				var stVal = encodeURIComponent(val);
+				var url = "/wallReply?k=" + Std.string(tgt.closest(".unit").data("k")) + "&msg=" + stVal;
+				Main.updateContent(url,cloneInto(updtArr,unsafeWindow),null,unsafeWindow.sendChatProc);
+				Tools.send2Store("mush_wallReply_" + tgt.attr("id"),"");
+				tgt.val('');
+				tgt.data("default",true);
+			} else {
+				// Insert line break at caret, not at the end...
+				$(tgt).insertAtCaret("\n");
+				Tools.send2Store("mush_wallReply_" + tgt.attr("id"),tgt.val());
+			}
+		} else Tools.send2Store("mush_wallReply_" + tgt.attr("id"),tgt.val());
+	};
 	Main.k.extend.onWallFocus = function() {//TODO: MULTILANG
 		jq = $(this);
 		console.info('Main.onWallFocus');
@@ -6455,14 +6484,21 @@ Main.k.tabs.playing = function() {
 
 		// Events
 		// ----------------------------------- //
-		var $chatbox = $('#wall').find('.chatbox');
-		$chatbox.off('focus');
-		$chatbox.on('focus',function(){
+		var $wall_chatbox = $('#wall').find('.chatbox');
+		$wall_chatbox.off('focus');
+		$wall_chatbox.on('focus',function(){
 			Main.k.extend.onChatFocus($(this),$(this).attr('id').replace(/[^0-9]+/,""));
 		});
-		var $wall_chatbox = $('.cdReplyBlock .chatbox');
-		$wall_chatbox.off('focus');
-		$wall_chatbox.on('focus',Main.k.extend.onWallFocus);
+
+		var $wall_replybox = $('.cdReplyBlock .chatbox');
+		$wall_replybox.off('focus');
+		$wall_replybox.on('focus',Main.k.extend.onWallFocus);
+		$wall_replybox.off('keydown input');
+		$wall_replybox.removeAttr('onkeydown');
+		$wall_replybox.on('keydown', Main.k.extend.onWallInput);
+		$wall_replybox.on('input', function(){
+			Tools.send2Store("mush_wallReply_" + $(this).attr("id"),$(this).val());
+		});
 
 		var $chatbox = $('#privateform .chatbox, #wall .chatbox');
 		$chatbox.off('keydown input');
