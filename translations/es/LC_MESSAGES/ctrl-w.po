@@ -648,10 +648,25 @@ msgstr "nada que informar"
 msgid "Recherches"
 msgstr "Investigaciones"
 
+#: ..\CTRLW.user.js:3024 ..\CTRLW.user.js:7162
+#, Javiernh
+msgid "Planètes"
+msgstr "Planetas"
+
 #: ..\CTRLW.user.js:3043
 #, fuzzy
 msgid "Communications:"
 msgstr "Oficial de Comunicaciones"
+
+#: ..\CTRLW.user.js:3047
+#, Javiernh
+msgid "(Nord|Est|Ouest|Sud)"
+msgstr "(Norte|Este|Oeste|Sur)"
+
+#: ..\CTRLW.user.js:3061
+#, Javiernh
+msgid "cases"
+msgstr "zonas"
 
 #: ..\CTRLW.user.js:3106
 msgid "Décodage: "
@@ -1429,14 +1444,19 @@ msgid ""
 "compétences visibles, statuts publiques et titres de ce personnage.</"
 "strong></p>"
 msgstr ""
-"<p> Usted está en el mismo cuarto que esa persona; usted puede examinarla "
-"de más cerca. </p><p><strong>Pulse aquí para registrar las habilidades "
+"<p>Usted está en el mismo cuarto que esa persona; usted puede examinarla "
+"más de cerca. </p><p><strong>Pulse aquí para registrar las habilidades "
 "visibles, los estados públicos y los títulos  de este personaje.</strong></"
 "p>"
 
 #: ..\CTRLW.user.js:6921
 msgid "Laboratoire"
 msgstr "Laboratorio"
+
+#: ..\CTRLW.user.js:6968
+#, Javiernh
+msgid "Coeur\sde\sNERON"
+msgstr "Núcleo\sde\sNERON"
 
 #: ..\CTRLW.user.js:6958
 #, fuzzy
@@ -1517,7 +1537,7 @@ msgstr "Comparte únicamente este planeta en el inventario"
 #, fuzzy
 msgid ""
 "Insère la liste de planètes dans la zone de texte active, de la forme&nbsp;:"
-"</p><p>TODO: en estudio"
+"</p><p>TODO: aperçu"
 msgstr ""
 "Copia la lista de planetas al cuadro de texto activo, con el siguiente "
 "formato&nbsp;:</p><p>TODO: en estudio"
