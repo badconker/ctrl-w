@@ -3226,10 +3226,10 @@ Main.k.tabs.playing = function() {
 		var $room = $("#room");
 		$room.find("li").not(".cdEmptySlot").each(function() {
 			var name = $(this).attr("data-name").capitalize();
-			var desc = $(this).attr("data-desc");
+			var desc = $(this).attr("data-desc").split("\\'").join("'");
 
 			if (desc.indexOf("Effets") != -1 || $(this).data('id') == "CONSUMABLE") {
-				var $desc = $(desc);
+				var $desc = $('<div>'+desc+'</div>');
 				if($desc.has('p')){
 
 					var a_ret_effect = [];
