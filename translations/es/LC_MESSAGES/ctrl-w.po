@@ -1455,8 +1455,8 @@ msgstr "Laboratorio"
 
 #: ..\CTRLW.user.js:6968
 #, Javiernh
-msgid "Coeur\sde\sNERON"
-msgstr "Núcleo\sde\sNERON"
+msgid "Coeur de NERON"
+msgstr "Núcleo de NERON"
 
 #: ..\CTRLW.user.js:6958
 #, fuzzy
