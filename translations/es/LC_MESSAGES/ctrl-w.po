@@ -644,6 +644,11 @@ msgstr "seca"
 msgid "RAS"
 msgstr "nada que informar"
 
+#: ..\CTRLW.user.js:2974
+#, Javiernh
+msgid "Projets"
+msgstr "Proyectos"
+
 #: ..\CTRLW.user.js:2950
 msgid "Recherches"
 msgstr "Investigaciones"
