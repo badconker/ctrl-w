@@ -18,7 +18,7 @@
 // @resource    jgrowl https://raw.github.com/badconker/ctrl-w/release/lib/jquery.jgrowl.js
 // @resource    translation:en https://raw.github.com/badconker/ctrl-w/release/translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es https://raw.github.com/badconker/ctrl-w/release/translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.35.8
+// @version     0.35.9
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -2971,7 +2971,7 @@ Main.k.tabs.playing = function() {
 	 * @return string
 	 */
 	Main.k.FormatProjects = function() {//TODO: MULTILANG
-		var ret = "**//Projets : //**";
+		var ret = "**//" + Main.k.text.gettext("Projets") + " : //**";
 
 		var parse = function(t) {
 			t = t.replace(/<img\s+src=\"\/img\/icons\/ui\/pa_slot1.png\"[\/\s]*>/ig, ":pa:");
@@ -6991,7 +6991,7 @@ Main.k.tabs.playing = function() {
 		var projects = $cdModuleContent.find("ul.dev li.cdProjCard");
 		var projectsdiv;
 		var $research_module = $("#research_module");
-		var pattcore = new RegExp(Main.k.text.gettext("Coeur\sde\sNERON"));
+		var pattcore = new RegExp(Main.k.text.gettext("Coeur de NERON"));
 		// Research
 		if ($research_module.length > 0 && projects.length > 0) {
 			t = $("<h3>").html(Main.k.text.gettext("Laboratoire")).appendTo(project_list);
@@ -7167,7 +7167,7 @@ Main.k.tabs.playing = function() {
 			});
 
 			// Projects actions
-			Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> Partager", null, null, "Partager les projets",
+			Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> "+Main.k.text.gettext("Partager"), null, null, Main.k.text.gettext("Partager les projets"),
 				Main.k.text.gettext("<p>Insère la liste de projets dans la zone de texte active, de la forme&nbsp;:</p><p>" +
 				"<li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li>" +
 				"<li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li>" +
