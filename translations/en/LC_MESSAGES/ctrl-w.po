@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: ctrl+w\n"
 "Report-Msgid-Bugs-To: http://twd.io/e/0fdb0w\n"
 "POT-Creation-Date: 2014-10-14 19:16+0200\n"
-"PO-Revision-Date: 2014-09-28 10:05+0100\n"
+"PO-Revision-Date: 2014-10-27 18:37+0100\n"
 "Last-Translator: \n"
 "Language-Team: English\n"
 "Language: en\n"
@@ -235,7 +235,7 @@ msgstr "My account"
 #. Translators: Forum Castings id */
 #: ..\CTRLW.user.js:432 ..\CTRLW.user.js:472 ..\CTRLW.user.js:474
 msgid "ForumCastingsId"
-msgstr ""
+msgstr "134976"
 
 #. Translators: Forum Castings label */
 #: ..\CTRLW.user.js:433 ..\CTRLW.user.js:476
