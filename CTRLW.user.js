@@ -18,7 +18,7 @@
 // @resource    jgrowl https://raw.github.com/badconker/ctrl-w/release/lib/jquery.jgrowl.js
 // @resource    translation:en https://raw.github.com/badconker/ctrl-w/release/translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es https://raw.github.com/badconker/ctrl-w/release/translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.35.9
+// @version     0.35.10
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -3345,7 +3345,7 @@ Main.k.tabs.playing = function() {
 				position: "absolute",
 				top: "3px",
 				left: "54px",
-				width: "140px",
+				width: "150px",
 				"font-size": "11px"
 			})
 			.html(res)
@@ -6484,6 +6484,11 @@ Main.k.tabs.playing = function() {
 
 		// Events
 		// ----------------------------------- //
+		$('#swf_ISO_MODULE').off('mousedown');
+		$('#swf_ISO_MODULE').on('mousedown',function(){
+			Main.closet.hide();
+		});
+
 		var $wall_chatbox = $('#wall').find('.chatbox');
 		$wall_chatbox.off('focus');
 		$wall_chatbox.on('focus',function(){
@@ -6950,6 +6955,8 @@ Main.k.tabs.playing = function() {
 					if(!$('#cdInventory').hasClass('placard_on')){
 						Main.closet.show();
 					}
+					$(this).siblings().find('.selected').remove();
+					$(this).prepend('<div class="selected"></div>');
 					mush_jquery('[serial="'+$this.attr('serial')+'"]').trigger('click') ;
 				})
 				.appendTo(".kobject_list")
