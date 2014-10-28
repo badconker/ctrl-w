@@ -3345,7 +3345,7 @@ Main.k.tabs.playing = function() {
 				position: "absolute",
 				top: "3px",
 				left: "54px",
-				width: "140px",
+				width: "150px",
 				"font-size": "11px"
 			})
 			.html(res)
