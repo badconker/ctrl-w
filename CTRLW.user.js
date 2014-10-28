@@ -6484,6 +6484,11 @@ Main.k.tabs.playing = function() {
 
 		// Events
 		// ----------------------------------- //
+		$('#swf_ISO_MODULE').off('mousedown');
+		$('#swf_ISO_MODULE').on('mousedown',function(){
+			Main.closet.hide();
+		});
+
 		var $wall_chatbox = $('#wall').find('.chatbox');
 		$wall_chatbox.off('focus');
 		$wall_chatbox.on('focus',function(){
@@ -6950,6 +6955,8 @@ Main.k.tabs.playing = function() {
 					if(!$('#cdInventory').hasClass('placard_on')){
 						Main.closet.show();
 					}
+					$(this).siblings().find('.selected').remove();
+					$(this).prepend('<div class="selected"></div>');
 					mush_jquery('[serial="'+$this.attr('serial')+'"]').trigger('click') ;
 				})
 				.appendTo(".kobject_list")
