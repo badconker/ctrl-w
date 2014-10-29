@@ -18,7 +18,7 @@
 // @resource    jgrowl https://raw.github.com/badconker/ctrl-w/release/lib/jquery.jgrowl.js
 // @resource    translation:en https://raw.github.com/badconker/ctrl-w/release/translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es https://raw.github.com/badconker/ctrl-w/release/translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.35.10
+// @version     0.35.11
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -6486,7 +6486,10 @@ Main.k.tabs.playing = function() {
 		// ----------------------------------- //
 		$('#swf_ISO_MODULE').off('mousedown');
 		$('#swf_ISO_MODULE').on('mousedown',function(){
-			Main.closet.hide();
+			$('.kobject_list .selected').remove();
+			if($('#cdInventory').is('.placard_on')){
+				Main.closet.hide();
+			}
 		});
 
 		var $wall_chatbox = $('#wall').find('.chatbox');
