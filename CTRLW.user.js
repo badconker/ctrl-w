@@ -6486,7 +6486,10 @@ Main.k.tabs.playing = function() {
 		// ----------------------------------- //
 		$('#swf_ISO_MODULE').off('mousedown');
 		$('#swf_ISO_MODULE').on('mousedown',function(){
-			Main.closet.hide();
+			$('.kobject_list .selected').remove();
+			if($('#cdInventory').is('.placard_on')){
+				Main.closet.hide();
+			}
 		});
 
 		var $wall_chatbox = $('#wall').find('.chatbox');
