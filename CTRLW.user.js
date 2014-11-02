@@ -330,7 +330,6 @@ Main.k.initData = function() {
 
 	Main.k.compInactiveMush = [];
 	Main.k.compInactiveMush["cold_blood"] = true;
-	Main.k.compInactiveMush["sturdy"] = true;
 	Main.k.compInactiveMush["opportunist"] = true;
 	Main.k.compInactiveMush["optimistic"] = true;
 	Main.k.compInactiveMush["mycologist"] = true;
