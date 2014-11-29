@@ -421,7 +421,7 @@ Main.k.displayMainMenu = function() {
 	var fix = $("ul.mtabs").length > 0 ? 70 : 20;
 	$("#maincontainer, .boxcontainer").css("margin", fix + "px auto 0");
 
-	Main.k.ownHero = ($(".hero h1.who").length > 0 ) ? $(".who").html().toLowerCase().trim() : false;
+	Main.k.ownHero = ($(".hero h1.who").length > 0 ) ? $(".who").html().toLowerCase().trim().replace(/(\s)/g, "_") : false;
 	Main.k.silver = true; //TODO
 	Main.k.fds = ($("a.butmini[href='/fds']").length > 0);
 	var menu = $("<ul>").addClass("kmenu").insertBefore("#maincontainer, .boxcontainer");
@@ -5691,9 +5691,9 @@ Main.k.tabs.playing = function() {
 				if (Main.k.Options.cbubbles) preview.addClass("bubble_" + Main.k.ownHero);
 				if (Main.k.Options.cbubblesNB) preview.addClass("custombubbles_nobackground");
 
-				var bubble = Main.k.ownHero.replace(/(\s)/g, "_").toLowerCase();
+				var bubble = Main.k.ownHero;
 				$("<div>").addClass("char " + bubble).appendTo(preview);
-				$("<span>").addClass("buddy").html(Main.k.ownHero.capitalize() + " : ").appendTo(preview);
+				$("<span>").addClass("buddy").html(Main.k.ownHero.replace('_',' ').capitalize() + " : ").appendTo(preview);
 				$("<p>").addClass("tid_preview tid_editorContent tid_wallPost_preview").appendTo(preview);
 				$("<div>").addClass("clear").appendTo(preview);
 
