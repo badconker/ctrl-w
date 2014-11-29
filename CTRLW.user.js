@@ -7495,16 +7495,25 @@ Main.k.tabs.playing = function() {
 
 		}
 		Main.k.heroes_same_room = tab_heroes_same_room;
+
+		if($('.groupConf').length > 0 && $('.groupConf img[src*="use_andrek"]').length == 0){
+			var existing_heroes = ['finola','chao'] ;
+		}else{
+			var existing_heroes = ['andie','derek'];
+		}
+
 		//replace heroes
 		$.each(Main.k.HEROES.replace, function(k,v){
 			var index;
-			if($('.'+k).length > 0 || $.inArray(k,tab_heroes_same_room) != -1){
+			if($('.'+k).length > 0 || $.inArray(k,existing_heroes) != -1){
 				index = $.inArray(v,Main.k.HEROES);
 			}else{
 				index = $.inArray(k,Main.k.HEROES);
 			}
 			Main.k.HEROES.splice(index,1);
 		});
+
+
 
 	};
 	Main.k.MushInit();
