@@ -3086,7 +3086,7 @@ Main.k.tabs.playing = function() {
 	 * @return string;
 	 */
 	Main.k.FormatBIOS = function() {//TODO: MULTILANG
-		var ret = "**//Paramètres BIOS : //**";
+		var ret = "//**" + Main.k.text.gettext('Paramètres BIOS:') + "**//";
 
 		$('#biosModule').find('ul.dev li').each(function() {
 			var biosParam = $(this);
