@@ -7502,11 +7502,10 @@ Main.k.tabs.playing = function() {
 
 		}
 		Main.k.heroes_same_room = tab_heroes_same_room;
+		var existing_heroes = ['finola','chao'];
 
 		if($('.groupConf').length > 0 && $('.groupConf img[src*="use_andrek"]').length == 0){
-			var existing_heroes = ['finola','chao'] ;
-		}else{
-			var existing_heroes = ['andie','derek'];
+			existing_heroes = ['andie','derek'];
 		}
 
 		//replace heroes
