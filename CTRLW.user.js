@@ -18,7 +18,7 @@
 // @resource    jgrowl https://raw.github.com/badconker/ctrl-w/release/lib/jquery.jgrowl.js
 // @resource    translation:en https://raw.github.com/badconker/ctrl-w/release/translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es https://raw.github.com/badconker/ctrl-w/release/translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.35.12
+// @version     0.35.13
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -421,7 +421,7 @@ Main.k.displayMainMenu = function() {
 	var fix = $("ul.mtabs").length > 0 ? 70 : 20;
 	$("#maincontainer, .boxcontainer").css("margin", fix + "px auto 0");
 
-	Main.k.ownHero = ($(".hero h1.who").length > 0 ) ? $(".who").html().toLowerCase().trim() : false;
+	Main.k.ownHero = ($(".hero h1.who").length > 0 ) ? $(".who").html().toLowerCase().trim().replace(/(\s)/g, "_") : false;
 	Main.k.silver = true; //TODO
 	Main.k.fds = ($("a.butmini[href='/fds']").length > 0);
 	var menu = $("<ul>").addClass("kmenu").insertBefore("#maincontainer, .boxcontainer");
@@ -825,18 +825,26 @@ Main.k.Game.updateDayAndCycle = function(day,cycle) {
 };
 Main.k.Game.updatePlayerInfos = function() {
 	var $this = this;
+	console.info('Mise à jour des infos joueurs - envoi');
 	Tools.ping('/me',function(content) {
+		console.group('Mise à jour des infos joueurs - retour');
 		var body = '<div id="body-mock">' + content.replace(/^[\s\S]*<body.*?>|<\/body>[\s\S]*$/g, '') + '</div>';
 		var jobject = $(body);
+		console.log('récupération de l\'xp');
 		if(jobject.find('#cdActualXp').length > 0){
 			$this.data.xp = jobject.find('#cdActualXp').text();
+			console.log('xp',$this.data.xp);
 		}
+		console.log('récupération du statut du joueur');
 		if(jobject.find('#experience .bought.goldactive').length > 0){
 			$this.player_status = 'gold';
+			console.log('le joueur est gold');
 		}else if(jobject.find('#experience .bought').length > 0){
 			$this.data.player_status = 'silver';
+			console.log('le joueur est silver');
 		}else{
 			$this.data.player_status = 'bronze';
+			console.log('le joueur est bronze');
 		}
 		$this.save();
 		Main.k.MushUpdate();
@@ -923,7 +931,6 @@ Main.k.Options.update = function(e) {
 	if (Main.k.Options.options[i][3]) Main.k.Options.options[i][3]();
 };
 Main.k.Options.updateOpt = function(key, val) {
-	console.log(key,val);
 	switch(key) {
 		case "custombubbles":
 		case "cbubbles":
@@ -3079,7 +3086,7 @@ Main.k.tabs.playing = function() {
 	 * @return string;
 	 */
 	Main.k.FormatBIOS = function() {//TODO: MULTILANG
-		var ret = "**//Paramètres BIOS : //**";
+		var ret = "//**" + Main.k.text.gettext('Paramètres BIOS:') + "**//";
 
 		$('#biosModule').find('ul.dev li').each(function() {
 			var biosParam = $(this);
@@ -5691,9 +5698,9 @@ Main.k.tabs.playing = function() {
 				if (Main.k.Options.cbubbles) preview.addClass("bubble_" + Main.k.ownHero);
 				if (Main.k.Options.cbubblesNB) preview.addClass("custombubbles_nobackground");
 
-				var bubble = Main.k.ownHero.replace(/(\s)/g, "_").toLowerCase();
+				var bubble = Main.k.ownHero;
 				$("<div>").addClass("char " + bubble).appendTo(preview);
-				$("<span>").addClass("buddy").html(Main.k.ownHero.capitalize() + " : ").appendTo(preview);
+				$("<span>").addClass("buddy").html(Main.k.ownHero.replace('_',' ').capitalize() + " : ").appendTo(preview);
 				$("<p>").addClass("tid_preview tid_editorContent tid_wallPost_preview").appendTo(preview);
 				$("<div>").addClass("clear").appendTo(preview);
 
@@ -7495,16 +7502,24 @@ Main.k.tabs.playing = function() {
 
 		}
 		Main.k.heroes_same_room = tab_heroes_same_room;
+		var existing_heroes = ['finola','chao'];
+
+		if($('.groupConf').length > 0 && $('.groupConf img[src*="use_andrek"]').length == 0){
+			existing_heroes = ['andie','derek'];
+		}
+
 		//replace heroes
 		$.each(Main.k.HEROES.replace, function(k,v){
 			var index;
-			if($('.'+k).length > 0 || $.inArray(k,tab_heroes_same_room) != -1){
+			if($('.'+k).length > 0 || $.inArray(k,existing_heroes) != -1){
 				index = $.inArray(v,Main.k.HEROES);
 			}else{
 				index = $.inArray(k,Main.k.HEROES);
 			}
 			Main.k.HEROES.splice(index,1);
 		});
+
+
 
 	};
 	Main.k.MushInit();
@@ -7616,7 +7631,6 @@ Main.k.tabs.ranking = function() {
 		position: absolute;\
 		top: 30px; left: 250px;\
 		bottom: 30px; right: 10px;\
-		z-index: 10;\
 		font-size: 24pt;\
 		color: #FFF;\
 		text-align: left;\
