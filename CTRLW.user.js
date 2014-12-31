@@ -7631,7 +7631,6 @@ Main.k.tabs.ranking = function() {
 		position: absolute;\
 		top: 30px; left: 250px;\
 		bottom: 30px; right: 10px;\
-		z-index: 10;\
 		font-size: 24pt;\
 		color: #FFF;\
 		text-align: left;\
