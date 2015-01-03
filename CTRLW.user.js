@@ -2327,18 +2327,22 @@ Main.k.tabs.playing = function() {
 	Main.updateContent = function(url,seek,dest,cb) {
 		console.log('update content');
 		Main.k.extend.updateContent(url,seek,dest,function(){
-			if(cb != null) cb();
+			try {
+				if (cb != null) cb();
+			} catch (e) {
+				console.error('erreur',e);
+				Main.k.MushUpdate();
+			}
+
 			if(/\/choosePeer\?charId=[0-9]+&idx=([0-9]+)/.test(url)){
 				var tab_class = '.cdPrivateTab' + RegExp.$1;
 				Main.k.MushUpdate();
 				if($(tab_class).length > 0){
 					$(tab_class).trigger('click');
 				}
-
 			}
 		});
 	};
-	//exportFunction(Main.updateContent, unsafeWindow.Main, {defineAs: "updateContent"});
 	addFctToPage(Main.updateContent,'Main.updateContent');
 
 	//Main.k.extend.onChatFocus = Main.onChatFocus;
@@ -7480,6 +7484,7 @@ Main.k.tabs.playing = function() {
 			//Main.k.displayLastSent(false);
 		}
 	};
+	exportFunction(Main.k.MushUpdate, unsafeWindow.Main.k, {defineAs: "MushUpdate"});
 	Main.k.MushInitHeroes = function(){
 		Main.k.heroes = {};
 		Main.k.heroes_same_room = [];
