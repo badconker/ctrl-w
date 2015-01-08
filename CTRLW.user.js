@@ -18,7 +18,7 @@
 // @resource    jgrowl https://raw.github.com/badconker/ctrl-w/release/lib/jquery.jgrowl.js
 // @resource    translation:en https://raw.github.com/badconker/ctrl-w/release/translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es https://raw.github.com/badconker/ctrl-w/release/translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.35.13
+// @version     0.35.14
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -623,6 +623,9 @@ Main.k.CustomTip = function(e) {
 		"</div></div></div></div>"
 	);
 };
+Main.k.hideTip = function(){
+	Main.hideTip();
+}
 Main.k.MakeButton = function(content, href, onclick, tiptitle, tipdesc) {
 	var but = $("<div>").addClass("action but");
 	var butbr = $("<div>").addClass("butright").appendTo(but);
@@ -640,7 +643,7 @@ Main.k.MakeButton = function(content, href, onclick, tiptitle, tipdesc) {
 		if (tiptitle) buta.attr("_title", tiptitle);
 		if (tipdesc) buta.attr("_desc", tipdesc);
 		buta.on("mouseover", Main.k.CustomTip);
-		buta.on("mouseout", Main.hideTip);
+		buta.on("mouseout", Main.k.hideTip);
 	}
 
 	return but;
@@ -2195,7 +2198,7 @@ Main.k.tabs.playing = function() {
 				.attr("_title", o_hero.spores.name)
 				.attr("_desc", o_hero.spores.desc)
 				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip)
+				.on("mouseout", Main.k.hideTip)
 				.appendTo($spores);
 
 			$('<span>')
@@ -2239,7 +2242,7 @@ Main.k.tabs.playing = function() {
 			.attr("_title", $tooltip_title.html())
 			.attr("_desc", $desc.html())
 			.on("mouseover", Main.k.CustomTip)
-			.on("mouseout", Main.hideTip);
+			.on("mouseout", Main.k.hideTip);
 		return $(this);
 	};
 	$.fn.addTooltip = function(title,text){
@@ -2247,7 +2250,7 @@ Main.k.tabs.playing = function() {
 			.attr("_title", title)
 			.attr("_desc", text)
 			.on("mouseover", Main.k.CustomTip)
-			.on("mouseout", Main.hideTip);
+			.on("mouseout", Main.k.hideTip);
 		return $(this);
 	};
 	/*haxe.remoting.ExternalConnection.prototype.call = function(params) {
@@ -2327,18 +2330,22 @@ Main.k.tabs.playing = function() {
 	Main.updateContent = function(url,seek,dest,cb) {
 		console.log('update content');
 		Main.k.extend.updateContent(url,seek,dest,function(){
-			if(cb != null) cb();
+			try {
+				if (cb != null) cb();
+			} catch (e) {
+				console.error('erreur',e);
+				Main.k.MushUpdate();
+			}
+
 			if(/\/choosePeer\?charId=[0-9]+&idx=([0-9]+)/.test(url)){
 				var tab_class = '.cdPrivateTab' + RegExp.$1;
 				Main.k.MushUpdate();
 				if($(tab_class).length > 0){
 					$(tab_class).trigger('click');
 				}
-
 			}
 		});
 	};
-	//exportFunction(Main.updateContent, unsafeWindow.Main, {defineAs: "updateContent"});
 	addFctToPage(Main.updateContent,'Main.updateContent');
 
 	//Main.k.extend.onChatFocus = Main.onChatFocus;
@@ -2441,7 +2448,7 @@ Main.k.tabs.playing = function() {
 				.attr("_title", Main.k.text.gettext("Partager son état de santé"))
 				.attr("_desc", Main.k.text.gettext("<p>Insère votre nombre de points de vie et de moral dans la zone de texte active, de la forme&nbsp;:</p><p>TODO: example</p>"))
 				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip);
+				.on("mouseout", Main.k.hideTip);
 
 			// Inventory
 			$("<a>").addClass("butmini formatbtn").html("<img src='http://data.hordes.fr/gfx/icons/item_bag.gif' />").attr("href", "#").appendTo(sharediv)
@@ -2454,7 +2461,7 @@ Main.k.tabs.playing = function() {
 				.attr("_title", Main.k.text.gettext("Partager l'inventaire"))
 				.attr("_desc", Main.k.text.gettext("Insère l'inventaire de la pièce dans la zone de texte active, de la forme&nbsp;:</p><p><strong>Couloir central :</strong> <i>Combinaison</i>, <i>Couteau</i>, <i>Médikit</i>, <i>Extincteur</i></p><p><strong>Partage aussi sur Astropad si celui-ci est installé.</strong></p>"))
 				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip);
+				.on("mouseout", Main.k.hideTip);
 
 			// Conso
 			if ($("#pharmashare").css("display") != "none") {
@@ -2477,7 +2484,7 @@ Main.k.tabs.playing = function() {
 					.attr("_title", Main.k.text.gettext("Partager l'état des plantes"))
 					.attr("_desc", Main.k.text.gettext("<p>Insère l'état des plantes dans la zone de texte active.</p><p>TODO: Exemple</p>"))
 					.on("mouseover", Main.k.CustomTip)
-					.on("mouseout", Main.hideTip);
+					.on("mouseout", Main.k.hideTip);
 			}
 
 			// Projects
@@ -2494,7 +2501,7 @@ Main.k.tabs.playing = function() {
 						"<li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li>" +
 						"<li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li>"))
 					.on("mouseover", Main.k.CustomTip)
-					.on("mouseout", Main.hideTip);
+					.on("mouseout", Main.k.hideTip);
 			}
 
 			// Research
@@ -2511,7 +2518,7 @@ Main.k.tabs.playing = function() {
 						"<li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li>" +
 						"<li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li>"))
 					.on("mouseover", Main.k.CustomTip)
-					.on("mouseout", Main.hideTip);
+					.on("mouseout", Main.k.hideTip);
 			}
 
 			// BIOS
@@ -2525,7 +2532,7 @@ Main.k.tabs.playing = function() {
 					.attr("_title", Main.k.text.gettext("Partager les paramètres BIOS"))
 					.attr("_desc", Main.k.text.gettext("Insère la liste de paramètres BIOS Neron dans la zone de texte active, de la forme&nbsp;:</p><p>TODO: aperçu"))
 					.on("mouseover", Main.k.CustomTip)
-					.on("mouseout", Main.hideTip);
+					.on("mouseout", Main.k.hideTip);
 			}
 
 			// Planets
@@ -2539,7 +2546,7 @@ Main.k.tabs.playing = function() {
 					.attr("_title", Main.k.text.gettext("Partager les planètes"))
 					.attr("_desc", Main.k.text.gettext("<p>Insère les détails des planètes dans la zone de texte active.</p><p>TODO: Exemple</p>"))
 					.on("mouseover", Main.k.CustomTip)
-					.on("mouseout", Main.hideTip);
+					.on("mouseout", Main.k.hideTip);
 			}
 
 
@@ -2568,7 +2575,7 @@ Main.k.tabs.playing = function() {
 				.attr("_title", Main.k.text.gettext("Insérer un smiley"))
 				.attr("_desc", Main.k.text.gettext("Bientôt disponible."))
 				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip);
+				.on("mouseout", Main.k.hideTip);
 
 			// Empty textarea
 			$("<a>").addClass("butmini").html("<img src='/img/icons/ui/bin.png' />").attr("href", "#").appendTo(formatdiv)
@@ -2580,7 +2587,7 @@ Main.k.tabs.playing = function() {
 				})
 				.attr("_desc", Main.k.text.gettext("Vider la zone de texte."))
 				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip);
+				.on("mouseout", Main.k.hideTip);
 
 			// Close textarea
 			$("<a>").addClass("butmini").html("<img src='/img/icons/ui/status/unsociable.png' />").attr("href", "#").appendTo(formatdiv)
@@ -2594,7 +2601,7 @@ Main.k.tabs.playing = function() {
 				})
 				.attr("_desc", Main.k.text.gettext("Fermer la zone de texte."))
 				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip);
+				.on("mouseout", Main.k.hideTip);
 
 			// Add formatting link (manager)
 			$("<span>&nbsp;</span>").appendTo(formatdiv);
@@ -2608,7 +2615,7 @@ Main.k.tabs.playing = function() {
 				})
 				.attr("_desc", Main.k.text.gettext("Ouvrir le manager."))
 				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip);
+				.on("mouseout", Main.k.hideTip);
 		}
 	};
 	Main.k.extend.onChatScroll = function() {
@@ -3357,7 +3364,7 @@ Main.k.tabs.playing = function() {
 			.html(res)
 			.appendTo(pilgred)
 			.on("mouseover", Main.k.CustomTip)
-			.on("mouseout", Main.hideTip);
+			.on("mouseout", Main.k.hideTip);
 	};
 	Main.k.maxAgo = function(a,b) {//TODO: MULTILANG
 		var min_a, min_b;
@@ -3713,7 +3720,7 @@ Main.k.tabs.playing = function() {
 			.find("a").attr("_title", Main.k.text.gettext("Chan IRC"))
 			.attr("_desc", Main.k.text.gettext("Venez discuter sur IRC avec les autres utilisateurs du script. \
 			Vous pourrez également y trouver de l'aide ou faire des suggestions.</p><p><strong>Chan #ctrlw sur Quakenet</strong>"))
-			.on("mouseover", Main.k.CustomTip).on("mouseout", Main.hideTip);
+			.on("mouseover", Main.k.CustomTip).on("mouseout", Main.k.hideTip);
 
 			Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> "+Main.k.text.gettext("Topic (Forum Mush)"),
 				/* Translators: Script topic (Mush forum) */
@@ -4199,7 +4206,7 @@ Main.k.tabs.playing = function() {
 				.attr("_title", Main.k.text.gettext("Espionnage"))
 				.attr("_desc", Main.k.text.gettext("<p>Vous êtes dans la même pièce que cette personne ; vous pouvez donc l'examiner de plus près.</p><p><strong>Cliquez ici pour enregistrer les compétences visibles, statuts publiques et titres de ce personnage.</strong><p>"))
 				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip);
+				.on("mouseout", Main.k.hideTip);
 
 			$('<div>')
 				.addClass('hero-details')
@@ -4325,7 +4332,7 @@ Main.k.tabs.playing = function() {
 					.attr("_title", status.name)
 					.attr("_desc", status.desc)
 					.on("mouseover", Main.k.CustomTip)
-					.on("mouseout", Main.hideTip)
+					.on("mouseout", Main.k.hideTip)
 					.appendTo(statuses);
 			});
 			if(typeof(o_hero.spores) != 'undefined' && o_hero.spores != null){
@@ -4344,7 +4351,7 @@ Main.k.tabs.playing = function() {
 					.attr("_title", o_hero.spores.name)
 					.attr("_desc", o_hero.spores.desc)
 					.on("mouseover", Main.k.CustomTip)
-					.on("mouseout", Main.hideTip)
+					.on("mouseout", Main.k.hideTip)
 					.appendTo($spores);
 
 				$('<span>')
@@ -4371,7 +4378,7 @@ Main.k.tabs.playing = function() {
 						.attr("_title", skill.name)
 						.attr("_desc", skill.desc + (Main.k.compInactiveMush[skill.img] ? "<p><strong>"+Main.k.text.gettext("Compétence inactive mush")+"</strong></p>" : ""))
 						.on("mouseover", Main.k.CustomTip)
-						.on("mouseout", Main.hideTip)
+						.on("mouseout", Main.k.hideTip)
 						.appendTo(skilldom);
 
 					if (Main.k.compInactiveMush[skill.img]) {
@@ -4380,7 +4387,7 @@ Main.k.tabs.playing = function() {
 							.attr("_title", Main.k.text.gettext("Compétence inactive mush"))
 							.attr("_desc", Main.k.text.gettext("Cette compétence est inactive quand on est mush (source : Twinpedia)."))
 							.on("mouseover", Main.k.CustomTip)
-							.on("mouseout", Main.hideTip)
+							.on("mouseout", Main.k.hideTip)
 							.appendTo(skilldom);
 					}
 			});
@@ -4400,7 +4407,7 @@ Main.k.tabs.playing = function() {
 					.attr("_title", title.name)
 					.attr("_desc", title.desc)
 					.on("mouseover", Main.k.CustomTip)
-					.on("mouseout", Main.hideTip)
+					.on("mouseout", Main.k.hideTip)
 					.appendTo(titles);
 			});
 
@@ -4735,7 +4742,7 @@ Main.k.tabs.playing = function() {
 			/* Translators: This translation must be copied from the game. */
 			$("#tabfav").attr("_title", "Favoris").attr("_desc", Main.k.text.gettext("Votre sélection de sujets favoris."));
 			tabs.find(".tab").on("mouseover", Main.k.CustomTip);
-			tabs.find(".tab").on("mouseout", Main.hideTip);
+			tabs.find(".tab").on("mouseout", Main.k.hideTip);
 			tabs.find(".tab").on("click", function() { Main.k.Manager.selectTab(this); });
 
 
@@ -4793,7 +4800,7 @@ Main.k.tabs.playing = function() {
 				$("<p>").addClass("warning").html("Disponible prochainement.").appendTo(chat3);
 			}
 			tabs.find(".tab").on("mouseover", Main.k.CustomTip);
-			tabs.find(".tab").on("mouseout", Main.hideTip);
+			tabs.find(".tab").on("mouseout", Main.k.hideTip);
 			tabs.find(".tab").on("click", function() { Main.k.Manager.selectTopicTab(this); });
 
 
@@ -4818,7 +4825,7 @@ Main.k.tabs.playing = function() {
 			$("<img>").attr("src", "/img/icons/ui/neron.png").appendTo(tabneron);
 			$("<img>").attr("src", "/img/icons/ui/book.png").appendTo(tabcustom);
 			tabs.find(".tab").on("mouseover", Main.k.CustomTip);
-			tabs.find(".tab").on("mouseout", Main.hideTip);
+			tabs.find(".tab").on("mouseout", Main.k.hideTip);
 			tabs.find(".tab").on("click", function() { Main.k.Manager.selectReplyTab(this); });
 
 			r = $("<div>").addClass("right").css("margin-top", 0).appendTo(td_reply);
@@ -5323,7 +5330,7 @@ Main.k.tabs.playing = function() {
 		.find("a")
 		.attr("_title", Main.k.text.gettext("Charger tous les messages")).attr("_desc", Main.k.text.gettext("Chargez tous les messages pour profiter pleinement du manager : recherches dans tous les messages depuis le début de la partie, nouveaux messages manqués à cause du bug de mush, statistiques complètes, etc.</p><p><strong>Cette action peut prendre un certain temps, suivant le nombre de messages postés sur votre vaisseau.</strong>"))
 		.on("mouseover", Main.k.CustomTip)
-		.on("mouseout", Main.hideTip);
+		.on("mouseout", Main.k.hideTip);
 
 		// Action : unload
 		Main.k.MakeButton("<img src='/img/icons/ui/wall.png' class='alerted' /><img src='/img/icons/ui/bin.png' class='alert' /> "+Main.k.text.gettext("Décharger"),null,function() {
@@ -5334,7 +5341,7 @@ Main.k.tabs.playing = function() {
 		.find("a")
 		.attr("_title", Main.k.text.gettext("Décharger les messages")).attr("_desc", Main.k.text.gettext("Déchargez la liste de messages pour alléger le jeu. Lorsque vous chargez des messages (en scrollant sur le chat, par exemple), ceux-ci restent chargés. Mush chargeant toute la page (dont les messages) à chaque action, votre jeu est grandement ralenti lorsque le nombre de messages chargés est conséquent.</p><p><strong>Cette action bloque le jeu pendant quelques secondes.</strong>"))
 		.on("mouseover", Main.k.CustomTip)
-		.on("mouseout", Main.hideTip);
+		.on("mouseout", Main.k.hideTip);
 
 		// Fix actions
 		actions.find(".but").css({
@@ -5374,7 +5381,7 @@ Main.k.tabs.playing = function() {
 				+ " "+Main.k.text.strargs(Main.k.text.ngettext("dont <b>%1</b> topic.","dont <b>%1</b> topics.",hero.topic),[hero.topic]));
 			}
 			heroDiv.on("mouseover", Main.k.CustomTip);
-			heroDiv.on("mouseout", Main.hideTip);
+			heroDiv.on("mouseout", Main.k.hideTip);
 			heroDiv.on("click", Main.k.Manager.searchHero);
 
 			$("<img>").attr("src", "/img/icons/ui/" + hero.name.replace("_", "") + ".png").appendTo(heroDiv);
@@ -5723,7 +5730,7 @@ Main.k.tabs.playing = function() {
 				.find("a")
 				.attr("_title", "Répondre").attr("_desc", Main.k.text.gettext("Envoyer ce message en tant que réponse au topic affiché ci-contre."))
 				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip);
+				.on("mouseout", Main.k.hideTip);
 
 				var newtopic = Main.k.MakeButton("<img src='http://twinoid.com/img/icons/reply.png' /> " + Main.k.text.gettext("Nouveau topic"),null,function() {
 					var $tid_wallPost = $tabreply_content.find(".tid_wallPost");
@@ -5736,7 +5743,7 @@ Main.k.tabs.playing = function() {
 				.find("a")
 				.attr("_title", "Nouveau topic").attr("_desc", Main.k.text.gettext("Poster ce message en tant que nouveau topic."))
 				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip);
+				.on("mouseout", Main.k.hideTip);
 
 
 				if(typeof(js.Lib.window["editor_tid_wallPost"]) == 'undefined'){
@@ -5913,7 +5920,7 @@ Main.k.tabs.playing = function() {
                 .find("a")
                 .attr("_title", "Répondre").attr("_desc", Main.k.text.gettext("Envoyer ce message en tant que réponse au topic affiché ci-contre."))
                 .on("mouseover", Main.k.CustomTip)
-                .on("mouseout", Main.hideTip);
+                .on("mouseout", Main.k.hideTip);
 
                 var newtopic = Main.k.MakeButton("<img src='http://twinoid.com/img/icons/reply.png' /> " + Main.k.text.gettext("Nouveau topic"),null,function() {
                     var $tid_wallPost = $tabcustom_content.find(".tid_wallPost");
@@ -5926,7 +5933,7 @@ Main.k.tabs.playing = function() {
                 .find("a")
                 .attr("_title", "Nouveau topic").attr("_desc", Main.k.text.gettext("Poster ce message en tant que nouveau topic."))
                 .on("mouseover", Main.k.CustomTip)
-                .on("mouseout", Main.hideTip);
+                .on("mouseout", Main.k.hideTip);
 
                 var addmsg = Main.k.MakeButton("<img src='http://mush.vg/img/icons/ui/fav.png' /> " + Main.k.text.gettext("Ajouter aux favoris"),null,function() {
                     var $tid_wallPost = $tabcustom_content.find(".tid_wallPost");
@@ -5960,7 +5967,7 @@ Main.k.tabs.playing = function() {
                 .find("a")
                 .attr("_title", "Ajouter aux favoris").attr("_desc", Main.k.text.gettext("Ajouter un message à votre liste des messages pré-enregistrés."))
                 .on("mouseover", Main.k.CustomTip)
-                .on("mouseout", Main.hideTip);
+                .on("mouseout", Main.k.hideTip);
 
                 var delmsg = Main.k.MakeButton("<img src='http://mush.vg/img/icons/ui/bin.png' /> " + Main.k.text.gettext("Supprimer un favori"),null,function() {
                     try{
@@ -5981,7 +5988,7 @@ Main.k.tabs.playing = function() {
                 .find("a")
                 .attr("_title", "Supprimer un favori").attr("_desc", Main.k.text.gettext("Supprimer une message de votre liste des messges pré-enregistrés."))
                 .on("mouseover", Main.k.CustomTip)
-                .on("mouseout", Main.hideTip);
+                .on("mouseout", Main.k.hideTip);
 
                 if(typeof(js.Lib.window["editor_tid_wallPost"]) == 'undefined'){
                     js.Lib.window["editor_tid_wallPost"] = {};
@@ -6575,7 +6582,7 @@ Main.k.tabs.playing = function() {
 			/* Translators: This translation must be copied from the game. */
 			.attr("_desc", Main.k.text.gettext("Le Commandant décide des planètes que le Daedalus explorera."))
 			.on("mouseover", Main.k.CustomTip)
-			.on("mouseout", Main.hideTip)
+			.on("mouseout", Main.k.hideTip)
 			.appendTo(commanders);
 		var commander_nb = 0;
 		for (i=0; commander_nb<maxshown && i<Main.k.COMMANDERS.length; i++) {
@@ -6605,7 +6612,7 @@ Main.k.tabs.playing = function() {
 			/* Translators: This translation must be copied from the game. */
 			.attr("_desc", Main.k.text.gettext("Le responsable NERON semble avoir une certaine influence auprès de l'ordinateur de bord. Il est notamment le seul à avoir la possibilité de transmettre des messages à tout l'équipage."))
 			.on("mouseover", Main.k.CustomTip)
-			.on("mouseout", Main.hideTip)
+			.on("mouseout", Main.k.hideTip)
 			.appendTo(admins);
 		var admin_nb = 0;
 		for (i=0; admin_nb<maxshown && i<Main.k.ADMINS.length; i++) {
@@ -6635,7 +6642,7 @@ Main.k.tabs.playing = function() {
 			/* Translators: This translation must be copied from the game. */
 			.attr("_desc", Main.k.text.gettext("Le Responsable de Communications est la seule personne habilitée à décider quels seront les téléchargements prioritaires du Centre de Communication."))
 			.on("mouseover", Main.k.CustomTip)
-			.on("mouseout", Main.hideTip)
+			.on("mouseout", Main.k.hideTip)
 			.appendTo(comms);
 		var comms_nb = 0;
 		for (i=0; comms_nb<maxshown && i<Main.k.COMMS.length; i++) {
@@ -6680,7 +6687,7 @@ Main.k.tabs.playing = function() {
 				.attr("_desc", Main.k.text.gettext("<p>Vous êtes dans la même pièce que cette personne ; vous pouvez donc l'examiner de plus près.</p><p><strong>Cliquez ici pour enregistrer les compétences visibles, statuts publiques et titres de ce personnage.</strong></p>"))
 				.data('dev_surname',bubble)
 				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip)
+				.on("mouseout", Main.k.hideTip)
 				.click(function(e){
 					e.preventDefault();
 					var dev_surname = $(this).data('dev_surname');
@@ -6702,7 +6709,7 @@ Main.k.tabs.playing = function() {
 					.attr("_title", status.name)
 					.attr("_desc", status.desc)
 					.on("mouseover", Main.k.CustomTip)
-					.on("mouseout", Main.hideTip)
+					.on("mouseout", Main.k.hideTip)
 					.appendTo(statuses);
 				}
 			}
@@ -6721,7 +6728,7 @@ Main.k.tabs.playing = function() {
 					.attr("_title", hero.spores.name)
 					.attr("_desc", hero.spores.desc)
 					.on("mouseover", Main.k.CustomTip)
-					.on("mouseout", Main.hideTip)
+					.on("mouseout", Main.k.hideTip)
 					.appendTo($spores);
 
 				$('<span>')
@@ -6751,7 +6758,7 @@ Main.k.tabs.playing = function() {
 					.attr("_title", skill.name)
 					.attr("_desc", skill.desc + (Main.k.compInactiveMush[skill.img] ? "<p><strong>"+Main.k.text.gettext("Compétence inactive mush")+"</strong></p>" : ""))
 					.on("mouseover", Main.k.CustomTip)
-					.on("mouseout", Main.hideTip)
+					.on("mouseout", Main.k.hideTip)
 					.appendTo(skilldom);
 
 					if (Main.k.compInactiveMush[skill.img]) {
@@ -6760,7 +6767,7 @@ Main.k.tabs.playing = function() {
 						.attr("_title", Main.k.text.gettext("Compétence inactive mush"))
 						.attr("_desc", Main.k.text.gettext("Cette compétence est inactive quand on est mush (source : Twinpedia)."))
 						.on("mouseover", Main.k.CustomTip)
-						.on("mouseout", Main.hideTip)
+						.on("mouseout", Main.k.hideTip)
 						.appendTo(skilldom);
 					}
 				}
@@ -6777,7 +6784,7 @@ Main.k.tabs.playing = function() {
 					.attr("_title", title.name)
 					.attr("_desc", title.desc)
 					.on("mouseover", Main.k.CustomTip)
-					.on("mouseout", Main.hideTip)
+					.on("mouseout", Main.k.hideTip)
 					.appendTo(titles);
 				}
 			}
@@ -6914,7 +6921,7 @@ Main.k.tabs.playing = function() {
 							.attr("_title", hero)
 							.attr("_desc", h.short_desc)
 							.on("mouseover", Main.k.CustomTip)
-							.on("mouseout", Main.hideTip)
+							.on("mouseout", Main.k.hideTip)
 							.appendTo(players);
 						}
 						break;
@@ -6973,7 +6980,7 @@ Main.k.tabs.playing = function() {
 				.attr("_title", $(this).attr("data-name").split("\\'").join("'"))
 				.attr("_desc", $(this).attr("data-desc").split("\\'").join("'"))
 				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip);
+				.on("mouseout", Main.k.hideTip);
 
 			// Loads
 			var name = $(this).attr("data-name");
@@ -7042,7 +7049,7 @@ Main.k.tabs.playing = function() {
 					$(this).find("p.efficacity").html().trim()
 				)
 				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip);
+				.on("mouseout", Main.k.hideTip);
 			});
 
 			// Research actions
@@ -7179,7 +7186,7 @@ Main.k.tabs.playing = function() {
 					$(this).find("p.efficacity").html().trim()
 				)
 				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip);
+				.on("mouseout", Main.k.hideTip);
 			});
 
 			// Projects actions
@@ -7329,7 +7336,7 @@ Main.k.tabs.playing = function() {
 					.attr("_title", $(this).attr("data-name").split("\\'").join("'"))
 					.attr("_desc", $(this).attr("data-desc").split("\\'").join("'"))
 					.on("mouseover", Main.k.CustomTip)
-					.on("mouseout", Main.hideTip);
+					.on("mouseout", Main.k.hideTip);
 			});
 
 			// Plants actions
@@ -7452,7 +7459,7 @@ Main.k.tabs.playing = function() {
 				.attr("_title", Main.k.text.gettext("Canal privé")+ " #" + (i+1))
 				.attr("_desc", tip)
 				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.hideTip);
+				.on("mouseout", Main.k.hideTip);
 			}
 		}
 		// ----------------------------------- //
@@ -7480,6 +7487,7 @@ Main.k.tabs.playing = function() {
 			//Main.k.displayLastSent(false);
 		}
 	};
+	exportFunction(Main.k.MushUpdate, unsafeWindow.Main.k, {defineAs: "MushUpdate"});
 	Main.k.MushInitHeroes = function(){
 		Main.k.heroes = {};
 		Main.k.heroes_same_room = [];
@@ -7504,7 +7512,7 @@ Main.k.tabs.playing = function() {
 		Main.k.heroes_same_room = tab_heroes_same_room;
 		var existing_heroes = ['finola','chao'];
 
-		if($('.groupConf').length > 0 && $('.groupConf img[src*="use_andrek"]').length == 0){
+		if($('.groupConf').length > 0 && $('.groupConf img[src*="use_andrek"]').length == 1){
 			existing_heroes = ['andie','derek'];
 		}
 
@@ -7758,7 +7766,7 @@ Main.k.tabs.gameover = function() {
 		.attr("_title", Main.k.text.gettext("Nouvelle Planète"))
 		.attr("_desc", Main.k.text.gettext("Gagné à chaque planète (arrivée en orbite)."))
 		.on("mouseover", Main.k.CustomTip)
-		.on("mouseout", Main.hideTip)
+		.on("mouseout", Main.k.hideTip)
 		.prependTo("#logtri");
 	}
 	if (logcount.expe) {
@@ -7767,7 +7775,7 @@ Main.k.tabs.gameover = function() {
 		.attr("_title", Main.k.text.gettext("Expédition"))
 		.attr("_desc", Main.k.text.gettext("Gagné à chaque exploration."))
 		.on("mouseover", Main.k.CustomTip)
-		.on("mouseout", Main.hideTip)
+		.on("mouseout", Main.k.hideTip)
 		.prependTo("#logtri");
 	}
 	if (logcount.researchMin) {
@@ -7776,7 +7784,7 @@ Main.k.tabs.gameover = function() {
 		.attr("_title", Main.k.text.gettext("Recherche Mineure"))
 		.attr("_desc", Main.k.text.gettext("Gagné lorsque la recherche est terminée ainsi qu'une seconde fois lors du retour sur SOL."))
 		.on("mouseover", Main.k.CustomTip)
-		.on("mouseout", Main.hideTip)
+		.on("mouseout", Main.k.hideTip)
 		.prependTo("#logtri");
 	}
 	if (logcount.research) {
@@ -7785,7 +7793,7 @@ Main.k.tabs.gameover = function() {
 		.attr("_title", Main.k.text.gettext("Recherche"))
 		.attr("_desc", Main.k.text.gettext("Gagné lorsque la recherche est terminée ainsi qu'une seconde fois lors du retour sur SOL."))
 		.on("mouseover", Main.k.CustomTip)
-		.on("mouseout", Main.hideTip)
+		.on("mouseout", Main.k.hideTip)
 		.prependTo("#logtri");
 	}
 	if (logcount.hunter) {
@@ -7794,7 +7802,7 @@ Main.k.tabs.gameover = function() {
 		.attr("_title", Main.k.text.gettext("Défenseur du Daedalus"))
 		.attr("_desc", Main.k.text.gettext("Gagné pour chaque Hunter abattu."))
 		.on("mouseover", Main.k.CustomTip)
-		.on("mouseout", Main.hideTip)
+		.on("mouseout", Main.k.hideTip)
 		.prependTo("#logtri");
 	}
 	if (logcount.humanC) {
@@ -7803,7 +7811,7 @@ Main.k.tabs.gameover = function() {
 		.attr("_title", Main.k.text.gettext("Cycle Humain"))
 		.attr("_desc", Main.k.text.gettext("Gagné à chaque cycle."))
 		.on("mouseover", Main.k.CustomTip)
-		.on("mouseout", Main.hideTip)
+		.on("mouseout", Main.k.hideTip)
 		.prependTo("#logtri");
 	}
 
