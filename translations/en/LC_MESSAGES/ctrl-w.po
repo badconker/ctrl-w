@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: ctrl+w\n"
 "Report-Msgid-Bugs-To: http://twd.io/e/0fdb0w\n"
 "POT-Creation-Date: 2014-11-29 14:29+0100\n"
-"PO-Revision-Date: 2014-10-27 18:37+0100\n"
+"PO-Revision-Date: 2015-04-12 16:11+0100\n"
 "Last-Translator: \n"
 "Language-Team: English\n"
 "Language: en\n"
@@ -630,13 +630,12 @@ msgid "Recherches"
 msgstr "Researches"
 
 #: ..\CTRLW.user.js:3041 ..\CTRLW.user.js:7205
-#, fuzzy
 msgid "Planètes"
-msgstr "Plants"
+msgstr "Planets"
 
 #: ..\CTRLW.user.js:3064
 msgid "(Nord|Est|Ouest|Sud)"
-msgstr ""
+msgstr "(North|East|West|South)"
 
 #: ..\CTRLW.user.js:3078
 msgid "cases"
