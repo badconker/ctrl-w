@@ -3082,7 +3082,7 @@ Main.k.tabs.playing = function() {
 			});
 
 			// Print planet
-			ret += "\n**" + name + "** (" + nbcases + Main.k.text.gettext('cases') + ")\n";
+			ret += "\n**" + name + "** (" + nbcases + ' ' +Main.k.text.gettext('cases') + ")\n";
 			if (dist && dir) ret += "//" + dir + " - " + dist + " :mush_fuel:****//\n";
 			ret += cases.join(", ");
 		});
