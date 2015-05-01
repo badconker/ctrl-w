@@ -1092,6 +1092,9 @@ Main.k.css.ingame = function() {
 	Main.k.css.bubbles();
 
 	$("<style>").attr("type", "text/css").html("\
+	.tid_editorContent {\
+	  visibility: visible;\
+	 }\
 	.blink-limited {\
 	  -moz-animation: blink 1s 3 linear;\
 	  -webkit-animation: blink 1s 3 linear;\
