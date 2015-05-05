@@ -340,7 +340,7 @@ msgstr ""
 
 #: ..\CTRLW.user.js:566
 msgid "ok"
-msgstr ""
+msgstr "ok"
 
 #: ..\CTRLW.user.js:589
 #, fuzzy
@@ -1207,19 +1207,19 @@ msgstr "<p> You are in the same room as that person; so you can examine it more 
 #. Translators: Text for Cryogenized people from CryoModule  Useless to translate in English*/
 #: ..\CTRLW.user.js:6921
 msgid "Cryo"
-msgstr ""
+msgstr "Cryo"
 
 #: ..\CTRLW.user.js:6922
 msgid "Tout le monde doit être décryogénisé pour pouvoir mettre à jour la liste d'équipage"
-msgstr ""
+msgstr "Everybody must be decryogenized to update the crew list"
 
 #: ..\CTRLW.user.js:6924
 msgid "Mettre à jour la liste d'équipage"
-msgstr ""
+msgstr "Update the crew list"
 
 #: ..\CTRLW.user.js:6924
 msgid "Cliquer ici pour mettre à jour la liste d'équipage de CTRL+W"
-msgstr ""
+msgstr "Click here to update CTRL+W crew list"
 
 #. Translators: Text for idle people from CryoModule. Regex allowed*/
 #: ..\CTRLW.user.js:6931
@@ -1238,7 +1238,7 @@ msgstr "Dead"
 
 #: ..\CTRLW.user.js:7123
 msgid "Coeur de NERON"
-msgstr ""
+msgstr "NERON's core"
 
 #: ..\CTRLW.user.js:7126
 msgid "Laboratoire"
@@ -1287,7 +1287,7 @@ msgstr "Share BIOS parameters"
 
 #: ..\CTRLW.user.js:7386
 msgid "Com."
-msgstr ""
+msgstr "Com."
 
 #: ..\CTRLW.user.js:7421 ..\CTRLW.user.js:7450
 msgid "Plantes"
