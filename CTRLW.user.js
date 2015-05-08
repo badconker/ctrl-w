@@ -18,7 +18,7 @@
 // @resource    jgrowl https://raw.github.com/badconker/ctrl-w/release/lib/jquery.jgrowl.js
 // @resource    translation:en https://raw.github.com/badconker/ctrl-w/release/translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es https://raw.github.com/badconker/ctrl-w/release/translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.35.15
+// @version     0.35.16
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -3984,6 +3984,8 @@ Main.k.tabs.playing = function() {
 								if(typeof(json.sync.msgs_prerecorded) != 'undefined'){
 									Main.k.Manager.loadMsgsPrerecorded(json.sync.msgs_prerecorded,true);
 								}
+								Main.k.GameInfos.load(json.sync.game_infos);
+								Main.k.MushInitHeroes();
 								Main.k.quickNotice(Main.k.text.gettext('Synchronisation effectuée'));
 								Main.k.MushUpdate();
 							}
@@ -4030,6 +4032,7 @@ Main.k.tabs.playing = function() {
 					last_update_time : localStorage.getItem('ctrlw_sync_last_update_time'),
 					mush_time: $('#input').attr('now'),
 					profiles: JSON.stringify(Main.k.Profiles.data),
+					game_infos: JSON.stringify(Main.k.GameInfos.data),
 					msgs_prerecorded: JSON.stringify(Main.k.Manager.msgs_prerecorded),
 					key: key,
 					force : force_push ? 1 : 0
@@ -4119,7 +4122,7 @@ Main.k.tabs.playing = function() {
 		}, 0);
 	};
 	Main.k.Sync.pushDelay = function() {
-		var delay = 10;
+		var delay = 5;
 		var key = localStorage.getItem('ctrlw_sync_key');
 		if(key == null){
 			return;
@@ -4524,7 +4527,10 @@ Main.k.tabs.playing = function() {
 			'dead': false
 		};
 	};
-	Main.k.Profiles.set = function(profile){
+	Main.k.Profiles.set = function(profile,save){
+		if(save == null){
+			save = true;
+		}
 		console.group('Main.k.Profiles.save');
 		console.log('profile',profile);
 		var profiles = this.data;
@@ -4536,9 +4542,11 @@ Main.k.tabs.playing = function() {
 		}
 		profiles[profile.dev_surname] = profile;
 		this.data = profiles;
-		this.save();
 		console.groupEnd();
-		Main.k.MushUpdate();
+		if(save){
+			this.save();
+			Main.k.MushUpdate();
+		}
 	};
 	Main.k.Profiles.get = function(hero){
 		if(typeof(hero) == 'undefined'){
@@ -4675,6 +4683,29 @@ Main.k.tabs.playing = function() {
 	};
 // == /Profiles Manager  =======================================
 
+	Main.k.GameInfos = {};
+	Main.k.GameInfos.data = {};
+	Main.k.GameInfos.data.heroes_list = [];
+	Main.k.GameInfos.init = function() {
+		var ctrlw_game_infos = localStorage.getItem("ctrlw_game_infos");
+		if (ctrlw_game_infos == null){
+			return;
+		}
+		Main.k.GameInfos.data = JSON.parse(ctrlw_game_infos);
+	};
+	Main.k.GameInfos.load = function (json){
+		localStorage.setItem("ctrlw_game_infos",json);
+		Main.k.GameInfos.init();
+	};
+	Main.k.GameInfos.save = function() {
+		localStorage.setItem("ctrlw_game_infos",JSON.stringify(Main.k.GameInfos.data));
+		callbacks_storage_sync.fire();
+	};
+	Main.k.GameInfos.clear = function(){
+		Main.k.Profiles.data = {};
+		localStorage.removeItem("ctrlw_game_infos");
+		callbacks_storage_sync.fire();
+	};
 
 
 	// == Message Manager  ========================================
@@ -6279,6 +6310,7 @@ Main.k.tabs.playing = function() {
 		Main.k.Profiles.load();
 		Main.k.Manager.loadMsgsPrerecorded();
 		Main.k.AliveHeroes = [];
+		Main.k.GameInfos.init();
 		Main.k.MushInitHeroes();
 
 		var $content = $("#content");
@@ -6403,6 +6435,7 @@ Main.k.tabs.playing = function() {
 			if (confirm(Main.k.text.gettext("Êtes vous sûr de vouloir effacer les informations de la partie précédente ?"))) {
 				localStorage.removeItem('ctrlw_newgame');
 				Main.k.Profiles.clear();
+				Main.k.GameInfos.clear();
 				Main.k.MushUpdate();
 				//$('#button_new_game').remove();
 			}
@@ -6886,6 +6919,84 @@ Main.k.tabs.playing = function() {
 			});
 
 		});
+		var cryo_table = $('.what_happened .table').first();
+		if(cryo_table.length > 0 && cryo_table.find('.ctrlw-save-cryo').length == 0){
+			cryo_table.find('tr').last().after('<tr><td colspan="2" class="ctrlw-save-cryo" style="font-style:normal"></td></tr>');
+			/* Translators: Text for Cryogenized people from CryoModule  Useless to translate in English*/
+			if(cryo_table.find(':contains("'+Main.k.text.gettext("Cryo")+'")').length > 0){
+				cryo_table.find('.ctrlw-save-cryo').append(Main.k.text.gettext("Tout le monde doit être décryogénisé pour pouvoir mettre à jour la liste d'équipage"));
+			}else{
+				Main.k.MakeButton("<img src='/img/icons/ui/notes.gif' /> "+Main.k.text.gettext("Mettre à jour la liste d'équipage"), null, null, Main.k.text.gettext("Mettre à jour la liste d'équipage"),Main.k.text.gettext("Cliquer ici pour mettre à jour la liste d'équipage de CTRL+W")
+				).appendTo(cryo_table.find('.ctrlw-save-cryo'))
+				.find("a").on("mousedown", function(e) {
+					var tds,bubble,status,add_bool;
+					var heroes_list = [];
+					var status_to_str = {
+						/* Translators: Text for idle people from CryoModule. Regex allowed*/
+						'inactive': Main.k.text.gettext('Inactive'),
+						/* Translators: Text for awake people from CryoModule. Regex allowed*/
+						'awake' : Main.k.text.gettext('Eveillée?'),
+						/* Translators: Text for dead people from CryoModule. Regex allowed*/
+						'dead' :  Main.k.text.gettext('Morte?')//Dead
+					};
+					console.info('status_to_str',status_to_str);
+					cryo_table.find('tr').each(function(){
+						tds = $(this).find('td');
+						if(tds.length == 2){
+							status = null;
+							bubble = Main.k.surnameToBubble(tds.first().text().trim());
+							$.each(status_to_str,function(key,regex){
+								regex = new RegExp(regex);
+								if(regex.exec(tds.last().text().trim()) != null){
+									status = key;
+								}
+							});
+							if(status == null){
+								console.error('Statut inconnu :', tds.last().text().trim());
+								return true;
+							}
+							console.log(bubble,status);
+							heroes_list.push(bubble);
+							profile = Main.k.Profiles.get(bubble);
+							if(status == 'inactive'){
+								add_bool = true
+								$.each(profile.statuses,function(index,status){
+									if(status.img == "sleepy"){
+										add_bool = false;
+										return false;
+									}
+								});
+								if(add_bool){
+									profile.statuses.push(Main.k.statuses['inactive']);
+								}
+								profile.dead = false;
+							}else if (status == 'awake'){
+								profile.dead = false;
+								$.each(profile.statuses,function(index,current_status){
+									if(current_status.img == "sleepy"){
+										console.log('is sleepy');
+										profile = Main.k.Profiles.removeAttrFromProfile(profile,'statuses',Main.k.statuses['inactive']['img']);
+										profile = Main.k.Profiles.removeAttrFromProfile(profile,'statuses',Main.k.statuses['hinactive']['img']);
+										return false;
+									}
+								});
+							}else if(status == 'dead'){
+								profile.dead = true;
+							}
+							Main.k.Profiles.set(profile,false);
+
+						}
+					});
+					Main.k.GameInfos.data.heroes_list = heroes_list;
+					Main.k.GameInfos.save();
+					Main.k.Profiles.save();
+					Main.k.MushInitHeroes();
+					Main.k.MushUpdate();
+					return false;
+				});
+			}
+
+		}
 		// ----------------------------------- //
 
 
@@ -7511,21 +7622,26 @@ Main.k.tabs.playing = function() {
 		}
 		Main.k.heroes_same_room = tab_heroes_same_room;
 		var existing_heroes = ['finola','chao'];
+		//console.log('check heroes list',Main.k.GameInfos.data.heroes_list);
+		if(Main.k.GameInfos.data.heroes_list.length > 0){
+			Main.k.HEROES = Main.k.GameInfos.data.heroes_list;
+		}else{
+			if($('.groupConf').length > 0 && $('.groupConf img[src*="use_andrek"]').length == 1){
+				existing_heroes = ['andie','derek'];
+			}
 
-		if($('.groupConf').length > 0 && $('.groupConf img[src*="use_andrek"]').length == 1){
-			existing_heroes = ['andie','derek'];
+			//replace heroes
+			$.each(Main.k.HEROES.replace, function(k,v){
+				var index;
+				if($('.'+k).length > 0 || $.inArray(k,existing_heroes) != -1){
+					index = $.inArray(v,Main.k.HEROES);
+				}else{
+					index = $.inArray(k,Main.k.HEROES);
+				}
+				Main.k.HEROES.splice(index,1);
+			});
 		}
 
-		//replace heroes
-		$.each(Main.k.HEROES.replace, function(k,v){
-			var index;
-			if($('.'+k).length > 0 || $.inArray(k,existing_heroes) != -1){
-				index = $.inArray(v,Main.k.HEROES);
-			}else{
-				index = $.inArray(k,Main.k.HEROES);
-			}
-			Main.k.HEROES.splice(index,1);
-		});
 
 
 
