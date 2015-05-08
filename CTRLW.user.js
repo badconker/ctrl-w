@@ -4125,7 +4125,7 @@ Main.k.tabs.playing = function() {
 		}, 0);
 	};
 	Main.k.Sync.pushDelay = function() {
-		var delay = 10;
+		var delay = 5;
 		var key = localStorage.getItem('ctrlw_sync_key');
 		if(key == null){
 			return;
