@@ -1188,7 +1188,7 @@ msgstr "Haz clic aquí para actualizar la lista de la tripulación de CTRL+W"
 #. Translators: Text for idle people from CryoModule. Regex allowed*/
 #: ..\CTRLW.user.js:6931
 msgid "Inactive"
-msgstr "Inactiv[o/a]"
+msgstr "Inactiv[o|a]"
 
 #. Translators: Text for awake people from CryoModule. Regex allowed*/
 #: ..\CTRLW.user.js:6933
