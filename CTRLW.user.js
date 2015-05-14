@@ -18,7 +18,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.35.16
+// @version     0.35.17
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -7676,43 +7676,49 @@ Main.k.tabs.credits = function() {
 	$(".scoremush").siblings("h3").css("color", "rgb(255, 64, 89)");
 	$(".triumphmush").siblings(".dude").find("h3").css("color", "rgb(255, 64, 89)");
 };
-Main.k.tabs.myprofile = function() {
-	// Fix Experience
-	$(".charboostbg ul.slots").css("display", "none");
-	$("ul.boost li.charboost").css("height", "200px");
+Main.k.tabs.playerProfile = function() {
 
-	// Fix menu
-	$("#accountmenu").find("a").each(function() {
-		$(this).on("click", function() {
-			var r = /\?([a-z]+)$/;
-			if (r.test(this.href)) {
-				$('.cdTabTgt').hide();
-				$("#" + r.exec(this.href)[1]).show();
-				var sel = $("#" + r.exec(this.href)[1] + "tab");
-				sel.addClass('active');
-				sel.siblings().removeClass('active');
-			} else {
-				$('.cdTabTgt').hide();
-				$("#experience").show();
-				var $experiencetab = $("#experiencetab");
-				$experiencetab.addClass('active');
-				$experiencetab.siblings().removeClass('active');
-			}
-			return false;
-		})
-	});
+	/** Only on connected player profile page **/
+	if($("#experience.cdTabTgt").length > 0){
 
-	// Autoselect tab
-	var url = Main.k.window.location;
-	var r = /\?([a-z]+)$/;
-	if (r.test(url)) {
-		$('.cdTabTgt').hide();
-		$("#" + r.exec(url)[1]).show();
-		var sel = $("#" + r.exec(url)[1] + "tab");
-		sel.addClass('active');
-		sel.siblings().removeClass('active');
+		// Fix Experience
+		$(".charboostbg ul.slots").css("display", "none");
+		$("ul.boost li.charboost").css("height", "200px");
+
+		// Fix menu
+		$("#accountmenu").find("a").each(function() {
+			$(this).on("click", function() {
+				var r = /\?([a-z]+)$/;
+				if (r.test(this.href)) {
+					$('.cdTabTgt').hide();
+					$("#" + r.exec(this.href)[1]).show();
+					var sel = $("#" + r.exec(this.href)[1] + "tab");
+					sel.addClass('active');
+					sel.siblings().removeClass('active');
+				} else {
+					$('.cdTabTgt').hide();
+					$("#experience").show();
+					var $experiencetab = $("#experiencetab");
+					$experiencetab.addClass('active');
+					$experiencetab.siblings().removeClass('active');
+				}
+				return false;
+			})
+		});
+
+		// Autoselect tab
+		var url = Main.k.window.location;
+		var r = /\?([a-z]+)$/;
+		if (r.test(url)) {
+			$('.cdTabTgt').hide();
+			$("#" + r.exec(url)[1]).show();
+			var sel = $("#" + r.exec(url)[1] + "tab");
+			sel.addClass('active');
+			sel.siblings().removeClass('active');
+		}
 	}
 
+	/** For all profile pages **/
 	/**** MY FILE ****/
 	$('.cdTripEntry td .char').css('margin','5px 0');
 	$('.cdTripEntry').each(function(){
@@ -7957,8 +7963,8 @@ if (Main.k.playing && $("#topinfo_bar").length > 0) {
 	Main.k.tabs.credits();
 
 // Fix account page
-} else if ($("#experience.cdTabTgt").length > 0) {
-	Main.k.tabs.myprofile();
+} else if ($("#profile.cdTabTgt").length > 0) {
+	Main.k.tabs.playerProfile();
 
 // Fix rankings
 } else if ($("#ranking").length > 0) {
