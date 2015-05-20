@@ -235,9 +235,25 @@ msgstr "Reality Shows"
 msgid "Classements"
 msgstr "Clasificación"
 
-#: ..\CTRLW.user.js:436
+#: ..\CTRLW.user.js:489 ..\CTRLW.user.js:531
 msgid "Forum"
 msgstr "Foro"
+
+#: ..\CTRLW.user.js:529
+msgid "Pages"
+msgstr "Páginas"
+
+#: ..\CTRLW.user.js:530
+msgid "Nexus"
+msgstr "Nexus"
+
+#: ..\CTRLW.user.js:532
+msgid "Members"
+msgstr "Miembros"
+
+#: ..\CTRLW.user.js:534
+msgid "History"
+msgstr "Historial"
 
 #: ..\CTRLW.user.js:437
 msgid "Aide"
@@ -1047,7 +1063,7 @@ msgstr "Gestor de mensajes"
 msgid "Ne manquez plus de messages ! Tous les topics avec des messages non lus seront mis en évidence, et vous pourrez effectuer des recherches par auteur ou contenu."
 msgstr "¡No vuelvas a perderte un mensaje nunca más! Todos los mensajes no leídos serán resaltados, y podrás hacer búsquedas por autor o contenido."
 
-#: ..\CTRLW.user.js:6398
+#: ..\CTRLW.user.js:6398 ..\CTRLW.user.js:534
 msgid "Options"
 msgstr "Opciones"
 
