@@ -158,6 +158,32 @@ Main.k.initLang = function() {
 		console.error("Error getting translation data:", err);
 	}
 };
+
+	// ************ NEW: LANGUAJE FLAG ************
+	var Html_langflag = '<td><ul class="langFlag"><img class="langFlag" src="http://data.twinoid.com/img/flags/' + Main.k.lang + '.png">';
+	var Html_langflag_FR = '<li class="langFlag FR"><a href="http://mush.vg"><img src="http://data.twinoid.com/img/flags/fr.png"></a></li>';
+	var Html_langflag_ES = '<li class="langFlag ES"><a href="http://mush.twinoid.es"><img src="http://data.twinoid.com/img/flags/es.png"></a></li>';
+	var Html_langflag_EN = '<li class="langFlag EN"><a href="http://mush.twinoid.com"><img src="http://data.twinoid.com/img/flags/en.png"></a></li>';
+	switch(Main.k.lang) {
+		case "fr":
+			Html_langflag += Html_langflag_EN;
+			Html_langflag += Html_langflag_ES;
+			break;
+		case "es":
+			Html_langflag += Html_langflag_EN;
+			Html_langflag += Html_langflag_FR;
+			break;
+		case "en":
+			Html_langflag += Html_langflag_ES;
+			Html_langflag += Html_langflag_FR;
+			break;
+	}
+	Html_langflag += '</ul></td>';
+	Main.k.css.langFlag();
+	//$('#topinfo_bar table.genstatus tr td:last').after(Html_langflag);
+	$('<h3>').html(Html_langflag).appendTo('#topinfo_bar table.genstatus tr td:last');
+	// ************ NEW: LANGUAJE FLAG ************
+
 Main.k.initData = function() {
 	// Define if we are ingame
 	Main.k.playing = Main.heroes.iterator().hasNext();
@@ -996,6 +1022,28 @@ Main.k.Options.init = function() {
 
 
 Main.k.css = {};
+// ************ NEW: LANGUAJE FLAG ************
+Main.k.css.langFlag = function() {
+	$("<style>").attr("type", "text/css").html("\
+	ul.langFlag {\
+		//display: inline-block;\
+		position: absolute;\
+		z-index: 8;\
+	}\
+	ul.langFlag li {\
+		display: none;\
+		padding-left: 5px;\
+		z-index: 8;\
+	}\
+	ul.langFlag:hover li {\
+		display: inline-block;\
+		//position: relative;\
+		//top: 15px;\
+		z-index: 8;\
+	}\
+	").appendTo("head");
+};
+// ************ NEW: LANGUAJE FLAG ************
 Main.k.css.customMenu = function() {
 	$("<style>").attr("type", "text/css").html("\
 	body.gold #maincontainer{margin-top:543px !important;}\
