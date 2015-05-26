@@ -18,7 +18,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.35.17
+// @version     0.35.18
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -840,7 +840,7 @@ Main.k.Game.updatePlayerInfos = function() {
 		}
 		console.log('récupération du statut du joueur');
 		if(jobject.find('#experience .bought.goldactive').length > 0){
-			$this.player_status = 'gold';
+			$this.data.player_status = 'gold';
 			console.log('le joueur est gold');
 		}else if(jobject.find('#experience .bought').length > 0){
 			$this.data.player_status = 'silver';
