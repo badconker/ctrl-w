@@ -840,7 +840,7 @@ Main.k.Game.updatePlayerInfos = function() {
 		}
 		console.log('récupération du statut du joueur');
 		if(jobject.find('#experience .bought.goldactive').length > 0){
-			$this.player_status = 'gold';
+			$this.data.player_status = 'gold';
 			console.log('le joueur est gold');
 		}else if(jobject.find('#experience .bought').length > 0){
 			$this.data.player_status = 'silver';
