@@ -457,35 +457,16 @@ Main.k.displayMainMenu = function() {
 
 	if(Main.k.text.gettext("ForumCastingsId") != "ForumCastingsId") {
 		var casting = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/group/list'>"+Main.k.text.gettext("Castings")+"</a></li>").appendTo(menu);	// NEW: Added var
-	}
-	var rankings = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/ranking'>"+Main.k.text.gettext("Classements")+"</a></li>").appendTo(menu);
-	var forum = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/tid/forum'>"+Main.k.text.gettext("Forum")+"</a></li>").appendTo(menu);
-	var help = $("<li class='kmenuel last'><a href='"+Main.k.mushurl+"/help'>"+Main.k.text.gettext("Aide")+"</a></li>").appendTo(menu);
-
-	var play_ss = $("<ul>").appendTo(play);
-	$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/vending'><img src='/img/icons/skills/rebel.png' />"+Main.k.text.gettext("Distributeur")+"</a></li>")
-	.css("display", "none").attr("id", "vendingmenu").appendTo(play_ss);
-
-	var account_ss = $("<ul>").attr("id", "accountmenu").appendTo(account);
-	$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/me'><img src='/img/icons/skills/persistent.png' />"+Main.k.text.gettext("Expérience")+"</a></li>").appendTo(account_ss);
-	$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/me?profile'><img src='/img/icons/skills/opportunist.png' />"+Main.k.text.gettext("Ma fiche")+"</a></li>").appendTo(account_ss);
-	$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/me?config'><img src='/img/icons/skills/engineer.png' />"+Main.k.text.gettext("Mes réglages")+"</a></li>").appendTo(account_ss);
-	$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/me?news'><img src='/img/icons/skills/radio_expert.png' />"+Main.k.text.gettext("News")+"</a></li>").appendTo(account_ss);
 
 	// ************ NEW: CASTING SUBMENU ************
 	var casting_ss = $("<ul>").appendTo(casting);
 
 	SaveCastingMenu();
 
-	var castID__ = localStorage.getItem("CastingListID");
-	var castSN__ = localStorage.getItem("CastingListSN");
-	var castLN__ = localStorage.getItem("CastingListFN");
-	var castIcon__ = localStorage.getItem("CastingListIcon");
-
-	var castID = JSON.parse(castID__);
-	var castSN = JSON.parse(castSN__);
-	var castLN = JSON.parse(castLN__);
-	var castIcon = JSON.parse(castIcon__);
+	var castID = JSON.parse(localStorage.getItem("CastingListID"));
+	var castSN = JSON.parse(localStorage.getItem("CastingListSN"));
+	var castLN = JSON.parse(localStorage.getItem("CastingListFN"));
+	var castIcon = JSON.parse(localStorage.getItem("CastingListIcon"));
 
 	if(castID.length > 0) {	// Check having casting
 		var arr_casting = [];
@@ -509,6 +490,20 @@ Main.k.displayMainMenu = function() {
 	}
 	$("<li><a href='http://mtrg.kubegb.fr/' target='_blank'><img src='http://mush.twinoid.es/img/icons/ui/triumph.png' />MTRG</a></li>").appendTo(casting_ss); // Mush Triumph Remap Generator
 	// ************ NEW: CASTING SUBMENU ************
+	}
+	var rankings = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/ranking'>"+Main.k.text.gettext("Classements")+"</a></li>").appendTo(menu);
+	var forum = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/tid/forum'>"+Main.k.text.gettext("Forum")+"</a></li>").appendTo(menu);
+	var help = $("<li class='kmenuel last'><a href='"+Main.k.mushurl+"/help'>"+Main.k.text.gettext("Aide")+"</a></li>").appendTo(menu);
+
+	var play_ss = $("<ul>").appendTo(play);
+	$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/vending'><img src='/img/icons/skills/rebel.png' />"+Main.k.text.gettext("Distributeur")+"</a></li>")
+	.css("display", "none").attr("id", "vendingmenu").appendTo(play_ss);
+
+	var account_ss = $("<ul>").attr("id", "accountmenu").appendTo(account);
+	$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/me'><img src='/img/icons/skills/persistent.png' />"+Main.k.text.gettext("Expérience")+"</a></li>").appendTo(account_ss);
+	$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/me?profile'><img src='/img/icons/skills/opportunist.png' />"+Main.k.text.gettext("Ma fiche")+"</a></li>").appendTo(account_ss);
+	$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/me?config'><img src='/img/icons/skills/engineer.png' />"+Main.k.text.gettext("Mes réglages")+"</a></li>").appendTo(account_ss);
+	$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/me?news'><img src='/img/icons/skills/radio_expert.png' />"+Main.k.text.gettext("News")+"</a></li>").appendTo(account_ss);
 
 	var rankings_ss = $("<ul>").appendTo(rankings);
 	$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/ranking'><img src='/img/icons/skills/persistent.png' />"+Main.k.text.gettext("Classements")+"</a></li>").appendTo(rankings_ss);
