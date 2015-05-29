@@ -414,6 +414,7 @@ Main.k.getHeroBySurname = function(dev_surname) {
 	}
 	return null;
 };
+// ************ NEW: CASTING SUBMENU ************
 Main.k.displayMainMenu = function() {
 	Main.k.css.customMenu();
 
@@ -429,15 +430,47 @@ Main.k.displayMainMenu = function() {
 	var account = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/me'>"+Main.k.text.gettext("Mon compte")+"</a></li>").appendTo(menu);
 
 	if(Main.k.text.gettext("ForumCastingsId") != "ForumCastingsId") {
-		$("<li class='kmenuel'><a href='"+Main.k.mushurl+"/group/list'>"+Main.k.text.gettext("Castings")+"</a></li>").appendTo(menu);
+		var casting = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/group/list'>"+Main.k.text.gettext("Castings")+"</a></li>").appendTo(menu);	// NEW: Added var
+
+		// ************ NEW: CASTING SUBMENU ************
+		var casting_ss = $("<ul>").appendTo(casting);
+
+		var castings = Main.k.Game.data.castings;
+
+		if(!$.isEmptyObject(castings)) {	// Check having casting
+			var casting_menu, cast_ss;
+			$.each(castings,function(id, casting){
+				casting_menu = $("<li></li>")
+					.appendTo(casting_ss);
+
+				var a = $("<a class='kssmenuel ext' href='"+Main.k.mushurl+"/group/"+casting.id+"'><img src='"+casting.icon+"' />"+casting.short_name+"</a>")
+					.appendTo(casting_menu);
+
+				if(casting.long_name != casting.short_name){
+						a
+							.attr("_title", Main.k.text.gettext("Nom complet"))
+							.attr("_desc", "<strong>"+casting.long_name+"</strong>")
+							.on("mouseover", Main.k.CustomTip)
+							.on("mouseout", Main.k.hideTip)
+				}
+
+				cast_ss = $("<ul>").appendTo(casting_menu);
+				$("<li><a href='"+Main.k.mushurl+"/group/page/"+casting.id+"'><img src='" + Main.k.mushurl + "/img/icons/skills/conceptor.png' />"+Main.k.text.gettext("Pages")+"</a></li>").appendTo(cast_ss); // Pages
+				$("<li><a href='"+Main.k.mushurl+"/group/nexus/"+casting.id+"'><img src='" + Main.k.mushurl + "/img/icons/skills/logistics.png' />"+Main.k.text.gettext("Nexus")+"</a></li>").appendTo(cast_ss); // Nexus
+				$("<li><a href='"+Main.k.mushurl+"/group/forum/"+casting.id+"'><img src='" + Main.k.servurl + "/img/radioh.png' />"+Main.k.text.gettext("Forum")+"</a></li>").appendTo(cast_ss); // Forum
+				$("<li><a href='"+Main.k.mushurl+"/group/members/"+casting.id+"'><img src='" + Main.k.mushurl + "/img/icons/skills/optimistic.png' />"+Main.k.text.gettext("Members")+"</a></li>").appendTo(cast_ss); // Members
+				$("<li><a href='"+Main.k.mushurl+"/group/options/"+casting.id+"'><img src='" + Main.k.mushurl + "/img/icons/skills/engineer.png' />"+Main.k.text.gettext("Options")+"</a></li>").appendTo(cast_ss); // Options
+				$("<li><a href='"+Main.k.mushurl+"/group/history/"+casting.id+"'><img src='" + Main.k.mushurl + "/img/icons/skills/panic.png' />"+Main.k.text.gettext("History")+"</a></li>").appendTo(cast_ss); // History
+			});
+			$("<li style='height:2px'>&nbsp</li>").appendTo(casting_ss);
+		}
+		$("<li><a href='http://mtrg.kubegb.fr/' class='kssmenuel ext' title='Mush Triumph Remap Generator'><img src='"+Main.k.mushurl+"/img/icons/ui/triumph.png' />MTRG</a></li>").appendTo(casting_ss); // Mush Triumph Remap Generator
+		// ************ NEW: CASTING SUBMENU ************
 	}
 	var rankings = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/ranking'>"+Main.k.text.gettext("Classements")+"</a></li>").appendTo(menu);
 	var forum = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/tid/forum'>"+Main.k.text.gettext("Forum")+"</a></li>").appendTo(menu);
 	var help = $("<li class='kmenuel last'><a href='"+Main.k.mushurl+"/help'>"+Main.k.text.gettext("Aide")+"</a></li>").appendTo(menu);
 
-	var play_ss = $("<ul>").appendTo(play);
-	$("<a class='kssmenuel' href='"+Main.k.mushurl+"/vending'><li><img src='/img/icons/skills/rebel.png' />"+Main.k.text.gettext("Distributeur")+"</li></a>")
-	.css("display", "none").attr("id", "vendingmenu").appendTo(play_ss);
 
 	var account_ss = $("<ul>").attr("id", "accountmenu").appendTo(account);
 	$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/me'><img src='/img/icons/skills/persistent.png' />"+Main.k.text.gettext("Expérience")+"</a></li>").appendTo(account_ss);
@@ -803,7 +836,7 @@ Main.k.Game.data.day = 0;
 Main.k.Game.data.cycle = 0;
 Main.k.Game.data.xp = 1;
 Main.k.Game.data.player_status = 'bronze';
-Main.k.Game.data.players = {};
+Main.k.Game.data.castings = {};
 Main.k.Game.init = function() {
 	var ctrlw_game = localStorage.getItem("ctrlw_game");
 	if (ctrlw_game == null){
@@ -849,6 +882,20 @@ Main.k.Game.updatePlayerInfos = function() {
 			$this.data.player_status = 'bronze';
 			console.log('le joueur est bronze');
 		}
+
+		$this.data.castings = {};
+		jobject.find('#profile .bgtablesummar:last li').each(function(index, element) {
+			var casting = {};
+			casting.id = $(this).find('a').attr('href').replace('/group/','');
+			casting.icon = $(this).find('a').attr('src');
+			var str = jobject.find('.nameCast a:eq('+index+')').text();
+			casting.long_name = casting.short_name = str;
+			if(str.length > 18){
+				casting.short_name = str.match(/\b(\w)/g).join('.').concat('.');
+			}
+			$this.data.castings[casting.id] = casting;
+		});
+
 		$this.save();
 		Main.k.MushUpdate();
 		Main.k.quickNotice(Main.k.text.gettext('Infos du joueur mises à jour.'));
@@ -1013,7 +1060,6 @@ Main.k.css.customMenu = function() {
 		border-left: none;\
 		background: #003baf;\
 		box-shadow: 0 2px 3px 1px rgba(0,0,0,0.3), inset 0px -15px 15px -10px rgba(0,0,0,0.5);\
-		cursor: pointer;\
 	}\
 	.kmenuel a {\
 		display: block;\
@@ -1045,26 +1091,32 @@ Main.k.css.customMenu = function() {
 		border-bottom-right-radius: 8px;\
 	}\
 	.kmenuel ul { display: none; }\
-	.kmenuel ul a { display: inline; height: auto; width: auto; padding: 0; }\
-	.kmenuel:hover ul {\
+	.kmenuel ul a { display: block; width: auto; padding: 0px 5px }\
+	.kmenuel:hover > ul {\
 		display: block;\
 		position: absolute;\
 		width: 100%;\
 		top: 33px;\
 		left: 0;\
-		text-align: center;\
-		z-index: 50;\
+		text-align: right;\
+		z-index: 9;\
+		padding: 0;\
+	}\
+	.kmenuel ul li:hover ul {\
+		display: block;\
+		position: absolute;\
+		width: 100%;\
+		text-align: right;\
+		z-index: 9;\
 		padding: 0;\
 	}\
 	.kmenuel ul li {\
 		text-align: left;\
-		margin: 0 auto;\
+		margin: 0 3px;\
 		display: block! important;\
 		border: 1px solid rgb(2,16,66);\
 		border-top: none! important;\
-		width: 140px;\
-		height: 22px;\
-		padding: 0 15px 0 5px! important;\
+		height: auto;\
 		background: #0071e3;\
 		color: #EEE;\
 		text-shadow: 0 0 1px #000;\
@@ -1075,6 +1127,10 @@ Main.k.css.customMenu = function() {
 		background: #0094ff;\
 		text-shadow: 0 0 3px #000;\
 		box-shadow: 0 2px 3px 1px rgba(0,0,0,0.3), inset 0px 4px 8px 0px rgba(0,0,0,0.3);\
+	}\
+	.kmenuel ul li ul {\
+		right: -160px;\
+		top: 0px;\
 	}\
 	.kmenuel ul li img {\
 		margin-right : 5px;\
