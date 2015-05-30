@@ -1148,9 +1148,6 @@ Main.k.css.ingame = function() {
 	Main.k.css.bubbles();
 
 	$("<style>").attr("type", "text/css").html("\
-	.tid_editorContent { \
-		visibility: visible !important; \
-	} \
 	.blink-limited {\
 		-moz-animation: blink 1s 3 linear;\
 		-webkit-animation: blink 1s 3 linear;\
@@ -6509,8 +6506,8 @@ Main.k.tabs.playing = function() {
 		// Heroes' titles
 		// ----------------------------------- //
 		var t = $('<h3 class="titles_title"></h3>').html(Main.k.text.gettext("titres").capitalize()).appendTo(leftbar);
-		$("<span>").addClass("displaymore").attr("_target", "#titles_list").appendTo(t).on("click", Main.k.ToggleDisplay);
-		$("<div>").addClass("titles_list").attr("id", "titles_list").css("display", "none").appendTo(leftbar);
+		$("<span>").addClass("displayless").attr("_target", "#titles_list").appendTo(t).on("click", Main.k.ToggleDisplay);
+		$("<div>").addClass("titles_list").attr("id", "titles_list").appendTo(leftbar);
 		// ----------------------------------- //
 
 
@@ -6528,8 +6525,8 @@ Main.k.tabs.playing = function() {
 		// Inventory
 		// ----------------------------------- //
 		t = $("<h3>").html(Main.k.text.gettext("inventaire").capitalize()).appendTo(leftbar);
-		$("<span>").addClass("displayless").attr("_target", ".kobject_list").appendTo(t).on("click", Main.k.ToggleDisplay);
-		$("<div>").addClass("inventory kobject_list").css("display", "block").appendTo(leftbar);
+		$("<span>").addClass("displaymore").attr("_target", ".kobject_list").appendTo(t).on("click", Main.k.ToggleDisplay);
+		$("<div>").addClass("inventory kobject_list").css("display", "none").appendTo(leftbar);
 		$("<div>").css({"clear": "both", "height": "5px"}).appendTo(leftbar);
 
 		// Inventory actions
