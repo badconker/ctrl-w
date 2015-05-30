@@ -887,7 +887,7 @@ Main.k.Game.updatePlayerInfos = function() {
 		jobject.find('#profile .bgtablesummar:last li').each(function(index, element) {
 			var casting = {};
 			casting.id = $(this).find('a').attr('href').replace('/group/','');
-			casting.icon = $(this).find('a').attr('src');
+			casting.icon = $(this).find('img').attr('src');
 			var str = jobject.find('.nameCast a:eq('+index+')').text();
 			casting.long_name = casting.short_name = str;
 			if(str.length > 18){
