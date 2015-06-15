@@ -855,7 +855,8 @@ Main.k.Game.save = function() {
 	localStorage.setItem("ctrlw_game",JSON.stringify(Main.k.Game.data));
 };
 Main.k.Game.clear = function(){
-	localStorage.removeItem("ctrlw_game");
+	Main.k.Game.data.day = 0;
+	$this.save();
 };
 Main.k.Game.updateDayAndCycle = function(day,cycle) {
 	if(day != this.data.day || cycle != this.data.cycle){
