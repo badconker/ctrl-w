@@ -18,7 +18,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.35.18
+// @version     0.35.19
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -7125,7 +7125,7 @@ Main.k.tabs.playing = function() {
 		var projects = $cdModuleContent.find("ul.dev li.cdProjCard");
 		var projectsdiv;
 		var $research_module = $("#research_module");
-		var pattcore = new RegExp(Main.k.text.gettext("Coeur de NERON"));
+		var pattcore = new RegExp(Main.k.text.gettext("Coeur de NERON"),"i");
 		// Research
 		if ($research_module.length > 0 && projects.length > 0) {
 			t = $("<h3>").html(Main.k.text.gettext("Laboratoire")).appendTo(project_list);
