@@ -1238,7 +1238,7 @@ msgstr "Dead"
 
 #: ..\CTRLW.user.js:7194
 msgid "Coeur de NERON"
-msgstr "NERON's core"
+msgstr "NERON's Core"
 
 #: ..\CTRLW.user.js:7197
 msgid "Laboratoire"
