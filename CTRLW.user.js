@@ -4060,7 +4060,6 @@ Main.k.tabs.playing = function() {
 									Main.k.Manager.loadMsgsPrerecorded(json.sync.msgs_prerecorded,true);
 								}
 								Main.k.GameInfos.load(json.sync.game_infos);
-								Main.k.MushInitHeroes();
 								Main.k.quickNotice(Main.k.text.gettext('Synchronisation effectuée'));
 								Main.k.MushUpdate();
 							}
@@ -6414,7 +6413,6 @@ Main.k.tabs.playing = function() {
 		Main.k.Manager.loadMsgsPrerecorded();
 		Main.k.AliveHeroes = [];
 		Main.k.GameInfos.init();
-		Main.k.MushInitHeroes();
 
 		var $content = $("#content");
 		// Handle Mush Logo (option)
@@ -6630,7 +6628,7 @@ Main.k.tabs.playing = function() {
 	};
 	Main.k.MushUpdate = function() {
 		console.log('mushupdate');
-
+		Main.k.MushInitHeroes();
 		// Events
 		// ----------------------------------- //
 		$('#swf_ISO_MODULE').off('mousedown');
@@ -7106,7 +7104,6 @@ Main.k.tabs.playing = function() {
 					Main.k.GameInfos.data.heroes_list = heroes_list;
 					Main.k.GameInfos.save();
 					Main.k.Profiles.save();
-					Main.k.MushInitHeroes();
 					Main.k.MushUpdate();
 					return false;
 				});
