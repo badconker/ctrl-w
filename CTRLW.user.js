@@ -73,7 +73,7 @@ Main.k.errorList = [];
 if(Main.k.debug){
 	var console = unsafeWindow.console;
 }else{
-	var console = {}
+	var console = {};
 	console.log = console.error = console.info = console.debug = console.warn = console.trace = console.dir = console.dirxml = console.group = console.groupEnd = console.time = console.timeEnd = console.assert = console.profile = function() {};
 }
 
@@ -104,7 +104,7 @@ String.prototype.hashCode = function() {
 		hash = hash & hash; // Convert to 32bit integer
 	}
 	return hash;
-}
+};
 RegExp.escape = function(s) {
 	return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 };
@@ -369,7 +369,7 @@ Main.k.initData = function() {
 	Main.k.statuses = {
 		'inactive': {
 			/* Translators: This translation must be copied from the game. */
-			'desc' : Main.k.text.gettext('Description inactif'),
+			'desc' : Main.k.text.gettext('Vous ne vous êtes pas connecté depuis 24h. Bonne chance pour la suite...'),
 			'img' : 'sleepy',
 			/* Translators: This translation must be copied from the game. */
 			'name' : Main.k.text.gettext('Inactif')
@@ -380,6 +380,13 @@ Main.k.initData = function() {
 			'img' : 'noob',
 			/* Translators: This translation must be copied from the game. */
 			'name' : Main.k.text.gettext('Grand inactif')
+		},
+		'mush': {
+			/* Translators: This translation must be copied from the game. */
+			'desc' : Main.k.text.gettext('Vous faites partie du Mush.'),
+			'img' : 'mush',
+			/* Translators: This translation must be copied from the game. */
+			'name' : Main.k.text.gettext('Mush')
 		}
 	};
 };
@@ -539,7 +546,7 @@ Main.k.updateMainMenu = function (){
 	}
 	$("<li><a href='http://mtrg.kubegb.fr/' class='kssmenuel ext' title='Mush Triumph Remap Generator'><img src='"+Main.k.mushurl+"/img/icons/ui/triumph.png' />MTRG</a></li>").appendTo(casting_ss); // Mush Triumph Remap Generator
 	// ************ NEW: CASTING SUBMENU ************
-}
+};
 /**
  *
  * @param arr
@@ -665,7 +672,7 @@ Main.k.CustomTip = function(e) {
 };
 Main.k.hideTip = function(){
 	Main.hideTip();
-}
+};
 Main.k.MakeButton = function(content, href, onclick, tiptitle, tipdesc) {
 	var but = $("<div>").addClass("action but");
 	var butbr = $("<div>").addClass("butright").appendTo(but);
@@ -4505,8 +4512,8 @@ Main.k.tabs.playing = function() {
 				$('<img>')
 					.attr({
 						src: '/img/icons/ui/dead.png',
-						alt: 'dead',
-						title: 'dead'
+						alt: Main.k.text.gettext('Mort'),
+						title: Main.k.text.gettext('Mort')
 					})
 			)
 			.append(
@@ -4529,8 +4536,8 @@ Main.k.tabs.playing = function() {
 				$('<img>')
 					.attr({
 						src: '/img/icons/ui/'+Main.k.statuses['inactive']['img']+'.png',
-						alt: 'inactive',
-						title: 'inactive'
+						alt: Main.k.statuses.inactive.name,
+						title: Main.k.statuses.inactive.name
 					})
 				)
 			.append(
@@ -4558,8 +4565,8 @@ Main.k.tabs.playing = function() {
 				$('<img>')
 					.attr({
 						src: '/img/icons/ui/'+Main.k.statuses['hinactive']['img']+'.png',
-						alt: 'highly inactive',
-						title: 'highly inactive'
+						alt: Main.k.statuses.hinactive.name,
+						title: Main.k.statuses.hinactive.name
 					})
 				)
 			.append(
@@ -4581,6 +4588,35 @@ Main.k.tabs.playing = function() {
 					})
 			)
 			.appendTo($custom_infos);
+			$('<label />')
+				.attr('for','hero_details_mush')
+				.append(
+				$('<img>')
+					.attr({
+						src: '/img/icons/ui/'+Main.k.statuses['mush']['img']+'.png',
+						alt: Main.k.statuses.mush.name,
+						title: Main.k.statuses.mush.name
+					})
+				)
+				.append(
+				$('<input />')
+					.attr({
+						id: 'hero_details_mush',
+						type: 'checkbox'
+					})
+					.prop('checked',$this.hasAttr(o_hero,'statuses',Main.k.statuses['mush']['img']))
+					.on('change',function(){
+						var o_hero = $this.get();
+						if($(this).prop('checked')){
+							o_hero.statuses.push(Main.k.statuses['mush']);
+						}else{
+							o_hero = $this.removeAttrFromProfile(o_hero,'statuses',Main.k.statuses['mush']['img']);
+						}
+						$this.set(o_hero);
+						$this.update();
+					})
+			)
+				.appendTo($custom_infos);
 		console.groupEnd();
 	};
 	Main.k.Profiles.create = function(dev_surname){
@@ -6943,14 +6979,6 @@ Main.k.tabs.playing = function() {
 								Main.k.Profiles.display($(this).data('dev_surname'));
 							})
 					);
-
-				for( var inc = 0; inc < o_hero.statuses.length; inc ++){
-					/** @type {{desc:string,img:string, name:string}} **/
-					status = o_hero.statuses[inc];
-					if($.inArray(status.img,['sleepy','noob']) != -1){
-						inactive_status = status.img;
-					}
-				}
 				if(o_hero.dead == true){
 					a_divs_heroes['dead'].push($div_hero);
 					$('<img>').attr({
@@ -6963,21 +6991,42 @@ Main.k.tabs.playing = function() {
 							'pointer-events': 'none'
 						})
 						.appendTo($div_hero);
-				}else if(inactive_status != null){
-					a_divs_heroes['inactive'].push($div_hero);
-					$('<img>').attr({
-							src: '/img/icons/ui/'+inactive_status+'.png'
+				}else {
+					if(Main.k.Profiles.hasAttr(o_hero,'statuses',Main.k.statuses['mush']['img'])){
+						$('<img>').attr({
+							src: '/img/icons/ui/mush.png'
 						})
-						.css({
-							position: 'absolute',
-							bottom: '-6px',
-							right: '-2px',
-							'pointer-events': 'none'
+							.css({
+								position: 'absolute',
+								bottom: '-6px',
+								right: '-2px',
+								'pointer-events': 'none'
+							})
+							.appendTo($div_hero);
+					}
+					for( var inc = 0; inc < o_hero.statuses.length; inc ++){
+						/** @type {{desc:string,img:string, name:string}} **/
+						status = o_hero.statuses[inc];
+						if(status.img)
+							if($.inArray(status.img,['sleepy','noob']) != -1){
+								inactive_status = status.img;
+							}
+					}
+					if (inactive_status != null) {
+						a_divs_heroes['inactive'].push($div_hero);
+						$('<img>').attr({
+							src: '/img/icons/ui/' + inactive_status + '.png'
 						})
-						.appendTo($div_hero);
-				}else{
-					a_divs_heroes['alive'].push($div_hero);
-
+							.css({
+								position: 'absolute',
+								bottom: '-6px',
+								right: '-2px',
+								'pointer-events': 'none'
+							})
+							.appendTo($div_hero);
+					} else {
+						a_divs_heroes['alive'].push($div_hero);
+					}
 				}
 		}
 		$.each(a_divs_heroes,function(k,a){
