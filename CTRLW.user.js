@@ -18,7 +18,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.35.19b2
+// @version     0.35.19b3
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
