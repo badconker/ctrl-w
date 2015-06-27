@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ctrl+w\n"
 "Report-Msgid-Bugs-To: http://twd.io/e/0fdb0w\n"
-"POT-Creation-Date: 2015-06-27 02:54-0700\n"
+"POT-Creation-Date: 2015-06-27 03:41-0700\n"
 "PO-Revision-Date: 2014-10-14 19:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -869,11 +869,19 @@ msgid ""
 msgstr ""
 
 #: ../CTRLW.user.js:4871
+msgid "Nouveaux Messages"
+msgstr ""
+
+#: ../CTRLW.user.js:4871
 msgid ""
 "Beaucoup de messages à lire ? Le manager permet de rattraper son retard plus "
 "facilement. En chargeant tous les messages dans l'onglet Statistiques, vous "
 "pouvez aussi voir les messages non lus manqués à cause du bug (Mush) des "
 "messages."
+msgstr ""
+
+#: ../CTRLW.user.js:4872
+msgid "Recherche de Messages"
 msgstr ""
 
 #: ../CTRLW.user.js:4872
@@ -890,6 +898,10 @@ msgid ""
 msgstr ""
 
 #. Translators: This translation must be copied from the game.
+#: ../CTRLW.user.js:4876
+msgid "Favoris"
+msgstr ""
+
 #: ../CTRLW.user.js:4876
 msgid "Votre sélection de sujets favoris."
 msgstr ""

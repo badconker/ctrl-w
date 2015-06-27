@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CTRL+W\n"
 "Report-Msgid-Bugs-To: http://twd.io/e/0fdb0w\n"
-"POT-Creation-Date: 2015-06-27 02:54-0700\n"
+"POT-Creation-Date: 2015-06-27 03:41-0700\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -927,6 +927,11 @@ msgstr ""
 "cargan por página."
 
 #: ../CTRLW.user.js:4871
+#, fuzzy
+msgid "Nouveaux Messages"
+msgstr "Nuevo mensaje"
+
+#: ../CTRLW.user.js:4871
 msgid ""
 "Beaucoup de messages à lire ? Le manager permet de rattraper son retard plus "
 "facilement. En chargeant tous les messages dans l'onglet Statistiques, vous "
@@ -937,6 +942,11 @@ msgstr ""
 "ponerte al día fácilmente. Cuando cargues todos los mensajes en la pestaña "
 "de Estadísticas, podrás leer incluso los mensajes no leídos debido a fallos "
 "del juego."
+
+#: ../CTRLW.user.js:4872
+#, fuzzy
+msgid "Recherche de Messages"
+msgstr "Investigación menor"
 
 #: ../CTRLW.user.js:4872
 msgid ""
@@ -956,6 +966,10 @@ msgstr ""
 "p><p>Para participar necesitarás un <strong>walkie-talkie</strong>."
 
 #. Translators: This translation must be copied from the game.
+#: ../CTRLW.user.js:4876
+msgid "Favoris"
+msgstr ""
+
 #: ../CTRLW.user.js:4876
 msgid "Votre sélection de sujets favoris."
 msgstr "Tus temas favoritos."
