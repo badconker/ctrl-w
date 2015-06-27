@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ctrl+w\n"
 "Report-Msgid-Bugs-To: http://twd.io/e/0fdb0w\n"
-"POT-Creation-Date: 2015-06-27 03:41-0700\n"
+"POT-Creation-Date: 2015-06-27 14:23-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -913,6 +913,10 @@ msgstr ""
 
 #. Translators: The beginning must be copied from the game.
 #: ../CTRLW.user.js:4912
+msgid "Canal Mush"
+msgstr ""
+
+#: ../CTRLW.user.js:4912
 msgid ""
 "Ssshh, personne nous entend ici... Le Canal Mush est le <em>canal privé</em> "
 "pour les adhérents aux <strong>Mush</strong> <img src='/img/icons/ui/mush."
@@ -921,6 +925,10 @@ msgstr ""
 
 #: ../CTRLW.user.js:4915 ../CTRLW.user.js:4973
 msgid "Disponible prochainement."
+msgstr ""
+
+#: ../CTRLW.user.js:4918 ../CTRLW.user.js:4924 ../CTRLW.user.js:4930
+msgid "Chat privé"
 msgstr ""
 
 #: ../CTRLW.user.js:4918 ../CTRLW.user.js:4924 ../CTRLW.user.js:4930

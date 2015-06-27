@@ -4909,25 +4909,25 @@ Main.k.tabs.playing = function() {
 
 			if (hasmushchat) {
 				/* Translators: The beginning must be copied from the game. */
-				var mushtab = $("<li>").addClass("tab taboff").attr("id", "tabmush").attr("_title", "Canal Mush").attr("_desc", Main.k.text.gettext("Ssshh, personne nous entend ici... Le Canal Mush est le <em>canal privé</em> pour les adhérents aux <strong>Mush</strong> <img src='/img/icons/ui/mush.png' />.</p><p><strong>/!&#92; Fonctionnalité non codée</strong>")).appendTo(tabs);
+				var mushtab = $("<li>").addClass("tab taboff").attr("id", "tabmush").attr("_title", Main.k.text.gettext("Canal Mush")).attr("_desc", Main.k.text.gettext("Ssshh, personne nous entend ici... Le Canal Mush est le <em>canal privé</em> pour les adhérents aux <strong>Mush</strong> <img src='/img/icons/ui/mush.png' />.</p><p><strong>/!&#92; Fonctionnalité non codée</strong>")).appendTo(tabs);
 				$("<img>").attr("src", "/img/icons/ui/mush.png").appendTo(mushtab);
 				var mushchat = $("<div>").attr("id", "tabmush_content").css("display", "none").addClass("tabcontent wall").appendTo(rbg);
 				$("<p>").addClass("warning").html(Main.k.text.gettext("Disponible prochainement.")).appendTo(mushchat);
 			}
 			if (haschat1) {
-				var chat1tab = $("<li>").addClass("tab taboff").attr("id", "tabchat1").attr("_title", "Chat privé #1").attr("_desc", Main.k.text.gettext("Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!&#92; Fonctionnalité non codée</strong>")).appendTo(tabs);
+				var chat1tab = $("<li>").addClass("tab taboff").attr("id", "tabchat1").attr("_title", Main.k.text.gettext("Chat privé") + " #1").attr("_desc", Main.k.text.gettext("Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!&#92; Fonctionnalité non codée</strong>")).appendTo(tabs);
 				$("<img>").attr("src", "/img/icons/ui/private.png").appendTo(chat1tab);
 				var chat1 = $("<div>").attr("id", "tabchat1_content").css("display", "none").addClass("tabcontent wall").appendTo(rbg);
 				$("<p>").addClass("warning").html("Disponible prochainement.").appendTo(chat1);
 			}
 			if (haschat2) {
-				var chat2tab = $("<li>").addClass("tab taboff").attr("id", "tabchat2").attr("_title", "Chat privé #2").attr("_desc", Main.k.text.gettext("Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!&#92; Fonctionnalité non codée</strong>")).appendTo(tabs);
+				var chat2tab = $("<li>").addClass("tab taboff").attr("id", "tabchat2").attr("_title", Main.k.text.gettext("Chat privé") + " #2").attr("_desc", Main.k.text.gettext("Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!&#92; Fonctionnalité non codée</strong>")).appendTo(tabs);
 				$("<img>").attr("src", "/img/icons/ui/private.png").appendTo(chat2tab);
 				var chat2 = $("<div>").attr("id", "tabchat2_content").css("display", "none").addClass("tabcontent wall").appendTo(rbg);
 				$("<p>").addClass("warning").html("Disponible prochainement.").appendTo(chat2);
 			}
 			if (haschat3) {
-				var chat3tab = $("<li>").addClass("tab taboff").attr("id", "tabchat3").attr("_title", "Chat privé #3").attr("_desc", Main.k.text.gettext("Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!&#92; Fonctionnalité non codée</strong>")).appendTo(tabs);
+				var chat3tab = $("<li>").addClass("tab taboff").attr("id", "tabchat3").attr("_title", Main.k.text.gettext("Chat privé") + " #3").attr("_desc", Main.k.text.gettext("Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!&#92; Fonctionnalité non codée</strong>")).appendTo(tabs);
 				$("<img>").attr("src", "/img/icons/ui/private.png").appendTo(chat3tab);
 				var chat3 = $("<div>").attr("id", "tabchat3_content").css("display", "none").addClass("tabcontent wall").appendTo(rbg);
 				$("<p>").addClass("warning").html("Disponible prochainement.").appendTo(chat3);
