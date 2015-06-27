@@ -4867,7 +4867,7 @@ Main.k.tabs.playing = function() {
 
 			// Tooltips
 			var $tabstats = $("#tabstats");
-			$tabstats.attr("_title", "Statistiques").attr("_desc", Main.k.text.gettext("Affiche les statistiques, et permet de gérer le nombre de messages chargés dans la page."));
+			$tabstats.attr("_title", Main.k.text.gettext("Statistiques")).attr("_desc", Main.k.text.gettext("Affiche les statistiques, et permet de gérer le nombre de messages chargés dans la page."));
 			$("#tabnew").attr("_title", "Nouveaux Messages").attr("_desc", Main.k.text.gettext("Beaucoup de messages à lire ? Le manager permet de rattraper son retard plus facilement. En chargeant tous les messages dans l'onglet Statistiques, vous pouvez aussi voir les messages non lus manqués à cause du bug (Mush) des messages."));
 			$("#tabsearch").attr("_title", "Recherche de Messages").attr("_desc", Main.k.text.gettext("Une discussion à retrouver ? Envie de savoir combien d'incendies se sont déclarés ? (@neron incendie daedalus)"));
 			/* Translators: This translation must be copied from the game. */
