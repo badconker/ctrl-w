@@ -943,6 +943,10 @@ msgstr ""
 "the page."
 
 #: ../CTRLW.user.js:4871
+msgid "Nouveaux Messages"
+msgstr "New Messages"
+
+#: ../CTRLW.user.js:4871
 msgid ""
 "Beaucoup de messages à lire ? Le manager permet de rattraper son retard plus "
 "facilement. En chargeant tous les messages dans l'onglet Statistiques, vous "
@@ -952,6 +956,10 @@ msgstr ""
 "Lots of messages to read? The manager allows you to catch up more easily. "
 "When you load all messages in the Statistics tab, you can also see unread "
 "messages that the Mush bug made you miss."
+
+#: ../CTRLW.user.js:4872
+msgid "Recherche de Messages"
+msgstr "Search Messages"
 
 #: ../CTRLW.user.js:4872
 msgid ""
@@ -972,8 +980,13 @@ msgstr ""
 
 #. Translators: This translation must be copied from the game.
 #: ../CTRLW.user.js:4876
+msgid "Favoris"
+msgstr "Favorites"
+
+#. Translators: This translation must be copied from the game.
+#: ../CTRLW.user.js:4876
 msgid "Votre sélection de sujets favoris."
-msgstr "Your chosen favourite subjects."
+msgstr "Your chosen favourite topics."
 
 #: ../CTRLW.user.js:4908
 msgid "Aucun topic sélectionné."
