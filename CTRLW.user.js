@@ -865,7 +865,7 @@ Main.k.Game.save = function() {
 };
 Main.k.Game.clear = function(){
 	Main.k.Game.data.day = 0;
-	$this.save();
+	this.save();
 };
 Main.k.Game.updateDayAndCycle = function(day,cycle) {
 	if(day != this.data.day || cycle != this.data.cycle){
