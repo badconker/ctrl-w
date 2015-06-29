@@ -163,7 +163,9 @@ Main.k.initData = function() {
 	Main.k.playing = Main.heroes.iterator().hasNext();
 
 	Main.k.BMAXWIDTH = 1160;
+	//this variable can be modified during script execution
 	Main.k.HEROES =   ["jin_su", "frieda", "kuan_ti", "janice", "roland", "hua", "paola", "chao", "finola", "stephen", "ian", "chun", "raluca", "gioele", "eleesha", "terrence", "andie", "derek"];
+	Main.k.HEROES_ALL = Main.k.HEROES;
 	Main.k.COMMANDERS = ["jin_su", "chao", "gioele", "stephen", "frieda", "kuan_ti", "hua", "derek", "roland", "raluca", "finola", "paola", "terrence", "eleesha", "andie", "ian", "janice", "chun"];
 	Main.k.COMMS = ["paola", "eleesha", "andie", "stephen", "janice", "roland", "hua", "derek", "jin_su", "kuan_ti", "gioele", "chun", "ian", "finola", "terrence", "frieda", "chao", "raluca"];
 	Main.k.ADMINS =   ["janice", "terrence", "eleesha", "raluca", "finola", "andie", "frieda", "ian", "stephen", "paola", "jin_su", "hua", "kuan_ti", "gioele", "chun", "roland", "chao", "derek"];
@@ -7735,9 +7737,9 @@ Main.k.tabs.playing = function() {
 		}
 		Main.k.heroes_same_room = tab_heroes_same_room;
 
-		if(Main.k.h.length == Main.k.HEROES.length){
+		if(Main.k.HEROES_ALL.length == Main.k.HEROES.length){
 			var existing_heroes = ['finola','chao'];
-			//console.log('check heroes list',Main.k.GameInfos.data.heroes_list);
+//			console.log('check heroes list',Main.k.GameInfos.data.heroes_list);
 			if(Main.k.GameInfos.data.heroes_list.length > 0){
 				Main.k.HEROES = Main.k.GameInfos.data.heroes_list;
 			}else{
