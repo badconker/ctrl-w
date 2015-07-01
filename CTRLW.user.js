@@ -4869,13 +4869,13 @@ Main.k.tabs.playing = function() {
 
 			// Tooltips
 			var $tabstats = $("#tabstats");
-			$tabstats.attr("_title", "Statistiques").attr("_desc", Main.k.text.gettext("Affiche les statistiques, et permet de gérer le nombre de messages chargés dans la page."));
-			$("#tabnew").attr("_title", "Nouveaux Messages").attr("_desc", Main.k.text.gettext("Beaucoup de messages à lire ? Le manager permet de rattraper son retard plus facilement. En chargeant tous les messages dans l'onglet Statistiques, vous pouvez aussi voir les messages non lus manqués à cause du bug (Mush) des messages."));
-			$("#tabsearch").attr("_title", "Recherche de Messages").attr("_desc", Main.k.text.gettext("Une discussion à retrouver ? Envie de savoir combien d'incendies se sont déclarés ? (@neron incendie daedalus)"));
+			$tabstats.attr("_title", Main.k.text.gettext("Statistiques")).attr("_desc", Main.k.text.gettext("Affiche les statistiques, et permet de gérer le nombre de messages chargés dans la page."));
+			$("#tabnew").attr("_title", Main.k.text.gettext("Nouveaux Messages")).attr("_desc", Main.k.text.gettext("Beaucoup de messages à lire ? Le manager permet de rattraper son retard plus facilement. En chargeant tous les messages dans l'onglet Statistiques, vous pouvez aussi voir les messages non lus manqués à cause du bug (Mush) des messages."));
+			$("#tabsearch").attr("_title", Main.k.text.gettext("Recherche de Messages")).attr("_desc", Main.k.text.gettext("Une discussion à retrouver ? Envie de savoir combien d'incendies se sont déclarés ? (@neron incendie daedalus)"));
 			/* Translators: This translation must be copied from the game. */
 			$("#tabwall").attr("_title", "Discussion").attr("_desc", Main.k.text.gettext("Le canal de discussion est indispensable pour s'organiser avec l'équipage.</p><p>Pour participer vous devez posséder un <strong>talkie-walkie</strong>."));
 			/* Translators: This translation must be copied from the game. */
-			$("#tabfav").attr("_title", "Favoris").attr("_desc", Main.k.text.gettext("Votre sélection de sujets favoris."));
+			$("#tabfav").attr("_title", Main.k.text.gettext("Favoris")).attr("_desc", Main.k.text.gettext("Votre sélection de sujets favoris."));
 			tabs.find(".tab").on("mouseover", Main.k.CustomTip);
 			tabs.find(".tab").on("mouseout", Main.k.hideTip);
 			tabs.find(".tab").on("click", function() { Main.k.Manager.selectTab(this); });
@@ -4911,25 +4911,25 @@ Main.k.tabs.playing = function() {
 
 			if (hasmushchat) {
 				/* Translators: The beginning must be copied from the game. */
-				var mushtab = $("<li>").addClass("tab taboff").attr("id", "tabmush").attr("_title", "Canal Mush").attr("_desc", Main.k.text.gettext("Ssshh, personne nous entend ici... Le Canal Mush est le <em>canal privé</em> pour les adhérents aux <strong>Mush</strong> <img src='/img/icons/ui/mush.png' />.</p><p><strong>/!&#92; Fonctionnalité non codée</strong>")).appendTo(tabs);
+				var mushtab = $("<li>").addClass("tab taboff").attr("id", "tabmush").attr("_title", Main.k.text.gettext("Canal Mush")).attr("_desc", Main.k.text.gettext("Ssshh, personne nous entend ici... Le Canal Mush est le <em>canal privé</em> pour les adhérents aux <strong>Mush</strong> <img src='/img/icons/ui/mush.png' />.</p><p><strong>/!&#92; Fonctionnalité non codée</strong>")).appendTo(tabs);
 				$("<img>").attr("src", "/img/icons/ui/mush.png").appendTo(mushtab);
 				var mushchat = $("<div>").attr("id", "tabmush_content").css("display", "none").addClass("tabcontent wall").appendTo(rbg);
 				$("<p>").addClass("warning").html(Main.k.text.gettext("Disponible prochainement.")).appendTo(mushchat);
 			}
 			if (haschat1) {
-				var chat1tab = $("<li>").addClass("tab taboff").attr("id", "tabchat1").attr("_title", "Chat privé #1").attr("_desc", Main.k.text.gettext("Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!&#92; Fonctionnalité non codée</strong>")).appendTo(tabs);
+				var chat1tab = $("<li>").addClass("tab taboff").attr("id", "tabchat1").attr("_title", Main.k.text.gettext("Chat privé") + " #1").attr("_desc", Main.k.text.gettext("Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!&#92; Fonctionnalité non codée</strong>")).appendTo(tabs);
 				$("<img>").attr("src", "/img/icons/ui/private.png").appendTo(chat1tab);
 				var chat1 = $("<div>").attr("id", "tabchat1_content").css("display", "none").addClass("tabcontent wall").appendTo(rbg);
 				$("<p>").addClass("warning").html("Disponible prochainement.").appendTo(chat1);
 			}
 			if (haschat2) {
-				var chat2tab = $("<li>").addClass("tab taboff").attr("id", "tabchat2").attr("_title", "Chat privé #2").attr("_desc", Main.k.text.gettext("Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!&#92; Fonctionnalité non codée</strong>")).appendTo(tabs);
+				var chat2tab = $("<li>").addClass("tab taboff").attr("id", "tabchat2").attr("_title", Main.k.text.gettext("Chat privé") + " #2").attr("_desc", Main.k.text.gettext("Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!&#92; Fonctionnalité non codée</strong>")).appendTo(tabs);
 				$("<img>").attr("src", "/img/icons/ui/private.png").appendTo(chat2tab);
 				var chat2 = $("<div>").attr("id", "tabchat2_content").css("display", "none").addClass("tabcontent wall").appendTo(rbg);
 				$("<p>").addClass("warning").html("Disponible prochainement.").appendTo(chat2);
 			}
 			if (haschat3) {
-				var chat3tab = $("<li>").addClass("tab taboff").attr("id", "tabchat3").attr("_title", "Chat privé #3").attr("_desc", Main.k.text.gettext("Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!&#92; Fonctionnalité non codée</strong>")).appendTo(tabs);
+				var chat3tab = $("<li>").addClass("tab taboff").attr("id", "tabchat3").attr("_title", Main.k.text.gettext("Chat privé") + " #3").attr("_desc", Main.k.text.gettext("Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!&#92; Fonctionnalité non codée</strong>")).appendTo(tabs);
 				$("<img>").attr("src", "/img/icons/ui/private.png").appendTo(chat3tab);
 				var chat3 = $("<div>").attr("id", "tabchat3_content").css("display", "none").addClass("tabcontent wall").appendTo(rbg);
 				$("<p>").addClass("warning").html("Disponible prochainement.").appendTo(chat3);
