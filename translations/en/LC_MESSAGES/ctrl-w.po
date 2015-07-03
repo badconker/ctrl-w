@@ -1434,3 +1434,69 @@ msgstr "Earned for every cycle."
 
 #~ msgid "Distributeur"
 #~ msgstr "Vending Machine"
+
+#: ../CTRLW.user.js:534
+msgid "Nom complet"
+msgstr "Full name"
+
+#: ../CTRLW.user.js:541
+msgid "Mémoire"
+msgstr ""
+
+#: ../CTRLW.user.js:542
+msgid "Nexus"
+msgstr "Nexus"
+
+#: ../CTRLW.user.js:544
+msgid "Membres"
+msgstr ""
+
+#: ../CTRLW.user.js:545
+msgid "Historique"
+msgstr ""
+
+#. Translators: This translation must be copied from the game.
+#: ../CTRLW.user.js:374
+msgid "Vous ne vous êtes pas connecté depuis 24h. Bonne chance pour la suite..."
+msgstr ""
+
+#. Translators: This translation must be copied from the game.
+#: ../CTRLW.user.js:388
+msgid "Vous faites partie du Mush."
+msgstr "You have joined the Mush"
+
+#. Translators: This translation must be copied from the game.
+#: ../CTRLW.user.js:391
+#, fuzzy
+msgid "Mush"
+msgstr "Mush help"
+
+#: ../CTRLW.user.js:4516 ../CTRLW.user.js:4517
+msgid "Mort"
+msgstr "Dead"
+
+#: ../CTRLW.user.js:4872
+msgid "Statistiques"
+msgstr ""
+
+#: ../CTRLW.user.js:4873
+msgid "Nouveaux Messages"
+msgstr "New Messages"
+
+#: ../CTRLW.user.js:4874
+msgid "Recherche de Messages"
+msgstr ""
+
+#. Translators: This translation must be copied from the game.
+#: ../CTRLW.user.js:4878
+msgid "Favoris"
+msgstr "Favorites"
+
+#. Translators: The beginning must be copied from the game.
+#: ../CTRLW.user.js:4914
+msgid "Canal Mush"
+msgstr "Mush Channel"
+
+#: ../CTRLW.user.js:4920 ../CTRLW.user.js:4926 ../CTRLW.user.js:4932
+msgid "Chat privé"
+msgstr "Private Chat"
