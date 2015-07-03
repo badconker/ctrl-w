@@ -7738,13 +7738,17 @@ Main.k.tabs.playing = function() {
 		Main.k.heroes_same_room = tab_heroes_same_room;
 
 		if(Main.k.HEROES_ALL.length == Main.k.HEROES.length){
-			var existing_heroes = ['finola','chao'];
+//			var existing_heroes = ['finola','chao'];
+			var existing_heroes = ['andie','derek'];
 //			console.log('check heroes list',Main.k.GameInfos.data.heroes_list);
 			if(Main.k.GameInfos.data.heroes_list.length > 0){
 				Main.k.HEROES = Main.k.GameInfos.data.heroes_list;
 			}else{
-				if($('.groupConf').length > 0 && $('.groupConf img[src*="use_andrek"]').length == 1){
-					existing_heroes = ['andie','derek'];
+//				if($('.groupConf').length > 0 && $('.groupConf img[src*="use_andrek"]').length == 1){
+//					existing_heroes = ['andie','derek'];
+//				}
+				if($('.groupConf').length > 0 && $('.groupConf img[src*="use_andrek"]').length == 0){
+					existing_heroes = ['finola','chao'];
 				}
 
 				//replace heroes
