@@ -446,6 +446,7 @@ Main.k.displayMainMenu = function() {
 	var forum = $("<li class='kmenuel'><a href='"+Main.k.mushurl+"/tid/forum'>"+Main.k.text.gettext("Forum")+"</a></li>").appendTo(menu);
 	var help = $("<li class='kmenuel last'><a href='"+Main.k.mushurl+"/help'>"+Main.k.text.gettext("Aide")+"</a></li>").appendTo(menu);
 
+	var play_ss = $("<ul>").appendTo(play);
 
 	var account_ss = $("<ul>").attr("id", "accountmenu").appendTo(account);
 	$("<li><a class='kssmenuel' href='"+Main.k.mushurl+"/me'><img src='/img/icons/skills/persistent.png' />"+Main.k.text.gettext("Expérience")+"</a></li>").appendTo(account_ss);
