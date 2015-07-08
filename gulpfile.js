@@ -54,8 +54,7 @@ gulp.task('default', function() {
         .on('end', function(){
             gulp.src(['./src/userscript.js', 'CTRLW.mini.user.js'])
                 .pipe(concat('CTRLW.mini.user.js'), {newLine: ''})
-                .pipe(gulp.dest('./'))
-                .pipe(gulp.dest('/home/florian/.mozilla/firefox/p53bc2t8.default/gm_scripts/CTRL+W'));
+                .pipe(gulp.dest('./'));
         });
 
 });

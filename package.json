@@ -7,8 +7,6 @@
 		"gulp-rename": "*",
 		"gulp-concat": "*",
 		"gulp-sourcemaps": "*",
-		"gulp-watch": "*",
-		"gulp-uglifycss": "*",
 		"gulp-replace": "*",
 		"gulp-prompt": "*"
 	}
