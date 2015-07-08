@@ -83,6 +83,7 @@ Main.k.displayMainMenu = function() {
     }
     Main.k.updateMainMenu();
 };
+
 Main.k.updateMainMenu = function (){
     var casting = $('#ctrlw-main-menu-castings');
 
