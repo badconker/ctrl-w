@@ -1,9 +1,12 @@
+
 Main.k.initData = function() {
     // Define if we are ingame
     Main.k.playing = Main.heroes.iterator().hasNext();
 
     Main.k.BMAXWIDTH = 1160;
+    //this variable can be modified during script execution
     Main.k.HEROES =   ["jin_su", "frieda", "kuan_ti", "janice", "roland", "hua", "paola", "chao", "finola", "stephen", "ian", "chun", "raluca", "gioele", "eleesha", "terrence", "andie", "derek"];
+    Main.k.HEROES_ALL = Main.k.HEROES.slice();
     Main.k.COMMANDERS = ["jin_su", "chao", "gioele", "stephen", "frieda", "kuan_ti", "hua", "derek", "roland", "raluca", "finola", "paola", "terrence", "eleesha", "andie", "ian", "janice", "chun"];
     Main.k.COMMS = ["paola", "eleesha", "andie", "stephen", "janice", "roland", "hua", "derek", "jin_su", "kuan_ti", "gioele", "chun", "ian", "finola", "terrence", "frieda", "chao", "raluca"];
     Main.k.ADMINS =   ["janice", "terrence", "eleesha", "raluca", "finola", "andie", "frieda", "ian", "stephen", "paola", "jin_su", "hua", "kuan_ti", "gioele", "chun", "roland", "chao", "derek"];
@@ -209,7 +212,7 @@ Main.k.initData = function() {
     Main.k.statuses = {
         'inactive': {
             /* Translators: This translation must be copied from the game. */
-            'desc' : Main.k.text.gettext('Description inactif'),
+            'desc' : Main.k.text.gettext('Vous ne vous êtes pas connecté depuis 24h. Bonne chance pour la suite...'),
             'img' : 'sleepy',
             /* Translators: This translation must be copied from the game. */
             'name' : Main.k.text.gettext('Inactif')
@@ -220,6 +223,13 @@ Main.k.initData = function() {
             'img' : 'noob',
             /* Translators: This translation must be copied from the game. */
             'name' : Main.k.text.gettext('Grand inactif')
+        },
+        'mush': {
+            /* Translators: This translation must be copied from the game. */
+            'desc' : Main.k.text.gettext('Vous faites partie du Mush.'),
+            'img' : 'mush',
+            /* Translators: This translation must be copied from the game. */
+            'name' : Main.k.text.gettext('Mush')
         }
     };
 };

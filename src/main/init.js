@@ -20,6 +20,7 @@ Main.k.init = function(){
 Main.k.getFullName = function(dev_surname) {
     return dev_surname.replace(/_/g, " ").capitalize();
 };
+
 Main.k.getHeroBySurname = function(dev_surname) {
     console.info('Main.heroes',Main.heroes);
     var $it = Main.heroes.iterator();

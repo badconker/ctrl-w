@@ -1,107 +1,107 @@
 .bubble_stephen {
-    background: url({{ SERVER_HOST }}/img/tile_stephen.png) center repeat #FFF! important;
+    background: url({{ SERVER_HOST }}/build/img/tile_stephen.png) center repeat #FFF! important;
     border: 1px solid #b48d75;
     text-shadow: 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF;
 padding: 3px 5px! important;
 }
 .bubble_hua {
-    background: url({{ SERVER_HOST }}/img/tile_hua.png) center repeat #FFF! important;
+    background: url({{ SERVER_HOST }}/build/img/tile_hua.png) center repeat #FFF! important;
     border: 1px solid #6c543e;
     text-shadow: 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF;
 padding: 3px 5px! important;
 }
 .bubble_frieda {
-    background: url({{ SERVER_HOST }}/img/tile_frieda.png) center repeat #FFF! important;
+    background: url({{ SERVER_HOST }}/build/img/tile_frieda.png) center repeat #FFF! important;
     border: 1px solid #204563;
     text-shadow: 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF;
 padding: 3px 5px! important;
 }
 .bubble_roland {
-    background: url({{ SERVER_HOST }}/img/tile_roland.png) center repeat #FFF! important;
+    background: url({{ SERVER_HOST }}/build/img/tile_roland.png) center repeat #FFF! important;
     border: 1px solid #dc3d8d;
     text-shadow: 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF;
 padding: 3px 5px! important;
 }
 .bubble_paola {
-    background: url({{ SERVER_HOST }}/img/tile_paola.png) center repeat #FFF! important;
+    background: url({{ SERVER_HOST }}/build/img/tile_paola.png) center repeat #FFF! important;
     border: 1px solid #792b70;
     text-shadow: 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF;
 padding: 3px 5px! important;
 }
 .bubble_jin_su {
-    background: url({{ SERVER_HOST }}/img/tile_jin_su.png) center repeat #FFF! important;
+    background: url({{ SERVER_HOST }}/build/img/tile_jin_su.png) center repeat #FFF! important;
     border: 1px solid #a41834;
     text-shadow: 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF;
 padding: 3px 5px! important;
 }
 .bubble_chao {
-    background: url({{ SERVER_HOST }}/img/tile_chao.png) center repeat #FFF! important;
+    background: url({{ SERVER_HOST }}/build/img/tile_chao.png) center repeat #FFF! important;
     border: 1px solid #5457b0;
     text-shadow: 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF;
 padding: 3px 5px! important;
 }
 .bubble_derek {
-    background: url({{ SERVER_HOST }}/img/tile_chao.png) center repeat #FFF! important;
+    background: url({{ SERVER_HOST }}/build/img/tile_chao.png) center repeat #FFF! important;
     border: 1px solid #5457b0;
     text-shadow: 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF;
 padding: 3px 5px! important;
 }
 .bubble_finola {
-    background: url({{ SERVER_HOST }}/img/tile_finola.png) center repeat #FFF! important;
+    background: url({{ SERVER_HOST }}/build/img/tile_finola.png) center repeat #FFF! important;
     border: 1px solid #35adbc;
     text-shadow: 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF;
 padding: 3px 5px! important;
 }
 .bubble_andie {
-    background: url({{ SERVER_HOST }}/img/tile_finola.png) center repeat #FFF! important;
+    background: url({{ SERVER_HOST }}/build/img/tile_finola.png) center repeat #FFF! important;
     border: 1px solid #35adbc;
     text-shadow: 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF;
 padding: 3px 5px! important;
 }
 .bubble_kuan_ti {
-    background: url({{ SERVER_HOST }}/img/tile_kuan_ti.png) center repeat #FFF! important;
+    background: url({{ SERVER_HOST }}/build/img/tile_kuan_ti.png) center repeat #FFF! important;
     border: 1px solid #e89413;
     text-shadow: 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF;
 padding: 3px 5px! important;
 }
 .bubble_ian {
-    background: url({{ SERVER_HOST }}/img/tile_ian.png) center repeat #FFF! important;
+    background: url({{ SERVER_HOST }}/build/img/tile_ian.png) center repeat #FFF! important;
     border: 1px solid #647c27;
     text-shadow: 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF;
 padding: 3px 5px! important;
 }
 .bubble_eleesha {
-    background: url({{ SERVER_HOST }}/img/tile_eleesha.png) center repeat #FFF! important;
+    background: url({{ SERVER_HOST }}/build/img/tile_eleesha.png) center repeat #FFF! important;
     border: 1px solid #dca312;
     text-shadow: 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF;
 padding: 3px 5px! important;
 }
 .bubble_terrence {
-    background: url({{ SERVER_HOST }}/img/tile_terrence.png) center repeat #FFF! important;
+    background: url({{ SERVER_HOST }}/build/img/tile_terrence.png) center repeat #FFF! important;
     border: 1px solid #55141c;
     text-shadow: 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF;
 padding: 3px 5px! important;
 }
 .bubble_janice {
-    background: url({{ SERVER_HOST }}/img/tile_janice.png) center repeat #FFF! important;
+    background: url({{ SERVER_HOST }}/build/img/tile_janice.png) center repeat #FFF! important;
     border: 1px solid #df2b4e;
     text-shadow: 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF;
 padding: 3px 5px! important;
 }
 .bubble_raluca {
-    background: url({{ SERVER_HOST }}/img/tile_raluca.png) center repeat #FFF! important;
+    background: url({{ SERVER_HOST }}/build/img/tile_raluca.png) center repeat #FFF! important;
     border: 1px solid #4c4e4c;
     text-shadow: 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF;
 padding: 3px 5px! important;
 }
 .bubble_chun {
-    background: url({{ SERVER_HOST }}/img/tile_chun.png) center repeat #FFF! important;
+    background: url({{ SERVER_HOST }}/build/img/tile_chun.png) center repeat #FFF! important;
     border: 1px solid #3aa669;
     text-shadow: 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF;
 padding: 3px 5px! important;
 }
 .bubble_gioele {
-    background: url({{ SERVER_HOST }}/img/tile_gioele.png) center repeat #FFF! important;
+    background: url({{ SERVER_HOST }}/build/img/tile_gioele.png) center repeat #FFF! important;
     border: 1px solid #cb5b29;
     text-shadow: 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF, 0 0 3px #FFF;
 padding: 3px 5px! important;

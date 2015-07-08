@@ -1,4 +1,3 @@
-
 Main.k.Options.open = function() {
     if (Main.k.folding.displayed == "options") {
         Main.k.folding.displayGame();
@@ -46,7 +45,7 @@ Main.k.Options.open = function() {
             if (opt[1]) chk.attr("checked", "checked");
         }
 
-        Main.k.MakeButton("<img src='/build/img/icons/ui/reported.png' style='vertical-align: -20%' /> "+ Main.k.text.gettext("Vider le cache du script"), null, null, Main.k.text.gettext("Vider le cache du script"),
+        Main.k.MakeButton("<img src='/img/icons/ui/reported.png' style='vertical-align: -20%' /> "+ Main.k.text.gettext("Vider le cache du script"), null, null, Main.k.text.gettext("Vider le cache du script"),
             Main.k.text.gettext("Ce bouton vous permet de vider le cache du script pour, par exemple, prendre en compte tout de suite votre mode Or ou forcer une vérification de mise à jour. A utiliser avec parcimonie svp."))
             .appendTo(td).find("a").on("mousedown", function(){
                 Main.k.clearCache();

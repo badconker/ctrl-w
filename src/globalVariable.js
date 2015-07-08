@@ -1,3 +1,4 @@
+
 var Main = unsafeWindow.Main;
 var _tid = unsafeWindow._tid;
 /*var ArrayEx = unsafeWindow.ArrayEx;
@@ -35,27 +36,22 @@ if (typeof(cloneInto) == 'undefined') {
         return obj;
     }
 }
-
-//MAIN.k VARIABLES
 Main.k = createObjectIn(unsafeWindow.Main, {defineAs: "k"});
 
 Main.k.window = unsafeWindow;
 Main.k.version = GM_info.script.version;
 Main.k.website = "http://ks26782.kimsufi.com/ctrlw";
-
 Main.k.servurl = "http://ctrl-w.badconker.com";
 Main.k.servurl_badconker = 'http://ctrlw.badconker.com';
-Main.k.servhost = 'file:///mnt/Données/Developpement/ctrl-w/build';
-
+Main.k.server_host = '{{ SERVER_HOST }}';
 Main.k.window = window;
 Main.k.domain = document.domain;
 Main.k.mushurl = 'http://' + document.domain;
 Main.k.debug = true;
 Main.k.errorList = [];
-
 if(Main.k.debug){
     var console = unsafeWindow.console;
 }else{
-    var console = {}
+    var console = {};
     console.log = console.error = console.info = console.debug = console.warn = console.trace = console.dir = console.dirxml = console.group = console.groupEnd = console.time = console.timeEnd = console.assert = console.profile = function() {};
 }

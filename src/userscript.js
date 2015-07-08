@@ -13,10 +13,14 @@
 // @require     lib/jquery-1.11.1.min.js
 // @require     lib/Gettext.js
 // @resource    css:jgrowl lib/jquery.jgrowl.css
+// @resource    css:bubbles build/css/bubbles.css
+// @resource    css:customMenu build/css/customMenu.css
+// @resource    css:ingame build/css/ingame.css
+// @resource    css:ranking build/css/ranking.css
 // @resource    jgrowl lib/jquery.jgrowl.js
 // @resource    mush lib/Mush.js
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.35.19b2
+// @version     0.35.20
 // ==/UserScript==

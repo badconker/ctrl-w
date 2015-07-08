@@ -1,13 +1,12 @@
+
 String.prototype.htmlEncode = function() {
     return $('<div/>').text(this).html();
 };
-
 String.prototype.capitalize = function() {
     return this.replace(/(?:^|\s)\S/g, function(a) {
         return a.toUpperCase();
     });
 };
-
 String.prototype.replaceFromObj = function(obj) {
     var retStr = this;
     for (var x in obj) {
@@ -17,7 +16,6 @@ String.prototype.replaceFromObj = function(obj) {
     }
     return retStr;
 };
-
 String.prototype.hashCode = function() {
     var hash = 0;
     if (this.length == 0) return hash;
@@ -28,11 +26,9 @@ String.prototype.hashCode = function() {
     }
     return hash;
 };
-
 RegExp.escape = function(s) {
     return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 };
-
 function addFctToPage (text, name) {
     var D                                   = document;
     var scriptNode                          = D.createElement ('script');
