@@ -46,7 +46,7 @@ Main.k.servurl_badconker = 'http://ctrlw.badconker.com';
 Main.k.window = window;
 Main.k.domain = document.domain;
 Main.k.mushurl = 'http://' + document.domain;
-Main.k.debug = true;
+Main.k.debug = false;
 Main.k.errorList = [];
 if(Main.k.debug){
     var console = unsafeWindow.console;

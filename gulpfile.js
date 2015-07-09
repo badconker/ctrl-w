@@ -46,7 +46,6 @@ gulp.task('default', function() {
 	gulp.src(fileOrder)
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(concat('concated.js'))
-        .pipe(replace('{{ SERVER_HOST }}', SERVER_HOST))
         .pipe(uglify())
         .pipe(rename('CTRLW.mini.user.js'))
         .pipe(sourcemaps.write('./'))
