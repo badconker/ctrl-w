@@ -651,7 +651,11 @@ Main.k.tabs.playing = function() {
     // ============================================================
     // == User Script  ============================================
     // ============================================================
-    Main.k.UpdateData = {currversion: 0, changelog: []};
+    Main.k.UpdateData = {
+        currversion: 0,
+        changelog: []
+    };
+
     Main.k.UpdateCheck = function() {
         var version_update;
         if(Main.k.UpdateCheck.b_in_progress == undefined){

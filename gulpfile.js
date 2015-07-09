@@ -13,8 +13,8 @@ gulp.task('default', function() {
         './src/functions.js',
 
         //INIT
-        './src/main/initLang.js',
         './src/main/initData.js',
+        './src/main/initLang.js',
         './src/main/init.js',
 
         './src/main/*.js',
@@ -37,7 +37,7 @@ gulp.task('default', function() {
         './src/main/options/*.js',
 
         //TABS
-        './src/main/tabs/init.js',
+        './src/main/tabs/initData.js',
         './src/main/tabs/*.js',
 
         //Le script commence ici
