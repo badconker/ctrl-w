@@ -347,7 +347,7 @@ msgstr "Tribunal FDS"
 
 #: ../CTRLW.user.js:534
 msgid "Nom complet"
-msgstr ""
+msgstr "Nombre completo"
 
 #: ../CTRLW.user.js:541
 msgid "Mémoire"
