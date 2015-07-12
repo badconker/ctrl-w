@@ -6,6 +6,7 @@ var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
 var replace = require('gulp-replace');
 var prompt = require('gulp-prompt');
+var addsrc = require('gulp-add-src');
 
 gulp.task('default', function() {
 
@@ -47,13 +48,9 @@ gulp.task('default', function() {
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(concat('concated.js'))
         .pipe(uglify())
-        .pipe(rename('CTRLW.mini.user.js'))
+        .pipe(addsrc('./src/userscript.js'))
+        .pipe(concat('CTRLW.mini.user.js'), {newLine: ''})
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('./'))
-        .on('end', function(){
-            gulp.src(['./src/userscript.js', 'CTRLW.mini.user.js'])
-                .pipe(concat('CTRLW.mini.user.js'), {newLine: ''})
-                .pipe(gulp.dest('./'));
-        });
+        .pipe(gulp.dest('./'));
 
 });

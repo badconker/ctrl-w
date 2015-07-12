@@ -8,6 +8,7 @@
 		"gulp-concat": "*",
 		"gulp-sourcemaps": "*",
 		"gulp-replace": "*",
-		"gulp-prompt": "*"
+		"gulp-prompt": "*",
+		"gulp-add-src": "*"
 	}
 }
