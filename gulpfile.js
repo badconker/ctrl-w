@@ -1,16 +1,12 @@
 var gulp = require('gulp');
-var compass = require( 'gulp-simple-compass' );
-var uglify = require('gulp-uglify');
-var rename = require('gulp-rename');
 var concat = require('gulp-concat');
-var sourcemaps = require('gulp-sourcemaps');
-var replace = require('gulp-replace');
-var prompt = require('gulp-prompt');
 var addsrc = require('gulp-add-src');
 
 gulp.task('default', function() {
 
-    fileOrder = ['./src/globalVariable.js',
+    fileOrder = [
+		'./src/userscript.js',
+		'./src/globalVariable.js',
         './src/functions.js',
 
         //INIT
@@ -45,12 +41,7 @@ gulp.task('default', function() {
         './src/start.js'];
 
 	gulp.src(fileOrder)
-        .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(concat('concated.js'))
-        .pipe(uglify())
-        .pipe(addsrc('./src/userscript.js'))
-        .pipe(concat('CTRLW.mini.user.js'), {newLine: ''})
-        .pipe(sourcemaps.write('./'))
+        .pipe(concat('CTRLW.user.js'), {newLine: ''})
         .pipe(gulp.dest('./'));
 
 });

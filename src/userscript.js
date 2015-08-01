@@ -5,7 +5,6 @@
 // @include     http://mush.vg/*
 // @include     http://mush.twinoid.com/*
 // @include     http://mush.twinoid.es/*
-// @downloadURL http://localhost/CTRLW.user.mini.js
 // @grant       GM_xmlhttpRequest
 // @grant       GM_addStyle
 // @grant       GM_getResourceText
