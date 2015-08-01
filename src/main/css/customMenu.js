@@ -1,5 +1,5 @@
 Main.k.css.customMenu = function() {
-    $("<style>").attr("type", "text/css").html("\
+	$("<style>").attr("type", "text/css").html("\
 	body.gold #maincontainer{margin-top:543px !important;}\
 	#menuBar { display: none; }\
 	.mxhead a[class^=logo] { position: relative! important; display: block; }\

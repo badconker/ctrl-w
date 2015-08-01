@@ -1,8 +1,8 @@
 Main.k.css.bubbles = function() {
-    var d = "3px";
-    var custombubbles_glow = "text-shadow: 0 0 " + d + " #FFF, 0 0 " + d + " #FFF, 0 0 " + d + " #FFF, 0 0 " + d + " #FFF, 0 0 " + d + " #FFF, 0 0 " + d + " #FFF, 0 0 " + d + " #FFF;";
+	var d = "3px";
+	var custombubbles_glow = "text-shadow: 0 0 " + d + " #FFF, 0 0 " + d + " #FFF, 0 0 " + d + " #FFF, 0 0 " + d + " #FFF, 0 0 " + d + " #FFF, 0 0 " + d + " #FFF, 0 0 " + d + " #FFF;";
 
-    $("<style>").attr("type", "text/css").html("\
+	$("<style>").attr("type", "text/css").html("\
 	.bubble_stephen {\
 		background: url(" + Main.k.servurl + "/img/tile_stephen.png) center repeat #FFF! important;\
 		border: 1px solid #b48d75;" + custombubbles_glow + "\

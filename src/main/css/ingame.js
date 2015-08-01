@@ -1,7 +1,7 @@
 Main.k.css.ingame = function() {
-    Main.k.css.bubbles();
+	Main.k.css.bubbles();
 
-    $("<style>").attr("type", "text/css").html("\
+	$("<style>").attr("type", "text/css").html("\
 	.tid_editorContent {\
 	  visibility: visible;\
 	 }\
@@ -812,5 +812,5 @@ Main.k.css.ingame = function() {
 		margin: 10px 0;\
 	}\
 	").appendTo("head");
-    if (navigator.userAgent.indexOf("Firefox")==-1) $(".usLeftbar .hero .icons").css("padding-right", "30px");
+	if (navigator.userAgent.indexOf("Firefox")==-1) $(".usLeftbar .hero .icons").css("padding-right", "30px");
 };
