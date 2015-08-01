@@ -1,0 +1,14 @@
+{
+	"name": "ctrl-w",
+	"dependencies": {
+		"gulp": "*",
+		"gulp-simple-compass": "*",
+		"gulp-uglify": "*",
+		"gulp-rename": "*",
+		"gulp-concat": "*",
+		"gulp-sourcemaps": "*",
+		"gulp-replace": "*",
+		"gulp-prompt": "*",
+		"gulp-add-src": "*"
+	}
+}
