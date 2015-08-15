@@ -980,10 +980,13 @@ Main.k.tabs.playing = function() {
 		};
 
 		$("#cdModuleContent").find("ul.dev li.cdProjCard").each(function(i) {
+			var pct = $(this).find("span").html().trim()
+			if(parseInt(pct) == 0){
+				return true;
+			}
 			var h3 = $(this).find("h3").clone();
 			h3.find("em").remove();
 			var name = parse(h3.html().trim());
-			var pct = $(this).find("span").html().trim();
 			var desc = parse($(this).find("div.desc").html().trim());
 			var bonus1 = /<strong>([^<]+)<\/strong>/.exec($(this).find("div.suggestprogress ul li img").first().attr("onmouseover"))[1].trim().replace("Médeçin", "Médecin");
 			var bonus2 = /<strong>([^<]+)<\/strong>/.exec($(this).find("div.suggestprogress ul li img").last().attr("onmouseover"))[1].trim().replace("Médeçin", "Médecin");
