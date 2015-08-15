@@ -2514,8 +2514,8 @@ Main.k.tabs.playing = function() {
 		if(save == null){
 			save = true;
 		}
-		console.group('Main.k.Profiles.save');
-		console.log('profile',profile);
+//		console.group('Main.k.Profiles.save');
+//		console.log('profile',profile);
 		var profiles = this.data;
 		if(profiles == null){
 			profiles = {};
@@ -4975,6 +4975,8 @@ Main.k.tabs.playing = function() {
 
 						}
 					});
+					/** To detect crew list update **/
+					Main.k.HEROES = Main.k.HEROES_ALL;
 					Main.k.GameInfos.data.heroes_list = heroes_list;
 					Main.k.GameInfos.save();
 					Main.k.Profiles.save();
