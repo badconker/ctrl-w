@@ -4442,7 +4442,7 @@ Main.k.tabs.playing = function() {
 		t = $("<h3>").html(Main.k.text.gettext("Présent(s)").capitalize()).appendTo(leftbar);
 		$("<span>").addClass("displaymore").attr("_target", "#heroes_list").appendTo(t).on("click", Main.k.ToggleDisplay);
 		$("<div>").attr("id", "heroes_list").css("display", "none").appendTo(leftbar);
-		t = $("<h3>").html(Main.k.text.gettext("équipage").capitalize()).appendTo(leftbar);
+		t = $("<h3>").addClass("ctrlw-sidebar-title-crew").html(Main.k.text.gettext("équipage").capitalize()).appendTo(leftbar);
 		$("<span>").addClass("displayless").attr("_target", "#crew_list").appendTo(t).on("click", Main.k.ToggleDisplay);
 		$("<div>").attr("id", "crew_list").css("display", "block").appendTo(leftbar);
 		// ----------------------------------- //
@@ -4675,6 +4675,19 @@ Main.k.tabs.playing = function() {
 
 		// Heroes
 		// ----------------------------------- //
+
+		if(Main.k.GameInfos.data.heroes_list.length == 0 && $('#ctrlw-warning-crew-list').length == 0){
+			var $alert_crew_list = $('<img id="ctrlw-warning-crew-list" style="margin-left:10px;position: relative;top:5px" src="/img/icons/ui/broken.png" ' +
+				'_title="'+Main.k.text.gettext("Attention")+'" ' +
+				'_desc="'+Main.k.text.gettext("Pour avoir une liste d'équipage correcte, vous devez mettre à jour cette liste via le module Cryo. <br/>" +
+					"Pour ce faire, veuillez vous rendre au labo, listez l'équipage via le module Cryo et cliquez sur le bouton au bas de la liste des personnages.<br/>" +
+					"Attention, le bouton n'apparait que lorsque l'équipage est au complet.")+'"/>')
+				.on("mouseover", Main.k.CustomTip)
+				.on("mouseout", Main.k.hideTip);
+			$alert_crew_list.appendTo($('.ctrlw-sidebar-title-crew'));
+		}else{
+			$('#ctrlw-warning-crew-list').remove();
+		}
 		var heroes_list = $("#heroes_list").empty();
 
 		// Display players' skills & statuses
