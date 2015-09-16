@@ -2688,7 +2688,9 @@ Main.k.tabs.playing = function() {
 		callbacks_storage_sync.fire();
 	};
 	Main.k.GameInfos.clear = function(){
-		Main.k.Profiles.data = {};
+		Main.k.GameInfos.data = {};
+		Main.k.GameInfos.data.heroes_list = [];
+		Main.k.HEROES = Main.k.HEROES_ALL.slice();
 		localStorage.removeItem("ctrlw_game_infos");
 		callbacks_storage_sync.fire();
 	};
@@ -4679,15 +4681,17 @@ Main.k.tabs.playing = function() {
 		// Heroes
 		// ----------------------------------- //
 
-		if(Main.k.GameInfos.data.heroes_list.length == 0 && $('#ctrlw-warning-crew-list').length == 0){
-			var $alert_crew_list = $('<img id="ctrlw-warning-crew-list" style="margin-left:10px;position: relative;top:5px" src="/img/icons/ui/broken.png" ' +
-				'_title="'+Main.k.text.gettext("Attention")+'" ' +
-				'_desc="'+Main.k.text.gettext("Pour avoir une liste d'équipage correcte, vous devez mettre à jour cette liste via le module Cryo. <br/>" +
-					"Pour ce faire, veuillez vous rendre au labo, listez l'équipage via le module Cryo et cliquez sur le bouton au bas de la liste des personnages.<br/>" +
-					"Attention, le bouton n'apparait que lorsque l'équipage est au complet.")+'"/>')
-				.on("mouseover", Main.k.CustomTip)
-				.on("mouseout", Main.k.hideTip);
-			$alert_crew_list.appendTo($('.ctrlw-sidebar-title-crew'));
+		if(Main.k.GameInfos.data.heroes_list.length == 0){
+			if($('#ctrlw-warning-crew-list').length == 0){
+				var $alert_crew_list = $('<img id="ctrlw-warning-crew-list" style="margin-left:10px;position: relative;top:5px" src="/img/icons/ui/broken.png" ' +
+					'_title="'+Main.k.text.gettext("Attention")+'" ' +
+					'_desc="'+Main.k.text.gettext("Pour avoir une liste d'équipage correcte, vous devez mettre à jour cette liste via le module Cryo. <br/>" +
+						"Pour ce faire, veuillez vous rendre au labo, listez l'équipage via le module Cryo et cliquez sur le bouton au bas de la liste des personnages.<br/>" +
+						"Attention, le bouton n'apparait que lorsque l'équipage est au complet.")+'"/>')
+					.on("mouseover", Main.k.CustomTip)
+					.on("mouseout", Main.k.hideTip);
+				$alert_crew_list.appendTo($('.ctrlw-sidebar-title-crew'));
+			}
 		}else{
 			$('#ctrlw-warning-crew-list').remove();
 		}
@@ -4992,7 +4996,7 @@ Main.k.tabs.playing = function() {
 						}
 					});
 					/** To detect crew list update **/
-					Main.k.HEROES = Main.k.HEROES_ALL;
+					Main.k.HEROES = Main.k.HEROES_ALL.slice();
 					Main.k.GameInfos.data.heroes_list = heroes_list;
 					Main.k.GameInfos.save();
 					Main.k.Profiles.save();
@@ -5642,7 +5646,7 @@ Main.k.tabs.playing = function() {
 				}
 
 				//replace heroes
-				$.each(Main.k.HEROES.replace, function(k,v){
+				$.each(Main.k.HEROES_REPLACE, function(k,v){
 					var index;
 					if($('.'+k).length > 0 || $.inArray(k,existing_heroes) != -1){
 						index = $.inArray(v,Main.k.HEROES);

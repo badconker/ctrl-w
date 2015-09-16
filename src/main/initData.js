@@ -10,7 +10,7 @@ Main.k.initData = function() {
 	Main.k.COMMS = ["paola", "eleesha", "andie", "stephen", "janice", "roland", "hua", "derek", "jin_su", "kuan_ti", "gioele", "chun", "ian", "finola", "terrence", "frieda", "chao", "raluca"];
 	Main.k.ADMINS =   ["janice", "terrence", "eleesha", "raluca", "finola", "andie", "frieda", "ian", "stephen", "paola", "jin_su", "hua", "kuan_ti", "gioele", "chun", "roland", "chao", "derek"];
 
-	Main.k.HEROES.replace = {
+	Main.k.HEROES_REPLACE = {
 		finola:'andie',
 		chao:'derek'
 	};
