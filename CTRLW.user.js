@@ -17,7 +17,7 @@
 // @resource    jgrowl https://raw.github.com/badconker/ctrl-w/release/lib/jquery.jgrowl.js
 // @resource    translation:en https://raw.github.com/badconker/ctrl-w/release/translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es https://raw.github.com/badconker/ctrl-w/release/translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.36
+// @version     0.36.1
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -7978,18 +7978,18 @@ Main.k.tabs.playing = function() {
 		Main.k.heroes_same_room = tab_heroes_same_room;
 
 		if(Main.k.HEROES_ALL.length == Main.k.HEROES.length){
-//			var existing_heroes = ['finola','chao'];
-			var existing_heroes = ['andie','derek'];
+			var existing_heroes = ['finola','chao'];
+//			var existing_heroes = ['andie','derek'];
 //			console.log('check heroes list',Main.k.GameInfos.data.heroes_list);
 			if(Main.k.GameInfos.data.heroes_list.length > 0){
 				Main.k.HEROES = Main.k.GameInfos.data.heroes_list;
 			}else{
-//				if($('.groupConf').length > 0 && $('.groupConf img[src*="use_andrek"]').length == 1){
-//					existing_heroes = ['andie','derek'];
-//				}
-				if($('.groupConf').length > 0 && $('.groupConf img[src*="use_andrek"]').length == 0){
-					existing_heroes = ['finola','chao'];
+				if($('.groupConf').length > 0 && $('.groupConf img[src*="use_andrek"]').length == 1){
+					existing_heroes = ['andie','derek'];
 				}
+				//if($('.groupConf').length > 0 && $('.groupConf img[src*="use_andrek"]').length == 0){
+				//	existing_heroes = ['finola','chao'];
+				//}
 
 				//replace heroes
 				$.each(Main.k.HEROES_REPLACE, function(k,v){
