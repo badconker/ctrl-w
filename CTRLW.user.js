@@ -17,7 +17,7 @@
 // @resource    translation:fr translations/fr/LC_MESSAGES/ctrl-w.po
 // @resource    translation:en translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.36.2b1
+// @version     0.36.2b2
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -800,7 +800,7 @@ Main.k.GetHeroNameFromTopic = function(topic) {
 	}
 
 	// If no hero found (hero = "" or hero = undefined), use jin su
-	return hero ? hero : "jin_su";
+	return hero;
 };
 
 
@@ -5359,6 +5359,9 @@ Main.k.tabs.playing = function() {
 					}
 				} else {
 					hero = Main.k.GetHeroNameFromTopic($(this));
+					if((!(hero in Main.k.Manager.heroes))){
+						return true;
+					}
 					Main.k.Manager.heroes[hero].mess++;
 					Main.k.Manager.heroes[hero].topic++;
 
@@ -5413,6 +5416,9 @@ Main.k.tabs.playing = function() {
 						Main.k.Manager.heroes[hero].av++;
 					} else {
 						hero = Main.k.GetHeroNameFromTopic($(this));
+						if((!(hero in Main.k.Manager.heroes))){
+							return true;
+						}
 						Main.k.Manager.heroes[hero].mess++;
 					}
 

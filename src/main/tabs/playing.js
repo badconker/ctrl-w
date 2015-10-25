@@ -3012,6 +3012,9 @@ Main.k.tabs.playing = function() {
 					}
 				} else {
 					hero = Main.k.GetHeroNameFromTopic($(this));
+					if((!(hero in Main.k.Manager.heroes))){
+						return true;
+					}
 					Main.k.Manager.heroes[hero].mess++;
 					Main.k.Manager.heroes[hero].topic++;
 
@@ -3066,6 +3069,9 @@ Main.k.tabs.playing = function() {
 						Main.k.Manager.heroes[hero].av++;
 					} else {
 						hero = Main.k.GetHeroNameFromTopic($(this));
+						if((!(hero in Main.k.Manager.heroes))){
+							return true;
+						}
 						Main.k.Manager.heroes[hero].mess++;
 					}
 
