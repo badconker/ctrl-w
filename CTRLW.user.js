@@ -62,8 +62,7 @@ Main.k = createObjectIn(unsafeWindow.Main, {defineAs: "k"});
 Main.k.window = unsafeWindow;
 Main.k.version = GM_info.script.version;
 Main.k.website = "http://ks26782.kimsufi.com/ctrlw";
-Main.k.servurl = "http://ctrl-w.badconker.com";
-Main.k.servurl_badconker = 'http://ctrlw.badconker.com';
+Main.k.servurl = "http://ctrl-w.badconker.fr";
 Main.k.window = window;
 Main.k.domain = document.domain;
 Main.k.mushurl = 'http://' + document.domain;
@@ -2527,7 +2526,7 @@ Main.k.tabs.playing = function() {
 					.appendTo($skilldom);
 
 				if (Main.k.compInactiveMush[skill.img]) {
-					$("<img>").attr("src", Main.k.servurl_badconker + "/img/non-mush.png").addClass("actmush")
+					$("<img>").attr("src", Main.k.servurl + "/img/non-mush.png").addClass("actmush")
 						.attr("width", "10").attr("height", "10")
 						.appendTo($skilldom);
 				}
@@ -4691,7 +4690,7 @@ Main.k.tabs.playing = function() {
 						.appendTo(skilldom);
 
 					if (Main.k.compInactiveMush[skill.img]) {
-						$("<img>").attr("src", Main.k.servurl_badconker + "/img/non-mush.png").addClass("actmush")
+						$("<img>").attr("src", Main.k.servurl + "/img/non-mush.png").addClass("actmush")
 							.attr("width", "10").attr("height", "10")
 							.attr("_title", Main.k.text.gettext("Compétence inactive mush"))
 							.attr("_desc", Main.k.text.gettext("Cette compétence est inactive quand on est mush (source : Twinpedia)."))
@@ -7145,7 +7144,7 @@ Main.k.tabs.playing = function() {
 					.appendTo(skilldom);
 
 					if (Main.k.compInactiveMush[skill.img]) {
-						$("<img>").attr("src", Main.k.servurl_badconker + "/img/non-mush.png").addClass("actmush")
+						$("<img>").attr("src", Main.k.servurl + "/img/non-mush.png").addClass("actmush")
 						.attr("width", "10").attr("height", "10")
 						.attr("_title", Main.k.text.gettext("Compétence inactive mush"))
 						.attr("_desc", Main.k.text.gettext("Cette compétence est inactive quand on est mush (source : Twinpedia)."))

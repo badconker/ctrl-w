@@ -180,7 +180,7 @@ Main.k.tabs.playing = function() {
 					.appendTo($skilldom);
 
 				if (Main.k.compInactiveMush[skill.img]) {
-					$("<img>").attr("src", Main.k.servurl_badconker + "/img/non-mush.png").addClass("actmush")
+					$("<img>").attr("src", Main.k.servurl + "/img/non-mush.png").addClass("actmush")
 						.attr("width", "10").attr("height", "10")
 						.appendTo($skilldom);
 				}
@@ -2344,7 +2344,7 @@ Main.k.tabs.playing = function() {
 						.appendTo(skilldom);
 
 					if (Main.k.compInactiveMush[skill.img]) {
-						$("<img>").attr("src", Main.k.servurl_badconker + "/img/non-mush.png").addClass("actmush")
+						$("<img>").attr("src", Main.k.servurl + "/img/non-mush.png").addClass("actmush")
 							.attr("width", "10").attr("height", "10")
 							.attr("_title", Main.k.text.gettext("Compétence inactive mush"))
 							.attr("_desc", Main.k.text.gettext("Cette compétence est inactive quand on est mush (source : Twinpedia)."))
@@ -4798,7 +4798,7 @@ Main.k.tabs.playing = function() {
 					.appendTo(skilldom);
 
 					if (Main.k.compInactiveMush[skill.img]) {
-						$("<img>").attr("src", Main.k.servurl_badconker + "/img/non-mush.png").addClass("actmush")
+						$("<img>").attr("src", Main.k.servurl + "/img/non-mush.png").addClass("actmush")
 						.attr("width", "10").attr("height", "10")
 						.attr("_title", Main.k.text.gettext("Compétence inactive mush"))
 						.attr("_desc", Main.k.text.gettext("Cette compétence est inactive quand on est mush (source : Twinpedia)."))
