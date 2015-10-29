@@ -155,19 +155,20 @@ Main.k.initData = function() {
 	});
 
 	Main.k.cssToHeroes = [];
+	Main.k.cssToHeroes["-1056px"] = "roland";
 	Main.k.cssToHeroes["-1185px"] = "janice";
+	Main.k.cssToHeroes["-1233px"] = "ian";
 	Main.k.cssToHeroes["-1282px"] = "chao";
 	Main.k.cssToHeroes["-1335px"] = "eleesha";
-	Main.k.cssToHeroes["-1233px"] = "ian";
-	Main.k.cssToHeroes["-1444px"] = "terrence";
-	Main.k.cssToHeroes["-1554px"] = "hua";
-	Main.k.cssToHeroes["-1499px"] = "jin_su";
-	Main.k.cssToHeroes["-1604px"] = "jin_su";
 	Main.k.cssToHeroes["-1391px"] = "raluca";
+	Main.k.cssToHeroes["-1444px"] = "terrence";
+	Main.k.cssToHeroes["-1499px"] = "jin_su";
+	Main.k.cssToHeroes["-1554px"] = "hua";
+	Main.k.cssToHeroes["-1604px"] = "jin_su";
 	Main.k.cssToHeroes["-1681px"] = "stephen";
 	Main.k.cssToHeroes["-1728px"] = "paola";
-	Main.k.cssToHeroes["-1056px"] = "roland";
 	Main.k.cssToHeroes["-1875px"] = "kuan_ti";
+	Main.k.cssToHeroes["-2063px"] = "frieda";
 
 	Main.k.compActiveMush = [];
 
