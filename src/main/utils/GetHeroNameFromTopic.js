@@ -22,5 +22,5 @@ Main.k.GetHeroNameFromTopic = function(topic) {
 	}
 
 	// If no hero found (hero = "" or hero = undefined), use jin su
-	return hero ? hero : "jin_su";
+	return hero;
 };
