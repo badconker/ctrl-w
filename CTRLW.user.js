@@ -17,7 +17,7 @@
 // @resource    jgrowl https://raw.github.com/badconker/ctrl-w/release/lib/jquery.jgrowl.js
 // @resource    translation:en https://raw.github.com/badconker/ctrl-w/release/translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es https://raw.github.com/badconker/ctrl-w/release/translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.36.2
+// @version     0.36.3
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -286,6 +286,7 @@ Main.k.initData = function() {
 	Main.k.cssToHeroes["-1681px"] = "stephen";
 	Main.k.cssToHeroes["-1728px"] = "paola";
 	Main.k.cssToHeroes["-1875px"] = "kuan_ti";
+	Main.k.cssToHeroes["-1921px"] = "finola";
 	Main.k.cssToHeroes["-2063px"] = "frieda";
 
 	Main.k.compActiveMush = [];
@@ -794,12 +795,26 @@ Main.k.GetHeroNameFromTopic = function(topic) {
 	if (div != null && hero == '') {
 		var sp = div.css('backgroundPosition').split(" ");
 		var pos_y = sp[1];
-
-		// Don't need to check if undefined thanks to the shield in the return
-		hero = Main.k.cssToHeroes[pos_y];
+		
+		if(pos_y in Main.k.cssToHeroes){
+			hero = Main.k.cssToHeroes[pos_y];
+		}else{
+			var storage = sessionStorage.getItem('ctrlw_css_outfit' + pos_y);
+			if(storage == null){
+				GM_xmlhttpRequest({
+					method: 'POST',
+					url: Main.k.servurl + "/misc/css-outfit",
+					data: $.param({
+						css: pos_y
+					}),
+					headers: {
+						"Content-Type": "application/x-www-form-urlencoded"
+					}
+				});
+				sessionStorage.setItem('ctrlw_css_outfit' + pos_y,1);
+			}
+		}
 	}
-
-	// If no hero found (hero = "" or hero = undefined), use jin su
 	return hero;
 };
 
