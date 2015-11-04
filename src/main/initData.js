@@ -168,6 +168,7 @@ Main.k.initData = function() {
 	Main.k.cssToHeroes["-1681px"] = "stephen";
 	Main.k.cssToHeroes["-1728px"] = "paola";
 	Main.k.cssToHeroes["-1875px"] = "kuan_ti";
+	Main.k.cssToHeroes["-1921px"] = "finola";
 	Main.k.cssToHeroes["-2063px"] = "frieda";
 
 	Main.k.compActiveMush = [];
