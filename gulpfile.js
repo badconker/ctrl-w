@@ -4,7 +4,7 @@ var concat = require('gulp-concat');
 gulp.task('default', function() {
 
 	fileOrder = [
-		'./src/userscript.js',
+		'./src/userscript_metadata.js',
 		'./src/globalVariable.js',
 		'./src/functions.js',
 
