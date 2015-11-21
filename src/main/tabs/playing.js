@@ -1595,7 +1595,21 @@ Main.k.tabs.playing = function() {
 		setTimeout(function() {
 			// Hide previous cols
 			for (var i=0; i<cols.length; i++) {
-				if (cols[i]) $(cols[i]).hide();
+				if (cols[i]) {
+					var $col = $(cols[i]);
+					if(cols[i] == '#room_col'){
+						//jQuery n'arrive pas à récupérer la largeur réelle de la cellule, si quelqu'un a une solution...
+						//$col.data('width', $col.width());
+						$col.data('width', 436);
+						$col.css({width:0});
+						$col.children().each(function(){
+							$(this).data('width', $(this).width());
+						});
+						$col.children().css({width: 0});
+					}else{
+						$col.hide();
+					}
+				}
 			}
 
 			if (after) after();
@@ -1604,7 +1618,17 @@ Main.k.tabs.playing = function() {
 	Main.k.folding.unfold = function(cols, after) {
 		// Display new cols
 		for (var i=0; i<cols.length; i++) {
-			if (cols[i]) $(cols[i]).show();
+			if (cols[i]) {
+				var $col = $(cols[i]);
+				if(cols[i] == '#room_col'){
+					$col.css({width:$col.data('width') + 'px'});
+					$col.children().each(function(){
+						$(this).css('width', $(this).data('width') + 'px');
+					})
+				}else{
+					$col.show();
+				}
+			}
 		}
 
 		setTimeout(function() {
@@ -1625,17 +1649,6 @@ Main.k.tabs.playing = function() {
 
 				if (after) after();
 
-				// Fix flash (chrome)
-				if (cols[1] == Main.k.folding.gamecols[1]) {
-					$("body").delay(200, "myQueue").queue("myQueue", function() {
-						Main.refreshChat();
-						Main.acListMaintainer.refresh(true);
-						Main.syncInvOffset(null,true);
-						Main.doChatPacks();
-						Main.topChat();
-						Main.onChanDone(ChatType.Local[1],true);
-					}).dequeue("myQueue");
-				}
 			}, 230);
 		}, 20);
 	};
@@ -2713,6 +2726,8 @@ Main.k.tabs.playing = function() {
 		var haschat1 = true;
 		var haschat2 = true;
 		var haschat3 = true;
+		
+		var $tabstats;
 
 		if (!Main.k.Manager.initialized) {
 			Main.k.Manager.initialized = true;
@@ -2753,7 +2768,7 @@ Main.k.tabs.playing = function() {
 			rbg.find(".tabcontent").css("display", "none");
 
 			// Tooltips
-			var $tabstats = $("#tabstats");
+			$tabstats = $("#tabstats");
 			$tabstats.attr("_title", Main.k.text.gettext("Statistiques")).attr("_desc", Main.k.text.gettext("Affiche les statistiques, et permet de gérer le nombre de messages chargés dans la page."));
 			$("#tabnew").attr("_title", Main.k.text.gettext("Nouveaux Messages")).attr("_desc", Main.k.text.gettext("Beaucoup de messages à lire ? Le manager permet de rattraper son retard plus facilement. En chargeant tous les messages dans l'onglet Statistiques, vous pouvez aussi voir les messages non lus manqués à cause du bug (Mush) des messages."));
 			$("#tabsearch").attr("_title", Main.k.text.gettext("Recherche de Messages")).attr("_desc", Main.k.text.gettext("Une discussion à retrouver ? Envie de savoir combien d'incendies se sont déclarés ? (@neron incendie daedalus)"));
@@ -2874,6 +2889,8 @@ Main.k.tabs.playing = function() {
 				"margin": "3px 4px 0 auto",
 				"display": "inline-block"
 			});
+		}else{
+			$tabstats = $("#tabstats");
 		}
 
 		// Load data
@@ -2948,31 +2965,30 @@ Main.k.tabs.playing = function() {
 		if (Main.k.Manager.lmwProcessing) return;
 		Main.k.Manager.lmwProcessing = true;
 
-		var w = Main.getChannel(Main.curChatIndex()).find("div.wall div.unit").last();
+		var w = $('#cdStdWall').find("div.wall div.unit").last();
 		var wp = w.closest(".wall");
 
-		if (w.length > 0) {
-			var datak = k ? k : w.attr("data-k");
-			Tools.ping("/retrWallAfter/" + datak,function(content) {
-				var jq1 = $(content);
-				Main.k.Manager.lmwProcessing = false;
-				if (jq1.find(".wall").html().trim().length > 0) {
-					// Store messages
-					Main.k.Manager.parseWall(jq1.find(".wall"));
-
-					// Get data-k
-					var datak = jq1.find(".wall .unit").last().attr("data-k");
-
-					// Load moar
-					Main.k.Manager.loadWholeWall(datak);
-				} else {
-					Main.k.Manager.update();
-				}
-			});
-		} else {
+		var datak = k ? k : w.attr("data-k");
+		Tools.ping("/retrWallAfter/" + datak,function(content) {
+			var jq1 = $(content);
 			Main.k.Manager.lmwProcessing = false;
-			Main.k.Manager.update();
-		}
+			if (jq1.find(".wall").html().trim().length > 0) {
+				// Store messages
+				Main.k.Manager.parseWall(jq1.find(".wall"));
+
+				// Get data-k
+				var datak = jq1.find(".wall .unit").last().attr("data-k");
+				if(datak == k){
+					Main.k.Manager.lmwProcessing = false;
+					Main.k.Manager.update();
+				}else{
+					// Load more
+					Main.k.Manager.loadWholeWall(datak);
+				}
+			} else {
+				Main.k.Manager.update();
+			}
+		});
 	};
 	Main.k.Manager.parseWall = function(wall) {
 		if (!wall.find) wall = $(wall);
@@ -3240,7 +3256,7 @@ Main.k.tabs.playing = function() {
 	Main.k.Manager.clearSess = function() {
 		// Clear sid cookie
 		js.Cookie.set("sid", "", -42, "/", "."+Main.k.domain+"");
-
+		Main.k.showLoading();
 		// Reload session
 		$('<iframe>', {
 			src: Main.k.mushurl+'/me',
@@ -3252,32 +3268,7 @@ Main.k.tabs.playing = function() {
 			display: "none",
 			position: "absolute"
 		}).appendTo('body').load(function() {
-			// Get new flash
-			var el = $('#cdContent', $('#sessionframe').contents()).clone();
-			el.find("embed").remove();
-
-			var $cdContent = $("#cdContent");
-			// Replace flash
-			$cdContent.replaceWith(el);
-			eval($cdContent.find("script").html());
-
-			// Delete iframe
-			$("#sessionframe").remove();
-
-			// Update new flash
-			Main.refreshChat();
-			Main.acListMaintainer.refresh(true);
-
-			// Fix page title
-			$(document).attr("title", "Mush - Jeu de survie dans l'espace : Vous êtes le seul espoir de l'humanité !");
-
-			// Update manager
-			Main.k.Manager.topics = [];
-			Main.k.Manager.replies = [];
-			Main.k.Manager.lastago = "";
-			Main.k.Manager.loadedtopics = [];
-			Main.k.Manager.loadedreplies = [];
-			Main.k.Manager.update();
+			window.location.reload();
 		});
 	};
 	Main.k.Manager.updateHeroes = function() {
@@ -3365,7 +3356,7 @@ Main.k.tabs.playing = function() {
 		})
 		.appendTo(actions)
 		.find("a")
-		.attr("_title", Main.k.text.gettext("Décharger les messages")).attr("_desc", Main.k.text.gettext("Déchargez la liste de messages pour alléger le jeu. Lorsque vous chargez des messages (en scrollant sur le chat, par exemple), ceux-ci restent chargés. Mush chargeant toute la page (dont les messages) à chaque action, votre jeu est grandement ralenti lorsque le nombre de messages chargés est conséquent.</p><p><strong>Cette action bloque le jeu pendant quelques secondes.</strong>"))
+		.attr("_title", Main.k.text.gettext("Décharger les messages")).attr("_desc", Main.k.text.gettext("Déchargez la liste de messages pour alléger le jeu. Lorsque vous chargez des messages (en scrollant sur le chat, par exemple), ceux-ci restent chargés. Mush chargeant toute la page (dont les messages) à chaque action, votre jeu est grandement ralenti lorsque le nombre de messages chargés est conséquent.</p><p><strong>Cette action fermera le Message Manager et rafraîchira la page.</strong>"))
 		.on("mouseover", Main.k.CustomTip)
 		.on("mouseout", Main.k.hideTip);
 
