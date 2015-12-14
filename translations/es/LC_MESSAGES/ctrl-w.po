@@ -160,7 +160,7 @@ msgstr "38791245"
 
 #. Translators: This translation must be copied from the game.
 msgid "Vous ne vous êtes pas connecté depuis 24h. Bonne chance pour la suite..."
-msgstr ""
+msgstr "Si tus barras de <img class='paslot' src='/img/icons/ui/pa_slot1.png' alt='pa' /> están llenas, eres considerado como inactivo y te vuelves un blanco fácil. No queremos imaginar lo que pasará..."
 
 #. Translators: This translation must be copied from the game.
 msgid "Inactif"
@@ -168,7 +168,7 @@ msgstr "Inactivo"
 
 #. Translators: This translation must be copied from the game.
 msgid "Description grand inactif"
-msgstr "No has sido muy activo, no te has conectado hace más 48h, tu tripulación se verá perjudicada y podrían tomar una decisión radical."
+msgstr "No has sido muy activo, no te has conectado hace más de 48h, tu tripulación se verá perjudicada y podrían tomar una decisión radical."
 
 #. Translators: This translation must be copied from the game.
 msgid "Grand inactif"
@@ -176,7 +176,7 @@ msgstr "Gran inactivo"
 
 #. Translators: This translation must be copied from the game.
 msgid "Vous faites partie du Mush."
-msgstr ""
+msgstr "Ahora eres un Mush."
 
 #. Translators: This translation must be copied from the game.
 #, fuzzy
@@ -264,14 +264,14 @@ msgstr "Guía de %1"
 
 #. Translators: Wiki url
 msgid "http://www.twinpedia.com/mush"
-msgstr "http://www.twinpedia.com/mush"
+msgstr "http://www.mushpedia.com/wiki/Main_Page"
 
 #. Translators: Wiki favicon url
 msgid "http://www.twinpedia.com/_media/favicon.ico"
-msgstr "http://www.twinpedia.com/_media/favicon.ico"
+msgstr "http://www.mushpedia.com/favicon.ico"
 
 msgid "Twinpedia"
-msgstr "Twinpedia"
+msgstr "Mushpedia"
 
 msgid "ForumFDSId"
 msgstr "109822"
@@ -280,7 +280,7 @@ msgid "Magistrature"
 msgstr "Tribunal FDS"
 
 msgid "Nom complet"
-msgstr ""
+msgstr "Nombre completo"
 
 msgid "Mémoire"
 msgstr "Historia"
@@ -544,7 +544,7 @@ msgstr "saciedad"
 
 #. Translators: This translation must be copied from the game. (Consummables description)
 msgid "Provoque la maladie"
-msgstr "Provoca las enfermedades"
+msgstr "Provoca la enfermedad"
 
 #. Translators: This translation must be copied from the game. (Consummables description)
 msgid "Impérissable"
@@ -569,7 +569,11 @@ msgid "Ne tient pas compte des mushs anonymes."
 msgstr "Ignora los mush escondidos."
 
 msgid "à l'instant"
-msgstr ""
+msgstr "hace un instante"
+
+#. TODO: Main.k.maxAgo Multilang
+-msgid "\~([0-9]+)j"		
+-msgstr "\~([0-9]+)d"		
 
 msgid "Chan IRC"
 msgstr "IRC"
@@ -672,7 +676,7 @@ msgid "Mort"
 msgstr "Fallecid[o|a]"
 
 msgid "Statistiques"
-msgstr ""
+msgstr "Estadísticas"
 
 msgid "Affiche les statistiques, et permet de gérer le nombre de messages chargés dans la page."
 msgstr "Muestra diversas estadísticas y te permite definir el número de mensajes que cargan por página."
@@ -693,11 +697,11 @@ msgstr "¿Buscas un tema específico? ¿Quieres saber cuántos incendios ha habi
 
 #. Translators: This translation must be copied from the game.
 msgid "Le canal de discussion est indispensable pour s'organiser avec l'équipage.</p><p>Pour participer vous devez posséder un <strong>talkie-walkie</strong>."
-msgstr "El canal de comunicaciones es esencial para coordinarte con la tripulación.</p><p>Para participar necesitarás un <strong>walkie-talkie</strong>."
+msgstr "El canal de chat es indispensable para la organización. </p><p>Para participar debes tener el <img src="/img/icons/ui/talkie.png"/> <strong>walkie talkie</strong>."
 
 #. Translators: This translation must be copied from the game.
 msgid "Favoris"
-msgstr ""
+msgstr "Favoritos"
 
 msgid "Votre sélection de sujets favoris."
 msgstr "Tus temas favoritos."
@@ -707,7 +711,7 @@ msgstr "No has seleccionado ningún tema."
 
 #. Translators: The beginning must be copied from the game.
 msgid "Canal Mush"
-msgstr ""
+msgstr "Canal Mush"
 
 msgid "Ssshh, personne nous entend ici... Le Canal Mush est le <em>canal privé</em> pour les adhérents aux <strong>Mush</strong> <img src='/img/icons/ui/mush.png' />.</p><p><strong>/!&#92; Fonctionnalité non codée</strong>"
 msgstr "Ssshh, nadie puede oirnos aquí... el Canal Mush es el <em>canal privado</em> para los <strong>Mush</strong> <img src='/img/icons/ui/mush.png' />.</p><p><strong>/!&#92; Característica no desarrollada</strong>"
@@ -770,7 +774,7 @@ msgstr "Descargar los mesajes"
 
 #, fuzzy
 msgid "Déchargez la liste de messages pour alléger le jeu. Lorsque vous chargez des messages (en scrollant sur le chat, par exemple), ceux-ci restent chargés. Mush chargeant toute la page (dont les messages) à chaque action, votre jeu est grandement ralenti lorsque le nombre de messages chargés est conséquent.</p><p><strong>Cette action fermera le Message Manager et rafraîchira la page.</strong>"
-msgstr "Vacía el historial de mensajes para aumentar el rendimiento de Mush. Cuando un mensaje carga, (al desplazarte por la página), permanecen cargados. En cada acción, el juego recarga la página completa, incluyendo los mensajes, lo que ralentiza el juego significativamente si el historial de mensajes tiene un tamaño considerable.</p><p><strong>Esta acción detiene el juego unos segundos.</strong>"
+msgstr "Vacía el historial de mensajes para aumentar el rendimiento de Mush. Cuando un mensaje carga, (al desplazarte por la página), permanecen cargados. En cada acción, el juego recarga la página completa, incluyendo los mensajes, lo que ralentiza el juego significativamente si el historial de mensajes tiene un tamaño considerable.</p><p><strong>Esta acción cerrará el Gestor de Mensajes y recargará la página.</strong>"
 
 msgid "Total : <b>%1</b> message chargé"
 msgid_plural "Total : <b>%1</b> messages chargés"
@@ -779,8 +783,8 @@ msgstr[1] "Total: <b>%1</b> mensajes cargados"
 
 msgid "en <b>%1</b> topic. <br/> (depuis %2)"
 msgid_plural "en <b>%1</b> topics. <br/> (depuis %2)"
-msgstr[0] "en <b>%1</b> tema. <br/> (para %2)"
-msgstr[1] "en <b>%1</b> temas. <br/> (para %2)"
+msgstr[0] "en <b>%1</b> tema. <br/> (en %2)"
+msgstr[1] "en <b>%1</b> temas. <br/> (en %2)"
 
 msgid "Total : %1 message"
 msgid_plural "Total : %1 messages"
@@ -998,10 +1002,10 @@ msgid "Le Responsable de Communications est la seule personne habilitée à déc
 msgstr "El Oficial de Comunicaciones puede establecer contacto una vez que el enlace con el Sistema Solar ha sido reestablecido. Adicionalmente, puede realizar comunicados a toda la tripulación."
 
 msgid "Attention"
-msgstr ""
+msgstr "Atención"
 
 msgid "Vous pouvez aussi modifier le duo Andrek/Chaola en cliquant sur l'icone"
-msgstr ""
+msgstr "Puedes cambiar el dúo Andrek/Chaola haciendo click en el icono"
 
 #, fuzzy
 msgid "Pour avoir une liste d'équipage correcte, vous devez mettre à jour cette liste via le module Cryo. <br/>Pour ce faire, veuillez vous rendre au labo, listez l'équipage via le module Cryo et cliquez sur le bouton au bas de la liste des personnages.<br/>Attention, le bouton n'apparait que lorsque l'équipage est au complet.<p><strong>"
