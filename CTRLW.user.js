@@ -17,7 +17,7 @@
 // @resource    jgrowl https://raw.github.com/badconker/ctrl-w/release/lib/jquery.jgrowl.js
 // @resource    translation:en https://raw.github.com/badconker/ctrl-w/release/translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es https://raw.github.com/badconker/ctrl-w/release/translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.36.4
+// @version     0.36.5
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -754,6 +754,8 @@ Main.k.CustomTip = function(e) {
 Main.k.hideTip = function(){
 	Main.hideTip();
 };
+//TODO make an Utils object
+
 /**
  *
  * @param arr
@@ -769,6 +771,7 @@ Main.k.ArrayContains = function(arr, o) {
 	}
 	return false;
 };
+
 Main.k.EliminateDuplicates = function(arr) {
 	var i, len=arr.length, out=[], obj={};
 	for (i=0;i<len;i++) obj[arr[i]]=0;
@@ -779,6 +782,7 @@ Main.k.EliminateDuplicates = function(arr) {
 	}
 	return out;
 };
+
 /**
  * @param {object} topic
  * @return string
@@ -797,7 +801,7 @@ Main.k.GetHeroNameFromTopic = function(topic) {
 	if (div != null && hero == '') {
 		var sp = div.css('backgroundPosition').split(" ");
 		var pos_y = sp[1];
-		
+
 		if(pos_y in Main.k.cssToHeroes){
 			hero = Main.k.cssToHeroes[pos_y];
 		}else{
@@ -818,6 +822,16 @@ Main.k.GetHeroNameFromTopic = function(topic) {
 		}
 	}
 	return hero;
+};
+
+Main.k.InvertObject = function(obj){
+	var new_obj = {};
+	for (var prop in obj) {
+		if(obj.hasOwnProperty(prop)) {
+			new_obj[obj[prop]] = prop;
+		}
+	}
+	return new_obj;
 };
 
 
@@ -5051,6 +5065,7 @@ Main.k.tabs.playing = function() {
 	Main.k.GameInfos = {};
 	Main.k.GameInfos.data = {};
 	Main.k.GameInfos.data.heroes_list = [];
+	Main.k.GameInfos.data.andrek = false; //persistant, not cleared on new game
 	Main.k.GameInfos.init = function() {
 		var ctrlw_game_infos = localStorage.getItem("ctrlw_game_infos");
 		if (ctrlw_game_infos == null){
@@ -5067,10 +5082,10 @@ Main.k.tabs.playing = function() {
 		callbacks_storage_sync.fire();
 	};
 	Main.k.GameInfos.clear = function(){
-		Main.k.GameInfos.data = {};
+		Main.k.GameInfos.data = {andrek: Main.k.GameInfos.data.andrek};
 		Main.k.GameInfos.data.heroes_list = [];
 		Main.k.HEROES = Main.k.HEROES_ALL.slice();
-		localStorage.removeItem("ctrlw_game_infos");
+		localStorage.setItem("ctrlw_game_infos",JSON.stringify(Main.k.GameInfos.data));
 		callbacks_storage_sync.fire();
 	};
 
@@ -7046,13 +7061,21 @@ Main.k.tabs.playing = function() {
 
 		if(Main.k.GameInfos.data.heroes_list.length == 0){
 			if($('#ctrlw-warning-crew-list').length == 0){
-				var $alert_crew_list = $('<img id="ctrlw-warning-crew-list" style="margin-left:10px;position: relative;top:5px" src="/img/icons/ui/broken.png" ' +
+				var $alert_crew_list = $('<img id="ctrlw-warning-crew-list" style="margin-left:10px;position: relative;top:5px;cursor:pointer" src="/img/icons/ui/broken.png" ' +
 					'_title="'+Main.k.text.gettext("Attention")+'" ' +
 					'_desc="'+Main.k.text.gettext("Pour avoir une liste d'équipage correcte, vous devez mettre à jour cette liste via le module Cryo. <br/>" +
 						"Pour ce faire, veuillez vous rendre au labo, listez l'équipage via le module Cryo et cliquez sur le bouton au bas de la liste des personnages.<br/>" +
-						"Attention, le bouton n'apparait que lorsque l'équipage est au complet.")+'"/>')
+						"Attention, le bouton n'apparait que lorsque l'équipage est au complet." +
+						"<p><strong>"+Main.k.text.gettext("Vous pouvez aussi modifier le duo Andrek/Chaola en cliquant sur l'icone")+"</strong></p>")+'"/>')
 					.on("mouseover", Main.k.CustomTip)
-					.on("mouseout", Main.k.hideTip);
+					.on("mouseout", Main.k.hideTip)
+					.on('click', function(){
+						Main.k.GameInfos.data.andrek = !Main.k.GameInfos.data.andrek;
+						Main.k.GameInfos.save();
+						Main.k.HEROES = Main.k.HEROES_ALL.slice();
+						Main.k.MushUpdate();
+						
+					});
 				$alert_crew_list.appendTo($('.ctrlw-sidebar-title-crew'));
 			}
 		}else{
@@ -7995,27 +8018,18 @@ Main.k.tabs.playing = function() {
 		Main.k.heroes_same_room = tab_heroes_same_room;
 
 		if(Main.k.HEROES_ALL.length == Main.k.HEROES.length){
-			var existing_heroes = ['finola','chao'];
-//			var existing_heroes = ['andie','derek'];
+			
 //			console.log('check heroes list',Main.k.GameInfos.data.heroes_list);
 			if(Main.k.GameInfos.data.heroes_list.length > 0){
 				Main.k.HEROES = Main.k.GameInfos.data.heroes_list;
 			}else{
-				if($('.groupConf').length > 0 && $('.groupConf img[src*="use_andrek"]').length == 1){
-					existing_heroes = ['andie','derek'];
+				var heroes_replace = jQuery.extend({}, Main.k.HEROES_REPLACE);
+				if(Main.k.GameInfos.data.andrek){
+					heroes_replace = Main.k.InvertObject(heroes_replace);
 				}
-				//if($('.groupConf').length > 0 && $('.groupConf img[src*="use_andrek"]').length == 0){
-				//	existing_heroes = ['finola','chao'];
-				//}
-
 				//replace heroes
-				$.each(Main.k.HEROES_REPLACE, function(k,v){
-					var index;
-					if($('.'+k).length > 0 || $.inArray(k,existing_heroes) != -1){
-						index = $.inArray(v,Main.k.HEROES);
-					}else{
-						index = $.inArray(k,Main.k.HEROES);
-					}
+				$.each(heroes_replace, function(k,v){
+					var index = $.inArray(v,Main.k.HEROES);
 					Main.k.HEROES.splice(index,1);
 				});
 			}
