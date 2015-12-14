@@ -16,7 +16,7 @@ gulp.task('default', function() {
 		'./src/main/*.js',
 
 		//UTILS
-		'./src/main/utils/*.js',
+		'./src/main/Utils.js',
 
 		//CSS
 		'./src/main/css/initData.js',
