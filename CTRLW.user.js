@@ -17,7 +17,7 @@
 // @resource    jgrowl https://raw.github.com/badconker/ctrl-w/release/lib/jquery.jgrowl.js
 // @resource    translation:en https://raw.github.com/badconker/ctrl-w/release/translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es https://raw.github.com/badconker/ctrl-w/release/translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.36.5
+// @version     0.36.6
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
