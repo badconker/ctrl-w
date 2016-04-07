@@ -5,6 +5,7 @@
 // @include     http://mush.vg/*
 // @include     http://mush.twinoid.com/*
 // @include     http://mush.twinoid.es/*
+// @downloadURL https://raw.github.com/badconker/ctrl-w/release/CTRLW.user.js
 // @grant       GM_xmlhttpRequest
 // @grant       GM_addStyle
 // @grant       GM_getResourceText
