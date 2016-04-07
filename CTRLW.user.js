@@ -6,6 +6,7 @@
 // @include     http://mush.twinoid.com/*
 // @include     http://mush.twinoid.es/*
 // @downloadURL https://raw.github.com/badconker/ctrl-w/release/CTRLW.user.js
+// @connect     ctrl-w.badconker.fr
 // @grant       GM_xmlhttpRequest
 // @grant       GM_addStyle
 // @grant       GM_getResourceText
@@ -18,7 +19,7 @@
 // @resource    jgrowl https://raw.github.com/badconker/ctrl-w/release/lib/jquery.jgrowl.js
 // @resource    translation:en https://raw.github.com/badconker/ctrl-w/release/translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es https://raw.github.com/badconker/ctrl-w/release/translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.36.7
+// @version     0.36.8
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
