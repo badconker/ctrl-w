@@ -535,11 +535,11 @@ msgstr "Decoding: "
 
 #, fuzzy
 msgid "Base(s) décodée(s): "
-msgstr "Decoded base(s):"
+msgstr "Decoded base(s): "
 
 #, fuzzy
 msgid "Base(s) perdue(s): "
-msgstr "Losted base(s)"
+msgstr "Lost base(s): "
 
 msgid "Consommables :"
 msgstr "Consummables:"
