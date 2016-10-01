@@ -19,7 +19,7 @@
 // @resource    jgrowl https://raw.github.com/badconker/ctrl-w/release/lib/jquery.jgrowl.js
 // @resource    translation:en https://raw.github.com/badconker/ctrl-w/release/translations/en/LC_MESSAGES/ctrl-w.po
 // @resource    translation:es https://raw.github.com/badconker/ctrl-w/release/translations/es/LC_MESSAGES/ctrl-w.po
-// @version     0.36.8
+// @version     0.36.9
 // ==/UserScript==
 
 var Main = unsafeWindow.Main;
@@ -580,7 +580,7 @@ Main.k.displayMainMenu = function() {
 	$("<li><a class='kssmenuel ext' target='_blank' href='"+Main.k.text.gettext("http://www.twinpedia.com/mush")+
 	/* Translators: Wiki favicon url */
 	"'><img data-async_src='"+Main.k.text.gettext("http://www.twinpedia.com/_media/favicon.ico")+"' />"+Main.k.text.gettext("Twinpedia")+"</a></li>").appendTo(help_ss);
-	$("<li><a class='kssmenuel ext' href='http://pictoid.fr/mush/picto' target='_blank'><img data-async_src='http://pictoid.fr/favicon.png' />Pictoid</a></li>").appendTo(help_ss);
+	$("<li><a class='kssmenuel ext' href='http://pictoid.badconker.fr/"+encodeURIComponent(Main.k.lang)+"/game/"+encodeURIComponent(Main.k.text.gettext("mush_game_id"))+"' target='_blank'><img data-async_src='http://pictoid.badconker.fr/favicon.ico' />Pictoid</a></li>").appendTo(help_ss);
 
 	if (Main.k.fds) {
 		$("<li><a class='kssmenuel ext' href='"+Main.k.mushurl+"/tid/forum#!view/"+Main.k.text.gettext("ForumFDSId")+"'><img src='/img/icons/skills/juge.png' />"+Main.k.text.gettext("Magistrature")+"</a></li>").appendTo(forum_ss);
