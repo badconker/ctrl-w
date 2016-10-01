@@ -1,12 +1,12 @@
 {
-	"name": "ctrl-w",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/badconker/ctrl-w.git"
-	},
-	"license": "MIT",
-	"dependencies": {
-		"gulp": "*",
-		"gulp-concat": "*"
-	}
+  "name": "ctrl-w",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/badconker/ctrl-w.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0"
+  }
 }
