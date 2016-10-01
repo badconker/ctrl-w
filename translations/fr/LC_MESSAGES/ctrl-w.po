@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ctrl+w\n"
 "Report-Msgid-Bugs-To: http://twd.io/e/0fdb0w\n"
-"POT-Creation-Date: 2015-11-21 11:55+0100\n"
+"POT-Creation-Date: 2016-10-01 09:21+0200\n"
 "PO-Revision-Date: 2014-10-14 19:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -278,6 +278,9 @@ msgstr ""
 
 msgid "Twinpedia"
 msgstr ""
+
+msgid "mush_game_id"
+msgstr "41"
 
 msgid "ForumFDSId"
 msgstr "77714"

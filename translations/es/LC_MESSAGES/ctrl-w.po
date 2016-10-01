@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CTRL+W\n"
 "Report-Msgid-Bugs-To: http://twd.io/e/0fdb0w\n"
-"POT-Creation-Date: 2015-11-21 11:55+0100\n"
+"POT-Creation-Date: 2016-10-01 09:24+0200\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -272,6 +272,9 @@ msgstr "http://www.mushpedia.com/favicon.ico"
 
 msgid "Twinpedia"
 msgstr "Mushpedia"
+
+msgid "mush_game_id"
+msgstr "76"
 
 msgid "ForumFDSId"
 msgstr "109822"
@@ -571,10 +574,8 @@ msgstr "Ignora los mush escondidos."
 msgid "à l'instant"
 msgstr "hace un instante"
 
-#. TODO: Main.k.maxAgo Multilang
--msgid "\~([0-9]+)j"		
--msgstr "\~([0-9]+)d"		
-
+# msgid "\~([0-9]+)j"
+# msgstr "\~([0-9]+)d"
 msgid "Chan IRC"
 msgstr "IRC"
 
@@ -697,7 +698,7 @@ msgstr "¿Buscas un tema específico? ¿Quieres saber cuántos incendios ha habi
 
 #. Translators: This translation must be copied from the game.
 msgid "Le canal de discussion est indispensable pour s'organiser avec l'équipage.</p><p>Pour participer vous devez posséder un <strong>talkie-walkie</strong>."
-msgstr "El canal de chat es indispensable para la organización. </p><p>Para participar debes tener el <img src="/img/icons/ui/talkie.png"/> <strong>walkie talkie</strong>."
+msgstr "El canal de chat es indispensable para la organización. </p><p>Para participar debes tener el <img src='/img/icons/ui/talkie.png'/> <strong>walkie talkie</strong>."
 
 #. Translators: This translation must be copied from the game.
 msgid "Favoris"
