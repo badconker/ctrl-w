@@ -4403,16 +4403,7 @@ Main.k.tabs.playing = function() {
 		// Page reloader
 		Main.k.MakeButton("<img src='http://twinoid.com/img/icons/refresh.png' style='vertical-align: -20%' /> "+ Main.k.text.gettext("Actualiser"), null, null, Main.k.text.gettext("Actualiser"),
 			Main.k.text.gettext("Actualiser la page sans tout recharger. <strong>Fonctionnalité en cours d'optimisation.</strong>"))
-		.appendTo(leftbar).find("a").on("mousedown", function() {
-			// TODO: loading screen -- Optimize
-
-			Main.refreshChat();
-			Main.acListMaintainer.refresh(true);
-			Main.syncInvOffset(null,true);
-			Main.doChatPacks();
-			Main.topChat();
-			Main.onChanDone(ChatType.Local[1],true)
-		});
+		.appendTo(leftbar).find("a").on("mousedown", Main.k.refreshAll);
 
 		Main.k.MakeButton(Main.k.text.gettext("Nouvelle partie ?"), null, null, Main.k.text.gettext("Nouvelle partie"),
 		Main.k.text.gettext("Vous venez de commencer une nouvelle partie ? Utilisez ce bouton pour supprimer les informations de votre ancienne partie"))
