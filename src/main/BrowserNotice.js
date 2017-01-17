@@ -40,7 +40,7 @@ Main.k.browserNotice = function(msg){
 Main.k.browserNotify = function(msg) {
 	var options = {
 		body: msg,
-		icon: Main.k.servurl + "/img/icons/ui/mush.png"
+		icon: "/img/icons/ui/mush.png"
 	}
 
 	var notification = new Notification("Mush", options);
