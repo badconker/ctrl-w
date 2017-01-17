@@ -22,6 +22,9 @@ Main.k.init = function(){
 			$(this).removeAttr('data-async_src');
 		});
 
+		//Start notification check and reloads
+		Main.k.statusCheck();
+
 	});
 };
 Main.k.getFullName = function(dev_surname) {
