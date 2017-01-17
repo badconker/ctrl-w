@@ -1109,6 +1109,9 @@ msgstr ""
 msgid "Cycle change just happened"
 msgstr ""
 
+msgid "Show browser notifications when tab is inactive."
+msgstr ""
+
 #~ msgid "Description inactif"
 #~ msgstr "Si tus barras de <img src=\"/img/icons/ui/pa_slot1.png\" alt=\"pa\"> están llenas, eres considerado como inactivo y te vuelves un blanco fácil. No queremos imaginar lo que pasará..."
 

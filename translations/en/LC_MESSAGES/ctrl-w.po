@@ -1140,3 +1140,6 @@ msgstr "Cycle change about to happen"
 
 msgid "Cycle change just happened"
 msgstr "Cycle change just happened"
+
+msgid "Show browser notifications when tab is inactive."
+msgstr "Show browser notifications when tab is inactive."
