@@ -9,4 +9,5 @@ Main.k.Options.dlogo = false;
 Main.k.Options.splitpjt = true;
 Main.k.Options.altpa = false;
 Main.k.Options.mushNoConf = false;
+Main.k.Options.browserNot = true;
 Main.k.Options.options = {};

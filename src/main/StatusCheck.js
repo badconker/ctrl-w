@@ -1,6 +1,8 @@
 Main.k.statusCheck = function(){ 
 
 	if (!!Main.k.statusTimeout) clearTimeout(Main.k.statusTimeout);
+	if (!Main.k.Options.browserNot) return;
+
 	Main.k.refreshAll();
 
 	var _now = new Date();

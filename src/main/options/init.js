@@ -45,6 +45,11 @@ Main.k.Options.init = function() {
 	// 	text:		"Utiliser des images alternatives pour les pa / pm."
 	// };
 
+	Main.k.Options.options.browserNot = {
+		option:		Main.k.Options.browserNot,
+		after:		Main.k.statusCheck,	
+		text:		Main.k.text.gettext("Show browser notifications when tab is inactive.")
+	};
 
 	var cook = js.Cookie.get("ctrlwoptions");
 	if (!cook) return;

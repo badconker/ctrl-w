@@ -23,5 +23,9 @@ Main.k.Options.updateOpt = function(key, val) {
 		//	Main.k.Options.altpa = (val == "y");
 		//	Main.k.Options.options.altpa.option = (val == "y");
 		//	break;
+		case "browserNot":
+			Main.k.Options.browserNot = (val == "y");
+			Main.k.Options.options.browserNot.option = (val == "y");
+			break;
 	}
 };
