@@ -5,6 +5,14 @@ Main.k.init = function(){
 	Main.k.Game.init();
 	Main.k.initData();
 	Main.k.displayMainMenu();
+
+	//Check if tab is focused
+	$( window ).focus(function() {
+		Main.k.windowFocus = true;
+	}).blur(function() {
+		Main.k.windowFocus = false;
+	});
+
 	//Integration with others scripts
 	$( window ).load(function() {
 

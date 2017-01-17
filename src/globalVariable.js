@@ -47,6 +47,7 @@ Main.k.domain = document.domain;
 Main.k.mushurl = 'http://' + document.domain;
 Main.k.debug = true;
 Main.k.errorList = [];
+Main.k.windowFocus = true;
 if(Main.k.debug){
 	var console = unsafeWindow.console;
 }else{
