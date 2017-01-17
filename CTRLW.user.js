@@ -774,6 +774,9 @@ Main.k.refreshAll = function() {
 }
 Main.k.statusCheck = function(){ 
 
+	if (!!Main.k.statusTimeout) clearTimeout(Main.k.statusTimeout);
+	if (!Main.k.Options.browserNot) return;
+
 	Main.k.refreshAll();
 
 	var _now = new Date();
@@ -791,26 +794,27 @@ Main.k.statusCheck = function(){
 	});
 
 	if(_unreads > 0) {
-		Main.k.browserNotice("You have " + _unreads + " unread messages");
+		var _unreadMSG = Main.k.text.strargs(Main.k.text.ngettext("You have %1 unread message","You have %1 unread messages",_unreads),[_unreads]);
+		Main.k.browserNotice(_unreadMSG);
 	}
 
 	if(_diffHI == 0 && _diffMI < 3) {
-		Main.k.browserNotice("Cycle change about to happen");
+		Main.k.browserNotice(Main.k.text.gettext('Cycle change about to happen'));
 	}
 
 	if(_diffHI == 2 && _diffMI > 55) {
-		Main.k.browserNotice("Cycle change just happened");
+		Main.k.browserNotice(Main.k.text.gettext('Cycle change just happened'));
 	}
 
 	// TODO : Make this configurable?
 	// TODO : Increase timer if long time in inactive tab
 
 	// Check every minute
-	var timeout = 60000;
+	var _timeout = 60000;
 	// If in hidden tab, check every 5 minutes
-	if(!Main.k.windowFocus) timeout = 300000;
+	if(!Main.k.windowFocus) _timeout = 300000;
 
-	setTimeout(Main.k.statusCheck, timeout);
+	Main.k.statusTimeout = setTimeout(Main.k.statusCheck, _timeout);
 
 }
 Main.k.SyncAstropad = function(tgt){
@@ -2145,17 +2149,61 @@ Main.k.Options.dlogo = false;
 Main.k.Options.splitpjt = true;
 Main.k.Options.altpa = false;
 Main.k.Options.mushNoConf = false;
-Main.k.Options.options = [];
+Main.k.Options.browserNot = true;
+Main.k.Options.options = {};
 
 Main.k.Options.init = function() {
-	Main.k.Options.options = [
-	//  Option Name,	Option Object,				Need refresh,	After(),				Desc
-		["cbubbles",	Main.k.Options.cbubbles,	false,			Main.k.customBubbles,	Main.k.text.gettext("Activer la mise en forme personnalisée des messages (bordure + couleur nom + image de fond).")],
-		["cbubblesNB",	Main.k.Options.cbubblesNB,	false,			Main.k.customBubbles,	Main.k.text.gettext("Simplifier la mise en forme personnalisée des messages (suppression de l'image de fond).")],
-		["dlogo",		Main.k.Options.dlogo,		true,			null,					Main.k.text.gettext("Afficher le logo Mush au dessus des onglets.")],
-		["splitpjt",	Main.k.Options.splitpjt,	false,			Main.k.updateBottom,	Main.k.text.gettext("Séparer les projets / recherches / pilgred sous la zone de jeu.")]
-		//["altpa",		Main.k.Options.altpa,		true,			null,					"Utiliser des images alternatives pour les pa / pm."]
-	];
+
+	Main.k.Options.options = {};
+
+	/**
+
+	Option format :
+
+	Main.k.Options.options.OPTIONNAME = {
+		option:		Main.k.Options.OPTIONNAME,			// Option value to change
+		text:		Main.k.text.gettext("description"), // Description text
+		after:		callback,							// (Optional) After option changed, call this function
+		refresh: 	true,								// (Optional) Page refresh needed after option change?
+	};
+
+	*/
+
+	Main.k.Options.options.cbubbles = {
+		option:		Main.k.Options.cbubbles,
+		after:		Main.k.customBubbles,
+		text:		Main.k.text.gettext("Activer la mise en forme personnalisée des messages (bordure + couleur nom + image de fond)."),
+	};
+
+	Main.k.Options.options.cbubblesNB = {
+		option:		Main.k.Options.cbubblesNB,
+		after:		Main.k.customBubbles,
+		text:		Main.k.text.gettext("Simplifier la mise en forme personnalisée des messages (suppression de l'image de fond)."),
+	};
+
+	Main.k.Options.options.dlogo = {
+		option:		Main.k.Options.dlogo,	
+		refresh:	true,
+		text:		Main.k.text.gettext("Afficher le logo Mush au dessus des onglets."),
+	};
+
+	Main.k.Options.options.splitpjt = {
+		option:		Main.k.Options.splitpjt,
+		after:		Main.k.updateBottom,
+		text:		Main.k.text.gettext("Séparer les projets / recherches / pilgred sous la zone de jeu."),
+	};
+
+	// Main.k.Options.options.altpa = {
+	// 	option:		Main.k.Options.altpa,	
+	// 	refresh:	true,
+	// 	text:		"Utiliser des images alternatives pour les pa / pm."
+	// };
+
+	Main.k.Options.options.browserNot = {
+		option:		Main.k.Options.browserNot,
+		after:		Main.k.statusCheck,	
+		text:		Main.k.text.gettext("Show browser notifications when tab is inactive.")
+	};
 
 	var cook = js.Cookie.get("ctrlwoptions");
 	if (!cook) return;
@@ -2189,10 +2237,10 @@ Main.k.Options.open = function() {
 		$("<p>").addClass("warning").text(Main.k.text.gettext("Plus d'options disponibles prochainement.")).appendTo(td);
 
 
-		for (var i=0; i<Main.k.Options.options.length; i++) {
-			var opt = Main.k.Options.options[i];
-			var html = opt[4];
-			if (opt[2]) html += " "+Main.k.text.gettext("Nécessite un rechargement de la page.");
+		for (var optname in Main.k.Options.options) {
+			var opt = Main.k.Options.options[optname];
+			var html = opt.text;
+			if (!!opt.refresh) html += " "+Main.k.text.gettext("Nécessite un rechargement de la page.");
 
 			var p = $("<p>").css({
 				color: "#EEE",
@@ -2202,19 +2250,18 @@ Main.k.Options.open = function() {
 				margin: "10px 20px",
 				clear: "both"
 			})
-			.html('<label style="margin-left: 30px;display:block" for="ctrlw_'+opt[0]+'">' + html + '</label>')
+			.html('<label style="margin-left: 30px;display:block" for="ctrlw_'+optname+'">' + html + '</label>')
 			.appendTo(td);
 
 			var chk = $("<input>").css({
 				"float": "left"
 			})
 			.attr("type", "checkbox")
-			.attr("optname", opt[0])
-			.attr("id", 'ctrlw_'+opt[0])
-			.attr("opti", i)
+			.attr("optname", optname)
+			.attr("id", 'ctrlw_'+optname)
 			.on("change", Main.k.Options.update)
 			.prependTo(p);
-			if (opt[1]) chk.attr("checked", "checked");
+			if (opt.option) chk.attr("checked", "checked");
 		}
 
 		Main.k.MakeButton("<img src='/img/icons/ui/reported.png' style='vertical-align: -20%' /> "+ Main.k.text.gettext("Vider le cache du script"), null, null, Main.k.text.gettext("Vider le cache du script"),
@@ -2230,18 +2277,20 @@ Main.k.Options.update = function(e) {
 	var tgt = $(e.target);
 	var key = $(tgt).attr("optname");
 	var val = $(tgt).is(":checked") ? "y" : "n";
-	var i = $(tgt).attr("opti");
+	var optname = $(tgt).attr("optname");
 
 	Main.k.Options.updateOpt(key,val);
 	Main.k.Options.updateCookie();
-	if (Main.k.Options.options[i][3]) Main.k.Options.options[i][3]();
+	if (!!Main.k.Options.options[optname].after) Main.k.Options.options[optname].after();
 };
 Main.k.Options.updateCookie = function() {
 	var cook = "";
-	for (var i=0; i<Main.k.Options.options.length; i++) {
-		if (i>0) cook += "|";
-		cook += Main.k.Options.options[i][0] + ":";
-		cook += Main.k.Options.options[i][1] ? "y" : "n";
+	for (var optname in Main.k.Options.options) {
+		if (cook != "") cook += "|";
+
+		cook += optname + ":";
+		cook += Main.k.Options.options[optname].option ? "y" : "n";
+		
 	}
 
 	js.Cookie.set("ctrlwoptions",cook,420000000);
@@ -2251,26 +2300,30 @@ Main.k.Options.updateOpt = function(key, val) {
 		case "custombubbles":
 		case "cbubbles":
 			Main.k.Options.cbubbles = (val == "y");
-			Main.k.Options.options[0][1] = (val == "y");
+			Main.k.Options.options.cbubbles.option = (val == "y");
 			break;
 		case "custombubbles_nobackground":
 		case "cbubblesNB":
 			Main.k.Options.cbubblesNB = (val == "y");
-			Main.k.Options.options[1][1] = (val == "y");
+			Main.k.Options.options.cbubblesNB.option = (val == "y");
 			break;
 		case "displaylogo":
 		case "dlogo":
 			Main.k.Options.dlogo = (val == "y");
-			Main.k.Options.options[2][1] = (val == "y");
+			Main.k.Options.options.dlogo.option = (val == "y");
 			break;
 		case "splitpjt":
 			Main.k.Options.splitpjt = (val == "y");
-			Main.k.Options.options[3][1] = (val == "y");
+			Main.k.Options.options.splitpjt.option = (val == "y");
 			break;
 		//case "altpa":
 		//	Main.k.Options.altpa = (val == "y");
-		//	Main.k.Options.options[4][1] = (val == "y");
+		//	Main.k.Options.options.altpa.option = (val == "y");
 		//	break;
+		case "browserNot":
+			Main.k.Options.browserNot = (val == "y");
+			Main.k.Options.options.browserNot.option = (val == "y");
+			break;
 	}
 };
 
