@@ -1,12 +1,50 @@
 Main.k.Options.init = function() {
-	Main.k.Options.options = [
-	//  Option Name,	Option Object,				Need refresh,	After(),				Desc
-		["cbubbles",	Main.k.Options.cbubbles,	false,			Main.k.customBubbles,	Main.k.text.gettext("Activer la mise en forme personnalisée des messages (bordure + couleur nom + image de fond).")],
-		["cbubblesNB",	Main.k.Options.cbubblesNB,	false,			Main.k.customBubbles,	Main.k.text.gettext("Simplifier la mise en forme personnalisée des messages (suppression de l'image de fond).")],
-		["dlogo",		Main.k.Options.dlogo,		true,			null,					Main.k.text.gettext("Afficher le logo Mush au dessus des onglets.")],
-		["splitpjt",	Main.k.Options.splitpjt,	false,			Main.k.updateBottom,	Main.k.text.gettext("Séparer les projets / recherches / pilgred sous la zone de jeu.")]
-		//["altpa",		Main.k.Options.altpa,		true,			null,					"Utiliser des images alternatives pour les pa / pm."]
-	];
+
+	Main.k.Options.options = {};
+
+	/**
+
+	Option format :
+
+	Main.k.Options.options.OPTIONNAME = {
+		option:		Main.k.Options.OPTIONNAME,			// Option value to change
+		text:		Main.k.text.gettext("description"), // Description text
+		after:		callback,							// (Optional) After option changed, call this function
+		refresh: 	true,								// (Optional) Page refresh needed after option change?
+	};
+
+	*/
+
+	Main.k.Options.options.cbubbles = {
+		option:		Main.k.Options.cbubbles,
+		after:		Main.k.customBubbles,
+		text:		Main.k.text.gettext("Activer la mise en forme personnalisée des messages (bordure + couleur nom + image de fond)."),
+	};
+
+	Main.k.Options.options.cbubblesNB = {
+		option:		Main.k.Options.cbubblesNB,
+		after:		Main.k.customBubbles,
+		text:		Main.k.text.gettext("Simplifier la mise en forme personnalisée des messages (suppression de l'image de fond)."),
+	};
+
+	Main.k.Options.options.dlogo = {
+		option:		Main.k.Options.dlogo,	
+		refresh:	true,
+		text:		Main.k.text.gettext("Afficher le logo Mush au dessus des onglets."),
+	};
+
+	Main.k.Options.options.splitpjt = {
+		option:		Main.k.Options.splitpjt,
+		after:		Main.k.updateBottom,
+		text:		Main.k.text.gettext("Séparer les projets / recherches / pilgred sous la zone de jeu."),
+	};
+
+	// Main.k.Options.options.altpa = {
+	// 	option:		Main.k.Options.altpa,	
+	// 	refresh:	true,
+	// 	text:		"Utiliser des images alternatives pour les pa / pm."
+	// };
+
 
 	var cook = js.Cookie.get("ctrlwoptions");
 	if (!cook) return;

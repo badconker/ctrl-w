@@ -3,25 +3,25 @@ Main.k.Options.updateOpt = function(key, val) {
 		case "custombubbles":
 		case "cbubbles":
 			Main.k.Options.cbubbles = (val == "y");
-			Main.k.Options.options[0][1] = (val == "y");
+			Main.k.Options.options.cbubbles.option = (val == "y");
 			break;
 		case "custombubbles_nobackground":
 		case "cbubblesNB":
 			Main.k.Options.cbubblesNB = (val == "y");
-			Main.k.Options.options[1][1] = (val == "y");
+			Main.k.Options.options.cbubblesNB.option = (val == "y");
 			break;
 		case "displaylogo":
 		case "dlogo":
 			Main.k.Options.dlogo = (val == "y");
-			Main.k.Options.options[2][1] = (val == "y");
+			Main.k.Options.options.dlogo.option = (val == "y");
 			break;
 		case "splitpjt":
 			Main.k.Options.splitpjt = (val == "y");
-			Main.k.Options.options[3][1] = (val == "y");
+			Main.k.Options.options.splitpjt.option = (val == "y");
 			break;
 		//case "altpa":
 		//	Main.k.Options.altpa = (val == "y");
-		//	Main.k.Options.options[4][1] = (val == "y");
+		//	Main.k.Options.options.altpa.option = (val == "y");
 		//	break;
 	}
 };
