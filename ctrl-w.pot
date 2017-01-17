@@ -1080,3 +1080,15 @@ msgstr ""
 
 msgid "Canal privé"
 msgstr ""
+
+msgid "You have %1 unread message"
+msgstr ""
+
+msgid "You have %1 unread messages"
+msgstr ""
+
+msgid "Cycle change about to happen"
+msgstr ""
+
+msgid "Cycle change just happened"
+msgstr ""

@@ -1097,6 +1097,18 @@ msgstr "conectado(a)"
 msgid "Canal privé"
 msgstr "Canal privado"
 
+msgid "You have %1 unread message"
+msgstr ""
+
+msgid "You have %1 unread messages"
+msgstr ""
+
+msgid "Cycle change about to happen"
+msgstr ""
+
+msgid "Cycle change just happened"
+msgstr ""
+
 #~ msgid "Description inactif"
 #~ msgstr "Si tus barras de <img src=\"/img/icons/ui/pa_slot1.png\" alt=\"pa\"> están llenas, eres considerado como inactivo y te vuelves un blanco fácil. No queremos imaginar lo que pasará..."
 

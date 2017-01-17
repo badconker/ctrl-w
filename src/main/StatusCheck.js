@@ -17,15 +17,16 @@ Main.k.statusCheck = function(){
 	});
 
 	if(_unreads > 0) {
-		Main.k.browserNotice("You have " + _unreads + " unread messages");
+		var _unreadMSG = Main.k.text.strargs(Main.k.text.ngettext("You have %1 unread message","You have %1 unread messages",_unreads),[_unreads]);
+		Main.k.browserNotice(_unreadMSG);
 	}
 
 	if(_diffHI == 0 && _diffMI < 3) {
-		Main.k.browserNotice("Cycle change about to happen");
+		Main.k.browserNotice(Main.k.text.gettext('Cycle change about to happen'));
 	}
 
 	if(_diffHI == 2 && _diffMI > 55) {
-		Main.k.browserNotice("Cycle change just happened");
+		Main.k.browserNotice(Main.k.text.gettext('Cycle change just happened'));
 	}
 
 	// TODO : Make this configurable?
