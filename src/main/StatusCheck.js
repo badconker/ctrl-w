@@ -1,5 +1,6 @@
 Main.k.statusCheck = function(){ 
 
+	if (!!Main.k.statusTimeout) clearTimeout(Main.k.statusTimeout);
 	Main.k.refreshAll();
 
 	var _now = new Date();
@@ -33,10 +34,10 @@ Main.k.statusCheck = function(){
 	// TODO : Increase timer if long time in inactive tab
 
 	// Check every minute
-	var timeout = 60000;
+	var _timeout = 60000;
 	// If in hidden tab, check every 5 minutes
-	if(!Main.k.windowFocus) timeout = 300000;
+	if(!Main.k.windowFocus) _timeout = 300000;
 
-	setTimeout(Main.k.statusCheck, timeout);
+	Main.k.statusTimeout = setTimeout(Main.k.statusCheck, _timeout);
 
 }
