@@ -7,11 +7,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0beta3\n"
+"X-Generator: POEditor.com\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
 
 #. Translators: Thread id for this character's tutorial.
 msgid "tutorial_id:mush"
@@ -182,6 +179,7 @@ msgid "Vous faites partie du Mush."
 msgstr "Ahora eres un Mush."
 
 #. Translators: This translation must be copied from the game.
+#, fuzzy
 msgid "Mush"
 msgstr "Ayuda Mush"
 
@@ -319,8 +317,9 @@ msgid_plural "(~%1 jours)"
 msgstr[0] "(~%1 día)"
 msgstr[1] "(~%1 días)"
 
+#, fuzzy
 msgid "Infos du joueur mises à jour."
-msgstr "Información de jugadores actualizada."
+msgstr "Termina la actualización"
 
 msgid "Activer la mise en forme personnalisée des messages (bordure + couleur nom + image de fond)."
 msgstr "Utiliza el estilo personalizado para los mensajes (nombre y bordes coloreados más imágenes de fondo)."
@@ -673,8 +672,9 @@ msgstr "Esta habilidad está desactivada al jugar como Mush."
 msgid "Aucune donnée enregistrée"
 msgstr "Información no disponible"
 
+#, fuzzy
 msgid "Mort"
-msgstr "Fallecido/a"
+msgstr "Fallecid[o|a]"
 
 msgid "Statistiques"
 msgstr "Estadísticas"
@@ -682,14 +682,16 @@ msgstr "Estadísticas"
 msgid "Affiche les statistiques, et permet de gérer le nombre de messages chargés dans la page."
 msgstr "Muestra diversas estadísticas y te permite definir el número de mensajes que cargan por página."
 
+#, fuzzy
 msgid "Nouveaux Messages"
-msgstr "Nuevos Mensajes"
+msgstr "Nuevo mensaje"
 
 msgid "Beaucoup de messages à lire ? Le manager permet de rattraper son retard plus facilement. En chargeant tous les messages dans l'onglet Statistiques, vous pouvez aussi voir les messages non lus manqués à cause du bug (Mush) des messages."
 msgstr "¿Tienes un montón de mensajes sin leer? El gestor de mensajería te permite ponerte al día fácilmente. Cuando cargues todos los mensajes en la pestaña de Estadísticas, podrás leer incluso los mensajes no leídos debido a fallos del juego."
 
+#, fuzzy
 msgid "Recherche de Messages"
-msgstr "Búsqueda de Mensajes"
+msgstr "Investigación menor"
 
 msgid "Une discussion à retrouver ? Envie de savoir combien d'incendies se sont déclarés ? (@neron incendie daedalus)"
 msgstr "¿Buscas un tema específico? ¿Quieres saber cuántos incendios ha habido? (@neron incendio)"
@@ -718,8 +720,9 @@ msgstr "Ssshh, nadie puede oirnos aquí... el Canal Mush es el <em>canal privado
 msgid "Disponible prochainement."
 msgstr "Disponible próximamente."
 
+#, fuzzy
 msgid "Chat privé"
-msgstr "Chat privado"
+msgstr "Canal privado"
 
 msgid "Chat privé ouvert avec :<br/>[liste des participants]</p><p><strong>/!&#92; Fonctionnalité non codée</strong>"
 msgstr "Conversación privada con: <br/>[lista de participantes]</p><p><strong>/!&#92; Característica en desarrollo</strong>"
@@ -760,6 +763,7 @@ msgstr "Cargar"
 msgid "Charger tous les messages"
 msgstr "Cargar todos los mesajes"
 
+#, fuzzy
 msgid "Chargez tous les messages pour profiter pleinement du manager : recherches dans tous les messages depuis le début de la partie, nouveaux messages manqués à cause du bug de mush, statistiques complètes, etc.</p><p><strong>Cette action peut prendre un certain temps, suivant le nombre de messages postés sur votre vaisseau.</strong>"
 msgstr "Carga todos los mensajes para obtener todos los beneficios del gestor de mensajería: buscar cualquier mensaje desde el incio de la partida, mensajes nuevos no leídos a causa de fallos, estadísticas completas, etcétera.</p><p><strong>Esta acción puede tardar un tiempo considerable dependiendo del tamaño del historial de mensajes.</strong>"
 
@@ -769,8 +773,9 @@ msgstr "Vaciar"
 msgid "Décharger les messages"
 msgstr "Descargar los mesajes"
 
+#, fuzzy
 msgid "Déchargez la liste de messages pour alléger le jeu. Lorsque vous chargez des messages (en scrollant sur le chat, par exemple), ceux-ci restent chargés. Mush chargeant toute la page (dont les messages) à chaque action, votre jeu est grandement ralenti lorsque le nombre de messages chargés est conséquent.</p><p><strong>Cette action fermera le Message Manager et rafraîchira la page.</strong>"
-msgstr "Descarga el historial de mensajes para aumentar el rendimiento de Mush. Cuando un mensaje carga, (al desplazarte por la página), permanecen cargados. En cada acción, el juego recarga la página completa, incluyendo los mensajes, lo que ralentiza el juego significativamente si el historial de mensajes tiene un tamaño considerable.</p><p><strong>Esta acción cerrará el Gestor de Mensajes y recargará la página.</strong>"
+msgstr "Vacía el historial de mensajes para aumentar el rendimiento de Mush. Cuando un mensaje carga, (al desplazarte por la página), permanecen cargados. En cada acción, el juego recarga la página completa, incluyendo los mensajes, lo que ralentiza el juego significativamente si el historial de mensajes tiene un tamaño considerable.</p><p><strong>Esta acción cerrará el Gestor de Mensajes y recargará la página.</strong>"
 
 msgid "Total : <b>%1</b> message chargé"
 msgid_plural "Total : <b>%1</b> messages chargés"
@@ -825,11 +830,13 @@ msgstr "Buscar"
 msgid "- Vous pouvez rechercher plusieurs mots, dans le désordre, complets ou non, qu'importe le contenu entre eux dans le message."
 msgstr "- Puedes buscar varias palabras, incluso desordenadas, completas o no."
 
+#, fuzzy
 msgid "- Pour rechercher les messages d'un joueur en particulier, utilisez <i>@personnage</i> (le prénom en minuscule, avec un _ pour kuan_ti et jin_su)."
-msgstr "- Para buscar mensajes de un jugador en concreto, usa <i>@personaje</i> (nombre en minúsculas, con un _ para kuan_ti y jin_su)."
+msgstr "- Para buscar mensajes de un jugador en concreto, usa <i>@personaje</i> (nombre en minúsculas, con _ para kuan_ti y jin_su)."
 
+#, fuzzy
 msgid "- Pour rechercher uniquement dans le premier message des topics, utilisez <i>@topic</i>."
-msgstr "- Para limitar la búsqueda al primer mensaje de los temas, usa <i>@topic</i>."
+msgstr "- Para limitar la búsqueda a los primeros mensajes de los temas, usa <i>@topic</i>."
 
 msgid "%1 résultat (maximum : %2)."
 msgid_plural "%1 résultats (maximum : %2)."
@@ -926,8 +933,9 @@ msgstr "Esto permite de sincronizar los datos del guión entre sus diferentes na
 msgid "Actualiser"
 msgstr "Actualizar"
 
+#, fuzzy
 msgid "Actualiser la page sans tout recharger. <strong>Fonctionnalité en cours d'optimisation.</strong>"
-msgstr "Actualiza la página sin recargarla. <p><strong>Característica en optimización.</strong></p>"
+msgstr "Actualiza el estado del juego sin tener que refrescar la página. <p><strong>Característica en optimización.</strong></p>"
 
 msgid "Nouvelle partie ?"
 msgstr "¿Nuevo juego?"
@@ -956,6 +964,7 @@ msgstr "inventario"
 msgid "Partager"
 msgstr "Compartir"
 
+#, fuzzy
 msgid "<p>Insère l'inventaire de la pièce dans la zone de texte active, de la forme&nbsp;:</p><p><strong>Couloir central :</strong> <i>Combinaison</i>, <i>Couteau</i>, <i>Médikit</i>, <i>Extincteur</i></p><p><strong>Partage aussi sur Astropad si celui-ci est installé.</strong></p>"
 msgstr "<p>Copia el inventario de la sala al cuadro de texto activo, con el siguiente formato&nbsp;:</p><p><strong>Pasillo central :</strong> <i>Extintor</i>, <i>Cuchillo</i>, <i>Médikit</i>, <i>Vendaje</i></p><p><strong>Si has instalado AstroPad, también sincronizará la información.</strong></p>"
 
@@ -965,6 +974,7 @@ msgstr "Consumibles"
 msgid "Partager les effets des consommables"
 msgstr "Compartir las propiedades del consumible"
 
+#, fuzzy
 msgid "Insère la liste des consommables avec leurs effets dans la zone de texte active, de la forme&nbsp;:</p><p>TODO: aperçu</p>"
 msgstr "Copia la lista de propiedades del consumible al cuadro activo de texto, con el siguiente formato&nbsp;:</p><p>TODO: en estudio</p>"
 
@@ -998,8 +1008,9 @@ msgstr "Atención"
 msgid "Vous pouvez aussi modifier le duo Andrek/Chaola en cliquant sur l'icone"
 msgstr "Puedes cambiar el dúo Andrek/Chaola haciendo click en el icono"
 
+#, fuzzy
 msgid "Pour avoir une liste d'équipage correcte, vous devez mettre à jour cette liste via le module Cryo. <br/>Pour ce faire, veuillez vous rendre au labo, listez l'équipage via le module Cryo et cliquez sur le bouton au bas de la liste des personnages.<br/>Attention, le bouton n'apparait que lorsque l'équipage est au complet.<p><strong>"
-msgstr "Para una correcta lista de tripulación, es necesario actualizarla a través del módulo de Cryo. <br/> Para ello, por favor vaya al laboratorio, Pase revista a través del módulo Cryo y haga clic en el botón en la parte inferior de la tabla de personajes. <br/><em>Atención, el botón no aparecerá hasta que la tripulación esté completa.</em>"
+msgstr "Para una correcta lista de tripulación, es necesario actualizarla a través del módulo de Cryo. <br/> Para ello, por favor vaya al laboratorio, Pase revista a través del módulo Cryo y haga clic en el botón en la parte inferior de la tabla de personajes. <br/><em>Atención, el botón aparece sólo cuando la tripulación está completa.</em>"
 
 msgid "<p>Vous êtes dans la même pièce que cette personne ; vous pouvez donc l'examiner de plus près.</p><p><strong>Cliquez ici pour enregistrer les compétences visibles, statuts publiques et titres de ce personnage.</strong></p>"
 msgstr "<p>Usted está en el mismo cuarto que esa persona; usted puede examinarla más de cerca. </p><p><strong>Pulse aquí para registrar las habilidades visibles, los estados públicos y los títulos  de este personaje.</strong></p>"
@@ -1008,26 +1019,28 @@ msgstr "<p>Usted está en el mismo cuarto que esa persona; usted puede examinarl
 msgid "Cryo"
 msgstr "Crio"
 
+#, fuzzy
 msgid "Tout le monde doit être décryogénisé pour pouvoir mettre à jour la liste d'équipage"
-msgstr "Todo el mundo debe estar descriogenizado para actualizar la lista de pasajeros"
+msgstr "Todo el mundo debería ser capaz de descriogenizarse para poder actualizar la lista de la tripulación"
 
 msgid "Mettre à jour la liste d'équipage"
 msgstr "Actualiza la lista de la tripulación"
 
+#, fuzzy
 msgid "Cliquer ici pour mettre à jour la liste d'équipage de CTRL+W"
 msgstr "Haz clic aquí para actualizar la lista de la tripulación de CTRL+W"
 
 #. Translators: Text for idle people from CryoModule. Regex allowed
 msgid "Inactive"
-msgstr "Inactivo/a"
+msgstr "Inactiv[o|a]"
 
 #. Translators: Text for awake people from CryoModule. Regex allowed
 msgid "Eveillée?"
-msgstr "Despierto/a"
+msgstr "Despiert[o|a]"
 
 #. Translators: Text for dead people from CryoModule. Regex allowed
 msgid "Morte?"
-msgstr "Muerto/a"
+msgstr "Muert[o|a]"
 
 msgid "Coeur de NERON"
 msgstr "Núcleo de NERON"
@@ -1035,18 +1048,21 @@ msgstr "Núcleo de NERON"
 msgid "Laboratoire"
 msgstr "Laboratorio"
 
+#, fuzzy
 msgid "<p>Insère la liste de recherches dans la zone de texte active, de la forme&nbsp;:</p><p><li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li><li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li><li><strong>Nom de la recherche</strong> - 0%<br/>Description de la recherche<br/>Bonus : <i>Biologiste</i>, <i>Médecin</i></li></p>"
 msgstr "Copia la lista de investigaciones al cuadro de texto activo, con el siguiente formato:</p><p><li><strong>Investigación</strong> - 0%<br/>Descripción<br/>Bonificación: <i>Biólogo</i>, <i>Médico</i></li><li><strong>Investigación</strong> - 0%<br/>Descripción<br/>Bonus: <i>Biólogo</i>, <i>Médico</i></li><li><strong>Investigación</strong> - 0%<br/>Descripción<br/>Bonus: <i>Biólogo</i>, <i>Médico</i></li>"
 
 msgid "Partager v2"
 msgstr "Compartir v2"
 
+#, fuzzy
 msgid "<p>Insère la liste de recherches dans la zone de texte active, de la forme&nbsp;:</p><p><li><strong>Nom de la recherche</strong> - 0%</li><li><strong>Nom de la recherche</strong> - 0%</li><li><strong>Nom de la recherche</strong> - 0%</li></p>"
 msgstr "Copia la lista de investigaciones al cuadro de texto activo, con el siguiente formato:</p><p><li><strong>Investigación</strong> - 0%<br/>Descripción<br/>Bonificación: <i>Biólogo</i>, <i>Médico</i></li><li><strong>Investigación</strong> - 0%<br/>Descripción<br/>Bonus: <i>Biólogo</i>, <i>Médico</i></li><li><strong>Investigación</strong> - 0%<br/>Descripción<br/>Bonus: <i>Biólogo</i>, <i>Médico</i></li>"
 
 msgid "Veuillez utiliser l'inventaire du labo s'il vous plaît"
 msgstr "Utilice el inventario del laboratorio por favor"
 
+#, fuzzy
 msgid "<p>Insère la liste de projets dans la zone de texte active, de la forme&nbsp;:</p><p><li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li><li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li><li><strong>Nom du projet</strong> - 0%<br/>Description du projet<br/>Bonus : <i>Tireur</i>, <i>Pilote</i></li></p>"
 msgstr "Copia la lista de proyectos al cuadro de texto activo, con el formato siguiente&nbsp;:</p><p><li><strong>Proyecto</strong> - 0%<br/>Descripción<br/>Bonus : <i>Artillero</i>, <i>Piloto</i></li><li><strong>Proyecto</strong> - 0%<br/>Descripción<br/>Bonus : <i>Artillero</i>, <i>Piloto</i></li><li><strong>Proyecto</strong> - 0%<br/>Descripción<br/>Bonus : <i>Artillero</i>, <i>Piloto</i></li>"
 
@@ -1056,6 +1072,7 @@ msgstr "Compartir el planeta"
 msgid "Partage uniquement cette planète dans l'inventaire"
 msgstr "Comparte únicamente este planeta en el inventario"
 
+#, fuzzy
 msgid "Insère la liste de planètes dans la zone de texte active, de la forme&nbsp;:</p><p>TODO: aperçu"
 msgstr "Copia la lista de planetas al cuadro de texto activo, con el siguiente formato&nbsp;:</p><p>TODO: en estudio"
 
