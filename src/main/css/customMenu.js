@@ -54,7 +54,7 @@ Main.k.css.customMenu = function() {
 		top: 33px;\
 		left: 0;\
 		text-align: right;\
-		z-index: 9;\
+		z-index: 30;\
 		padding: 0;\
 	}\
 	.kmenuel ul li:hover ul {\
@@ -62,7 +62,7 @@ Main.k.css.customMenu = function() {
 		position: absolute;\
 		width: 100%;\
 		text-align: right;\
-		z-index: 9;\
+		z-index: 30;\
 		padding: 0;\
 	}\
 	.kmenuel ul li {\
