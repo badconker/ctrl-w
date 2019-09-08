@@ -264,11 +264,11 @@ msgid "Tuto %1"
 msgstr "Tips for %1"
 
 #. Translators: Wiki url
-msgid "http://www.twinpedia.com/mush"
+msgid "http://twin.tithom.fr/mush/"
 msgstr "http://www.mushpedia.com/"
 
 #. Translators: Wiki favicon url
-msgid "http://www.twinpedia.com/_media/favicon.ico"
+msgid "http://twin.tithom.fr/_media/mush/notes.gif"
 msgstr "http://mushpedia.com/favicon.ico"
 
 msgid "Twinpedia"
