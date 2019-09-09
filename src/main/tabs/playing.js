@@ -492,6 +492,7 @@ Main.k.tabs.playing = function() {
 
 			// Planets
 			if ($("#navModule").length > 0) {
+				var tolltiptext = Main.k.FormatPlanets(0,true);
 				$("<a>").addClass("butmini formatbtn").html("<img src='/img/icons/ui/planet.png' />").attr("href", "#").appendTo(sharediv)
 					.on("click", function() {
 						var txt = Main.k.FormatPlanets();
@@ -499,7 +500,7 @@ Main.k.tabs.playing = function() {
 						return false;
 					})
 					.attr("_title", Main.k.text.gettext("Partager les planètes"))
-					.attr("_desc", Main.k.text.gettext("<p>Insère les détails des planètes dans la zone de texte active.</p><p>TODO: Exemple</p>"))
+					.attr("_desc", Main.k.text.gettext("<p>Insère les détails des planètes dans la zone de texte active.<br />"+tolltiptext+"</p>"))
 					.on("mouseover", Main.k.CustomTip)
 					.on("mouseout", Main.k.hideTip);
 			}
@@ -1002,8 +1003,15 @@ Main.k.tabs.playing = function() {
 	/**
 	 * @return string;
 	 */
-	Main.k.FormatPlanets = function(index) {//TODO: MULTILANG
-		var ret = "**//"+Main.k.text.gettext("Planètes")+" : //**";
+	Main.k.FormatPlanets = function(index,tooltip) {//TODO: MULTILANG
+		var ret = '',tooltipret = '',nbrPlanet = $("#navModule").find(".planet").not(".planetoff").length, compteurPlanet = 0;
+        var caseDesc = '';
+
+        if(tooltip === undefined){
+            tooltip = false;
+        }else{
+            tooltip = true;
+        }
 
 		var parse = function(t) {
 			t = t.replace(/<img\s+src=\"\/img\/icons\/ui\/triumph.png\"\s+alt=\"triomphe\"[\/\s]*>/ig, ":mush_triumph:");
@@ -1033,19 +1041,87 @@ Main.k.tabs.playing = function() {
 
 			// Cases
 			var nbcases = $(this).find("td img.explTag").length;
-			var cases = [];
+            		var nbCasesInconnues = $(this).find("td img.explTag.off").length;
+			var cases = [],casesToolTip = [];
 			var casenamereg = /<h1>([^<]+)<\/h1>/;
 			$(this).find("td img.explTag.on").each(function() {
-				cases.push(casenamereg.exec($(this).attr("onmouseover"))[1]);
-			});
-
-			// Print planet
-			ret += "\n**" + name + "** (" + nbcases + ' ' + Main.k.text.gettext('cases') + ")\n";
-			if (dist && dir) ret += "//" + dir + " - " + dist + " :mush_fuel:****//\n";
-			ret += cases.join(", ");
+                	var caseNameRecup = casenamereg.exec($(this).attr("onmouseover"))[1];
+                	var finalCaseName = '',finalCaseNameToolTip = '';
+                	switch(caseNameRecup){
+                    		case 'Activité sismique':
+                    		case 'Mankarog':
+                    		case 'Activité volcanique':
+                        		finalCaseName = '**//'+caseNameRecup+'//** :dead:';
+                        		finalCaseNameToolTip = '<strong><em>'+caseNameRecup+'</em></strong> <img src="http://data.mush.vg/img/icons/ui/dead.png" />';
+                        		break;
+                    		case 'Cristalite':
+                        		finalCaseName = '//'+caseNameRecup+'// :mush:';
+                        		finalCaseNameToolTip = '<em>'+caseNameRecup+'</em> <img src="http://data.mush.vg/img/icons/ui/mush.png" />';
+                        		break;
+                    		case 'Hydro-Carbure':
+                        		finalCaseName = '**'+caseNameRecup+'** :fuel:';
+                        		finalCaseNameToolTip = '<strong>'+caseNameRecup+'</strong> <img src="http://data.mush.vg/img/icons/ui/fuel.png" />';
+                        		break;
+                    		case 'Oxygène':
+                        		finalCaseName = '**'+caseNameRecup+'** :o2:';
+                        		finalCaseNameToolTip = '<strong>'+caseNameRecup+'</strong> <img src="http://data.mush.vg/img/icons/ui/o2.png" />';
+                        		break;
+                    		default:
+                        		finalCaseNameToolTip = finalCaseName = caseNameRecup;
+                	}
+			cases.push(finalCaseName);
+                	casesToolTip.push(finalCaseNameToolTip);
 		});
 
-		return ret;
+		// Print planet
+            	if(compteurPlanet === 0){
+                	compteurPlanet++;
+            	}else{
+                	ret += "\n";
+                	tooltipret += "<br />";
+                	compteurPlanet++;
+            	}
+		ret += "**" + name + "** (" + nbcases + ' ' + Main.k.text.gettext('cases') + ")\n";
+            	tooltipret += "<strong>" + name + "</strong> (" + nbcases + ' ' + Main.k.text.gettext('cases') + ")<br />";
+		if (dist && dir) ret += "//" + dir + " - " + dist + " :mush_fuel:****//\n";
+            	if (dist && dir) tooltipret += "<em>" + dir + " - " + dist + " <img alt=\"Icône Fuel\" src=\"http://data.twinoid.com/proxy/mush.vg/img/icons/ui/fuel.png\"/></em><br />";
+		ret += '---\n'+cases.join(", ");
+            	tooltipret += '--<br />'+casesToolTip.join(", ");
+            	if(nbCasesInconnues === 1){
+                	if(cases.length === 0){
+                    		ret += "Encore ";
+                    		tooltipret += "Encore ";
+                	} else {
+                    		ret += " et encore ";
+                    		tooltipret += " et encore ";
+			}
+			ret += "1 case inconnue.";
+			tooltipret += "1 case inconnue.";
+            	} else if ( nbCasesInconnues === 0){
+                	ret += ".";
+                	tooltipret += ".";
+            	} else {
+                	if(cases.length === 0){
+                    		ret += "Encore ";
+                    		tooltipret += "Encore ";
+                	} else {
+                    		ret += " et encore ";
+                    		tooltipret += " et encore ";
+                	}
+                	ret += nbCasesInconnues+" cases inconnues.";
+                	tooltipret += nbCasesInconnues+" cases inconnues.";
+            	}
+	});
+
+        if(compteurPlanet > 0 && compteurPlanet < nbrPlanet){
+            tooltipret += '<hr />';
+        }
+
+        if(tooltip === true){
+            return tooltipret;
+        }else{
+            return ret;
+        }
 	};
 	/**
 	 * @return string;
@@ -5335,6 +5411,7 @@ Main.k.tabs.playing = function() {
 		// Astro
 		} else if ($("#navModule").length > 0) {
 			var nav = $("#navModule");
+			var toolTipText = '';
 			var planets = nav.find(".planet").not(".planetoff");
 			if (planets.length > 0) {
 				t = $("<h3>").html(Main.k.text.gettext("Planètes")).appendTo(project_list);
@@ -5343,6 +5420,7 @@ Main.k.tabs.playing = function() {
 
 				projectsdiv = $("<div>").addClass("projectspreview planetpreview").attr("id", "projectspreview").appendTo(project_list);
 				planets.each(function(i) {
+					toolTipText = Main.k.FormatPlanets(i,true);
 					// Print planet
 					var planet = $("<div>").addClass("planetpreview").appendTo(projectsdiv);
 					$("<img>").attr("width", "40")
@@ -5374,8 +5452,8 @@ Main.k.tabs.playing = function() {
 
 				// Planets actions
 				Main.k.MakeButton("<img src='/img/icons/ui/talk.gif' /> "+Main.k.text.gettext("Partager"), null, null, Main.k.text.gettext("Partager les planètes"),
-					Main.k.text.gettext("Insère la liste de planètes dans la zone de texte active, de la forme&nbsp;:</p><p>" +
-					"TODO: aperçu")
+					Main.k.text.gettext("Insère la liste de planètes dans la zone de texte active, de la forme&nbsp;:<br />" +
+					toolTipText + "</p>")
 				).appendTo(project_list)
 				.find("a").on("mousedown", function(e) {
 					$('textarea:focus').each(function(e) {
