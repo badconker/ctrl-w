@@ -1048,7 +1048,7 @@ Main.k.tabs.playing = function() {
                 	var caseNameRecup = casenamereg.exec($(this).attr("onmouseover"))[1];
                 	var finalCaseName = '',finalCaseNameToolTip = '';
                 	switch(caseNameRecup){
-                    		case 'Activité sismique':
+                    		case 'Sismique':
                     		case 'Mankarog':
                     		case 'Activité volcanique':
                         		finalCaseName = '**//'+caseNameRecup+'//** :dead:';
