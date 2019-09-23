@@ -1004,7 +1004,10 @@ Main.k.tabs.playing = function() {
 	 * @return string;
 	 */
 	Main.k.FormatPlanets = function(index,tooltip) {//TODO: MULTILANG
-		var ret = '',tooltipret = '',nbrPlanet = $("#navModule").find(".planet").not(".planetoff").length, compteurPlanet = 0;
+	var ret = '';
+	var tooltipret = '';
+	var nbrPlanet = $("#navModule").find(".planet").not(".planetoff").length;
+	var compteurPlanet = 0;
         var caseDesc = '';
 
         if(tooltip === undefined){
