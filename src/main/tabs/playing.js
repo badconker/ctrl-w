@@ -500,7 +500,7 @@ Main.k.tabs.playing = function() {
 						return false;
 					})
 					.attr("_title", Main.k.text.gettext("Partager les planètes"))
-					.attr("_desc", Main.k.text.gettext("<p>Insère les détails des planètes dans la zone de texte active.<br />"+tolltiptext+"</p>"))
+					.attr("_desc", Main.k.text.gettext("<p>Insère les détails des planètes dans la zone de texte active.<br />"+tooltipText+"</p>"))
 					.on("mouseover", Main.k.CustomTip)
 					.on("mouseout", Main.k.hideTip);
 			}
