@@ -1045,7 +1045,8 @@ Main.k.tabs.playing = function() {
 			// Cases
 			var nbcases = $(this).find("td img.explTag").length;
             		var nbCasesInconnues = $(this).find("td img.explTag.off").length;
-			var cases = [],casesToolTip = [];
+			var cases = [];
+			var casesToolTip = [];
 			var casenamereg = /<h1>([^<]+)<\/h1>/;
 			$(this).find("td img.explTag.on").each(function() {
                 	var caseNameRecup = casenamereg.exec($(this).attr("onmouseover"))[1];
