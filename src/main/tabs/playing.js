@@ -1050,7 +1050,8 @@ Main.k.tabs.playing = function() {
 			var casenamereg = /<h1>([^<]+)<\/h1>/;
 			$(this).find("td img.explTag.on").each(function() {
                 	var caseNameRecup = casenamereg.exec($(this).attr("onmouseover"))[1];
-                	var finalCaseName = '',finalCaseNameToolTip = '';
+                	var finalCaseName = '';
+                	var finalCaseNameToolTip = '';
                 	switch(caseNameRecup){
                     		case 'Sismique':
                     		case 'Mankarog':
