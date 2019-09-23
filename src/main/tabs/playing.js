@@ -492,7 +492,7 @@ Main.k.tabs.playing = function() {
 
 			// Planets
 			if ($("#navModule").length > 0) {
-				var tolltiptext = Main.k.FormatPlanets(0,true);
+				var tooltipText = Main.k.FormatPlanets(0,true);
 				$("<a>").addClass("butmini formatbtn").html("<img src='/img/icons/ui/planet.png' />").attr("href", "#").appendTo(sharediv)
 					.on("click", function() {
 						var txt = Main.k.FormatPlanets();
